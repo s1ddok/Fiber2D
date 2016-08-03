@@ -57,11 +57,11 @@ import Foundation
     
     }
     
-    func hitTestWithWorldPos(pos: CGPoint) -> Bool {
+    func hitTestWithWorldPos(_ pos: CGPoint) -> Bool {
         return false
     }
     
-    func clippedHitTestWithWorldPos(pos: CGPoint) -> Bool {
+    func clippedHitTestWithWorldPos(_ pos: CGPoint) -> Bool {
         return false
     }
     
@@ -84,35 +84,35 @@ import Foundation
     #endif
     
     #if os(OSX)
-    func mouseDown(theEvent: NSEvent, button: MouseButton) {
+    func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     
-    func mouseDragged(theEvent: NSEvent, button: MouseButton) {
+    func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     
-    func mouseUp(theEvent: NSEvent, button: MouseButton) {
+    func mouseUp(_ theEvent: NSEvent, button: MouseButton) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     
-    func scrollWheel(theEvent: NSEvent) {
+    func scrollWheel(_ theEvent: NSEvent) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     
-    func mouseMoved(theEvent: NSEvent) {
+    func mouseMoved(_ theEvent: NSEvent) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     
-    func keyDown(theEvent: NSEvent) {
+    func keyDown(_ theEvent: NSEvent) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     
-    func keyUp(theEvent: NSEvent) {
+    func keyUp(_ theEvent: NSEvent) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     
-    func flagsChanged(theEvent: NSEvent) {
+    func flagsChanged(_ theEvent: NSEvent) {
         Director.currentDirector()!.responderManager.discardCurrentEvent()
     }
     #endif

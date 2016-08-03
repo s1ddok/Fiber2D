@@ -11,32 +11,32 @@ import MetalKit
 let CCDirectorCurrentKey = "CCDirectorCurrentKey"
 let CCDirectorStackKey   = "CCDirectorStackKey"
 
-func CCDirectorBindCurrent(director: AnyObject?) {
+func CCDirectorBindCurrent(_ director: AnyObject?) {
     if director != nil || !(director is NSNull) {
-        NSThread.currentThread().threadDictionary[CCDirectorCurrentKey] = director
+        Thread.current.threadDictionary[CCDirectorCurrentKey] = director
     } else {
-        NSThread.currentThread().threadDictionary.removeObjectForKey(CCDirectorCurrentKey)
+        Thread.current.threadDictionary.removeObject(forKey: CCDirectorCurrentKey)
     }
 }
 
 func CCDirectorStack() -> NSMutableArray
 {
-    var stack = NSThread.currentThread().threadDictionary[CCDirectorStackKey] as? NSMutableArray
+    var stack = Thread.current.threadDictionary[CCDirectorStackKey] as? NSMutableArray
     if stack == nil {
         stack = NSMutableArray()
-        NSThread.currentThread().threadDictionary[CCDirectorStackKey] = stack
+        Thread.current.threadDictionary[CCDirectorStackKey] = stack
     }
     return stack!
 }
 
 @objc class Director : NSObject, MTKViewDelegate {
     class func currentDirector() -> Director? {
-        return NSThread.currentThread().threadDictionary[CCDirectorCurrentKey] as? Director
+        return Thread.current.threadDictionary[CCDirectorCurrentKey] as? Director
     }
     
-    class func pushCurrentDirector(director: Director) {
+    class func pushCurrentDirector(_ director: Director) {
         let stack = CCDirectorStack()
-        stack.addObject(self.currentDirector() ?? NSNull())
+        stack.add(self.currentDirector() ?? NSNull())
         CCDirectorBindCurrent(director)
     }
     
@@ -88,14 +88,14 @@ func CCDirectorStack() -> NSMutableArray
     var designSize : CGSize {
         get {
             // Return the viewSize unless designSize has been set.
-            return (CGSizeEqualToSize(_designSize, CGSizeZero) ? self.viewSize() : _designSize)
+            return (_designSize.equalTo(CGSize.zero) ? self.viewSize() : _designSize)
         }
         
         set {
             _designSize = newValue
         }
     }
-    private var _designSize = CGSizeZero
+    private var _designSize = CGSize.zero
     /** @name Working with View and Projection */
     /// View used by the director for rendering. The CC_VIEW macro equals UIView on iOS, NSOpenGLView on OS X and MetalView on Android.
     /// @see MetalView
@@ -147,12 +147,12 @@ func CCDirectorStack() -> NSMutableArray
         view!.beginFrame()
         var projection: GLKMatrix4 = runningScene!.projection
         // Synchronize the framebuffer with the view.
-        framebuffer.syncWithView(self.view!)
+        framebuffer.sync(with: self.view!)
         let renderer: CCRenderer = self.rendererFromPool()
     
-        renderer.prepareWithProjection(&projection, framebuffer: framebuffer)
+        renderer.prepare(withProjection: &projection, framebuffer: framebuffer)
         CCRenderer.bindRenderer(renderer)
-        renderer.enqueueClear(.Clear, color: runningScene!.colorRGBA.glkVector4, globalSortOrder: NSInteger.min)
+        renderer.enqueueClear(.clear, color: runningScene!.colorRGBA.glkVector4, globalSortOrder: NSInteger.min)
         // Render
         runningScene!.visit(renderer, parentTransform: projection)
         notificationNode?.visit(renderer, parentTransform: projection)
@@ -181,14 +181,14 @@ func CCDirectorStack() -> NSMutableArray
         return CCRenderer()
     }
     
-    func poolRenderer(renderer: CCRenderer) {
+    func poolRenderer(_ renderer: CCRenderer) {
         /*let lockQueue = dispatch_queue_create("com.test.LockQueue")
         dispatch_sync(lockQueue) {
             rendererPool.append(renderer)
         }*/
     }
     
-    func addFrameCompletionHandler(handler: dispatch_block_t) {
+    func addFrameCompletionHandler(_ handler: ()->()) {
         self.view!.addFrameCompletionHandler(handler)
     }
     
@@ -216,9 +216,9 @@ func CCDirectorStack() -> NSMutableArray
         }*/
         CCRenderState.flushCache()
         if Director.currentDirector()?.view != nil {
-            CCTextureCache.sharedTextureCache().removeUnusedTextures()
+            CCTextureCache.shared().removeUnusedTextures()
         }
-        CCFileLocator.sharedFileLocator().purgeCache()
+        CCFileLocator.shared().purgeCache()
     }
     
     func flipY() -> CGFloat {
@@ -230,7 +230,7 @@ func CCDirectorStack() -> NSMutableArray
         #endif
     }
     
-    func convertToGL(uiPoint: CGPoint) -> CGPoint {
+    func convertToGL(_ uiPoint: CGPoint) -> CGPoint {
         var transform: GLKMatrix4 = runningScene!.projection
         let invTransform: GLKMatrix4 = GLKMatrix4Invert(transform, nil)
         // Calculate z=0 using -> transform*[0, 0, 0, 1]/w
@@ -242,7 +242,7 @@ func CCDirectorStack() -> NSMutableArray
         return ccp(CGFloat(glCoord.x), CGFloat(glCoord.y))
     }
     
-    func convertToUI(glPoint: CGPoint) -> CGPoint {
+    func convertToUI(_ glPoint: CGPoint) -> CGPoint {
         let transform: GLKMatrix4 = runningScene!.projection
         var clipCoord: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(transform, GLKVector3Make(Float(glPoint.x), Float(glPoint.y), 0.0))
         let glSize: CGSize = self.view!.bounds.size
@@ -250,7 +250,7 @@ func CCDirectorStack() -> NSMutableArray
     }
     
     func viewSize() -> CGSize {
-        return CC_SIZE_SCALE(self.view!.sizeInPixels, 1.0 / CGFloat(CCSetup.sharedSetup().contentScale))
+        return CC_SIZE_SCALE(self.view!.sizeInPixels, 1.0 / CGFloat(CCSetup.shared().contentScale))
     }
     
     func viewSizeInPixels() -> CGSize {
@@ -269,7 +269,7 @@ func CCDirectorStack() -> NSMutableArray
         // Bottom left and top right coords in GL coords.
         let glBL: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(projectionInv, clipBL)
         let glTR: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(projectionInv, clipTR)
-        return CGRectMake(CGFloat(glBL.x), CGFloat(glBL.y), CGFloat(glTR.x - glBL.x), CGFloat(glTR.y - glBL.y))
+        return CGRect(x: CGFloat(glBL.x), y: CGFloat(glBL.y), width: CGFloat(glTR.x - glBL.x), height: CGFloat(glTR.y - glBL.y))
     }
     
     func antiFlickrDrawCall() {
@@ -278,11 +278,11 @@ func CCDirectorStack() -> NSMutableArray
         self.mainLoopBody()
     }
     
-    func presentScene(scene: Scene) {
+    func presentScene(_ scene: Scene) {
         if runningScene != nil {
             self.sendCleanupToScene = true
             scenesStack.removeLastObject()
-            scenesStack.addObject(scene)
+            scenesStack.add(scene)
             self.nextScene = scene
             // _nextScene is a weak ref
         }
@@ -291,7 +291,7 @@ func CCDirectorStack() -> NSMutableArray
         }
     }
     
-    func presentScene(scene: Scene, withTransition transition: Transition) {
+    func presentScene(_ scene: Scene, withTransition transition: Transition) {
         if runningScene != nil {
             self.sendCleanupToScene = true
             // the transition gets to become the running scene
@@ -302,7 +302,7 @@ func CCDirectorStack() -> NSMutableArray
         }
     }
     
-    func runWithScene(scene: Scene!) {
+    func runWithScene(_ scene: Scene!) {
         assert(scene != nil, "Argument must be non-nil")
         assert(runningScene == nil, "This command can only be used to start the CCDirector. There is already a scene present.")
         self.pushScene(scene)
@@ -312,17 +312,17 @@ func CCDirectorStack() -> NSMutableArray
         self.startRunLoop()
     }
     
-    func pushScene(scene: Scene!) {
+    func pushScene(_ scene: Scene!) {
         assert(scene != nil, "Argument must be non-nil")
         self.sendCleanupToScene = false
-        scenesStack.addObject(scene)
+        scenesStack.add(scene)
         self.nextScene = scene
         // _nextScene is a weak ref
     }
     
-    func pushScene(scene: Scene!, withTransition transition: Transition) {
+    func pushScene(_ scene: Scene!, withTransition transition: Transition) {
         assert(scene != nil, "Scene must be non-nil")
-        scenesStack.addObject(scene)
+        scenesStack.add(scene)
         self.sendCleanupToScene = false
         transition.startTransition(scene, withDirector: self)
     }
@@ -340,7 +340,7 @@ func CCDirectorStack() -> NSMutableArray
         }
     }
     
-    func popSceneWithTransition(transition: Transition) {
+    func popSceneWithTransition(_ transition: Transition) {
         assert(runningScene != nil, "A running Scene is needed")
         if scenesStack.count < 2 {
             self.end()
@@ -357,13 +357,13 @@ func CCDirectorStack() -> NSMutableArray
         self.popToSceneStackLevel(1)
     }
     
-    func popToRootSceneWithTransition(transition: Transition) {
+    func popToRootSceneWithTransition(_ transition: Transition) {
         self.popToRootScene()
         self.sendCleanupToScene = true
         transition.startTransition(nextScene!, withDirector: self)
     }
     
-    func popToSceneStackLevel(level: Int) {
+    func popToSceneStackLevel(_ level: Int) {
         assert(runningScene != nil, "A running Scene is needed")
         var c: Int = scenesStack.count
         // level 0? -> end
@@ -390,11 +390,11 @@ func CCDirectorStack() -> NSMutableArray
         self.sendCleanupToScene = false
     }
     
-    func startTransition(transition: Transition!) {
+    func startTransition(_ transition: Transition!) {
         assert(transition != nil, "Argument must be non-nil")
         assert(runningScene != nil, "There must be a running scene")
         scenesStack.removeLastObject()
-        scenesStack.addObject(transition)
+        scenesStack.add(transition)
         self.nextScene = transition
     }
     
@@ -415,7 +415,7 @@ func CCDirectorStack() -> NSMutableArray
         // Purge all managers / caches
         SpriteFrame.purgeCache()
         CCTextureCache.purgeSharedTextureCache()
-        CCFileLocator.sharedFileLocator().purgeCache()
+        CCFileLocator.shared().purgeCache()
     }
     
     func setNextScene() {
@@ -474,9 +474,9 @@ func CCDirectorStack() -> NSMutableArray
         self.oldFrameSkipInterval = frameSkipInterval
         // when paused, don't consume CPU
         self.frameSkipInterval = 15
-        self.willChangeValueForKey("isPaused")
+        self.willChangeValue(forKey: "isPaused")
         self.isPaused = true
-        self.didChangeValueForKey("isPaused")
+        self.didChangeValue(forKey: "isPaused")
     }
     
     func resume() {
@@ -488,9 +488,9 @@ func CCDirectorStack() -> NSMutableArray
         }*/
         self.frameSkipInterval = oldFrameSkipInterval
         self.lastUpdate = CCAbsoluteTime()
-        self.willChangeValueForKey("isPaused")
+        self.willChangeValue(forKey: "isPaused")
         self.isPaused = false
-        self.didChangeValueForKey("isPaused")
+        self.didChangeValue(forKey: "isPaused")
         self.dt = 0
     }
     // This method is also overridden by platform specific directors.
@@ -503,18 +503,18 @@ func CCDirectorStack() -> NSMutableArray
         print("Director#stopRunLoop. Override me")
     }
     
-    func drawInMTKView(view: MTKView) {
+    func draw(in view: MTKView) {
         self.animating = true
         self.mainLoopBody()
     }
     
-    func mtkView(view: MTKView, drawableSizeWillChange size: CGSize) {
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         runningScene?.contentSize = size
         runningScene?.viewDidResizeTo(size)
     }
     #if os(OSX)
-    func convertEventToGL(event: NSEvent) -> CGPoint {
-        let point: NSPoint = self.view!.convertPoint(event.locationInWindow, fromView: nil)
+    func convertEventToGL(_ event: NSEvent) -> CGPoint {
+        let point: NSPoint = self.view!.convert(event.locationInWindow, from: nil)
         return self.convertToGL(NSPointToCGPoint(point))
     }
     #endif

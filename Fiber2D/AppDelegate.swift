@@ -14,20 +14,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
 
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         CCSetup.createCustomSetup()
-        CCSetup.sharedSetup().contentScale = 2.0
+        CCSetup.shared().contentScale = 2.0
         //;2*[_view convertSizeToBacking:NSMakeSize(1, 1)].width;
-        CCSetup.sharedSetup().assetScale = CCSetup.sharedSetup().contentScale
-        CCSetup.sharedSetup().UIScale = 0.5
-        let rect: CGRect = CGRectMake(0, 0, 1024, 768)
-        window = NSWindow(contentRect: rect, styleMask: NSClosableWindowMask | NSResizableWindowMask | NSTitledWindowMask, backing: .Buffered, defer: false, screen: NSScreen.mainScreen())
+        CCSetup.shared().assetScale = CCSetup.shared().contentScale
+        CCSetup.shared().uiScale = 0.5
+        let rect: CGRect = CGRect(x: 0, y: 0, width: 1024, height: 768)
+        window = NSWindow(contentRect: rect, styleMask: [NSClosableWindowMask, NSResizableWindowMask, NSTitledWindowMask], backing: .buffered, defer: false, screen: NSScreen.main())
         let view: MetalView = MetalView(frame: rect)
         view.wantsBestResolutionOpenGLSurface = true
         self.window.contentView = view
-        let locator: CCFileLocator = CCFileLocator.sharedFileLocator()
+        let locator: CCFileLocator = CCFileLocator.shared()
         locator.untaggedContentScale = 4
-        locator.searchPaths = [ NSBundle.mainBundle().resourcePath!, NSBundle.mainBundle().resourcePath! + "//Resources" ]
+        locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "//Resources" ]
             
         window.center()
         window.makeFirstResponder(view)
@@ -40,7 +40,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Director.popCurrentDirector()
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 

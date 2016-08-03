@@ -1,12 +1,12 @@
 let SPRITE_9SLICE_MARGIN_DEFAULT: Float = 1.0 / 3.0
 
-func PositionInterpolationMatrix(inout verts: SpriteVertexes, transform: GLKMatrix4) -> GLKMatrix4 {
+func PositionInterpolationMatrix(_ verts: inout SpriteVertexes, transform: GLKMatrix4) -> GLKMatrix4 {
     let origin: GLKVector4 = verts.bl.position
     let basisX: GLKVector4 = GLKVector4Subtract(verts.br.position, origin)
     let basisY: GLKVector4 = GLKVector4Subtract(verts.tl.position, origin)
     return GLKMatrix4Multiply(transform, GLKMatrix4Make(basisX.x, basisX.y, basisX.z, 0.0, basisY.x, basisY.y, basisY.z, 0.0, 0.0, 0.0, 1.0, 0.0, origin.x, origin.y, origin.z, 1.0))
 }
-func TexCoordInterpolationMatrix(inout verts: SpriteVertexes) -> GLKMatrix3 {
+func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> GLKMatrix3 {
     let origin: GLKVector2 = verts.bl.texCoord1
     let basisX: GLKVector2 = GLKVector2Subtract(verts.br.texCoord1, origin)
     let basisY: GLKVector2 = GLKVector2Subtract(verts.tl.texCoord1, origin)
@@ -14,7 +14,7 @@ func TexCoordInterpolationMatrix(inout verts: SpriteVertexes) -> GLKMatrix3 {
 }
 
 @objc class Sprite9Slice : Sprite {
-    var originalContentSize = CGSizeZero
+    var originalContentSize = CGSize.zero
     
     var margin : Float {
         get {
@@ -43,13 +43,13 @@ func TexCoordInterpolationMatrix(inout verts: SpriteVertexes) -> GLKMatrix3 {
         self.margin = SPRITE_9SLICE_MARGIN_DEFAULT
     }
     
-    func setTextureRect(rect: CGRect, rotated: Bool, untrimmedSize: CGSize) {
+    func setTextureRect(_ rect: CGRect, rotated: Bool, untrimmedSize: CGSize) {
         let oldContentSize = self.contentSize
         let oldContentSizeType = self.contentSizeType
         self.setTextureRect(rect, forTexture: self.texture, rotated: rotated, untrimmedSize: untrimmedSize)
         // save the original sizes for texture calculations
         self.originalContentSize = self.contentSizeInPoints
-        if !CGSizeEqualToSize(oldContentSize, CGSizeZero) {
+        if !oldContentSize.equalTo(CGSize.zero) {
             self.contentSizeType = oldContentSizeType
             self.contentSize = oldContentSize
         }
@@ -57,7 +57,7 @@ func TexCoordInterpolationMatrix(inout verts: SpriteVertexes) -> GLKMatrix3 {
     // TODO This is sort of brute force. Could probably use some optimization after profiling.
     // Could it be done in a vertex shader using the texCoord2 attribute?
     
-    override func draw(renderer: CCRenderer, transform: GLKMatrix4) {
+    override func draw(_ renderer: CCRenderer, transform: GLKMatrix4) {
         // Don't draw rects that were originally sizeless. CCButtons in tableviews are like this.
         // Not really sure it's intended behavior or not.
         if originalContentSize.width == 0 && originalContentSize.height == 0 {
@@ -65,7 +65,7 @@ func TexCoordInterpolationMatrix(inout verts: SpriteVertexes) -> GLKMatrix3 {
         }
         let size: CGSize = self.contentSizeInPoints
         let rectSize: CGSize = self.textureRect.size
-        let physicalSize: CGSize = CGSizeMake(size.width + rectSize.width - originalContentSize.width, size.height + rectSize.height - originalContentSize.height)
+        let physicalSize: CGSize = CGSize(width: size.width + rectSize.width - originalContentSize.width, height: size.height + rectSize.height - originalContentSize.height)
         // Lookup tables for alpha coefficients.
         let scaleX = Float(physicalSize.width / rectSize.width)
         let scaleY = Float(physicalSize.height / rectSize.height)
@@ -78,7 +78,7 @@ func TexCoordInterpolationMatrix(inout verts: SpriteVertexes) -> GLKMatrix3 {
         let interpolatePosition: GLKMatrix4 = PositionInterpolationMatrix(&verts, transform: transform)
         let interpolateTexCoord: GLKMatrix3 = TexCoordInterpolationMatrix(&verts)
         let color: GLKVector4 = verts.bl.color
-        let buffer: CCRenderBuffer = renderer.enqueueTriangles(18, andVertexes: 16, withState: self.renderState, globalSortOrder: 0)
+        let buffer: CCRenderBuffer = renderer.enqueueTriangles(18, andVertexes: 16, with: self.renderState, globalSortOrder: 0)
         
         // Interpolate the vertexes!
         for y in 0..<4 {

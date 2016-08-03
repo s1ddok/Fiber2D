@@ -57,8 +57,8 @@ extension Node {
             }
             let needsSkewMatrix: Bool = (skewX != 0.0 || skewY != 0.0)
             var scaleFactor: Float = 1
-            if scaleType == .Scaled {
-                scaleFactor = CCSetup.sharedSetup().UIScale
+            if scaleType == .scaled {
+                scaleFactor = CCSetup.shared().uiScale
             }
             // optimization:
             // inline anchor point calculation if skew is not needed

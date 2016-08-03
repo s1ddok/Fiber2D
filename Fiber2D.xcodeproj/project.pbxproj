@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		081FBC241D4625A6005838B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC231D4625A6005838B8 /* AppDelegate.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
 		081FBC291D4625A6005838B8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC271D4625A6005838B8 /* MainMenu.xib */; };
-		081FBC3D1D462614005838B8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 081FBC3A1D46260A005838B8 /* libpng.a */; };
 		081FBCCD1D462732005838B8 /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC711D462732005838B8 /* CCAction.m */; };
 		081FBCCE1D462732005838B8 /* CCActionCatmullRom.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC741D462732005838B8 /* CCActionCatmullRom.m */; };
 		081FBCCF1D462732005838B8 /* CCActionEase.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC761D462732005838B8 /* CCActionEase.m */; };
@@ -71,23 +71,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		081FBC371D46260A005838B8 /* PBXContainerItemProxy */ = {
+		0812ACE61D52A6F900AE46E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 081FBC311D462609005838B8 /* libpng.xcodeproj */;
+			containerPortal = 0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D331FB3F1ADB74040013FFBE;
 			remoteInfo = "libpng (iOS)";
 		};
-		081FBC391D46260A005838B8 /* PBXContainerItemProxy */ = {
+		0812ACE81D52A6F900AE46E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 081FBC311D462609005838B8 /* libpng.xcodeproj */;
+			containerPortal = 0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D331FC3A1ADB82B20013FFBE;
 			remoteInfo = "libpng (Mac)";
 		};
-		081FBC3B1D46260A005838B8 /* PBXContainerItemProxy */ = {
+		0812ACEA1D52A6F900AE46E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 081FBC311D462609005838B8 /* libpng.xcodeproj */;
+			containerPortal = 0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D331FC831ADB97FE0013FFBE;
 			remoteInfo = "libpng (Android)";
@@ -95,12 +95,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		081FBC231D4625A6005838B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC281D4625A6005838B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		081FBC311D462609005838B8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = "cocos2d-legacy/libpng/libpng.xcodeproj"; sourceTree = "<group>"; };
 		081FBC701D462732005838B8 /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
 		081FBC711D462732005838B8 /* CCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAction.m; sourceTree = "<group>"; };
 		081FBC721D462732005838B8 /* CCAction_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction_Private.h; sourceTree = "<group>"; };
@@ -216,13 +216,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				081FBC3D1D462614005838B8 /* libpng.a in Frameworks */,
+				0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0812ACE11D52A6F900AE46E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0812ACE71D52A6F900AE46E8 /* libpng.a */,
+				0812ACE91D52A6F900AE46E8 /* libpng.a */,
+				0812ACEB1D52A6F900AE46E8 /* libpng.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		081FBC171D4625A6005838B8 = {
 			isa = PBXGroup;
 			children = (
@@ -258,20 +268,10 @@
 				081FBC7D1D462732005838B8 /* CCClasses */,
 				081FBCAA1D462732005838B8 /* Platforms */,
 				081FBCBB1D462732005838B8 /* Support */,
-				081FBC311D462609005838B8 /* libpng.xcodeproj */,
+				0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */,
 			);
 			name = "cocos2d-legacy";
 			path = Fiber2D;
-			sourceTree = "<group>";
-		};
-		081FBC321D462609005838B8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				081FBC381D46260A005838B8 /* libpng.a */,
-				081FBC3A1D46260A005838B8 /* libpng.a */,
-				081FBC3C1D46260A005838B8 /* libpng.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		081FBC6F1D462732005838B8 /* Actions */ = {
@@ -543,6 +543,7 @@
 				TargetAttributes = {
 					081FBC1F1D4625A6005838B8 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -559,8 +560,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 081FBC321D462609005838B8 /* Products */;
-					ProjectRef = 081FBC311D462609005838B8 /* libpng.xcodeproj */;
+					ProductGroup = 0812ACE11D52A6F900AE46E8 /* Products */;
+					ProjectRef = 0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -571,25 +572,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		081FBC381D46260A005838B8 /* libpng.a */ = {
+		0812ACE71D52A6F900AE46E8 /* libpng.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libpng.a;
-			remoteRef = 081FBC371D46260A005838B8 /* PBXContainerItemProxy */;
+			remoteRef = 0812ACE61D52A6F900AE46E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		081FBC3A1D46260A005838B8 /* libpng.a */ = {
+		0812ACE91D52A6F900AE46E8 /* libpng.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libpng.a;
-			remoteRef = 081FBC391D46260A005838B8 /* PBXContainerItemProxy */;
+			remoteRef = 0812ACE81D52A6F900AE46E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		081FBC3C1D46260A005838B8 /* libpng.a */ = {
+		0812ACEB1D52A6F900AE46E8 /* libpng.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libpng.a;
-			remoteRef = 081FBC3B1D46260A005838B8 /* PBXContainerItemProxy */;
+			remoteRef = 0812ACEA1D52A6F900AE46E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -773,6 +774,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Fiber2D/cocos2d-legacy/**",
+					"$(SRCROOT)/external/**",
+				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/**";
@@ -780,7 +785,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
-				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/**";
+				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};
 			name = Debug;
 		};
@@ -789,6 +795,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Fiber2D/cocos2d-legacy/**",
+					"$(SRCROOT)/external/**",
+				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/**";
@@ -796,7 +806,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
-				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/**";
+				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};
 			name = Release;
 		};

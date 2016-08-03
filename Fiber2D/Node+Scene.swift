@@ -31,7 +31,7 @@ extension Node {
         let wasRunning: Bool = self.active
         self.isInActiveScene = true
         // Add queued actions or scheduled code, if needed:
-        for block: dispatch_block_t in queuedActions {
+        for block: ()->() in queuedActions {
             block()
         }
         self.queuedActions.removeAll()

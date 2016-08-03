@@ -3,11 +3,11 @@
  */
 @objc enum CCLayoutBoxDirection : Int    /// The children will be horizontally aligned.
 {
-    case Horizontal
+    case horizontal
     /// The children will be vertically aligned.
-    case Vertical
+    case vertical
 }
-func roundUpToEven(f: Float) -> Float {
+func roundUpToEven(_ f: Float) -> Float {
     return ceilf(f / 2.0) * 2.0
 }
 /**
@@ -23,7 +23,7 @@ func roundUpToEven(f: Float) -> Float {
      The direction is either horizontal or vertical.
      @see CCLayoutBoxDirection
      */
-    var direction: CCLayoutBoxDirection = .Horizontal {
+    var direction: CCLayoutBoxDirection = .horizontal {
         didSet {
             needsLayout()
         }
@@ -44,7 +44,7 @@ func roundUpToEven(f: Float) -> Float {
             return
         }
         
-        if direction == .Horizontal {
+        if direction == .horizontal {
             // Get the maximum height
             var maxHeight: Float = 0
             for child in self.children {
@@ -71,7 +71,7 @@ func roundUpToEven(f: Float) -> Float {
                 width = 0
             }
             self.contentSizeType = CCSizeTypePoints
-            self.contentSize = CGSizeMake(CGFloat(roundUpToEven(width)), CGFloat(roundUpToEven(maxHeight)))
+            self.contentSize = CGSize(width: CGFloat(roundUpToEven(width)), height: CGFloat(roundUpToEven(maxHeight)))
         }
         else {
             // Get the maximum width
@@ -100,11 +100,11 @@ func roundUpToEven(f: Float) -> Float {
                 height = 0
             }
             self.contentSizeType = CCSizeTypePoints
-            self.contentSize = CGSizeMake(CGFloat(roundUpToEven(maxWidth)), CGFloat(roundUpToEven(height)))
+            self.contentSize = CGSize(width: CGFloat(roundUpToEven(maxWidth)), height: CGFloat(roundUpToEven(height)))
         }
     }
     
-    override func detachChild(child: Node, cleanup: Bool = true) {
+    override func detachChild(_ child: Node, cleanup: Bool = true) {
         super.detachChild(child, cleanup: cleanup)
         self.needsLayout()
     }

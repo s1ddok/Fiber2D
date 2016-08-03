@@ -39,7 +39,7 @@ class MainScene: Scene {
         colorNode.visit()
         rt.end()
         
-        colorNode.runAction(repeatForever)
+        colorNode.runAction(repeatForever!)
         addChild(colorNode)
         rt.sprite.positionType = CCPositionTypeNormalized
         rt.sprite.position = ccp(0.5, 0.5)
@@ -49,7 +49,7 @@ class MainScene: Scene {
         print(sprite.active)
         
     }
-    override func mouseDown(theEvent: NSEvent, button: MouseButton) {
+    override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
        // print(theEvent.locationInNode(self))
     }
 }

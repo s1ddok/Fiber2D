@@ -25,16 +25,16 @@ extension Node {
      @see CCAction
      */
     
-    func runAction(action: CCAction) -> CCAction {
+    func runAction(_ action: CCAction) -> CCAction {
         let scheduler = self.scheduler
         if scheduler == nil {
-            let block: dispatch_block_t = {() -> Void in
-                self.scheduler!.addAction(action, target: self, paused: !self.active)
+            let block: ()->() = {() -> Void in
+                self.scheduler!.add(action, target: self, paused: !self.active)
             }
             queuedActions.append(block)
         }
         else {
-            scheduler!.addAction(action, target: self, paused: !self.active)
+            scheduler!.add(action, target: self, paused: !self.active)
         }
         return action
 
@@ -43,7 +43,7 @@ extension Node {
      @node It is not necessary to call this when removing a node. Removing a node from its parent will also stop its actions. */
     
     func stopAllActions() {
-        scheduler?.removeAllActionsFromTarget(self)
+        scheduler?.removeAllActions(from: self)
     }
     /**
      *  Removes an action from the running action list.
@@ -52,8 +52,8 @@ extension Node {
      *  @see CCAction
      */
     
-    func stopAction(action: CCAction) {
-        scheduler?.removeAction(action, fromTarget: self)
+    func stopAction(_ action: CCAction) {
+        scheduler?.remove(action, from: self)
     }
     /**
      *  Removes an action from the running action list given its tag. If there are multiple actions with the same tag it will
@@ -62,8 +62,8 @@ extension Node {
      *  @param name Name of the action to remove.
      */
     
-    func stopActionByName(name: String) {
-        scheduler?.removeActionByName(name, target: self)
+    func stopActionByName(_ name: String) {
+        scheduler?.removeAction(byName: name, target: self)
     }
     /**
      *  Gets an action running on the node given its tag.
@@ -75,7 +75,7 @@ extension Node {
      *  @see CCAction
      */
     
-    func getActionByName(name: String) -> CCAction? {
+    func getActionByName(_ name: String) -> CCAction? {
         return scheduler?.getActionByName(name, target: self)
     }
     /**
@@ -85,7 +85,7 @@ extension Node {
      */
     
     func actions() -> [AnyObject]? {
-        return scheduler?.actionsForTarget(self)
+        return scheduler?.actions(for: self)
     }
     /// -----------------------------------------------------------------------
     /// @name Scheduling Selectors and Blocks
@@ -105,15 +105,15 @@ extension Node {
      @see CCTimer
      */
     
-    func scheduleBlock(block: CCTimerBlock, delay: CCTime) -> CCTimer! {
+    func scheduleBlock(_ block: CCTimerBlock, delay: CCTime) -> CCTimer! {
         guard let scheduler = self.scheduler else {
             return nil
         }
-        return scheduler.scheduleBlock(block, forTarget: self, withDelay: delay)
+        return scheduler.scheduleBlock(block, for: self, withDelay: delay)
     }
     
     // Used to pause/unpause a node's actions and timers when it's isRunning state changes.
-    func wasRunning(wasRunning: Bool) {
+    func wasRunning(_ wasRunning: Bool) {
         let isRunning = self.active
         // Resume or pause scheduled update methods, CCActions, and animations if the pause state has changed
         if isRunning != wasRunning {
@@ -122,7 +122,7 @@ extension Node {
     }
     
     // Recursively increment/decrement _pausedAncestors on the children of 'node'.
-    func recursivelyIncrementPausedAncestors(increment: Int) {
+    func recursivelyIncrementPausedAncestors(_ increment: Int) {
         for node in children {
             let wasRunning = node.active
             node.pausedAncestors += increment

@@ -87,7 +87,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         self.dirty = false
     }
     
-    func buildResponderList(node: Node) {
+    func buildResponderList(_ node: Node) {
         // dont add invisible nodes
         if !node.visible {
             return
@@ -111,7 +111,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         }
     }
     
-    func addResponder(responder: Node!) {
+    func addResponder(_ responder: Node!) {
         guard responder != nil else {
             assertionFailure("Trying to add a nil responder")
             return
@@ -138,13 +138,13 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         self.dirty = true
     }
 
-    func nodeAtPoint(pos: CGPoint) -> Node? {
+    func nodeAtPoint(_ pos: CGPoint) -> Node? {
         if dirty {
             self.buildResponderList()
         }
         
         // scan backwards through touch responders
-        for node in responderList.reverse() {
+        for node in responderList.reversed() {
             // check for hit test
             if node.hitTestWithWorldPos(pos) {
                 return (node)
@@ -154,7 +154,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         return nil
     }
     
-    func nodesAtPoint(pos: CGPoint) -> [AnyObject] {
+    func nodesAtPoint(_ pos: CGPoint) -> [AnyObject] {
         if dirty {
             self.buildResponderList()
         }
@@ -365,7 +365,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
     #endif
     
     #if os(OSX)
-    func mouseDown(theEvent: NSEvent, button: MouseButton) {
+    func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
         if !enabled {
             return
         }
@@ -380,7 +380,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             }, withEvent: theEvent)
     }
     
-    func mouseDragged(theEvent: NSEvent, button: MouseButton) {
+    func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
         if !enabled {
             return
         }
@@ -394,7 +394,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             // Items that claim user interaction receive events even if they occur outside of the bounds of the object.
             if node.claimsUserInteraction || node.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
                 Director.pushCurrentDirector(director)
-                if node.respondsToSelector(#selector(Responder.mouseDragged(_:button:))) {
+                if node.responds(to: #selector(Responder.mouseDragged(_:button:))) {
                     node.mouseDragged(theEvent, button: button)
                 }
                 Director.popCurrentDirector()
@@ -413,7 +413,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         }
     }
     
-    func mouseUp(theEvent: NSEvent, button: MouseButton) {
+    func mouseUp(_ theEvent: NSEvent, button: MouseButton) {
         if dirty {
             self.buildResponderList()
         }
@@ -421,7 +421,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         if let responder = self.responderForButton(button) {
             let node: Node = (responder.target as! Node)
             Director.pushCurrentDirector(director)
-            if node.respondsToSelector(#selector(Responder.mouseUp(_:button:))) {
+            if node.responds(to: #selector(Responder.mouseUp(_:button:))) {
                 node.mouseUp(theEvent, button: button)
             }
             Director.popCurrentDirector()
@@ -429,7 +429,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         }
     }
     
-    func scrollWheel(theEvent: NSEvent) {
+    func scrollWheel(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -443,7 +443,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             let node: Node = (responder.target as! Node)
             self.currentEventProcessed = true
             Director.pushCurrentDirector(director)
-            if node.respondsToSelector(#selector(NSResponder.scrollWheel(_:))) {
+            if node.responds(to: #selector(NSResponder.scrollWheel)) {
                 node.scrollWheel(theEvent)
             }
             Director.popCurrentDirector()
@@ -457,7 +457,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             }, withEvent: theEvent)
     }
     
-    func mouseMoved(theEvent: NSEvent) {
+    func mouseMoved(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -469,10 +469,10 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             }, withEvent: theEvent)
     }
     
-    func executeOnEachResponder(block: (Node) -> Void, withEvent theEvent: NSEvent) {
+    func executeOnEachResponder(_ block: (Node) -> Void, withEvent theEvent: NSEvent) {
         Director.pushCurrentDirector(director)
         // scan through responders, and find first one
-        for node in responderList.reverse() {
+        for node in responderList.reversed() {
             // check for hit test
             if node.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
                 self.currentEventProcessed = true
@@ -486,7 +486,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         Director.popCurrentDirector()
     }
     
-    func keyDown(theEvent: NSEvent) {
+    func keyDown(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -494,13 +494,13 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             self.buildResponderList()
         }
         Director.pushCurrentDirector(director)
-        responderList.reverse().forEach {
+        responderList.reversed().forEach {
             $0.keyDown(theEvent)
         }
         Director.popCurrentDirector()
     }
     
-    func keyUp(theEvent: NSEvent) {
+    func keyUp(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -508,13 +508,13 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             self.buildResponderList()
         }
         Director.pushCurrentDirector(director)
-        responderList.reverse().forEach {
+        responderList.reversed().forEach {
             $0.keyUp(theEvent)
         }
         Director.popCurrentDirector()
     }
     
-    func flagsChanged(theEvent: NSEvent) {
+    func flagsChanged(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -522,14 +522,14 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
             self.buildResponderList()
         }
         Director.pushCurrentDirector(director)
-        responderList.reverse().forEach {
+        responderList.reversed().forEach {
             $0.flagsChanged(theEvent)
         }
         Director.popCurrentDirector()
     }
     // finds a responder object for an event
     
-    func responderForButton(button: MouseButton) -> RunningResponder? {
+    func responderForButton(_ button: MouseButton) -> RunningResponder? {
         for touchEntry: RunningResponder in runningResponderList {
             if touchEntry.button == button {
                 return touchEntry
@@ -539,7 +539,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
     }
     // adds a responder object ( running responder ) to the responder object list
     
-    func addResponder(node: Node, withButton button: MouseButton) {
+    func addResponder(_ node: Node, withButton button: MouseButton) {
         var touchEntry: RunningResponder
         // create a new touch object
         touchEntry = RunningResponder()
@@ -548,7 +548,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         runningResponderList.append(touchEntry)
     }
     
-    func cancelResponder(responder: RunningResponder) {
+    func cancelResponder(_ responder: RunningResponder) {
         runningResponderList.removeObject(responder)
     }
     

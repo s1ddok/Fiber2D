@@ -141,7 +141,7 @@ import Foundation
      Default setting is referencing the bottom left corner in points.
      @see positionInPoints
      @see positionType */
-    var position = CGPointZero {
+    var position = CGPoint.zero {
         didSet {
             isTransformDirty = true
         }
@@ -277,8 +277,8 @@ import Foundation
      @see scale
      @see scaleType */
     var scaleInPoints: Float {
-        if scaleType == .Scaled {
-            return scale * CCSetup.sharedSetup().UIScale
+        if scaleType == .scaled {
+            return scale * CCSetup.shared().uiScale
         }
         return scale
     }
@@ -289,8 +289,8 @@ import Foundation
      
      @see scaleY, scaleYInPoints */
     var scaleXInPoints: Float {
-        if scaleType == .Scaled {
-            return scaleX * CCSetup.sharedSetup().UIScale
+        if scaleType == .scaled {
+            return scaleX * CCSetup.shared().uiScale
         }
         return scaleX
     }
@@ -302,8 +302,8 @@ import Foundation
      @see scaleX
      @see scaleXInPoints */
     var scaleYInPoints: Float {
-        if scaleType == .Scaled {
-            return scaleY * CCSetup.sharedSetup().UIScale
+        if scaleType == .scaled {
+            return scaleY * CCSetup.shared().uiScale
         }
         return scaleY
 
@@ -314,7 +314,7 @@ import Foundation
      @see CCScaleType
      @see scale
      @see scaleInPoints */
-    var scaleType: CCScaleType = .Points {
+    var scaleType: CCScaleType = .points {
         didSet {
             isTransformDirty = true
         }
@@ -328,7 +328,7 @@ import Foundation
      The contentSize remains the same regardless of whether the node is scaled or rotated.
      @see contentSizeInPoints
      @see contentSizeType */
-    var contentSize: CGSize = CGSizeZero {
+    var contentSize: CGSize = CGSize.zero {
         didSet {
             if oldValue != contentSize {
                 contentSizeChanged()
@@ -365,7 +365,7 @@ import Foundation
      * @param newViewSize The new size of the view after it has been resized.
      */
     
-    func viewDidResizeTo(newViewSize: CGSize) {
+    func viewDidResizeTo(_ newViewSize: CGSize) {
         children.forEach { $0.viewDidResizeTo(newViewSize) }
     }
     /** Returns an axis aligned bounding box in points, in the parent node's coordinate system.
@@ -374,9 +374,10 @@ import Foundation
     
     var boundingBox: CGRect {
         let contentSize: CGSize = self.contentSizeInPoints
-        let rect: CGRect = CGRectMake(0, 0, contentSize.width, contentSize.height)
+        let rect: CGRect = CGRect(x: 0, y: 0, width: contentSize.width, height: contentSize.height)
         let t: GLKMatrix4 = self.nodeToParentMatrix()
-        return CGRectApplyAffineTransform(rect, CGAffineTransformMake(CGFloat(t.m.0), CGFloat(t.m.1), CGFloat(t.m.4), CGFloat(t.m.5), CGFloat(t.m.12), CGFloat(t.m.13)))
+
+        return rect.applying(CGAffineTransform(a: CGFloat(t.m.0), b: CGFloat(t.m.1), c: CGFloat(t.m.4), d: CGFloat(t.m.5), tx: CGFloat(t.m.12), ty: CGFloat(t.m.13)))
     }
     
     // MARK: Content's anchor
@@ -389,7 +390,7 @@ import Foundation
      default anchorPoint, typically centered on the node (0.5,0.5).
      @warning The anchorPoint is not a replacement for moving a node. It defines how the node's content is drawn relative to the node's position.
      @see anchorPointInPoints */
-    var anchorPoint = CGPointZero {
+    var anchorPoint = CGPoint.zero {
         didSet {
             if oldValue != anchorPoint {
                 let contentSizeInPoints = self.contentSizeInPoints
@@ -402,7 +403,7 @@ import Foundation
      It is calculated as follows: `x = contentSizeInPoints.width * anchorPoint.x; y = contentSizeInPoints.height * anchorPoint.y;`
      @note The returned point is relative to the node's contentSize origin, not relative to the node's position.
      @see anchorPoint */
-    private(set) var anchorPointInPoints = CGPointZero
+    private(set) var anchorPointInPoints = CGPoint.zero
     
     // MARK: Visibility and Draw Order
     /// -----------------------------------------------------------------------
@@ -457,7 +458,7 @@ import Foundation
      */
     var color: CCColor {
         get {
-            return CCColor(GLKVector4: _color)
+            return CCColor(glkVector4: _color)
         }
         set {
             //retain old alpha
@@ -481,7 +482,7 @@ import Foundation
      */
     var colorRGBA: CCColor {
         get {
-            return CCColor(GLKVector4: _color)
+            return CCColor(glkVector4: _color)
         }
         set {
             _color = colorRGBA.glkVector4
@@ -500,7 +501,7 @@ import Foundation
      */
     var displayedColor: CCColor {
         get {
-            return CCColor(GLKVector4: _displayedColor)
+            return CCColor(glkVector4: _displayedColor)
         }
     }
     private var _displayedColor = GLKVector4Make(1.0, 1.0, 1.0, 1.0)
@@ -517,13 +518,13 @@ import Foundation
     
     private func cascadeColorIfNeeded() {
         if cascadeColorEnabled {
-            var parentColor = CCColor.whiteColor()
+            var parentColor = CCColor.white()
             if let parent = self.parent {
                 if parent.cascadeColorEnabled {
                     parentColor = parent.displayedColor
                 }
             }
-            self.updateDisplayedColor(parentColor.glkVector4)
+            self.updateDisplayedColor((parentColor?.glkVector4)!)
         }
     }
     // purposefully undocumented: internal method users needn't know about
@@ -533,7 +534,7 @@ import Foundation
      *  @param color Color used for update.
      */
     
-    func updateDisplayedColor(parentColor: GLKVector4) {
+    func updateDisplayedColor(_ parentColor: GLKVector4) {
         _displayedColor.v.0 = _color.r * parentColor.r
         _displayedColor.v.1 = _color.g * parentColor.g
         _displayedColor.v.2 = _color.b * parentColor.b
@@ -599,7 +600,7 @@ import Foundation
      *  @param opacity Opacity to use for update.
      */
     
-    func updateDisplayedOpacity(parentOpacity: Float) {
+    func updateDisplayedOpacity(_ parentOpacity: Float) {
         _displayedColor.v.3 = _color.a * parentOpacity
         // if (_cascadeOpacityEnabled) {
         for item: Node in children {
@@ -642,7 +643,7 @@ import Foundation
      * If a class want's to extend the 'addChild' behaviour it only needs
      * to override this method
      */
-    func addChild(child: Node, z: Int? = nil, name: String? = nil) {
+    func addChild(_ child: Node, z: Int? = nil, name: String? = nil) {
         assert(child.parent == nil, "child already added to another node. It can't be added again")
         //assert((child as? Scene) == nil, "Scenes may not be added as children of other nodes or scenes. Only one scene can exist in a hierarchy.")
         child.zOrder = z ?? child.zOrder
@@ -664,7 +665,7 @@ import Foundation
      @note It is typically more efficient to change a node's visible status rather than remove + addChild: if all you need
      is to temporarily remove the node from the screen.
      @see visible */
-    func removeFromParent(cleanup: Bool = true) {
+    func removeFromParent(_ cleanup: Bool = true) {
         parent?.removeChild(self, cleanup: cleanup)
     }
     /**
@@ -681,7 +682,7 @@ import Foundation
      @see removeFromParent
      */
     
-    func removeChild(child: Node, cleanup: Bool = true) {
+    func removeChild(_ child: Node, cleanup: Bool = true) {
         detachChild(child, cleanup: cleanup)
     }
     /**
@@ -691,7 +692,7 @@ import Foundation
      @param name Name of node to be removed.
      */
     
-    func removeChildByName(name: String, cleanup: Bool = true) {
+    func removeChildByName(_ name: String, cleanup: Bool = true) {
         guard let child = getChildByName(name, recursively: false) else {
             print("WARNING: Node doesn't contain specified child")
             return
@@ -705,7 +706,7 @@ import Foundation
      when removed from a parent node or when a new scene is presented.
      */
     
-    func removeAllChildrenWithCleanup(cleanup: Bool = true) {
+    func removeAllChildrenWithCleanup(_ cleanup: Bool = true) {
         // not using detachChild improves speed here
         for c: Node in children {
             // IMPORTANT:
@@ -732,7 +733,7 @@ import Foundation
      *  @param cleanup Stops all scheduled events and actions
      */
     
-    func detachChild(child: Node, cleanup doCleanup: Bool) {
+    func detachChild(_ child: Node, cleanup doCleanup: Bool) {
         // IMPORTANT:
         //  -1st do onExit
         //  -2nd cleanup
@@ -750,7 +751,7 @@ import Foundation
         // set parent nil at the end (issue #476)
         child.parent = nil
         Director.currentDirector()!.responderManager.markAsDirty()
-        children.removeAtIndex(children.indexOf(child)!)
+        children.remove(at: children.index(of: child)!)
     }
     
     /* performance improvement, Sort the children array once before drawing, instead of every time when a child is added or reordered
@@ -758,7 +759,7 @@ import Foundation
     
     func sortAllChildren() {
         if isReorderChildDirty {
-            children.sortInPlace { $0.zOrder < $1.zOrder }
+            children.sort { $0.zOrder < $1.zOrder }
             
             //don't need to check children recursively, that's done in visit of each child
             self.isReorderChildDirty = false
@@ -767,7 +768,7 @@ import Foundation
     }
     
     // Recursively get a child by name, but don't return the root of the search.
-    private func getChildByNameRecursive(name: String, root: Node) -> Node? {
+    private func getChildByNameRecursive(_ name: String, root: Node) -> Node? {
         if self != root && (name == name) { return self }
         for node in children {
             let n = node.getChildByNameRecursive(name, root: root)
@@ -791,7 +792,7 @@ import Foundation
      @return Returns the first node with a matching name, or nil if no node with that name was found.
      @see name
      */
-    func getChildByName(name: String, recursively isRecursive: Bool) -> Node? {
+    func getChildByName(_ name: String, recursively isRecursive: Bool) -> Node? {
         if isRecursive {
             return self.getChildByNameRecursive(name, root: self)
         }
@@ -855,7 +856,7 @@ import Foundation
     }
     
     // Blocks that are scheduled to run on this node when onEnter is called, contains scheduled stuff and actions.
-    internal var queuedActions = [dispatch_block_t]()
+    internal var queuedActions = [()->()]()
     
     /// -----------------------------------------------------------------------
     /// @name Rendering (Implemented in Subclasses)
@@ -871,7 +872,7 @@ import Foundation
      @see CCRenderer
      */
     
-    func draw(renderer: CCRenderer, transform: GLKMatrix4) {}
+    func draw(_ renderer: CCRenderer, transform: GLKMatrix4) {}
     
     //
     // MARK: Power user functionality 
@@ -923,7 +924,7 @@ import Foundation
      @since v4.0
      */
     
-    func setRawParent(parent: Node) {
+    func setRawParent(_ parent: Node) {
         _parent = parent
     }
     /**

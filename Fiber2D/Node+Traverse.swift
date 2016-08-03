@@ -13,7 +13,7 @@ extension Node {
      * @param renderer The CCRenderer instance to use for drawing.
      * @param parentTransform The parent node's transform.
      */
-    func visit(renderer: CCRenderer, parentTransform: GLKMatrix4) {
+    func visit(_ renderer: CCRenderer, parentTransform: GLKMatrix4) {
         // quick return if not visible. children won't be drawn.
         if !visible {
             return
@@ -38,7 +38,7 @@ extension Node {
     // purposefully undocumented: users needn't override/implement visit in their own subclasses
     /* Calls visit:parentTransform: using the current renderer and projection. */
     func visit() {
-        let renderer: CCRenderer! = CCRenderer.currentRenderer()
+        let renderer: CCRenderer! = CCRenderer.current()
         assert(renderer != nil, "Cannot call [Node visit] without a currently bound renderer.")
         var projection: GLKMatrix4 = GLKMatrix4Identity
         (renderer.globalShaderUniforms[CCShaderUniformProjection]! as! NSValue).getValue(&projection)

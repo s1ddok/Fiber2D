@@ -26,14 +26,14 @@ class Layout : Node {
         }
     }
     
-    override func visit(renderer: CCRenderer, parentTransform: GLKMatrix4) {
+    override func visit(_ renderer: CCRenderer, parentTransform: GLKMatrix4) {
         if _needsLayout {
             self.layout()
         }
         super.visit(renderer, parentTransform: parentTransform)
     }
     
-    override func addChild(child: Node, z: Int? = nil, name: String? = nil) {
+    override func addChild(_ child: Node, z: Int? = nil, name: String? = nil) {
         super.addChild(child, z: z, name: name)
         self.sortAllChildren()
         self.layout()

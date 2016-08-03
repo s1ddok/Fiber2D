@@ -20,7 +20,7 @@
     private var _proxy: CCProxy?
     var lazyTexture: CCTexture {
         if _lazyTexture == nil && textureFilename != "" {
-            _lazyTexture = CCTextureCache.sharedTextureCache().addImage(textureFilename)
+            _lazyTexture = CCTextureCache.shared().addImage(textureFilename)
             _texture = _lazyTexture
         }
         return texture
@@ -36,8 +36,8 @@
     /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is offset of the sprite caused by trimming in points. */
     var trimOffset: CGPoint
     
-    static func frameWithImageNamed(imageName: String) -> SpriteFrame! {
-        return CCSpriteFrameCache.sharedSpriteFrameCache().spriteFrameByName(imageName)
+    static func frameWithImageNamed(_ imageName: String) -> SpriteFrame! {
+        return CCSpriteFrameCache.shared().spriteFrame(byName: imageName)
     }
     
     init(texture: CCTexture!, rect: CGRect, rotated: Bool, trimOffset: CGPoint, untrimmedSize: CGSize) {
@@ -53,7 +53,7 @@
         return "<CCSpriteFrame: Texture=\(textureFilename), Rect = (%.2f,%.2f,%.2f,%.2f)> rotated:\(rect.origin.x) offset=(%.2f,%.2f)"
     }
     
-    func setTexture(texture: CCTexture) {
+    func setTexture(_ texture: CCTexture) {
         if _texture != texture {
             self._texture = texture
         }
@@ -65,6 +65,6 @@
     
     class func purgeCache() {
         // TODO not thread safe.
-        CCSpriteFrameCache.sharedSpriteFrameCache().removeUnusedSpriteFrames()
+        CCSpriteFrameCache.shared().removeUnusedSpriteFrames()
     }
 }

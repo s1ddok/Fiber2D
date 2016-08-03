@@ -25,7 +25,7 @@ class Transition: Scene {
      *  @return The CCTransition Object.
      *  @note Use this initializer only for implementing custom transitions.
      */
-    init(duration: NSTimeInterval) {
+    init(duration: TimeInterval) {
         self.duration = duration
         super.init()
         self.userInteractionEnabled = false
@@ -62,7 +62,7 @@ class Transition: Scene {
      *  Depth/stencil format used for transition.
      *  Default `GL_DEPTH24_STENCIL8_OES`.
      */
-    var transitionDepthStencilFormat: MTLPixelFormat = .Depth32Float_Stencil8
+    var transitionDepthStencilFormat: MTLPixelFormat = .depth32Float_Stencil8
     /// -----------------------------------------------------------------------
     /// @name Controlling Scene Animation during Transition
     /// -----------------------------------------------------------------------
@@ -104,7 +104,7 @@ class Transition: Scene {
     /** Normalized (percentage) transition progress in the range 0.0 to 1.0. */
     var progress: Float = 0.0
     
-    func update(delta: CCTime) {
+    func update(_ delta: CCTime) {
         // update progress
         self.runTime += delta
         self.progress = clampf(Float(runTime / duration), 0.0, 1.0)
@@ -133,21 +133,21 @@ class Transition: Scene {
 
     }
     
-    func renderOutgoing(progress: Float) {
+    func renderOutgoing(_ progress: Float) {
         let color: GLKVector4 = outgoingScene.colorRGBA.glkVector4
         outgoingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         outgoingScene.visit()
         outgoingTexture.end()
     }
     
-    func renderIncoming(progress: Float) {
+    func renderIncoming(_ progress: Float) {
         let color: GLKVector4 = incomingScene.colorRGBA.glkVector4
         incomingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         incomingScene.visit()
         incomingTexture.end()
     }
     
-    func startTransition(scene: Scene, withDirector director: Director) {
+    func startTransition(_ scene: Scene, withDirector director: Director) {
         scene.director = director
         self.director = director
         
@@ -167,13 +167,13 @@ class Transition: Scene {
         size.height = ceil(rect.size.height)
         // create texture for outgoing scene
         self.outgoingTexture = RenderTexture(width: Int(size.width), height: Int(size.height))
-        self.outgoingTexture.position = CGPointMake(size.width * 0.5 + rect.origin.x, size.height * 0.5 + rect.origin.y)
+        self.outgoingTexture.position = CGPoint(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.outgoingTexture.contentScale /= outgoingDownScale
         self.outgoingTexture.projection = incomingScene.projection
         self.addChild(outgoingTexture, z: outgoingOverIncoming ? 1 : 0)
         // create texture for incoming scene
         self.incomingTexture = RenderTexture(width: Int(size.width), height: Int(size.height))
-        self.incomingTexture.position = CGPointMake(size.width * 0.5 + rect.origin.x, size.height * 0.5 + rect.origin.y)
+        self.incomingTexture.position = CGPoint(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.incomingTexture.contentScale /= incomingDownScale
         self.incomingTexture.projection = incomingScene.projection
         self.addChild(incomingTexture)

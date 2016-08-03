@@ -12,7 +12,7 @@ class MetalView : MTKView {
     //id<MTLDrawable> _currentDrawable;
     var layerSizeDidUpdate: Bool = false
     var director: Director!
-    var surfaceSize = CGSizeZero
+    var surfaceSize = CGSize.zero
     
     var sizeInPixels: CGSize {
         get {
@@ -23,7 +23,7 @@ class MetalView : MTKView {
     #if os(OSX)
     var contentScaleFactor: CGFloat {
         get {
-            let screen = NSScreen.mainScreen()!
+            let screen = NSScreen.main()!
             return screen.backingScaleFactor
         }
     }
@@ -40,7 +40,7 @@ class MetalView : MTKView {
         super.init(frame: frame, device: context.device)
         
         //TODO Move into CCRenderDispatch to support threaded rendering with Metal?
-        CCMetalContext.setCurrentContext(context)
+        CCMetalContext.setCurrent(context)
         self.device = context.device
         self.framebufferOnly = true
         /*CAMetalLayer *layer = self.metalLayer;
@@ -73,7 +73,7 @@ class MetalView : MTKView {
         super.init(coder: coder)
         self.context = CCMetalContext()
         //TODO Move into CCRenderDispatch to support threaded rendering with Metal?
-        CCMetalContext.setCurrentContext(context)
+        CCMetalContext.setCurrent(context)
         self.device = context.device
         self.framebufferOnly = true
         self.director = Director(view: self)
@@ -97,24 +97,24 @@ class MetalView : MTKView {
     }
     
     func presentFrame() {
-        context.currentCommandBuffer.presentDrawable(self.currentDrawable!)
+        context.currentCommandBuffer.present(self.currentDrawable!)
         context.flushCommandBuffer()
     }
     
-    func addFrameCompletionHandler(handler: dispatch_block_t) {
+    func addFrameCompletionHandler(_ handler: ()->()) {
         context.currentCommandBuffer.addCompletedHandler({(buffer: MTLCommandBuffer) -> Void in
             handler()
         })
     }
     
-    func convertPointFromViewToSurface(point: CGPoint) -> CGPoint {
+    func convertPointFromViewToSurface(_ point: CGPoint) -> CGPoint {
         let bounds: CGRect = self.bounds
-        return CGPointMake((point.x - bounds.origin.x) / bounds.size.width * surfaceSize.width, (point.y - bounds.origin.y) / bounds.size.height * surfaceSize.height)
+        return CGPoint(x: (point.x - bounds.origin.x) / bounds.size.width * surfaceSize.width, y: (point.y - bounds.origin.y) / bounds.size.height * surfaceSize.height)
     }
     
-    func convertRectFromViewToSurface(rect: CGRect) -> CGRect {
+    func convertRectFromViewToSurface(_ rect: CGRect) -> CGRect {
         let bounds: CGRect = self.bounds
-        return CGRectMake((rect.origin.x - bounds.origin.x) / bounds.size.width * surfaceSize.width, (rect.origin.y - bounds.origin.y) / bounds.size.height * surfaceSize.height, rect.size.width / bounds.size.width * surfaceSize.width, rect.size.height / bounds.size.height * surfaceSize.height)
+        return CGRect(x: (rect.origin.x - bounds.origin.x) / bounds.size.width * surfaceSize.width, y: (rect.origin.y - bounds.origin.y) / bounds.size.height * surfaceSize.height, width: rect.size.width / bounds.size.width * surfaceSize.width, height: rect.size.height / bounds.size.height * surfaceSize.height)
     }
     #if os(iOS)
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -145,59 +145,59 @@ class MetalView : MTKView {
     #if os(OSX)
     // NSResponder Mac events are forwarded to the responderManager associated with this view's Director.
     
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(with theEvent: NSEvent) {
         director.responderManager.mouseDown(theEvent, button: .left)
     }
     
-    override func mouseDragged(theEvent: NSEvent) {
+    override func mouseDragged(with theEvent: NSEvent) {
         director.responderManager.mouseDragged(theEvent, button: .left)
     }
     
-    override func mouseUp(theEvent: NSEvent) {
+    override func mouseUp(with theEvent: NSEvent) {
         director.responderManager.mouseUp(theEvent, button: .left)
     }
     
-    override func mouseMoved(theEvent: NSEvent) {
+    override func mouseMoved(with theEvent: NSEvent) {
         director.responderManager.mouseMoved(theEvent)
     }
     
-    override func rightMouseDown(theEvent: NSEvent) {
+    override func rightMouseDown(with theEvent: NSEvent) {
         director.responderManager.mouseDown(theEvent, button: .right)
     }
     
-    override func rightMouseDragged(theEvent: NSEvent) {
+    override func rightMouseDragged(with theEvent: NSEvent) {
         director.responderManager.mouseDragged(theEvent, button: .right)
     }
     
-    override func rightMouseUp(theEvent: NSEvent) {
+    override func rightMouseUp(with theEvent: NSEvent) {
         director.responderManager.mouseUp(theEvent, button: .right)
     }
     
-    override func otherMouseDown(theEvent: NSEvent) {
+    override func otherMouseDown(with theEvent: NSEvent) {
         director.responderManager.mouseDown(theEvent, button: .other)
     }
     
-    override func otherMouseDragged(theEvent: NSEvent) {
+    override func otherMouseDragged(with theEvent: NSEvent) {
         director.responderManager.mouseDragged(theEvent, button: .other)
     }
     
-    override func otherMouseUp(theEvent: NSEvent) {
+    override func otherMouseUp(with theEvent: NSEvent) {
         director.responderManager.mouseUp(theEvent, button: .other)
     }
     
-    override func scrollWheel(theEvent: NSEvent) {
+    override func scrollWheel(with theEvent: NSEvent) {
         director.responderManager.scrollWheel(theEvent)
     }
     
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         director.responderManager.keyDown(theEvent)
     }
     
-    override func keyUp(theEvent: NSEvent) {
+    override func keyUp(with theEvent: NSEvent) {
         director.responderManager.keyUp(theEvent)
     }
     
-    override func flagsChanged(theEvent: NSEvent) {
+    override func flagsChanged(with theEvent: NSEvent) {
         director.responderManager.flagsChanged(theEvent)
     }
     #endif

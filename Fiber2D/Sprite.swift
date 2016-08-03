@@ -46,9 +46,9 @@ class Sprite: RenderableNode {
     var vertexCenter = GLKVector2()
     var vertexExtents = GLKVector2()
     private // Offset Position, used by sprite sheet editors.
-    var unflippedOffsetPositionFromCenter = CGPointZero
+    var unflippedOffsetPositionFromCenter = CGPoint.zero
     
-    class func textureCoordsForTexture(texture: CCTexture!, withRect rect: CGRect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
+    class func textureCoordsForTexture(_ texture: CCTexture!, withRect rect: CGRect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
         var result = SpriteTexCoordSet()
         guard let texture = texture else {
             return result
@@ -101,7 +101,7 @@ class Sprite: RenderableNode {
     
     convenience init(imageNamed imageName: String) {
         let spriteFrame = SpriteFrame.frameWithImageNamed(imageName)
-        self.init(spriteFrame: spriteFrame)
+        self.init(spriteFrame: spriteFrame!)
     }
     /**
      *  Initializes an sprite with an existing SpriteFrame.
@@ -130,10 +130,10 @@ class Sprite: RenderableNode {
      *  @see CCTexture
      */
     
-    init(texture: CCTexture? = nil, rect: CGRect = CGRectZero, rotated: Bool = false) {
+    init(texture: CCTexture? = nil, rect: CGRect = CGRect.zero, rotated: Bool = false) {
         super.init()
-        self.blendMode = CCBlendMode.premultipliedAlphaMode()
-        self.shader = CCShader.positionTextureColorShader()
+        self.blendMode = CCBlendMode.premultipliedAlpha()
+        self.shader = CCShader.positionTextureColor()
         // default transform anchor: center
         self.anchorPoint = ccp(0.5, 0.5)
         self.updateColor()
@@ -203,10 +203,10 @@ class Sprite: RenderableNode {
     }*/
     
     /** The offset position in points of the sprite in points. Calculated automatically by sprite sheet editors. */
-    private(set) var offsetPosition = CGPointZero
+    private(set) var offsetPosition = CGPoint.zero
     
     /** Returns the texture rect of the Sprite in points. */
-    private(set) var textureRect = CGRectZero
+    private(set) var textureRect = CGRect.zero
     
     /** Returns whether or not the texture rectangle is rotated. Sprite sheet editors may rotate sprite frames in a texture to fit more sprites in the same atlas. */
     private(set) var textureRectRotated: Bool = false
@@ -220,7 +220,7 @@ class Sprite: RenderableNode {
      *  @param size    Untrimmed size.
      */
     
-    func setTextureRect(rect: CGRect, forTexture texture: CCTexture, rotated: Bool, untrimmedSize: CGSize) {
+    func setTextureRect(_ rect: CGRect, forTexture texture: CCTexture, rotated: Bool, untrimmedSize: CGSize) {
         self.textureRectRotated = rotated
         self.contentSizeType = CCSizeTypePoints
         self.contentSize = untrimmedSize
@@ -300,7 +300,7 @@ class Sprite: RenderableNode {
         }
     }
     
-    override func updateDisplayedColor(parentColor: GLKVector4) {
+    override func updateDisplayedColor(_ parentColor: GLKVector4) {
         super.updateDisplayedColor(parentColor)
         self.updateColor()
     }
@@ -311,19 +311,19 @@ class Sprite: RenderableNode {
         }
     }
     
-    override func updateDisplayedOpacity(parentOpacity: Float) {
+    override func updateDisplayedOpacity(_ parentOpacity: Float) {
         super.updateDisplayedOpacity(parentOpacity)
         self.updateColor()
     }
     
     
-    override func draw(renderer: CCRenderer, transform: GLKMatrix4) {
+    override func draw(_ renderer: CCRenderer, transform: GLKMatrix4) {
         var t = transform
         guard CCRenderCheckVisibility(&t, vertexCenter, vertexExtents) else {
             return
         }
         
-        let buffer = renderer.enqueueTriangles(2, andVertexes: 4, withState: self.renderState, globalSortOrder: 0)
+        let buffer = renderer.enqueueTriangles(2, andVertexes: 4, with: self.renderState, globalSortOrder: 0)
         CCRenderBufferSetVertex(buffer, 0, CCVertexApplyTransform(self.verts.bl, &t))
         CCRenderBufferSetVertex(buffer, 1, CCVertexApplyTransform(self.verts.br, &t))
         CCRenderBufferSetVertex(buffer, 2, CCVertexApplyTransform(self.verts.tr, &t))

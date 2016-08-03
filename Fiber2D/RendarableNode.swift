@@ -81,8 +81,8 @@ class RenderableNode: Node {
     private var _renderState: CCRenderState? = nil
     
     override init() {
-        shader = CCShader.positionColorShader()
-        blendMode = CCBlendMode.premultipliedAlphaMode()
+        shader = CCShader.positionColor()
+        blendMode = CCBlendMode.premultipliedAlpha()
         
         super.init()
     }
@@ -98,7 +98,7 @@ class RenderableNode: Node {
         return true
     }
     
-    private func CheckDefaultUniforms(uniforms: [NSObject: AnyObject]?, texture: CCTexture) -> Bool
+    private func CheckDefaultUniforms(_ uniforms: [NSObject: AnyObject]?, texture: CCTexture) -> Bool
     {
         guard uniforms != nil else {
             return true

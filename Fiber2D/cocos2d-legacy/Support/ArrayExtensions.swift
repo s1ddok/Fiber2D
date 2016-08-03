@@ -9,11 +9,11 @@
 import Foundation
 
 extension Array {
-    mutating func removeObject(obj: AnyObject) {
+    mutating func removeObject(_ obj: AnyObject) {
         var idx = 0
         for e in self {
             if (e as! AnyObject) === obj {
-                removeAtIndex(idx)
+                remove(at: idx)
             }
             idx += 1
         }
