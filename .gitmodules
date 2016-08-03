@@ -1,0 +1,3 @@
+[submodule "external/math"]
+	path = external/math
+	url = https://github.com/SwiftGFX/SwiftMath.git
