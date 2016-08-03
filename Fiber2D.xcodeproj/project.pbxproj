@@ -96,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
+		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		081FBC231D4625A6005838B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -268,6 +269,7 @@
 				081FBC7D1D462732005838B8 /* CCClasses */,
 				081FBCAA1D462732005838B8 /* Platforms */,
 				081FBCBB1D462732005838B8 /* Support */,
+				0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */,
 				0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */,
 			);
 			name = "cocos2d-legacy";
@@ -780,7 +782,7 @@
 				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MTL_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/**";
+				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -801,7 +803,7 @@
 				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MTL_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/**";
+				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -26,7 +26,8 @@
 #include <metal_stdlib>
 #include <simd/simd.h>
 
-#include "CCRendererSharedTypes.h"
+// I tried to adjust header search path but that doesnt work for some reason :(
+#include "Fiber2D/cocos2d-legacy/CCRendererSharedTypes.h"
 
 using namespace metal;
 
