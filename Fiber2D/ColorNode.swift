@@ -16,9 +16,9 @@ class ColorNode: RenderableNode {
         let h = Float(contentSizeInPoints.height)
         let zero = GLKVector2(v: (0.0, 0.0))
         
-        let blueColor = CCColor.blue().glkVector4
-        let redColor = CCColor.red().glkVector4
-        let greenColor = CCColor.green().glkVector4
+        let blueColor = Color.blue.glkVector4
+        let redColor = Color.red.glkVector4
+        let greenColor = Color.green.glkVector4
         
         CCRenderBufferSetVertex(buffer, 0, CCVertex(position: GLKMatrix4MultiplyVector4(transform, GLKVector4Make(0, 0, 0, 1)), texCoord1: zero, texCoord2: zero, color: blueColor));
         CCRenderBufferSetVertex(buffer, 1, CCVertex(position: GLKMatrix4MultiplyVector4(transform, GLKVector4Make(w, 0, 0, 1)), texCoord1: zero, texCoord2: zero, color: redColor));

@@ -277,24 +277,20 @@ class Sprite: RenderableNode {
     
     
     func updateColor() {
-        var color4: GLKVector4 = displayedColor.glkVector4
-        // Premultiply alpha.
-        color4.v.0 *= displayedColor.alpha
-        color4.v.1 *= displayedColor.alpha
-        color4.v.2 *= displayedColor.alpha
+        let color4: GLKVector4 = displayedColor.premultiplyingAlpha().glkVector4
         self.verts.bl.color = color4
         self.verts.br.color = color4
         self.verts.tr.color = color4
         self.verts.tl.color = color4
     }
     
-    override var color: CCColor {
+    override var color: Color {
         didSet {
             self.updateColor()
         }
     }
     
-    override var colorRGBA: CCColor {
+    override var colorRGBA: Color {
         didSet {
             self.updateColor()
         }

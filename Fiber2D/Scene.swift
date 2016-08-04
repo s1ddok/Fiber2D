@@ -65,11 +65,11 @@ class Scene: Node {
         let s = Director.currentDirector()!.designSize
         self.anchorPoint = ccp(0.0, 0.0)
         self.contentSize = s
-        self.colorRGBA = CCColor.black()
+        self.colorRGBA = Color.black
         self._scheduler = CCScheduler()
         self.projectionDelegate = CCOrthoProjection(target: self)
         self._projection = GLKMatrix4Identity
-        self.color = CCColor.black()
+        self.color = Color.black
     }
     
     override func onEnter() {

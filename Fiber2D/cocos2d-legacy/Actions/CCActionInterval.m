@@ -31,7 +31,6 @@
 
 #import "CCActionInterval.h"
 #import "CCActionInstant.h"
-#import "CCColor.h"
 
 #import "Fiber2D-Swift.h"
 //
@@ -1392,107 +1391,6 @@ static inline CGFloat bezierat( float a, float b, float c, float d, CCTime t )
 -(void) update: (CCTime) t
 {
 	[(Node*)_target setOpacity:_fromOpacity + ( _toOpacity - _fromOpacity ) * t];
-}
-@end
-
-//
-// TintTo
-//
-#pragma mark - CCTintTo
-@implementation CCActionTintTo {
-    @protected
-    CCColor* _to;
-    CCColor* _from;
-}
-
-+(instancetype) actionWithDuration:(CCTime)duration color:(CCColor*)color
-{
-	return [(CCActionTintTo*)[ self alloc] initWithDuration:duration color:color];
-}
-
--(id) initWithDuration:(CCTime)t color:(CCColor*)color
-{
-	if( (self=[super initWithDuration:t] ) )
-		_to = color;
-
-	return self;
-}
-
--(id) copyWithZone: (NSZone*) zone
-{
-	CCAction *copy = [(CCActionTintTo*)[[self class] allocWithZone: zone] initWithDuration:[self duration] color:_to];
-	return copy;
-}
-
--(void) startWithTarget:(Node*)aTarget
-{
-	[super startWithTarget:aTarget];
-
-	Node* tn = (Node*) _target;
-	_from = [tn color];
-}
-
--(void) update: (CCTime) t
-{
-	Node* tn = (Node*) _target;
-    
-	GLKVector4 fc = _from.glkVector4;
-	GLKVector4 tc = _to.glkVector4;
-    
-	[tn setColor:[CCColor colorWithRed:fc.r + (tc.r - fc.r) * t green:fc.g + (tc.g - fc.g) * t blue:fc.b + (tc.b - fc.b) * t alpha:1]];
-}
-@end
-
-//
-// TintBy
-//
-#pragma mark - CCTintBy
-@implementation CCActionTintBy {
-    CGFloat _deltaR, _deltaG, _deltaB;
-    CGFloat _fromR, _fromG, _fromB;
-}
-
-+(instancetype) actionWithDuration:(CCTime)t red:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b
-{
-	return [(CCActionTintBy*)[ self alloc] initWithDuration:t red:r green:g blue:b];
-}
-
--(id) initWithDuration:(CCTime)t red:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b
-{
-	if( (self=[super initWithDuration: t] ) ) {
-		_deltaR = r;
-		_deltaG = g;
-		_deltaB = b;
-	}
-	return self;
-}
-
--(id) copyWithZone: (NSZone*) zone
-{
-	return[(CCActionTintBy*)[[self class] allocWithZone: zone] initWithDuration: [self duration] red:_deltaR green:_deltaG blue:_deltaB];
-}
-
--(void) startWithTarget:(id)aTarget
-{
-	[super startWithTarget:aTarget];
-
-	Node* tn = (Node*) _target;
-	CCColor* color = [tn color];
-    
-	_fromR = color.red;
-	_fromG = color.green;
-	_fromB = color.blue;
-}
-
--(void) update: (CCTime) t
-{
-	Node* tn = (Node*) _target;
-	[tn setColor:[CCColor colorWithRed:_fromR + _deltaR * t green:_fromG + _deltaG * t blue:_fromB + _deltaB * t alpha:1]];
-}
-
-- (CCActionInterval*) reverse
-{
-	return [CCActionTintBy actionWithDuration:_duration red:-_deltaR green:-_deltaG blue:-_deltaB];
 }
 @end
 

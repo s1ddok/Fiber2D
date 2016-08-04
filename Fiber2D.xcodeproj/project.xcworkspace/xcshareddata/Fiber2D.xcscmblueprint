@@ -5,11 +5,13 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "7D39869EA4CC9A83A3F4FB03D5AECCACD0642011" : 9223372036854775807,
+    "CD48A33CC8DECA9AE6AA0181A11622958355048F" : 9223372036854775807,
     "15CDD3D44F6D433AF7946E3CCB33353A33C52F1D" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3E4E5F86-8B1E-4D1E-BCCE-E273F3D9B586",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "7D39869EA4CC9A83A3F4FB03D5AECCACD0642011" : "Fiber2D\/external\/libpng\/",
+    "CD48A33CC8DECA9AE6AA0181A11622958355048F" : "Fiber2D\/external\/math\/",
     "15CDD3D44F6D433AF7946E3CCB33353A33C52F1D" : "Fiber2D\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Fiber2D",
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/s1ddok\/libpng",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7D39869EA4CC9A83A3F4FB03D5AECCACD0642011"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SwiftGFX\/SwiftMath.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CD48A33CC8DECA9AE6AA0181A11622958355048F"
     }
   ]
 }

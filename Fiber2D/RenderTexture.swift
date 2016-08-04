@@ -119,8 +119,8 @@ class RenderTexture: RenderableNode {
         self.end()
     }
     /** Clear color value. Valid only when autoDraw is YES.
-     @see CCColor */
-    var clearColor = CCColor.clear()
+     @see Color */
+    var clearColor = Color.clear
     /** @name Render Texture Drawing Properties */
     /**
      When enabled, it will render its children into the texture automatically.
@@ -221,7 +221,7 @@ class RenderTexture: RenderableNode {
         if autoDraw {
             let rtRenderer: CCRenderer = self.begin()
             assert(renderer == renderer, "CCRenderTexture error!")
-            rtRenderer.enqueueClear(.clear, color: (clearColor?.glkVector4)!, globalSortOrder: NSInteger.min)
+            rtRenderer.enqueueClear(.clear, color: clearColor.glkVector4, globalSortOrder: NSInteger.min)
             //! make sure all children are drawn
             self.sortAllChildren()
             for child: Node in children {

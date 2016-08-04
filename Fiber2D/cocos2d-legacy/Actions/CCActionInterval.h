@@ -26,7 +26,6 @@
  */
 
 #import "CCAction.h"
-#import "CCColor.h"
 
 /**
  Abstract base class for interval actions. An interval action is an action that performs its task over a certain period of time.
@@ -803,72 +802,6 @@ typedef struct _ccBezierConfig {
 
 @end
 
-
-/**
- *  This action tints (colorizes) the target from current color to the specified color.
- *
- *  @note This action is not reversible.
- */
-@interface CCActionTintTo : CCActionInterval
-
-/** @name Creating a Colorize Action */
-
-/**
- *  Creates a tint to action.
- *
- *  @param duration     Action duration.
- *  @param color		Destination color tint to.
- *
- *  @return New tint to action.
- */
-+ (id)actionWithDuration:(CCTime)duration color:(CCColor*)color;
-
-/**
- *  Initalizes a tint to action.
- *
- *  @param duration     Action duration.
- *  @param color		Destination color tint to.
- *
- *  @return New tint to action.
- */
-- (id)initWithDuration:(CCTime)duration color:(CCColor*)color;
-
-@end
-
-
-/**
- *  This action tints (colorizes) the target from current color to the specified color.
- *  @note Contrary to CCActionTintTo, this action is reversible.
- */
-@interface CCActionTintBy : CCActionInterval
-
-/** @name Creating a Colorize Action */
-
-/**
- *  Creates a tint by action.
- *
- *  @param duration   Action duration.
- *  @param deltaRed   Red delta color to tint.
- *  @param deltaGreen Green delta color to tint.
- *  @param deltaBlue  Blue delta color to tint.
- *
- *  @return New tint by action.
- */
-+ (id)actionWithDuration:(CCTime)duration red:(CGFloat)deltaRed green:(CGFloat)deltaGreen blue:(CGFloat)deltaBlue;
-
-/**
- *  Initalizes a tint by action.
- *
- *  @param duration   Action duration.
- *  @param deltaRed   Red delta color to tint.
- *  @param deltaGreen Green delta color to tint.
- *  @param deltaBlue  Blue delta color to tint.
- *
- *  @return New tint by action.
- */
-- (id)initWithDuration:(CCTime)duration red:(CGFloat)deltaRed green:(CGFloat)deltaGreen blue:(CGFloat)deltaBlue;
-
-@end
 
 /**
  This action waits for the time specified. Used in sequences to delay (pause) the sequence for a given time.

@@ -33,7 +33,6 @@
 #import "CCFileLocator.h"
 #import "CCFile.h"
 #import "CCCache.h"
-#import "CCColor.h"
 #import "CCSetup.h"
 
 

@@ -25,7 +25,6 @@
 
 #import "CCImage_Private.h"
 
-#import "CCColor.h"
 #import "ccUtils.h"
 #import "CCSetup.h"
 
@@ -93,13 +92,12 @@ NormalizeCCImageOptions(NSDictionary *options)
     return [self initWithPixelSize:pixelSize contentScale:contentScale pixelData:pixelData options:DEFAULT_OPTIONS];
 }
 
--(instancetype)initWithPixelSize:(CGSize)pixelSize contentScale:(CGFloat)contentScale clearColor:(CCColor *)color options:(NSDictionary *)options
+-(instancetype)initWithPixelSize:(CGSize)pixelSize contentScale:(CGFloat)contentScale clearColor:(GLKVector4)color4f options:(NSDictionary *)options
 {
     NSUInteger bytes = pixelSize.width*pixelSize.height*4;
     NSMutableData *pixelData = [NSMutableData dataWithLength:bytes];
     
     // Convert to a RGBA8 color
-    GLKVector4 color4f = color.glkVector4;
     uint8_t color4b[] = {255*color4f.r, 255*color4f.g, 255*color4f.b, 255*color4f.a};
     
     // Set the initial fill color.
@@ -130,7 +128,7 @@ NormalizeCCImageOptions(NSDictionary *options)
 		sizeInPixels.height = CCNextPOT(sizeInPixels.height);
 	}
     
-    if((self = [self initWithPixelSize:sizeInPixels contentScale:contentScale clearColor:[CCColor clearColor] options:options])){
+    if((self = [self initWithPixelSize:sizeInPixels contentScale:contentScale clearColor:GLKVector4Make(0.0, 0.0, 0.0, 0.0) options:options])){
         _contentSize = CC_SIZE_SCALE(scaledSizeInPixels, 1.0/contentScale);
         
         CGContextRef context = [self createCGContext];

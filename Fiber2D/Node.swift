@@ -451,41 +451,41 @@ import Foundation
     /** Sets and returns the node's color. Alpha is ignored. Changing color has no effect on non-visible nodes (ie Node, Scene).
      
      @note By default color is not "inherited" by child nodes. This can be enabled via cascadeColorEnabled.
-     @see CCColor
+     @see Color
      @see colorRGBA
      @see opacity
      @see cascadeColorEnabled
      */
-    var color: CCColor {
+    var color: Color {
         get {
-            return CCColor(glkVector4: _color)
+            return _color
         }
         set {
             //retain old alpha
             let oldAlpha = _color.a
-            _displayedColor = newValue.glkVector4
+            _displayedColor = newValue
             _color = _displayedColor
             
-            _color.v.3 = oldAlpha
-            _displayedColor.v.3 = oldAlpha
+            _color.a = oldAlpha
+            _displayedColor.a = oldAlpha
             cascadeColorIfNeeded()
         }
     }
-    private var _color = GLKVector4Make(1.0, 1.0, 1.0, 1.0)
+    private var _color = Color.white
     /** Sets and returns the node's color including alpha. Changing color has no effect on non-visible nodes (ie Node, Scene).
      
      @note By default color is not "inherited" by child nodes. This can be enabled via cascadeColorEnabled.
-     @see CCColor
+     @see Color
      @see color
      @see opacity
      @see cascadeColorEnabled
      */
-    var colorRGBA: CCColor {
+    var colorRGBA: Color {
         get {
-            return CCColor(glkVector4: _color)
+            return _color
         }
         set {
-            _color = colorRGBA.glkVector4
+            _color = newValue
             _displayedColor = _color
             
             cascadeColorIfNeeded()
@@ -495,16 +495,14 @@ import Foundation
     /** Returns the actual color used by the node. This may be different from the color and colorRGBA properties if the parent
      node has cascadeColorEnabled.
      
-     @see CCColor
+     @see Color
      @see color
      @see colorRGBA
      */
-    var displayedColor: CCColor {
-        get {
-            return CCColor(glkVector4: _displayedColor)
-        }
+    var displayedColor: Color {
+        return _displayedColor
     }
-    private var _displayedColor = GLKVector4Make(1.0, 1.0, 1.0, 1.0)
+    private var _displayedColor = Color.white
     /**
      CascadeColorEnabled causes changes to this node's color to cascade down to it's children. The new color is multiplied
      in with the color of each child, so it doesn't bash the current color of those nodes. Opacity is unaffected by this
@@ -518,13 +516,13 @@ import Foundation
     
     private func cascadeColorIfNeeded() {
         if cascadeColorEnabled {
-            var parentColor = CCColor.white()
+            var parentColor = Color.white
             if let parent = self.parent {
                 if parent.cascadeColorEnabled {
                     parentColor = parent.displayedColor
                 }
             }
-            self.updateDisplayedColor((parentColor?.glkVector4)!)
+            self.updateDisplayedColor(parentColor)
         }
     }
     // purposefully undocumented: internal method users needn't know about
@@ -534,10 +532,10 @@ import Foundation
      *  @param color Color used for update.
      */
     
-    func updateDisplayedColor(_ parentColor: GLKVector4) {
-        _displayedColor.v.0 = _color.r * parentColor.r
-        _displayedColor.v.1 = _color.g * parentColor.g
-        _displayedColor.v.2 = _color.b * parentColor.b
+    func updateDisplayedColor(_ parentColor: Color) {
+        _displayedColor.r = _color.r * parentColor.r
+        _displayedColor.g = _color.g * parentColor.g
+        _displayedColor.b = _color.b * parentColor.b
         // if (_cascadeColorEnabled) {
         for item: Node in children {
             item.updateDisplayedColor(_displayedColor)
@@ -558,11 +556,11 @@ import Foundation
      */
     var opacity: Float {
         get {
-          return color.alpha
+          return _color.a
         }
         set {
-            _color.v.3 = newValue
-            _displayedColor.v.3 = newValue
+            _color.a = newValue
+            _displayedColor.a = newValue
             cascadeOpacityIfNeeded()
         }
     }
@@ -601,7 +599,7 @@ import Foundation
      */
     
     func updateDisplayedOpacity(_ parentOpacity: Float) {
-        _displayedColor.v.3 = _color.a * parentOpacity
+        _displayedColor.a = _color.a * parentOpacity
         // if (_cascadeOpacityEnabled) {
         for item: Node in children {
             item.updateDisplayedOpacity(_displayedColor.a)
