@@ -6,8 +6,6 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-import simd
-
 typealias Color = Vector4f
 
 extension Color {
@@ -55,10 +53,6 @@ extension Color {
         rgb.w = alpha
         
         d = rgb
-    }
-    
-    nonmutating func interpolating(to color: Color, factor: Float) -> Color {
-        return Color(float4: simd.mix(d, color.d, t: factor))
     }
     
     mutating func premultiplyAlpha() {
