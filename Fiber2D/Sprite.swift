@@ -72,10 +72,10 @@ class Sprite: RenderableNode {
             if flipY {
                 swap(&left, &right)
             }
-            result.bl = GLKVector2Make(left, top)
-            result.br = GLKVector2Make(left, bottom)
-            result.tr = GLKVector2Make(right, bottom)
-            result.tl = GLKVector2Make(right, top)
+            result.bl = vec2(left, top)
+            result.br = vec2(left, bottom)
+            result.tr = vec2(right, bottom)
+            result.tl = vec2(right, top)
         }
         else {
             if flipX {
@@ -84,10 +84,10 @@ class Sprite: RenderableNode {
             if flipY {
                 swap(&top, &bottom)
             }
-            result.bl = GLKVector2Make(left, bottom)
-            result.br = GLKVector2Make(right, bottom)
-            result.tr = GLKVector2Make(right, top)
-            result.tl = GLKVector2Make(left, top)
+            result.bl = vec2(left, bottom)
+            result.br = vec2(right, bottom)
+            result.tr = vec2(right, top)
+            result.tl = vec2(left, top)
         }
         return result
     }
