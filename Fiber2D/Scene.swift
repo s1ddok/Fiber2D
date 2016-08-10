@@ -43,18 +43,20 @@ class Scene: Node {
      
      @since 4.0.0
      */
-    var projectionDelegate: CCProjectionDelegate?
+    //var projectionDelegate: CCProjectionDelegate?
     /**
      Projection matrix for this scene. This value is overridden if the projectionDelegate is set.
      Defaults to the identity matrix.
      
      @since 4.0.0
      */
-    var projection: GLKMatrix4 {
-        get { return projectionDelegate?.projection ?? _projection }
+    var projection: Matrix4x4f {
+        get {
+            //return projectionDelegate?.projection ?? _projection
+            return _projection }
         set { _projection = newValue }
     }
-    private var _projection: GLKMatrix4!
+    private var _projection: Matrix4x4f!
     /// -----------------------------------------------------------------------
     /// @name Creating a Scene
     /// -----------------------------------------------------------------------
@@ -67,8 +69,8 @@ class Scene: Node {
         self.contentSize = s
         self.colorRGBA = Color.black
         self._scheduler = CCScheduler()
-        self.projectionDelegate = CCOrthoProjection(target: self)
-        self._projection = GLKMatrix4Identity
+        //self.projectionDelegate = CCOrthoProjection(target: self)
+        self._projection = Matrix4x4f(target: self)
         self.color = Color.black
     }
     
@@ -83,4 +85,5 @@ class Scene: Node {
         // mark starting scene as dirty, to make sure responder manager is updated
         director.responderManager.markAsDirty()
     }
+    
 }

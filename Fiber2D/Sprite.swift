@@ -21,10 +21,10 @@ struct SpriteVertexes {
 /// A set of four texture coordinates corresponding to the four
 /// vertices of a sprite.
 struct SpriteTexCoordSet {
-    var bl, br, tr, tl: GLKVector2
+    var bl, br, tr, tl: Vector2f
     
     init() {
-        bl = GLKVector2Make(0.0, 0.0)
+        bl = vec2(0.0, 0.0)
         br = bl
         tr = bl
         tl = bl
@@ -226,10 +226,10 @@ class Sprite: RenderableNode {
         self.contentSize = untrimmedSize
         self.textureRect = rect
         let texCoords: SpriteTexCoordSet = Sprite.textureCoordsForTexture(texture, withRect: rect, rotated: rotated, xFlipped: flipX, yFlipped: flipY)
-        self.verts.bl.texCoord1 = texCoords.bl
-        self.verts.br.texCoord1 = texCoords.br
-        self.verts.tr.texCoord1 = texCoords.tr
-        self.verts.tl.texCoord1 = texCoords.tl
+        self.verts.bl.texCoord1 = texCoords.bl.glkVec2
+        self.verts.br.texCoord1 = texCoords.br.glkVec2
+        self.verts.tr.texCoord1 = texCoords.tr.glkVec2
+        self.verts.tl.texCoord1 = texCoords.tl.glkVec2
         var relativeOffset = unflippedOffsetPositionFromCenter
         // issue #732
         if flipX {
@@ -277,7 +277,7 @@ class Sprite: RenderableNode {
     
     
     func updateColor() {
-        let color4: GLKVector4 = displayedColor.premultiplyingAlpha().glkVector4
+        let color4 = displayedColor.premultiplyingAlpha().glkVector4
         self.verts.bl.color = color4
         self.verts.br.color = color4
         self.verts.tr.color = color4
@@ -296,7 +296,7 @@ class Sprite: RenderableNode {
         }
     }
     
-    override func updateDisplayedColor(_ parentColor: GLKVector4) {
+    override func updateDisplayedColor(_ parentColor: Color) {
         super.updateDisplayedColor(parentColor)
         self.updateColor()
     }
@@ -313,8 +313,8 @@ class Sprite: RenderableNode {
     }
     
     
-    override func draw(_ renderer: CCRenderer, transform: GLKMatrix4) {
-        var t = transform
+    override func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {
+        var t = transform.glkMatrix4
         guard CCRenderCheckVisibility(&t, vertexCenter, vertexExtents) else {
             return
         }

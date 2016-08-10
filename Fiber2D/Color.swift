@@ -92,10 +92,3 @@ extension Color {
     static let purple    = Color(float4: float4(0.5, 0, 0.5 , 1))
     static let brown     = Color(float4: float4(0.6, 0.4, 0.2 , 1))
 }
-
-// TEMPORARY
-extension Color {
-    var glkVector4: GLKVector4 {
-        return GLKVector4(v: (d.x, d.y, d.z, d.w))
-    }
-}

@@ -41,7 +41,7 @@ class RenderTexture: RenderableNode {
         super.init()
         self.contentScale = CCSetup.shared().assetScale
         self.contentSize = CGSize(width: CGFloat(w), height: CGFloat(h))
-        self.projection = GLKMatrix4MakeOrtho(0.0, Float(w), 0.0, Float(h), -1024.0, 1024.0)
+        self.projection = Matrix4x4f.ortho(left: 0.0, right: Float(w), bottom: 0.0, top: Float(h), near: -1024, far: 1024)
         let rtSprite: RenderTextureSprite = RenderTextureSprite(texture: CCTexture.none(), rect: CGRect.zero, rotated: false)
         rtSprite.renderTexture = self
         self.sprite = rtSprite
@@ -66,7 +66,8 @@ class RenderTexture: RenderableNode {
             texture = self.texture
         }
         let renderer: CCRenderer = Director.currentDirector()!.rendererFromPool()
-        renderer.prepare(withProjection: &projection, framebuffer: framebuffer)
+        var proj = projection.glkMatrix4
+        renderer.prepare(withProjection: &proj, framebuffer: framebuffer)
         self.previousRenderer = CCRenderer.current()
         CCRenderer.bindRenderer(renderer)
         return renderer
@@ -143,7 +144,7 @@ class RenderTexture: RenderableNode {
     }
     // Raw projection matrix used for rendering.
     // For metal will be flipped on the y-axis compared to the .projection property.
-    var projection: GLKMatrix4 /*{
+    var projection: Matrix4x4f /*{
         get {
             return FlipY(_projection)
         }
@@ -151,7 +152,7 @@ class RenderTexture: RenderableNode {
             _projection = FlipY(newValue)
         }
     }
-    private var _projection */ = GLKMatrix4Identity
+    private var _projection */ = Matrix4x4f.identity
 
     var framebuffer: CCFrameBufferObject?
     
@@ -212,14 +213,14 @@ class RenderTexture: RenderableNode {
         }
     }
     
-    override func visit(_ renderer: CCRenderer, parentTransform: GLKMatrix4) {
+    override func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
         // override visit.
         // Don't call visit on its children
         guard self.visible else {
             return
         }
         if autoDraw {
-            let rtRenderer: CCRenderer = self.begin()
+            let rtRenderer = self.begin()
             assert(renderer == renderer, "CCRenderTexture error!")
             rtRenderer.enqueueClear(.clear, color: clearColor.glkVector4, globalSortOrder: NSInteger.min)
             //! make sure all children are drawn
@@ -229,7 +230,7 @@ class RenderTexture: RenderableNode {
             }
         
             self.end()
-            let transform: GLKMatrix4 = GLKMatrix4Multiply(parentTransform, self.nodeToParentMatrix())
+            let transform = parentTransform * self.nodeToParentMatrix()
             self.draw(renderer, transform: transform)
         }
         else {
@@ -239,7 +240,7 @@ class RenderTexture: RenderableNode {
         
     }
     
-    override func draw(_ renderer: CCRenderer, transform: GLKMatrix4) {
+    override func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {
         assert(sprite.zOrder == 0, "Changing the sprite's zOrder is not supported.")
         // Force the sprite to render itself
         sprite.visit(renderer, parentTransform: transform)

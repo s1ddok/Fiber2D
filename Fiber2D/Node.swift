@@ -131,7 +131,7 @@ import Foundation
     
     // MARK: Transforms
     internal var isTransformDirty = true
-    internal var transform = GLKMatrix4Identity
+    internal var transform = Matrix4x4f.identity
     // MARK: Position
     /// -----------------------------------------------------------------------
     /// @name Position
@@ -375,7 +375,7 @@ import Foundation
     var boundingBox: CGRect {
         let contentSize: CGSize = self.contentSizeInPoints
         let rect: CGRect = CGRect(x: 0, y: 0, width: contentSize.width, height: contentSize.height)
-        let t: GLKMatrix4 = self.nodeToParentMatrix()
+        let t = self.nodeToParentMatrix().glkMatrix4
 
         return rect.applying(CGAffineTransform(a: CGFloat(t.m.0), b: CGFloat(t.m.1), c: CGFloat(t.m.4), d: CGFloat(t.m.5), tx: CGFloat(t.m.12), ty: CGFloat(t.m.13)))
     }
@@ -856,6 +856,7 @@ import Foundation
     // Blocks that are scheduled to run on this node when onEnter is called, contains scheduled stuff and actions.
     internal var queuedActions = [()->()]()
     
+    // MARK: Travers + Rendering
     /// -----------------------------------------------------------------------
     /// @name Rendering (Implemented in Subclasses)
     /// -----------------------------------------------------------------------
@@ -869,8 +870,35 @@ import Foundation
      @param transform The parent node's transform.
      @see CCRenderer
      */
+    @nonobjc
+    func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {}
     
-    func draw(_ renderer: CCRenderer, transform: GLKMatrix4) {}
+    // purposefully undocumented: internal method, users should prefer to implement draw:transform:
+    /* Recursive method that visit its children and draw them.
+     * @param renderer The CCRenderer instance to use for drawing.
+     * @param parentTransform The parent node's transform.
+     */
+    func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
+        // quick return if not visible. children won't be drawn.
+        if !visible {
+            return
+        }
+        self.sortAllChildren()
+        let transform = parentTransform * nodeToParentMatrix()
+        var drawn: Bool = false
+        
+        for child in children {
+            if !drawn && child.zOrder >= 0 {
+                self.draw(renderer, transform: transform)
+                drawn = true
+            }
+            child.visit(renderer, parentTransform: transform)
+        }
+        
+        if !drawn {
+            self.draw(renderer, transform: transform)
+        }
+    }
     
     //
     // MARK: Power user functionality 

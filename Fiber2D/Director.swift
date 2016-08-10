@@ -145,12 +145,13 @@ func CCDirectorStack() -> NSMutableArray
             self.setNextScene()
         }
         view!.beginFrame()
-        var projection: GLKMatrix4 = runningScene!.projection
+        let projection = runningScene!.projection
         // Synchronize the framebuffer with the view.
         framebuffer.sync(with: self.view!)
         let renderer: CCRenderer = self.rendererFromPool()
     
-        renderer.prepare(withProjection: &projection, framebuffer: framebuffer)
+        var proj = projection.glkMatrix4
+        renderer.prepare(withProjection: &proj, framebuffer: framebuffer)
         CCRenderer.bindRenderer(renderer)
         renderer.enqueueClear(.clear, color: runningScene!.colorRGBA.glkVector4, globalSortOrder: NSInteger.min)
         // Render
@@ -231,20 +232,20 @@ func CCDirectorStack() -> NSMutableArray
     }
     
     func convertToGL(_ uiPoint: CGPoint) -> CGPoint {
-        var transform: GLKMatrix4 = runningScene!.projection
-        let invTransform: GLKMatrix4 = GLKMatrix4Invert(transform, nil)
+        var transform = runningScene!.projection
+        let invTransform = transform.inversed
         // Calculate z=0 using -> transform*[0, 0, 0, 1]/w
-        let zClip: Float = transform.m.14 / transform.m.15
+        let zClip: Float = transform[3, 2] / transform[3, 3]
         let glSize: CGSize = self.view!.bounds.size
         var clipCoord: GLKVector3 = GLKVector3Make(2.0 * Float(uiPoint.x / glSize.width) - 1.0, 2.0 * Float(uiPoint.y / glSize.height) - 1.0, zClip)
         clipCoord.v.2 *= Float(self.flipY())
-        let glCoord: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(invTransform, clipCoord)
+        let glCoord: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(invTransform.glkMatrix4, clipCoord)
         return ccp(CGFloat(glCoord.x), CGFloat(glCoord.y))
     }
     
     func convertToUI(_ glPoint: CGPoint) -> CGPoint {
-        let transform: GLKMatrix4 = runningScene!.projection
-        var clipCoord: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(transform, GLKVector3Make(Float(glPoint.x), Float(glPoint.y), 0.0))
+        let transform = runningScene!.projection
+        var clipCoord: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(transform.glkMatrix4, GLKVector3Make(Float(glPoint.x), Float(glPoint.y), 0.0))
         let glSize: CGSize = self.view!.bounds.size
         return ccp(glSize.width * CGFloat(clipCoord.v.0 * 0.5 + 0.5), glSize.height * CGFloat(Float(self.flipY()) * clipCoord.v.1 * 0.5 + 0.5))
     }
@@ -258,17 +259,17 @@ func CCDirectorStack() -> NSMutableArray
     }
     
     func viewportRect() -> CGRect {
-        var projection: GLKMatrix4 = runningScene!.projection
+        var projection = runningScene!.projection
         // TODO It's _possible_ that a user will use a non-axis aligned projection. Weird, but possible.
-        let projectionInv: GLKMatrix4 = GLKMatrix4Invert(projection, nil)
+        let projectionInv = projection.inversed
         // Calculate z=0 using -> transform*[0, 0, 0, 1]/w
-        let zClip: Float = projection.m.14 / projection.m.15
+        let zClip = projection[3, 2] / projection[3, 3]
         // Bottom left and top right coords of viewport in clip coords.
-        let clipBL: GLKVector3 = GLKVector3Make(-1.0, -1.0, zClip)
-        let clipTR: GLKVector3 = GLKVector3Make(1.0, 1.0, zClip)
+        let clipBL = Vector3f(-1.0, -1.0, zClip).glkVector3
+        let clipTR = Vector3f(1.0, 1.0, zClip).glkVector3
         // Bottom left and top right coords in GL coords.
-        let glBL: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(projectionInv, clipBL)
-        let glTR: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(projectionInv, clipTR)
+        let glBL = GLKMatrix4MultiplyAndProjectVector3(projectionInv.glkMatrix4, clipBL)
+        let glTR = GLKMatrix4MultiplyAndProjectVector3(projectionInv.glkMatrix4, clipTR)
         return CGRect(x: CGFloat(glBL.x), y: CGFloat(glBL.y), width: CGFloat(glTR.x - glBL.x), height: CGFloat(glTR.y - glBL.y))
     }
     

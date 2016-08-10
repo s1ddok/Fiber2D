@@ -26,11 +26,11 @@ class RenderTextureSprite: Sprite {
         }
     }
     
-    func nodeToWorldTransform() -> GLKMatrix4 {
-        var t: GLKMatrix4 = self.nodeToParentMatrix()
+    func nodeToWorldTransform() -> Matrix4x4f {
+        var t = self.nodeToParentMatrix()
         var p: Node? = renderTexture
         while p != nil {
-            t = GLKMatrix4Multiply(p!.nodeToParentMatrix(), t)
+            t = p!.nodeToParentMatrix() * t
             p = p!.parent
         }
         return t

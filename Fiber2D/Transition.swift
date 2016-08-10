@@ -134,15 +134,15 @@ class Transition: Scene {
     }
     
     func renderOutgoing(_ progress: Float) {
-        let color: GLKVector4 = outgoingScene.colorRGBA.glkVector4
-        outgoingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
+        let color = outgoingScene.colorRGBA
+        let _ = outgoingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         outgoingScene.visit()
         outgoingTexture.end()
     }
     
     func renderIncoming(_ progress: Float) {
-        let color: GLKVector4 = incomingScene.colorRGBA.glkVector4
-        incomingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
+        let color = incomingScene.colorRGBA
+        let _ = incomingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         incomingScene.visit()
         incomingTexture.end()
     }

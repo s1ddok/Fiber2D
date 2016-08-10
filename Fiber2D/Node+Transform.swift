@@ -8,23 +8,12 @@
 import Foundation
 import CoreGraphics
 
-extension GLKVector2 {
-    var isZero: Bool {
-        return x == 0.0 && y == 0.0
-    }
-    
-    init(point: CGPoint) {
-        v.0 = Float(point.x)
-        v.1 = Float(point.y)
-    }
-}
 extension Node {
     /** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
      The matrix is in points.
-     @see [GLKMatrix4](https://developer.apple.com/library/ios/documentation/GLkit/Reference/GLKMatrix4/index.html)
      @see parentToNodeMatrix
      */
-    func nodeToParentMatrix() -> GLKMatrix4 {
+    func nodeToParentMatrix() -> Matrix4x4f {
         if isTransformDirty {
             // Get content size
             // Convert position to points
@@ -33,10 +22,10 @@ extension Node {
                 // Optimization for basic points (most common case)
                 positionInPoints = position
             } else {
-                positionInPoints = self.convertPositionToPoints(position, type: positionType)
+                positionInPoints = self.positionInPoints
             }
             
-            let anchorPointInPoints = GLKVector2(point: self.anchorPointInPoints)
+            let anchorPointInPoints = unsafeBitCast(GLKVector2(point: self.anchorPointInPoints), to: vec2.self)
             // Get x and y
             var x = Float(positionInPoints.x)
             var y = Float(positionInPoints.y)
@@ -48,14 +37,14 @@ extension Node {
             var cy: Float = 1
             var sy: Float = 0
             if rotationalSkewX != 0.0 || rotationalSkewY != 0.0 {
-                let radiansX: Float = -CC_DEGREES_TO_RADIANS(rotationalSkewX)
-                let radiansY: Float = -CC_DEGREES_TO_RADIANS(rotationalSkewY)
+                let radiansX: Float = -radians(rotationalSkewX)
+                let radiansY: Float = -radians(rotationalSkewY)
                 cx = cosf(radiansX)
                 sx = sinf(radiansX)
                 cy = cosf(radiansY)
                 sy = sinf(radiansY)
             }
-            let needsSkewMatrix: Bool = (skewX != 0.0 || skewY != 0.0)
+            let needsSkewMatrix = skewX != 0.0 || skewY != 0.0
             var scaleFactor: Float = 1
             if scaleType == .scaled {
                 scaleFactor = CCSetup.shared().uiScale
@@ -69,18 +58,24 @@ extension Node {
             }
             // Build Transform Matrix
             // Adjusted transfor m calculation for rotational skew
-            self.transform = GLKMatrix4Make(cy * scaleX * scaleFactor, sy * scaleX * scaleFactor, 0.0, 0.0, -sx * scaleY * scaleFactor, cx * scaleY * scaleFactor, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, x, y, vertexZ, 1.0)
+            self.transform = Matrix4x4f(cy * scaleX * scaleFactor,  sy * scaleX * scaleFactor, 0.0, 0.0,
+                                        -sx * scaleY * scaleFactor, cx * scaleY * scaleFactor, 0.0, 0.0,
+                                        0, 0, 1,       0,
+                                        x, y, vertexZ, 1)
             // XXX: Try to inline skew
             // If skew is needed, apply skew and then anchor point
             if needsSkewMatrix {
-                let skewMatrix: GLKMatrix4 = GLKMatrix4Make(1.0, tanf(CC_DEGREES_TO_RADIANS(skewY)), 0.0, 0.0, tanf(CC_DEGREES_TO_RADIANS(skewX)), 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0)
-                self.transform = GLKMatrix4Multiply(transform, skewMatrix)
+                let skewMatrix = Matrix4x4f(1.0, tanf(CC_DEGREES_TO_RADIANS(skewY)), 0.0, 0.0,
+                                            tanf(CC_DEGREES_TO_RADIANS(skewX)), 1.0, 0.0, 0.0,
+                                            0.0, 0.0, 1.0, 0.0,
+                                            0.0, 0.0, 0.0, 1.0)
+                self.transform = transform * skewMatrix
                 // adjust anchor point
                 if !anchorPointInPoints.isZero {
-                    self.transform = GLKMatrix4Translate(transform, -anchorPointInPoints.x, -anchorPointInPoints.y, 0.0)
+                    self.transform = transform.translated(by: vec3(-anchorPointInPoints.x, -anchorPointInPoints.y, 0.0))
                 }
             }
-            self.isTransformDirty = false
+            isTransformDirty = false
         }
         
         return transform
@@ -88,30 +83,27 @@ extension Node {
     /** Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates. The matrix is in points.
      @see nodeToParentMatrix
      */
-    func parentToNodeMatrix() -> GLKMatrix4 {
-        return GLKMatrix4Invert(self.nodeToParentMatrix(), nil)
+    func parentToNodeMatrix() -> Matrix4x4f {
+        return nodeToParentMatrix().inversed
     }
-    
     /** Returns the world transform matrix. The matrix is in points.
-     @see [GLKMatrix4](https://developer.apple.com/library/ios/documentation/GLkit/Reference/GLKMatrix4/index.html)
      @see nodeToParentMatrix
      @see worldToNodeMatrix
      */
-    func nodeToWorldMatrix() -> GLKMatrix4 {
-        var t: GLKMatrix4 = self.nodeToParentMatrix()
+    func nodeToWorldMatrix() -> Matrix4x4f {
+        var t = self.nodeToParentMatrix()
         var p = parent
         while p != nil {
-            t = GLKMatrix4Multiply(p!.nodeToParentMatrix(), t)
+            t = p!.nodeToParentMatrix() * t
             p = p!.parent
         }
         return t
     }
     
     /** Returns the inverse world transform matrix. The matrix is in points.
-     @see [GLKMatrix4](https://developer.apple.com/library/ios/documentation/GLkit/Reference/GLKMatrix4/index.html)
      @see nodeToWorldTransform
      */
-    func worldToNodeMatrix() -> GLKMatrix4 {
-        return GLKMatrix4Invert(self.nodeToWorldMatrix(), nil)
+    func worldToNodeMatrix() -> Matrix4x4f {
+        return nodeToWorldMatrix().inversed
     }
 }

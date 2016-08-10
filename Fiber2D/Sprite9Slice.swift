@@ -57,7 +57,7 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> GLKMatrix3 {
     // TODO This is sort of brute force. Could probably use some optimization after profiling.
     // Could it be done in a vertex shader using the texCoord2 attribute?
     
-    override func draw(_ renderer: CCRenderer, transform: GLKMatrix4) {
+    override func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {
         // Don't draw rects that were originally sizeless. CCButtons in tableviews are like this.
         // Not really sure it's intended behavior or not.
         if originalContentSize.width == 0 && originalContentSize.height == 0 {
@@ -75,7 +75,7 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> GLKMatrix3 {
         let alphaTexX: [Float] = [0.0, marginLeft, 1.0 - marginRight, 1.0]
         let alphaTexY: [Float] = [0.0, marginBottom, 1.0 - marginTop, 1.0]
         // Interpolation matrices for the vertexes and texture coordinates
-        let interpolatePosition: GLKMatrix4 = PositionInterpolationMatrix(&verts, transform: transform)
+        let interpolatePosition: GLKMatrix4 = PositionInterpolationMatrix(&verts, transform: transform.glkMatrix4)
         let interpolateTexCoord: GLKMatrix3 = TexCoordInterpolationMatrix(&verts)
         let color: GLKVector4 = verts.bl.color
         let buffer: CCRenderBuffer = renderer.enqueueTriangles(18, andVertexes: 16, with: self.renderState, globalSortOrder: 0)

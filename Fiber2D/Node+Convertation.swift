@@ -310,7 +310,7 @@ extension Node {
      *  @return Local position in points.
      */
     func convertToNodeSpace(_ worldPoint: CGPoint) -> CGPoint {
-        return CGPointApplyGLKMatrix4(worldPoint, self.worldToNodeMatrix())
+        return (worldToNodeMatrix() * vec2(worldPoint)).cgPoint
     }
     
     /**
@@ -321,7 +321,7 @@ extension Node {
      *  @return World position in points.
      */
     func convertToWorldSpace(_ nodePoint: CGPoint) -> CGPoint {
-        return CGPointApplyGLKMatrix4(nodePoint, self.nodeToWorldMatrix())
+        return (self.nodeToWorldMatrix() * Vector2f(nodePoint)).cgPoint
     }
     /**
      *  Converts a Point to node (local) space coordinates. The result is in Points.
