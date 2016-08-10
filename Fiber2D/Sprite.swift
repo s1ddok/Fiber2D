@@ -189,10 +189,10 @@ class Sprite: RenderableNode {
             self.secondaryTexture = spriteFrame2.texture
             // Set the second texture coordinate set from the normal map's sprite frame.
             let texCoords: SpriteTexCoordSet = Sprite.textureCoordsForTexture(spriteFrame2.texture, withRect: spriteFrame2.rect, rotated: spriteFrame2.rotated, xFlipped: flipX, yFlipped: flipY)
-            self.verts.bl.texCoord2 = texCoords.bl
-            self.verts.br.texCoord2 = texCoords.br
-            self.verts.tr.texCoord2 = texCoords.tr
-            self.verts.tl.texCoord2 = texCoords.tl
+            self.verts.bl.texCoord2 = texCoords.bl.glkVec2
+            self.verts.br.texCoord2 = texCoords.br.glkVec2
+            self.verts.tr.texCoord2 = texCoords.tr.glkVec2
+            self.verts.tl.texCoord2 = texCoords.tl.glkVec2
         }
     }
     /// -----------------------------------------------------------------------
