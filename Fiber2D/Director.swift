@@ -240,7 +240,7 @@ public class Director: NSObject {
     
     func convertToUI(_ glPoint: Point) -> Point {
         let transform = runningScene!.projection
-        let clipCoord = transform.multiplyAndProject(v: glPoint.extendedToVec3)
+        let clipCoord = transform.multiplyAndProject(v: vec3(glPoint))
         let glSize: Size = viewSize
         return glSize * p2d(clipCoord.x * 0.5 + 0.5, clipCoord.y * flipY * 0.5 + 0.5)
     }
