@@ -70,7 +70,6 @@
 
 // Actions:
 #import "CCAction.h"
-#import "CCActionCatmullRom.h"
 #import "CCActionEase.h"
 #import "CCActionEase.h"
 #import "CCActionInstant.h"
@@ -85,16 +84,12 @@
 #import "uthash.h"
 #import "utlist.h"
 #import "UITouch+CC.h"
-#import "NSEvent+CC.h"
 #import "CCScheduler.h"
 
 // Platform Support:
 #import "CCNS.h"
 
 #import "CCDirectorIOS.h"
-#if __CC_PLATFORM_MAC
-#import "NSEvent+CC.h"
-#endif
 
 #ifdef __cplusplus
 extern "C" {

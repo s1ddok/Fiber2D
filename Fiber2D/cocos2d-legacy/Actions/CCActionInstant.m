@@ -203,40 +203,6 @@
 @end
 
 
-//
-// Place
-//
-#pragma mark CCPlace
-
-@implementation CCActionPlace {
-    CGPoint _position;
-}
-
-+(instancetype) actionWithPosition: (CGPoint) pos
-{
-	return [[self alloc]initWithPosition:pos];
-}
-
--(id) initWithPosition: (CGPoint) pos
-{
-	if( (self=[super init]) )
-		_position = pos;
-
-	return self;
-}
-
--(id) copyWithZone: (NSZone*) zone
-{
-	CCActionInstant *copy = [[[self class] allocWithZone: zone] initWithPosition: _position];
-	return copy;
-}
-
--(void) update:(CCTime)time
-{
-	((Node *)_target).position = _position;
-}
-
-@end
 
 //
 // CallFunc
