@@ -57,17 +57,17 @@ extension Node {
             }
             // Build Transform Matrix
             // Adjusted transfor m calculation for rotational skew
-            self.transform = Matrix4x4f(cy * scaleX * scaleFactor,  sy * scaleX * scaleFactor, 0.0, 0.0,
-                                        -sx * scaleY * scaleFactor, cx * scaleY * scaleFactor, 0.0, 0.0,
-                                        0, 0, 1,       0,
-                                        x, y, vertexZ, 1)
+            self.transform = Matrix4x4f(vec4(cy * scaleX * scaleFactor,  sy * scaleX * scaleFactor, 0.0, 0.0),
+                                        vec4(-sx * scaleY * scaleFactor, cx * scaleY * scaleFactor, 0.0, 0.0),
+                                        vec4(0, 0, 1,       0),
+                                        vec4(x, y, vertexZ, 1))
             // XXX: Try to inline skew
             // If skew is needed, apply skew and then anchor point
             if needsSkewMatrix {
-                let skewMatrix = Matrix4x4f(1.0, tanf(CC_DEGREES_TO_RADIANS(skewY)), 0.0, 0.0,
-                                            tanf(CC_DEGREES_TO_RADIANS(skewX)), 1.0, 0.0, 0.0,
-                                            0.0, 0.0, 1.0, 0.0,
-                                            0.0, 0.0, 0.0, 1.0)
+                let skewMatrix = Matrix4x4f(vec4(1.0, tanf(CC_DEGREES_TO_RADIANS(skewY)), 0.0, 0.0),
+                                            vec4(tanf(CC_DEGREES_TO_RADIANS(skewX)), 1.0, 0.0, 0.0),
+                                            vec4(0.0, 0.0, 1.0, 0.0),
+                                            vec4(0.0, 0.0, 0.0, 1.0))
                 self.transform = transform * skewMatrix
                 // adjust anchor point
                 if !anchorPointInPoints.isZero {
