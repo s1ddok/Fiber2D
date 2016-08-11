@@ -57,11 +57,11 @@ import Foundation
     
     }
     
-    func hitTestWithWorldPos(_ pos: CGPoint) -> Bool {
+    func hitTestWithWorldPos(_ pos: Point) -> Bool {
         return false
     }
     
-    func clippedHitTestWithWorldPos(_ pos: CGPoint) -> Bool {
+    func clippedHitTestWithWorldPos(_ pos: Point) -> Bool {
         return false
     }
     

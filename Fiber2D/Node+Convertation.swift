@@ -17,12 +17,12 @@ extension Node {
      @returns The position values in the format specified by type.
      @see position
      @see CCPositionType, CCPositionUnit, CCPositionReferenceCorner */
-    func convertPositionFromPoints(_ positionInPoints: CGPoint, type: CCPositionType) -> CGPoint {
+    func convertPositionFromPoints(_ positionInPoints: Point, type: CCPositionType) -> Point {
         let setup: CCSetup = CCSetup.shared()
-        let UIScale = CGFloat(setup.uiScale)
-        var parentsContentSizeInPoints = CGSize(width: 0.0, height: 0.0)
+        let UIScale = setup.uiScale
+        var parentsContentSizeInPoints = Size.zero
         var gotParentSize: Bool = parent == nil
-        var position = CGPoint.zero
+        var position = Point.zero
         var x = positionInPoints.x
         var y = positionInPoints.y
         // Account for reference corner
@@ -66,9 +66,9 @@ extension Node {
             position.x = x / UIScale
         }
         else if xUnit == .normalized {
-            let parentWidth: CGFloat = gotParentSize ? parentsContentSizeInPoints.width : parent!.contentSizeInPoints.width
+            let parentWidth = gotParentSize ? parentsContentSizeInPoints.width : parent!.contentSizeInPoints.width
             if parentWidth > 0 {
-                position.x = x / CGFloat(parentWidth)
+                position.x = x / parentWidth
             }
         }
         
@@ -80,9 +80,9 @@ extension Node {
             position.y = y / UIScale
         }
         else if yUnit == .normalized {
-            let parentHeight: CGFloat = gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height
+            let parentHeight = gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height
             if parentHeight > 0 {
-                position.y = y / CGFloat(parentHeight)
+                position.y = y / parentHeight
             }
         }
         
@@ -96,14 +96,14 @@ extension Node {
      @returns The converted position in points.
      @see positionInPoints
      @see CCPositionType, CCPositionUnit, CCPositionReferenceCorner */
-    func convertPositionToPoints(_ position: CGPoint, type: CCPositionType) -> CGPoint {
+    func convertPositionToPoints(_ position: Point, type: CCPositionType) -> Point {
         let setup: CCSetup = CCSetup.shared()
-        let UIScale = CGFloat(setup.uiScale)
+        let UIScale = setup.uiScale
         var gotParentSize: Bool = parent == nil
-        var parentsContentSizeInPoints = CGSize(width: 0.0, height: 0.0)
-        var positionInPoints = CGPoint.zero
-        var x: CGFloat = 0
-        var y: CGFloat = 0
+        var parentsContentSizeInPoints = Size(width: 0.0, height: 0.0)
+        var positionInPoints = Point.zero
+        var x: Float = 0
+        var y: Float = 0
         // Convert position to points
         let xUnit = type.xUnit
         if xUnit == .points {
@@ -171,14 +171,14 @@ extension Node {
      @returns The converted size in points.
      @see contentSizeInPoints
      @see CCSizeType, CCSizeUnit */
-    func convertContentSizeToPoints(_ contentSize: CGSize, type: CCSizeType) -> CGSize {
-        var size: CGSize = CGSize.zero
+    func convertContentSizeToPoints(_ contentSize: Size, type: CCSizeType) -> Size {
+        var size: Size = Size.zero
         let setup: CCSetup = CCSetup.shared()
-        let UIScale = CGFloat(setup.uiScale)
+        let UIScale = Float(setup.uiScale)
         let widthUnit = type.widthUnit
         let heightUnit = type.heightUnit
         var gotParentSize: Bool = parent == nil
-        var parentsContentSizeInPoints = CGSize(width: 0.0, height: 0.0)
+        var parentsContentSizeInPoints = Size.zero
         // Width
         if widthUnit == .points {
             size.width = contentSize.width
@@ -234,14 +234,14 @@ extension Node {
      @returns The size values in the format specified by type.
      @see contentSize
      @see CCSizeType, CCSizeUnit */
-    func convertContentSizeFromPoints(_ pointSize: CGSize, type: CCSizeType) -> CGSize {
-        var size: CGSize = CGSize.zero
+    func convertContentSizeFromPoints(_ pointSize: Size, type: CCSizeType) -> Size {
+        var size: Size = Size.zero
         let setup: CCSetup = CCSetup.shared()
-        let UIScale = CGFloat(setup.uiScale)
+        let UIScale = Float(setup.uiScale)
         let widthUnit = type.widthUnit
         let heightUnit = type.heightUnit
         var gotParentSize: Bool = parent == nil
-        var parentsContentSizeInPoints = CGSize(width: 0.0, height: 0.0)
+        var parentsContentSizeInPoints = Size.zero
         // Width
         if widthUnit == .points {
             size.width = pointSize.width
@@ -309,8 +309,8 @@ extension Node {
      *
      *  @return Local position in points.
      */
-    func convertToNodeSpace(_ worldPoint: CGPoint) -> CGPoint {
-        return (worldToNodeMatrix() * vec2(worldPoint)).cgPoint
+    func convertToNodeSpace(_ worldPoint: Point) -> Point {
+        return worldToNodeMatrix() * worldPoint
     }
     
     /**
@@ -320,8 +320,8 @@ extension Node {
      *
      *  @return World position in points.
      */
-    func convertToWorldSpace(_ nodePoint: CGPoint) -> CGPoint {
-        return (self.nodeToWorldMatrix() * Vector2f(nodePoint)).cgPoint
+    func convertToWorldSpace(_ nodePoint: Point) -> Point {
+        return self.nodeToWorldMatrix() * nodePoint
     }
     /**
      *  Converts a Point to node (local) space coordinates. The result is in Points.
@@ -331,9 +331,9 @@ extension Node {
      *
      *  @return Local position in points.
      */
-    func convertToNodeSpaceAR(_ worldPoint: CGPoint) -> CGPoint {
-        let nodePoint: CGPoint = self.convertToNodeSpace(worldPoint)
-        return ccpSub(nodePoint, anchorPointInPoints)
+    func convertToNodeSpaceAR(_ worldPoint: Point) -> Point {
+        let nodePoint = convertToNodeSpace(worldPoint)
+        return nodePoint - anchorPointInPoints
     }
     
     /**
@@ -344,8 +344,8 @@ extension Node {
      *
      *  @return World position in points.
      */
-    func convertToWorldSpaceAR(_ nodePoint: CGPoint) -> CGPoint {
-        let np = ccpAdd(nodePoint, anchorPointInPoints)
+    func convertToWorldSpaceAR(_ nodePoint: Point) -> Point {
+        let np = nodePoint + anchorPointInPoints
         return self.convertToWorldSpace(np)
     }
     
@@ -356,7 +356,7 @@ extension Node {
      *
      *  @return UI position in points.
      */
-    func convertToWindowSpace(_ nodePoint: CGPoint) -> CGPoint {
+    func convertToWindowSpace(_ nodePoint: Point) -> Point {
         let wp = self.convertToWorldSpace(nodePoint)
         return Director.currentDirector()!.convertToUI(wp)
     }

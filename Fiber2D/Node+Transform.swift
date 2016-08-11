@@ -17,7 +17,7 @@ extension Node {
         if isTransformDirty {
             // Get content size
             // Convert position to points
-            var positionInPoints: CGPoint
+            var positionInPoints: p2d
             if CCPositionTypeIsBasicPoints(positionType) {
                 // Optimization for basic points (most common case)
                 positionInPoints = position
@@ -25,7 +25,6 @@ extension Node {
                 positionInPoints = self.positionInPoints
             }
             
-            let anchorPointInPoints = unsafeBitCast(GLKVector2(point: self.anchorPointInPoints), to: vec2.self)
             // Get x and y
             var x = Float(positionInPoints.x)
             var y = Float(positionInPoints.y)

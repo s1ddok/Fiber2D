@@ -43,20 +43,20 @@ class Sprite: RenderableNode {
     // Vertex coords, texture coords and color info.
     var verts = SpriteVertexes()
     // Center of extents (half width/height) of the sprite for culling purposes.
-    var vertexCenter = GLKVector2()
-    var vertexExtents = GLKVector2()
+    var vertexCenter = vec2.zero
+    var vertexExtents = vec2.zero
     private // Offset Position, used by sprite sheet editors.
-    var unflippedOffsetPositionFromCenter = CGPoint.zero
+    var unflippedOffsetPositionFromCenter = Point.zero
     
-    class func textureCoordsForTexture(_ texture: CCTexture!, withRect rect: CGRect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
+    class func textureCoordsForTexture(_ texture: CCTexture!, withRect rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
         var result = SpriteTexCoordSet()
         guard let texture = texture else {
             return result
         }
         // Need to convert the texel coords for the texel stretch hack. (Bah)
-        let scale: CGFloat = texture.contentScale
-        let rect = CC_RECT_SCALE(rect, scale)
-        let sizeInPixels: CGSize = texture.sizeInPixels
+        let scale = Float(texture.contentScale)
+        let rect = rect.scaled(by: scale)
+        let sizeInPixels: Size = Size(CGSize: texture.sizeInPixels)
         let atlasWidth = sizeInPixels.width
         let atlasHeight = sizeInPixels.height
         
@@ -117,6 +117,9 @@ class Sprite: RenderableNode {
         self.spriteFrame = spriteFrame
     }
     
+    convenience init(texture: CCTexture? = nil, rect: CGRect = CGRect.zero, rotated: Bool = false) {
+        self.init(texture: texture, rect: Rect(CGRect: rect), rotated: rotated)
+    }
     /**
      *  Initializes a sprite with an existing CCTexture and a rect in points, optionally rotated.
      *  The offset will be (0,0).
@@ -130,12 +133,12 @@ class Sprite: RenderableNode {
      *  @see CCTexture
      */
     
-    init(texture: CCTexture? = nil, rect: CGRect = CGRect.zero, rotated: Bool = false) {
+    init(texture: CCTexture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
         super.init()
         self.blendMode = CCBlendMode.premultipliedAlpha()
         self.shader = CCShader.positionTextureColor()
         // default transform anchor: center
-        self.anchorPoint = ccp(0.5, 0.5)
+        self.anchorPoint = p2d(0.5, 0.5)
         self.updateColor()
         self.texture = texture
         self.setTextureRect(rect, forTexture: self.texture, rotated: rotated, untrimmedSize: rect.size)
@@ -203,10 +206,10 @@ class Sprite: RenderableNode {
     }*/
     
     /** The offset position in points of the sprite in points. Calculated automatically by sprite sheet editors. */
-    private(set) var offsetPosition = CGPoint.zero
+    private(set) var offsetPosition = Point.zero
     
     /** Returns the texture rect of the Sprite in points. */
-    private(set) var textureRect = CGRect.zero
+    private(set) var textureRect = Rect.zero
     
     /** Returns whether or not the texture rectangle is rotated. Sprite sheet editors may rotate sprite frames in a texture to fit more sprites in the same atlas. */
     private(set) var textureRectRotated: Bool = false
@@ -220,7 +223,7 @@ class Sprite: RenderableNode {
      *  @param size    Untrimmed size.
      */
     
-    func setTextureRect(_ rect: CGRect, forTexture texture: CCTexture, rotated: Bool, untrimmedSize: CGSize) {
+    func setTextureRect(_ rect: Rect, forTexture texture: CCTexture, rotated: Bool, untrimmedSize: Size) {
         self.textureRectRotated = rotated
         self.contentSizeType = CCSizeTypePoints
         self.contentSize = untrimmedSize
@@ -238,9 +241,9 @@ class Sprite: RenderableNode {
         if flipY {
             relativeOffset.y = -relativeOffset.y
         }
-        let size: CGSize = self.contentSize
-        self.offsetPosition.x = relativeOffset.x + (size.width - textureRect.size.width) / 2
-        self.offsetPosition.y = relativeOffset.y + (size.height - textureRect.size.height) / 2
+        let size = self.contentSize
+        self.offsetPosition.x = relativeOffset.x + (size.width - textureRect.width) / 2
+        self.offsetPosition.y = relativeOffset.y + (size.height - textureRect.height) / 2
         // Atlas: Vertex
         let x1 = Float(offsetPosition.x)
         let y1 = Float(offsetPosition.y)
@@ -251,8 +254,8 @@ class Sprite: RenderableNode {
         self.verts.tr.position = GLKVector4Make(x2, y2, 0.0, 1.0)
         self.verts.tl.position = GLKVector4Make(x1, y2, 0.0, 1.0)
         // Set the center/extents for culling purposes.
-        self.vertexCenter = GLKVector2Make((x1 + x2) * 0.5, (y1 + y2) * 0.5)
-        self.vertexExtents = GLKVector2Make((x2 - x1) * 0.5, (y2 - y1) * 0.5)
+        self.vertexCenter = vec2((x1 + x2) * 0.5, (y1 + y2) * 0.5)
+        self.vertexExtents = vec2((x2 - x1) * 0.5, (y2 - y1) * 0.5)
     }
     /** Returns the matrix that transforms the sprite's (local) space coordinates into the sprite's texture space coordinates.
      */
@@ -315,7 +318,7 @@ class Sprite: RenderableNode {
     
     override func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {
         var t = transform.glkMatrix4
-        guard CCRenderCheckVisibility(&t, vertexCenter, vertexExtents) else {
+        guard CCRenderCheckVisibility(&t, vertexCenter.glkVec2, vertexExtents.glkVec2) else {
             return
         }
         

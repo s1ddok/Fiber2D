@@ -16,9 +16,9 @@ class MainScene: Scene {
         
         sprite = Sprite(imageNamed: "image.jpeg")
         sprite.scale = 6.0
-        sprite.position = ccp(0.5, 0.5)
+        sprite.position = p2d(0.5, 0.5)
         sprite.positionType = CCPositionTypeNormalized
-        sprite.runAction( CCActionRepeatForever(action: CCActionRotateBy(duration: 3.0, angle: 60.0)))
+        sprite.runAction(CCActionRepeatForever(action: CCActionRotateBy(duration: 3.0, angle: 60.0)))
         addChild(sprite)
         
         self.userInteractionEnabled = true
@@ -27,8 +27,8 @@ class MainScene: Scene {
     override func onEnter() {
         super.onEnter()
         colorNode = ColorNode()
-        colorNode.contentSize = CGSize(width: 64.0, height: 64.0)
-        colorNode.position = ccp(0.5, 0.5)
+        colorNode.contentSize = Size(width: 64.0, height: 64.0)
+        colorNode.position = p2d(0.5, 0.5)
         colorNode.positionType = CCPositionTypeNormalized
         
         let repeatForever = CCActionRepeatForever(action: CCActionRotateBy(duration: 3.0, angle: 60.0))
@@ -42,7 +42,7 @@ class MainScene: Scene {
         colorNode.runAction(repeatForever!)
         addChild(colorNode)
         rt.sprite.positionType = CCPositionTypeNormalized
-        rt.sprite.position = ccp(0.5, 0.5)
+        rt.sprite.position = p2d(0.5, 0.5)
         rt.sprite.opacity = 0.5
         self.addChild(rt.sprite)
         
@@ -50,6 +50,7 @@ class MainScene: Scene {
         
     }
     override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
-       // print(theEvent.locationInNode(self))
+        colorNode.positionInPoints = theEvent.location(in: self)
+        print(theEvent.location(in: self))
     }
 }

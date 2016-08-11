@@ -160,20 +160,20 @@ class Transition: Scene {
         self.outgoingScene.paused = outgoingScene.paused || !outgoingSceneAnimated
         // create render textures
         // get viewport size
-        let rect: CGRect = director.viewportRect()
-        var size: CGSize = rect.size
+        let rect = director.viewportRect()
+        var size = rect.size
         // Make sure we aren't rounding down.
         size.width = ceil(rect.size.width)
         size.height = ceil(rect.size.height)
         // create texture for outgoing scene
         self.outgoingTexture = RenderTexture(width: Int(size.width), height: Int(size.height))
-        self.outgoingTexture.position = CGPoint(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
+        self.outgoingTexture.position = p2d(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.outgoingTexture.contentScale /= outgoingDownScale
         self.outgoingTexture.projection = incomingScene.projection
         self.addChild(outgoingTexture, z: outgoingOverIncoming ? 1 : 0)
         // create texture for incoming scene
         self.incomingTexture = RenderTexture(width: Int(size.width), height: Int(size.height))
-        self.incomingTexture.position = CGPoint(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
+        self.incomingTexture.position = p2d(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.incomingTexture.contentScale /= incomingDownScale
         self.incomingTexture.projection = incomingScene.projection
         self.addChild(incomingTexture)

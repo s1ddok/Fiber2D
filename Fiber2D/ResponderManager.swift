@@ -138,7 +138,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         self.dirty = true
     }
 
-    func nodeAtPoint(_ pos: CGPoint) -> Node? {
+    func nodeAtPoint(_ pos: Point) -> Node? {
         if dirty {
             self.buildResponderList()
         }
@@ -154,7 +154,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         return nil
     }
     
-    func nodesAtPoint(_ pos: CGPoint) -> [AnyObject] {
+    func nodesAtPoint(_ pos: Point) -> [AnyObject] {
         if dirty {
             self.buildResponderList()
         }
@@ -180,7 +180,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         }
         // go through all touches
         for touch: CCTouch in touches {
-            var worldTouchLocation: CGPoint = director.convertToGL(touch.locationInView((director.view as! CCView)))
+            var worldTouchLocation: Point = director.convertToGL(touch.locationInView((director.view as! CCView)))
             // scan backwards through touch responders
             for var index = responderListCount - 1; index >= 0; index-- {
                 var node: Node = responderList[index]

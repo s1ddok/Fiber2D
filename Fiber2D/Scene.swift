@@ -65,7 +65,7 @@ class Scene: Node {
     override init() {
         super.init()
         let s = Director.currentDirector()!.designSize
-        self.anchorPoint = ccp(0.0, 0.0)
+        self.anchorPoint = p2d(0.0, 0.0)
         self.contentSize = s
         self.colorRGBA = Color.black
         self._scheduler = CCScheduler()

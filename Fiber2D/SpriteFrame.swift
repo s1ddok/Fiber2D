@@ -28,19 +28,21 @@
     private var _lazyTexture: CCTexture?
     
     /** Rectangle of the frame within the texture, in points. */
-    var rect: CGRect
+    var rect: Rect
     /** If YES, the frame rectangle is rotated. */
     var rotated: Bool
     /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is the original size in points of a frame before it was trimmed. */
-    var untrimmedSize: CGSize
+    var untrimmedSize: Size
     /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is offset of the sprite caused by trimming in points. */
-    var trimOffset: CGPoint
+    var trimOffset: Point
     
     static func frameWithImageNamed(_ imageName: String) -> SpriteFrame! {
         return CCSpriteFrameCache.shared().spriteFrame(byName: imageName)
     }
-    
-    init(texture: CCTexture!, rect: CGRect, rotated: Bool, trimOffset: CGPoint, untrimmedSize: CGSize) {
+    convenience init(texture: CCTexture!, rect: CGRect, rotated: Bool, trimOffset: CGPoint, untrimmedSize: CGSize) {
+        self.init(texture: texture, rect: Rect(CGRect: rect), rotated: rotated, trimOffset: Point(trimOffset), untrimmedSize: Size(CGSize: untrimmedSize))
+    }
+    init(texture: CCTexture!, rect: Rect, rotated: Bool, trimOffset: Point, untrimmedSize: Size) {
         self._texture = texture
         self.rect = rect
         self.trimOffset = trimOffset

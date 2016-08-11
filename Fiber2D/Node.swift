@@ -124,7 +124,6 @@ import Foundation
      data in a node without needing to subclass the node. */
     var userObject: AnyObject?
     
-    
     override init() {
         super.init()
     }
@@ -141,14 +140,14 @@ import Foundation
      Default setting is referencing the bottom left corner in points.
      @see positionInPoints
      @see positionType */
-    var position = CGPoint.zero {
+    var position = Point.zero {
         didSet {
             isTransformDirty = true
         }
     }
     /** Position (x,y) of the node in points from the bottom left corner.
      @see position */
-    var positionInPoints: CGPoint {
+    var positionInPoints: Point {
         get {
             return convertPositionToPoints(position, type: positionType)
         }
@@ -328,7 +327,7 @@ import Foundation
      The contentSize remains the same regardless of whether the node is scaled or rotated.
      @see contentSizeInPoints
      @see contentSizeType */
-    var contentSize: CGSize = CGSize.zero {
+    var contentSize: Size = Size.zero {
         didSet {
             if oldValue != contentSize {
                 contentSizeChanged()
@@ -339,7 +338,7 @@ import Foundation
      contentSizeInPoints will be scaled by the [Director UIScaleFactor] if the contentSizeType is CCSizeUnitUIPoints.
      @see contentSize
      @see contentSizeType */
-    var contentSizeInPoints: CGSize {
+    var contentSizeInPoints: Size {
         get {
             return convertContentSizeToPoints(contentSize, type: contentSizeType)
         }
@@ -365,19 +364,17 @@ import Foundation
      * @param newViewSize The new size of the view after it has been resized.
      */
     
-    func viewDidResizeTo(_ newViewSize: CGSize) {
+    func viewDidResizeTo(_ newViewSize: Size) {
         children.forEach { $0.viewDidResizeTo(newViewSize) }
     }
     /** Returns an axis aligned bounding box in points, in the parent node's coordinate system.
      @see contentSize
      @see nodeToParentTransform */
     
-    var boundingBox: CGRect {
-        let contentSize: CGSize = self.contentSizeInPoints
-        let rect: CGRect = CGRect(x: 0, y: 0, width: contentSize.width, height: contentSize.height)
-        let t = self.nodeToParentMatrix().glkMatrix4
+    var boundingBox: Rect {
+        let rect = Rect(origin: p2d.zero, size: contentSizeInPoints)
 
-        return rect.applying(CGAffineTransform(a: CGFloat(t.m.0), b: CGFloat(t.m.1), c: CGFloat(t.m.4), d: CGFloat(t.m.5), tx: CGFloat(t.m.12), ty: CGFloat(t.m.13)))
+        return rect.applying(matrix: nodeToParentMatrix())
     }
     
     // MARK: Content's anchor
@@ -390,11 +387,11 @@ import Foundation
      default anchorPoint, typically centered on the node (0.5,0.5).
      @warning The anchorPoint is not a replacement for moving a node. It defines how the node's content is drawn relative to the node's position.
      @see anchorPointInPoints */
-    var anchorPoint = CGPoint.zero {
+    var anchorPoint = Point.zero {
         didSet {
             if oldValue != anchorPoint {
                 let contentSizeInPoints = self.contentSizeInPoints
-                anchorPointInPoints = ccp(contentSizeInPoints.width * anchorPoint.x, contentSizeInPoints.height * anchorPoint.y)
+                anchorPointInPoints = p2d(contentSizeInPoints.width * anchorPoint.x, contentSizeInPoints.height * anchorPoint.y)
                 isTransformDirty = true
             }
         }
@@ -403,7 +400,7 @@ import Foundation
      It is calculated as follows: `x = contentSizeInPoints.width * anchorPoint.x; y = contentSizeInPoints.height * anchorPoint.y;`
      @note The returned point is relative to the node's contentSize origin, not relative to the node's position.
      @see anchorPoint */
-    private(set) var anchorPointInPoints = CGPoint.zero
+    private(set) var anchorPointInPoints = Point.zero
     
     // MARK: Visibility and Draw Order
     /// -----------------------------------------------------------------------
@@ -901,6 +898,45 @@ import Foundation
     }
     
     //
+    // MARK: Input
+    //
+    /** Returns YES, if touch is inside sprite
+     Added hit area expansion / contraction
+     Override for alternative clipping behavior, such as if you want to clip input to a circle.
+     */
+    override func hitTestWithWorldPos(_ pos: Point) -> Bool {
+        let p = self.convertToNodeSpace(pos)
+        let h = -hitAreaExpansion
+        let offset = Point(-h, -h)
+        // optimization
+        let contentSizeInPoints = self.contentSizeInPoints
+        let size: Size = Size(width: contentSizeInPoints.width - offset.x, height: contentSizeInPoints.height - offset.y)
+        return !(p.y < offset.y || p.y > size.height || p.x < offset.x || p.x > size.width)
+    }
+    
+    override func clippedHitTestWithWorldPos(_ pos: Point) -> Bool {
+        // If *any* parent node clips input and we're outside their clipping range, reject the hit.
+        guard parent == nil || !parent!.rejectClippedInput(pos) else {
+            return false
+        }
+        
+        return self.hitTestWithWorldPos(pos)
+    }
+    
+    func rejectClippedInput(_ pos: Point) -> Bool {
+        // If this clips input, do the bounds test to clip against this node
+        if self.clipsInput && !self.hitTestWithWorldPos(pos) {
+            // outside of this node, reject this!
+            return true
+        }
+        guard let parent = self.parent else {
+            // Terminating condition, the hit was not rejected
+            return false
+        }
+        return parent.rejectClippedInput(pos)
+    }
+    
+    //
     // MARK: Power user functionality 
     //
     
@@ -927,8 +963,8 @@ import Foundation
     
     func contentSizeChanged() {
         // Update children
-        let contentSizeInPoints: CGSize = self.contentSizeInPoints
-        self.anchorPointInPoints = ccp(contentSizeInPoints.width * anchorPoint.x, contentSizeInPoints.height * anchorPoint.y)
+        let contentSizeInPoints: Size = self.contentSizeInPoints
+        self.anchorPointInPoints = p2d(contentSizeInPoints.width * anchorPoint.x, contentSizeInPoints.height * anchorPoint.y)
         self.isTransformDirty = true
         if let layout = parent as? Layout {
             layout.needsLayout()

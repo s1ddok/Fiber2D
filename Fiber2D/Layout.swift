@@ -14,7 +14,7 @@ class Layout : Node {
         self._needsLayout = false
     }
     
-    override var contentSize: CGSize {
+    override var contentSize: Size {
         get {
             if _needsLayout {
                 self.layout()

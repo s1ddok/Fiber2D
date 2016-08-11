@@ -60,3 +60,19 @@ extension Matrix4x4f {
         d = m.d
     }
 }
+
+extension Size {
+    init(CGSize: CGSize) {
+        self.init(Float(CGSize.width), Float(CGSize.height))
+    }
+    
+    var cgSize: CGSize {
+        return CGSize(width: CGFloat(width), height: CGFloat(height))
+    }
+}
+
+extension Rect {
+    init(CGRect: CGRect) {
+        self.init(origin: p2d(CGRect.origin), size: Size(CGSize: CGRect.size))
+    }
+}

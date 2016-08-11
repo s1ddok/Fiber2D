@@ -14,7 +14,7 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> GLKMatrix3 {
 }
 
 @objc class Sprite9Slice : Sprite {
-    var originalContentSize = CGSize.zero
+    var originalContentSize = Size.zero
     
     var margin : Float {
         get {
@@ -36,20 +36,20 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> GLKMatrix3 {
     var marginTop: Float = 0.0
     var marginBottom: Float = 0.0
     
-    override init(texture: CCTexture!, rect: CGRect, rotated: Bool) {
+    override init(texture: CCTexture!, rect: Rect, rotated: Bool) {
         super.init(texture: texture, rect: rect, rotated: rotated)
         self.originalContentSize = self.contentSizeInPoints
         // initialize new parts in 9slice
         self.margin = SPRITE_9SLICE_MARGIN_DEFAULT
     }
     
-    func setTextureRect(_ rect: CGRect, rotated: Bool, untrimmedSize: CGSize) {
+    func setTextureRect(_ rect: Rect, rotated: Bool, untrimmedSize: Size) {
         let oldContentSize = self.contentSize
         let oldContentSizeType = self.contentSizeType
         self.setTextureRect(rect, forTexture: self.texture, rotated: rotated, untrimmedSize: untrimmedSize)
         // save the original sizes for texture calculations
         self.originalContentSize = self.contentSizeInPoints
-        if !oldContentSize.equalTo(CGSize.zero) {
+        if oldContentSize != Size.zero {
             self.contentSizeType = oldContentSizeType
             self.contentSize = oldContentSize
         }
@@ -63,9 +63,9 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> GLKMatrix3 {
         if originalContentSize.width == 0 && originalContentSize.height == 0 {
             return
         }
-        let size: CGSize = self.contentSizeInPoints
-        let rectSize: CGSize = self.textureRect.size
-        let physicalSize: CGSize = CGSize(width: size.width + rectSize.width - originalContentSize.width, height: size.height + rectSize.height - originalContentSize.height)
+        let size: Size = self.contentSizeInPoints
+        let rectSize: Size = self.textureRect.size
+        let physicalSize: Size = Size(width: size.width + rectSize.width - originalContentSize.width, height: size.height + rectSize.height - originalContentSize.height)
         // Lookup tables for alpha coefficients.
         let scaleX = Float(physicalSize.width / rectSize.width)
         let scaleY = Float(physicalSize.height / rectSize.height)

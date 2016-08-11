@@ -56,10 +56,10 @@ func roundUpToEven(_ f: Float) -> Float {
             // Position the nodes
             var width: Float = 0
             for child in self.children {
-                let childSize: CGSize = child.contentSizeInPoints
-                let offset: CGPoint = child.anchorPointInPoints
-                let localPos: CGPoint = ccp(CGFloat(roundf(width)), CGFloat(roundf(Float(maxHeight - Float(childSize.height)) / 2.0)))
-                let position: CGPoint = ccpAdd(localPos, offset)
+                let childSize: Size = child.contentSizeInPoints
+                let offset: Point = child.anchorPointInPoints
+                let localPos: Point = p2d(roundf(width), roundf(maxHeight - childSize.height / 2.0))
+                let position: Point = localPos + offset
                 child.position = position
                 child.positionType = CCPositionTypePoints
                 width += Float(childSize.width)
@@ -71,7 +71,7 @@ func roundUpToEven(_ f: Float) -> Float {
                 width = 0
             }
             self.contentSizeType = CCSizeTypePoints
-            self.contentSize = CGSize(width: CGFloat(roundUpToEven(width)), height: CGFloat(roundUpToEven(maxHeight)))
+            self.contentSize = Size(width: Float(roundUpToEven(width)), height: Float(roundUpToEven(maxHeight)))
         }
         else {
             // Get the maximum width
@@ -85,10 +85,10 @@ func roundUpToEven(_ f: Float) -> Float {
             // Position the nodes
             var height: Float = 0
             for child in self.children {
-                let childSize: CGSize = child.contentSizeInPoints
-                let offset: CGPoint = child.anchorPointInPoints
-                let localPos: CGPoint = ccp(CGFloat(roundf((maxWidth - Float(childSize.width)) / 2.0)), CGFloat(roundf(height)))
-                let position: CGPoint = ccpAdd(localPos, offset)
+                let childSize: Size = child.contentSizeInPoints
+                let offset: Point = child.anchorPointInPoints
+                let localPos: Point = p2d(Float(roundf((maxWidth - Float(childSize.width)) / 2.0)), Float(roundf(height)))
+                let position: Point = localPos + offset
                 child.position = position
                 child.positionType = CCPositionTypePoints
                 height += Float(childSize.height)
@@ -100,7 +100,7 @@ func roundUpToEven(_ f: Float) -> Float {
                 height = 0
             }
             self.contentSizeType = CCSizeTypePoints
-            self.contentSize = CGSize(width: CGFloat(roundUpToEven(maxWidth)), height: CGFloat(roundUpToEven(height)))
+            self.contentSize = Size(width: Float(roundUpToEven(maxWidth)), height: Float(roundUpToEven(height)))
         }
     }
     

@@ -85,17 +85,17 @@ func CCDirectorStack() -> NSMutableArray
     //weak var delegate: CCDirectorDelegate?
     /// User definable value that is used for default contentSizes of many node types (Scene, NodeColor, etc).
     /// Defaults to the view size.
-    var designSize : CGSize {
+    var designSize : Size {
         get {
             // Return the viewSize unless designSize has been set.
-            return (_designSize.equalTo(CGSize.zero) ? self.viewSize() : _designSize)
+            return (_designSize == Size.zero ? self.viewSize : _designSize)
         }
         
         set {
             _designSize = newValue
         }
     }
-    private var _designSize = CGSize.zero
+    private var _designSize = Size.zero
     /** @name Working with View and Projection */
     /// View used by the director for rendering. The CC_VIEW macro equals UIView on iOS, NSOpenGLView on OS X and MetalView on Android.
     /// @see MetalView
@@ -124,7 +124,7 @@ func CCDirectorStack() -> NSMutableArray
     }
     
     /*func description() -> String {
-        var size: CGSize = self.viewSize
+        var size: Size = self.viewSize
         return "<\(self.self) = \(self) | Size: %0.f x %0.f, view = \(size.width)>"
     }*/
     
@@ -222,7 +222,7 @@ func CCDirectorStack() -> NSMutableArray
         CCFileLocator.shared().purgeCache()
     }
     
-    func flipY() -> CGFloat {
+    var flipY: Float {
         #if os(iOS)
         return -1.0
         #endif
@@ -231,46 +231,45 @@ func CCDirectorStack() -> NSMutableArray
         #endif
     }
     
-    func convertToGL(_ uiPoint: CGPoint) -> CGPoint {
+    func convertToGL(_ uiPoint: Point) -> Point {
         var transform = runningScene!.projection
         let invTransform = transform.inversed
         // Calculate z=0 using -> transform*[0, 0, 0, 1]/w
         let zClip: Float = transform[3, 2] / transform[3, 3]
-        let glSize: CGSize = self.view!.bounds.size
-        var clipCoord: GLKVector3 = GLKVector3Make(2.0 * Float(uiPoint.x / glSize.width) - 1.0, 2.0 * Float(uiPoint.y / glSize.height) - 1.0, zClip)
-        clipCoord.v.2 *= Float(self.flipY())
-        let glCoord: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(invTransform.glkMatrix4, clipCoord)
-        return ccp(CGFloat(glCoord.x), CGFloat(glCoord.y))
+        let glSize: Size = Size(CGSize: self.view!.bounds.size)
+        var clipCoord = vec3(2.0 * Float(uiPoint.x / glSize.width) - 1.0, 2.0 * Float(uiPoint.y / glSize.height) - 1.0, zClip)
+        clipCoord.y *= flipY
+        return invTransform.multiplyAndProject(v: clipCoord).xy
     }
     
-    func convertToUI(_ glPoint: CGPoint) -> CGPoint {
+    func convertToUI(_ glPoint: Point) -> Point {
         let transform = runningScene!.projection
-        var clipCoord: GLKVector3 = GLKMatrix4MultiplyAndProjectVector3(transform.glkMatrix4, GLKVector3Make(Float(glPoint.x), Float(glPoint.y), 0.0))
-        let glSize: CGSize = self.view!.bounds.size
-        return ccp(glSize.width * CGFloat(clipCoord.v.0 * 0.5 + 0.5), glSize.height * CGFloat(Float(self.flipY()) * clipCoord.v.1 * 0.5 + 0.5))
+        let clipCoord = transform.multiplyAndProject(v: glPoint.extendedToVec3)
+        let glSize: Size = Size(CGSize: self.view!.bounds.size)
+        return glSize * p2d(clipCoord.x * 0.5 + 0.5, clipCoord.y * flipY * 0.5 + 0.5)
     }
     
-    func viewSize() -> CGSize {
-        return CC_SIZE_SCALE(self.view!.sizeInPixels, 1.0 / CGFloat(CCSetup.shared().contentScale))
+    var viewSize: Size {
+        return viewSizeInPixels * Float(1.0 / CCSetup.shared().contentScale)
     }
     
-    func viewSizeInPixels() -> CGSize {
-        return self.view!.sizeInPixels
+    var viewSizeInPixels: Size {
+        return Size(CGSize: self.view!.sizeInPixels)
     }
     
-    func viewportRect() -> CGRect {
+    func viewportRect() -> Rect {
         var projection = runningScene!.projection
         // TODO It's _possible_ that a user will use a non-axis aligned projection. Weird, but possible.
         let projectionInv = projection.inversed
         // Calculate z=0 using -> transform*[0, 0, 0, 1]/w
         let zClip = projection[3, 2] / projection[3, 3]
         // Bottom left and top right coords of viewport in clip coords.
-        let clipBL = Vector3f(-1.0, -1.0, zClip).glkVector3
-        let clipTR = Vector3f(1.0, 1.0, zClip).glkVector3
+        let clipBL = Vector3f(-1.0, -1.0, zClip)
+        let clipTR = Vector3f(1.0, 1.0, zClip)
         // Bottom left and top right coords in GL coords.
-        let glBL = GLKMatrix4MultiplyAndProjectVector3(projectionInv.glkMatrix4, clipBL)
-        let glTR = GLKMatrix4MultiplyAndProjectVector3(projectionInv.glkMatrix4, clipTR)
-        return CGRect(x: CGFloat(glBL.x), y: CGFloat(glBL.y), width: CGFloat(glTR.x - glBL.x), height: CGFloat(glTR.y - glBL.y))
+        let glBL = projectionInv.multiplyAndProject(v: clipBL).xy
+        let glTR = projectionInv.multiplyAndProject(v: clipTR).xy
+        return Rect(bottomLeft: glBL, topRight: glTR)
     }
     
     func antiFlickrDrawCall() {
@@ -510,13 +509,13 @@ func CCDirectorStack() -> NSMutableArray
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        runningScene?.contentSize = size
-        runningScene?.viewDidResizeTo(size)
+        runningScene?.contentSize = Size(CGSize: size)
+        runningScene?.viewDidResizeTo(Size(CGSize:size))
     }
     #if os(OSX)
-    func convertEventToGL(_ event: NSEvent) -> CGPoint {
+    func convertEventToGL(_ event: NSEvent) -> Point {
         let point: NSPoint = self.view!.convert(event.locationInWindow, from: nil)
-        return self.convertToGL(NSPointToCGPoint(point))
+        return self.convertToGL(Point(NSPointToCGPoint(point)))
     }
     #endif
     

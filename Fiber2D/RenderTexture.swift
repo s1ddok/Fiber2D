@@ -40,9 +40,9 @@ class RenderTexture: RenderableNode {
     init(width w: Int, height h: Int) {
         super.init()
         self.contentScale = CCSetup.shared().assetScale
-        self.contentSize = CGSize(width: CGFloat(w), height: CGFloat(h))
+        self.contentSize = Size(width: Float(w), height: Float(h))
         self.projection = Matrix4x4f.ortho(left: 0.0, right: Float(w), bottom: 0.0, top: Float(h), near: -1024, far: 1024)
-        let rtSprite: RenderTextureSprite = RenderTextureSprite(texture: CCTexture.none(), rect: CGRect.zero, rotated: false)
+        let rtSprite: RenderTextureSprite = RenderTextureSprite(texture: CCTexture.none(), rect: Rect.zero, rotated: false)
         rtSprite.renderTexture = self
         self.sprite = rtSprite
 
@@ -116,7 +116,7 @@ class RenderTexture: RenderableNode {
      */
     
     func clear(_ r: Float, g: Float, b: Float, a: Float) {
-        self.beginWithClear(r, g: g, b: b, a: a)
+        let _ = self.beginWithClear(r, g: g, b: b, a: a)
         self.end()
     }
     /** Clear color value. Valid only when autoDraw is YES.
@@ -157,14 +157,14 @@ class RenderTexture: RenderableNode {
     var framebuffer: CCFrameBufferObject?
     
     
-    func createTextureAndFboWithPixelSize(_ pixelSize: CGSize) {
-        let paddedSize: CGSize = pixelSize
+    func createTextureAndFboWithPixelSize(_ pixelSize: Size) {
+        let paddedSize: Size = pixelSize
         /*if(![[CCDeviceInfo sharedDeviceInfo] supportsNPOT]){
          paddedSize.width = CCNextPOT(pixelSize.width);
          paddedSize.height = CCNextPOT(pixelSize.height);
         	}*/
-        let image: CCImage = CCImage(pixelSize: paddedSize, contentScale: CGFloat(contentScale), pixelData: nil)
-        image.contentSize = CC_SIZE_SCALE(pixelSize, 1.0 / CGFloat(contentScale))
+        let image: CCImage = CCImage(pixelSize: paddedSize.cgSize, contentScale: CGFloat(contentScale), pixelData: nil)
+        image.contentSize = CC_SIZE_SCALE(pixelSize.cgSize, 1.0 / CGFloat(contentScale))
         self.texture = CCTexture(image: image, options: nil, rendertexture: true)
         self.framebuffer = CCFrameBufferObjectMetal(texture: texture, depthStencilFormat: .bgra8Unorm)
         // XXX Thayer says: I think this is incorrect for any situations where the content
@@ -172,14 +172,14 @@ class RenderTexture: RenderableNode {
         // at some code that assumes the supplied size is in points so, if the size is not in points,
         // things break.
         self.assignSpriteTexture()
-        let size: CGSize = self.contentSize
-        let textureSize: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let size = self.contentSize
+        let textureSize = Rect(origin: p2d.zero, size: size)
         sprite.setTextureRect(textureSize, forTexture: sprite.texture, rotated: false, untrimmedSize: textureSize.size)
     }
     
     func create() {
-        let size: CGSize = self.contentSize
-        let pixelSize: CGSize = CGSize(width: size.width * CGFloat(contentScale), height: size.height * CGFloat(contentScale))
+        let size: Size = self.contentSize
+        let pixelSize: Size = Size(width: size.width * Float(contentScale), height: size.height * Float(contentScale))
         self.createTextureAndFboWithPixelSize(pixelSize)
     }
     func destroy() {
