@@ -61,7 +61,7 @@ extension Color {
         a *= a
     }
     
-    nonmutating func premultiplyingAlpha() -> Color {
+    var premultiplyingAlpha: Color {
         var retVal = self
         retVal.premultiplyAlpha()
         return retVal

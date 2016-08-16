@@ -13,7 +13,7 @@ extension Node {
      The matrix is in points.
      @see parentToNodeMatrix
      */
-    func nodeToParentMatrix() -> Matrix4x4f {
+    var nodeToParentMatrix: Matrix4x4f {
         if isTransformDirty {
             // Get content size
             // Convert position to points
@@ -82,18 +82,18 @@ extension Node {
     /** Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates. The matrix is in points.
      @see nodeToParentMatrix
      */
-    func parentToNodeMatrix() -> Matrix4x4f {
-        return nodeToParentMatrix().inversed
+    var parentToNodeMatrix: Matrix4x4f {
+        return nodeToParentMatrix.inversed
     }
     /** Returns the world transform matrix. The matrix is in points.
      @see nodeToParentMatrix
      @see worldToNodeMatrix
      */
-    func nodeToWorldMatrix() -> Matrix4x4f {
-        var t = self.nodeToParentMatrix()
+    var nodeToWorldMatrix: Matrix4x4f {
+        var t = self.nodeToParentMatrix
         var p = parent
         while p != nil {
-            t = p!.nodeToParentMatrix() * t
+            t = p!.nodeToParentMatrix * t
             p = p!.parent
         }
         return t
@@ -102,7 +102,7 @@ extension Node {
     /** Returns the inverse world transform matrix. The matrix is in points.
      @see nodeToWorldTransform
      */
-    func worldToNodeMatrix() -> Matrix4x4f {
-        return nodeToWorldMatrix().inversed
+    var worldToNodeMatrix: Matrix4x4f {
+        return nodeToWorldMatrix.inversed
     }
 }

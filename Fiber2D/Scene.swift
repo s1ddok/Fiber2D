@@ -64,7 +64,7 @@ class Scene: Node {
     
     override init() {
         super.init()
-        let s = Director.currentDirector()!.designSize
+        let s = Director.currentDirector!.designSize
         self.anchorPoint = p2d(0.0, 0.0)
         self.contentSize = s
         self.colorRGBA = Color.black

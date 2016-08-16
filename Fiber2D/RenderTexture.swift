@@ -65,7 +65,7 @@ class RenderTexture: RenderableNode {
             self.create()
             texture = self.texture
         }
-        let renderer: CCRenderer = Director.currentDirector()!.rendererFromPool()
+        let renderer: CCRenderer = Director.currentDirector!.rendererFromPool()
         var proj = projection.glkMatrix4
         renderer.prepare(withProjection: &proj, framebuffer: framebuffer)
         self.previousRenderer = CCRenderer.current()
@@ -95,7 +95,7 @@ class RenderTexture: RenderableNode {
     
     func end() {
         let renderer: CCRenderer = CCRenderer.current()
-        let director: Director = Director.currentDirector()!
+        let director: Director = Director.currentDirector!
         director.addFrameCompletionHandler {
             // Return the renderer to the pool when the frame completes.
             director.poolRenderer(renderer)
@@ -230,7 +230,7 @@ class RenderTexture: RenderableNode {
             }
         
             self.end()
-            let transform = parentTransform * self.nodeToParentMatrix()
+            let transform = parentTransform * self.nodeToParentMatrix
             self.draw(renderer, transform: transform)
         }
         else {

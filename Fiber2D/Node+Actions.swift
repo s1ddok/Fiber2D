@@ -84,7 +84,7 @@ extension Node {
      @since v4.0
      */
     
-    func actions() -> [AnyObject]? {
+    var actions: [AnyObject]? {
         return scheduler?.actions(for: self)
     }
     /// -----------------------------------------------------------------------

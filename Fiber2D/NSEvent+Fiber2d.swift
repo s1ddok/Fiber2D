@@ -13,11 +13,11 @@ import Foundation
 extension NSEvent {
 
     var locationInWorld: Point {
-        return Director.currentDirector()!.convertEventToGL(self)
+        return Director.currentDirector!.convertEventToGL(self)
     }
     
     func location(in node: Node) -> Point {
-        let director = Director.currentDirector()!
+        let director = Director.currentDirector!
         let mouseLocation = director.convertEventToGL(self)
         return node.convertToNodeSpace(mouseLocation)
     }

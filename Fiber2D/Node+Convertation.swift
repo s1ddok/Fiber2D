@@ -310,7 +310,7 @@ extension Node {
      *  @return Local position in points.
      */
     func convertToNodeSpace(_ worldPoint: Point) -> Point {
-        return worldToNodeMatrix() * worldPoint
+        return worldToNodeMatrix * worldPoint
     }
     
     /**
@@ -321,7 +321,7 @@ extension Node {
      *  @return World position in points.
      */
     func convertToWorldSpace(_ nodePoint: Point) -> Point {
-        return self.nodeToWorldMatrix() * nodePoint
+        return self.nodeToWorldMatrix * nodePoint
     }
     /**
      *  Converts a Point to node (local) space coordinates. The result is in Points.
@@ -358,6 +358,6 @@ extension Node {
      */
     func convertToWindowSpace(_ nodePoint: Point) -> Point {
         let wp = self.convertToWorldSpace(nodePoint)
-        return Director.currentDirector()!.convertToUI(wp)
+        return Director.currentDirector!.convertToUI(wp)
     }
 }

@@ -30,13 +30,13 @@ func CCDirectorStack() -> NSMutableArray
 }
 
 @objc class Director : NSObject, MTKViewDelegate {
-    class func currentDirector() -> Director? {
+    class var currentDirector: Director? {
         return Thread.current.threadDictionary[CCDirectorCurrentKey] as? Director
     }
     
     class func pushCurrentDirector(_ director: Director) {
         let stack = CCDirectorStack()
-        stack.add(self.currentDirector() ?? NSNull())
+        stack.add(self.currentDirector ?? NSNull())
         CCDirectorBindCurrent(director)
     }
     
@@ -216,7 +216,7 @@ func CCDirectorStack() -> NSMutableArray
             delegate?.purgeCachedData!()
         }*/
         CCRenderState.flushCache()
-        if Director.currentDirector()?.view != nil {
+        if Director.currentDirector?.view != nil {
             CCTextureCache.shared().removeUnusedTextures()
         }
         CCFileLocator.shared().purgeCache()
@@ -257,7 +257,7 @@ func CCDirectorStack() -> NSMutableArray
         return Size(CGSize: self.view!.sizeInPixels)
     }
     
-    func viewportRect() -> Rect {
+    var viewportRect: Rect {
         var projection = runningScene!.projection
         // TODO It's _possible_ that a user will use a non-axis aligned projection. Weird, but possible.
         let projectionInv = projection.inversed

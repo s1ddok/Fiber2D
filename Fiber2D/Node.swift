@@ -374,7 +374,7 @@ import Foundation
     var boundingBox: Rect {
         let rect = Rect(origin: p2d.zero, size: contentSizeInPoints)
 
-        return rect.applying(matrix: nodeToParentMatrix())
+        return rect.applying(matrix: nodeToParentMatrix)
     }
     
     // MARK: Content's anchor
@@ -653,7 +653,7 @@ import Foundation
             child.onEnter()
             child.onEnterTransitionDidFinish()
         }
-        Director.currentDirector()!.responderManager.markAsDirty()
+        Director.currentDirector!.responderManager.markAsDirty()
     }
     
     /** Removes the node from its parent node. Will stop the node's scheduled selectors/blocks and actions.
@@ -718,7 +718,7 @@ import Foundation
             }
             // set parent nil at the end (issue #476)
             c.parent = nil
-            Director.currentDirector()!.responderManager.markAsDirty()
+            Director.currentDirector!.responderManager.markAsDirty()
         }
         children.removeAll()
     }
@@ -745,7 +745,7 @@ import Foundation
         }
         // set parent nil at the end (issue #476)
         child.parent = nil
-        Director.currentDirector()!.responderManager.markAsDirty()
+        Director.currentDirector!.responderManager.markAsDirty()
         children.remove(at: children.index(of: child)!)
     }
     
@@ -758,7 +758,7 @@ import Foundation
             
             //don't need to check children recursively, that's done in visit of each child
             self.isReorderChildDirty = false
-            Director.currentDirector()!.responderManager.markAsDirty()
+            Director.currentDirector!.responderManager.markAsDirty()
         }
     }
     
@@ -881,7 +881,7 @@ import Foundation
             return
         }
         self.sortAllChildren()
-        let transform = parentTransform * nodeToParentMatrix()
+        let transform = parentTransform * nodeToParentMatrix
         var drawn: Bool = false
         
         for child in children {

@@ -112,12 +112,12 @@ class Transition: Scene {
         if progress >= 1.0 {
             // Exit out scene
             outgoingScene.onExit()
-            if Director.currentDirector()!.sendCleanupToScene {
+            if Director.currentDirector!.sendCleanupToScene {
                 outgoingScene.cleanup()
             }
             self.outgoingScene = nil
             // Start incoming scene
-            Director.currentDirector()!.presentScene(incomingScene)
+            Director.currentDirector!.presentScene(incomingScene)
             incomingScene.onEnterTransitionDidFinish()
             incomingScene.paused = false
             self.incomingScene = nil
@@ -160,7 +160,7 @@ class Transition: Scene {
         self.outgoingScene.paused = outgoingScene.paused || !outgoingSceneAnimated
         // create render textures
         // get viewport size
-        let rect = director.viewportRect()
+        let rect = director.viewportRect
         var size = rect.size
         // Make sure we aren't rounding down.
         size.width = ceil(rect.size.width)

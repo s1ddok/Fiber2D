@@ -280,7 +280,7 @@ class Sprite: RenderableNode {
     
     
     func updateColor() {
-        let color4 = displayedColor.premultiplyingAlpha().glkVector4
+        let color4 = displayedColor.premultiplyingAlpha.glkVector4
         self.verts.bl.color = color4
         self.verts.br.color = color4
         self.verts.tr.color = color4
