@@ -52,7 +52,7 @@
     }
     
     override var description: String {
-        return "<CCSpriteFrame: Texture=\(textureFilename), Rect = (%.2f,%.2f,%.2f,%.2f)> rotated:\(rect.origin.x) offset=(%.2f,%.2f)"
+        return "<CCSpriteFrame: Texture=\(textureFilename), Rect = \(rect.description)> rotated:\(rotated) offset=\(trimOffset.description))"
     }
     
     func setTexture(_ texture: CCTexture) {
