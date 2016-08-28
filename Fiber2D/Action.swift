@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-struct Action {
+public struct Action {
     
 }
 
