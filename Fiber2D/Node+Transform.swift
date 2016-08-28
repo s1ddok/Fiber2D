@@ -35,9 +35,9 @@ extension Node {
             var sx: Float = 0
             var cy: Float = 1
             var sy: Float = 0
-            if rotationalSkewX != 0.0 || rotationalSkewY != 0.0 {
-                let radiansX: Float = -radians(rotationalSkewX)
-                let radiansY: Float = -radians(rotationalSkewY)
+            if rotationalSkewX != 0° || rotationalSkewY != 0° {
+                let radiansX = -rotationalSkewX.radians
+                let radiansY = -rotationalSkewY.radians
                 cx = cosf(radiansX)
                 sx = sinf(radiansX)
                 cy = cosf(radiansY)

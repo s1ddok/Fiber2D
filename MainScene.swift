@@ -18,7 +18,7 @@ class MainScene: Scene {
         sprite.scale = 6.0
         sprite.position = p2d(0.5, 0.5)
         sprite.positionType = CCPositionTypeNormalized
-        sprite.runAction(CCActionRepeatForever(action: CCActionRotateBy(duration: 3.0, angle: 60.0)))
+        sprite.runAction(CCActionRepeatForever(action: CCActionSkewBy(duration: 2.0, skewX: 36.0, skewY: 12.0)))
         addChild(sprite)
         
         self.userInteractionEnabled = true
@@ -31,7 +31,7 @@ class MainScene: Scene {
         colorNode.position = p2d(0.5, 0.5)
         colorNode.positionType = CCPositionTypeNormalized
         
-        let repeatForever = CCActionRepeatForever(action: CCActionRotateBy(duration: 3.0, angle: 60.0))
+        let repeatForever = CCActionRepeatForever(action: CCActionSkewBy(duration: 2.0, skewX: 6.0, skewY: 12.0))
         
         let rt = RenderTexture(width: 64, height: 64)
         rt.begin()
