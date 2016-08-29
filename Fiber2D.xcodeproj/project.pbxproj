@@ -25,7 +25,6 @@
 		081FBCCF1D462732005838B8 /* CCActionEase.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC761D462732005838B8 /* CCActionEase.m */; };
 		081FBCD01D462732005838B8 /* CCActionInstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC781D462732005838B8 /* CCActionInstant.m */; };
 		081FBCD11D462732005838B8 /* CCActionInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7A1D462732005838B8 /* CCActionInterval.m */; };
-		081FBCD21D462732005838B8 /* CCActionTween.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7C1D462732005838B8 /* CCActionTween.m */; };
 		081FBCD31D462732005838B8 /* CCCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7F1D462732005838B8 /* CCCache.m */; };
 		081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* CCImage+PNG.m */; };
 		081FBCD51D462732005838B8 /* CCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC841D462732005838B8 /* CCImage.m */; };
@@ -136,8 +135,6 @@
 		081FBC781D462732005838B8 /* CCActionInstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionInstant.m; sourceTree = "<group>"; };
 		081FBC791D462732005838B8 /* CCActionInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionInterval.h; sourceTree = "<group>"; };
 		081FBC7A1D462732005838B8 /* CCActionInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionInterval.m; sourceTree = "<group>"; };
-		081FBC7B1D462732005838B8 /* CCActionTween.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionTween.h; sourceTree = "<group>"; };
-		081FBC7C1D462732005838B8 /* CCActionTween.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionTween.m; sourceTree = "<group>"; };
 		081FBC7E1D462732005838B8 /* CCCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCache.h; sourceTree = "<group>"; };
 		081FBC7F1D462732005838B8 /* CCCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCache.m; sourceTree = "<group>"; };
 		081FBC801D462732005838B8 /* ccConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccConfig.h; sourceTree = "<group>"; };
@@ -334,8 +331,6 @@
 				081FBC781D462732005838B8 /* CCActionInstant.m */,
 				081FBC791D462732005838B8 /* CCActionInterval.h */,
 				081FBC7A1D462732005838B8 /* CCActionInterval.m */,
-				081FBC7B1D462732005838B8 /* CCActionTween.h */,
-				081FBC7C1D462732005838B8 /* CCActionTween.m */,
 			);
 			name = Actions;
 			path = "cocos2d-legacy/Actions";
@@ -684,7 +679,6 @@
 				081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */,
 				0812AD031D538D7600AE46E8 /* Color.swift in Sources */,
 				0812ACFC1D538D6600AE46E8 /* Vector2+simd.swift in Sources */,
-				081FBCD21D462732005838B8 /* CCActionTween.m in Sources */,
 				081FBCD51D462732005838B8 /* CCImage.m in Sources */,
 				081FBD221D46289A005838B8 /* SpriteFrame.swift in Sources */,
 				088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */,
