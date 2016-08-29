@@ -101,7 +101,7 @@ class MetalView : MTKView {
         context.flushCommandBuffer()
     }
     
-    func addFrameCompletionHandler(_ handler: ()->()) {
+    func addFrameCompletionHandler(_ handler: @escaping ()->()) {
         context.currentCommandBuffer.addCompletedHandler({(buffer: MTLCommandBuffer) -> Void in
             handler()
         })

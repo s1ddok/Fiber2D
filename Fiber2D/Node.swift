@@ -174,7 +174,7 @@ import Foundation
     /// -----------------------------------------------------------------------
     /** The rotation (angle) of the node in degrees. Rotation is relative to the parent node's rotation.
      0 is the default rotation angle. Positive values rotate node clockwise. */
-    var rotation: Angle<Float> {
+    var rotation: Angle {
         get {
             assert(rotationalSkewX == rotationalSkewY, "Node#rotation. rotationalSkewX != rotationalSkewY. Don't know which one to return")
             return rotationalSkewX
@@ -187,14 +187,14 @@ import Foundation
     /** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node clockwise.
      It only modifies the X rotation performing a horizontal rotational skew.
      @see skewX, skewY */
-    var rotationalSkewX: Angle<Float> = 0° {
+    var rotationalSkewX: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
     }
     /** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node clockwise.
      It only modifies the Y rotation performing a vertical rotational skew. */
-    var rotationalSkewY: Angle<Float> = 0° {
+    var rotationalSkewY: Angle = 0° {
         didSet {
             isTransformDirty = true
         }

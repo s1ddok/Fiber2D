@@ -17,7 +17,7 @@ class RenderableNode: Node {
     private(set) var shaderUniforms: [NSObject : AnyObject]! {
         get {
             if _shaderUniforms == nil {
-                _shaderUniforms = [CCShaderUniformMainTexture : texture ?? CCTexture.none()]
+                _shaderUniforms = [CCShaderUniformMainTexture as NSObject : texture ?? CCTexture.none()]
             }
             
             return _shaderUniforms
@@ -41,7 +41,7 @@ class RenderableNode: Node {
             if texture != oldValue {
                 renderState = nil
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
-                shaderUniforms?[CCShaderUniformMainTexture] = texture ?? CCTexture.none()
+                shaderUniforms?[CCShaderUniformMainTexture as NSObject] = texture ?? CCTexture.none()
             }
         }
     }
@@ -50,7 +50,7 @@ class RenderableNode: Node {
             if texture != oldValue {
                 renderState = nil
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
-                shaderUniforms?[CCShaderUniformSecondaryTexture] = texture ?? CCTexture.none()
+                shaderUniforms?[CCShaderUniformSecondaryTexture as NSObject] = texture ?? CCTexture.none()
             }
         }
     }
@@ -104,6 +104,6 @@ class RenderableNode: Node {
             return true
         }
         // Check that the uniforms has only one key for the main texture.
-        return uniforms!.count == 1 && uniforms![CCShaderUniformMainTexture] as! CCTexture == texture
+        return uniforms!.count == 1 && uniforms![CCShaderUniformMainTexture as NSObject] as! CCTexture == texture
     }
 }

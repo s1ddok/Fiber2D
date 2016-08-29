@@ -85,7 +85,7 @@ extension Node {
      */
     
     var actions: [AnyObject]? {
-        return scheduler?.actions(for: self)
+        return scheduler?.actions(for: self) as? [AnyObject]
     }
     /// -----------------------------------------------------------------------
     /// @name Scheduling Selectors and Blocks

@@ -43,7 +43,7 @@ func CCDirectorStack() -> NSMutableArray
     class func popCurrentDirector() {
         let stack = CCDirectorStack()
         assert(stack.count > 0, "CCDirector stack underflow.")
-        CCDirectorBindCurrent(stack.lastObject)
+        CCDirectorBindCurrent(stack.lastObject as AnyObject?)
         stack.removeLastObject()
     }
     
@@ -189,7 +189,7 @@ func CCDirectorStack() -> NSMutableArray
         }*/
     }
     
-    func addFrameCompletionHandler(_ handler: ()->()) {
+    func addFrameCompletionHandler(_ handler: @escaping ()->()) {
         self.view!.addFrameCompletionHandler(handler)
     }
     
