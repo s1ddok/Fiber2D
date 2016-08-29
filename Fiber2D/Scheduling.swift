@@ -10,18 +10,14 @@ public typealias Time = Float
 
 // Targets are things that can have update: and fixedUpdate: methods called by the scheduler.
 // Scheduled blocks (Timers) can be associated with a target to inherit their priority and paused state.
-protocol Updatable {
+protocol Updatable: class {
     // Used to break ties for scheduled blocks, updated: and fixedUpdate: methods.
     // Targets are sorted by priority so lower priorities are called first.
     // The priority value for a given object should be constant.
     var priority: Int { get }
-    func update(delta: CCTime)
+    func update(delta: Time)
     
-    func fixedUpdate(delta: CCTime)
-}
-
-protocol UpdatableRef: class, Updatable {
-    
+    func fixedUpdate(delta: Time)
 }
 
 extension Timer {
@@ -45,7 +41,7 @@ extension Timer {
 
 public class ScheduledTarget {
     
-    weak var target: UpdatableRef?
+    weak var target: Updatable?
     var timers: Timer?
     var actions = [Action]()
     var empty: Bool {
@@ -68,11 +64,11 @@ public class ScheduledTarget {
         timers?.forEach { $0.invalidate() }
     }
     
-    func addAction(action: Action) {
+    func add(action: Action) {
         actions.append(action)
     }
     
-    func removeAction(action: Action) {
+    func remove(action: Action) {
         if let idx = actions.index(of: action) {
             actions.remove(at: idx)
         }
@@ -82,7 +78,7 @@ public class ScheduledTarget {
         timers = timers?.removeRecursive(skip: timer)
     }
     
-    init(target: UpdatableRef) {
+    init(target: Updatable) {
         self.target = target
     }
 }

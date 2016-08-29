@@ -8,6 +8,8 @@
 
 typealias TimerBlock = (Timer) -> Void
 
+internal let TIMER_REPEAT_COUNT_FOREVER = Int.max
+
 /** Contains information about a scheduled selector. Returned by [Node schedule:interval:] and related methods.
  
  @note New Timer objects can only be created with the schedule methods. Timer should not be subclassed.
@@ -107,5 +109,32 @@ extension Timer {
     func apply(pauseDelay currentTime: Time) {
         invokeTimeInternal = max(invokeTimeInternal, currentTime) + pauseDelay
         pauseDelay = 0.0
+    }
+}
+
+extension Timer: Comparable {
+    @inline(__always)
+    public static func ==(lhs: Timer, rhs: Timer) -> Bool {
+        return lhs.invokeTimeInternal == rhs.invokeTimeInternal
+    }
+
+    @inline(__always)
+    public static func <(lhs: Timer, rhs: Timer) -> Bool {
+        return lhs.invokeTimeInternal < rhs.invokeTimeInternal
+    }
+    
+    @inline(__always)
+    public static func <=(lhs: Timer, rhs: Timer) -> Bool {
+        return lhs.invokeTimeInternal <= rhs.invokeTimeInternal
+    }
+    
+    @inline(__always)
+    public static func >(lhs: Timer, rhs: Timer) -> Bool {
+        return lhs.invokeTimeInternal > rhs.invokeTimeInternal
+    }
+    
+    @inline(__always)
+    public static func >=(lhs: Timer, rhs: Timer) -> Bool {
+        return lhs.invokeTimeInternal >= rhs.invokeTimeInternal
     }
 }
