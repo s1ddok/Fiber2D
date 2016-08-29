@@ -275,21 +275,19 @@ extension Scheduler {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.paused = paused
         if scheduledTarget.hasActions {
-            assert(!scheduledTarget.actions.contains(action), "Action already running on this target.")
+            //assert(!scheduledTarget.actions.contains(action), "Action already running on this target.")
         } else {
             // This is the first action that has been scheduled for this target.
             // It needs to be added to the list of targets with actions.
             actionTargets.append(scheduledTarget)
         }
         scheduledTarget.add(action: action)
-        action.startWithTarget(target: target)
+        action.start(with: target)
     }
     
     func remove(action: Action, from target: Updatable) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
-        if let idx = scheduledTarget.actions.index(of: action) {
-            scheduledTarget.actions.remove(at: idx)
-        }
+        scheduledTarget.actions.removeObject(action)
     }
     
     func removeAllActions(from target: Updatable) {

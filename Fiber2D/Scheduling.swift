@@ -69,9 +69,7 @@ public class ScheduledTarget {
     }
     
     func remove(action: Action) {
-        if let idx = actions.index(of: action) {
-            actions.remove(at: idx)
-        }
+        actions.removeObject(action)
     }
     
     func remove(timer: Timer) {
