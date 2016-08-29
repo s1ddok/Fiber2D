@@ -5,11 +5,6 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-extension Node: CCSchedulableTarget {
-    
-    
-}
-
 extension Node {
     /**
      Has the node run an action.

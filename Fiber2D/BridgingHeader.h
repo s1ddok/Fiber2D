@@ -11,6 +11,4 @@
 #import "CCMetalSupport_Private.h"
 #import "CCTexture_Private.h"
 #import "CCSpriteFrameCache_Private.h"
-#import "CCScheduler_Private.h"
 #import "CCProtocols.h"
-#import "CCScheduler.h"

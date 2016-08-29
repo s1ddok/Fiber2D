@@ -32,7 +32,6 @@
 		081FBCD61D462732005838B8 /* CCNoARC.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC871D462732005838B8 /* CCNoARC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		081FBCD91D462732005838B8 /* CCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC8E1D462732005838B8 /* CCRenderer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC911D462732005838B8 /* CCRendererBasicTypes.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		081FBCDB1D462732005838B8 /* CCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC951D462732005838B8 /* CCScheduler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		081FBCDC1D462732005838B8 /* CCShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC981D462732005838B8 /* CCShader.m */; };
 		081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC9A1D462732005838B8 /* CCSpriteFrameCache.m */; };
 		081FBCDE1D462732005838B8 /* CCTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC9D1D462732005838B8 /* CCTexture.m */; };
@@ -157,9 +156,6 @@
 		081FBC911D462732005838B8 /* CCRendererBasicTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRendererBasicTypes.m; sourceTree = "<group>"; };
 		081FBC921D462732005838B8 /* CCRendererBasicTypes_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRendererBasicTypes_Private.h; sourceTree = "<group>"; };
 		081FBC931D462732005838B8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRendererSharedTypes.h; sourceTree = "<group>"; };
-		081FBC941D462732005838B8 /* CCScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScheduler.h; sourceTree = "<group>"; };
-		081FBC951D462732005838B8 /* CCScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScheduler.m; sourceTree = "<group>"; };
-		081FBC961D462732005838B8 /* CCScheduler_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScheduler_Private.h; sourceTree = "<group>"; };
 		081FBC971D462732005838B8 /* CCShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShader.h; sourceTree = "<group>"; };
 		081FBC981D462732005838B8 /* CCShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCShader.m; sourceTree = "<group>"; };
 		081FBC991D462732005838B8 /* CCShader_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShader_Private.h; sourceTree = "<group>"; };
@@ -367,9 +363,6 @@
 				081FBC911D462732005838B8 /* CCRendererBasicTypes.m */,
 				081FBC921D462732005838B8 /* CCRendererBasicTypes_Private.h */,
 				081FBC931D462732005838B8 /* CCRendererSharedTypes.h */,
-				081FBC941D462732005838B8 /* CCScheduler.h */,
-				081FBC951D462732005838B8 /* CCScheduler.m */,
-				081FBC961D462732005838B8 /* CCScheduler_Private.h */,
 				081FBC971D462732005838B8 /* CCShader.h */,
 				081FBC981D462732005838B8 /* CCShader.m */,
 				081FBC991D462732005838B8 /* CCShader_Private.h */,
@@ -738,7 +731,6 @@
 				081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */,
 				081FBCDF1D462732005838B8 /* CCTextureCache.m in Sources */,
 				081FBCD31D462732005838B8 /* CCCache.m in Sources */,
-				081FBCDB1D462732005838B8 /* CCScheduler.m in Sources */,
 				081FBD201D46289A005838B8 /* Sprite.swift in Sources */,
 				0866526D1D732FA400BCD9CE /* Angle.swift in Sources */,
 				0812ACFB1D538D6600AE46E8 /* platform.swift in Sources */,

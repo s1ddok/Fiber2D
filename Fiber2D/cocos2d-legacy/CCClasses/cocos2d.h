@@ -84,7 +84,6 @@
 #import "uthash.h"
 #import "utlist.h"
 #import "UITouch+CC.h"
-#import "CCScheduler.h"
 
 // Platform Support:
 #import "CCNS.h"
