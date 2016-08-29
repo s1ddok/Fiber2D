@@ -67,7 +67,7 @@ class Scheduler {
     var actionsRunInFixedMode = false
     
     init() {
-        fixedUpdateTimer = scheduleBlock(block: { [unowned self](timer:Timer) in
+        fixedUpdateTimer = schedule(block: { [unowned self](timer:Timer) in
             if timer.invokeTime > 0.0 {
                 for t in self.updatableTargets {
                     t.target?.fixedUpdate(delta: timer.repeatInterval)
@@ -79,7 +79,7 @@ class Scheduler {
                 
                 self.lastFixedUpdateTime = timer.invokeTime
             }
-            }, forTarget: mock, withDelay: 0)
+            }, for: mock, withDelay: 0)
         fixedUpdateTimer.repeatCount = TIMER_REPEAT_COUNT_FOREVER
         fixedUpdateTimer.repeatInterval = Time(CCSetup.shared().fixedUpdateInterval)
     }
@@ -205,7 +205,7 @@ extension Scheduler {
         return scheduledTarget
     }
     
-    func scheduleBlock(block: TimerBlock, forTarget target: Updatable, withDelay delay: Time) -> Timer {
+    func schedule(block: TimerBlock, for target: Updatable, withDelay delay: Time) -> Timer {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         let timer = Timer(delay: delay, scheduler: self, scheduledTarget: scheduledTarget, block: block)
         self.schedule(timer: timer)
@@ -214,7 +214,7 @@ extension Scheduler {
         return timer
     }
     
-    func scheduleTarget(target: Updatable) {
+    func schedule(target: Updatable) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         // Don't schedule something more than once.
         if !scheduledTarget.enableUpdates {
@@ -225,7 +225,7 @@ extension Scheduler {
         }
     }
     
-    func unscheduleTarget(target: Updatable) {
+    func unschedule(target: Updatable) {
         if let scheduledTarget = self.scheduledTarget(for: target, insert: false) {
             // Remove the update methods if they are scheduled
             if scheduledTarget.enableUpdates {
@@ -271,7 +271,7 @@ extension Scheduler {
 
 // MARK: Scheduling Actions
 extension Scheduler {
-    func addAction(action: Action, target: Updatable, paused: Bool) {
+    func add(action: Action, target: Updatable, paused: Bool) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.paused = paused
         if scheduledTarget.hasActions {
@@ -298,7 +298,7 @@ extension Scheduler {
         actionTargets.removeObject(scheduledTarget)
     }
     
-    func removeActionByName(name: String, target: Updatable) {
+    func removeAction(by name: String, target: Updatable) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.actions = scheduledTarget.actions.filter {
             return $0.name != name

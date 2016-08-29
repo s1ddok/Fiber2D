@@ -26,7 +26,7 @@ class Scene: Node {
     
     private var _director: Director!
 
-    override var scheduler: CCScheduler {
+    override var scheduler: Scheduler {
         get {
             return _scheduler
         }
@@ -35,7 +35,7 @@ class Scene: Node {
         }
     }
     
-    private var _scheduler: CCScheduler!
+    private var _scheduler: Scheduler!
     
     /**
      Delegate that calculates the projection matrix for this scene.
@@ -68,7 +68,7 @@ class Scene: Node {
         self.anchorPoint = p2d(0.0, 0.0)
         self.contentSize = s
         self.colorRGBA = Color.black
-        self._scheduler = CCScheduler()
+        self._scheduler = Scheduler()
         //self.projectionDelegate = CCOrthoProjection(target: self)
         self._projection = Matrix4x4f(target: self)
         self.color = Color.black

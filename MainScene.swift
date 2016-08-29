@@ -18,7 +18,7 @@ class MainScene: Scene {
         sprite.scale = 6.0
         sprite.position = p2d(0.5, 0.5)
         sprite.positionType = CCPositionTypeNormalized
-        sprite.runAction(CCActionRepeatForever(action: CCActionSkewBy(duration: 2.0, skewX: 36.0, skewY: 12.0)))
+        //sprite.runAction(CCActionRepeatForever(action: CCActionSkewBy(duration: 2.0, skewX: 36.0, skewY: 12.0)))
         addChild(sprite)
         
         self.userInteractionEnabled = true
@@ -39,7 +39,7 @@ class MainScene: Scene {
         colorNode.visit()
         rt.end()
         
-        colorNode.runAction(repeatForever!)
+        //colorNode.runAction(repeatForever!)
         addChild(colorNode)
         rt.sprite.positionType = CCPositionTypeNormalized
         rt.sprite.position = p2d(0.5, 0.5)
@@ -52,5 +52,9 @@ class MainScene: Scene {
     override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
         colorNode.positionInPoints = theEvent.location(in: self)
         print(theEvent.location(in: self))
+    }
+    
+    override func update(delta: Time) {
+        print("update works!")
     }
 }

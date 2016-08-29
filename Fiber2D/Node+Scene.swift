@@ -27,7 +27,7 @@ extension Node {
     func onEnter() {
         assert(self.scene != nil, "Missing scene on node. Was it not added to the hierarchy?")
         children.forEach { $0.onEnter() }
-        scene!.scheduler.scheduleTarget(self)
+        scene!.scheduler.schedule(target: self)
         let wasRunning: Bool = self.active
         self.isInActiveScene = true
         // Add queued actions or scheduled code, if needed:

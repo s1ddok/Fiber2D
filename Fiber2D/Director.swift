@@ -54,9 +54,9 @@ func CCDirectorStack() -> NSMutableArray
     var displayStats: Bool
     var frames: Int
     var totalFrames: Int
-    var secondsPerFrame: CCTime = 0.0
-    var accumDt: CCTime = 0.0
-    var frameRate: CCTime = 0.0
+    var secondsPerFrame: Time = 0.0
+    var accumDt: Time = 0.0
+    var frameRate: Time = 0.0
     /* is the running scene paused */
     var isPaused: Bool = false
     /* Is the director running */
@@ -73,9 +73,9 @@ func CCDirectorStack() -> NSMutableArray
     /* scheduled scenes */
     var scenesStack = NSMutableArray()
     /* last time the main loop was updated */
-    var lastUpdate: CCTime = 0.0
+    var lastUpdate: Time = 0.0
     /* delta time since last tick to main loop */
-    var dt: CCTime = 0.0
+    var dt: Time = 0.0
     /* whether or not the next delta time will be zero */
     var nextDeltaTimeZero: Bool = false
     //var rendererPool: [AnyObject]
@@ -194,7 +194,7 @@ func CCDirectorStack() -> NSMutableArray
     }
     
     func calculateDeltaTime() {
-        let now: CCTime = CCAbsoluteTime()
+        let now: Time = Time(CCAbsoluteTime())
         // new delta time
         if nextDeltaTimeZero {
             self.dt = 0
@@ -487,7 +487,7 @@ func CCDirectorStack() -> NSMutableArray
             delegate!.resume!()
         }*/
         self.frameSkipInterval = oldFrameSkipInterval
-        self.lastUpdate = CCAbsoluteTime()
+        self.lastUpdate = Time(CCAbsoluteTime())
         self.willChangeValue(forKey: "isPaused")
         self.isPaused = false
         self.didChangeValue(forKey: "isPaused")

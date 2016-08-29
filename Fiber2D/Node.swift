@@ -115,7 +115,7 @@ import Foundation
  would only add minimal functionality or just data.
  */
 
-@objc class Node: Responder {
+@objc class Node: Responder, Updatable {
     
     /// -----------------------------------------------------------------------
     /// @name Storing Custom Information
@@ -957,7 +957,7 @@ import Foundation
     func cleanup() {
         // Clean up timers and actions.
         stopAllActions()
-        scene?.scheduler.unscheduleTarget(self)
+        scene?.scheduler.unschedule(target: self)
         children.forEach { $0.cleanup() }
     }
     
@@ -998,6 +998,11 @@ import Foundation
     var isInActiveScene: Bool = false
     
     // For CCScheduler target
-    internal(set) var priority:NSInteger = 0
+    var scheduler: Scheduler? {
+        return scene?.scheduler
+    }
+    internal(set) var priority: Int = 0
+    func update(delta: Time) { }
+    func fixedUpdate(delta: Time) { }
 
 }
