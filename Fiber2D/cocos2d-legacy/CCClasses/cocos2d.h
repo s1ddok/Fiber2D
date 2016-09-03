@@ -74,7 +74,6 @@
 #import "CCActionEase.h"
 #import "CCActionInstant.h"
 #import "CCActionInterval.h"
-#import "CCActionTween.h"
 
 // Misc:
 #import "CCFile.h"

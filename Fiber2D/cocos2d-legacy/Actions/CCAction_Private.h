@@ -47,30 +47,3 @@ enum {
 }
 
 @end
-
-
-// TODO what to do with CCAction follow?
-@interface CCActionFollow() {
-    
-	// Node to follow.
-	Node *_followedNode;
-
-	// Whether camera should be limited to certain area.
-	BOOL _boundarySet;
-
-	// If screen-size is bigger than the boundary - update not needed.
-	BOOL _boundaryFullyCovered;
-
-	// Fast access to the screen dimensions.
-	CGPoint _halfScreenSize;
-	CGPoint _fullScreenSize;
-
-	// World boundaries.
-	float _leftBoundary;
-	float _rightBoundary;
-	float _topBoundary;
-	float _bottomBoundary;
-}
-
-@end
-

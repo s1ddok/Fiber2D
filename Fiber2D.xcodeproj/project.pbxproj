@@ -75,7 +75,10 @@
 		0866527D1D73359800BCD9CE /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866527C1D73359800BCD9CE /* Scheduler.swift */; };
 		0866527F1D7335D800BCD9CE /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866527E1D7335D800BCD9CE /* Timer.swift */; };
 		086652811D73412600BCD9CE /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086652801D73412600BCD9CE /* Action.swift */; };
-		088509811D74CBD3003EF800 /* ActionInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509801D74CBD3003EF800 /* ActionInterval.swift */; };
+		0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509891D7B4F2F003EF800 /* Tagged.swift */; };
+		0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098C1D7B5428003EF800 /* ActionTransform.swift */; };
+		0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098E1D7B548B003EF800 /* ActionContinous.swift */; };
+		088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509901D7B55AF003EF800 /* ActionInstant.swift */; };
 		088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1A1D5AA73900E48EC9 /* functions.swift */; };
 		088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1B1D5AA73900E48EC9 /* Point.swift */; };
 		088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1C1D5AA73900E48EC9 /* Rect.swift */; };
@@ -223,7 +226,10 @@
 		0866527C1D73359800BCD9CE /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		0866527E1D7335D800BCD9CE /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		086652801D73412600BCD9CE /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		088509801D74CBD3003EF800 /* ActionInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionInterval.swift; sourceTree = "<group>"; };
+		088509891D7B4F2F003EF800 /* Tagged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tagged.swift; path = protocols/Tagged.swift; sourceTree = "<group>"; };
+		0885098C1D7B5428003EF800 /* ActionTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTransform.swift; sourceTree = "<group>"; };
+		0885098E1D7B548B003EF800 /* ActionContinous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionContinous.swift; sourceTree = "<group>"; };
+		088509901D7B55AF003EF800 /* ActionInstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionInstant.swift; sourceTree = "<group>"; };
 		088ECE1A1D5AA73900E48EC9 /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		088ECE1B1D5AA73900E48EC9 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		088ECE1C1D5AA73900E48EC9 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
@@ -459,6 +465,7 @@
 		081FBCF71D462871005838B8 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				0885098B1D7B4F62003EF800 /* Protocols */,
 				081FBD2F1D46343D005838B8 /* Layout */,
 				081FBD2E1D463435005838B8 /* Base */,
 				081FBD301D463446005838B8 /* Rendering */,
@@ -551,9 +558,19 @@
 				0866527C1D73359800BCD9CE /* Scheduler.swift */,
 				0866527E1D7335D800BCD9CE /* Timer.swift */,
 				086652801D73412600BCD9CE /* Action.swift */,
-				088509801D74CBD3003EF800 /* ActionInterval.swift */,
+				088509901D7B55AF003EF800 /* ActionInstant.swift */,
+				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
+				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
 			);
 			name = Scheduling;
+			sourceTree = "<group>";
+		};
+		0885098B1D7B4F62003EF800 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				088509891D7B4F2F003EF800 /* Tagged.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		08A8D54B1D53DA8600262C0B /* Support */ = {
@@ -669,6 +686,7 @@
 				0866527F1D7335D800BCD9CE /* Timer.swift in Sources */,
 				0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */,
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
+				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
 				081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */,
 				081FBCD11D462732005838B8 /* CCActionInterval.m in Sources */,
 				088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */,
@@ -691,16 +709,17 @@
 				081FBD1A1D46289A005838B8 /* RendarableNode.swift in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */,
+				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
 				081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */,
 				081FBCCD1D462732005838B8 /* CCAction.m in Sources */,
 				088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */,
-				088509811D74CBD3003EF800 /* ActionInterval.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
 				081FBD191D46289A005838B8 /* Node+Traverse.swift in Sources */,
+				0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */,
 				081FBCDE1D462732005838B8 /* CCTexture.m in Sources */,
 				081FBCE41D462732005838B8 /* CCDirectorIOS.m in Sources */,
 				081FBD1E1D46289A005838B8 /* ResponderManager.swift in Sources */,
@@ -709,6 +728,7 @@
 				081FBD1F1D46289A005838B8 /* Scene.swift in Sources */,
 				081FBD211D46289A005838B8 /* Sprite9Slice.swift in Sources */,
 				081FBD231D46289A005838B8 /* Transition.swift in Sources */,
+				088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */,
 				0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */,
 				0812ACFE1D538D6600AE46E8 /* Vector3+simd.swift in Sources */,
 				0866527D1D73359800BCD9CE /* Scheduler.swift in Sources */,

@@ -43,7 +43,7 @@ public class ScheduledTarget {
     
     weak var target: Updatable?
     var timers: Timer?
-    var actions = [Action]()
+    var actions = [ActionContainer]()
     var empty: Bool {
         return timers == nil && !enableUpdates
     }
@@ -64,12 +64,14 @@ public class ScheduledTarget {
         timers?.forEach { $0.invalidate() }
     }
     
-    func add(action: Action) {
+    func add(action: ActionContainer) {
         actions.append(action)
     }
     
-    func remove(action: Action) {
-        actions.removeObject(action)
+    func removeAction(by tag: Int) {
+        actions = actions.filter {
+            $0.tag != tag
+        }
     }
     
     func remove(timer: Timer) {

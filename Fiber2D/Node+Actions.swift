@@ -17,7 +17,7 @@ extension Node {
      @see CCAction
      */
     
-    func runAction(_ action: Action) -> Action {
+    func run(action: ActionContainer) {
         let scheduler = self.scheduler
         if scheduler == nil {
             let block: ()->() = {() -> Void in
@@ -28,8 +28,6 @@ extension Node {
         else {
             scheduler!.add(action: action, target: self, paused: !self.active)
         }
-        return action
-
     }
     /** Stops and removes all actions running on the node.
      @node It is not necessary to call this when removing a node. Removing a node from its parent will also stop its actions. */
@@ -37,16 +35,7 @@ extension Node {
     func stopAllActions() {
         scheduler?.removeAllActions(from: self)
     }
-    /**
-     *  Removes an action from the running action list.
-     *
-     *  @param action Action to remove.
-     *  @see CCAction
-     */
-    
-    func stopAction(_ action: Action) {
-        scheduler?.remove(action: action, from: self)
-    }
+
     /**
      *  Removes an action from the running action list given its tag. If there are multiple actions with the same tag it will
      *  only remove the first action found that has this tag.
@@ -54,8 +43,8 @@ extension Node {
      *  @param name Name of the action to remove.
      */
     
-    func stopActionByName(_ name: String) {
-        scheduler?.removeAction(by: name, target: self)
+    func stopActionByName(by tag: Int) {
+        //scheduler?.removeAction(by: name, target: self)
     }
     /**
      *  Gets an action running on the node given its tag.
@@ -66,9 +55,8 @@ extension Node {
      *  @return The first action with the given name, or nil if there's no running action with this name.
      *  @see CCAction
      */
-    
-    func getActionByName(_ name: String) -> Action? {
-        return scheduler?.getAction(by: name, target: self)
+    func getAction(by tag: Int) -> ActionContainer? {
+        return scheduler?.getAction(by: tag, target: self)
     }
     /**
      Return a list of all actions associated with this node.
@@ -76,7 +64,7 @@ extension Node {
      @since v4.0
      */
     
-    var actions: [Action]? {
+    var actions: [ActionContainer]? {
         return scheduler?.actions(for: self)
     }
     /// -----------------------------------------------------------------------

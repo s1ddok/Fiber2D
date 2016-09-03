@@ -171,15 +171,16 @@ extension Scheduler {
                 return st.hasActions
             }
             
-            st.actions = st.actions.filter {
-                let action = $0
-                action.step(dt)
+            for i in 0..<st.actions.count {
+                st.actions[i].step(dt: dt)
                 
-                if action.isDone {
-                    action.stop()
+                if st.actions[i].isDone {
+                    st.actions[i].stop()
                 }
-                
-                return !action.isDone
+            }
+            
+            st.actions = st.actions.filter {
+                return !$0.isDone
             }
             
             return st.hasActions
@@ -271,7 +272,7 @@ extension Scheduler {
 
 // MARK: Scheduling Actions
 extension Scheduler {
-    func add(action: Action, target: Updatable, paused: Bool) {
+    func add(action: ActionContainer, target: Updatable, paused: Bool) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.paused = paused
         if scheduledTarget.hasActions {
@@ -282,12 +283,7 @@ extension Scheduler {
             actionTargets.append(scheduledTarget)
         }
         scheduledTarget.add(action: action)
-        action.start(with: target)
-    }
-    
-    func remove(action: Action, from target: Updatable) {
-        let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
-        scheduledTarget.actions.removeObject(action)
+        scheduledTarget.actions[scheduledTarget.actions.count - 1].start(with: target)
     }
     
     func removeAllActions(from target: Updatable) {
@@ -296,10 +292,10 @@ extension Scheduler {
         actionTargets.removeObject(scheduledTarget)
     }
     
-    func removeAction(by name: String, target: Updatable) {
+    func removeAction(by tag: Int, target: Updatable) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.actions = scheduledTarget.actions.filter {
-            return $0.name != name
+            return $0.tag != tag
         }
 
         guard scheduledTarget.hasActions else {
@@ -309,17 +305,17 @@ extension Scheduler {
         actionTargets.removeObject(scheduledTarget)
     }
     
-    func getAction(by name: String, target: Updatable) -> Action? {
+    func getAction(by tag: Int, target: Updatable) -> ActionContainer? {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
-        for action: Action in scheduledTarget.actions {
-            if (action.name == name) {
+        for action: ActionContainer in scheduledTarget.actions {
+            if (action.tag == tag) {
                 return action
             }
         }
         return nil
     }
     
-    func actions(for target: Updatable) -> [Action] {
+    func actions(for target: Updatable) -> [ActionContainer] {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         return scheduledTarget.actions
     }

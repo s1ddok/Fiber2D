@@ -18,7 +18,9 @@ class MainScene: Scene {
         sprite.scale = 6.0
         sprite.position = p2d(0.5, 0.5)
         sprite.positionType = CCPositionTypeNormalized
-        sprite.runAction(ActionSkewTo(duration: 15.0, skewX: 45.0, skewY: 45.0))
+        //sprite.runAction(ActionSkewTo(duration: 15.0, skewX: 45.0, skewY: 45.0))
+        let action = ActionSkewTo(skewX: 45.0, skewY: 45.0).continously(duration: 15.0)
+        sprite.run(action: action)
         addChild(sprite)
         
         self.userInteractionEnabled = true
