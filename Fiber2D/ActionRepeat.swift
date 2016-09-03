@@ -56,7 +56,7 @@ public struct ActionRepeatContainer: ActionContainer {
     public var tag: Int = 0
     weak var target: AnyObject? = nil
     public var isDone: Bool {
-        return innerContainer.isDone && (repeatCount == .Forever || remainingRepeats != 0)
+        return repeatCount != .Forever && remainingRepeats == 0
     }
     
     public let repeatCount: RepeatCount
