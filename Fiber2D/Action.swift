@@ -73,7 +73,7 @@ public protocol ActionModel {
     mutating func update(state: Float)
 }
 
-protocol ActionContainer: ActionModel, Tagged {
+protocol ActionContainer: Tagged {
     /// -----------------------------------------------------------------------
     /// @name Identifying an Action
     /// -----------------------------------------------------------------------
@@ -100,6 +100,21 @@ protocol ActionContainer: ActionModel, Tagged {
      *  @param dt Ellapsed interval since last step.
      */
     mutating func step(dt: Time)
+    
+    /**
+     *  Overridden by subclasses to set up an action before it runs.
+     *
+     *  @param target Target the action will run on.
+     */
+    mutating func start(with target: AnyObject?)
+    
+    /**
+     *  Called after the action has finished.
+     *  Note:
+     *  You should never call this method directly.
+     *  In stead use: target.stopAction(:)
+     */
+    mutating func stop()
 }
 
 // Default implementation
@@ -107,6 +122,10 @@ extension ActionModel {
     mutating func start(with target: AnyObject?) {}
     mutating public func stop() {}
     mutating func update(state: Float) {}
+}
+extension ActionContainer {
+    mutating func start(with target: AnyObject?) {}
+    mutating public func stop() {}
 }
 
 // MARK: - ActionRepeatForever
