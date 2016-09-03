@@ -70,7 +70,7 @@ public struct ActionRepeatContainer: ActionContainer {
 }
 
 public extension ActionContainer {
-    public func repeated(_ count: RepeatCount) -> ActionRepeatContainer {
+    public func repeate(_ count: RepeatCount) -> ActionRepeatContainer {
         return ActionRepeatContainer(action: self, repeatCount: count)
     }
 }
