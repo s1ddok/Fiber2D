@@ -7,17 +7,13 @@
 //
 
 public struct ActionInstantContainer: ActionContainer {
-    @inline(__always)
-    public mutating func update(state: Float) {
-        action.update(state: state)
-    }
     
     public mutating  func start(with target: AnyObject?) {
         action.start(with: target)
     }
     
     mutating func step(dt: Time) {
-        self.update(state: 1.0)
+        action.update(state: 1.0)
     }
     
     public var tag: Int = 0
