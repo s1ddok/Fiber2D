@@ -8,17 +8,17 @@
 
 public struct ActionInstantContainer: ActionContainer {
     
-    public mutating  func start(with target: AnyObject?) {
+    mutating public func start(with target: AnyObject?) {
         action.start(with: target)
     }
     
-    mutating func step(dt: Time) {
+    mutating public func step(dt: Time) {
         action.update(state: 1.0)
     }
     
     public var tag: Int = 0
     weak var target: AnyObject? = nil
-    var isDone: Bool {
+    public var isDone: Bool {
         return true
     }
         

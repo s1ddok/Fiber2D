@@ -6,6 +6,6 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-protocol Tagged {
+public protocol Tagged {
     var tag: Int { get set }
 }

@@ -73,7 +73,7 @@ public protocol ActionModel {
     mutating func update(state: Float)
 }
 
-protocol ActionContainer: Tagged {
+public protocol ActionContainer: Tagged {
     /// -----------------------------------------------------------------------
     /// @name Identifying an Action
     /// -----------------------------------------------------------------------

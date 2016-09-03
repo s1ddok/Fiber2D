@@ -30,7 +30,7 @@ public struct ActionRepeatContainer: ActionContainer {
         innerContainer.start(with: target)
     }
     
-    mutating func step(dt: Time) {
+    mutating public func step(dt: Time) {
         innerContainer.step(dt: dt)
         
         if innerContainer.isDone {
@@ -55,7 +55,7 @@ public struct ActionRepeatContainer: ActionContainer {
     
     public var tag: Int = 0
     weak var target: AnyObject? = nil
-    var isDone: Bool {
+    public var isDone: Bool {
         return innerContainer.isDone && (repeatCount == .Forever || remainingRepeats != 0)
     }
     
@@ -66,5 +66,11 @@ public struct ActionRepeatContainer: ActionContainer {
     init(action: ActionContainer, repeatCount: RepeatCount) {
         self.innerContainer = action
         self.repeatCount = repeatCount
+    }
+}
+
+public extension ActionContainer {
+    public func repeated(_ count: RepeatCount) -> ActionRepeatContainer {
+        return ActionRepeatContainer(action: self, repeatCount: count)
     }
 }

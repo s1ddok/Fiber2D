@@ -21,7 +21,7 @@ public struct ActionContinousContainer: ActionContainer, Continous {
         action.stop()
     }
     
-    internal mutating func step(dt: Time) {
+    public mutating func step(dt: Time) {
         elapsed += dt
         
         self.update(state: max(0, // needed for rewind. elapsed could be negative
