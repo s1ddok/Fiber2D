@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public struct ActionContinousContainer: ActionContainer {
+public struct ActionContinousContainer: ActionContainer, Continous {
     
     public mutating func update(state: Float) {
         action.update(state: state)
@@ -33,7 +33,7 @@ public struct ActionContinousContainer: ActionContainer {
     weak var target: AnyObject? = nil
     public var tag: Int = 0
     private(set) public var duration: Time = 0.0
-    private(set) public var elapsed: Time = 0.0
+    private(set) public var elapsed:  Time = 0.0
 
     public var isDone: Bool {
         return elapsed > duration

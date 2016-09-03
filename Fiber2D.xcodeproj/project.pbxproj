@@ -79,6 +79,7 @@
 		0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098C1D7B5428003EF800 /* ActionTransform.swift */; };
 		0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098E1D7B548B003EF800 /* ActionContinous.swift */; };
 		088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509901D7B55AF003EF800 /* ActionInstant.swift */; };
+		088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509921D7B7AD8003EF800 /* ActionRepeat.swift */; };
 		088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1A1D5AA73900E48EC9 /* functions.swift */; };
 		088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1B1D5AA73900E48EC9 /* Point.swift */; };
 		088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1C1D5AA73900E48EC9 /* Rect.swift */; };
@@ -230,6 +231,7 @@
 		0885098C1D7B5428003EF800 /* ActionTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTransform.swift; sourceTree = "<group>"; };
 		0885098E1D7B548B003EF800 /* ActionContinous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionContinous.swift; sourceTree = "<group>"; };
 		088509901D7B55AF003EF800 /* ActionInstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionInstant.swift; sourceTree = "<group>"; };
+		088509921D7B7AD8003EF800 /* ActionRepeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRepeat.swift; sourceTree = "<group>"; };
 		088ECE1A1D5AA73900E48EC9 /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		088ECE1B1D5AA73900E48EC9 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		088ECE1C1D5AA73900E48EC9 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				086652801D73412600BCD9CE /* Action.swift */,
 				088509901D7B55AF003EF800 /* ActionInstant.swift */,
 				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
+				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
 				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
 			);
 			name = Scheduling;
@@ -702,6 +705,7 @@
 				088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */,
 				0812ACFF1D538D6600AE46E8 /* Vector3.swift in Sources */,
 				081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */,
+				088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */,
 				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,
 				088ECE281D5C959600E48EC9 /* NSEvent+Fiber2d.swift in Sources */,

@@ -38,12 +38,12 @@ public protocol Reversable {
 public protocol Continous {
     /** @name Duration */
     /** Duration of the action in seconds. */
-    var duration: Time { get set }
+    var duration: Time { get }
     
     /** @name Elapsed
      *  How many seconds had elapsed since the actions started to run.
      */
-    var elapsed: Time { get set }
+    var elapsed: Time { get }
 }
 
 public protocol ActionModel {
