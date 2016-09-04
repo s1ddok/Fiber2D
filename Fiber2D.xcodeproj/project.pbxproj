@@ -82,6 +82,7 @@
 		088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509921D7B7AD8003EF800 /* ActionRepeat.swift */; };
 		088509951D7B876D003EF800 /* ActionEase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509941D7B876D003EF800 /* ActionEase.swift */; };
 		088509971D7C5F76003EF800 /* easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509961D7C5F76003EF800 /* easing.swift */; };
+		088509991D7C6A5E003EF800 /* ActionSequenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509981D7C6A5E003EF800 /* ActionSequenceContainer.swift */; };
 		088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1A1D5AA73900E48EC9 /* functions.swift */; };
 		088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1B1D5AA73900E48EC9 /* Point.swift */; };
 		088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1C1D5AA73900E48EC9 /* Rect.swift */; };
@@ -236,6 +237,7 @@
 		088509921D7B7AD8003EF800 /* ActionRepeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRepeat.swift; sourceTree = "<group>"; };
 		088509941D7B876D003EF800 /* ActionEase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionEase.swift; sourceTree = "<group>"; };
 		088509961D7C5F76003EF800 /* easing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = easing.swift; sourceTree = "<group>"; };
+		088509981D7C6A5E003EF800 /* ActionSequenceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSequenceContainer.swift; sourceTree = "<group>"; };
 		088ECE1A1D5AA73900E48EC9 /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		088ECE1B1D5AA73900E48EC9 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		088ECE1C1D5AA73900E48EC9 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
 				088509941D7B876D003EF800 /* ActionEase.swift */,
 				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
+				088509981D7C6A5E003EF800 /* ActionSequenceContainer.swift */,
 			);
 			name = Scheduling;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */,
 				0812ACFF1D538D6600AE46E8 /* Vector3.swift in Sources */,
 				081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */,
+				088509991D7C6A5E003EF800 /* ActionSequenceContainer.swift in Sources */,
 				088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */,
 				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,

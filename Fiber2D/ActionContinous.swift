@@ -15,6 +15,7 @@ public struct ActionContinousContainer: ActionContainer, Continous {
     
     public mutating  func start(with target: AnyObject?) {
         elapsed = 0
+        self.target = target
         action.start(with: target)
     }
     
