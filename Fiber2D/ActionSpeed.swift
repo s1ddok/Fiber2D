@@ -50,3 +50,9 @@ public struct ActionSpeedContainer: ActionContainer, Continous {
         self.speed = speed
     }
 }
+
+extension ActionContainer {
+    public func speed(_ s: Float) -> ActionSpeedContainer {
+        return ActionSpeedContainer(action: self, speed: s)
+    }
+}

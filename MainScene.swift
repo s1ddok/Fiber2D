@@ -19,11 +19,38 @@ class MainScene: Scene {
         sprite.position = p2d(0.5, 0.5)
         sprite.positionType = CCPositionTypeNormalized
         //sprite.runAction(ActionSkewTo(duration: 15.0, skewX: 45.0, skewY: 45.0))
-        let action = ActionSkewTo(skewX: 45.0, skewY: 45.0).continously(duration: 15.0)
+        let action = ActionSkewTo(skewX: 15.0, skewY: 45.0).continously(duration: 15.0)
         sprite.run(action: action)
         addChild(sprite)
         
+        var startPosition = p2d(0.1, 0.0)
+        var colorNodes = [ColorNode]()
+        for _ in 0..<13 {
+            colorNode = ColorNode()
+            colorNode.contentSize = Size(width: 56.0, height: 56.0)
+            colorNode.anchorPoint = p2d(0.5, 0.5)
+            startPosition = startPosition + p2d(0.0, 0.1)
+            colorNode.position = startPosition
+            colorNode.positionType = CCPositionTypeNormalized
+            colorNodes.append(colorNode)
+            self.addChild(colorNode)
+        }
+        
+        let rotate = ActionRotateTo(angle: 45°).continously(duration: 2.0)
+        let skew   = ActionSkewTo(skewX: 30, skewY: 30).continously(duration: 1.0)
+        let rotate2 = ActionRotateTo(angle: 90°).continously(duration: 2.0)
+        let skew2   = ActionSkewTo(skewX: 15, skewY: 10).instantly
+        
+        colorNodes[0].run(action: rotate)
+        colorNodes[1].run(action: rotate.then(skew))
+        colorNodes[2].run(action: rotate.then(skew).speed(0.50))
+        colorNodes[3].run(action: rotate.then(skew).speed(0.50).ease(EaseSine.in))
+        colorNodes[4].run(action: rotate.then(skew2).then(rotate2))
+        colorNodes[5].run(action: rotate.and(skew))
+    
         self.userInteractionEnabled = true
+        
+        
     }
     
     override func onEnter() {
