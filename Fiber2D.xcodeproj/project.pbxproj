@@ -570,15 +570,7 @@
 				086652711D7333B500BCD9CE /* Scheduling.swift */,
 				0866527C1D73359800BCD9CE /* Scheduler.swift */,
 				0866527E1D7335D800BCD9CE /* Timer.swift */,
-				086652801D73412600BCD9CE /* Action.swift */,
-				088509901D7B55AF003EF800 /* ActionInstant.swift */,
-				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
-				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
-				088509941D7B876D003EF800 /* ActionEase.swift */,
-				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
-				088509981D7C6A5E003EF800 /* ActionSequence.swift */,
-				0854AB361D7C91A90037AB56 /* ActionSpeed.swift */,
-				0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */,
+				088509A01D7CC91F003EF800 /* Actions */,
 			);
 			name = Scheduling;
 			sourceTree = "<group>";
@@ -589,6 +581,22 @@
 				088509891D7B4F2F003EF800 /* Tagged.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		088509A01D7CC91F003EF800 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				086652801D73412600BCD9CE /* Action.swift */,
+				088509901D7B55AF003EF800 /* ActionInstant.swift */,
+				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
+				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
+				088509941D7B876D003EF800 /* ActionEase.swift */,
+				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
+				088509981D7C6A5E003EF800 /* ActionSequence.swift */,
+				0854AB361D7C91A90037AB56 /* ActionSpeed.swift */,
+				0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */,
+			);
+			name = Actions;
 			sourceTree = "<group>";
 		};
 		08A8D54B1D53DA8600262C0B /* Support */ = {

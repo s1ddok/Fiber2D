@@ -42,12 +42,7 @@ class Timer {
     // purposefully undocumented
     /* Track an object along with the timer. [Node schedule:interval:] methods use this to store the selector name. */
     var userData: AnyObject!
-    // purposefully undocumented: same as setting repeatCount and repeatInterval
-    // Set the timer to repeat once with the given interval.
-    // Can be used from a timer block to make the timer run again.
-    
-    func repeatOnceWithInterval(interval: Time) {
-    }
+
     /** @name Pausing and Stopping Timer */
     /** Whether the timer is paused. */
     var paused = false {
@@ -88,6 +83,8 @@ class Timer {
         self.scheduledTarget = scheduledTarget
         self.block = block
         self.deltaTime = delay
+        self.invokeTimeInternal = scheduler.currentTime + delay
+        self.repeatInterval = delay
     }
 
 }
@@ -101,6 +98,9 @@ extension Timer {
         repeatCount = 0
     }
     
+    // purposefully undocumented: same as setting repeatCount and repeatInterval
+    // Set the timer to repeat once with the given interval.
+    // Can be used from a timer block to make the timer run again.
     func repeatOnce(interval: Time) {
         repeatCount = 1
         repeatInterval = interval

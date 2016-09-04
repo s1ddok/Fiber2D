@@ -97,12 +97,15 @@ extension Scheduler {
         
         heap.sort()
         
-        for timer in heap {
+        while heap.count > 0 {
+            let timer = heap.first!
+            
             let invokeTime = timer.invokeTimeInternal
             
             if invokeTime > targetTime {
                 break;
             } else {
+                heap.removeFirst()
                 timer.scheduled = false
             }
             
@@ -143,6 +146,7 @@ extension Scheduler {
                 }
             }
         }
+        currentTime = targetTime
     }
     
     internal func update(_ dt: Time) {

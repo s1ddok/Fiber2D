@@ -49,8 +49,11 @@ class MainScene: Scene {
         colorNodes[5].run(action: rotate.and(skew))
         colorNodes[6].run(action: rotate.then(skew.and(rotate2)))
         self.userInteractionEnabled = true
-        
-        
+        print(Date())
+        scheduleBlock({ (t:Timer) in
+            print(Date())
+            print(colorNodes[8].rotation)
+            }, delay: 10.0)
     }
     
     override func onEnter() {
