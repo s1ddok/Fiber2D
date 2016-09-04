@@ -66,7 +66,7 @@ class RenderTexture: RenderableNode {
             texture = self.texture
         }
         let renderer: CCRenderer = Director.currentDirector!.rendererFromPool()
-        var proj = projection.glkMatrix4
+        var proj = _projection.glkMatrix4
         renderer.prepare(withProjection: &proj, framebuffer: framebuffer)
         self.previousRenderer = CCRenderer.current()
         CCRenderer.bindRenderer(renderer)
@@ -139,20 +139,17 @@ class RenderTexture: RenderableNode {
     // Reference to the previous render to be restored by end.
     var previousRenderer: CCRenderer!
     
-    private func FlipY(_ matrix: GLKMatrix4) -> GLKMatrix4 {
-        return GLKMatrix4Multiply(GLKMatrix4MakeScale(1.0, -1.0, 1.0), matrix);
-    }
     // Raw projection matrix used for rendering.
     // For metal will be flipped on the y-axis compared to the .projection property.
-    var projection: Matrix4x4f /*{
+    var projection: Matrix4x4f {
         get {
-            return FlipY(_projection)
+            return Matrix4x4f.scale(sx: 1.0, sy: -1.0, sz: 1.0) * _projection
         }
         set {
-            _projection = FlipY(newValue)
+            _projection = Matrix4x4f.scale(sx: 1.0, sy: -1.0, sz: 1.0) * newValue
         }
     }
-    private var _projection */ = Matrix4x4f.identity
+    private var _projection  = Matrix4x4f.identity
 
     var framebuffer: CCFrameBufferObject?
     
@@ -226,7 +223,7 @@ class RenderTexture: RenderableNode {
             //! make sure all children are drawn
             self.sortAllChildren()
             for child: Node in children {
-                child.visit(rtRenderer, parentTransform: projection)
+                child.visit(rtRenderer, parentTransform: _projection)
             }
         
             self.end()
