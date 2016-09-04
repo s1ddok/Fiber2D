@@ -25,6 +25,7 @@ public struct ActionRepeatForeverContainer: ActionContainer {
     public mutating func update(state: Float) { }
     
     public mutating func start(with target: AnyObject?) {
+        self.target = target
         innerContainer.start(with: target)
     }
     
@@ -32,14 +33,17 @@ public struct ActionRepeatForeverContainer: ActionContainer {
         innerContainer.step(dt: dt)
         
         if innerContainer.isDone {
-            innerContainer.start(with: target)
-            
             if let c = innerContainer as? Continous {
                 let diff = c.elapsed - c.duration
-                // to prevent jerk. issue #390, 1247
-                innerContainer.step(dt: 0.0)
-                innerContainer.step(dt: diff)
+                
+                defer {
+                    // to prevent jerk. issue #390, 1247
+                    innerContainer.step(dt: 0.0)
+                    innerContainer.step(dt: diff)
+                }
             }
+            
+            innerContainer.start(with: target)
         }
     }
     
@@ -65,6 +69,8 @@ public struct ActionRepeatContainer: ActionContainer {
     }
     
     public mutating  func start(with target: AnyObject?) {
+        self.target = target
+        self.remainingRepeats = repeatCount
         innerContainer.start(with: target)
     }
     
@@ -78,14 +84,16 @@ public struct ActionRepeatContainer: ActionContainer {
                 return
             }
             
-            innerContainer.start(with: target)
-            
             if let c = innerContainer as? Continous {
                 let diff = c.elapsed - c.duration
-                // to prevent jerk. issue #390, 1247
-                innerContainer.step(dt: 0.0)
-                innerContainer.step(dt: diff)
+                defer {
+                    // to prevent jerk. issue #390, 1247
+                    innerContainer.step(dt: 0.0)
+                    innerContainer.step(dt: diff)
+                }
             }
+            
+            innerContainer.start(with: target)
         }
     }
     

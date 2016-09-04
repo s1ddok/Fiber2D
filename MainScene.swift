@@ -41,6 +41,8 @@ class MainScene: Scene {
         let rotate2 = ActionRotateTo(angle: 0°).continously(duration: 2.0)
         let skew2   = ActionSkewTo(skewX: 15, skewY: 10).instantly
         
+        let rotateBy = ActionRotateBy(angle: 15°).continously(duration: 1.0)
+        
         colorNodes[0].run(action: rotate)
         colorNodes[1].run(action: rotate.then(skew))
         colorNodes[2].run(action: rotate.then(skew).speed(0.50))
@@ -48,6 +50,8 @@ class MainScene: Scene {
         colorNodes[4].run(action: rotate.then(skew2).then(rotate2))
         colorNodes[5].run(action: rotate.and(skew))
         colorNodes[6].run(action: rotate.then(skew.and(rotate2)))
+        colorNodes[7].run(action: rotateBy.repeat(.Forever))
+        colorNodes[8].run(action: rotateBy.repeat(.Times(6)))
         self.userInteractionEnabled = true
         print(Date())
         scheduleBlock({ (t:Timer) in

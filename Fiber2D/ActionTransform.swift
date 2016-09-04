@@ -45,7 +45,6 @@ struct ActionRotateTo: ActionModel {
         // Simple Rotation
         if simple {
             self.startAngleX = target.rotation
-
             self.startAngleY = target.rotation
             self.diffAngleX = dstAngleX - startAngleX
             self.diffAngleY = dstAngleY - startAngleY
@@ -60,11 +59,11 @@ struct ActionRotateTo: ActionModel {
             self.startAngleX = startAngleX % -Angle.pi2
         }
         self.diffAngleX = dstAngleX - startAngleX
-        if diffAngleX > 180° {
-            self.diffAngleX -= 360°
+        if diffAngleX > Angle.pi {
+            self.diffAngleX -= Angle.pi2
         }
-        if diffAngleX < -180° {
-            self.diffAngleX += 360°
+        if diffAngleX < -Angle.pi {
+            self.diffAngleX += Angle.pi2
         }
         //Calculate Y: It's duplicated from calculating X since the rotation wrap should be the same
         self.startAngleY = target.rotationalSkewY
@@ -75,11 +74,11 @@ struct ActionRotateTo: ActionModel {
             self.startAngleY = startAngleY % -Angle.pi2
         }
         self.diffAngleY = dstAngleY - startAngleY
-        if diffAngleY > 180° {
-            self.diffAngleY -= 360°
+        if diffAngleY > Angle.pi {
+            self.diffAngleY -= Angle.pi2
         }
-        if diffAngleY < -180° {
-            self.diffAngleY += 360°
+        if diffAngleY < -Angle.pi {
+            self.diffAngleY += Angle.pi2
         }
     }
 
@@ -97,6 +96,57 @@ struct ActionRotateTo: ActionModel {
         }
     }
 }
+
+/**
+ This action rotates the target clockwise by the number of degrees specified.
+ 
+ @warning Rotate actions shouldn't be used to rotate nodes with a dynamic PhysicsBody unless the body has allowsRotation set to NO.
+ Otherwise both the physics body and the action will alter the node's rotation property, overriding each other's changes.
+ This leads to unpredictable behavior.
+ */
+struct ActionRotateBy: ActionModel {
+    private var startAngleX : Angle!
+    private var startAngleY : Angle!
+    private let rotateX: Bool
+    private let rotateY: Bool
+    private var target: Node!
+    
+    private let diffAngleY: Angle
+    private let diffAngleX: Angle
+    
+    init(angle: Angle) {
+        self.init(angleX: angle, angleY: angle)
+    }
+    
+    init(angleX aX: Angle? = nil, angleY aY: Angle? = nil) {
+        self.diffAngleX = aX ?? Angle.zero
+        self.diffAngleY = aY ?? Angle.zero
+        rotateX = aX != nil
+        rotateY = aY != nil
+    }
+    
+    mutating func start(with target: AnyObject?) {
+        let target = target as! Node
+        self.target = target
+        self.startAngleX = target.rotationalSkewX
+        self.startAngleY = target.rotationalSkewY
+    
+    }
+    mutating func update(state: Float) {
+        // added to support overriding setRotation only
+        if startAngleX == startAngleY && diffAngleX == diffAngleY {
+            target.rotation = startAngleX + diffAngleX * state
+        } else {
+            if rotateX {
+                target.rotationalSkewX = startAngleX + diffAngleX * state
+            }
+            if rotateY {
+                target.rotationalSkewY = startAngleY + diffAngleY * state
+            }
+        }
+    }
+}
+
 /**
  *  This action skews the target to the specified angles. Skewing changes the rectangular shape of the node to that of a parallelogram.
  */
