@@ -71,6 +71,7 @@
 		081FBD261D4628F8005838B8 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD251D4628F8005838B8 /* MainScene.swift */; };
 		081FBD2D1D463207005838B8 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 081FBD2C1D463207005838B8 /* Resources */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
+		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
 		0866526D1D732FA400BCD9CE /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866526C1D732FA400BCD9CE /* Angle.swift */; };
 		086652721D7333B500BCD9CE /* Scheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086652711D7333B500BCD9CE /* Scheduling.swift */; };
 		0866527D1D73359800BCD9CE /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866527C1D73359800BCD9CE /* Scheduler.swift */; };
@@ -227,6 +228,7 @@
 		081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCRendererSharedTypes.h; sourceTree = "<group>"; };
 		081FBD2C1D463207005838B8 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
+		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
 		0866526C1D732FA400BCD9CE /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
 		086652711D7333B500BCD9CE /* Scheduling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduling.swift; sourceTree = "<group>"; };
 		0866527C1D73359800BCD9CE /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
 				088509981D7C6A5E003EF800 /* ActionSequence.swift */,
 				0854AB361D7C91A90037AB56 /* ActionSpeed.swift */,
+				0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */,
 			);
 			name = Scheduling;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */,
 				081FBCDF1D462732005838B8 /* CCTextureCache.m in Sources */,
 				081FBCD31D462732005838B8 /* CCCache.m in Sources */,
+				0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */,
 				081FBD201D46289A005838B8 /* Sprite.swift in Sources */,
 				0866526D1D732FA400BCD9CE /* Angle.swift in Sources */,
 				0812ACFB1D538D6600AE46E8 /* platform.swift in Sources */,
