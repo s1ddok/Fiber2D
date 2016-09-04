@@ -38,7 +38,7 @@ class MainScene: Scene {
         
         let rotate = ActionRotateTo(angle: 45°).continously(duration: 2.0)
         let skew   = ActionSkewTo(skewX: 30, skewY: 30).continously(duration: 1.0)
-        let rotate2 = ActionRotateTo(angle: 90°).continously(duration: 2.0)
+        let rotate2 = ActionRotateTo(angle: 0°).continously(duration: 2.0)
         let skew2   = ActionSkewTo(skewX: 15, skewY: 10).instantly
         
         colorNodes[0].run(action: rotate)
@@ -47,7 +47,7 @@ class MainScene: Scene {
         colorNodes[3].run(action: rotate.then(skew).speed(0.50).ease(EaseSine.in))
         colorNodes[4].run(action: rotate.then(skew2).then(rotate2))
         colorNodes[5].run(action: rotate.and(skew))
-    
+        colorNodes[6].run(action: rotate.then(skew.and(rotate2)))
         self.userInteractionEnabled = true
         
         
