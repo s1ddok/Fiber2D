@@ -21,12 +21,10 @@ extension RepeatCount: Equatable {
     }
 }
 
-
-public struct ActionRepeatContainer: ActionContainer {
-    public mutating  func start(with target: AnyObject?) {
-        if case .Times(let remains) = repeatCount {
-            remainingRepeats = remains
-        }
+public struct ActionRepeatForeverContainer: ActionContainer {
+    public mutating func update(state: Float) { }
+    
+    public mutating func start(with target: AnyObject?) {
         innerContainer.start(with: target)
     }
     
@@ -34,11 +32,49 @@ public struct ActionRepeatContainer: ActionContainer {
         innerContainer.step(dt: dt)
         
         if innerContainer.isDone {
-            if repeatCount != .Forever {
-                remainingRepeats -= 1
-            }
+            innerContainer.start(with: target)
             
-            guard repeatCount == .Forever || remainingRepeats > 0 else {
+            if let c = innerContainer as? Continous {
+                let diff = c.elapsed - c.duration
+                // to prevent jerk. issue #390, 1247
+                innerContainer.step(dt: 0.0)
+                innerContainer.step(dt: diff)
+            }
+        }
+    }
+    
+    public var tag: Int = 0
+    weak var target: AnyObject? = nil
+    public var isDone: Bool {
+        return false
+    }
+    
+    private(set) var innerContainer: ActionContainer
+    init(action: ActionContainer) {
+        self.innerContainer = action
+        
+        if !(action is FiniteTime) {
+            assertionFailure("ERROR: You can't repeat infinite action")
+        }
+    }
+}
+
+public struct ActionRepeatContainer: ActionContainer {
+    public mutating func update(state: Float) {
+        innerContainer.update(state: state * Float(repeatCount))
+    }
+    
+    public mutating  func start(with target: AnyObject?) {
+        innerContainer.start(with: target)
+    }
+    
+    mutating public func step(dt: Time) {
+        innerContainer.step(dt: dt)
+        
+        if innerContainer.isDone {
+            remainingRepeats -= 1
+            
+            guard remainingRepeats > 0 else {
                 return
             }
             
@@ -56,21 +92,36 @@ public struct ActionRepeatContainer: ActionContainer {
     public var tag: Int = 0
     weak var target: AnyObject? = nil
     public var isDone: Bool {
-        return repeatCount != .Forever && remainingRepeats == 0
+        return remainingRepeats == 0
     }
     
-    public let repeatCount: RepeatCount
+    public let repeatCount: UInt
     private var remainingRepeats: UInt = 0
     
     private(set) var innerContainer: ActionContainer
-    init(action: ActionContainer, repeatCount: RepeatCount) {
+    init(action: ActionContainer, repeatCount: UInt) {
         self.innerContainer = action
         self.repeatCount = repeatCount
+    
+        if !(action is FiniteTime) {
+            assertionFailure("ERROR: You can't repeat infinite action")
+        }
+    }
+}
+
+extension ActionRepeatContainer: FiniteTime {
+    public var duration: Time {
+        let mp = Float(repeatCount)
+        
+        return (innerContainer as! FiniteTime).duration * mp
     }
 }
 
 public extension ActionContainer {
-    public func `repeat`(_ count: RepeatCount) -> ActionRepeatContainer {
-        return ActionRepeatContainer(action: self, repeatCount: count)
+    public func `repeat`(_ count: RepeatCount) -> ActionContainer {
+        switch count {
+        case .Forever: return ActionRepeatForeverContainer(action: self)
+        case .Times(let a): return ActionRepeatContainer(action: self, repeatCount: a)
+        }
     }
 }

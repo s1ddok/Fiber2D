@@ -80,6 +80,8 @@
 		0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098E1D7B548B003EF800 /* ActionContinous.swift */; };
 		088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509901D7B55AF003EF800 /* ActionInstant.swift */; };
 		088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509921D7B7AD8003EF800 /* ActionRepeat.swift */; };
+		088509951D7B876D003EF800 /* ActionEase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509941D7B876D003EF800 /* ActionEase.swift */; };
+		088509971D7C5F76003EF800 /* easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509961D7C5F76003EF800 /* easing.swift */; };
 		088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1A1D5AA73900E48EC9 /* functions.swift */; };
 		088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1B1D5AA73900E48EC9 /* Point.swift */; };
 		088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1C1D5AA73900E48EC9 /* Rect.swift */; };
@@ -232,6 +234,8 @@
 		0885098E1D7B548B003EF800 /* ActionContinous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionContinous.swift; sourceTree = "<group>"; };
 		088509901D7B55AF003EF800 /* ActionInstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionInstant.swift; sourceTree = "<group>"; };
 		088509921D7B7AD8003EF800 /* ActionRepeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRepeat.swift; sourceTree = "<group>"; };
+		088509941D7B876D003EF800 /* ActionEase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionEase.swift; sourceTree = "<group>"; };
+		088509961D7C5F76003EF800 /* easing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = easing.swift; sourceTree = "<group>"; };
 		088ECE1A1D5AA73900E48EC9 /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		088ECE1B1D5AA73900E48EC9 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		088ECE1C1D5AA73900E48EC9 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
@@ -266,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				0866526C1D732FA400BCD9CE /* Angle.swift */,
+				088509961D7C5F76003EF800 /* easing.swift */,
 				088ECE1A1D5AA73900E48EC9 /* functions.swift */,
 				088ECE1B1D5AA73900E48EC9 /* Point.swift */,
 				088ECE1C1D5AA73900E48EC9 /* Rect.swift */,
@@ -563,6 +568,7 @@
 				088509901D7B55AF003EF800 /* ActionInstant.swift */,
 				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
 				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
+				088509941D7B876D003EF800 /* ActionEase.swift */,
 				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
 			);
 			name = Scheduling;
@@ -694,6 +700,7 @@
 				081FBCD11D462732005838B8 /* CCActionInterval.m in Sources */,
 				088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */,
 				081FBCD91D462732005838B8 /* CCRenderer.m in Sources */,
+				088509971D7C5F76003EF800 /* easing.swift in Sources */,
 				081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */,
 				081FBCE31D462732005838B8 /* CCSetup.m in Sources */,
 				081FBC241D4625A6005838B8 /* AppDelegate.swift in Sources */,
@@ -761,6 +768,7 @@
 				0812AD001D538D6600AE46E8 /* Vector4+simd.swift in Sources */,
 				0812ACFD1D538D6600AE46E8 /* Vector2.swift in Sources */,
 				081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */,
+				088509951D7B876D003EF800 /* ActionEase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

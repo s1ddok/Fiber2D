@@ -8,12 +8,17 @@
 
 public struct ActionInstantContainer: ActionContainer {
     
+    @inline(__always)
+    mutating public func update(state: Float) {
+        action.update(state: state)
+    }
+    
     mutating public func start(with target: AnyObject?) {
         action.start(with: target)
     }
     
     mutating public func step(dt: Time) {
-        action.update(state: 1.0)
+        self.update(state: 1.0)
     }
     
     public var tag: Int = 0
@@ -31,6 +36,12 @@ public struct ActionInstantContainer: ActionContainer {
 public extension ActionModel {
     public var instantly: ActionInstantContainer {
         return ActionInstantContainer(action: self)
+    }
+}
+
+extension ActionInstantContainer: FiniteTime {
+    public var duration: Time {
+        return 0.0
     }
 }
     

@@ -30,16 +30,17 @@ public protocol Reversable {
     var reversed: Reversable { get }
 }
 
+public protocol FiniteTime {
+    /** @name Duration */
+    /** Duration of the action in seconds. */
+    var duration: Time { get }
+}
 // MARK: Continous
 // Protocol that defines time-related properties for an object
 /**
  Protocol for actions that (can) have a duration
  */
-public protocol Continous {
-    /** @name Duration */
-    /** Duration of the action in seconds. */
-    var duration: Time { get }
-    
+public protocol Continous: FiniteTime {
     /** @name Elapsed
      *  How many seconds had elapsed since the actions started to run.
      */
@@ -100,6 +101,16 @@ public protocol ActionContainer: Tagged {
      *  @param dt Ellapsed interval since last step.
      */
     mutating func step(dt: Time)
+    
+    /**
+     *  Updates the action with normalized value.
+     *
+     *  For example:
+     *  A value of 0.5 indicates that the action is 50% complete.
+     *
+     *  @param state Normalized action progress.
+     */
+    mutating func update(state: Float)
     
     /**
      *  Overridden by subclasses to set up an action before it runs.
