@@ -14,9 +14,13 @@ public struct ActionInstantContainer: ActionContainer {
     }
     
     mutating public func start(with target: AnyObject?) {
+        self.target = target
         action.start(with: target)
     }
     
+    mutating public func stop() {
+        self.target = nil
+    }
     mutating public func step(dt: Time) {
         self.update(state: 1.0)
     }
