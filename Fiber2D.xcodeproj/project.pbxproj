@@ -21,9 +21,6 @@
 		081FBC241D4625A6005838B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC231D4625A6005838B8 /* AppDelegate.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
 		081FBC291D4625A6005838B8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC271D4625A6005838B8 /* MainMenu.xib */; };
-		081FBCCD1D462732005838B8 /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC711D462732005838B8 /* CCAction.m */; };
-		081FBCCF1D462732005838B8 /* CCActionEase.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC761D462732005838B8 /* CCActionEase.m */; };
-		081FBCD11D462732005838B8 /* CCActionInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7A1D462732005838B8 /* CCActionInterval.m */; };
 		081FBCD31D462732005838B8 /* CCCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7F1D462732005838B8 /* CCCache.m */; };
 		081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* CCImage+PNG.m */; };
 		081FBCD51D462732005838B8 /* CCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC841D462732005838B8 /* CCImage.m */; };
@@ -135,13 +132,6 @@
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC281D4625A6005838B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		081FBC701D462732005838B8 /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
-		081FBC711D462732005838B8 /* CCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAction.m; sourceTree = "<group>"; };
-		081FBC721D462732005838B8 /* CCAction_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction_Private.h; sourceTree = "<group>"; };
-		081FBC751D462732005838B8 /* CCActionEase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionEase.h; sourceTree = "<group>"; };
-		081FBC761D462732005838B8 /* CCActionEase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionEase.m; sourceTree = "<group>"; };
-		081FBC791D462732005838B8 /* CCActionInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionInterval.h; sourceTree = "<group>"; };
-		081FBC7A1D462732005838B8 /* CCActionInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionInterval.m; sourceTree = "<group>"; };
 		081FBC7E1D462732005838B8 /* CCCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCache.h; sourceTree = "<group>"; };
 		081FBC7F1D462732005838B8 /* CCCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCache.m; sourceTree = "<group>"; };
 		081FBC801D462732005838B8 /* ccConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccConfig.h; sourceTree = "<group>"; };
@@ -326,7 +316,6 @@
 		081FBC301D4625B8005838B8 /* cocos2d-legacy */ = {
 			isa = PBXGroup;
 			children = (
-				081FBC6F1D462732005838B8 /* Actions */,
 				081FBC7D1D462732005838B8 /* CCClasses */,
 				081FBCAA1D462732005838B8 /* Platforms */,
 				081FBCBB1D462732005838B8 /* Support */,
@@ -335,21 +324,6 @@
 			);
 			name = "cocos2d-legacy";
 			path = Fiber2D;
-			sourceTree = "<group>";
-		};
-		081FBC6F1D462732005838B8 /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				081FBC701D462732005838B8 /* CCAction.h */,
-				081FBC711D462732005838B8 /* CCAction.m */,
-				081FBC721D462732005838B8 /* CCAction_Private.h */,
-				081FBC751D462732005838B8 /* CCActionEase.h */,
-				081FBC761D462732005838B8 /* CCActionEase.m */,
-				081FBC791D462732005838B8 /* CCActionInterval.h */,
-				081FBC7A1D462732005838B8 /* CCActionInterval.m */,
-			);
-			name = Actions;
-			path = "cocos2d-legacy/Actions";
 			sourceTree = "<group>";
 		};
 		081FBC7D1D462732005838B8 /* CCClasses */ = {
@@ -712,7 +686,6 @@
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
 				081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */,
-				081FBCD11D462732005838B8 /* CCActionInterval.m in Sources */,
 				088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */,
 				081FBCD91D462732005838B8 /* CCRenderer.m in Sources */,
 				088509971D7C5F76003EF800 /* easing.swift in Sources */,
@@ -738,7 +711,6 @@
 				088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
 				081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */,
-				081FBCCD1D462732005838B8 /* CCAction.m in Sources */,
 				088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
@@ -779,7 +751,6 @@
 				0812ACFB1D538D6600AE46E8 /* platform.swift in Sources */,
 				081FBCE21D462732005838B8 /* NSValue+CCRenderer.m in Sources */,
 				081FBCDC1D462732005838B8 /* CCShader.m in Sources */,
-				081FBCCF1D462732005838B8 /* CCActionEase.m in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,
 				081FBD101D46289A005838B8 /* Layout.swift in Sources */,
 				081FBD1D1D46289A005838B8 /* Responder.swift in Sources */,

@@ -68,13 +68,6 @@
 #import "CCEffectStereo.h"
 #endif
 
-// Actions:
-#import "CCAction.h"
-#import "CCActionEase.h"
-#import "CCActionEase.h"
-#import "CCActionInstant.h"
-#import "CCActionInterval.h"
-
 // Misc:
 #import "CCFile.h"
 #import "CCFileLocator.h"
