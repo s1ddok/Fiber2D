@@ -50,9 +50,9 @@ class MainScene: Scene {
         colorNodes[4].run(action: rotate.then(skew2).then(rotate2))
         colorNodes[5].run(action: rotate.and(skew))
         colorNodes[6].run(action: rotate.then(skew.and(rotate2)))
-        colorNodes[7].run(action: rotateBy.repeatForever)
+        //colorNodes[7].run(action: rotateBy.repeatForever)
         colorNodes[8].run(action: rotateBy.repeat(times: 6)
-            .then(ActionCallBlock { print(colorNodes[8].position) }.instantly))
+            .then(ActionCallBlock { print(colorNodes[8].position) }.instantly.repeat(times: 7)))
         self.userInteractionEnabled = true
         print(Date())
         let _ = scheduleBlock({ (t:Timer) in
@@ -69,7 +69,7 @@ class MainScene: Scene {
         colorNode.positionType = CCPositionTypeNormalized
         
         let rt = RenderTexture(width: 64, height: 64)
-        rt.begin()
+        let _ = rt.begin()
         colorNode.removeFromParent()
         colorNode.visit()
         rt.end()

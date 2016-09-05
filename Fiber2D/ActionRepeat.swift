@@ -55,38 +55,67 @@ public struct ActionRepeatForeverContainer: ActionContainer {
     }
 }
 
-public struct ActionRepeatContainer: ActionContainer {
+public struct ActionRepeatContainer: ActionContainer, FiniteTime {
     public mutating func update(state: Float) {
-        innerContainer.update(state: state * Float(repeatCount))
+        // issue #80. Instead of hooking step:, hook update: since it can be called by any
+        // container action like Repeat, Sequence, Ease, etc..
+        let dt = state
+        if dt >= nextDt {
+            while dt >= nextDt && remainingRepeats > 0 {
+                innerContainer.update(state: 1.0)
+                remainingRepeats -= 1
+                
+                innerContainer.stop()
+                innerContainer.start(with: target)
+                self.nextDt = Float(Int(repeatCount - remainingRepeats) + 1) / Float(repeatCount)
+            }
+            // fix for issue #1288, incorrect end value of repeat
+            if fabsf(dt - 1.0) < FLT_EPSILON && remainingRepeats > 0 {
+                innerContainer.update(state: 1.0)
+                remainingRepeats -= 1
+            }
+            
+            guard icDuration > 0 else {
+                return
+            }
+            if remainingRepeats == 0 {
+                innerContainer.stop()
+            } else {
+                // issue #390 prevent jerk, use right update
+                innerContainer.update(state: dt - (nextDt - 1.0 / Float(repeatCount)))
+            }
+        } else {
+            guard icDuration > 0 else {
+                return
+            }
+            let clampedState = (dt * Float(repeatCount)).truncatingRemainder(dividingBy: 1.0)
+            innerContainer.update(state: clampedState)
+        }
+        
     }
     
     public mutating  func start(with target: AnyObject?) {
+        self.elapsed = 0
         self.target = target
         self.remainingRepeats = repeatCount
+        self.nextDt = 1.0 / Float(repeatCount)
         innerContainer.start(with: target)
     }
-    
+
     mutating public func step(dt: Time) {
-        innerContainer.step(dt: dt)
-        
-        if innerContainer.isDone {
-            remainingRepeats -= 1
-            
-            guard remainingRepeats > 0 else {
-                return
-            }
-            
-            if let c = innerContainer as? Continous {
-                let diff = c.elapsed - c.duration
-                defer {
-                    // to prevent jerk. issue #390, 1247
-                    innerContainer.step(dt: 0.0)
-                    innerContainer.step(dt: diff)
-                }
-            }
-            
+        guard icDuration > 0 else {
             innerContainer.start(with: target)
+            innerContainer.update(state: 1.0)
+            innerContainer.stop()
+            remainingRepeats -= 1
+            return
         }
+        
+        elapsed += dt
+        self.update(state: max(0, // needed for rewind. elapsed could be negative
+            min(1, elapsed / max(duration,FLT_EPSILON)) // division by 0
+            )
+        )
     }
     
     public var tag: Int = 0
@@ -97,6 +126,11 @@ public struct ActionRepeatContainer: ActionContainer {
     
     public let repeatCount: UInt
     private var remainingRepeats: UInt = 0
+    private var nextDt: Float = 0.0
+    
+    private let icDuration: Time
+    public  let duration: Time
+    private var elapsed: Time = 0.0
     
     private(set) var innerContainer: ActionContainer
     init(action: ActionContainer, repeatCount: UInt) {
@@ -106,14 +140,8 @@ public struct ActionRepeatContainer: ActionContainer {
         if !(action is FiniteTime) {
             assertionFailure("ERROR: You can't repeat infinite action")
         }
-    }
-}
-
-extension ActionRepeatContainer: FiniteTime {
-    public var duration: Time {
-        let mp = Float(repeatCount)
-        
-        return (innerContainer as! FiniteTime).duration * mp
+        self.icDuration = (action as! FiniteTime).duration
+        self.duration = Float(repeatCount) * icDuration
     }
 }
 
