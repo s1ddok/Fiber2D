@@ -130,7 +130,7 @@ public protocol ActionContainer: Tagged {
 
 // Default implementation
 extension ActionModel {
-    mutating func start(with target: AnyObject?) {}
+    mutating public func start(with target: AnyObject?) {}
     mutating public func stop() {}
     mutating func update(state: Float) {}
 }

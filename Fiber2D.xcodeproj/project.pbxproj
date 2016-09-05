@@ -23,7 +23,6 @@
 		081FBC291D4625A6005838B8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC271D4625A6005838B8 /* MainMenu.xib */; };
 		081FBCCD1D462732005838B8 /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC711D462732005838B8 /* CCAction.m */; };
 		081FBCCF1D462732005838B8 /* CCActionEase.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC761D462732005838B8 /* CCActionEase.m */; };
-		081FBCD01D462732005838B8 /* CCActionInstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC781D462732005838B8 /* CCActionInstant.m */; };
 		081FBCD11D462732005838B8 /* CCActionInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7A1D462732005838B8 /* CCActionInterval.m */; };
 		081FBCD31D462732005838B8 /* CCCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7F1D462732005838B8 /* CCCache.m */; };
 		081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* CCImage+PNG.m */; };
@@ -85,6 +84,7 @@
 		088509951D7B876D003EF800 /* ActionEase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509941D7B876D003EF800 /* ActionEase.swift */; };
 		088509971D7C5F76003EF800 /* easing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509961D7C5F76003EF800 /* easing.swift */; };
 		088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509981D7C6A5E003EF800 /* ActionSequence.swift */; };
+		088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */; };
 		088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1A1D5AA73900E48EC9 /* functions.swift */; };
 		088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1B1D5AA73900E48EC9 /* Point.swift */; };
 		088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1C1D5AA73900E48EC9 /* Rect.swift */; };
@@ -140,8 +140,6 @@
 		081FBC721D462732005838B8 /* CCAction_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction_Private.h; sourceTree = "<group>"; };
 		081FBC751D462732005838B8 /* CCActionEase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionEase.h; sourceTree = "<group>"; };
 		081FBC761D462732005838B8 /* CCActionEase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionEase.m; sourceTree = "<group>"; };
-		081FBC771D462732005838B8 /* CCActionInstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionInstant.h; sourceTree = "<group>"; };
-		081FBC781D462732005838B8 /* CCActionInstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionInstant.m; sourceTree = "<group>"; };
 		081FBC791D462732005838B8 /* CCActionInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionInterval.h; sourceTree = "<group>"; };
 		081FBC7A1D462732005838B8 /* CCActionInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCActionInterval.m; sourceTree = "<group>"; };
 		081FBC7E1D462732005838B8 /* CCCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCache.h; sourceTree = "<group>"; };
@@ -242,6 +240,7 @@
 		088509941D7B876D003EF800 /* ActionEase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionEase.swift; sourceTree = "<group>"; };
 		088509961D7C5F76003EF800 /* easing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = easing.swift; sourceTree = "<group>"; };
 		088509981D7C6A5E003EF800 /* ActionSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSequence.swift; sourceTree = "<group>"; };
+		088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ActionInstant+Node.swift"; sourceTree = "<group>"; };
 		088ECE1A1D5AA73900E48EC9 /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		088ECE1B1D5AA73900E48EC9 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		088ECE1C1D5AA73900E48EC9 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
@@ -346,8 +345,6 @@
 				081FBC721D462732005838B8 /* CCAction_Private.h */,
 				081FBC751D462732005838B8 /* CCActionEase.h */,
 				081FBC761D462732005838B8 /* CCActionEase.m */,
-				081FBC771D462732005838B8 /* CCActionInstant.h */,
-				081FBC781D462732005838B8 /* CCActionInstant.m */,
 				081FBC791D462732005838B8 /* CCActionInterval.h */,
 				081FBC7A1D462732005838B8 /* CCActionInterval.m */,
 			);
@@ -588,6 +585,7 @@
 			children = (
 				086652801D73412600BCD9CE /* Action.swift */,
 				088509901D7B55AF003EF800 /* ActionInstant.swift */,
+				088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */,
 				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
 				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
 				088509941D7B876D003EF800 /* ActionEase.swift */,
@@ -760,6 +758,7 @@
 				081FBD231D46289A005838B8 /* Transition.swift in Sources */,
 				088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */,
 				0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */,
+				088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */,
 				0812ACFE1D538D6600AE46E8 /* Vector3+simd.swift in Sources */,
 				0866527D1D73359800BCD9CE /* Scheduler.swift in Sources */,
 				081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */,
@@ -769,7 +768,6 @@
 				081FBD141D46289A005838B8 /* Node+Convenience.swift in Sources */,
 				08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */,
 				081FBD121D46289A005838B8 /* Node.swift in Sources */,
-				081FBCD01D462732005838B8 /* CCActionInstant.m in Sources */,
 				081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */,
 				081FBCD61D462732005838B8 /* CCNoARC.m in Sources */,
 				081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */,

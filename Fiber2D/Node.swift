@@ -115,7 +115,7 @@ import Foundation
  would only add minimal functionality or just data.
  */
 
-@objc class Node: Responder, Updatable {
+public class Node: Responder, Updatable {
     
     /// -----------------------------------------------------------------------
     /// @name Storing Custom Information

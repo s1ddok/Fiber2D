@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class Responder: NSObject {
+public class Responder: NSObject {
     /// -----------------------------------------------------------------------
     /// @name Enabling Input Events
     /// -----------------------------------------------------------------------
