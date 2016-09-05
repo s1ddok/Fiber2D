@@ -6,21 +6,13 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public enum RepeatCount {
-    case Times(UInt)
-    case Forever
-}
-
-extension RepeatCount: Equatable {
-    public static func ==(lhs: RepeatCount, rhs: RepeatCount) -> Bool {
-        switch (lhs, rhs) {
-        case (.Times(let a), .Times(let b)) where a == b: return true
-        case (.Forever, .Forever): return true
-        default: return false
-        }
-    }
-}
-
+/**
+ *  Repeats an action indefinitely (until stopped).
+ *  To repeat the action for a limited number of times use the ActionRepeat action.
+ *
+ *  @note This action can not be used within a ActionSequence because it is not an FiniteTime action.
+ *  However you can use ActionRepeatForever to repeat a ActionSequence.
+ */
 public struct ActionRepeatForeverContainer: ActionContainer {
     public mutating func update(state: Float) { }
     
@@ -125,11 +117,12 @@ extension ActionRepeatContainer: FiniteTime {
     }
 }
 
-public extension ActionContainer {
-    public func `repeat`(_ count: RepeatCount) -> ActionContainer {
-        switch count {
-        case .Forever: return ActionRepeatForeverContainer(action: self)
-        case .Times(let a): return ActionRepeatContainer(action: self, repeatCount: a)
-        }
+public extension ActionContainer where Self: FiniteTime  {
+    public func `repeat`(times: UInt) -> ActionRepeatContainer {
+        return ActionRepeatContainer(action: self, repeatCount: times)
+    }
+    
+    public var repeatForever: ActionRepeatForeverContainer {
+        return ActionRepeatForeverContainer(action: self)
     }
 }
