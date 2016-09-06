@@ -50,3 +50,9 @@ public struct ActionRewindContainer: ActionContainer, Continous {
         self.duration = (action as! FiniteTime).duration
     }
 }
+
+public extension ActionContainer where Self: FiniteTime {
+    public var rewinded: ActionRewindContainer {
+        return ActionRewindContainer(action: self)
+    }
+}
