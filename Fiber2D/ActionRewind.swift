@@ -52,6 +52,12 @@ public struct ActionRewindContainer: ActionContainer, Continous {
 }
 
 public extension ActionContainer where Self: FiniteTime {
+    /**
+     *   This will return ActionRewindContainer for a given ActionContainer
+     *   Passed value must conform to FiniteTime protocol
+     *
+     *   @see FiniteTime
+     */
     public var rewinded: ActionRewindContainer {
         return ActionRewindContainer(action: self)
     }
