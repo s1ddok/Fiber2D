@@ -15,7 +15,6 @@ public struct ActionContinousContainer: ActionContainer, Continous {
     
     public mutating  func start(with target: AnyObject?) {
         elapsed = 0
-        self.target = target
         action.start(with: target)
     }
     
@@ -32,7 +31,6 @@ public struct ActionContinousContainer: ActionContainer, Continous {
         )
     }
     
-    weak var target: AnyObject? = nil
     public var tag: Int = 0
     private(set) public var duration: Time = 0.0
     private(set) public var elapsed:  Time = 0.0

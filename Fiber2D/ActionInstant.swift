@@ -14,19 +14,18 @@ public struct ActionInstantContainer: ActionContainer {
     }
     
     mutating public func start(with target: AnyObject?) {
-        self.target = target
         action.start(with: target)
     }
     
     mutating public func stop() {
-        self.target = nil
+        action.stop()
     }
+    
     mutating public func step(dt: Time) {
         self.update(state: 1.0)
     }
     
     public var tag: Int = 0
-    weak var target: AnyObject? = nil
     public var isDone: Bool {
         return true
     }
