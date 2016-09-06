@@ -88,6 +88,7 @@
 		088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE251D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift */; };
 		088ECE281D5C959600E48EC9 /* NSEvent+Fiber2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE271D5C959600E48EC9 /* NSEvent+Fiber2d.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
+		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +238,7 @@
 		088ECE251D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+Extensions.swift"; sourceTree = "<group>"; };
 		088ECE271D5C959600E48EC9 /* NSEvent+Fiber2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSEvent+Fiber2d.swift"; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
+		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -561,6 +563,7 @@
 				088509901D7B55AF003EF800 /* ActionInstant.swift */,
 				088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */,
 				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
+				08BB5C811D7EE09E004A5561 /* ActionRewind.swift */,
 				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
 				088509941D7B876D003EF800 /* ActionEase.swift */,
 				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
@@ -713,6 +716,7 @@
 				081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */,
 				088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
+				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
