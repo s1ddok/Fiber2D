@@ -6,6 +6,36 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+public struct ActionConcurrent: ActionModel {
+    
+    @inline(__always)
+    mutating public func update(state: Float) {
+        first.update(state: state)
+        second.update(state: state)
+
+    }
+    
+    public mutating func start(with target: AnyObject?) {
+        first.start(with: target)
+        second.start(with: target)
+    }
+    
+    public mutating func stop() {
+        first.stop()
+        second.stop()
+    }
+    
+    public var tag: Int = 0
+    
+    private(set) var first: ActionModel
+    private(set) var second: ActionModel
+    
+    public init(first: ActionModel, second: ActionModel) {
+        self.first = first
+        self.second = second
+    }
+}
+
 public struct ActionConcurrentContainer: ActionContainer, Continous {
     
     @inline(__always)
@@ -20,7 +50,6 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
     
     public mutating  func start(with target: AnyObject?) {
         elapsed = 0
-        self.target = target
         first.start(with: target)
         second.start(with: target)
     }
@@ -38,8 +67,7 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
             )
         )
     }
-    
-    weak var target: AnyObject? = nil
+
     public var tag: Int = 0
     public let duration: Time
     private let firstDuration: Time
@@ -70,5 +98,11 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
 extension ActionContainer {
     func and(_ action: ActionContainer) -> ActionConcurrentContainer {
         return ActionConcurrentContainer(first: self, second: action)
+    }
+}
+
+extension ActionModel {
+    func and(_ action: ActionModel) -> ActionConcurrent {
+        return ActionConcurrent(first: self, second: action)
     }
 }
