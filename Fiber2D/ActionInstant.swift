@@ -30,7 +30,7 @@ public struct ActionInstantContainer: ActionContainer {
         return true
     }
         
-    var action: ActionModel
+    private(set) var action: ActionModel
     init(action: ActionModel) {
         self.action = action
     }

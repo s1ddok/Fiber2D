@@ -39,7 +39,7 @@ public struct ActionContinousContainer: ActionContainer, Continous {
         return elapsed > duration
     }
     
-    private(set) var action: ActionModel
+    private(set) public var action: ActionModel
     public init(action: ActionModel, duration: Time) {
         self.action = action
         self.duration = duration
