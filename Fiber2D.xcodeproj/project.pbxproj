@@ -561,15 +561,14 @@
 			children = (
 				086652801D73412600BCD9CE /* Action.swift */,
 				088509901D7B55AF003EF800 /* ActionInstant.swift */,
-				088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */,
 				0885098E1D7B548B003EF800 /* ActionContinous.swift */,
-				08BB5C811D7EE09E004A5561 /* ActionRewind.swift */,
-				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
-				088509941D7B876D003EF800 /* ActionEase.swift */,
-				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
-				088509981D7C6A5E003EF800 /* ActionSequence.swift */,
-				0854AB361D7C91A90037AB56 /* ActionSpeed.swift */,
 				0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */,
+				088509981D7C6A5E003EF800 /* ActionSequence.swift */,
+				088509921D7B7AD8003EF800 /* ActionRepeat.swift */,
+				08BB5C811D7EE09E004A5561 /* ActionRewind.swift */,
+				088509941D7B876D003EF800 /* ActionEase.swift */,
+				0854AB361D7C91A90037AB56 /* ActionSpeed.swift */,
+				08C5B59C1D80AA1800770DFD /* Implementations */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -580,6 +579,15 @@
 				08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		08C5B59C1D80AA1800770DFD /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */,
+				0885098C1D7B5428003EF800 /* ActionTransform.swift */,
+			);
+			name = Implementations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
