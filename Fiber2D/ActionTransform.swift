@@ -9,10 +9,6 @@
 /**
  This action rotates the target to the specified angle.
  The direction will be decided by the shortest route.
- 
- @warning Rotate actions shouldn't be used to rotate nodes with a dynamic PhysicsBody unless the body has allowsRotation set to NO.
- Otherwise both the physics body and the action will alter the node's rotation property, overriding each other's changes.
- This leads to unpredictable behavior.
  */
 struct ActionRotateTo: ActionModel {
     private let dstAngleX   : Angle
@@ -99,10 +95,6 @@ struct ActionRotateTo: ActionModel {
 
 /**
  This action rotates the target clockwise by the number of degrees specified.
- 
- @warning Rotate actions shouldn't be used to rotate nodes with a dynamic PhysicsBody unless the body has allowsRotation set to NO.
- Otherwise both the physics body and the action will alter the node's rotation property, overriding each other's changes.
- This leads to unpredictable behavior.
  */
 struct ActionRotateBy: ActionModel {
     private var startAngleX : Angle!
@@ -253,4 +245,76 @@ struct ActionSkewBy: ActionModel {
         target.skewX = startSkewX + deltaX * state
         target.skewY = startSkewY + deltaY * state
     }
+}
+
+/**
+ This action moves the target to the position specified, these are absolute coordinates.
+ Several MoveTo actions can be concurrently called, and the resulting movement will be the sum of individual movements.
+ */
+struct ActionMoveTo: ActionModel {
+    private var startPosition: Point!
+    private let endPosition: Point
+    
+    private(set) var target: Node!
+    
+    /** @name Creating a Move Action */
+    
+    /**
+     *  Creates the action.
+     *
+     *  @param position Absolute position to move to.
+     *
+     *  @return New moveto action.
+     */
+    init(_ p: Point) {
+        endPosition = p
+    }
+    
+    mutating func start(with target: AnyObject?) {
+        self.target = target as! Node
+        let target = self.target!
+        
+        self.startPosition = target.position
+    }
+    
+    mutating func update(state: Float) {
+        target.position = startPosition.interpolated(to: endPosition, factor: state)
+    }
+}
+
+/**
+ This action moves the target by the x,y values in the specified point value.
+ X and Y are relative to the position of the object.
+ Several MoveBy actions can be concurrently called, and the resulting movement will be the sum of individual movements.
+ */
+struct ActionMoveBy: ActionModel {
+    private var startPosition: Point!
+    public let deltaPosition: Point
+    
+    private(set) var target: Node!
+    
+    /** @name Creating a Move Action */
+    
+    /**
+     *  Creates the action.
+     *
+     *  @param deltaPosition Delta position.
+     *
+     *  @return New moveby action.
+     */
+    init(_ p: Point) {
+        deltaPosition = p
+    }
+    
+    mutating func start(with target: AnyObject?) {
+        self.target = target as! Node
+        let target = self.target!
+        
+        self.startPosition = target.position
+    }
+    
+    mutating func update(state: Float) {
+        target.position = startPosition + deltaPosition * state
+    }
+    
 }
