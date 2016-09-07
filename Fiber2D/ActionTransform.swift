@@ -326,7 +326,6 @@ struct ActionMoveBy: ActionModel {
         let newPos = startPosition + deltaPosition * state
         target.position = newPos
         previousPosition = newPos
-        print("newPos \(newPos) = \(startPosition) + \(deltaPosition) * \(state)")
         #else
         target.position = startPosition + deltaPosition * state
         #endif
