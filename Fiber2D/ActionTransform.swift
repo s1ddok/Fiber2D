@@ -215,3 +215,42 @@ struct ActionSkewTo: ActionModel {
         target.skewY = startSkewY + deltaY * state
     }
 }
+
+/**
+ *  This action skews a target by the specified skewX and skewY degrees values. Skewing changes the rectangular shape of the node to that of a parallelogram.
+ */
+struct ActionSkewBy: ActionModel {
+    private var startSkewX:    Float = 0.0
+    private var startSkewY:    Float = 0.0
+    private let deltaX:        Float
+    private let deltaY:        Float
+    
+    private(set) var target: Node!
+    
+    /** @name Creating a Skew Action */
+    /**
+     *  Initializes the action.
+     *
+     *  @param sx X skew value in degrees, between -90 and 90.
+     *  @param sy Y skew value in degrees, between -90 and 90.
+     *
+     *  @return New skew action.
+     */
+    init(skewX sx: Float = 0.0, skewY sy: Float = 0.0) {
+        self.deltaX = sx
+        self.deltaY = sy
+    }
+    
+    mutating func start(with target: AnyObject?) {
+        self.target = target as! Node
+        let target = self.target!
+        
+        self.startSkewX = target.skewX
+        self.startSkewY = target.skewY
+    }
+    
+    mutating func update(state: Float) {
+        target.skewX = startSkewX + deltaX * state
+        target.skewY = startSkewY + deltaY * state
+    }
+}
