@@ -882,6 +882,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_LDFLAGS = "-lz";
+				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
@@ -903,6 +904,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_LDFLAGS = "-lz";
+				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;

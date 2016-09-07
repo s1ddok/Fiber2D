@@ -290,7 +290,9 @@ struct ActionMoveTo: ActionModel {
 struct ActionMoveBy: ActionModel {
     private var startPosition: Point!
     public let deltaPosition: Point
-    
+    #if ENABLE_STACKABLE_ACTIONS
+    private var previousPosition: Point!
+    #endif
     private(set) var target: Node!
     
     /** @name Creating a Move Action */
@@ -311,10 +313,23 @@ struct ActionMoveBy: ActionModel {
         let target = self.target!
         
         self.startPosition = target.position
+        #if ENABLE_STACKABLE_ACTIONS
+        self.previousPosition = startPosition
+        #endif
     }
     
     mutating func update(state: Float) {
+        #if ENABLE_STACKABLE_ACTIONS
+        let currentPosition = target.position
+        let diff = currentPosition - previousPosition
+        startPosition = startPosition + diff
+        let newPos = startPosition + deltaPosition * state
+        target.position = newPos
+        previousPosition = newPos
+        print("newPos \(newPos) = \(startPosition) + \(deltaPosition) * \(state)")
+        #else
         target.position = startPosition + deltaPosition * state
+        #endif
     }
     
 }
