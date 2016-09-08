@@ -1,8 +1,7 @@
 /**
- Declares the possible directions for laying out nodes in a CCLayoutBox.
+ Declares the possible directions for laying out nodes in a LayoutBox.
  */
-@objc enum CCLayoutBoxDirection : Int    /// The children will be horizontally aligned.
-{
+enum LayoutBoxDirection {    /// The children will be horizontally aligned.
     case horizontal
     /// The children will be vertically aligned.
     case vertical
@@ -13,17 +12,17 @@ func roundUpToEven(_ f: Float) -> Float {
 /**
  The box layout lays out its child nodes in a horizontal row or a vertical column. Optionally you can set a spacing between the child nodes.
  
- @note In order to layout nodes in a grid, you can add one or more CCLayoutBox as child node with the opposite layout direction, ie the parent
- box layout node uses vertical and the child box layout nodes use horizontal CCLayoutBoxDirection to create a grid of nodes.
+ @note In order to layout nodes in a grid, you can add one or more LayoutBox as child node with the opposite layout direction, ie the parent
+ box layout node uses vertical and the child box layout nodes use horizontal LayoutBoxDirection to create a grid of nodes.
  */
 
-@objc class LayoutBox: Layout {
+class LayoutBox: Layout {
     /** @name Layout Options */
     /**
      The direction is either horizontal or vertical.
      @see CCLayoutBoxDirection
      */
-    var direction: CCLayoutBoxDirection = .horizontal {
+    var direction: LayoutBoxDirection = .horizontal {
         didSet {
             needsLayout()
         }
