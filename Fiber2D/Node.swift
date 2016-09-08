@@ -644,6 +644,9 @@ public class Node: Responder, Updatable {
         child.zOrder = z ?? child.zOrder
         child.name = name ?? child.name
         child._parent = self
+        // this is needed for the case when node has Normalize positon type and switched parents
+        // we should've add method `parentContentSizeChanged` and trigger that instead
+        child.isTransformDirty = true
         children.append(child)
         self.isReorderChildDirty = true
         // Update pausing parameters
@@ -1001,8 +1004,8 @@ public class Node: Responder, Updatable {
     var scheduler: Scheduler? {
         return scene?.scheduler
     }
-    internal(set) var priority: Int = 0
-    func update(delta: Time) { }
-    func fixedUpdate(delta: Time) { }
+    internal(set) public var priority: Int = 0
+    open func update(delta: Time) { }
+    open func fixedUpdate(delta: Time) { }
 
 }
