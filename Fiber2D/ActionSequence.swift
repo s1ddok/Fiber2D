@@ -69,7 +69,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
     public mutating func start(with target: AnyObject?) {
         elapsed = 0
         self.target = target
-        self.split = (actions[0] as! FiniteTime).duration / max(duration, FLT_EPSILON)
+        self.split = actions[0].duration / max(duration, FLT_EPSILON)
         self.last = -1
     }
     
