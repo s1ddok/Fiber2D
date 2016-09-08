@@ -257,18 +257,18 @@ class Sprite: RenderableNode {
         self.vertexCenter = vec2((x1 + x2) * 0.5, (y1 + y2) * 0.5)
         self.vertexExtents = vec2((x2 - x1) * 0.5, (y2 - y1) * 0.5)
     }
+    
     /** Returns the matrix that transforms the sprite's (local) space coordinates into the sprite's texture space coordinates.
      */
-    
-    func nodeToTextureTransform() -> GLKMatrix4 {
-        let sx = Float((verts.br.texCoord1.s - verts.bl.texCoord1.s) / (verts.br.position.x - verts.bl.position.x))
-        let sy = Float((verts.tl.texCoord1.t - verts.bl.texCoord1.t) / (verts.tl.position.y - verts.bl.position.y))
-        let tx = Float(verts.bl.texCoord1.s - verts.bl.position.x * sx)
-        let ty = Float(verts.bl.texCoord1.t - verts.bl.position.y * sy)
-        return GLKMatrix4Make(sx, 0.0, 0.0, 0.0,
-                              0.0, sy, 0.0, 0.0,
-                              0.0, 0.0, 1.0, 0.0,
-                              tx, ty, 0.0, 1.0)
+    var nodeToTextureTransform: Matrix4x4f {
+        let sx = (verts.br.texCoord1.s - verts.bl.texCoord1.s) / (verts.br.position.x - verts.bl.position.x)
+        let sy = (verts.tl.texCoord1.t - verts.bl.texCoord1.t) / (verts.tl.position.y - verts.bl.position.y)
+        let tx = verts.bl.texCoord1.s - verts.bl.position.x * sx
+        let ty = verts.bl.texCoord1.t - verts.bl.position.y * sy
+        return Matrix4x4f(vec4(sx, 0.0, 0.0, 0.0),
+                          vec4(0.0, sy, 0.0, 0.0),
+                          vec4(0.0, 0.0, 1.0, 0.0),
+                          vec4(tx, ty, 0.0, 1.0))
 
     }
     
