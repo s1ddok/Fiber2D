@@ -62,7 +62,7 @@ class Transition: Scene {
      *  Depth/stencil format used for transition.
      *  Default `GL_DEPTH24_STENCIL8_OES`.
      */
-    var transitionDepthStencilFormat: MTLPixelFormat = .depth32Float_Stencil8
+    var transitionDepthStencilFormat: MTLPixelFormat = .depth32Float_stencil8
     /// -----------------------------------------------------------------------
     /// @name Controlling Scene Animation during Transition
     /// -----------------------------------------------------------------------

@@ -85,7 +85,7 @@ extension Node {
      @see CCTimer
      */
     
-    func scheduleBlock(_ block: TimerBlock, delay: Time) -> Timer! {
+    func scheduleBlock(_ block: @escaping TimerBlock, delay: Time) -> Timer! {
         guard let scheduler = self.scheduler else {
             return nil
         }

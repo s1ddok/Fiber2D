@@ -210,7 +210,7 @@ extension Scheduler {
         return scheduledTarget
     }
     
-    func schedule(block: TimerBlock, for target: Updatable, withDelay delay: Time) -> Timer {
+    func schedule(block: @escaping TimerBlock, for target: Updatable, withDelay delay: Time) -> Timer {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         let timer = Timer(delay: delay, scheduler: self, scheduledTarget: scheduledTarget, block: block)
         self.schedule(timer: timer)
