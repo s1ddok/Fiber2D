@@ -10,15 +10,13 @@ private class MockUpdatable: Updatable {
     var priority: Int {
         return Int.min
     }
-    func update(delta: Time) {}
-    func fixedUpdate(delta: Time) {}
 }
 /**
  Scheduler is responsible for triggering scheduled callbacks. All scheduled and timed events should use this class, rather than NSTimer.
  Generally, you interface with the scheduler by using the "schedule"/"scheduleBlock" methods in Node. You may need to aess Scheduler
  in order to aess read-only time properties or to adjust the time scale.
  */
-class Scheduler {
+public final class Scheduler {
     func update(dt: Time) {
     }
     /* Modifies the time of all scheduled callbacks.
