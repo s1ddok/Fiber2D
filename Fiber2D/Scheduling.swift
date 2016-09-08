@@ -10,7 +10,7 @@ public typealias Time = Float
 
 // Targets are things that can have update: and fixedUpdate: methods called by the scheduler.
 // Scheduled blocks (Timers) can be associated with a target to inherit their priority and paused state.
-open protocol Updatable: class {
+public protocol Updatable: class {
     // Used to break ties for scheduled blocks, updated: and fixedUpdate: methods.
     // Targets are sorted by priority so lower priorities are called first.
     // The priority value for a given object should be constant.
