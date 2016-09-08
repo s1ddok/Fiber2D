@@ -18,15 +18,18 @@ class MainScene: Scene {
         sprite.scale = 6.0
         sprite.position = p2d(0.5, 0.5)
         sprite.positionType = CCPositionTypeNormalized
-        //sprite.runAction(ActionSkewTo(duration: 15.0, skewX: 45.0, skewY: 45.0))
         let action = ActionSkewTo(skewX: 15.0, skewY: 45.0).continously(duration: 15.0)
         sprite.run(action: action)
         addChild(sprite)
         
+        colorNode = ColorNode()
+        colorNode.contentSize = Size(width: 64.0, height: 64.0)
+        colorNode.position = p2d(0.5, 0.5)
+        colorNode.positionType = CCPositionTypeNormalized
         var startPosition = p2d(0.1, 0.0)
         var colorNodes = [ColorNode]()
         for _ in 0..<13 {
-            colorNode = ColorNode()
+            let colorNode = ColorNode()
             colorNode.contentSize = Size(width: 56.0, height: 56.0)
             colorNode.anchorPoint = p2d(0.5, 0.5)
             startPosition = startPosition + p2d(0.0, 0.1)
@@ -69,14 +72,9 @@ class MainScene: Scene {
     
     override func onEnter() {
         super.onEnter()
-        colorNode = ColorNode()
-        colorNode.contentSize = Size(width: 64.0, height: 64.0)
-        colorNode.position = p2d(0.5, 0.5)
-        colorNode.positionType = CCPositionTypeNormalized
         
         let rt = RenderTexture(width: 64, height: 64)
         let _ = rt.begin()
-        colorNode.removeFromParent()
         colorNode.visit()
         rt.end()
         
@@ -88,9 +86,8 @@ class MainScene: Scene {
         self.addChild(rt.sprite)
         
         print(sprite.active)
-        
-        
     }
+    
     override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
         colorNode.positionInPoints = theEvent.location(in: self)
         print(theEvent.location(in: self))
