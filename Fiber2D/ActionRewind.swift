@@ -44,10 +44,10 @@ public struct ActionRewindContainer: ActionContainer, Continous {
         return elapsed > duration
     }
     
-    private(set) public var action: ActionContainer
-    public init(action: ActionContainer) {
+    private(set) public var action: ActionContainerFiniteTime
+    public init(action: ActionContainerFiniteTime) {
         self.action = action
-        self.duration = (action as! FiniteTime).duration
+        self.duration = action.duration
     }
 }
 

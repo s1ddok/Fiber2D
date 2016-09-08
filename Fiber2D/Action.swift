@@ -128,6 +128,8 @@ public protocol ActionContainer: Tagged {
     mutating func stop()
 }
 
+public typealias ActionContainerFiniteTime = ActionContainer & FiniteTime
+
 // Default implementation
 extension ActionModel {
     mutating public func start(with target: AnyObject?) {}

@@ -42,16 +42,16 @@ public struct ActionSpeedContainer: ActionContainer, Continous {
         return elapsed > duration
     }
     
-    private(set) var action: ActionContainer
-    public init(action: ActionContainer, speed: Float) {
+    private(set) var action: ActionContainerFiniteTime
+    public init(action: ActionContainerFiniteTime, speed: Float) {
         self.action = action
-        self.actionDuration = (action as! FiniteTime).duration
+        self.actionDuration = action.duration
         self.duration = actionDuration / speed
         self.speed = speed
     }
 }
 
-extension ActionContainer {
+extension ActionContainer where Self: FiniteTime {
     public func speed(_ s: Float) -> ActionSpeedContainer {
         return ActionSpeedContainer(action: self, speed: s)
     }

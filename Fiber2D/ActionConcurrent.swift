@@ -78,15 +78,15 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
         return elapsed > duration
     }
     
-    private(set) var first: ActionContainer
-    private(set) var second: ActionContainer
+    private(set) var first: ActionContainerFiniteTime
+    private(set) var second: ActionContainerFiniteTime
     
-    public init(first: ActionContainer, second: ActionContainer) {
+    public init(first: ActionContainerFiniteTime, second: ActionContainerFiniteTime) {
         self.first = first
         self.second = second
         
-        let firstDuration = (first as! FiniteTime).duration
-        let secondDuration = (first as! FiniteTime).duration
+        let firstDuration = first.duration
+        let secondDuration = first.duration
         self.duration = max(firstDuration, secondDuration)
         
         self.firstDuration = firstDuration / duration
@@ -95,8 +95,8 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
     
 }
 
-extension ActionContainer {
-    func and(_ action: ActionContainer) -> ActionConcurrentContainer {
+extension ActionContainer where Self: FiniteTime {
+    func and(_ action: ActionContainerFiniteTime) -> ActionConcurrentContainer {
         return ActionConcurrentContainer(first: self, second: action)
     }
 }

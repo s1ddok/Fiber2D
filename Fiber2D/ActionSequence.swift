@@ -100,15 +100,15 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         return elapsed > duration
     }
     
-    private(set) var actions: [ActionContainer] = []
+    private(set) var actions: [ActionContainerFiniteTime] = []
 
     private var split: Float = 0.0
     private var last = -1
 
-    init(first: ActionContainer, second: ActionContainer) {
+    init(first: ActionContainerFiniteTime, second: ActionContainerFiniteTime) {
         actions = [first, second]
         // Force unwrap because it won't work otherwise anyways
-        duration = (first as! FiniteTime).duration + (second as! FiniteTime).duration
+        duration = first.duration + second.duration
     }
 }
 
@@ -131,7 +131,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
 }*/
 
 extension ActionContainer where Self: FiniteTime {
-    public func then(_ next: ActionContainer) -> ActionSequenceContainer {
+    public func then(_ next: ActionContainerFiniteTime) -> ActionSequenceContainer {
         return ActionSequenceContainer(first: self, second: next)
     }
 }

@@ -14,7 +14,7 @@ internal let TIMER_REPEAT_COUNT_FOREVER = Int.max
  
  @note New Timer objects can only be created with the schedule methods. Timer should not be subclassed.
  */
-class Timer {
+internal final class Timer {
     /** @name Interval and Repeat Count */
     /** Number of times to run the selector again. First run does not count as a repeat. */
     var repeatCount = 0

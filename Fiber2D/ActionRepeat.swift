@@ -132,15 +132,12 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
     public  let duration: Time
     private var elapsed: Time = 0.0
     
-    private(set) var innerContainer: ActionContainer
-    init(action: ActionContainer, repeatCount: UInt) {
+    private(set) var innerContainer: ActionContainerFiniteTime
+    init(action: ActionContainerFiniteTime, repeatCount: UInt) {
         self.innerContainer = action
         self.repeatCount = repeatCount
     
-        if !(action is FiniteTime) {
-            assertionFailure("ERROR: You can't repeat infinite action")
-        }
-        self.icDuration = (action as! FiniteTime).duration
+        self.icDuration = action.duration
         self.duration = Float(repeatCount) * icDuration
     }
 }
