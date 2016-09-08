@@ -93,6 +93,13 @@ class MainScene: Scene {
         print(theEvent.location(in: self))
     }
     
+    override func scrollWheel(_ theEvent: NSEvent) {
+        print("scroll")
+    }
+    
+    override func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
+        print("drag")
+    }
     override func update(delta: Time) {
         colorNode.rotation += 1°
     }

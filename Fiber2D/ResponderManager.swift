@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-@objc enum MouseButton: Int {
+public enum MouseButton: Int {
     case left
     case right
     case other
@@ -13,11 +13,11 @@
 /**
  *  Defines a running iOS/OSX responder.
  */
-@objc class RunningResponder : NSObject {
+internal final class RunningResponder {
     /**
      *  Holdes the target of the touch. This is the node which accepted the touch.
      */
-    var target: AnyObject!
+    var target: Node!
     #if os(iOS)
     /**
      *  Holds the current touch. Note that touches must not be retained.
@@ -42,7 +42,7 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
 /**
  *  The responder manager handles touches.
  */
-@objc class ResponderManager : NSObject {
+internal final class ResponderManager : NSObject {
     /**
      *  Enables the responder manager.
      *  When the responder manager is disabled, all current touches will be cancelled and no further touch handling registered.
@@ -390,13 +390,10 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         
         if let responder: RunningResponder = self.responderForButton(button) {
             // This drag event is already associated with a specific target.
-            let node: Node = (responder.target as! Node)
             // Items that claim user interaction receive events even if they occur outside of the bounds of the object.
-            if node.claimsUserInteraction || node.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
+            if responder.target.claimsUserInteraction || responder.target.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
                 Director.pushCurrentDirector(director)
-                if node.responds(to: #selector(Responder.mouseDragged(_:button:))) {
-                    node.mouseDragged(theEvent, button: button)
-                }
+                responder.target.mouseDragged(theEvent, button: button)
                 Director.popCurrentDirector()
             }
             else {
@@ -419,11 +416,8 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         }
         
         if let responder = self.responderForButton(button) {
-            let node: Node = (responder.target as! Node)
             Director.pushCurrentDirector(director)
-            if node.responds(to: #selector(Responder.mouseUp(_:button:))) {
-                node.mouseUp(theEvent, button: button)
-            }
+            responder.target.mouseUp(theEvent, button: button)
             Director.popCurrentDirector()
             runningResponderList.removeObject(responder)
         }
@@ -440,12 +434,9 @@ let RESPONDER_MANAGER_BUFFER_SIZE = 128
         // otherwise, scrollWheel goes to the node under the cursor
         
         if let responder: RunningResponder = self.responderForButton(.other) {
-            let node: Node = (responder.target as! Node)
             self.currentEventProcessed = true
             Director.pushCurrentDirector(director)
-            if node.responds(to: #selector(NSResponder.scrollWheel)) {
-                node.scrollWheel(theEvent)
-            }
+            responder.target.scrollWheel(theEvent)
             Director.popCurrentDirector()
             // if mouse was accepted, return
             if currentEventProcessed {
