@@ -163,8 +163,6 @@
 		081FBC9F1D462732005838B8 /* CCTextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextureCache.h; sourceTree = "<group>"; };
 		081FBCA01D462732005838B8 /* CCTextureCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTextureCache.m; sourceTree = "<group>"; };
 		081FBCA31D462732005838B8 /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
-		081FBCA41D462732005838B8 /* cocos2d-tests-ios-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "cocos2d-tests-ios-Bridging-Header.h"; sourceTree = "<group>"; };
-		081FBCA51D462732005838B8 /* cocos2d-tests-mac-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "cocos2d-tests-mac-Bridging-Header.h"; sourceTree = "<group>"; };
 		081FBCA61D462732005838B8 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
 		081FBCA71D462732005838B8 /* cocos2d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d.m; sourceTree = "<group>"; };
 		081FBCA81D462732005838B8 /* NSValue+CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+CCRenderer.h"; sourceTree = "<group>"; };
@@ -365,8 +363,6 @@
 				081FBC9F1D462732005838B8 /* CCTextureCache.h */,
 				081FBCA01D462732005838B8 /* CCTextureCache.m */,
 				081FBCA31D462732005838B8 /* ccTypes.h */,
-				081FBCA41D462732005838B8 /* cocos2d-tests-ios-Bridging-Header.h */,
-				081FBCA51D462732005838B8 /* cocos2d-tests-mac-Bridging-Header.h */,
 				081FBCA61D462732005838B8 /* cocos2d.h */,
 				081FBCA71D462732005838B8 /* cocos2d.m */,
 				081FBCA81D462732005838B8 /* NSValue+CCRenderer.h */,
