@@ -18,9 +18,7 @@
 		0812AD001D538D6600AE46E8 /* Vector4+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF71D538D6600AE46E8 /* Vector4+simd.swift */; };
 		0812AD011D538D6600AE46E8 /* Vector4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF81D538D6600AE46E8 /* Vector4.swift */; };
 		0812AD031D538D7600AE46E8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812AD021D538D7600AE46E8 /* Color.swift */; };
-		081FBC241D4625A6005838B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC231D4625A6005838B8 /* AppDelegate.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
-		081FBC291D4625A6005838B8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC271D4625A6005838B8 /* MainMenu.xib */; };
 		081FBCD31D462732005838B8 /* CCCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7F1D462732005838B8 /* CCCache.m */; };
 		081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* CCImage+PNG.m */; };
 		081FBCD51D462732005838B8 /* CCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC841D462732005838B8 /* CCImage.m */; };
@@ -75,6 +73,9 @@
 		086652811D73412600BCD9CE /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086652801D73412600BCD9CE /* Action.swift */; };
 		087BFA081D82D16100F940D4 /* Behaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA071D82D16100F940D4 /* Behaviour.swift */; };
 		087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0D1D82D1BE00F940D4 /* Component.swift */; };
+		087BFA101D82EB2600F940D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0F1D82EB2600F940D4 /* main.swift */; };
+		087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA111D82EC7700F940D4 /* AppDelegate.swift */; };
+		087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */; };
 		0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509891D7B4F2F003EF800 /* Tagged.swift */; };
 		0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098C1D7B5428003EF800 /* ActionTransform.swift */; };
 		0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098E1D7B548B003EF800 /* ActionContinous.swift */; };
@@ -88,7 +89,6 @@
 		088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1B1D5AA73900E48EC9 /* Point.swift */; };
 		088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1C1D5AA73900E48EC9 /* Rect.swift */; };
 		088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE251D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift */; };
-		088ECE281D5C959600E48EC9 /* NSEvent+Fiber2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE271D5C959600E48EC9 /* NSEvent+Fiber2d.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
 /* End PBXBuildFile section */
@@ -131,9 +131,7 @@
 		0812ACF81D538D6600AE46E8 /* Vector4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector4.swift; sourceTree = "<group>"; };
 		0812AD021D538D7600AE46E8 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		081FBC231D4625A6005838B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		081FBC281D4625A6005838B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		081FBC7E1D462732005838B8 /* CCCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCache.h; sourceTree = "<group>"; };
 		081FBC7F1D462732005838B8 /* CCCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCache.m; sourceTree = "<group>"; };
@@ -227,6 +225,9 @@
 		086652801D73412600BCD9CE /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		087BFA071D82D16100F940D4 /* Behaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Behaviour.swift; sourceTree = "<group>"; };
 		087BFA0D1D82D1BE00F940D4 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		087BFA0F1D82EB2600F940D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = platform/macos/main.swift; sourceTree = "<group>"; };
+		087BFA111D82EC7700F940D4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = platform/macos/AppDelegate.swift; sourceTree = "<group>"; };
+		087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSEvent+Fiber2d.swift"; path = "platform/macos/NSEvent+Fiber2d.swift"; sourceTree = "<group>"; };
 		088509891D7B4F2F003EF800 /* Tagged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tagged.swift; path = protocols/Tagged.swift; sourceTree = "<group>"; };
 		0885098C1D7B5428003EF800 /* ActionTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTransform.swift; sourceTree = "<group>"; };
 		0885098E1D7B548B003EF800 /* ActionContinous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionContinous.swift; sourceTree = "<group>"; };
@@ -240,7 +241,6 @@
 		088ECE1B1D5AA73900E48EC9 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		088ECE1C1D5AA73900E48EC9 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
 		088ECE251D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+Extensions.swift"; sourceTree = "<group>"; };
-		088ECE271D5C959600E48EC9 /* NSEvent+Fiber2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSEvent+Fiber2d.swift"; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
 		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -436,7 +436,6 @@
 				081FBCF41D462765005838B8 /* BridgingHeader.h */,
 				081FBC251D4625A6005838B8 /* Assets.xcassets */,
 				081FBD2C1D463207005838B8 /* Resources */,
-				081FBC271D4625A6005838B8 /* MainMenu.xib */,
 				081FBC2A1D4625A6005838B8 /* Info.plist */,
 			);
 			name = "Support Files";
@@ -445,9 +444,10 @@
 		081FBCF61D46277D005838B8 /* System */ = {
 			isa = PBXGroup;
 			children = (
-				088ECE271D5C959600E48EC9 /* NSEvent+Fiber2d.swift */,
+				087BFA111D82EC7700F940D4 /* AppDelegate.swift */,
+				087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */,
 				081FBCBA1D462732005838B8 /* MetalView.swift */,
-				081FBC231D4625A6005838B8 /* AppDelegate.swift */,
+				087BFA0F1D82EB2600F940D4 /* main.swift */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -694,7 +694,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */,
-				081FBC291D4625A6005838B8 /* MainMenu.xib in Resources */,
 				081FBD2D1D463207005838B8 /* Resources in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -708,15 +707,16 @@
 			files = (
 				0866527F1D7335D800BCD9CE /* Timer.swift in Sources */,
 				0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */,
+				087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */,
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
 				081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */,
 				088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */,
 				081FBCD91D462732005838B8 /* CCRenderer.m in Sources */,
 				088509971D7C5F76003EF800 /* easing.swift in Sources */,
+				087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */,
 				081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */,
 				081FBCE31D462732005838B8 /* CCSetup.m in Sources */,
-				081FBC241D4625A6005838B8 /* AppDelegate.swift in Sources */,
 				081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */,
 				0812AD031D538D7600AE46E8 /* Color.swift in Sources */,
 				0812ACFC1D538D6600AE46E8 /* Vector2+simd.swift in Sources */,
@@ -729,7 +729,6 @@
 				088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */,
 				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,
-				088ECE281D5C959600E48EC9 /* NSEvent+Fiber2d.swift in Sources */,
 				081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */,
 				081FBD1A1D46289A005838B8 /* RendarableNode.swift in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
@@ -771,6 +770,7 @@
 				081FBCD61D462732005838B8 /* CCNoARC.m in Sources */,
 				081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */,
 				081FBCDF1D462732005838B8 /* CCTextureCache.m in Sources */,
+				087BFA101D82EB2600F940D4 /* main.swift in Sources */,
 				081FBCD31D462732005838B8 /* CCCache.m in Sources */,
 				0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */,
 				081FBD201D46289A005838B8 /* Sprite.swift in Sources */,
@@ -790,17 +790,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		081FBC271D4625A6005838B8 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				081FBC281D4625A6005838B8 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		081FBC2B1D4625A6005838B8 /* Debug */ = {
