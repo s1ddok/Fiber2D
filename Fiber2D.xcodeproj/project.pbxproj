@@ -75,6 +75,8 @@
 		087BFA101D82EB2600F940D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0F1D82EB2600F940D4 /* main.swift */; };
 		087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA111D82EC7700F940D4 /* AppDelegate.swift */; };
 		087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */; };
+		087BFA161D82F5C200F940D4 /* DirectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA151D82F5C200F940D4 /* DirectorView.swift */; };
+		087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA171D82F60500F940D4 /* Director+macOS.swift */; };
 		0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509891D7B4F2F003EF800 /* Tagged.swift */; };
 		0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098C1D7B5428003EF800 /* ActionTransform.swift */; };
 		0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098E1D7B548B003EF800 /* ActionContinous.swift */; };
@@ -167,7 +169,6 @@
 		081FBCA71D462732005838B8 /* cocos2d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d.m; sourceTree = "<group>"; };
 		081FBCA81D462732005838B8 /* NSValue+CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+CCRenderer.h"; sourceTree = "<group>"; };
 		081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+CCRenderer.m"; sourceTree = "<group>"; };
-		081FBCAB1D462732005838B8 /* CCDirectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDirectorView.h; sourceTree = "<group>"; };
 		081FBCAC1D462732005838B8 /* CCNS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNS.h; sourceTree = "<group>"; };
 		081FBCAD1D462732005838B8 /* CCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSetup.h; sourceTree = "<group>"; };
 		081FBCAE1D462732005838B8 /* CCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSetup.m; sourceTree = "<group>"; };
@@ -225,6 +226,8 @@
 		087BFA0F1D82EB2600F940D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = platform/macos/main.swift; sourceTree = "<group>"; };
 		087BFA111D82EC7700F940D4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = platform/macos/AppDelegate.swift; sourceTree = "<group>"; };
 		087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSEvent+Fiber2d.swift"; path = "platform/macos/NSEvent+Fiber2d.swift"; sourceTree = "<group>"; };
+		087BFA151D82F5C200F940D4 /* DirectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectorView.swift; sourceTree = "<group>"; };
+		087BFA171D82F60500F940D4 /* Director+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Director+macOS.swift"; sourceTree = "<group>"; };
 		088509891D7B4F2F003EF800 /* Tagged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tagged.swift; path = protocols/Tagged.swift; sourceTree = "<group>"; };
 		0885098C1D7B5428003EF800 /* ActionTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTransform.swift; sourceTree = "<group>"; };
 		0885098E1D7B548B003EF800 /* ActionContinous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionContinous.swift; sourceTree = "<group>"; };
@@ -376,7 +379,6 @@
 		081FBCAA1D462732005838B8 /* Platforms */ = {
 			isa = PBXGroup;
 			children = (
-				081FBCAB1D462732005838B8 /* CCDirectorView.h */,
 				081FBCAC1D462732005838B8 /* CCNS.h */,
 				081FBCAD1D462732005838B8 /* CCSetup.h */,
 				081FBCAE1D462732005838B8 /* CCSetup.m */,
@@ -525,6 +527,8 @@
 				081FBD091D46289A005838B8 /* Scene.swift */,
 				081FBD0D1D46289A005838B8 /* Transition.swift */,
 				081FBCF91D46289A005838B8 /* Director.swift */,
+				087BFA171D82F60500F940D4 /* Director+macOS.swift */,
+				087BFA151D82F5C200F940D4 /* DirectorView.swift */,
 			);
 			name = Scene;
 			sourceTree = "<group>";
@@ -693,6 +697,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0866527F1D7335D800BCD9CE /* Timer.swift in Sources */,
+				087BFA161D82F5C200F940D4 /* DirectorView.swift in Sources */,
 				0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */,
 				087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */,
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
@@ -772,6 +777,7 @@
 				0812ACFD1D538D6600AE46E8 /* Vector2.swift in Sources */,
 				081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */,
 				088509951D7B876D003EF800 /* ActionEase.swift in Sources */,
+				087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

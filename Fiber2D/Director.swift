@@ -29,7 +29,7 @@ func CCDirectorStack() -> NSMutableArray
     return stack!
 }
 
-@objc class Director : NSObject, MTKViewDelegate {
+public class Director: NSObject {
     class var currentDirector: Director? {
         return Thread.current.threadDictionary[CCDirectorCurrentKey] as? Director
     }
@@ -99,14 +99,14 @@ func CCDirectorStack() -> NSMutableArray
     /** @name Working with View and Projection */
     /// View used by the director for rendering. The CC_VIEW macro equals UIView on iOS, NSOpenGLView on OS X and MetalView on Android.
     /// @see MetalView
-    weak var view: MetalView?
+    weak var view: DirectorView?
     
     /// The current global shader values values.
     var globalShaderUniforms = Dictionary<String, AnyObject>()
     
     let framebuffer = CCFrameBufferObjectMetal()
     
-    init(view: MetalView) {
+    init(view: DirectorView) {
         self.displayStats = false
         self.totalFrames = 0
         self.frames = 0
@@ -147,7 +147,7 @@ func CCDirectorStack() -> NSMutableArray
         view!.beginFrame()
         let projection = runningScene!.projection
         // Synchronize the framebuffer with the view.
-        framebuffer.sync(with: self.view!)
+        framebuffer.sync(with: self.view as! MetalView)
         let renderer: CCRenderer = self.rendererFromPool()
     
         var proj = projection.glkMatrix4
@@ -159,7 +159,7 @@ func CCDirectorStack() -> NSMutableArray
         notificationNode?.visit(renderer, parentTransform: projection)
 
         CCRenderer.bindRenderer(nil)
-        view!.addFrameCompletionHandler {
+        view!.add {
             // Return the renderer to the pool when the frame completes.
             self.poolRenderer(renderer)
         }
@@ -190,7 +190,7 @@ func CCDirectorStack() -> NSMutableArray
     }
     
     func addFrameCompletionHandler(_ handler: @escaping ()->()) {
-        self.view!.addFrameCompletionHandler(handler)
+        self.view!.add(frameCompletionHandler: handler)
     }
     
     func calculateDeltaTime() {
@@ -236,7 +236,7 @@ func CCDirectorStack() -> NSMutableArray
         let invTransform = transform.inversed
         // Calculate z=0 using -> transform*[0, 0, 0, 1]/w
         let zClip: Float = transform[3, 2] / transform[3, 3]
-        let glSize: Size = Size(CGSize: self.view!.bounds.size)
+        let glSize: Size = viewSize
         var clipCoord = vec3(2.0 * Float(uiPoint.x / glSize.width) - 1.0, 2.0 * Float(uiPoint.y / glSize.height) - 1.0, zClip)
         clipCoord.y *= flipY
         return invTransform.multiplyAndProject(v: clipCoord).xy
@@ -245,16 +245,16 @@ func CCDirectorStack() -> NSMutableArray
     func convertToUI(_ glPoint: Point) -> Point {
         let transform = runningScene!.projection
         let clipCoord = transform.multiplyAndProject(v: glPoint.extendedToVec3)
-        let glSize: Size = Size(CGSize: self.view!.bounds.size)
+        let glSize: Size = viewSize
         return glSize * p2d(clipCoord.x * 0.5 + 0.5, clipCoord.y * flipY * 0.5 + 0.5)
     }
     
     var viewSize: Size {
-        return viewSizeInPixels * Float(1.0 / CCSetup.shared().contentScale)
+        return view!.size
     }
     
     var viewSizeInPixels: Size {
-        return Size(CGSize: self.view!.sizeInPixels)
+        return view!.sizeInPixels
     }
     
     var viewportRect: Rect {
@@ -502,21 +502,4 @@ func CCDirectorStack() -> NSMutableArray
     func stopRunLoop() {
         print("Director#stopRunLoop. Override me")
     }
-    
-    func draw(in view: MTKView) {
-        self.animating = true
-        self.mainLoopBody()
-    }
-    
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        runningScene?.contentSize = Size(CGSize: size)
-        runningScene?.viewDidResizeTo(Size(CGSize:size))
-    }
-    #if os(OSX)
-    func convertEventToGL(_ event: NSEvent) -> Point {
-        let point: NSPoint = self.view!.convert(event.locationInWindow, from: nil)
-        return self.convertToGL(Point(NSPointToCGPoint(point)))
-    }
-    #endif
-    
 }

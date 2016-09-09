@@ -9,7 +9,7 @@ extension Node {
     /** The CCView this node is a member of, accessed via the scene and director associated with this node.
      
      @see CCView */
-    var view: MetalView? {
+    var view: DirectorView? {
         return director?.view
     }
     

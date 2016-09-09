@@ -7,31 +7,34 @@
 
 import MetalKit
 
-class MetalView : MTKView {
+class MetalView: MTKView, DirectorView {
     var context: CCMetalContext!
     //id<MTLDrawable> _currentDrawable;
     var layerSizeDidUpdate: Bool = false
     var director: Director!
     var surfaceSize = CGSize.zero
     
-    var sizeInPixels: CGSize {
-        get {
-            return CC_SIZE_SCALE(self.bounds.size, self.contentScaleFactor)
-        }
+    @objc(sizeInPixels)
+    var cgsizeInPixels: CGSize {
+        return CC_SIZE_SCALE(self.bounds.size, self.contentScaleFactor)
+    }
+    
+    var sizeInPixels: Size {
+        return Size(CGSize: self.bounds.size) *  Float(self.contentScaleFactor)
+    }
+    
+    var size: Size {
+        return Size(CGSize: self.bounds.size)
     }
     
     #if os(OSX)
     var contentScaleFactor: CGFloat {
-        get {
-            let screen = NSScreen.main()!
-            return screen.backingScaleFactor
-        }
+        let screen = NSScreen.main()!
+        return screen.backingScaleFactor
     }
     
     override var acceptsFirstResponder : Bool {
-        get {
-            return true
-        }
+        return true
     }
     #endif
     
@@ -101,10 +104,10 @@ class MetalView : MTKView {
         context.flushCommandBuffer()
     }
     
-    func addFrameCompletionHandler(_ handler: @escaping ()->()) {
-        context.currentCommandBuffer.addCompletedHandler({(buffer: MTLCommandBuffer) -> Void in
+    func add(frameCompletionHandler handler: @escaping ()->()) {
+        context.currentCommandBuffer.addCompletedHandler {(buffer: MTLCommandBuffer) -> Void in
             handler()
-        })
+        }
     }
     
     func convertPointFromViewToSurface(_ point: CGPoint) -> CGPoint {
