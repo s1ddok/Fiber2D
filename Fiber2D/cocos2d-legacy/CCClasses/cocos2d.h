@@ -80,8 +80,6 @@
 // Platform Support:
 #import "CCNS.h"
 
-#import "CCDirectorIOS.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif

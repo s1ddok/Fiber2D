@@ -32,7 +32,6 @@
 		081FBCE11D462732005838B8 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA71D462732005838B8 /* cocos2d.m */; };
 		081FBCE21D462732005838B8 /* NSValue+CCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */; };
 		081FBCE31D462732005838B8 /* CCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCAE1D462732005838B8 /* CCSetup.m */; };
-		081FBCE41D462732005838B8 /* CCDirectorIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB11D462732005838B8 /* CCDirectorIOS.m */; };
 		081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB21D462732005838B8 /* CCMetalSupport.m */; };
 		081FBCE61D462732005838B8 /* CCShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB41D462732005838B8 /* CCShaders.metal */; };
 		081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB61D462732005838B8 /* UITouch+CC.m */; };
@@ -172,8 +171,6 @@
 		081FBCAC1D462732005838B8 /* CCNS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNS.h; sourceTree = "<group>"; };
 		081FBCAD1D462732005838B8 /* CCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSetup.h; sourceTree = "<group>"; };
 		081FBCAE1D462732005838B8 /* CCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSetup.m; sourceTree = "<group>"; };
-		081FBCB01D462732005838B8 /* CCDirectorIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDirectorIOS.h; sourceTree = "<group>"; };
-		081FBCB11D462732005838B8 /* CCDirectorIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDirectorIOS.m; sourceTree = "<group>"; };
 		081FBCB21D462732005838B8 /* CCMetalSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMetalSupport.m; sourceTree = "<group>"; };
 		081FBCB31D462732005838B8 /* CCMetalSupport_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMetalSupport_Private.h; sourceTree = "<group>"; };
 		081FBCB41D462732005838B8 /* CCShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CCShaders.metal; sourceTree = "<group>"; };
@@ -384,7 +381,6 @@
 				081FBCAD1D462732005838B8 /* CCSetup.h */,
 				081FBCAE1D462732005838B8 /* CCSetup.m */,
 				081FBCAF1D462732005838B8 /* iOS */,
-				081FBCB71D462732005838B8 /* Mac */,
 			);
 			name = Platforms;
 			path = "cocos2d-legacy/Platforms";
@@ -393,8 +389,6 @@
 		081FBCAF1D462732005838B8 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				081FBCB01D462732005838B8 /* CCDirectorIOS.h */,
-				081FBCB11D462732005838B8 /* CCDirectorIOS.m */,
 				081FBCB21D462732005838B8 /* CCMetalSupport.m */,
 				081FBCB31D462732005838B8 /* CCMetalSupport_Private.h */,
 				081FBCB41D462732005838B8 /* CCShaders.metal */,
@@ -402,13 +396,6 @@
 				081FBCB61D462732005838B8 /* UITouch+CC.m */,
 			);
 			path = iOS;
-			sourceTree = "<group>";
-		};
-		081FBCB71D462732005838B8 /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mac;
 			sourceTree = "<group>";
 		};
 		081FBCBB1D462732005838B8 /* Support */ = {
@@ -746,7 +733,6 @@
 				081FBD191D46289A005838B8 /* Node+Traverse.swift in Sources */,
 				0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */,
 				081FBCDE1D462732005838B8 /* CCTexture.m in Sources */,
-				081FBCE41D462732005838B8 /* CCDirectorIOS.m in Sources */,
 				081FBD1E1D46289A005838B8 /* ResponderManager.swift in Sources */,
 				081FBD1B1D46289A005838B8 /* RenderTexture.swift in Sources */,
 				0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */,
