@@ -8,42 +8,42 @@
 import Foundation
 import MetalKit
 
-let CCDirectorCurrentKey = "CCDirectorCurrentKey"
-let CCDirectorStackKey   = "CCDirectorStackKey"
+let DirectorCurrentKey = "DirectorCurrentKey"
+let DirectorStackKey   = "DirectorStackKey"
 
-func CCDirectorBindCurrent(_ director: AnyObject?) {
+func DirectorBindCurrent(_ director: AnyObject?) {
     if director != nil || !(director is NSNull) {
-        Thread.current.threadDictionary[CCDirectorCurrentKey] = director
+        Thread.current.threadDictionary[DirectorCurrentKey] = director
     } else {
-        Thread.current.threadDictionary.removeObject(forKey: CCDirectorCurrentKey)
+        Thread.current.threadDictionary.removeObject(forKey: DirectorCurrentKey)
     }
 }
 
-func CCDirectorStack() -> NSMutableArray
+func DirectorStack() -> NSMutableArray
 {
-    var stack = Thread.current.threadDictionary[CCDirectorStackKey] as? NSMutableArray
+    var stack = Thread.current.threadDictionary[DirectorStackKey] as? NSMutableArray
     if stack == nil {
         stack = NSMutableArray()
-        Thread.current.threadDictionary[CCDirectorStackKey] = stack
+        Thread.current.threadDictionary[DirectorStackKey] = stack
     }
     return stack!
 }
 
 public class Director: NSObject {
     class var currentDirector: Director? {
-        return Thread.current.threadDictionary[CCDirectorCurrentKey] as? Director
+        return Thread.current.threadDictionary[DirectorCurrentKey] as? Director
     }
     
     class func pushCurrentDirector(_ director: Director) {
-        let stack = CCDirectorStack()
+        let stack = DirectorStack()
         stack.add(self.currentDirector ?? NSNull())
-        CCDirectorBindCurrent(director)
+        DirectorBindCurrent(director)
     }
     
     class func popCurrentDirector() {
-        let stack = CCDirectorStack()
-        assert(stack.count > 0, "CCDirector stack underflow.")
-        CCDirectorBindCurrent(stack.lastObject as AnyObject?)
+        let stack = DirectorStack()
+        assert(stack.count > 0, "Director stack underflow.")
+        DirectorBindCurrent(stack.lastObject as AnyObject?)
         stack.removeLastObject()
     }
     
@@ -82,7 +82,7 @@ public class Director: NSObject {
     
     // Undocumented members (considered private)
     var responderManager: ResponderManager!
-    //weak var delegate: CCDirectorDelegate?
+    
     /// User definable value that is used for default contentSizes of many node types (Scene, NodeColor, etc).
     /// Defaults to the view size.
     var designSize : Size {
@@ -97,8 +97,7 @@ public class Director: NSObject {
     }
     private var _designSize = Size.zero
     /** @name Working with View and Projection */
-    /// View used by the director for rendering. The CC_VIEW macro equals UIView on iOS, NSOpenGLView on OS X and MetalView on Android.
-    /// @see MetalView
+    /// View used by the director for rendering.
     weak var view: DirectorView?
     
     /// The current global shader values values.
@@ -212,9 +211,6 @@ public class Director: NSObject {
     }
     
     func purgeCachedData() {
-        /*if ((delegate?.respondsToSelector(#selector(CCDirectorDelegate.purgeCachedData))) != nil) {
-            delegate?.purgeCachedData!()
-        }*/
         CCRenderState.flushCache()
         if Director.currentDirector?.view != nil {
             CCTextureCache.shared().removeUnusedTextures()
@@ -302,9 +298,8 @@ public class Director: NSObject {
         }
     }
     
-    func runWithScene(_ scene: Scene!) {
-        assert(scene != nil, "Argument must be non-nil")
-        assert(runningScene == nil, "This command can only be used to start the CCDirector. There is already a scene present.")
+    func runWithScene(_ scene: Scene) {
+        assert(runningScene == nil, "This command can only be used to start the Director. There is already a scene present.")
         self.pushScene(scene)
         scene.director = self
         self.antiFlickrDrawCall()
@@ -312,16 +307,14 @@ public class Director: NSObject {
         self.startRunLoop()
     }
     
-    func pushScene(_ scene: Scene!) {
-        assert(scene != nil, "Argument must be non-nil")
+    func pushScene(_ scene: Scene) {
         self.sendCleanupToScene = false
         scenesStack.add(scene)
         self.nextScene = scene
         // _nextScene is a weak ref
     }
     
-    func pushScene(_ scene: Scene!, withTransition transition: Transition) {
-        assert(scene != nil, "Scene must be non-nil")
+    func pushScene(_ scene: Scene, withTransition transition: Transition) {
         scenesStack.add(scene)
         self.sendCleanupToScene = false
         transition.startTransition(scene, withDirector: self)
@@ -390,8 +383,7 @@ public class Director: NSObject {
         self.sendCleanupToScene = false
     }
     
-    func startTransition(_ transition: Transition!) {
-        assert(transition != nil, "Argument must be non-nil")
+    func startTransition(_ transition: Transition) {
         assert(runningScene != nil, "There must be a running scene")
         scenesStack.removeLastObject()
         scenesStack.add(transition)
@@ -399,9 +391,6 @@ public class Director: NSObject {
     }
     
     func end() {
-        /*if ((delegate?.respondsToSelector(#selector(CCDirectorDelegate.end))) != nil) {
-            delegate!.end!()
-        }*/
         runningScene!.onExitTransitionDidStart()
         runningScene!.onExit()
         runningScene!.cleanup()
