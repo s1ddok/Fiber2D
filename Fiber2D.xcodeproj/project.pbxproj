@@ -63,6 +63,7 @@
 		081FBD231D46289A005838B8 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0D1D46289A005838B8 /* Transition.swift */; };
 		081FBD261D4628F8005838B8 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD251D4628F8005838B8 /* MainScene.swift */; };
 		081FBD2D1D463207005838B8 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 081FBD2C1D463207005838B8 /* Resources */; };
+		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
 		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
 		0866526D1D732FA400BCD9CE /* Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866526C1D732FA400BCD9CE /* Angle.swift */; };
@@ -212,6 +213,7 @@
 		081FBD251D4628F8005838B8 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCRendererSharedTypes.h; sourceTree = "<group>"; };
 		081FBD2C1D463207005838B8 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
 		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
 		0866526C1D732FA400BCD9CE /* Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Angle.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				081FBD011D46289A005838B8 /* Node+Scene.swift */,
 				081FBD021D46289A005838B8 /* Node+Transform.swift */,
 				081FBD031D46289A005838B8 /* Node+Traverse.swift */,
+				0847405D1D8362FA0053DD2E /* Node+Component.swift */,
 				081FBD041D46289A005838B8 /* RendarableNode.swift */,
 			);
 			name = Base;
@@ -764,6 +767,7 @@
 				087BFA081D82D16100F940D4 /* Behaviour.swift in Sources */,
 				0866526D1D732FA400BCD9CE /* Angle.swift in Sources */,
 				0812ACFB1D538D6600AE46E8 /* platform.swift in Sources */,
+				0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */,
 				081FBCE21D462732005838B8 /* NSValue+CCRenderer.m in Sources */,
 				081FBCDC1D462732005838B8 /* CCShader.m in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,

@@ -120,13 +120,14 @@ public class Node: Responder, Updatable {
     /// -----------------------------------------------------------------------
     /// @name Storing Custom Information
     /// -----------------------------------------------------------------------
-    /** Used to store a custom object of any type. For instance you could add a NSMutableDictionary to store custom
+    /** Used to store a custom object of any type. 
+     For instance you could add a NSMutableDictionary to store custom
      data in a node without needing to subclass the node. */
     var userObject: AnyObject?
     
-    override init() {
-        super.init()
-    }
+    // MARK: Components
+    /// Array of components added to the node
+    internal(set) public var components = [Component]()
     
     // MARK: Transforms
     internal var isTransformDirty = true
@@ -1005,7 +1006,9 @@ public class Node: Responder, Updatable {
         return scene?.scheduler
     }
     internal(set) public var priority: Int = 0
-    open func update(delta: Time) { }
+    open func update(delta: Time) {
+        components.forEach { $0.update(delta: delta) }
+    }
     open func fixedUpdate(delta: Time) { }
 
 }

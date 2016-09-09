@@ -34,6 +34,8 @@ extension Node {
         for block: ()->() in queuedActions {
             block()
         }
+        
+        components.forEach { $0.onEnter() }
         self.queuedActions.removeAll()
         self.wasRunning(wasRunning)
     }
@@ -72,6 +74,8 @@ extension Node {
         let wasRunning: Bool = self.active
         self.isInActiveScene = false
         self.wasRunning(wasRunning)
+        
+        components.forEach { $0.onExit() }
         children.forEach { $0.onExit() }
     }
 }
