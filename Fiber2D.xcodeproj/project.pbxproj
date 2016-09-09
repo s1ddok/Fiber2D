@@ -73,6 +73,8 @@
 		0866527D1D73359800BCD9CE /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866527C1D73359800BCD9CE /* Scheduler.swift */; };
 		0866527F1D7335D800BCD9CE /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866527E1D7335D800BCD9CE /* Timer.swift */; };
 		086652811D73412600BCD9CE /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086652801D73412600BCD9CE /* Action.swift */; };
+		087BFA081D82D16100F940D4 /* Behaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA071D82D16100F940D4 /* Behaviour.swift */; };
+		087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0D1D82D1BE00F940D4 /* Component.swift */; };
 		0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509891D7B4F2F003EF800 /* Tagged.swift */; };
 		0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098C1D7B5428003EF800 /* ActionTransform.swift */; };
 		0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885098E1D7B548B003EF800 /* ActionContinous.swift */; };
@@ -223,6 +225,8 @@
 		0866527C1D73359800BCD9CE /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		0866527E1D7335D800BCD9CE /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		086652801D73412600BCD9CE /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		087BFA071D82D16100F940D4 /* Behaviour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Behaviour.swift; sourceTree = "<group>"; };
+		087BFA0D1D82D1BE00F940D4 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		088509891D7B4F2F003EF800 /* Tagged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tagged.swift; path = protocols/Tagged.swift; sourceTree = "<group>"; };
 		0885098C1D7B5428003EF800 /* ActionTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTransform.swift; sourceTree = "<group>"; };
 		0885098E1D7B548B003EF800 /* ActionContinous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionContinous.swift; sourceTree = "<group>"; };
@@ -457,6 +461,7 @@
 				081FBD301D463446005838B8 /* Rendering */,
 				081FBD311D463450005838B8 /* Input */,
 				081FBD331D463463005838B8 /* Scene */,
+				087BFA0C1D82D16600F940D4 /* Behaviour */,
 				086652731D7333BA00BCD9CE /* Scheduling */,
 				081FBD321D463457005838B8 /* Sprites */,
 				0812ACEF1D538D6500AE46E8 /* Math */,
@@ -546,6 +551,15 @@
 				088509A01D7CC91F003EF800 /* Actions */,
 			);
 			name = Scheduling;
+			sourceTree = "<group>";
+		};
+		087BFA0C1D82D16600F940D4 /* Behaviour */ = {
+			isa = PBXGroup;
+			children = (
+				087BFA0D1D82D1BE00F940D4 /* Component.swift */,
+				087BFA071D82D16100F940D4 /* Behaviour.swift */,
+			);
+			name = Behaviour;
 			sourceTree = "<group>";
 		};
 		0885098B1D7B4F62003EF800 /* Protocols */ = {
@@ -721,6 +735,7 @@
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
+				087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */,
 				081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */,
 				088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
@@ -759,6 +774,7 @@
 				081FBCD31D462732005838B8 /* CCCache.m in Sources */,
 				0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */,
 				081FBD201D46289A005838B8 /* Sprite.swift in Sources */,
+				087BFA081D82D16100F940D4 /* Behaviour.swift in Sources */,
 				0866526D1D732FA400BCD9CE /* Angle.swift in Sources */,
 				0812ACFB1D538D6600AE46E8 /* platform.swift in Sources */,
 				081FBCE21D462732005838B8 /* NSValue+CCRenderer.m in Sources */,
