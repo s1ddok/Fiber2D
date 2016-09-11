@@ -867,19 +867,19 @@ public class Node: Responder, Updatable {
      @note You should only use Fiber2D's CCRenderer API to modify the render state and shaders. For further info, please see the CCRenderer documentation.
      @warning You **must not** call `[super draw:transform:];`
      
-     @param renderer The CCRenderer instance to use for drawing.
+     @param renderer The Renderer instance to use for drawing.
      @param transform The parent node's transform.
-     @see CCRenderer
+     @see Renderer
      */
     @nonobjc
-    func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {}
+    func draw(_ renderer: Renderer, transform: Matrix4x4f) {}
     
     // purposefully undocumented: internal method, users should prefer to implement draw:transform:
     /* Recursive method that visit its children and draw them.
-     * @param renderer The CCRenderer instance to use for drawing.
+     * @param renderer The Renderer instance to use for drawing.
      * @param parentTransform The parent node's transform.
      */
-    func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
+    func visit(_ renderer: Renderer, parentTransform: Matrix4x4f) {
         // quick return if not visible. children won't be drawn.
         if !visible {
             return

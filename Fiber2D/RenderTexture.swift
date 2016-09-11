@@ -59,17 +59,18 @@ class RenderTexture: RenderableNode {
      @returns A CCRenderer instance used for drawing.
      */
     
-    func begin() -> CCRenderer {
+    func begin() -> Renderer {
         var texture: CCTexture! = self.texture
         if texture == nil {
             self.create()
             texture = self.texture
         }
-        let renderer: CCRenderer = Director.currentDirector!.rendererFromPool()
-        var proj = _projection.glkMatrix4
-        renderer.prepare(withProjection: &proj, framebuffer: framebuffer)
-        self.previousRenderer = CCRenderer.current()
-        CCRenderer.bindRenderer(renderer)
+        let renderer: Renderer = Director.currentDirector!.rendererFromPool()
+        // TODO: Renderer
+        renderer.prepare(withProjection: _projection, framebuffer: framebuffer!)
+        self.previousRenderer = currentRenderer
+        currentRenderer = renderer
+        //CCRenderer.bindRenderer(renderer)
         return renderer
     }
     /**
@@ -83,9 +84,9 @@ class RenderTexture: RenderableNode {
      *  @returns A CCRenderer instance used for drawing.
      */
     
-    func beginWithClear(_ r: Float, g: Float, b: Float, a: Float, flags: MTLLoadAction = .clear) -> CCRenderer {
-        let renderer: CCRenderer = self.begin()
-        renderer.enqueueClear(flags, color: GLKVector4Make(r, g, b, a), globalSortOrder: NSInteger.min)
+    func beginWithClear(_ r: Float, g: Float, b: Float, a: Float, flags: MTLLoadAction = .clear) -> Renderer {
+        let renderer: Renderer = self.begin()
+        renderer.enqueueClear(color: Color(r, g, b, a), globalSortOrder: NSInteger.min)
         return renderer
     }
     
@@ -94,14 +95,15 @@ class RenderTexture: RenderableNode {
      */
     
     func end() {
-        let renderer: CCRenderer = CCRenderer.current()
+        let renderer = currentRenderer!
         let director: Director = Director.currentDirector!
         director.addFrameCompletionHandler {
             // Return the renderer to the pool when the frame completes.
             director.poolRenderer(renderer)
         }
         renderer.flush()
-        CCRenderer.bindRenderer(previousRenderer)
+        currentRenderer = previousRenderer
+        //CCRenderer.bindRenderer(previousRenderer)
     }
     /**
      *  @name Clearing the Render Texture
@@ -137,7 +139,7 @@ class RenderTexture: RenderableNode {
      */
     var sprite: Sprite!
     // Reference to the previous render to be restored by end.
-    var previousRenderer: CCRenderer!
+    var previousRenderer: Renderer?
     
     // Raw projection matrix used for rendering.
     // For metal will be flipped on the y-axis compared to the .projection property.
@@ -210,7 +212,7 @@ class RenderTexture: RenderableNode {
         }
     }
     
-    override func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
+    override func visit(_ renderer: Renderer, parentTransform: Matrix4x4f) {
         // override visit.
         // Don't call visit on its children
         guard self.visible else {
@@ -218,8 +220,8 @@ class RenderTexture: RenderableNode {
         }
         if autoDraw {
             let rtRenderer = self.begin()
-            assert(renderer == renderer, "CCRenderTexture error!")
-            rtRenderer.enqueueClear(.clear, color: clearColor.glkVector4, globalSortOrder: NSInteger.min)
+            //assert(renderer == renderer, "CCRenderTexture error!")
+            rtRenderer.enqueueClear(color: clearColor, globalSortOrder: NSInteger.min)
             //! make sure all children are drawn
             self.sortAllChildren()
             for child: Node in children {
@@ -237,7 +239,7 @@ class RenderTexture: RenderableNode {
         
     }
     
-    override func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {
+    override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
         assert(sprite.zOrder == 0, "Changing the sprite's zOrder is not supported.")
         // Force the sprite to render itself
         sprite.visit(renderer, parentTransform: transform)

@@ -26,7 +26,7 @@ class Layout : Node {
         }
     }
     
-    override func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
+    override func visit(_ renderer: Renderer, parentTransform: Matrix4x4f) {
         if _needsLayout {
             self.layout()
         }

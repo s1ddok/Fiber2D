@@ -147,17 +147,19 @@ public class Director: NSObject {
         let projection = runningScene!.projection
         // Synchronize the framebuffer with the view.
         framebuffer.sync(with: self.view as! MetalView)
-        let renderer: CCRenderer = self.rendererFromPool()
+        let renderer: Renderer = self.rendererFromPool()
     
-        var proj = projection.glkMatrix4
-        renderer.prepare(withProjection: &proj, framebuffer: framebuffer)
-        CCRenderer.bindRenderer(renderer)
-        renderer.enqueueClear(.clear, color: runningScene!.colorRGBA.glkVector4, globalSortOrder: NSInteger.min)
+        renderer.prepare(withProjection: projection, framebuffer: framebuffer)
+        
+        //CCRenderer.bindRenderer(renderer)
+        currentRenderer = renderer
+        renderer.enqueueClear(color: runningScene!.colorRGBA, globalSortOrder: NSInteger.min)
         // Render
         runningScene!.visit(renderer, parentTransform: projection)
         notificationNode?.visit(renderer, parentTransform: projection)
 
-        CCRenderer.bindRenderer(nil)
+        //CCRenderer.bindRenderer(nil)
+        currentRenderer = nil
         view!.add {
             // Return the renderer to the pool when the frame completes.
             self.poolRenderer(renderer)
@@ -168,7 +170,7 @@ public class Director: NSObject {
         Director.popCurrentDirector()
     }
     
-    func rendererFromPool() -> CCRenderer {
+    func rendererFromPool() -> Renderer {
         /*let lockQueue = dispatch_queue_create("com.test.LockQueue")
         dispatch_sync(lockQueue) {
             if rendererPool.count > 0 {
@@ -178,10 +180,10 @@ public class Director: NSObject {
             }
         }*/
         // Allocate and return a new renderer.
-        return CCRenderer()
+        return CCRendererImpl(renderer: CCRenderer())
     }
     
-    func poolRenderer(_ renderer: CCRenderer) {
+    func poolRenderer(_ renderer: Renderer) {
         /*let lockQueue = dispatch_queue_create("com.test.LockQueue")
         dispatch_sync(lockQueue) {
             rendererPool.append(renderer)

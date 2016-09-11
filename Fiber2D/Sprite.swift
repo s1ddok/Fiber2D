@@ -8,10 +8,10 @@
 /// The four CCVertexes of a sprite.
 /// Bottom left, bottom right, top right, top left.
 struct SpriteVertexes {
-    var bl, br, tr, tl: CCVertex
+    var bl, br, tr, tl: RendererVertex
     
     init() {
-        bl = CCVertex()
+        bl = RendererVertex()
         br = bl
         tr = bl
         tl = bl
@@ -192,10 +192,10 @@ class Sprite: RenderableNode {
             self.secondaryTexture = spriteFrame2.texture
             // Set the second texture coordinate set from the normal map's sprite frame.
             let texCoords: SpriteTexCoordSet = Sprite.textureCoordsForTexture(spriteFrame2.texture, withRect: spriteFrame2.rect, rotated: spriteFrame2.rotated, xFlipped: flipX, yFlipped: flipY)
-            self.verts.bl.texCoord2 = texCoords.bl.glkVec2
-            self.verts.br.texCoord2 = texCoords.br.glkVec2
-            self.verts.tr.texCoord2 = texCoords.tr.glkVec2
-            self.verts.tl.texCoord2 = texCoords.tl.glkVec2
+            self.verts.bl.texCoord2 = texCoords.bl
+            self.verts.br.texCoord2 = texCoords.br
+            self.verts.tr.texCoord2 = texCoords.tr
+            self.verts.tl.texCoord2 = texCoords.tl
         }
     }
     /// -----------------------------------------------------------------------
@@ -229,10 +229,10 @@ class Sprite: RenderableNode {
         self.contentSize = untrimmedSize
         self.textureRect = rect
         let texCoords: SpriteTexCoordSet = Sprite.textureCoordsForTexture(texture, withRect: rect, rotated: rotated, xFlipped: flipX, yFlipped: flipY)
-        self.verts.bl.texCoord1 = texCoords.bl.glkVec2
-        self.verts.br.texCoord1 = texCoords.br.glkVec2
-        self.verts.tr.texCoord1 = texCoords.tr.glkVec2
-        self.verts.tl.texCoord1 = texCoords.tl.glkVec2
+        self.verts.bl.texCoord1 = texCoords.bl
+        self.verts.br.texCoord1 = texCoords.br
+        self.verts.tr.texCoord1 = texCoords.tr
+        self.verts.tl.texCoord1 = texCoords.tl
         var relativeOffset = unflippedOffsetPositionFromCenter
         // issue #732
         if flipX {
@@ -249,10 +249,10 @@ class Sprite: RenderableNode {
         let y1 = Float(offsetPosition.y)
         let x2 = x1 + Float(textureRect.size.width)
         let y2 = y1 + Float(textureRect.size.height)
-        self.verts.bl.position = GLKVector4Make(x1, y1, 0.0, 1.0)
-        self.verts.br.position = GLKVector4Make(x2, y1, 0.0, 1.0)
-        self.verts.tr.position = GLKVector4Make(x2, y2, 0.0, 1.0)
-        self.verts.tl.position = GLKVector4Make(x1, y2, 0.0, 1.0)
+        self.verts.bl.position = vec4(x1, y1, 0.0, 1.0)
+        self.verts.br.position = vec4(x2, y1, 0.0, 1.0)
+        self.verts.tr.position = vec4(x2, y2, 0.0, 1.0)
+        self.verts.tl.position = vec4(x1, y2, 0.0, 1.0)
         // Set the center/extents for culling purposes.
         self.vertexCenter = vec2((x1 + x2) * 0.5, (y1 + y2) * 0.5)
         self.vertexExtents = vec2((x2 - x1) * 0.5, (y2 - y1) * 0.5)
@@ -280,7 +280,7 @@ class Sprite: RenderableNode {
     
     
     func updateColor() {
-        let color4 = displayedColor.premultiplyingAlpha.glkVector4
+        let color4 = displayedColor.premultiplyingAlpha
         self.verts.bl.color = color4
         self.verts.br.color = color4
         self.verts.tr.color = color4
@@ -316,20 +316,21 @@ class Sprite: RenderableNode {
     }
     
     
-    override func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {
+    override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
         var t = transform.glkMatrix4
         guard CCRenderCheckVisibility(&t, vertexCenter.glkVec2, vertexExtents.glkVec2) else {
             return
         }
         
-        let buffer = renderer.enqueueTriangles(2, andVertexes: 4, with: self.renderState, globalSortOrder: 0)
-        CCRenderBufferSetVertex(buffer, 0, CCVertexApplyTransform(self.verts.bl, &t))
-        CCRenderBufferSetVertex(buffer, 1, CCVertexApplyTransform(self.verts.br, &t))
-        CCRenderBufferSetVertex(buffer, 2, CCVertexApplyTransform(self.verts.tr, &t))
-        CCRenderBufferSetVertex(buffer, 3, CCVertexApplyTransform(self.verts.tl, &t))
-        CCRenderBufferSetTriangle(buffer, 0, 0, 1, 2)
-        CCRenderBufferSetTriangle(buffer, 1, 0, 2, 3)
+        let buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: self.renderState, globalSortOrder: 0)
+
+        buffer.setVertex(index: 0, vertex: verts.bl.transformed(transform))
+        buffer.setVertex(index: 1, vertex: verts.br.transformed(transform))
+        buffer.setVertex(index: 2, vertex: verts.tr.transformed(transform))
+        buffer.setVertex(index: 3, vertex: verts.tl.transformed(transform))
         
+        buffer.setTriangle(index: 0, v1: 0, v2: 1, v3: 2)
+        buffer.setTriangle(index: 1, v1: 0, v2: 2, v3: 3)
     }
     
 }
