@@ -9,6 +9,7 @@
 import Foundation
 
 extension Array {
+	@discardableResult
     mutating func removeObject(_ obj: AnyObject) -> Bool {
         var idx = 0
         for e in self {
