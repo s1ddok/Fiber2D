@@ -14,10 +14,10 @@ class RenderableNode: Node {
             renderState = nil
         }
     }
-    private(set) var shaderUniforms: [NSObject : AnyObject]! {
+    private(set) var shaderUniforms: [String : Any]! {
         get {
             if _shaderUniforms == nil {
-                _shaderUniforms = [CCShaderUniformMainTexture as NSObject : texture ?? CCTexture.none()]
+                _shaderUniforms = [ShaderUniformMainTexture : texture ?? CCTexture.none()]
             }
             
             return _shaderUniforms
@@ -26,7 +26,7 @@ class RenderableNode: Node {
             _shaderUniforms = newValue
         }
     }
-    private var _shaderUniforms: [NSObject: AnyObject]?
+    private var _shaderUniforms: [String: Any]?
     
     
     var blendMode: CCBlendMode {
@@ -41,7 +41,7 @@ class RenderableNode: Node {
             if texture != oldValue {
                 renderState = nil
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
-                shaderUniforms?[CCShaderUniformMainTexture as NSObject] = texture ?? CCTexture.none()
+                shaderUniforms?[ShaderUniformMainTexture] = texture ?? CCTexture.none()
             }
         }
     }
@@ -50,7 +50,7 @@ class RenderableNode: Node {
             if texture != oldValue {
                 renderState = nil
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
-                shaderUniforms?[CCShaderUniformSecondaryTexture as NSObject] = texture ?? CCTexture.none()
+                shaderUniforms?[ShaderUniformSecondaryTexture] = texture ?? CCTexture.none()
             }
         }
     }
@@ -98,12 +98,12 @@ class RenderableNode: Node {
         return true
     }
     
-    private func CheckDefaultUniforms(_ uniforms: [NSObject: AnyObject]?, texture: CCTexture) -> Bool
+    private func CheckDefaultUniforms(_ uniforms: [String: Any]?, texture: CCTexture) -> Bool
     {
         guard uniforms != nil else {
             return true
         }
         // Check that the uniforms has only one key for the main texture.
-        return uniforms!.count == 1 && uniforms![CCShaderUniformMainTexture as NSObject] as! CCTexture == texture
+        return uniforms!.count == 1 && uniforms![ShaderUniformMainTexture] as! CCTexture == texture
     }
 }
