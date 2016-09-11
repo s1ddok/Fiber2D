@@ -14,7 +14,6 @@ public extension Node {
      * @param name A given tag of component.
      * @return The Component by tag.
      */
-    
     func getComponent(by tag: Int) -> Component? {
         return components.first { $0.tag == tag }
     }
@@ -25,6 +24,7 @@ public extension Node {
      * @param component A given component.
      * @return True if added success.
      */
+    @discardableResult
     func add(component: Component) -> Bool {
         guard component.owner == nil else {
             fatalError("ERROR: Component already add. It can't be added to more than one owner")
@@ -49,6 +49,7 @@ public extension Node {
      * @param name A given tag of components.
      * @return True if removed success.
      */
+    @discardableResult
     func removeComponent(by tag: Int) -> Bool {
         let oldCount = components.count
         components = components.filter {
@@ -69,6 +70,7 @@ public extension Node {
      * @param component A given component.
      * @return True if removed success.
      */
+    @discardableResult
     func remove(component: Component) -> Bool {
         return components.removeObject(component)
     }
