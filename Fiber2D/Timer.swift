@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-typealias TimerBlock = (Timer) -> Void
+public typealias TimerBlock = (Timer) -> Void
 
 internal let TIMER_REPEAT_COUNT_FOREVER = Int.max
 
@@ -14,7 +14,7 @@ internal let TIMER_REPEAT_COUNT_FOREVER = Int.max
  
  @note New Timer objects can only be created with the schedule methods. Timer should not be subclassed.
  */
-internal final class Timer {
+public final class Timer {
     /** @name Interval and Repeat Count */
     /** Number of times to run the selector again. First run does not count as a repeat. */
     var repeatCount = 0

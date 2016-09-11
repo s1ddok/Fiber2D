@@ -850,7 +850,7 @@ public class Node: Responder {
         }
     }
     /** Returns YES if the node is added to an active scene and neither it nor any of it's ancestors is paused. */
-    var active: Bool {
+    public var active: Bool {
         return self.isInActiveScene && !paused && pausedAncestors == 0
     }
     
@@ -864,14 +864,13 @@ public class Node: Responder {
     /**
      Override this method to add custom rendering code to your node.
      
-     @note You should only use Fiber2D's CCRenderer API to modify the render state and shaders. For further info, please see the CCRenderer documentation.
-     @warning You **must not** call `[super draw:transform:];`
+     @note You should only use Fiber2D's Renderer API to modify the render state and shaders. For further info, please see the CCRenderer documentation.
+     @warning You **must not** call `super.draw(:transform:)`
      
-     @param renderer The CCRenderer instance to use for drawing.
+     @param renderer The Renderer instance to use for drawing.
      @param transform The parent node's transform.
-     @see CCRenderer
+     @see Renderer
      */
-    @nonobjc
     func draw(_ renderer: CCRenderer, transform: Matrix4x4f) {}
     
     // purposefully undocumented: internal method, users should prefer to implement draw:transform:
@@ -879,7 +878,7 @@ public class Node: Responder {
      * @param renderer The CCRenderer instance to use for drawing.
      * @param parentTransform The parent node's transform.
      */
-    func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
+    internal func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
         // quick return if not visible. children won't be drawn.
         if !visible {
             return
@@ -993,10 +992,9 @@ public class Node: Responder {
     /**
      You probably want "active" instead, but this tells you if the node is in the active scene wihtout regards to its pause state.
      */
-    
     var isInActiveScene: Bool = false
     
-    // For CCScheduler target
+    // For Scheduler target
     var scheduler: Scheduler? {
         return scene?.scheduler
     }
