@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+// TODO:
+// Add to scheduler only nodes with at least one component
 public extension Node {
     /// @name component functions
     /**
@@ -14,7 +16,7 @@ public extension Node {
      * @param name A given tag of component.
      * @return The Component by tag.
      */
-    func getComponent(by tag: Int) -> Component? {
+    public func getComponent(by tag: Int) -> Component? {
         return components.first { $0.tag == tag }
     }
     
@@ -25,7 +27,7 @@ public extension Node {
      * @return True if added success.
      */
     @discardableResult
-    func add(component: Component) -> Bool {
+    public func add(component: Component) -> Bool {
         guard component.owner == nil else {
             fatalError("ERROR: Component already add. It can't be added to more than one owner")
         }
@@ -50,7 +52,7 @@ public extension Node {
      * @return True if removed success.
      */
     @discardableResult
-    func removeComponent(by tag: Int) -> Bool {
+    public func removeComponent(by tag: Int) -> Bool {
         let oldCount = components.count
         components = components.filter {
             if $0.tag == tag {
@@ -71,21 +73,28 @@ public extension Node {
      * @return True if removed success.
      */
     @discardableResult
-    func remove(component: Component) -> Bool {
+    public func remove(component: Component) -> Bool {
         return components.removeObject(component)
     }
     
     /**
      * Removes all components
      */
-    func removeAllComponents() {
+    public func removeAllComponents() {
         components.forEach {
             $0.onRemove()
             $0.owner = nil
         }
         components = []
         //unscheduleUpdate()
+    }    
+}
+
+extension Node: Updatable {
+    public final func update(delta: Time) {
+        components.forEach { $0.update(delta: delta) }
     }
-    
-    
+    public final func fixedUpdate(delta: Time) {
+        components.forEach { $0.fixedUpdate(delta: delta) }
+    }
 }

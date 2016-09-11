@@ -115,7 +115,7 @@ import Foundation
  would only add minimal functionality or just data.
  */
 
-public class Node: Responder, Updatable {
+public class Node: Responder {
     
     /// -----------------------------------------------------------------------
     /// @name Storing Custom Information
@@ -986,17 +986,12 @@ public class Node: Responder, Updatable {
      of children. In particular this can be useful when a node references another node in an atypical non-child
      way, such as how the the CCClipNode tracks the stencil. The stencil is kept outside of the normal heirarchy,
      but still needs a parent to function in a scene.
-     
-     @since v4.0
      */
-    
     func setRawParent(_ parent: Node) {
         _parent = parent
     }
     /**
-     You probably want "active" instead, but this tells you if the node is in the active scene wihtout regards
-     to its pause state.
-     @since v4.0
+     You probably want "active" instead, but this tells you if the node is in the active scene wihtout regards to its pause state.
      */
     
     var isInActiveScene: Bool = false
@@ -1006,9 +1001,4 @@ public class Node: Responder, Updatable {
         return scene?.scheduler
     }
     internal(set) public var priority: Int = 0
-    open func update(delta: Time) {
-        components.forEach { $0.update(delta: delta) }
-    }
-    open func fixedUpdate(delta: Time) { }
-
 }

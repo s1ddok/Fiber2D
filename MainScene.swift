@@ -100,7 +100,8 @@ class MainScene: Scene {
     override func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
         print("drag")
     }
-    override func update(delta: Time) {
+    
+    /*override func update(delta: Time) {
         colorNode.rotation += 1°
-    }
+    }*/
 }
