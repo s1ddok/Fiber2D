@@ -10,7 +10,7 @@ typealias Color = Vector4f
 
 extension Color {
     init(white: Float, alpha: Float) {
-        self.init(float4: float4(white, white, white, alpha))
+        self.init(white, white, white, alpha)
     }
     
     /** Hue in degrees
@@ -80,15 +80,15 @@ extension Color {
     static let white     = Color(white: 1, alpha: 1)
     static let gray      = Color(white: 0.5, alpha: 1)
     
-    static let blue      = Color(float4: float4(0.0, 0.0, 1.0, 1.0))
-    static let red       = Color(float4: float4(1.0, 0.0, 0.0, 1.0))
-    static let green     = Color(float4: float4(0.0, 1.0, 0.0, 1.0))
+    static let blue      = Color(0.0, 0.0, 1.0, 1.0)
+    static let red       = Color(1.0, 0.0, 0.0, 1.0)
+    static let green     = Color(0.0, 1.0, 0.0, 1.0)
     
-    static let black     = Color(float4: float4(0, 0, 0, 1))
-    static let cyan      = Color(float4: float4(0, 1, 1 , 1))
-    static let yellow    = Color(float4: float4(1, 1, 0 , 1))
-    static let magenta   = Color(float4: float4(1, 0, 1 , 1))
-    static let orange    = Color(float4: float4(1, 0.5, 0 , 1))
-    static let purple    = Color(float4: float4(0.5, 0, 0.5 , 1))
-    static let brown     = Color(float4: float4(0.6, 0.4, 0.2 , 1))
+    static let black     = Color(0, 0, 0, 1)
+    static let cyan      = Color(0, 1, 1 , 1)
+    static let yellow    = Color(1, 1, 0 , 1)
+    static let magenta   = Color(1, 0, 1 , 1)
+    static let orange    = Color(1, 0.5, 0 , 1)
+    static let purple    = Color(0.5, 0, 0.5 , 1)
+    static let brown     = Color(0.6, 0.4, 0.2 , 1)
 }
