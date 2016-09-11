@@ -116,15 +116,7 @@ import Foundation
  */
 
 public class Node: Responder {
-    
-    /// -----------------------------------------------------------------------
-    /// @name Storing Custom Information
-    /// -----------------------------------------------------------------------
-    /** Used to store a custom object of any type. 
-     For instance you could add a NSMutableDictionary to store custom
-     data in a node without needing to subclass the node. */
-    var userObject: AnyObject?
-    
+        
     // MARK: Components
     /// Array of components added to the node
     internal(set) public var components = [Component]()
