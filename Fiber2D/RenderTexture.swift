@@ -40,7 +40,7 @@ class RenderTexture: RenderableNode {
     init(width w: Int, height h: Int) {
         super.init()
         self.contentScale = CCSetup.shared().assetScale
-        self.contentSize = Size(width: Float(w), height: Float(h))
+        self.contentSize = Size(width: w, height: h)
         self.projection = Matrix4x4f.ortho(left: 0.0, right: Float(w), bottom: 0.0, top: Float(h), near: -1024, far: 1024)
         let rtSprite: RenderTextureSprite = RenderTextureSprite(texture: CCTexture.none(), rect: Rect.zero, rotated: false)
         rtSprite.renderTexture = self
