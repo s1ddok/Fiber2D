@@ -30,7 +30,6 @@ public protocol FrameBufferObject {
 public protocol RendererBuffer {
     func setVertex(index: Int, vertex: RendererVertex)
     func setTriangle(index: Int, v1: Int, v2: Int, v3: Int)
-    
 }
 
 public struct RendererVertex {

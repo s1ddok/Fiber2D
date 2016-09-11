@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		054764D91D82944D003DC740 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054764D81D82944D003DC740 /* libSwiftBGFX.dylib */; };
-		054764E11D829509003DC740 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054764E01D829509003DC740 /* Renderer.swift */; };
-		05BC349F1D84C8A400306A4F /* GraphicsBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC349E1D84C8A400306A4F /* GraphicsBuffer.swift */; };
-		05BC34AB1D85398000306A4F /* CCRendererImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34AA1D85398000306A4F /* CCRendererImpl.swift */; };
 		05BC34AC1D853E2000306A4F /* RenderTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD051D46289A005838B8 /* RenderTexture.swift */; };
 		05BC34B41D85467400306A4F /* Matrix3x3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34B21D85467400306A4F /* Matrix3x3.swift */; };
 		05BC34B51D85467400306A4F /* Matrix3x3+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34B31D85467400306A4F /* Matrix3x3+simd.swift */; };
+		05BC34BE1D85B8A300306A4F /* GraphicsBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BB1D85B8A300306A4F /* GraphicsBuffer.swift */; };
+		05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BC1D85B8A300306A4F /* Renderer.swift */; };
+		05BC34C01D85B8A300306A4F /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BD1D85B8A300306A4F /* Shader.swift */; };
+		05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */; };
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */; };
 		0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF11D538D6600AE46E8 /* Matrix4x4.swift */; };
@@ -128,11 +129,13 @@
 /* Begin PBXFileReference section */
 		054764D81D82944D003DC740 /* libSwiftBGFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftBGFX.dylib; path = ../../swift/SwiftBGFX/.build/debug/libSwiftBGFX.dylib; sourceTree = "<group>"; };
 		054764DE1D829473003DC740 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		054764E01D829509003DC740 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
-		05BC349E1D84C8A400306A4F /* GraphicsBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsBuffer.swift; sourceTree = "<group>"; };
-		05BC34AA1D85398000306A4F /* CCRendererImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRendererImpl.swift; sourceTree = "<group>"; };
 		05BC34B21D85467400306A4F /* Matrix3x3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix3x3.swift; sourceTree = "<group>"; };
 		05BC34B31D85467400306A4F /* Matrix3x3+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix3x3+simd.swift"; sourceTree = "<group>"; };
+		05BC34BB1D85B8A300306A4F /* GraphicsBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsBuffer.swift; sourceTree = "<group>"; };
+		05BC34BC1D85B8A300306A4F /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		05BC34BD1D85B8A300306A4F /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
+		05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGFXRenderer.swift; sourceTree = "<group>"; };
+		05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRendererImpl.swift; sourceTree = "<group>"; };
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+simd.swift"; sourceTree = "<group>"; };
@@ -290,19 +293,29 @@
 		054764DF1D8294F6003DC740 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
-				05BC34A61D85396900306A4F /* LegacyRenderer */,
-				054764E01D829509003DC740 /* Renderer.swift */,
-				05BC349E1D84C8A400306A4F /* GraphicsBuffer.swift */,
+				05BC34B81D85B75600306A4F /* bgfx */,
+				05BC34A61D85396900306A4F /* legacy */,
+				05BC34BB1D85B8A300306A4F /* GraphicsBuffer.swift */,
+				05BC34BC1D85B8A300306A4F /* Renderer.swift */,
+				05BC34BD1D85B8A300306A4F /* Shader.swift */,
 			);
-			name = Renderer;
+			path = Renderer;
 			sourceTree = "<group>";
 		};
-		05BC34A61D85396900306A4F /* LegacyRenderer */ = {
+		05BC34A61D85396900306A4F /* legacy */ = {
 			isa = PBXGroup;
 			children = (
-				05BC34AA1D85398000306A4F /* CCRendererImpl.swift */,
+				05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */,
 			);
-			name = LegacyRenderer;
+			path = legacy;
+			sourceTree = "<group>";
+		};
+		05BC34B81D85B75600306A4F /* bgfx */ = {
+			isa = PBXGroup;
+			children = (
+				05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */,
+			);
+			path = bgfx;
 			sourceTree = "<group>";
 		};
 		0812ACE11D52A6F900AE46E8 /* Products */ = {
@@ -770,22 +783,22 @@
 				088ECE1D1D5AA73900E48EC9 /* functions.swift in Sources */,
 				0812ACFF1D538D6600AE46E8 /* Vector3.swift in Sources */,
 				081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */,
+				05BC34C01D85B8A300306A4F /* Shader.swift in Sources */,
 				088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */,
 				088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */,
 				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
-				054764E11D829509003DC740 /* Renderer.swift in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,
 				081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */,
 				081FBD1A1D46289A005838B8 /* RendarableNode.swift in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
+				05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */,
 				087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */,
 				081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */,
 				088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
-				05BC34AB1D85398000306A4F /* CCRendererImpl.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
@@ -800,6 +813,7 @@
 				081FBD211D46289A005838B8 /* Sprite9Slice.swift in Sources */,
 				081FBD231D46289A005838B8 /* Transition.swift in Sources */,
 				088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */,
+				05BC34BE1D85B8A300306A4F /* GraphicsBuffer.swift in Sources */,
 				0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */,
 				088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */,
 				0812ACFE1D538D6600AE46E8 /* Vector3+simd.swift in Sources */,
@@ -819,6 +833,7 @@
 				087BFA101D82EB2600F940D4 /* main.swift in Sources */,
 				081FBCD31D462732005838B8 /* CCCache.m in Sources */,
 				0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */,
+				05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */,
 				081FBD201D46289A005838B8 /* Sprite.swift in Sources */,
 				087BFA081D82D16100F940D4 /* Behaviour.swift in Sources */,
 				0866526D1D732FA400BCD9CE /* Angle.swift in Sources */,
@@ -832,7 +847,6 @@
 				0812AD001D538D6600AE46E8 /* Vector4+simd.swift in Sources */,
 				0812ACFD1D538D6600AE46E8 /* Vector2.swift in Sources */,
 				081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */,
-				05BC349F1D84C8A400306A4F /* GraphicsBuffer.swift in Sources */,
 				05BC34AC1D853E2000306A4F /* RenderTexture.swift in Sources */,
 				088509951D7B876D003EF800 /* ActionEase.swift in Sources */,
 				087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */,
