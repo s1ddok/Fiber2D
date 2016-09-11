@@ -101,7 +101,7 @@ public class Director: NSObject {
     weak var view: DirectorView?
     
     /// The current global shader values values.
-    var globalShaderUniforms = Dictionary<String, AnyObject>()
+	var globalShaderUniforms = [String: AnyObject]()
     
     let framebuffer = CCFrameBufferObjectMetal()
     
