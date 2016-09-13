@@ -322,7 +322,7 @@ class Sprite: RenderableNode {
             return
         }
         
-        let buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: self.renderState, globalSortOrder: 0)
+        var buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: self.renderState, globalSortOrder: 0)
 
         buffer.setVertex(index: 0, vertex: verts.bl.transformed(transform))
         buffer.setVertex(index: 1, vertex: verts.br.transformed(transform))

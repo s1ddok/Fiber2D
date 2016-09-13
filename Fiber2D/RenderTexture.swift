@@ -86,7 +86,7 @@ class RenderTexture: RenderableNode {
     
     func beginWithClear(_ r: Float, g: Float, b: Float, a: Float, flags: MTLLoadAction = .clear) -> Renderer {
         let renderer: Renderer = self.begin()
-        renderer.enqueueClear(color: Color(r, g, b, a), globalSortOrder: NSInteger.min)
+        renderer.enqueueClear(color: Color(r, g, b, a))
         return renderer
     }
     
@@ -221,7 +221,7 @@ class RenderTexture: RenderableNode {
         if autoDraw {
             let rtRenderer = self.begin()
             //assert(renderer == renderer, "CCRenderTexture error!")
-            rtRenderer.enqueueClear(color: clearColor, globalSortOrder: NSInteger.min)
+            rtRenderer.enqueueClear(color: clearColor)
             //! make sure all children are drawn
             self.sortAllChildren()
             for child: Node in children {

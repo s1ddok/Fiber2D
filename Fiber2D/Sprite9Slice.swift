@@ -79,13 +79,13 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> Matrix3x3f {
         let interpolatePosition = PositionInterpolationMatrix(&verts, transform: transform)
         let interpolateTexCoord = TexCoordInterpolationMatrix(&verts)
         let color = verts.bl.color
-        let buffer = renderer.enqueueTriangles(count: 18, verticesCount: 16, state: self.renderState, globalSortOrder: 0)
+        var buffer = renderer.enqueueTriangles(count: 18, verticesCount: 16, state: self.renderState, globalSortOrder: 0)
         
         // Interpolate the vertexes!
         for y in 0..<4 {
             for x in 0..<4 {
                 let position = interpolatePosition * vec4(alphaX[x], alphaY[y], 0.0, 1.0)
-                var texCoord = interpolateTexCoord * vec3(alphaTexX[x], alphaTexY[y], 1.0)
+                let texCoord = interpolateTexCoord * vec3(alphaTexX[x], alphaTexY[y], 1.0)
                 buffer.setVertex(index: (y * 4 + x), vertex: RendererVertex(position: position,
                                                                                  texCoord1: vec2(texCoord),
                                                                                  texCoord2: vec2.zero,
@@ -96,13 +96,13 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> Matrix3x3f {
         for y in 0..<3 {
             for x in 0..<3 {
                 buffer.setTriangle(index: y * 6 + x * 2,
-                                   v1: y * 4 + x,
-                                   v2: y * 4 + x + 1,
-                                   v3: (y + 1) * 4 + x + 1)
+                                   v1: UInt16(y * 4 + x),
+                                   v2: UInt16(y * 4 + x + 1),
+                                   v3: UInt16((y + 1) * 4 + x + 1))
                 buffer.setTriangle(index: y * 6 + x * 2 + 1,
-                                   v1: y * 4 + x,
-                                   v2: (y + 1) * 4 + x + 1,
-                                   v3: (y + 1) * 4 + x)
+                                   v1: UInt16(y * 4 + x),
+                                   v2: UInt16((y + 1) * 4 + x + 1),
+                                   v3: UInt16((y + 1) * 4 + x))
             }
         }
     }

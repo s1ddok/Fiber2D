@@ -11,10 +11,10 @@
 		05BC34AC1D853E2000306A4F /* RenderTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD051D46289A005838B8 /* RenderTexture.swift */; };
 		05BC34B41D85467400306A4F /* Matrix3x3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34B21D85467400306A4F /* Matrix3x3.swift */; };
 		05BC34B51D85467400306A4F /* Matrix3x3+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34B31D85467400306A4F /* Matrix3x3+simd.swift */; };
-		05BC34BE1D85B8A300306A4F /* GraphicsBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BB1D85B8A300306A4F /* GraphicsBuffer.swift */; };
 		05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BC1D85B8A300306A4F /* Renderer.swift */; };
 		05BC34C01D85B8A300306A4F /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BD1D85B8A300306A4F /* Shader.swift */; };
 		05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */; };
+		05BC34C51D85BBB100306A4F /* BGFXRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */; };
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */; };
 		0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF11D538D6600AE46E8 /* Matrix4x4.swift */; };
@@ -131,7 +131,6 @@
 		054764DE1D829473003DC740 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		05BC34B21D85467400306A4F /* Matrix3x3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix3x3.swift; sourceTree = "<group>"; };
 		05BC34B31D85467400306A4F /* Matrix3x3+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix3x3+simd.swift"; sourceTree = "<group>"; };
-		05BC34BB1D85B8A300306A4F /* GraphicsBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsBuffer.swift; sourceTree = "<group>"; };
 		05BC34BC1D85B8A300306A4F /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		05BC34BD1D85B8A300306A4F /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGFXRenderer.swift; sourceTree = "<group>"; };
@@ -295,7 +294,6 @@
 			children = (
 				05BC34B81D85B75600306A4F /* bgfx */,
 				05BC34A61D85396900306A4F /* legacy */,
-				05BC34BB1D85B8A300306A4F /* GraphicsBuffer.swift */,
 				05BC34BC1D85B8A300306A4F /* Renderer.swift */,
 				05BC34BD1D85B8A300306A4F /* Shader.swift */,
 			);
@@ -786,6 +784,7 @@
 				05BC34C01D85B8A300306A4F /* Shader.swift in Sources */,
 				088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */,
 				088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */,
+				05BC34C51D85BBB100306A4F /* BGFXRenderer.swift in Sources */,
 				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,
 				081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */,
@@ -813,7 +812,6 @@
 				081FBD211D46289A005838B8 /* Sprite9Slice.swift in Sources */,
 				081FBD231D46289A005838B8 /* Transition.swift in Sources */,
 				088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */,
-				05BC34BE1D85B8A300306A4F /* GraphicsBuffer.swift in Sources */,
 				0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */,
 				088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */,
 				0812ACFE1D538D6600AE46E8 /* Vector3+simd.swift in Sources */,

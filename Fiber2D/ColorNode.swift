@@ -10,7 +10,7 @@ import Foundation
 class ColorNode: RenderableNode {
     
     override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
-        let buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: renderState, globalSortOrder: 0)
+        var buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: renderState, globalSortOrder: 0)
         
         let w = Float(contentSizeInPoints.width)
         let h = Float(contentSizeInPoints.height)

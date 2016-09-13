@@ -21,8 +21,8 @@ class CCRendererImpl: Renderer {
         self.renderer = renderer
     }
     
-    func enqueueClear(color: Color, globalSortOrder: Int) {
-        renderer.enqueueClear(.clear, color: color.glkVector4, globalSortOrder: globalSortOrder)
+    func enqueueClear(color: Color) {
+        renderer.enqueueClear(.clear, color: color.glkVector4, globalSortOrder: Int.min)
     }
     
     func enqueueTriangles(count: UInt, verticesCount: UInt, state: RendererState, globalSortOrder: Int) -> RendererBuffer {
@@ -48,15 +48,17 @@ extension CCRenderState: RendererState {
 }
 
 extension CCRenderBuffer: RendererBuffer {
-    public func setVertex(index: Int, vertex: RendererVertex) {
+    public mutating func setVertex(index: Int, vertex: RendererVertex) {
         CCRenderBufferSetVertex(self, Int32(index), unsafeBitCast(vertex, to: CCVertex.self))
     }
     
-    public func setTriangle(index: Int, v1: Int, v2: Int, v3: Int) {
-        CCRenderBufferSetTriangle(self, Int32(index), UInt16(v1), UInt16(v2), UInt16(v3))
+    public mutating func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16) {
+        CCRenderBufferSetTriangle(self, Int32(index), v1, v2, v3)
     }
 }
 
 extension CCFrameBufferObject: FrameBufferObject {
     
 }
+
+

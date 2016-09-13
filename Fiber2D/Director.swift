@@ -153,7 +153,7 @@ public class Director: NSObject {
         
         //CCRenderer.bindRenderer(renderer)
         currentRenderer = renderer
-        renderer.enqueueClear(color: runningScene!.colorRGBA, globalSortOrder: NSInteger.min)
+        renderer.enqueueClear(color: runningScene!.colorRGBA)
         // Render
         runningScene!.visit(renderer, parentTransform: projection)
         notificationNode?.visit(renderer, parentTransform: projection)

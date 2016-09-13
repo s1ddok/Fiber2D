@@ -7,7 +7,7 @@
 //
 
 public protocol Renderer {
-    func enqueueClear(color: vec4, globalSortOrder: Int)
+    func enqueueClear(color: vec4)
     func enqueueTriangles(count: UInt, verticesCount: UInt, state: RendererState, globalSortOrder: Int) -> RendererBuffer
     func prepare(withProjection: Matrix4x4f, framebuffer: FrameBufferObject)
     func flush()
@@ -28,8 +28,13 @@ public protocol FrameBufferObject {
 }
 
 public protocol RendererBuffer {
-    func setVertex(index: Int, vertex: RendererVertex)
-    func setTriangle(index: Int, v1: Int, v2: Int, v3: Int)
+    mutating func setVertex(index: Int, vertex: RendererVertex)
+    mutating func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16)
+}
+
+public protocol RendererBuffer2 {
+    mutating func add(vertex: RendererVertex) -> Int
+    mutating func addTriange(v1: Int, v2: Int, v3: Int)
 }
 
 public struct RendererVertex {
