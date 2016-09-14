@@ -4,3 +4,6 @@
 [submodule "external/libpng"]
 	path = external/libpng
 	url = https://github.com/s1ddok/libpng
+[submodule "external/chipmunk"]
+	path = external/chipmunk
+	url = https://github.com/slembcke/Chipmunk2D.git
