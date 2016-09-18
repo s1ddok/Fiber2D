@@ -12,4 +12,4 @@
 #import "CCTexture_Private.h"
 #import "CCSpriteFrameCache_Private.h"
 #import "CCProtocols.h"
-#include "chipmunk.h"
+#import "chipmunk_private.h"

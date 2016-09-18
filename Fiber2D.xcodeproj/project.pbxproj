@@ -126,6 +126,10 @@
 		08C1CB2E1D8EFFD5006CDCCB /* cpSpaceStep.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB0C1D8EFFD5006CDCCB /* cpSpaceStep.c */; };
 		08C1CB2F1D8EFFD5006CDCCB /* cpSpatialIndex.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB0D1D8EFFD5006CDCCB /* cpSpatialIndex.c */; };
 		08C1CB301D8EFFD5006CDCCB /* cpSweep1D.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB0E1D8EFFD5006CDCCB /* cpSweep1D.c */; };
+		08C1CB321D8F00C6006CDCCB /* PhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB311D8F00C6006CDCCB /* PhysicsBody.swift */; };
+		08C1CB341D8F01CB006CDCCB /* PhysicsWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB331D8F01CA006CDCCB /* PhysicsWorld.swift */; };
+		08C1CB361D8F03D2006CDCCB /* PhysicsTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB351D8F03D2006CDCCB /* PhysicsTypes.swift */; };
+		08C1CB381D8F04A5006CDCCB /* PhysicsJoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB371D8F04A5006CDCCB /* PhysicsJoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,6 +344,10 @@
 		08C1CB0D1D8EFFD5006CDCCB /* cpSpatialIndex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cpSpatialIndex.c; sourceTree = "<group>"; };
 		08C1CB0E1D8EFFD5006CDCCB /* cpSweep1D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cpSweep1D.c; sourceTree = "<group>"; };
 		08C1CB0F1D8EFFD5006CDCCB /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prime.h; sourceTree = "<group>"; };
+		08C1CB311D8F00C6006CDCCB /* PhysicsBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBody.swift; sourceTree = "<group>"; };
+		08C1CB331D8F01CA006CDCCB /* PhysicsWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsWorld.swift; sourceTree = "<group>"; };
+		08C1CB351D8F03D2006CDCCB /* PhysicsTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsTypes.swift; sourceTree = "<group>"; };
+		08C1CB371D8F04A5006CDCCB /* PhysicsJoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsJoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -686,6 +694,10 @@
 		08C1CAC41D8EFFA6006CDCCB /* Physics */ = {
 			isa = PBXGroup;
 			children = (
+				08C1CB371D8F04A5006CDCCB /* PhysicsJoint.swift */,
+				08C1CB351D8F03D2006CDCCB /* PhysicsTypes.swift */,
+				08C1CB331D8F01CA006CDCCB /* PhysicsWorld.swift */,
+				08C1CB311D8F00C6006CDCCB /* PhysicsBody.swift */,
 				08C1CAC81D8EFFAF006CDCCB /* Chipmunk */,
 			);
 			name = Physics;
@@ -908,6 +920,7 @@
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
 				081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */,
+				08C1CB321D8F00C6006CDCCB /* PhysicsBody.swift in Sources */,
 				08C1CB281D8EFFD5006CDCCB /* cpSlideJoint.c in Sources */,
 				088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */,
 				08C1CB301D8EFFD5006CDCCB /* cpSweep1D.c in Sources */,
@@ -921,6 +934,7 @@
 				081FBCE31D462732005838B8 /* CCSetup.m in Sources */,
 				081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */,
 				08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */,
+				08C1CB361D8F03D2006CDCCB /* PhysicsTypes.swift in Sources */,
 				0812AD031D538D7600AE46E8 /* Color.swift in Sources */,
 				0812ACFC1D538D6600AE46E8 /* Vector2+simd.swift in Sources */,
 				08C1CB271D8EFFD5006CDCCB /* cpSimpleMotor.c in Sources */,
@@ -933,6 +947,7 @@
 				081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */,
 				08C1CB2C1D8EFFD5006CDCCB /* cpSpaceHash.c in Sources */,
 				088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */,
+				08C1CB341D8F01CB006CDCCB /* PhysicsWorld.swift in Sources */,
 				088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */,
 				08C1CB131D8EFFD5006CDCCB /* cpArray.c in Sources */,
 				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
@@ -961,6 +976,7 @@
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
 				081FBD191D46289A005838B8 /* Node+Traverse.swift in Sources */,
 				0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */,
+				08C1CB381D8F04A5006CDCCB /* PhysicsJoint.swift in Sources */,
 				081FBCDE1D462732005838B8 /* CCTexture.m in Sources */,
 				081FBD1E1D46289A005838B8 /* ResponderManager.swift in Sources */,
 				08C1CB231D8EFFD5006CDCCB /* cpRatchetJoint.c in Sources */,

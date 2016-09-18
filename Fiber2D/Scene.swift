@@ -86,4 +86,6 @@ class Scene: Node {
         director.responderManager.markAsDirty()
     }
     
+    //#if USE_PHYSICS
+    public var physicsWorld: PhysicsWorld!
 }
