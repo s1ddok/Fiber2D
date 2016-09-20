@@ -9,3 +9,18 @@
 public enum DebugDrawOption {
     case shape, joint, contact
 }
+
+internal extension Vector2f {
+    
+    init(_ cpv: cpVect) {
+        self.init(x: Float(cpv.x), y: Float(cpv.y))
+    }
+    
+    var cpVect: cpVect { return cpv(cpFloat(x), cpFloat(y)) }
+}
+
+internal extension cpVect {
+    init(_ vec2: Vector2f) {
+        self.init(x: cpFloat(vec2.x), y: cpFloat(vec2.y))
+    }
+}

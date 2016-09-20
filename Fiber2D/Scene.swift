@@ -9,7 +9,7 @@ import Foundation
 
 /** Scene is a subclass of Node. The scene represents the root node of the node hierarchy.
  */
-class Scene: Node {
+open class Scene: Node {
     
     override var scene: Scene {
         return self

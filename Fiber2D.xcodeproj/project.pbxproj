@@ -130,6 +130,7 @@
 		08C1CB341D8F01CB006CDCCB /* PhysicsWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB331D8F01CA006CDCCB /* PhysicsWorld.swift */; };
 		08C1CB361D8F03D2006CDCCB /* PhysicsTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB351D8F03D2006CDCCB /* PhysicsTypes.swift */; };
 		08C1CB381D8F04A5006CDCCB /* PhysicsJoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB371D8F04A5006CDCCB /* PhysicsJoint.swift */; };
+		08C1CB3D1D8F0DFF006CDCCB /* PhysicsWorld+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB3C1D8F0DFF006CDCCB /* PhysicsWorld+Internal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -348,6 +349,7 @@
 		08C1CB331D8F01CA006CDCCB /* PhysicsWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsWorld.swift; sourceTree = "<group>"; };
 		08C1CB351D8F03D2006CDCCB /* PhysicsTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsTypes.swift; sourceTree = "<group>"; };
 		08C1CB371D8F04A5006CDCCB /* PhysicsJoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsJoint.swift; sourceTree = "<group>"; };
+		08C1CB3C1D8F0DFF006CDCCB /* PhysicsWorld+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsWorld+Internal.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -697,6 +699,7 @@
 				08C1CB371D8F04A5006CDCCB /* PhysicsJoint.swift */,
 				08C1CB351D8F03D2006CDCCB /* PhysicsTypes.swift */,
 				08C1CB331D8F01CA006CDCCB /* PhysicsWorld.swift */,
+				08C1CB3C1D8F0DFF006CDCCB /* PhysicsWorld+Internal.swift */,
 				08C1CB311D8F00C6006CDCCB /* PhysicsBody.swift */,
 				08C1CAC81D8EFFAF006CDCCB /* Chipmunk */,
 			);
@@ -1016,6 +1019,7 @@
 				0866526D1D732FA400BCD9CE /* Angle.swift in Sources */,
 				0812ACFB1D538D6600AE46E8 /* platform.swift in Sources */,
 				0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */,
+				08C1CB3D1D8F0DFF006CDCCB /* PhysicsWorld+Internal.swift in Sources */,
 				08C1CB251D8EFFD5006CDCCB /* cpRotaryLimitJoint.c in Sources */,
 				081FBCE21D462732005838B8 /* NSValue+CCRenderer.m in Sources */,
 				08C1CB2D1D8EFFD5006CDCCB /* cpSpaceQuery.c in Sources */,

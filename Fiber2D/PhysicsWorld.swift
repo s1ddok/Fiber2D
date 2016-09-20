@@ -18,7 +18,7 @@ public class PhysicsWorld {
      *
      * @return A Vec2 object.
      */
-    public var gravity: vec2 = vec2.zero
+    public var gravity: vec2 = vec2(0.0, -98.0)
     
     /**
      * Set the speed of this physics world.
@@ -78,8 +78,35 @@ public class PhysicsWorld {
      */
     public func step(dt: Time) {}
     
+    /**
+     * Get a scene contain this physics world.
+     *
+     * @attention This value is initialized in constructor
+     * @return A Scene object reference.
+     */
+    public let scene: Scene
+    
+    public init(scene: Scene) {
+        self.scene = scene
+        chipmunkSpace = cpHastySpaceNew()
+        cpHastySpaceSetThreads(chipmunkSpace, 0)
+        
+        cpSpaceSetGravity(chipmunkSpace, cpVect(gravity))
+        
+        let handler = cpSpaceAddDefaultCollisionHandler(chipmunkSpace)!
+        handler.pointee.userData = Unmanaged.passRetained(self).toOpaque()
+        handler.pointee.beginFunc = collisionBeginCallbackFunc
+        handler.pointee.postSolveFunc = collisionPostSolveCallbackFunc
+        handler.pointee.preSolveFunc = collisionPreSolveCallbackFunc
+        handler.pointee.separateFunc = collisionSeparateCallbackFunc
+    }
+    
     // MARK: Internal stuff
-    internal var chipmunkSpace: UnsafePointer<cpSpace>!
+    internal var chipmunkSpace: UnsafeMutablePointer<cpSpace>!
+    
+    deinit {
+        cpHastySpaceFree(chipmunkSpace)
+    }
 }
 
 public extension PhysicsWorld {

@@ -114,8 +114,7 @@ import Foundation
  The userObject property can be used to add custom data and methods (model, components) to any node, in particular to avoid subclassing where the subclass
  would only add minimal functionality or just data.
  */
-
-public class Node: Responder {
+open class Node: Responder {
         
     // MARK: Components
     /// Array of components added to the node
