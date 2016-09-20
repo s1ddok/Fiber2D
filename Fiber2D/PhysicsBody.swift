@@ -95,6 +95,33 @@ public class PhysicsBody: Behaviour {
         }
     }
     
+    /** get the body position. */
+    public var position: Point {
+        get {
+            let tt = cpBodyGetPosition(chipmunkBody)
+            
+            return Point(tt) - positionOffset
+        }
+        set {
+            cpBodySetPosition(chipmunkBody, cpVect(newValue + positionOffset))
+        }
+        
+    }
+    
+    /** set body position offset, it's the position witch relative to node */
+    public var positionOffset: Vector2f {
+        get {
+            return _positionOffset
+        }
+        set {
+            if _positionOffset != newValue {
+                let pos = self.position
+                _positionOffset = newValue
+                self.position = pos
+            }
+        }
+    }
+    
     /**
      * The velocity of a body.
      */
@@ -217,11 +244,15 @@ public class PhysicsBody: Behaviour {
     internal var _density: Float = 0.0
     internal var _area: Float = 0.0
     
+    internal var _recordPos = Vector2f.zero
+    internal var _offset = Vector2f.zero
     internal var _isDamping = false
     // MARK: Private vars
     private var _rotationOffset: Angle = 0°
     private var _recordedAngle: Angle = 0°
     private var _recordedRotation: Angle = 0°
+    
+    private var _positionOffset: Vector2f = Vector2f.zero
 }
 
 extension PhysicsBody {
