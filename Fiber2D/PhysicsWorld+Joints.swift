@@ -85,10 +85,11 @@ internal extension PhysicsWorld {
             return
         }
         
-        /*for joint in delayAddJoints {
-            
-        }*/
-        joints.append(contentsOf: delayAddJoints)
+        for joint in delayAddJoints {
+            if joint.chipmunkInitJoint() {
+                joints.append(joint)
+            }
+        }
         delayAddJoints.removeAll()
         
         for joint in delayRemoveJoints {
