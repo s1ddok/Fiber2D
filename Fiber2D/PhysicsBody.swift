@@ -15,6 +15,21 @@
  * You can change mass and moment with `mass` and `moment`. And you can change the body to be dynamic or static by use `dynamic`.
  */
 public class PhysicsBody: Behaviour {
+    // MARK: State
+    /** Whether the body is at rest. */
+    public var isResting: Bool {
+        get {
+            return cpBodyIsSleeping(chipmunkBody) != 0
+        }
+        set {
+            let isResting = self.isResting
+            if newValue && !isResting {
+                cpBodySleep(chipmunkBody)
+            } else if !newValue && isResting {
+                cpBodyActivate(chipmunkBody)
+            }
+        }
+    }
     /**
      * @brief Test the body is dynamic or not.
      *
@@ -46,6 +61,8 @@ public class PhysicsBody: Behaviour {
             }
         }
     }
+    
+    // MARK: Properties
     
     /** set body rotation offset, it's the rotation witch relative to node */
     public var rotationOffset: Angle {
@@ -99,10 +116,45 @@ public class PhysicsBody: Behaviour {
     /**
      * The angular velocity of a body.
      */
-    public var angularVelocity: Float = 0.0
+    public var angularVelocity: Float = 0.0 {
+        didSet {
+            guard isDynamic else {
+                print("You can't set angular velocity for a static body.")
+                return
+            }
+            
+            cpBodySetAngularVelocity(chipmunkBody, cpFloat(angularVelocity))
+        }
+    }
     
     /** The max of angular velocity */
     public var angularVelocityLimit: Float = Float.infinity
+    
+    /**
+     * Linear damping.
+     *
+     * it is used to simulate fluid or air friction forces on the body.
+     * @param damping The value is 0.0f to 1.0f.
+     */
+    public var linearDamping: Float = 0.0 {
+        didSet {
+            updateDamping()
+        }
+    }
+    
+    /**
+     * Angular damping.
+     *
+     * It is used to simulate fluid or air friction forces on the body.
+     * @param damping The value is 0.0f to 1.0f.
+     */
+    public var angularDamping: Float = 0.0 {
+        didSet {
+            updateDamping()
+        }
+    }
+    
+    private func updateDamping() { _isDamping = linearDamping != 0.0 ||  angularDamping != 0.0 }
  
     internal(set) public var shapes = [PhysicsShape]()
     
@@ -119,6 +171,14 @@ public class PhysicsBody: Behaviour {
         cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
     
+    public override func update(delta: Time) {
+        // damping compute
+        if (_isDamping && isDynamic && !isResting) {
+            chipmunkBody.pointee.v.x *= cpfclamp(1.0 - cpFloat(delta * linearDamping), 0.0, 1.0)
+            chipmunkBody.pointee.v.y *= cpfclamp(1.0 - cpFloat(delta * linearDamping), 0.0, 1.0)
+            chipmunkBody.pointee.w *= cpfclamp(1.0 - cpFloat(delta * angularDamping), 0.0, 1.0)
+        }
+    }
     // MARK: Component stuff
     public override func onEnter() {
         addToPhysicsWorld()
@@ -156,6 +216,8 @@ public class PhysicsBody: Behaviour {
     
     internal var _density: Float = 0.0
     internal var _area: Float = 0.0
+    
+    internal var _isDamping = false
     // MARK: Private vars
     private var _rotationOffset: Angle = 0°
     private var _recordedAngle: Angle = 0°

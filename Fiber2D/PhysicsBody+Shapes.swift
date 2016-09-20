@@ -15,7 +15,9 @@ extension PhysicsBody {
      * @return A PhysicsShape object pointer or nullptr if no shapes were found.
      */
     func getShape(by tag: Int) -> PhysicsShape? {
-        return nil
+        return shapes.first(where: { (shape:PhysicsShape) -> Bool in
+            shape.tag == tag
+        })
     }
     /**
      * @brief Add a shape to body.
@@ -23,7 +25,8 @@ extension PhysicsBody {
      * @param addMassAndMoment If this is true, the shape's mass and moment will be added to body. The default is true.
      * @return This shape's pointer if added success or nullptr if failed.
      */
-    func add(shape: PhysicsShape, addMassAndMoment: Bool = true) {}
+    func add(shape: PhysicsShape, addMassAndMoment: Bool = true) {
+    }
     
     /**
      * @brief Remove a shape from body.

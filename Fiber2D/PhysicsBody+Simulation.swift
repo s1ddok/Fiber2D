@@ -180,8 +180,6 @@ public extension PhysicsBody {
     }
 }
 
-
-
 // MARK: Before/After simulation
 internal extension PhysicsBody {
     
