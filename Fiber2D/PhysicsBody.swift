@@ -20,7 +20,21 @@ public class PhysicsBody: Behaviour {
      *
      * A dynamic body will effect with gravity.
      */
-    public var isDynamic = false
+    public var isDynamic = false {
+        didSet {
+            guard isDynamic != oldValue else {
+                return
+            }
+            
+            if isDynamic {
+                cpBodySetType(chipmunkBody, CP_BODY_TYPE_DYNAMIC)
+                internalBodySetMass(chipmunkBody, cpFloat(_mass))
+                cpBodySetMoment(chipmunkBody, cpFloat(_moment))
+            } else {
+                cpBodySetType(chipmunkBody, CP_BODY_TYPE_KINEMATIC);
+            }
+        }
+    }
     
     /** if the body is affected by the physics world's gravitational force or not. */
     public var isGravityEnabled = false
@@ -32,6 +46,7 @@ public class PhysicsBody: Behaviour {
             }
         }
     }
+    
     /** set body rotation offset, it's the rotation witch relative to node */
     public var rotationOffset: Angle {
         get { return _rotationOffset }
@@ -40,58 +55,6 @@ public class PhysicsBody: Behaviour {
                 let rot = rotation
                 _rotationOffset = newValue
                 rotation = rot
-            }
-        }
-    }
-    
-    /**
-     * @brief The body moment of inertia.
-     *
-     * @note If you need add/subtract moment to body, don't use setMoment(getMoment() +/- moment), because the moment of body may be equal to PHYSICS_INFINITY, it will cause some unexpected result, please use addMoment() instead.
-     */
-    public var moment: Float {
-        get {
-            return _moment
-        }
-        set {
-            _moment = newValue
-            _momentDefault = false
-            _momentSetByUser = true
-            if isDynamic && isRotationEnabled {
-                cpBodySetMoment(chipmunkBody, cpFloat(_moment))
-            }
-        }
-    }
-    /**
-     * @brief The body mass.
-     *
-     * @attention If you need add/subtract mass to body, don't use setMass(getMass() +/- mass), because the mass of body may be equal to PHYSICS_INFINITY, it will cause some unexpected result, please use addMass() instead.
-     */
-    public var mass: Float {
-        get { return _mass }
-        set {
-            guard newValue > 0 else {
-                return
-            }
-            _mass = newValue
-            _massDefault = false
-            _massSetByUser = true
-            
-            // update density
-            if _mass == PHYSICS_INFINITY {
-                _density = PHYSICS_INFINITY
-            }
-            else {
-                if _area > 0 {
-                    _density = _mass / _area
-                } else {
-                    _density = 0
-                }
-            }
-            
-            // the static body's mass and moment is always infinity
-            if isDynamic {
-                internalBodySetMass(chipmunkBody, cpFloat(_mass));
             }
         }
     }
@@ -129,6 +92,7 @@ public class PhysicsBody: Behaviour {
             cpBodySetVelocity(chipmunkBody, cpVect(velocity))
         }
     }
+    
     /** The max of velocity */
     public var velocityLimit: Float = Float.infinity
     
@@ -142,16 +106,19 @@ public class PhysicsBody: Behaviour {
  
     internal(set) public var shapes = [PhysicsShape]()
     
-    
     internal(set) public var joints = [PhysicsJoint]()
     
     /** get the world body added to. */
     internal(set) public weak var world: PhysicsWorld? = nil
     
-    public func remove(joint: PhysicsJoint) {
-        
+    override init() {
+        chipmunkBody = cpBodyNew(cpFloat(_mass), cpFloat(_moment))
+        super.init()
+        internalBodySetMass(chipmunkBody, cpFloat(_mass))
+        cpBodySetUserData(chipmunkBody, Unmanaged.passRetained(self).toOpaque())
+        cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
-        
+    
     // MARK: Component stuff
     public override func onEnter() {
         addToPhysicsWorld()
@@ -174,7 +141,7 @@ public class PhysicsBody: Behaviour {
     
     // MARK: Internal vars
     /** The rigid body of chipmunk. */
-    internal var chipmunkBody: UnsafeMutablePointer<cpBody>!
+    internal let chipmunkBody: UnsafeMutablePointer<cpBody>
     // offset between owner's center point and down left point
     internal var ownerCenterOffset = Vector2f.zero
     
@@ -196,7 +163,6 @@ public class PhysicsBody: Behaviour {
 }
 
 extension PhysicsBody {
-    
     func addToPhysicsWorld() { owner?.scene?.physicsWorld.remove(body: self) }
     /** remove the body from the world it added to */
     func removeFromPhysicsWorld() { owner?.scene?.physicsWorld.remove(body: self) }

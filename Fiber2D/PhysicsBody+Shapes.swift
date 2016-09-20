@@ -24,6 +24,7 @@ extension PhysicsBody {
      * @return This shape's pointer if added success or nullptr if failed.
      */
     func add(shape: PhysicsShape, addMassAndMoment: Bool = true) {}
+    
     /**
      * @brief Remove a shape from body.
      * @param shape Shape the shape to be removed.

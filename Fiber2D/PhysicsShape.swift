@@ -62,8 +62,8 @@ public class PhysicsShape: Tagged {
             }
             
             if let body = self.body {
-                //
-                //
+                body.add(moment: -oldValue)
+                body.add(moment: moment)
             }
         }
     }
@@ -82,8 +82,8 @@ public class PhysicsShape: Tagged {
             }
             
             if let body = self.body {
-                //
-                //
+                body.add(mass: -oldValue)
+                body.add(mass: mass)
             }
         }
     }

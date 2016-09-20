@@ -46,6 +46,58 @@ public extension PhysicsBody {
     }
     
     /**
+     * @brief The body moment of inertia.
+     *
+     * @note If you need add/subtract moment to body, don't use setMoment(getMoment() +/- moment), because the moment of body may be equal to PHYSICS_INFINITY, it will cause some unexpected result, please use addMoment() instead.
+     */
+    public var moment: Float {
+        get {
+            return _moment
+        }
+        set {
+            _moment = newValue
+            _momentDefault = false
+            _momentSetByUser = true
+            if isDynamic && isRotationEnabled {
+                cpBodySetMoment(chipmunkBody, cpFloat(_moment))
+            }
+        }
+    }
+    /**
+     * @brief The body mass.
+     *
+     * @attention If you need add/subtract mass to body, don't use setMass(getMass() +/- mass), because the mass of body may be equal to PHYSICS_INFINITY, it will cause some unexpected result, please use addMass() instead.
+     */
+    public var mass: Float {
+        get { return _mass }
+        set {
+            guard newValue > 0 else {
+                return
+            }
+            _mass = newValue
+            _massDefault = false
+            _massSetByUser = true
+            
+            // update density
+            if _mass == PHYSICS_INFINITY {
+                _density = PHYSICS_INFINITY
+            }
+            else {
+                if _area > 0 {
+                    _density = _mass / _area
+                } else {
+                    _density = 0
+                }
+            }
+            
+            // the static body's mass and moment is always infinity
+            if isDynamic {
+                internalBodySetMass(chipmunkBody, cpFloat(_mass));
+            }
+        }
+    }
+    
+    /**
      * @brief Add moment of inertia to body.
      *
      * @param moment If _moment(moment of the body) == PHYSICS_INFINITY, it remains.
@@ -128,11 +180,10 @@ public extension PhysicsBody {
     }
 }
 
-internal func internalBodySetMass(_ body: UnsafeMutablePointer<cpBody>, _ mass: cpFloat)
-{
-    cpBodyActivate(body);
-    body.pointee.m = mass;
-    body.pointee.m_inv = 1.0 / mass
-    //cpAssertSaneBody(body);
+
+
+// MARK: Before/After simulation
+internal extension PhysicsBody {
+    
 }
 
