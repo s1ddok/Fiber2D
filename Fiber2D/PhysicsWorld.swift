@@ -18,7 +18,11 @@ public class PhysicsWorld {
      *
      * @return A Vec2 object.
      */
-    public var gravity: vec2 = vec2(0.0, -98.0)
+    public var gravity: vec2 = vec2(0.0, -98.0) {
+        didSet {
+            cpSpaceSetGravity(chipmunkSpace, cpVect(gravity))
+        }
+    }
     
     /**
      * Set the speed of this physics world.
@@ -34,7 +38,13 @@ public class PhysicsWorld {
      * One physics update will be divided into several substeps to increase its accuracy.
      * @param steps An integer number, default value is 1.
      */
-    public var substeps: UInt = 1
+    public var substeps: UInt = 1 {
+        didSet {
+            if substeps > 1 {
+                updateRate = 1
+            }
+        }
+    }
     
     /**
      * Set the update rate of this physics world
@@ -76,8 +86,15 @@ public class PhysicsWorld {
      * @attention You need to setAutoStep(false) first before it can work.
      * @param   delta   A Time number.
      */
-    public func step(dt: Time) {}
-    
+    public func step(dt: Time) {
+        guard !autoStep else {
+            print("Cant step: You need to close auto step( autoStep = false ) first")
+            return
+        }
+        
+        update(dt: dt, userCall: true)
+    }
+
     /**
      * Get a scene contain this physics world.
      *
@@ -85,6 +102,15 @@ public class PhysicsWorld {
      * @return A Scene object reference.
      */
     public let scene: Scene
+    
+    internal(set) public var joints = [PhysicsJoint]()
+    
+    /**
+     * Get all the bodies that in this physics world.
+     *
+     * @return A [PhysicsBody] that contains all bodies in this physics world.
+     */
+    internal(set) public var bodies = [PhysicsBody]()
     
     public init(scene: Scene) {
         self.scene = scene
@@ -102,69 +128,21 @@ public class PhysicsWorld {
     }
     
     // MARK: Internal stuff
+    // MARK: Chipmunk vars
     internal var chipmunkSpace: UnsafeMutablePointer<cpSpace>!
     
+    // MARK: Joints vars
+    internal var delayRemoveJoints = [PhysicsJoint]()
+    internal var delayAddJoints = [PhysicsJoint]()
+    // MARK: Bodies vars
+    internal var delayRemoveBodies = [PhysicsBody]()
+    internal var delayAddBodies = [PhysicsBody]()
+    
+    // MARK: Other vars
+    internal var updateTime: Time = 0.0
+    internal var updateRateCount = 0
+    // MARK: Destructor
     deinit {
         cpHastySpaceFree(chipmunkSpace)
     }
-}
-
-public extension PhysicsWorld {
-    /**
-     * Get a body by tag.
-     *
-     * @param   tag   An integer number that identifies a PhysicsBody object.
-     * @return A PhysicsBody object pointer or nullptr if no shapes were found.
-     */
-    public func getBody(by tag: Int) -> PhysicsBody? { return nil }
-    
-    /**
-     * Get all the bodies that in this physics world.
-     *
-     * @return A [PhysicsBody] that contains all bodies in this physics world.
-     */
-    public var allBodies: [PhysicsBody] { return [] }
-    
-    /**
-     * Remove body by tag.
-     *
-     * If this world is not locked, the object is removed immediately, otherwise at next frame.
-     * @attention If this body has joints, those joints will be removed also.
-     * @param   tag   An integer number that identifies a PhysicsBody object.
-     */
-    public func removeBody(by tag: Int) {}
-    
-    /**
-     * Remove all bodies from physics world.
-     *
-     * If this world is not locked, those body are removed immediately, otherwise at next frame.
-     */
-    public func removeAllBodies() {}
-}
-
-public extension PhysicsWorld {
-    /**
-     * Adds a joint to this physics world.
-     *
-     * This joint will be added to this physics world at next frame.
-     * @attention If this joint is already added to another physics world, it will be removed from that world first and then add to this world.
-     * @param   joint   A pointer to an existing PhysicsJoint object.
-     */
-    public func add(joint: PhysicsJoint) {}
-    
-    /**
-     * Remove a joint from this physics world.
-     *
-     * If this world is not locked, the joint is removed immediately, otherwise at next frame.
-     * If this joint is connected with a body, it will be removed from the body also.
-     * @param   joint   A pointer to an existing PhysicsJoint object.
-     */
-    public func remove(joint: PhysicsJoint) {}
-    
-    /**
-     * Remove all joints from this physics world.
-     *
-     * @attention This function is invoked in the destructor of this physics world, you do not use this api in common.
-     */
-    public func removeAllJoints() {}
 }

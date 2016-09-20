@@ -51,6 +51,59 @@ func collisionSeparateCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ sp
 }
 
 internal extension PhysicsWorld {
-
+    
+    internal func update(dt: Time, userCall: Bool = false) {
+        if !delayAddBodies.isEmpty || !delayRemoveBodies.isEmpty {
+            updateBodies()
+        }
+        
+        if !delayAddJoints.isEmpty || !delayRemoveJoints.isEmpty {
+            updateJoints()
+        }
+        
+        guard dt < FLT_EPSILON else {
+            return
+        }
+        
+        let sceneToWorldTransform = scene.nodeToParentMatrix
+        scene.beforeSimulation(parentToWorldTransform: sceneToWorldTransform,
+                               nodeParentScaleX: 1, nodeParentScaleY: 1,
+                               parentRotation: Angle.zero)
+        
+        if userCall {
+            cpHastySpaceStep(chipmunkSpace, cpFloat(dt))
+        } else {
+            updateTime += dt
+            
+            if fixedUpdateRate > 0 {
+                let step = 1.0 / Time(fixedUpdateRate)
+                let dt = step * speed
+                while updateTime > step {
+                    updateTime -= step
+                    
+                    cpHastySpaceStep(chipmunkSpace, cpFloat(dt))
+                }
+            } else {
+                updateRateCount += 1
+                if Float(updateRateCount) > updateRate {
+                    let dt = updateTime * speed / Time(substeps)
+                    for _ in 0..<substeps {
+                        cpHastySpaceStep(chipmunkSpace, cpFloat(dt))
+                        
+                        bodies.forEach { $0.update(delta: dt) }
+                    }
+                    
+                    updateRateCount = 0
+                    updateTime = 0
+                }
+                
+            }
+        }
+        
+        // debugDraw()
+        
+        // Update physics position, should loop as the same sequence as node tree.
+        scene.afterSimulation(parentToWorldTransform: sceneToWorldTransform, parentRotation: Angle.zero)
+    }
 
 }

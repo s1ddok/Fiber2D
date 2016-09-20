@@ -6,6 +6,23 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public class PhysicsBody {
-    public weak var world: PhysicsWorld? { return nil }
+public class PhysicsBody: Behaviour {
+    
+    internal var chipmunkBody: UnsafeMutablePointer<cpBody>!
+    internal(set) public var shapes = [PhysicsShape]()
+    
+    public weak var world: PhysicsWorld? = nil
+    
+    public func remove(joint: PhysicsJoint) {
+        
+    }
+    
+    /**
+     * @brief Remove a shape from body.
+     * @param shape Shape the shape to be removed.
+     * @param reduceMassAndMoment If this is true, the body mass and moment will be reduced by shape. The default is true.
+     */
+    func remove(shape: PhysicsShape, reduceMassAndMoment: Bool = true) {
+        
+    }
 }
