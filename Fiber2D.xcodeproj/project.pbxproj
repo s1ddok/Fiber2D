@@ -135,6 +135,9 @@
 		08C1CB411D914A07006CDCCB /* PhysicsWorld+Bodies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB401D914A07006CDCCB /* PhysicsWorld+Bodies.swift */; };
 		08C1CB431D915950006CDCCB /* PhysicsShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB421D915950006CDCCB /* PhysicsShape.swift */; };
 		08C1CB471D915A1A006CDCCB /* PhysicsWorld+Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB461D915A1A006CDCCB /* PhysicsWorld+Shapes.swift */; };
+		08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB481D91769C006CDCCB /* PhysicsBody+Internal.swift */; };
+		08C1CB4B1D917A6A006CDCCB /* PhysicsBody+Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4A1D917A6A006CDCCB /* PhysicsBody+Shapes.swift */; };
+		08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,6 +361,9 @@
 		08C1CB401D914A07006CDCCB /* PhysicsWorld+Bodies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsWorld+Bodies.swift"; sourceTree = "<group>"; };
 		08C1CB421D915950006CDCCB /* PhysicsShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShape.swift; sourceTree = "<group>"; };
 		08C1CB461D915A1A006CDCCB /* PhysicsWorld+Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsWorld+Shapes.swift"; sourceTree = "<group>"; };
+		08C1CB481D91769C006CDCCB /* PhysicsBody+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Internal.swift"; sourceTree = "<group>"; };
+		08C1CB4A1D917A6A006CDCCB /* PhysicsBody+Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Shapes.swift"; sourceTree = "<group>"; };
+		08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Simulation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -712,6 +718,9 @@
 				08C1CB3C1D8F0DFF006CDCCB /* PhysicsWorld+Internal.swift */,
 				08C1CB371D8F04A5006CDCCB /* PhysicsJoint.swift */,
 				08C1CB311D8F00C6006CDCCB /* PhysicsBody.swift */,
+				08C1CB4A1D917A6A006CDCCB /* PhysicsBody+Shapes.swift */,
+				08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */,
+				08C1CB481D91769C006CDCCB /* PhysicsBody+Internal.swift */,
 				08C1CB421D915950006CDCCB /* PhysicsShape.swift */,
 				08C1CAC81D8EFFAF006CDCCB /* Chipmunk */,
 			);
@@ -933,6 +942,7 @@
 				0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */,
 				087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */,
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
+				08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
 				081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */,
 				08C1CB321D8F00C6006CDCCB /* PhysicsBody.swift in Sources */,
@@ -1012,12 +1022,14 @@
 				0812ACFE1D538D6600AE46E8 /* Vector3+simd.swift in Sources */,
 				08C1CB171D8EFFD5006CDCCB /* cpConstraint.c in Sources */,
 				0866527D1D73359800BCD9CE /* Scheduler.swift in Sources */,
+				08C1CB4B1D917A6A006CDCCB /* PhysicsBody+Shapes.swift in Sources */,
 				081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */,
 				081FBD1C1D46289A005838B8 /* RenderTextureSprite.swift in Sources */,
 				081FBCE11D462732005838B8 /* cocos2d.m in Sources */,
 				0812AD011D538D6600AE46E8 /* Vector4.swift in Sources */,
 				081FBD141D46289A005838B8 /* Node+Convenience.swift in Sources */,
 				08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */,
+				08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */,
 				081FBD121D46289A005838B8 /* Node.swift in Sources */,
 				08C1CB291D8EFFD5006CDCCB /* cpSpace.c in Sources */,
 				081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */,

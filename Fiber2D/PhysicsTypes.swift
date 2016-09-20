@@ -24,3 +24,9 @@ internal extension cpVect {
         self.init(x: cpFloat(vec2.x), y: cpFloat(vec2.y))
     }
 }
+
+internal extension Angle {
+    init(_ cpf: cpFloat) {
+        self.init(degrees: Float(cpf))
+    }
+}

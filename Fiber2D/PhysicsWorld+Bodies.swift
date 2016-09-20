@@ -77,7 +77,7 @@ internal extension PhysicsWorld {
         }
         
         if let _ = body.world {
-            body.removeFromWorld()
+            body.removeFromPhysicsWorld()
         }
         
         addBodyOrDelay(body: body)
