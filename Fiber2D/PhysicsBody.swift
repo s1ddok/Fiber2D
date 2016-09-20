@@ -122,6 +122,31 @@ public class PhysicsBody: Behaviour {
         }
     }
     
+    internal var scale: (x: Float, y: Float) = (x: 1.0, y: 1.0) {
+        didSet {
+            for shape in shapes {
+                _area -= shape.area
+                if !_massSetByUser {
+                    add(mass: -shape.mass)
+                }
+                if !_momentSetByUser {
+                    add(moment: -shape.moment)
+                }
+                
+                // shape.scale = scale 
+                
+                _area += shape.area
+                if !_massSetByUser {
+                    add(mass: shape.mass)
+                }
+                if !_momentSetByUser {
+                    add(moment: shape.moment)
+                }
+                
+            }
+        }
+    }
+    
     /**
      * The velocity of a body.
      */
@@ -143,14 +168,17 @@ public class PhysicsBody: Behaviour {
     /**
      * The angular velocity of a body.
      */
-    public var angularVelocity: Float = 0.0 {
-        didSet {
+    public var angularVelocity: Float {
+        get {
+            return Float(cpBodyGetAngularVelocity(chipmunkBody))
+        }
+        set {
             guard isDynamic else {
                 print("You can't set angular velocity for a static body.")
                 return
             }
             
-            cpBodySetAngularVelocity(chipmunkBody, cpFloat(angularVelocity))
+            cpBodySetAngularVelocity(chipmunkBody, cpFloat(newValue))
         }
     }
     
@@ -207,6 +235,17 @@ public class PhysicsBody: Behaviour {
         }
     }
     // MARK: Component stuff
+    public override var enabled: Bool {
+        didSet {
+            if oldValue != enabled {
+                if enabled {
+                    world?.addBodyOrDelay(body: self)
+                } else {
+                    world?.removeBodyOrDelay(body: self)
+                }
+            }
+        }
+    }
     public override func onEnter() {
         addToPhysicsWorld()
     }
@@ -214,7 +253,7 @@ public class PhysicsBody: Behaviour {
         removeFromPhysicsWorld()
     }
     public override func onAdd() {
-        let contentSize = owner!.contentSize
+        let contentSize = owner!.contentSizeInPoints
         ownerCenterOffset = contentSize * 0.5
         
         rotationOffset = owner!.rotation
@@ -244,13 +283,18 @@ public class PhysicsBody: Behaviour {
     internal var _density: Float = 0.0
     internal var _area: Float = 0.0
     
-    internal var _recordPos = Vector2f.zero
+    internal var _recordPos = Point.zero
     internal var _offset = Vector2f.zero
     internal var _isDamping = false
+    
+    internal var _recordScaleX: Float = 0.0
+    internal var _recordScaleY: Float = 0.0
+    
+    internal var _recordedRotation: Angle = 0°
     // MARK: Private vars
     private var _rotationOffset: Angle = 0°
     private var _recordedAngle: Angle = 0°
-    private var _recordedRotation: Angle = 0°
+    
     
     private var _positionOffset: Vector2f = Vector2f.zero
 }

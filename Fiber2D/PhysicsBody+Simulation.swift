@@ -183,14 +183,34 @@ public extension PhysicsBody {
 
 // MARK: Before/After simulation
 internal extension PhysicsBody {
-    func beforeSimulation(parentToWorldTransform: Matrix4x4f, nodeToParentTransform: Matrix4x4f, scaleX: Float, scaleY: Float, rotation: Angle) {
+    func beforeSimulation(parentToWorldTransform: Matrix4x4f, nodeToWorldTransform: Matrix4x4f, scaleX: Float, scaleY: Float, rotation: Angle) {
+        if _recordScaleX != scale.x || _recordScaleY != scale.y {
+            _recordScaleX = scale.x
+            _recordScaleY = scale.y
+            scale = (x:scaleX, y: scaleY)
+        }
         
+        // set rotation
+        if _recordedRotation != rotation {
+            self.rotation = rotation
+        }
+        
+        // set position
+        let worldPosition = nodeToWorldTransform * ownerCenterOffset
+        
+        self.position = worldPosition
+        
+        _recordPos = worldPosition
+        
+        if owner!.anchorPoint != vec2(0.5, 0.5) {
+            _offset = parentToWorldTransform.inversed * worldPosition - owner!.positionInPoints
+        }
     }
     
     func afterSimulation(parentToWorldTransform: Matrix4x4f, parentRotation: Angle) {
         let tmp = position
         if _recordPos != tmp {
-            owner!.position = parentToWorldTransform.inversed * tmp - _offset
+            owner!.positionInPoints = parentToWorldTransform.inversed * tmp - _offset
         }
         owner!.rotation = rotation - parentRotation
     }
