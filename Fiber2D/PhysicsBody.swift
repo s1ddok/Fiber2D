@@ -102,11 +102,16 @@ public class PhysicsBody: Behaviour {
             cpBodySetVelocity(chipmunkBody, cpVect(velocity))
         }
     }
+    /** The max of velocity */
+    public var velocityLimit: Float = Float.infinity
     
     /**
-     * Set the angular velocity of a body.
+     * The angular velocity of a body.
      */
     public var angularVelocity: Float = 0.0
+    
+    /** The max of angular velocity */
+    public var angularVelocityLimit: Float = Float.infinity
  
     internal(set) public var shapes = [PhysicsShape]()
     

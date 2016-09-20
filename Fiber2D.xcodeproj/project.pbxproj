@@ -138,6 +138,7 @@
 		08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB481D91769C006CDCCB /* PhysicsBody+Internal.swift */; };
 		08C1CB4B1D917A6A006CDCCB /* PhysicsBody+Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4A1D917A6A006CDCCB /* PhysicsBody+Shapes.swift */; };
 		08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */; };
+		08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -364,6 +365,7 @@
 		08C1CB481D91769C006CDCCB /* PhysicsBody+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Internal.swift"; sourceTree = "<group>"; };
 		08C1CB4A1D917A6A006CDCCB /* PhysicsBody+Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Shapes.swift"; sourceTree = "<group>"; };
 		08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Simulation.swift"; sourceTree = "<group>"; };
+		08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsShape+Internal.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -722,6 +724,7 @@
 				08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */,
 				08C1CB481D91769C006CDCCB /* PhysicsBody+Internal.swift */,
 				08C1CB421D915950006CDCCB /* PhysicsShape.swift */,
+				08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */,
 				08C1CAC81D8EFFAF006CDCCB /* Chipmunk */,
 			);
 			name = Physics;
@@ -985,6 +988,7 @@
 				08C1CB221D8EFFD5006CDCCB /* cpPolyShape.c in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */,
+				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
 				08C1CB181D8EFFD5006CDCCB /* cpDampedRotarySpring.c in Sources */,
 				087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */,

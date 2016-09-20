@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+let CP_ALL_CATEGORIES: UInt32 = 0
+
 public enum DebugDrawOption {
     case shape, joint, contact
 }
