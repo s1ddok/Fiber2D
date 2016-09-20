@@ -8,6 +8,10 @@
 
 let CP_ALL_CATEGORIES: UInt32 = 0
 
+let PHYSICS_INFINITY = Float.infinity
+let MASS_DEFAULT:   Float = 1
+let MOMENT_DEFAULT: Float = 200
+
 public enum DebugDrawOption {
     case shape, joint, contact
 }

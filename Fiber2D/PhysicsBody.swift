@@ -67,7 +67,34 @@ public class PhysicsBody: Behaviour {
      *
      * @attention If you need add/subtract mass to body, don't use setMass(getMass() +/- mass), because the mass of body may be equal to PHYSICS_INFINITY, it will cause some unexpected result, please use addMass() instead.
      */
-    public var mass: Float = 0.0
+    public var mass: Float {
+        get { return _mass }
+        set {
+            guard newValue > 0 else {
+                return
+            }
+            _mass = newValue
+            _massDefault = false
+            _massSetByUser = true
+            
+            // update density
+            if _mass == PHYSICS_INFINITY {
+                _density = PHYSICS_INFINITY
+            }
+            else {
+                if _area > 0 {
+                    _density = _mass / _area
+                } else {
+                    _density = 0
+                }
+            }
+            
+            // the static body's mass and moment is always infinity
+            if isDynamic {
+                internalBodySetMass(chipmunkBody, cpFloat(_mass));
+            }
+        }
+    }
     
     /** get the body rotation. */
     public var rotation: Angle {
@@ -151,13 +178,21 @@ public class PhysicsBody: Behaviour {
     // offset between owner's center point and down left point
     internal var ownerCenterOffset = Vector2f.zero
     
+    // it means body's moment is not calculated by shapes
+    internal var _momentSetByUser = false
+    internal var _momentDefault   = true
+    internal var _moment: Float = 0.0
+    // it means body's mass is not calculated by shapes
+    internal var _massSetByUser = false
+    internal var _massDefault = true
+    internal var _mass: Float = 0.0
+    
+    internal var _density: Float = 0.0
+    internal var _area: Float = 0.0
     // MARK: Private vars
     private var _rotationOffset: Angle = 0°
     private var _recordedAngle: Angle = 0°
     private var _recordedRotation: Angle = 0°
-    private var _momentSetByUser = false
-    private var _momentDefault   = true
-    private var _moment: Float = 0.0
 }
 
 extension PhysicsBody {
