@@ -11,6 +11,10 @@ public class PhysicsBody: Behaviour {
     internal var chipmunkBody: UnsafeMutablePointer<cpBody>!
     internal(set) public var shapes = [PhysicsShape]()
     
+    
+    internal(set) public var joints = [PhysicsJoint]()
+    
+    
     public weak var world: PhysicsWorld? = nil
     
     public func remove(joint: PhysicsJoint) {
@@ -25,4 +29,9 @@ public class PhysicsBody: Behaviour {
     func remove(shape: PhysicsShape, reduceMassAndMoment: Bool = true) {
         
     }
+}
+
+extension PhysicsBody {
+    /** remove the body from the world it added to */
+    func removeFromWorld() {}
 }

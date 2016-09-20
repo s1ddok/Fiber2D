@@ -43,6 +43,28 @@ public extension PhysicsWorld {
             print("Joint is not in this world")
             return
         }
+        
+        let idx = delayAddJoints.index {
+            $0 === joint
+        }
+        
+        let removedFromDelayAdd = idx != nil
+        if removedFromDelayAdd {
+            delayAddJoints.remove(at: idx!)
+        }
+        
+        if cpSpaceIsLocked(chipmunkSpace) != 0 {
+            guard !removedFromDelayAdd else {
+                return
+            }
+            
+            if !delayRemoveJoints.contains { $0 === joint } {
+                delayRemoveJoints.append(joint)
+            }
+            
+        } else {
+            doRemove(joint: joint)
+        }
     }
     
     /**
