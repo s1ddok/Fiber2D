@@ -81,8 +81,7 @@ public extension PhysicsBody {
             // update density
             if _mass == PHYSICS_INFINITY {
                 _density = PHYSICS_INFINITY
-            }
-            else {
+            } else {
                 if _area > 0 {
                     _density = _mass / _area
                 } else {

@@ -21,7 +21,7 @@ internal func internalBodyUpdateVelocity(_ body: UnsafeMutablePointer<cpBody>?, 
         return
     }
 
-    let physicsBody = cpBodyGetUserData(body).assumingMemoryBound(to: PhysicsBody.self).pointee
+    let physicsBody = Unmanaged<PhysicsBody>.fromOpaque(cpBodyGetUserData(body)).takeUnretainedValue()
     
     if physicsBody.isGravityEnabled {
         body!.pointee.v = cpvclamp(cpvadd(cpvmult(body!.pointee.v, damping), cpvmult(cpvadd(gravity, cpvmult(body!.pointee.f, body!.pointee.m_inv)), dt)), cpFloat(physicsBody.velocityLimit))

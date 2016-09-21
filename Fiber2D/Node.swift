@@ -990,4 +990,20 @@ open class Node: Responder {
         return scene?.scheduler
     }
     internal(set) public var priority: Int = 0
+    
+    //FIXME: Temporary
+    public var physicsBody: PhysicsBody? {
+        get {
+            return _physicsBody
+        }
+        set {
+            if newValue != nil && _physicsBody != nil {
+                remove(component: _physicsBody!)
+            }
+            
+            add(component: newValue!)
+        }
+    }
+    
+    internal var _physicsBody: PhysicsBody?
 }

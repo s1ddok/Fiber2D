@@ -11,6 +11,7 @@ class MainScene: Scene {
     
     var colorNode: ColorNode!
     var sprite: Sprite!
+    
     override init() {
         super.init()
         
@@ -68,6 +69,22 @@ class MainScene: Scene {
             print(Date())
             print(colorNodes[8].rotation)
             }, delay: 10.0)
+        
+        
+        for j in 0..<10 {
+            let physicsSquare = ColorNode()
+            physicsSquare.contentSize = Size(24.0, 24.0)
+            let physicsBody = PhysicsBody()
+            physicsBody.isDynamic = true
+            physicsBody.mass = 25.0 + 1005.0 * Float(j)
+            physicsBody.isGravityEnabled = true
+            physicsBody.isResting = false
+            physicsSquare.physicsBody = physicsBody
+            physicsSquare.position = p2d(64.0 * Float(j), 256.0)
+            
+            addChild(physicsSquare)
+        }
+        
     }
     
     override func onEnter() {

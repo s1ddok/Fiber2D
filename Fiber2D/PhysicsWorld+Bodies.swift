@@ -86,7 +86,7 @@ internal extension PhysicsWorld {
     }
     
     internal func updateBodies() {
-        guard cpSpaceIsLocked(chipmunkSpace) != 0 else {
+        guard cpSpaceIsLocked(chipmunkSpace) == 0 else {
             return
         }
         

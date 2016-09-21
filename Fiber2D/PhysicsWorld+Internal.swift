@@ -14,9 +14,7 @@ internal extension Node {
         
         let nodeToWorldTransform = parentToWorldTransform * self.nodeToParentMatrix
         
-        //if let physicsBody =  {
-            // physicsBody.beforeSimulation(
-        //}
+        physicsBody?.beforeSimulation(parentToWorldTransform: parentToWorldTransform, nodeToWorldTransform: nodeToWorldTransform, scaleX: scaleX, scaleY: scaleY, rotation: rotation)
         
         for c in children {
             c.beforeSimulation(parentToWorldTransform: nodeToWorldTransform,
@@ -29,9 +27,7 @@ internal extension Node {
         let nodeToWorldTransform = parentToWorldTransform * self.nodeToParentMatrix
         let nodeRotation = parentRotation + self.rotation
         
-        //if let physicsBody =  {
-        // physicsBody.beforeSimulation(
-        //}
+        physicsBody?.afterSimulation(parentToWorldTransform: parentToWorldTransform, parentRotation: parentRotation)
         
         for c in children {
             c.afterSimulation(parentToWorldTransform: nodeToWorldTransform, parentRotation: nodeRotation)
@@ -61,7 +57,7 @@ internal extension PhysicsWorld {
             updateJoints()
         }
         
-        guard dt < FLT_EPSILON else {
+        guard dt > FLT_EPSILON else {
             return
         }
         
@@ -90,7 +86,10 @@ internal extension PhysicsWorld {
                     for _ in 0..<substeps {
                         cpHastySpaceStep(chipmunkSpace, cpFloat(dt))
                         
-                        bodies.forEach { $0.update(delta: dt) }
+                        for b in bodies {
+                            b.update(delta: dt)
+                        }
+                        //bodies.forEach { $0.update(delta: dt) }
                     }
                     
                     updateRateCount = 0

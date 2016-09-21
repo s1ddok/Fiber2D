@@ -19,7 +19,7 @@ public class PhysicsBody: Behaviour {
     /** Whether the body is at rest. */
     public var isResting: Bool {
         get {
-            return cpBodyIsSleeping(chipmunkBody) != 0
+            return cpBodyIsSleeping(chipmunkBody) == 0
         }
         set {
             let isResting = self.isResting
@@ -222,7 +222,7 @@ public class PhysicsBody: Behaviour {
         chipmunkBody = cpBodyNew(cpFloat(_mass), cpFloat(_moment))
         super.init()
         internalBodySetMass(chipmunkBody, cpFloat(_mass))
-        cpBodySetUserData(chipmunkBody, Unmanaged.passRetained(self).toOpaque())
+        cpBodySetUserData(chipmunkBody, Unmanaged.passUnretained(self).toOpaque())
         cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
     
@@ -253,13 +253,14 @@ public class PhysicsBody: Behaviour {
         removeFromPhysicsWorld()
     }
     public override func onAdd() {
+        owner!._physicsBody = self
         let contentSize = owner!.contentSizeInPoints
         ownerCenterOffset = contentSize * 0.5
         
         rotationOffset = owner!.rotation
         // component may be added after onEnter() has been invoked, so we should add
         // this line to make sure physics body is added to physics world
-        addToPhysicsWorld();
+        addToPhysicsWorld()
     }
     public override func onRemove() {
         removeFromPhysicsWorld()
@@ -274,11 +275,11 @@ public class PhysicsBody: Behaviour {
     // it means body's moment is not calculated by shapes
     internal var _momentSetByUser = false
     internal var _momentDefault   = true
-    internal var _moment: Float = 0.0
+    internal var _moment: Float = MOMENT_DEFAULT
     // it means body's mass is not calculated by shapes
     internal var _massSetByUser = false
     internal var _massDefault = true
-    internal var _mass: Float = 0.0
+    internal var _mass: Float = MASS_DEFAULT
     
     internal var _density: Float = 0.0
     internal var _area: Float = 0.0
@@ -300,7 +301,7 @@ public class PhysicsBody: Behaviour {
 }
 
 extension PhysicsBody {
-    func addToPhysicsWorld() { owner?.scene?.physicsWorld.remove(body: self) }
+    func addToPhysicsWorld() { owner?.scene?.physicsWorld.add(body: self) }
     /** remove the body from the world it added to */
     func removeFromPhysicsWorld() { owner?.scene?.physicsWorld.remove(body: self) }
 }
