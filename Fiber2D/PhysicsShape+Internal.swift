@@ -14,3 +14,5 @@ internal extension PhysicsShape {
     }
     
 }
+
+internal let SHARED_BODY = cpBodyNewStatic()

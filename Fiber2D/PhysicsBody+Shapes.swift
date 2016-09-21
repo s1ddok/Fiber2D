@@ -97,7 +97,7 @@ extension PhysicsBody {
     }
 }
 
-extension PhysicsBody {
+public extension PhysicsBody {
     /**
      * A mask that defines which categories of physics bodies can collide with this physics body.
      *

@@ -94,7 +94,16 @@ public class PhysicsShape: Tagged {
      *
      * @return A PhysicsMaterial object reference.
      */
-    internal(set) public var material = PhysicsMaterial.default
+    public var material: PhysicsMaterial {
+        get {
+            return _material
+        }
+        set {
+            self.density = newValue.density
+            self.elasticity = newValue.elasticity
+            self.friction = newValue.friction
+        }
+    }
     
     /**
      * This shape's density.
@@ -104,13 +113,13 @@ public class PhysicsShape: Tagged {
      * @param density A float number.
      */
     public var density: Float {
-        get { return material.density }
+        get { return _material.density }
         set {
             guard newValue >= 0.0 else {
                 return
             }
             
-            material.density = newValue
+            _material.density = newValue
             
             if newValue == Float.infinity {
                 mass = Float.infinity
@@ -128,9 +137,9 @@ public class PhysicsShape: Tagged {
      * @param restitution A float number.
      */
     public var elasticity: Float {
-        get { return material.elasticity }
+        get { return _material.elasticity }
         set {
-            material.elasticity = newValue
+            _material.elasticity = newValue
             
             for cps in chipmunkShapes {
                 cpShapeSetElasticity(cps, cpFloat(newValue))
@@ -146,9 +155,9 @@ public class PhysicsShape: Tagged {
      * @param friction A float number.
      */
     public var friction: Float {
-        get { return material.friction }
+        get { return _material.friction }
         set {
-            material.friction = newValue
+            _material.friction = newValue
             
             for cps in chipmunkShapes {
                 cpShapeSetFriction(cps, cpFloat(newValue))
@@ -174,6 +183,22 @@ public class PhysicsShape: Tagged {
     }
     
     /**
+     * Get this shape's position offset.
+     *
+     * This function should be overridden in inherit classes.
+     * @return A Vec2 object.
+     */
+    public var offset: Vector2f { return Vector2f.zero }
+    
+    /**
+     * Get this shape's center position.
+     *
+     * This function should be overridden in inherit classes.
+     * @return A Vec2 object.
+     */
+    public var center: Vector2f { return offset }
+    
+    /**
      * A mask that defines which categories of physics bodies can collide with this physics body.
      *
      * When two physics bodies contact each other, a collision may occur. This body's collision mask is compared to the other body's category mask by performing a logical AND operation. If the result is a non-zero value, then this body is affected by the collision. Each body independently chooses whether it wants to be affected by the other body. For example, you might use this to avoid collision calculations that would make negligible changes to a body's velocity.
@@ -187,7 +212,7 @@ public class PhysicsShape: Tagged {
      * When two bodies share the same space, each body's category mask is tested against the other body's contact mask by performing a logical AND operation. If either comparison results in a non-zero value, an PhysicsContact object is created and passed to the physics world’s delegate. For best performance, only set bits in the contacts mask for interactions you are interested in.
      * @param bitmask An integer number, the default value is 0x00000000 (all bits cleared).
      */
-    public var contactTestBitmask = UInt32.max
+    public var contactTestBitmask = UInt32(0)
     
     /**
      * Set a mask that defines which categories this physics body belongs to.
@@ -212,9 +237,16 @@ public class PhysicsShape: Tagged {
         return 0.0
     }
     
+    /**
+     * Calculate the default moment value.
+     *
+     * This function should be overridden in inherit classes.
+     * @return A float number, equals 0.0.
+     */
+    func calculateDefaultMoment() -> Float { return 0.0 }
+    
     // MARK: Internal vars
     internal var chipmunkShapes = [UnsafeMutablePointer<cpShape>]()
-    
-    
+    internal var _material = PhysicsMaterial.default
     // MARK: Private vars
 }

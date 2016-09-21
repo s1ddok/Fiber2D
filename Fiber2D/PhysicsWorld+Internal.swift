@@ -36,7 +36,15 @@ internal extension Node {
 }
 
 func collisionBeginCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> cpBool {
-    return cpBool.allZeros
+    
+    var a: UnsafeMutablePointer<cpShape>? = nil
+    var b: UnsafeMutablePointer<cpShape>? = nil
+    cpArbiterGetShapes(arb, &a, &b)
+    
+    let shapeA = Unmanaged<PhysicsShape>.fromOpaque(cpShapeGetUserData(a)).takeUnretainedValue()
+    let shapeB = Unmanaged<PhysicsShape>.fromOpaque(cpShapeGetUserData(b)).takeUnretainedValue()
+    
+    return cpBool.max
 }
 func collisionPreSolveCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> cpBool {
     return cpBool.allZeros

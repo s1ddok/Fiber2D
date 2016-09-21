@@ -305,3 +305,22 @@ extension PhysicsBody {
     /** remove the body from the world it added to */
     func removeFromPhysicsWorld() { owner?.scene?.physicsWorld.remove(body: self) }
 }
+
+public extension PhysicsBody {
+    /**
+     * Create a body contains a circle.
+     *
+     * @param   radius A float number, it is the circle's radius.
+     * @param   material A PhysicsMaterial object, the default value is PHYSICSSHAPE_MATERIAL_DEFAULT.
+     * @param   offset A Vec2 object, it is the offset from the body's center of gravity in body local coordinates.
+     * @return  An autoreleased PhysicsBody object pointer.
+     */
+    public static func circle(radius: Float, material: PhysicsMaterial = PhysicsMaterial.default, offset: Vector2f = Vector2f.zero) -> PhysicsBody {
+        let circleShape = PhysicsShapeCircle(radius: radius, material: material, offset: offset)
+        let body = PhysicsBody()
+        body.add(shape: circleShape)
+        return body
+    }
+    
+}
+
