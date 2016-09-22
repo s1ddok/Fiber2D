@@ -16,7 +16,7 @@ public struct PhysicsMaterial {
     var elasticity: Float     ///< The bounciness of the physics body.
     var friction: Float       ///< The roughness of the surface of a shape.
     
-    public static let `default` = PhysicsMaterial(density: 0.0, elasticity: 0.0, friction: 0.0)
+    public static let `default` = PhysicsMaterial(density: 0.1, elasticity: 0.5, friction: 0.5)
 }
 
 /**

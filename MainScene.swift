@@ -80,7 +80,7 @@ class MainScene: Scene {
         staticBody.position = p2d(256.0, 128.0)
         staticBody.contentSize = Size(98.0, 98.0)
         
-        let material = PhysicsMaterial(density: 1.0, elasticity: 1.0, friction: 1.0)
+        let material = PhysicsMaterial(density: 0.1, elasticity: 0.0, friction: 1.0)
         let physicsCircle = PhysicsBody.circle(radius: 49.0, material: material)
         physicsCircle.collisionBitmask = mask
         physicsCircle.isDynamic = false
@@ -141,7 +141,7 @@ class MainScene: Scene {
         let physicsSquare = ColorNode()
         physicsSquares.append(physicsSquare)
         physicsSquare.contentSize = Size(24.0, 24.0)
-        let physicsBody = PhysicsBody.circle(radius: 12.0, material: PhysicsMaterial(density: 0.5, elasticity: 0.0, friction: 0.0))
+        let physicsBody = PhysicsBody.box(size: physicsSquare.contentSize)
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
         physicsSquare.physicsBody = physicsBody

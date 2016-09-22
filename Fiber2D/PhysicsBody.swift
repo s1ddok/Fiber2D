@@ -79,7 +79,7 @@ public class PhysicsBody: Behaviour {
     /** get the body rotation. */
     public var rotation: Angle {
         get {
-            let cpAngle = Angle(cpBodyGetAngle(chipmunkBody))
+            let cpAngle = Angle(radians: Float(cpBodyGetAngle(chipmunkBody)))
             
             if cpAngle != _recordedAngle {
                 _recordedAngle = cpAngle
