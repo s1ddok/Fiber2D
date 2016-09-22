@@ -14,6 +14,8 @@ class MainScene: Scene {
     
     var physicsSquares = [ColorNode]()
     
+    let ground = ColorNode()
+    
     override init() {
         super.init()
         
@@ -78,10 +80,10 @@ class MainScene: Scene {
         staticBody.position = p2d(256.0, 128.0)
         staticBody.contentSize = Size(98.0, 98.0)
         
-        let physicsCircle = PhysicsBody.circle(radius: 49.0, material: PhysicsMaterial(density: 1.0, elasticity: 1.0, friction: 1.0))
+        let material = PhysicsMaterial(density: 1.0, elasticity: 1.0, friction: 1.0)
+        let physicsCircle = PhysicsBody.circle(radius: 49.0, material: material)
         physicsCircle.collisionBitmask = mask
         physicsCircle.isDynamic = false
-        physicsCircle.isRotationEnabled = true
         staticBody.physicsBody = physicsCircle
         addChild(staticBody)
         
@@ -89,15 +91,23 @@ class MainScene: Scene {
             let physicsSquare = ColorNode()
             physicsSquares.append(physicsSquare)
             physicsSquare.contentSize = Size(24.0, 24.0)
-            let physicsBody = PhysicsBody.circle(radius: 12.0, material: PhysicsMaterial(density: 1.0, elasticity: 1.0, friction: 1.0))
+            let physicsBody = PhysicsBody.box(size: vec2(24.0, 24.0), material: material)
             physicsBody.isDynamic = true
-            physicsBody.isGravityEnabled = true
-
             physicsSquare.physicsBody = physicsBody
             physicsSquare.position = p2d(64.0 * Float(j), 256.0)
             
             addChild(physicsSquare)
         }
+        
+        
+        ground.contentSize = Size(1.0, 0.1)
+        ground.contentSizeType = CCSizeTypeNormalized
+        
+        addChild(ground)
+        
+        let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
+        boxBody.isDynamic = false
+        ground.physicsBody = boxBody
     }
     
     override func onEnter() {

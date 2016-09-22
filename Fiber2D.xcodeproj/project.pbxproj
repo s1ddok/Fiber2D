@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		080306AA1D932B3B008CAC8E /* PhysicsShapeCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306A91D932B3B008CAC8E /* PhysicsShapeCircle.swift */; };
 		080306AC1D933B4D008CAC8E /* PhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306AB1D933B4D008CAC8E /* PhysicsContact.swift */; };
+		080306AE1D941F4D008CAC8E /* PhysicsShapeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306AD1D941F4D008CAC8E /* PhysicsShapeBox.swift */; };
+		080306B01D942000008CAC8E /* PhysicsShapePolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306AF1D942000008CAC8E /* PhysicsShapePolygon.swift */; };
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */; };
 		0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF11D538D6600AE46E8 /* Matrix4x4.swift */; };
@@ -171,6 +173,8 @@
 /* Begin PBXFileReference section */
 		080306A91D932B3B008CAC8E /* PhysicsShapeCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShapeCircle.swift; sourceTree = "<group>"; };
 		080306AB1D933B4D008CAC8E /* PhysicsContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsContact.swift; sourceTree = "<group>"; };
+		080306AD1D941F4D008CAC8E /* PhysicsShapeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShapeBox.swift; sourceTree = "<group>"; };
+		080306AF1D942000008CAC8E /* PhysicsShapePolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShapePolygon.swift; sourceTree = "<group>"; };
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+simd.swift"; sourceTree = "<group>"; };
@@ -403,6 +407,8 @@
 			children = (
 				08C1CB421D915950006CDCCB /* PhysicsShape.swift */,
 				080306A91D932B3B008CAC8E /* PhysicsShapeCircle.swift */,
+				080306AF1D942000008CAC8E /* PhysicsShapePolygon.swift */,
+				080306AD1D941F4D008CAC8E /* PhysicsShapeBox.swift */,
 				08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */,
 			);
 			name = PhysicsShape;
@@ -1031,6 +1037,7 @@
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
+				080306B01D942000008CAC8E /* PhysicsShapePolygon.swift in Sources */,
 				081FBD191D46289A005838B8 /* Node+Traverse.swift in Sources */,
 				0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */,
 				08C1CB381D8F04A5006CDCCB /* PhysicsJoint.swift in Sources */,
@@ -1064,6 +1071,7 @@
 				08C1CB291D8EFFD5006CDCCB /* cpSpace.c in Sources */,
 				081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */,
 				081FBCD61D462732005838B8 /* CCNoARC.m in Sources */,
+				080306AE1D941F4D008CAC8E /* PhysicsShapeBox.swift in Sources */,
 				081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */,
 				081FBCDF1D462732005838B8 /* CCTextureCache.m in Sources */,
 				087BFA101D82EB2600F940D4 /* main.swift in Sources */,
