@@ -22,10 +22,10 @@ public struct PhysicsContactData {
  */
 public struct PhysicsContact {
     /** Get contact shape A. */
-    public weak var shapeA: PhysicsShape?
+    public unowned var shapeA: PhysicsShape
     
     /** Get contact shape B. */
-    public weak var shapeB: PhysicsShape?
+    public unowned var shapeB: PhysicsShape
     
     /** Get contact data */
     public let contactData: PhysicsContactData
