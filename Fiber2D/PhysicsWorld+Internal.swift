@@ -35,7 +35,7 @@ internal extension Node {
     }
 }
 
-func collisionBeginCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> cpBool {
+internal func collisionBeginCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> cpBool {
     
     var a: UnsafeMutablePointer<cpShape>? = nil
     var b: UnsafeMutablePointer<cpShape>? = nil
@@ -44,14 +44,17 @@ func collisionBeginCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space
     let shapeA = Unmanaged<PhysicsShape>.fromOpaque(cpShapeGetUserData(a)).takeUnretainedValue()
     let shapeB = Unmanaged<PhysicsShape>.fromOpaque(cpShapeGetUserData(b)).takeUnretainedValue()
     
-    return cpBool.max
+    return 1
 }
-func collisionPreSolveCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> cpBool {
-    return cpBool.allZeros
+
+internal func collisionPreSolveCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> cpBool {
+    return 1
 }
-func collisionPostSolveCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> Void {
+
+internal func collisionPostSolveCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> Void {
 }
-func collisionSeparateCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> Void {
+
+internal func collisionSeparateCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> Void {
 }
 
 internal extension PhysicsWorld {

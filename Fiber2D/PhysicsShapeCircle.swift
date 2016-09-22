@@ -25,7 +25,7 @@ public class PhysicsShapeCircle: PhysicsShape {
         return Float(cpAreaForCircle(0, cpCircleShapeGetRadius(chipmunkShapes.first!)))
     }
     
-    override func calculateDefaultMoment() -> Float {
+    override public func calculateDefaultMoment() -> Float {
         let shape = chipmunkShapes.first!
         return mass == PHYSICS_INFINITY ? PHYSICS_INFINITY
             : Float(cpMomentForCircle(cpFloat(mass),

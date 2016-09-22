@@ -31,7 +31,13 @@ public class PhysicsShape: Tagged {
      *
      * @return A PhysicsBody object pointer.
      */
-    internal(set) weak public var body: PhysicsBody?
+    internal(set) weak public var body: PhysicsBody? {
+        didSet {
+            for cps in chipmunkShapes {
+                cpShapeSetBody(cps, body?.chipmunkBody ?? SHARED_BODY)
+            }
+        }
+    }
     
     /**
      * Return this shape's type.
@@ -176,7 +182,7 @@ public class PhysicsShape: Tagged {
         didSet {
             if group < 0 {
                 for shape in chipmunkShapes {
-                cpShapeSetFilter(shape, cpShapeFilterNew(cpGroup(group), CP_ALL_CATEGORIES, CP_ALL_CATEGORIES))
+                    cpShapeSetFilter(shape, cpShapeFilterNew(cpGroup(group), CP_ALL_CATEGORIES, CP_ALL_CATEGORIES))
                 }
             }
         }
@@ -233,7 +239,7 @@ public class PhysicsShape: Tagged {
     }
     
     // Override me in subclasses
-    public func calculateArea() -> Float {
+    open func calculateArea() -> Float {
         return 0.0
     }
     
@@ -243,7 +249,7 @@ public class PhysicsShape: Tagged {
      * This function should be overridden in inherit classes.
      * @return A float number, equals 0.0.
      */
-    func calculateDefaultMoment() -> Float { return 0.0 }
+    open func calculateDefaultMoment() -> Float { return 0.0 }
     
     // MARK: Internal vars
     internal var chipmunkShapes = [UnsafeMutablePointer<cpShape>]()

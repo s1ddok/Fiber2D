@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-let CP_ALL_CATEGORIES: UInt32 = 0
+let CP_ALL_CATEGORIES: UInt32 = UInt32.max
 
 let PHYSICS_INFINITY = Float.infinity
 let MASS_DEFAULT:   Float = 1
