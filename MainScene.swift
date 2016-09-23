@@ -80,7 +80,7 @@ class MainScene: Scene {
         staticBody.position = p2d(256.0, 128.0)
         staticBody.contentSize = Size(98.0, 98.0)
         
-        let material = PhysicsMaterial(density: 0.1, elasticity: 0.0, friction: 1.0)
+        let material = PhysicsMaterial.default
         let physicsCircle = PhysicsBody.circle(radius: 49.0, material: material)
         physicsCircle.collisionBitmask = mask
         physicsCircle.isDynamic = false
@@ -134,20 +134,18 @@ class MainScene: Scene {
         
         for j in 0..<physicsSquares.count {
             //print(physicsSquares[j].physicsBody!.mass)
-            physicsSquares[j].physicsBody?.apply(force: vec2(0.0, Float(j) * 25.0))
+            //physicsSquares[j].physicsBody?.apply(force: vec2(0.0, Float(j) * 25.0))
             //physicsSquares[j].physicsBody!.isDynamic = !physicsSquares[j].physicsBody!.isDynamic
         }
         
-        let physicsSquare = ColorNode()
-        physicsSquares.append(physicsSquare)
-        physicsSquare.contentSize = Size(24.0, 24.0)
-        let physicsBody = PhysicsBody.box(size: physicsSquare.contentSize)
+        let physicsCircle = Sprite(imageNamed: "circle.png")
+        let physicsBody = PhysicsBody.circle(radius: 6.0)
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
-        physicsSquare.physicsBody = physicsBody
-        physicsSquare.position = theEvent.location(in: self)
+        physicsCircle.physicsBody = physicsBody
+        physicsCircle.position = theEvent.location(in: self)
         
-        addChild(physicsSquare)
+        addChild(physicsCircle)
     }
     
     override func scrollWheel(_ theEvent: NSEvent) {
