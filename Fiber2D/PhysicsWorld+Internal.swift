@@ -44,6 +44,14 @@ internal func collisionBeginCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?
     let shapeA = Unmanaged<PhysicsShape>.fromOpaque(cpShapeGetUserData(a)).takeUnretainedValue()
     let shapeB = Unmanaged<PhysicsShape>.fromOpaque(cpShapeGetUserData(b)).takeUnretainedValue()
     
+    let contactPointer = UnsafeMutablePointer<PhysicsContact>.allocate(capacity: 1)
+    let contact = PhysicsContact(shapeA: shapeA, shapeB: shapeB, arb: arb)
+    contactPointer.initialize(to: contact)
+    cpArbiterSetUserData(arb, contactPointer)
+    
+    let world = Unmanaged<PhysicsWorld>.fromOpaque(world!).takeUnretainedValue()
+    world.contactDelegate?.didBegin(contact: contact)
+    
     return 1
 }
 
@@ -55,6 +63,11 @@ internal func collisionPostSolveCallbackFunc(_ arb: UnsafeMutablePointer<cpArbit
 }
 
 internal func collisionSeparateCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> Void {
+    let contactPointer = cpArbiterGetUserData(arb).assumingMemoryBound(to: PhysicsContact.self)
+    let contact = contactPointer.pointee
+    let world = Unmanaged<PhysicsWorld>.fromOpaque(world!).takeUnretainedValue()
+    world.contactDelegate?.didEnd(contact: contact)
+    free(contactPointer)
 }
 
 internal extension PhysicsWorld {

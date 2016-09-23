@@ -13,6 +13,10 @@
  * instead, you can get it from an Scene object.
  */
 public class PhysicsWorld {
+    
+    /** A delegate that is called when two physics shapes come in contact with each other. */
+    public weak var contactDelegate: PhysicsContactDelegate?
+    
     /**
      * Get the gravity value of this physics world.
      *

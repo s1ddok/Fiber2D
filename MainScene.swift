@@ -108,6 +108,8 @@ class MainScene: Scene {
         let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
         boxBody.isDynamic = false
         ground.physicsBody = boxBody
+        
+        self.physicsWorld.contactDelegate = self
     }
     
     override func onEnter() {
@@ -159,4 +161,15 @@ class MainScene: Scene {
     /*override func update(delta: Time) {
         colorNode.rotation += 1°
     }*/
+}
+
+extension Scene: PhysicsContactDelegate {
+    public func didEnd(contact: PhysicsContact) {
+        print("did end")
+        
+    }
+    
+    public func didBegin(contact: PhysicsContact) {
+        print("did begin")
+    }
 }
