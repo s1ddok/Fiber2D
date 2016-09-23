@@ -7,10 +7,13 @@
 //
 
 import Cocoa
+import SwiftBGFX
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var window: NSWindow!
+    var director: Director!
+    var renderer: Renderer!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         CCSetup.createCustomSetup()
@@ -20,9 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         CCSetup.shared().uiScale = 0.5
         let rect: CGRect = CGRect(x: 0, y: 0, width: 1024, height: 768)
         window = NSWindow(contentRect: rect, styleMask: [NSClosableWindowMask, NSResizableWindowMask, NSTitledWindowMask], backing: .buffered, defer: false, screen: NSScreen.main())
+        
         let view: MetalView = MetalView(frame: rect)
         view.wantsBestResolutionOpenGLSurface = true
         self.window.contentView = view
+        
         let locator: CCFileLocator = CCFileLocator.shared()
         locator.untaggedContentScale = 4
         locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "//Resources" ]
@@ -31,8 +36,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.makeFirstResponder(view)
         window.makeKeyAndOrderFront(window)
         
+        var pd = PlatformData()
+        pd.nwh = UnsafeMutableRawPointer(Unmanaged.passRetained(view).toOpaque())
+        pd.context = UnsafeMutableRawPointer(Unmanaged.passRetained(view.context.device!).toOpaque())
+        bgfx.setPlatformData(pd)
+        
+        bgfx.initialize(type: .metal)
+        bgfx.reset(width: 1024, height: 768, options: [.vsync])
+        
+        //bgfx.renderFrame()
+        
+        
         self.window.acceptsMouseMovedEvents = true
         let director: Director = view.director
+//        director = Director(view: self)
         Director.pushCurrentDirector(director)
         director.presentScene(MainScene())
         Director.popCurrentDirector()
@@ -41,7 +58,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
-
 }
 

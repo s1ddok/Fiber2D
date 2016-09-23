@@ -15,6 +15,7 @@
 		05BC34C01D85B8A300306A4F /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BD1D85B8A300306A4F /* Shader.swift */; };
 		05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */; };
 		05BC34C51D85BBB100306A4F /* BGFXRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */; };
+		05BC358F1D8850B000306A4F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BC358E1D8850B000306A4F /* GLKit.framework */; };
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */; };
 		0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF11D538D6600AE46E8 /* Matrix4x4.swift */; };
@@ -135,6 +136,7 @@
 		05BC34BD1D85B8A300306A4F /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGFXRenderer.swift; sourceTree = "<group>"; };
 		05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRendererImpl.swift; sourceTree = "<group>"; };
+		05BC358E1D8850B000306A4F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+simd.swift"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BC358F1D8850B000306A4F /* GLKit.framework in Frameworks */,
 				054764D91D82944D003DC740 /* libSwiftBGFX.dylib in Frameworks */,
 				0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */,
 			);
@@ -276,6 +279,7 @@
 		054764D71D82944D003DC740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05BC358E1D8850B000306A4F /* GLKit.framework */,
 				054764D81D82944D003DC740 /* libSwiftBGFX.dylib */,
 			);
 			name = Frameworks;

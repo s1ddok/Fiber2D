@@ -70,6 +70,7 @@ class MetalView: MTKView, DirectorView {
         self.delegate = director
         self.drawableSize = frame.size
         self.surfaceSize = frame.size
+        self.colorPixelFormat = .bgra8Unorm
     }
     
     required init(coder: NSCoder) {

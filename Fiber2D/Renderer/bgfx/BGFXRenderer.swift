@@ -9,14 +9,67 @@
 import SwiftBGFX
 import SwiftMath
 
+let vs_shader =
+    "using namespace metal; \n" +
+        "struct xlatMtlShaderInput { \n" +
+        "  float4 a_position  [[attribute(0)]]; \n" +
+        "  float2 a_texcoord0 [[attribute(1)]]; \n" +
+        "  float2 a_texcoord1 [[attribute(2)]]; \n" +
+        "  float4 a_color0    [[attribute(3)]]; \n" +
+        "}; \n" +
+        "struct xlatMtlShaderOutput { \n" +
+        "  float4 gl_Position [[position]]; \n" +
+        "  float4 v_color0; \n" +
+        "}; \n" +
+        "struct xlatMtlShaderUniform { \n" +
+        "  float4x4 u_modelViewProj; \n" +
+        "}; \n" +
+        "vertex xlatMtlShaderOutput xlatMtlMain (xlatMtlShaderInput _mtl_i [[stage_in]], constant xlatMtlShaderUniform& _mtl_u [[buffer(0)]]) \n" +
+        "{ \n" +
+        "  xlatMtlShaderOutput _mtl_o; \n" +
+        "  float4 tmpvar_1; \n" +
+        "  //tmpvar_1.w = 1.0; \n" +
+        "  tmpvar_1 = _mtl_i.a_position; \n" +
+        //"  _mtl_o.gl_Position = (_mtl_u.u_modelViewProj * tmpvar_1); \n" +
+        "  _mtl_o.gl_Position = _mtl_i.a_position; \n" +
+        "  _mtl_o.v_color0 = _mtl_i.a_color0; \n" +
+        "  return _mtl_o; \n" +
+"} \n";
+
+let fs_shader =
+    "using namespace metal; \n" +
+        "struct xlatMtlShaderInput { \n" +
+        "  float4 v_color0; \n" +
+        "}; \n" +
+        "struct xlatMtlShaderOutput { \n" +
+        "  float4 gl_FragColor; \n" +
+        "}; \n" +
+        "struct xlatMtlShaderUniform { \n" +
+        "}; \n" +
+        "fragment xlatMtlShaderOutput xlatMtlMain (xlatMtlShaderInput _mtl_i [[stage_in]], constant xlatMtlShaderUniform& _mtl_u [[buffer(0)]]) \n" +
+        "{ \n" +
+        "  xlatMtlShaderOutput _mtl_o; \n" +
+        "  _mtl_o.gl_FragColor = _mtl_i.v_color0; \n" +
+        "  return _mtl_o; \n" +
+"} \n"
+
+
 class BGFXRenderer: Renderer {
     
     var projection: Matrix4x4f = Matrix4x4f.identity
     
     var bindings = BGFXBufferBindings()
     
+    let prog: Program
+    
+    init() {
+        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
+        let fs = Shader(source: fs_shader, language: .metal, type: .fragment)
+        prog = Program(vertex: vs, fragment: fs)
+    }
+    
     func enqueueClear(color: vec4) {
-        bgfx.setViewClear(viewId: 0, options: [.color, .depth], depth: 0.0, stencil: 0)
+        bgfx.setViewClear(viewId: 0, options: [.color, .depth], rgba: 0x30_30_30_ff, depth: 1.0, stencil: 0)
     }
     
     func enqueueTriangles(count: UInt, verticesCount: UInt, state: RendererState, globalSortOrder: Int) -> RendererBuffer {
@@ -24,21 +77,34 @@ class BGFXRenderer: Renderer {
     }
     
     func prepare(withProjection: Matrix4x4f, framebuffer: FrameBufferObject) {
+        self.bindings.clear()
         let proj = unsafeBitCast(withProjection, to: SwiftMath.Matrix4x4f.self)
+        bgfx.setViewRect(viewId: 0, x: 0, y: 0, width: 1024, height: 768)
+        bgfx.touch(0)
+
         bgfx.setViewTransform(viewId: 0, proj: proj)
+    }
     
+    func flush() {
+        bgfx.debugTextClear()
+        bgfx.debugTextPrint(x: 0, y: 1, foreColor: .white, backColor: .darkGray, format: "going")
+        
+        if bindings.vertexCount == 0 || bindings.indexCount == 0 {
+            return
+        }
+        
+
         let vb = TransientVertexBuffer(count: UInt32(bindings.vertexCount), layout: RendererVertex.layout)
         memcpy(vb.data, bindings.vertices, bindings.vertexCount * MemoryLayout<RendererVertex>.size)
         bgfx.setVertexBuffer(vb)
         
         let ib = TransientIndexBuffer(count: UInt32(bindings.indexCount))
-        memcpy(vb.data, bindings.vertices, bindings.indexCount * MemoryLayout<UInt16>.size)
+        memcpy(ib.data, bindings.indices, bindings.indexCount * MemoryLayout<UInt16>.size)
         bgfx.setIndexBuffer(ib)
-        
-        bgfx.submit(0, program: <#T##Program#>)
-    }
-    
-    func flush() {
+
+        bgfx.setRenderState(.default, colorRgba: 0x00)
+
+        bgfx.submit(0, program: prog)
         bgfx.frame()
     }
     
@@ -47,44 +113,57 @@ class BGFXRenderer: Renderer {
     }
 }
 
-struct BGFXBufferBindings {
-    var vertices: [RendererVertex]
-    var vertexCount: Int
-    var indices: [UInt16]
-    var indexCount: Int
+class BGFXBufferBindings {
+    fileprivate var vertices: [BGFXRendererVertex]
+    fileprivate var vertexCount: Int
+    fileprivate var indices: [UInt16]
+    fileprivate var indexCount: Int
     
     init() {
-        vertices    = [RendererVertex](repeating: RendererVertex(), count: 16*1024)
+        vertices    = [BGFXRendererVertex](repeating: BGFXRendererVertex(), count: 16*1024)
         vertexCount = 0
         indices     = [UInt16](repeating: 0, count: 1024)
         indexCount  = 0
     }
     
-    mutating func makeView(vertexCount: Int, triangleCount: Int) -> View {
+    func clear() {
+        self.vertexCount = 0
+        self.indexCount  = 0
+    }
+    
+    func makeView(vertexCount: Int, triangleCount: Int) -> View {
         if vertices.capacity < self.vertexCount + vertexCount {
             // Why 1.5? https://github.com/facebook/folly/blob/master/folly/docs/FBVector.md
             vertices.reserveCapacity(Int(Double(vertices.capacity) * 1.5))
         }
         
-        if indices.capacity < self.indexCount + triangleCount {
+        if indices.capacity < self.indexCount + triangleCount*3 {
             indices.reserveCapacity(Int(Double(indices.capacity) * 1.5))
         }
         
-        return View(buf: self, vertexOffset: vertices.count, vertexCount: vertexCount, indexOffset: indices.count, indexCount: indexCount)
+        let v = View(buf: self, vertexOffset: self.vertexCount, indexOffset: self.indexCount)
+        self.vertexCount += vertexCount
+        self.indexCount  += triangleCount*3
+        return v
     }
     
-    struct View: RendererBuffer {
+    class View: RendererBuffer {
         var buf: BGFXBufferBindings
         let vertexOffset: Int
-        let vertexCount: Int
         let indexOffset: Int
-        let indexCount: Int
         
-        mutating func setVertex(index: Int, vertex: RendererVertex) {
-            buf.vertices[vertexOffset+index] = vertex
+        init(buf: BGFXBufferBindings, vertexOffset: Int, indexOffset: Int) {
+            self.buf = buf
+            self.vertexOffset = vertexOffset
+            self.indexOffset  = indexOffset
         }
         
-        mutating func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16) {
+        func setVertex(index: Int, vertex: RendererVertex) {
+            let v = unsafeBitCast(vertex, to: BGFXRendererVertex.self)
+            buf.vertices[vertexOffset+index] = v
+        }
+        
+        func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16) {
             buf.indices[(indexOffset+index)*3 + 0] = UInt16(vertexOffset)+v1
             buf.indices[(indexOffset+index)*3 + 1] = UInt16(vertexOffset)+v2
             buf.indices[(indexOffset+index)*3 + 2] = UInt16(vertexOffset)+v3
@@ -94,6 +173,40 @@ struct BGFXBufferBindings {
 
 extension SwiftBGFX.FrameBuffer: FrameBufferObject {
     
+}
+
+private struct _texcoord {
+    var u, v: Float
+    init() {
+        u = 0
+        v = 0
+    }
+}
+
+private struct _color {
+    var r, g, b, a: Float
+    init() {
+        r = 0
+        g = 0
+        b = 0
+        a = 0
+    }
+}
+
+private struct BGFXRendererVertex {
+    var x, y, z, w: Float
+    var texCoord0: _texcoord
+    var texCoord1: _texcoord
+    var color0: _color
+    init() {
+        x = 0
+        y = 0
+        z = 0
+        w = 0
+        texCoord0 = _texcoord()
+        texCoord1 = _texcoord()
+        color0 = _color()
+    }
 }
 
 extension RendererVertex {

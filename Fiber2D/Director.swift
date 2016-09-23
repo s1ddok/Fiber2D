@@ -127,6 +127,12 @@ public class Director: NSObject {
         return "<\(self.self) = \(self) | Size: %0.f x %0.f, view = \(size.width)>"
     }*/
     
+    func run() {
+        DispatchQueue.global(qos: .userInteractive).async {
+            
+        }
+    }
+    
     func mainLoopBody() {
         if !animating {
             return
@@ -170,7 +176,12 @@ public class Director: NSObject {
         Director.popCurrentDirector()
     }
     
+    var r: Renderer?
+    
     func rendererFromPool() -> Renderer {
+        if r == nil {
+            r = BGFXRenderer()
+        }
         /*let lockQueue = dispatch_queue_create("com.test.LockQueue")
         dispatch_sync(lockQueue) {
             if rendererPool.count > 0 {
@@ -180,7 +191,8 @@ public class Director: NSObject {
             }
         }*/
         // Allocate and return a new renderer.
-        return CCRendererImpl(renderer: CCRenderer())
+        //return CCRendererImpl(renderer: CCRenderer())
+        return r!
     }
     
     func poolRenderer(_ renderer: Renderer) {

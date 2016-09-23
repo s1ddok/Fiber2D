@@ -32,15 +32,10 @@ public protocol RendererBuffer {
     mutating func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16)
 }
 
-public protocol RendererBuffer2 {
-    mutating func add(vertex: RendererVertex) -> Int
-    mutating func addTriange(v1: Int, v2: Int, v3: Int)
-}
-
 public struct RendererVertex {
-    var position: vec4
-    var texCoord1, texCoord2: vec2
-    var color: vec4;
+    var position: Vector4f
+    var texCoord1, texCoord2: Vector2f
+    var color: Vector4f;
     
     public init() {
         position = vec4(0)
