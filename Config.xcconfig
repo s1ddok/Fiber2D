@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  Fiber2D
+//
+//  Created by Stuart Carnie on 9/8/16.
+//  Copyright © 2016 s1ddok. All rights reserved.
+//
+
+LIBRARY_SEARCH_PATHS = $(inherited) /Users/stuartcarnie/projects/macos/bgfx/swift/SwiftBGFX/.build/debug
+SWIFT_INCLUDE_PATHS  = $(inherited) /Users/stuartcarnie/projects/macos/bgfx/swift/SwiftBGFX/.build/debug
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1 CP_USE_CGTYPES=0 $(inherited)
