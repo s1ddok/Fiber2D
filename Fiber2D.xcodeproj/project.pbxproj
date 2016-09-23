@@ -95,6 +95,8 @@
 		088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1B1D5AA73900E48EC9 /* Point.swift */; };
 		088ECE1F1D5AA73900E48EC9 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE1C1D5AA73900E48EC9 /* Rect.swift */; };
 		088ECE261D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088ECE251D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift */; };
+		0895CBA41D95705900EC6D13 /* Matrix3x3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895CBA21D95705900EC6D13 /* Matrix3x3.swift */; };
+		0895CBA51D95705900EC6D13 /* Matrix3x3+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0895CBA31D95705900EC6D13 /* Matrix3x3+simd.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
 		08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CAEE1D8EFFD5006CDCCB /* chipmunk.c */; };
@@ -296,6 +298,8 @@
 		088ECE1B1D5AA73900E48EC9 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		088ECE1C1D5AA73900E48EC9 /* Rect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
 		088ECE251D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+Extensions.swift"; sourceTree = "<group>"; };
+		0895CBA21D95705900EC6D13 /* Matrix3x3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix3x3.swift; sourceTree = "<group>"; };
+		0895CBA31D95705900EC6D13 /* Matrix3x3+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix3x3+simd.swift"; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
 		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
 		08C1CACF1D8EFFD5006CDCCB /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
@@ -434,6 +438,8 @@
 				088ECE1C1D5AA73900E48EC9 /* Rect.swift */,
 				0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */,
 				088ECE251D5AAC0E00E48EC9 /* Matrix4x4+Extensions.swift */,
+				0895CBA21D95705900EC6D13 /* Matrix3x3.swift */,
+				0895CBA31D95705900EC6D13 /* Matrix3x3+simd.swift */,
 				0812ACF11D538D6600AE46E8 /* Matrix4x4.swift */,
 				0812ACF21D538D6600AE46E8 /* platform.swift */,
 				0812ACF31D538D6600AE46E8 /* Vector2+simd.swift */,
@@ -1032,8 +1038,10 @@
 				088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
+				0895CBA51D95705900EC6D13 /* Matrix3x3+simd.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
+				0895CBA41D95705900EC6D13 /* Matrix3x3.swift in Sources */,
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
