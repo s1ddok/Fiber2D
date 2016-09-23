@@ -9,7 +9,7 @@ import Foundation
 
 /** Scene is a subclass of Node. The scene represents the root node of the node hierarchy.
  */
-class Scene: Node {
+open class Scene: Node {
     
     override var scene: Scene {
         return self
@@ -57,6 +57,7 @@ class Scene: Node {
         set { _projection = newValue }
     }
     private var _projection: Matrix4x4f!
+    
     /// -----------------------------------------------------------------------
     /// @name Creating a Scene
     /// -----------------------------------------------------------------------
@@ -72,6 +73,7 @@ class Scene: Node {
         //self.projectionDelegate = CCOrthoProjection(target: self)
         self._projection = Matrix4x4f(target: self)
         self.color = Color.black
+        self.physicsWorld = PhysicsWorld(scene: self)
     }
     
     override func onEnter() {
@@ -86,4 +88,13 @@ class Scene: Node {
         director.responderManager.markAsDirty()
     }
     
+    //#if USE_PHYSICS
+    // FIXME: Temoporary
+    public var physicsWorld: PhysicsWorld!
+    
+    public func updatePhysics(delta: Time) {
+        if physicsWorld.autoStep {
+            physicsWorld.update(dt: delta)
+        }
+    }
 }

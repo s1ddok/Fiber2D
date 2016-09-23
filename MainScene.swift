@@ -11,6 +11,11 @@ class MainScene: Scene {
     
     var colorNode: ColorNode!
     var sprite: Sprite!
+    
+    var physicsSquares = [ColorNode]()
+    
+    let ground = ColorNode()
+    
     override init() {
         super.init()
         
@@ -68,6 +73,43 @@ class MainScene: Scene {
             print(Date())
             print(colorNodes[8].rotation)
             }, delay: 10.0)
+        
+        let mask: UInt32 = 1
+        
+        let staticBody = ColorNode()
+        staticBody.position = p2d(256.0, 128.0)
+        staticBody.contentSize = Size(98.0, 98.0)
+        
+        let material = PhysicsMaterial.default
+        let physicsCircle = PhysicsBody.circle(radius: 49.0, material: material)
+        physicsCircle.collisionBitmask = mask
+        physicsCircle.isDynamic = false
+        staticBody.physicsBody = physicsCircle
+        addChild(staticBody)
+        
+        for j in 0..<10 {
+            let physicsSquare = ColorNode()
+            physicsSquares.append(physicsSquare)
+            physicsSquare.contentSize = Size(24.0, 24.0)
+            let physicsBody = PhysicsBody.box(size: vec2(24.0, 24.0), material: material)
+            physicsBody.isDynamic = true
+            physicsSquare.physicsBody = physicsBody
+            physicsSquare.position = p2d(64.0 * Float(j), 256.0)
+            
+            addChild(physicsSquare)
+        }
+        
+        
+        ground.contentSize = Size(1.0, 0.1)
+        ground.contentSizeType = CCSizeTypeNormalized
+        
+        addChild(ground)
+        
+        let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
+        boxBody.isDynamic = false
+        ground.physicsBody = boxBody
+        
+        self.physicsWorld.contactDelegate = self
     }
     
     override func onEnter() {
@@ -89,8 +131,23 @@ class MainScene: Scene {
     }
     
     override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
-        colorNode.positionInPoints = theEvent.location(in: self)
-        print(theEvent.location(in: self))
+        //colorNode.positionInPoints = theEvent.location(in: self)
+        //print(theEvent.location(in: self))
+        
+        for j in 0..<physicsSquares.count {
+            //print(physicsSquares[j].physicsBody!.mass)
+            //physicsSquares[j].physicsBody?.apply(force: vec2(0.0, Float(j) * 25.0))
+            //physicsSquares[j].physicsBody!.isDynamic = !physicsSquares[j].physicsBody!.isDynamic
+        }
+        
+        let physicsCircle = Sprite(imageNamed: "circle.png")
+        let physicsBody = PhysicsBody.circle(radius: 6.0)
+        physicsBody.isDynamic = true
+        physicsBody.isGravityEnabled = true
+        physicsCircle.physicsBody = physicsBody
+        physicsCircle.position = theEvent.location(in: self)
+        
+        addChild(physicsCircle)
     }
     
     override func scrollWheel(_ theEvent: NSEvent) {
@@ -104,4 +161,15 @@ class MainScene: Scene {
     /*override func update(delta: Time) {
         colorNode.rotation += 1°
     }*/
+}
+
+extension Scene: PhysicsContactDelegate {
+    public func didEnd(contact: PhysicsContact) {
+        print("did end")
+        
+    }
+    
+    public func didBegin(contact: PhysicsContact) {
+        print("did begin")
+    }
 }
