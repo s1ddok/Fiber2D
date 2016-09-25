@@ -117,8 +117,8 @@ open class Node: Responder, Prioritized {
     // MARK: Components
     /// Array of components added to the node
     internal(set) public var components = [Component]()
-    internal var fixedUpdatableComponentns = [FixedUpdatable]()
-    internal var updatableComponents = [Updatable]()
+    internal var fixedUpdatableComponentns = [FixedUpdatable & Tagged]()
+    internal var updatableComponents = [Updatable & Tagged]()
     
     // MARK: Transforms
     internal var isTransformDirty = true

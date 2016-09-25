@@ -39,13 +39,13 @@ public extension Node {
         components.append(component)
         component.onAdd(to: self)
         
-        if let c = component as? Updatable {
+        if let c = component as? Updatable & Tagged {
             // TODO: Insert with priority in mind
             updatableComponents.append(c)
         }
         
-        if let c = component as? FixedUpdatable {
-            
+        if let c = component as? FixedUpdatable & Tagged {
+
             fixedUpdatableComponentns.append(c)
         }
         
@@ -68,6 +68,17 @@ public extension Node {
             if $0.tag == tag {
                 $0.onRemove()
             
+                if $0 is Updatable {
+                    self.updatableComponents = self.updatableComponents.filter {
+                        return $0.tag != tag
+                    }
+                }
+                
+                if $0 is FixedUpdatable {
+                    self.fixedUpdatableComponentns = self.fixedUpdatableComponentns.filter {
+                        return $0.tag != tag
+                    }
+                }
                 return false
             }
             return true
@@ -83,7 +94,7 @@ public extension Node {
      */
     @discardableResult
     public func remove(component: Component) -> Bool {
-        return components.removeObject(component)
+        return removeComponent(by: component.tag)
     }
     
     /**
@@ -92,9 +103,11 @@ public extension Node {
     public func removeAllComponents() {
         components.forEach {
             $0.onRemove()
-            $0.owner = nil
         }
         components = []
+        updatableComponents = []
+        fixedUpdatableComponentns = []
+        // TODO: unschedule for updates, but remember about actions
         //unscheduleUpdate()
     }    
 }
