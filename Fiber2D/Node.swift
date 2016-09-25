@@ -5,8 +5,6 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
-
 /** Node is the base class for all objects displayed by Fiber2D. Node handles transformations, can have a content size and provides a coordinate system
  for its child nodes.
  
@@ -114,11 +112,13 @@ import Foundation
  The userObject property can be used to add custom data and methods (model, components) to any node, in particular to avoid subclassing where the subclass
  would only add minimal functionality or just data.
  */
-open class Node: Responder {
+open class Node: Responder, Prioritized {
         
     // MARK: Components
     /// Array of components added to the node
     internal(set) public var components = [Component]()
+    internal var fixedUpdatableComponentns = [FixedUpdatable]()
+    internal var updatableComponents = [Updatable]()
     
     // MARK: Transforms
     internal var isTransformDirty = true

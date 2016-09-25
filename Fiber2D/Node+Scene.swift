@@ -7,13 +7,13 @@
 
 import Foundation
 
-extension Node {
+extension Node: Enterable, Exitable {
     /** The scene this node is added to, or nil if it's not part of a scene.
      
      @note The scene property is nil during a node's init methods. The scene property is set only after addChild: was used to add it
      as a child node to a node that already is in the scene.
      @see Scene */
-    var scene: Scene? {
+    public var scene: Scene? {
         return parent?.scene
     }
     
@@ -24,7 +24,7 @@ extension Node {
      @see onExit
      @see onEnterTransitionDidFinish
      */
-    func onEnter() {
+    public func onEnter() {
         assert(self.scene != nil, "Missing scene on node. Was it not added to the hierarchy?")
         children.forEach { $0.onEnter() }
         scene!.scheduler.schedule(target: self)
@@ -35,7 +35,9 @@ extension Node {
             block()
         }
         
-        components.forEach { $0.onEnter() }
+        components.forEach {
+            if let c = $0 as? Enterable { c.onEnter() }
+        }
         self.queuedActions.removeAll()
         self.wasRunning(wasRunning)
     }
@@ -70,12 +72,14 @@ extension Node {
      @see onEnter
      @see onExitTransitionDidStart
      */
-    func onExit() {
+    public func onExit() {
         let wasRunning: Bool = self.active
         self.isInActiveScene = false
         self.wasRunning(wasRunning)
         
-        components.forEach { $0.onExit() }
+        components.forEach {
+            if let c = $0 as? Exitable { c.onExit() }
+        }
         children.forEach { $0.onExit() }
     }
 }

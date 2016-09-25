@@ -35,9 +35,19 @@ public extension Node {
         guard getComponent(by: component.tag) == nil else {
             return false
         }
+        
         components.append(component)
-        component.owner = self
-        component.onAdd()
+        component.onAdd(to: self)
+        
+        if let c = component as? Updatable {
+            // TODO: Insert with priority in mind
+            updatableComponents.append(c)
+        }
+        
+        if let c = component as? FixedUpdatable {
+            
+            fixedUpdatableComponentns.append(c)
+        }
         
         // should enable schedule update, then all components can receive this call back
         //scheduleUpdate()
@@ -57,7 +67,6 @@ public extension Node {
         components = components.filter {
             if $0.tag == tag {
                 $0.onRemove()
-                $0.owner = nil
             
                 return false
             }
@@ -90,11 +99,13 @@ public extension Node {
     }    
 }
 
-extension Node: Updatable {
+extension Node {
+    
     public final func update(delta: Time) {
-        components.forEach { $0.update(delta: delta) }
+        updatableComponents.forEach { $0.update(delta: delta) }
     }
+    
     public final func fixedUpdate(delta: Time) {
-        components.forEach { $0.fixedUpdate(delta: delta) }
+        fixedUpdatableComponentns.forEach { $0.fixedUpdate(delta: delta) }
     }
 }

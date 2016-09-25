@@ -6,19 +6,19 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-private class MockUpdatable: Updatable {
-    var priority: Int {
-        return Int.min
+private class MockNode: Node {
+    override var priority: Int {
+        get { return Int.min }
+        set { }
     }
 }
+
 /**
  Scheduler is responsible for triggering scheduled callbacks. All scheduled and timed events should use this class, rather than NSTimer.
  Generally, you interface with the scheduler by using the "schedule"/"scheduleBlock" methods in Node. You may need to aess Scheduler
  in order to aess read-only time properties or to adjust the time scale.
  */
 public final class Scheduler {
-    func update(dt: Time) {
-    }
     /* Modifies the time of all scheduled callbacks.
      You can use this property to create a 'slow motion' or 'fast forward' effect.
      Default is 1.0. To create a 'slow motion' effect, use values below 1.0.
@@ -61,7 +61,7 @@ public final class Scheduler {
     var actionTargets    = [ScheduledTarget]()
     internal var updatableTargetsNeedSorting = true
     var fixedUpdateTimer: Timer!
-    private let mock = MockUpdatable()
+    private let mock = MockNode()
     var actionsRunInFixedMode = false
     
     init() {
@@ -193,7 +193,7 @@ extension Scheduler {
 // MARK: Getters
 extension Scheduler {
     
-    func scheduledTarget(for target: Updatable, insert: Bool) -> ScheduledTarget? {
+    func scheduledTarget(for target: Node, insert: Bool) -> ScheduledTarget? {
         var scheduledTarget = scheduledTargets.first {
             $0.target === target
         }
@@ -208,7 +208,7 @@ extension Scheduler {
         return scheduledTarget
     }
     
-    func schedule(block: @escaping TimerBlock, for target: Updatable, withDelay delay: Time) -> Timer {
+    func schedule(block: @escaping TimerBlock, for target: Node, withDelay delay: Time) -> Timer {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         let timer = Timer(delay: delay, scheduler: self, scheduledTarget: scheduledTarget, block: block)
         self.schedule(timer: timer)
@@ -217,7 +217,7 @@ extension Scheduler {
         return timer
     }
     
-    func schedule(target: Updatable) {
+    func schedule(target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         // Don't schedule something more than once.
         if !scheduledTarget.enableUpdates {
@@ -228,7 +228,7 @@ extension Scheduler {
         }
     }
     
-    func unschedule(target: Updatable) {
+    func unschedule(target: Node) {
         if let scheduledTarget = self.scheduledTarget(for: target, insert: false) {
             // Remove the update methods if they are scheduled
             if scheduledTarget.enableUpdates {
@@ -242,21 +242,21 @@ extension Scheduler {
         }
     }
     
-    func isTargetScheduled(target: Updatable) -> Bool {
+    func isTargetScheduled(target: Node) -> Bool {
         return self.scheduledTarget(for: target, insert: false) != nil
     }
     
-    func setPaused(paused: Bool, target: Updatable) {
+    func setPaused(paused: Bool, target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: false)!
         scheduledTarget.paused = paused
     }
     
-    func isTargetPaused(target: Updatable) -> Bool {
+    func isTargetPaused(target: Node) -> Bool {
         let scheduledTarget = self.scheduledTarget(for: target, insert: false)!
         return scheduledTarget.paused
     }
     
-    func timersForTarget(target: Updatable) -> [Timer] {
+    func timersForTarget(target: Node) -> [Timer] {
         guard let scheduledTarget = self.scheduledTarget(for: target, insert: false) else {
             return []
         }
@@ -274,7 +274,7 @@ extension Scheduler {
 
 // MARK: Scheduling Actions
 extension Scheduler {
-    func add(action: ActionContainer, target: Updatable, paused: Bool) {
+    func add(action: ActionContainer, target: Node, paused: Bool) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.paused = paused
         if scheduledTarget.hasActions {
@@ -288,13 +288,13 @@ extension Scheduler {
         scheduledTarget.actions[scheduledTarget.actions.count - 1].start(with: target)
     }
     
-    func removeAllActions(from target: Updatable) {
+    func removeAllActions(from target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.actions = []
         actionTargets.removeObject(scheduledTarget)
     }
     
-    func removeAction(by tag: Int, target: Updatable) {
+    func removeAction(by tag: Int, target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.actions = scheduledTarget.actions.filter {
             return $0.tag != tag
@@ -307,7 +307,7 @@ extension Scheduler {
         actionTargets.removeObject(scheduledTarget)
     }
     
-    func getAction(by tag: Int, target: Updatable) -> ActionContainer? {
+    func getAction(by tag: Int, target: Node) -> ActionContainer? {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         for action: ActionContainer in scheduledTarget.actions {
             if (action.tag == tag) {
@@ -317,7 +317,7 @@ extension Scheduler {
         return nil
     }
     
-    func actions(for target: Updatable) -> [ActionContainer] {
+    func actions(for target: Node) -> [ActionContainer] {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         return scheduledTarget.actions
     }

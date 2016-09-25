@@ -14,7 +14,7 @@
  * If you create body with createEdgeXXX, the mass and moment will be inifinity by default. And it's a static body.
  * You can change mass and moment with `mass` and `moment`. And you can change the body to be dynamic or static by use `dynamic`.
  */
-public class PhysicsBody: Behaviour {
+public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
     // MARK: State
     /** Whether the body is at rest. */
     public var isResting: Bool {
@@ -226,7 +226,7 @@ public class PhysicsBody: Behaviour {
         cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
     
-    public override func update(delta: Time) {
+    public func update(delta: Time) {
         // damping compute
         if (_isDamping && isDynamic && !isResting) {
             chipmunkBody.pointee.v.x *= cpfclamp(1.0 - cpFloat(delta * linearDamping), 0.0, 1.0)
@@ -246,24 +246,26 @@ public class PhysicsBody: Behaviour {
             }
         }
     }
-    public override func onEnter() {
+    public func onEnter() {
         addToPhysicsWorld()
     }
-    public override func onExit() {
+    public func onExit() {
         removeFromPhysicsWorld()
     }
-    public override func onAdd() {
-        owner!._physicsBody = self
-        let contentSize = owner!.contentSizeInPoints
+    public override func onAdd(to owner: Node) {
+        super.onAdd(to: owner)
+        owner._physicsBody = self
+        let contentSize = owner.contentSizeInPoints
         ownerCenterOffset = contentSize * 0.5
         
-        rotationOffset = owner!.rotation
+        rotationOffset = owner.rotation
         // component may be added after onEnter() has been invoked, so we should add
         // this line to make sure physics body is added to physics world
         addToPhysicsWorld()
     }
     public override func onRemove() {
         removeFromPhysicsWorld()
+        super.onRemove()
     }
     
     // MARK: Internal vars

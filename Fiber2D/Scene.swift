@@ -11,7 +11,7 @@ import Foundation
  */
 open class Scene: Node {
     
-    override var scene: Scene {
+    override public var scene: Scene {
         return self
     }
     
@@ -76,7 +76,7 @@ open class Scene: Node {
         self.physicsWorld = PhysicsWorld(scene: self)
     }
     
-    override func onEnter() {
+    override public func onEnter() {
         super.onEnter()
         // mark starting scene as dirty, to make sure responder manager is updated
         director.responderManager.markAsDirty()
