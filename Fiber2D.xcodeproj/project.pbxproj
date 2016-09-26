@@ -13,6 +13,8 @@
 		080306B01D942000008CAC8E /* PhysicsShapePolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306AF1D942000008CAC8E /* PhysicsShapePolygon.swift */; };
 		080306F31D97F093008CAC8E /* BehaviourProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306F21D97F093008CAC8E /* BehaviourProtocol.swift */; };
 		080306F81D97F233008CAC8E /* Prioritized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306F71D97F233008CAC8E /* Prioritized.swift */; };
+		080307191D994FED008CAC8E /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307181D994FED008CAC8E /* System.swift */; };
+		0803071B1D995331008CAC8E /* Director+Systems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071A1D995331008CAC8E /* Director+Systems.swift */; };
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */; };
 		0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF11D538D6600AE46E8 /* Matrix4x4.swift */; };
@@ -181,6 +183,8 @@
 		080306AF1D942000008CAC8E /* PhysicsShapePolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShapePolygon.swift; sourceTree = "<group>"; };
 		080306F21D97F093008CAC8E /* BehaviourProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BehaviourProtocol.swift; path = protocols/BehaviourProtocol.swift; sourceTree = "<group>"; };
 		080306F71D97F233008CAC8E /* Prioritized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Prioritized.swift; path = protocols/Prioritized.swift; sourceTree = "<group>"; };
+		080307181D994FED008CAC8E /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		0803071A1D995331008CAC8E /* Director+Systems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Director+Systems.swift"; sourceTree = "<group>"; };
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+simd.swift"; sourceTree = "<group>"; };
@@ -694,6 +698,7 @@
 				081FBD091D46289A005838B8 /* Scene.swift */,
 				081FBD0D1D46289A005838B8 /* Transition.swift */,
 				081FBCF91D46289A005838B8 /* Director.swift */,
+				0803071A1D995331008CAC8E /* Director+Systems.swift */,
 				087BFA171D82F60500F940D4 /* Director+macOS.swift */,
 				087BFA151D82F5C200F940D4 /* DirectorView.swift */,
 			);
@@ -714,6 +719,7 @@
 		087BFA0C1D82D16600F940D4 /* Behaviour */ = {
 			isa = PBXGroup;
 			children = (
+				080307181D994FED008CAC8E /* System.swift */,
 				087BFA0D1D82D1BE00F940D4 /* Component.swift */,
 				087BFA071D82D16100F940D4 /* Behaviour.swift */,
 			);
@@ -1045,6 +1051,7 @@
 				088ECE1E1D5AA73900E48EC9 /* Point.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
+				080307191D994FED008CAC8E /* System.swift in Sources */,
 				0895CBA51D95705900EC6D13 /* Matrix3x3+simd.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
@@ -1118,6 +1125,7 @@
 				088509951D7B876D003EF800 /* ActionEase.swift in Sources */,
 				080306F81D97F233008CAC8E /* Prioritized.swift in Sources */,
 				087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */,
+				0803071B1D995331008CAC8E /* Director+Systems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
