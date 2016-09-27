@@ -36,21 +36,44 @@ public extension Node {
             return false
         }
         
-        components.append(component)
-        component.onAdd(to: self)
-        
-        if let c = component as? Updatable & Tagged {
-            // TODO: Insert with priority in mind
-            updatableComponents.append(c)
+        if let system = director?.system(for: component) {
+            system.add(component: component)
+        } else {
+            components.append(component)
+            component.onAdd(to: self)
+            
+            if let c = component as? Updatable & Tagged {
+                // TODO: Insert with priority in mind
+                updatableComponents.append(c)
+                
+                // If it is first component
+                if updatableComponents.count == 1 {
+                    if let scheduler = self.scheduler {
+                        scheduler.schedule(updatable: self)
+                    } else {
+                        queuedActions.append {
+                            self.scheduler!.schedule(updatable: self)
+                        }
+                    }
+                }
+            }
+            
+            if let c = component as? FixedUpdatable & Tagged {
+                // TODO: Insert with priority in mind
+                fixedUpdatableComponentns.append(c)
+                
+                // If it is first component
+                if fixedUpdatableComponentns.count == 1 {
+                    if let scheduler = self.scheduler {
+                        scheduler.schedule(updatable: self)
+                    } else {
+                        queuedActions.append {
+                            self.scheduler!.schedule(updatable: self)
+                        }
+                    }
+                }
+            }
         }
-        
-        if let c = component as? FixedUpdatable & Tagged {
-
-            fixedUpdatableComponentns.append(c)
-        }
-        
-        // should enable schedule update, then all components can receive this call back
-        //scheduleUpdate()
         
         return true
     }
@@ -68,15 +91,26 @@ public extension Node {
             if $0.tag == tag {
                 $0.onRemove()
             
+                // FIXME: This will not work if component will be removed when node doesn't have any scheduler
+                // And we also cant remove it from queuedActions since blocks are incomparable
+                // Need to find more clever solution
                 if $0 is Updatable {
                     self.updatableComponents = self.updatableComponents.filter {
                         return $0.tag != tag
+                    }
+                    
+                    if self.updatableComponents.isEmpty {
+                        self.scheduler?.unschedule(updatable: self)
                     }
                 }
                 
                 if $0 is FixedUpdatable {
                     self.fixedUpdatableComponentns = self.fixedUpdatableComponentns.filter {
                         return $0.tag != tag
+                    }
+                    
+                    if self.fixedUpdatableComponentns.isEmpty {
+                        self.scheduler?.unschedule(fixedUpdatable: self)
                     }
                 }
                 return false
@@ -107,12 +141,14 @@ public extension Node {
         components = []
         updatableComponents = []
         fixedUpdatableComponentns = []
-        // TODO: unschedule for updates, but remember about actions
-        //unscheduleUpdate()
+        
+        let scheduler = self.scheduler
+        scheduler?.unschedule(updatable: self)
+        scheduler?.unschedule(fixedUpdatable: self)
     }    
 }
 
-extension Node {
+extension Node: Updatable, FixedUpdatable {
     
     public final func update(delta: Time) {
         updatableComponents.forEach { $0.update(delta: delta) }

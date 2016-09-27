@@ -23,4 +23,14 @@ public extension Director {
         system.onRemove()
     }
     
+    public func system(for component: Component) -> System? {
+        for s in systems {
+            if s.wants(component: component) {
+                return s
+            }
+        }
+        
+        return nil
+    }
+    
 }

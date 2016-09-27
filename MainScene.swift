@@ -96,6 +96,12 @@ class MainScene: Scene {
             physicsSquare.physicsBody = physicsBody
             physicsSquare.position = p2d(64.0 * Float(j), 256.0)
             
+            if j % 2 == 0 {
+                physicsSquare.add(component: UpdateComponent())
+            } else {
+                physicsSquare.add(component: FixedUpdateComponent())
+            }
+            
             add(child: physicsSquare)
         }
         
