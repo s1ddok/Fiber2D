@@ -7,16 +7,7 @@
 
 import Foundation
 
-extension Node: Enterable, Exitable {
-    /** The scene this node is added to, or nil if it's not part of a scene.
-     
-     @note The scene property is nil during a node's init methods. The scene property is set only after addChild: was used to add it
-     as a child node to a node that already is in the scene.
-     @see Scene */
-    public var scene: Scene? {
-        return parent?.scene
-    }
-    
+extension Node: Enterable, Exitable {    
     /** Called every time the Node (or one of its parents) has been added to the scene, or when the scene is presented.
      If a new scene is presented with a transition, this event is sent to nodes when the transition animation starts.
      
@@ -27,7 +18,7 @@ extension Node: Enterable, Exitable {
     public func onEnter() {
         assert(self.scene != nil, "Missing scene on node. Was it not added to the hierarchy?")
         children.forEach { $0.onEnter() }
-        scene!.scheduler.schedule(target: self)
+        scheduler!.schedule(target: self)
         let wasRunning: Bool = self.active
         self.isInActiveScene = true
         // Add queued actions or scheduled code, if needed:

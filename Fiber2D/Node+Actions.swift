@@ -41,7 +41,7 @@ public extension Node {
      *
      *  @param name Name of the action to remove.
      */
-    public func stopActionByName(by tag: Int) {
+    public func stopAction(by tag: Int) {
         scheduler?.removeAction(by: tag, target: self)
     }
     

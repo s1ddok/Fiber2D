@@ -15,6 +15,8 @@
 		080306F81D97F233008CAC8E /* Prioritized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306F71D97F233008CAC8E /* Prioritized.swift */; };
 		080307191D994FED008CAC8E /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307181D994FED008CAC8E /* System.swift */; };
 		0803071B1D995331008CAC8E /* Director+Systems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071A1D995331008CAC8E /* Director+Systems.swift */; };
+		0803071D1D9A70C7008CAC8E /* Pausable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071C1D9A70C7008CAC8E /* Pausable.swift */; };
+		0803071F1D9AFFDC008CAC8E /* Node+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */; };
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */; };
 		0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812ACF11D538D6600AE46E8 /* Matrix4x4.swift */; };
@@ -185,6 +187,8 @@
 		080306F71D97F233008CAC8E /* Prioritized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Prioritized.swift; path = protocols/Prioritized.swift; sourceTree = "<group>"; };
 		080307181D994FED008CAC8E /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		0803071A1D995331008CAC8E /* Director+Systems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Director+Systems.swift"; sourceTree = "<group>"; };
+		0803071C1D9A70C7008CAC8E /* Pausable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pausable.swift; path = protocols/Pausable.swift; sourceTree = "<group>"; };
+		0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Hierarchy.swift"; sourceTree = "<group>"; };
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		0812ACF01D538D6600AE46E8 /* Matrix4x4+simd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Matrix4x4+simd.swift"; sourceTree = "<group>"; };
@@ -645,6 +649,7 @@
 				081FBCFD1D46289A005838B8 /* Node+Actions.swift */,
 				081FBCFE1D46289A005838B8 /* Node+Convenience.swift */,
 				081FBCFF1D46289A005838B8 /* Node+Convertation.swift */,
+				0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */,
 				081FBD011D46289A005838B8 /* Node+Scene.swift */,
 				081FBD021D46289A005838B8 /* Node+Transform.swift */,
 				081FBD031D46289A005838B8 /* Node+Traverse.swift */,
@@ -732,6 +737,7 @@
 				088509891D7B4F2F003EF800 /* Tagged.swift */,
 				080306F71D97F233008CAC8E /* Prioritized.swift */,
 				080306F21D97F093008CAC8E /* BehaviourProtocol.swift */,
+				0803071C1D9A70C7008CAC8E /* Pausable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -993,6 +999,7 @@
 				08C1CB161D8EFFD5006CDCCB /* cpCollision.c in Sources */,
 				0812ACF91D538D6600AE46E8 /* Matrix4x4+simd.swift in Sources */,
 				087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */,
+				0803071F1D9AFFDC008CAC8E /* Node+Hierarchy.swift in Sources */,
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
 				08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
@@ -1073,6 +1080,7 @@
 				081FBD1F1D46289A005838B8 /* Scene.swift in Sources */,
 				081FBD211D46289A005838B8 /* Sprite9Slice.swift in Sources */,
 				081FBD231D46289A005838B8 /* Transition.swift in Sources */,
+				0803071D1D9A70C7008CAC8E /* Pausable.swift in Sources */,
 				088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */,
 				08C1CB141D8EFFD5006CDCCB /* cpBBTree.c in Sources */,
 				0812ACFA1D538D6600AE46E8 /* Matrix4x4.swift in Sources */,

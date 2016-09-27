@@ -15,7 +15,7 @@ open class Scene: Node {
         return self
     }
     
-    override var director: Director! {
+    override public var director: Director! {
         get {
             return _director
         }
