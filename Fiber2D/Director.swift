@@ -47,6 +47,8 @@ public class Director: NSObject {
         stack.removeLastObject()
     }
     
+    internal(set) public var systems = [System]()
+    
     // internal timer
     var oldFrameSkipInterval: Int = 1
     var frameSkipInterval: Int = 1
@@ -67,7 +69,7 @@ public class Director: NSObject {
     var notificationNode: Node?
     /* will be the next 'runningScene' in the next frame
      nextScene is a weak reference. */
-    var nextScene: Scene?
+    internal weak var nextScene: Scene?
     /* If YES, then "old" scene will receive the cleanup message */
     var sendCleanupToScene: Bool = false
     /* scheduled scenes */

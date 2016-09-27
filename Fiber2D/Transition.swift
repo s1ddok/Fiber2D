@@ -170,13 +170,13 @@ class Transition: Scene {
         self.outgoingTexture.position = p2d(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.outgoingTexture.contentScale /= outgoingDownScale
         self.outgoingTexture.projection = incomingScene.projection
-        self.addChild(outgoingTexture, z: outgoingOverIncoming ? 1 : 0)
+        self.add(child:outgoingTexture, z: outgoingOverIncoming ? 1 : 0)
         // create texture for incoming scene
         self.incomingTexture = RenderTexture(width: Int(size.width), height: Int(size.height))
         self.incomingTexture.position = p2d(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.incomingTexture.contentScale /= incomingDownScale
         self.incomingTexture.projection = incomingScene.projection
-        self.addChild(incomingTexture)
+        self.add(child: incomingTexture)
         // make sure scene is rendered at least once at progress 0.0
         self.renderOutgoing(0)
         self.renderIncoming(0)

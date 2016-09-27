@@ -6,26 +6,34 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-private class MockUpdatable: Updatable {
-    var priority: Int {
-        return Int.min
+private class MockNode: Node {
+    override var priority: Int {
+        get { return Int.min }
+        set { }
     }
 }
+
+internal struct UnownedContainer<T> where T: AnyObject {
+    unowned var value : T
+    
+    init(_ value: T) {
+        self.value = value
+    }
+}
+
 /**
  Scheduler is responsible for triggering scheduled callbacks. All scheduled and timed events should use this class, rather than NSTimer.
  Generally, you interface with the scheduler by using the "schedule"/"scheduleBlock" methods in Node. You may need to aess Scheduler
  in order to aess read-only time properties or to adjust the time scale.
  */
 public final class Scheduler {
-    func update(dt: Time) {
-    }
-    /* Modifies the time of all scheduled callbacks.
+    /** Modifies the time of all scheduled callbacks.
      You can use this property to create a 'slow motion' or 'fast forward' effect.
      Default is 1.0. To create a 'slow motion' effect, use values below 1.0.
      To create a 'fast forward' effect, use values higher than 1.0.
      @warning It will affect EVERY scheduled selector / action.
      */
-    var timeScale: Time = 1.0
+    public var timeScale: Time = 1.0
     /**
      Current time the scheduler is calling a block for.
      */
@@ -55,20 +63,26 @@ public final class Scheduler {
         }
     }
     
-    var heap = [Timer]()
-    var scheduledTargets = [ScheduledTarget]()
-    var updatableTargets = [ScheduledTarget]()
-    var actionTargets    = [ScheduledTarget]()
+    internal var heap = [Timer]()
+    var scheduledTargets      = [ScheduledTarget]()
+    var updatableTargets      = [Updatable      & Pausable]()
+    var fixedUpdatableTargets = [FixedUpdatable & Pausable]()
+    var actionTargets         = [UnownedContainer<ScheduledTarget>]()
     internal var updatableTargetsNeedSorting = true
+    internal var fixedUpdatableTargetsNeedSorting = true
     var fixedUpdateTimer: Timer!
-    private let mock = MockUpdatable()
+    private let mock = MockNode()
     var actionsRunInFixedMode = false
     
     init() {
         fixedUpdateTimer = schedule(block: { [unowned self](timer:Timer) in
             if timer.invokeTime > 0.0 {
-                for t in self.updatableTargets {
-                    t.target?.fixedUpdate(delta: timer.repeatInterval)
+                if self.fixedUpdatableTargetsNeedSorting {
+                    self.fixedUpdatableTargets.sort { $0.priority < $1.priority }
+                    self.fixedUpdatableTargetsNeedSorting = false
+                }
+                for t in self.fixedUpdatableTargets {
+                    t.fixedUpdate(delta: timer.repeatInterval)
                 }
                 
                 if self.actionsRunInFixedMode {
@@ -137,7 +151,7 @@ extension Scheduler {
                     scheduledTarget.remove(timer: timer)
                     
                     if scheduledTarget.empty {
-                        scheduledTargets.removeObject(scheduledTarget.target!)
+                        scheduledTargets.removeObject(scheduledTarget)
                     }
                     
                     timer.invalidate()
@@ -152,9 +166,14 @@ extension Scheduler {
         
         update(to: currentTime + clampedDelta)
         
+        if self.updatableTargetsNeedSorting {
+            self.updatableTargets.sort { $0.priority < $1.priority }
+            self.updatableTargetsNeedSorting = false
+        }
+        
         for t in updatableTargets {
             if !t.paused {
-                t.target?.update(delta: clampedDelta)
+                t.update(delta: clampedDelta)
             }
         }
         
@@ -166,8 +185,8 @@ extension Scheduler {
     }
     
     internal func updateActions(_ dt: Time) {
-        actionTargets = actionTargets.filter{
-            let st = $0
+        actionTargets = actionTargets.filter {
+            let st = $0.value
             
             guard !st.paused else {
                 return st.hasActions
@@ -193,7 +212,7 @@ extension Scheduler {
 // MARK: Getters
 extension Scheduler {
     
-    func scheduledTarget(for target: Updatable, insert: Bool) -> ScheduledTarget? {
+    func scheduledTarget(for target: Node, insert: Bool) -> ScheduledTarget? {
         var scheduledTarget = scheduledTargets.first {
             $0.target === target
         }
@@ -208,7 +227,7 @@ extension Scheduler {
         return scheduledTarget
     }
     
-    func schedule(block: @escaping TimerBlock, for target: Updatable, withDelay delay: Time) -> Timer {
+    func schedule(block: @escaping TimerBlock, for target: Node, withDelay delay: Time) -> Timer {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         let timer = Timer(delay: delay, scheduler: self, scheduledTarget: scheduledTarget, block: block)
         self.schedule(timer: timer)
@@ -217,46 +236,48 @@ extension Scheduler {
         return timer
     }
     
-    func schedule(target: Updatable) {
+    func schedule(target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         // Don't schedule something more than once.
         if !scheduledTarget.enableUpdates {
             scheduledTarget.enableUpdates = true
             
-            updatableTargets.append(scheduledTarget)
-            updatableTargetsNeedSorting = true
+            // TODO: Let target schedule itself only when at least one component is added to it
+            schedule(updatable: target)
+            schedule(fixedUpdatable: target)
         }
     }
     
-    func unschedule(target: Updatable) {
+    func unschedule(target: Node) {
         if let scheduledTarget = self.scheduledTarget(for: target, insert: false) {
             // Remove the update methods if they are scheduled
             if scheduledTarget.enableUpdates {
-                updatableTargets.removeObject(scheduledTarget)
+                unschedule(updatable: scheduledTarget.target!)
+                unschedule(fixedUpdatable: scheduledTarget.target!)
             }
             if scheduledTarget.hasActions {
-                actionTargets.removeObject(scheduledTarget)
+                actionTargets.remove(at: actionTargets.index { $0.value === scheduledTarget }!)
             }
             scheduledTarget.invalidateTimers()
             scheduledTargets.removeObject(scheduledTarget)
         }
     }
     
-    func isTargetScheduled(target: Updatable) -> Bool {
+    func isTargetScheduled(target: Node) -> Bool {
         return self.scheduledTarget(for: target, insert: false) != nil
     }
     
-    func setPaused(paused: Bool, target: Updatable) {
+    func setPaused(paused: Bool, target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: false)!
         scheduledTarget.paused = paused
     }
     
-    func isTargetPaused(target: Updatable) -> Bool {
+    func isTargetPaused(target: Node) -> Bool {
         let scheduledTarget = self.scheduledTarget(for: target, insert: false)!
         return scheduledTarget.paused
     }
     
-    func timersForTarget(target: Updatable) -> [Timer] {
+    func timersForTarget(target: Node) -> [Timer] {
         guard let scheduledTarget = self.scheduledTarget(for: target, insert: false) else {
             return []
         }
@@ -274,7 +295,7 @@ extension Scheduler {
 
 // MARK: Scheduling Actions
 extension Scheduler {
-    func add(action: ActionContainer, target: Updatable, paused: Bool) {
+    func add(action: ActionContainer, target: Node, paused: Bool) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.paused = paused
         if scheduledTarget.hasActions {
@@ -282,19 +303,19 @@ extension Scheduler {
         } else {
             // This is the first action that has been scheduled for this target.
             // It needs to be added to the list of targets with actions.
-            actionTargets.append(scheduledTarget)
+            actionTargets.append(UnownedContainer(scheduledTarget))
         }
         scheduledTarget.add(action: action)
         scheduledTarget.actions[scheduledTarget.actions.count - 1].start(with: target)
     }
     
-    func removeAllActions(from target: Updatable) {
+    func removeAllActions(from target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.actions = []
-        actionTargets.removeObject(scheduledTarget)
+        actionTargets.remove(at: actionTargets.index { $0.value === scheduledTarget }!)
     }
     
-    func removeAction(by tag: Int, target: Updatable) {
+    func removeAction(by tag: Int, target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.actions = scheduledTarget.actions.filter {
             return $0.tag != tag
@@ -304,10 +325,10 @@ extension Scheduler {
             return
         }
         
-        actionTargets.removeObject(scheduledTarget)
+        actionTargets.remove(at: actionTargets.index { $0.value === scheduledTarget }!)
     }
     
-    func getAction(by tag: Int, target: Updatable) -> ActionContainer? {
+    func getAction(by tag: Int, target: Node) -> ActionContainer? {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         for action: ActionContainer in scheduledTarget.actions {
             if (action.tag == tag) {
@@ -317,9 +338,29 @@ extension Scheduler {
         return nil
     }
     
-    func actions(for target: Updatable) -> [ActionContainer] {
+    func actions(for target: Node) -> [ActionContainer] {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         return scheduledTarget.actions
     }
 }
 
+
+public extension Scheduler {
+    public func schedule(updatable: Updatable & Pausable) {
+        updatableTargets.append(updatable)
+        updatableTargetsNeedSorting = true
+    }
+    
+    public func unschedule(updatable: Updatable & Pausable) {
+        updatableTargets.removeObject(updatable)
+    }
+    
+    public func schedule(fixedUpdatable: FixedUpdatable & Pausable) {
+        fixedUpdatableTargets.append(fixedUpdatable)
+        fixedUpdatableTargetsNeedSorting = true
+    }
+    
+    public func unschedule(fixedUpdatable: FixedUpdatable & Pausable) {
+        fixedUpdatableTargets.removeObject(fixedUpdatable)
+    }
+}

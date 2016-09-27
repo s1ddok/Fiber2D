@@ -35,12 +35,45 @@ public extension Node {
         guard getComponent(by: component.tag) == nil else {
             return false
         }
-        components.append(component)
-        component.owner = self
-        component.onAdd()
         
-        // should enable schedule update, then all components can receive this call back
-        //scheduleUpdate()
+        if let system = director?.system(for: component) {
+            system.add(component: component)
+        } else {
+            components.append(component)
+            component.onAdd(to: self)
+            
+            if let c = component as? Updatable & Tagged {
+                // TODO: Insert with priority in mind
+                updatableComponents.append(c)
+                
+                // If it is first component
+                if updatableComponents.count == 1 {
+                    if let scheduler = self.scheduler {
+                        scheduler.schedule(updatable: self)
+                    } else {
+                        queuedActions.append {
+                            self.scheduler!.schedule(updatable: self)
+                        }
+                    }
+                }
+            }
+            
+            if let c = component as? FixedUpdatable & Tagged {
+                // TODO: Insert with priority in mind
+                fixedUpdatableComponentns.append(c)
+                
+                // If it is first component
+                if fixedUpdatableComponentns.count == 1 {
+                    if let scheduler = self.scheduler {
+                        scheduler.schedule(updatable: self)
+                    } else {
+                        queuedActions.append {
+                            self.scheduler!.schedule(updatable: self)
+                        }
+                    }
+                }
+            }
+        }
         
         return true
     }
@@ -57,8 +90,29 @@ public extension Node {
         components = components.filter {
             if $0.tag == tag {
                 $0.onRemove()
-                $0.owner = nil
             
+                // FIXME: This will not work if component will be removed when node doesn't have any scheduler
+                // And we also cant remove it from queuedActions since blocks are incomparable
+                // Need to find more clever solution
+                if $0 is Updatable {
+                    self.updatableComponents = self.updatableComponents.filter {
+                        return $0.tag != tag
+                    }
+                    
+                    if self.updatableComponents.isEmpty {
+                        self.scheduler?.unschedule(updatable: self)
+                    }
+                }
+                
+                if $0 is FixedUpdatable {
+                    self.fixedUpdatableComponentns = self.fixedUpdatableComponentns.filter {
+                        return $0.tag != tag
+                    }
+                    
+                    if self.fixedUpdatableComponentns.isEmpty {
+                        self.scheduler?.unschedule(fixedUpdatable: self)
+                    }
+                }
                 return false
             }
             return true
@@ -74,7 +128,7 @@ public extension Node {
      */
     @discardableResult
     public func remove(component: Component) -> Bool {
-        return components.removeObject(component)
+        return removeComponent(by: component.tag)
     }
     
     /**
@@ -83,18 +137,24 @@ public extension Node {
     public func removeAllComponents() {
         components.forEach {
             $0.onRemove()
-            $0.owner = nil
         }
         components = []
-        //unscheduleUpdate()
+        updatableComponents = []
+        fixedUpdatableComponentns = []
+        
+        let scheduler = self.scheduler
+        scheduler?.unschedule(updatable: self)
+        scheduler?.unschedule(fixedUpdatable: self)
     }    
 }
 
-extension Node: Updatable {
+extension Node: Updatable, FixedUpdatable {
+    
     public final func update(delta: Time) {
-        components.forEach { $0.update(delta: delta) }
+        updatableComponents.forEach { $0.update(delta: delta) }
     }
+    
     public final func fixedUpdate(delta: Time) {
-        components.forEach { $0.fixedUpdate(delta: delta) }
+        fixedUpdatableComponentns.forEach { $0.fixedUpdate(delta: delta) }
     }
 }

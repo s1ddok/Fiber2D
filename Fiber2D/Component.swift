@@ -9,20 +9,18 @@
 /**
  * Base class for everything attached to Nodes.
  */
-open class Component: Tagged, Updatable {
+open class Component: Tagged {
     public weak var owner: Node?
     
     public var tag: Int = 0
     
-    public var priority: Int = 0
+    open func onAdd(to owner: Node) {
+        self.owner = owner
+    }
     
-    open func onEnter()  {}
-    open func onExit()   {}
-    open func onAdd()    {}
-    open func onRemove() {}
-    
-    open func update(delta: Time) {}
-    open func fixedUpdate(delta: Time) {}
+    open func onRemove() {
+        self.owner = nil
+    }
 }
 
 extension Component: Equatable {

@@ -33,8 +33,7 @@ class Layout : Node {
         super.visit(renderer, parentTransform: parentTransform)
     }
     
-    override func addChild(_ child: Node, z: Int? = nil, name: String? = nil) {
-        super.addChild(child, z: z, name: name)
+    override func childWasAdded(child: Node) {
         self.sortAllChildren()
         self.layout()
     }

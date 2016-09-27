@@ -103,8 +103,7 @@ class LayoutBox: Layout {
         }
     }
     
-    override func detachChild(_ child: Node, cleanup: Bool = true) {
-        super.detachChild(child, cleanup: cleanup)
-        self.needsLayout()
+    override func childWasRemoved(child: Node) {
+        needsLayout()
     }
 }

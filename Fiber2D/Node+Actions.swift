@@ -19,12 +19,10 @@ public extension Node {
     public func run(action: ActionContainer) {
         let scheduler = self.scheduler
         if scheduler == nil {
-            let block: ()->() = {() -> Void in
+            queuedActions.append {
                 self.scheduler!.add(action: action, target: self, paused: !self.active)
             }
-            queuedActions.append(block)
-        }
-        else {
+        } else {
             scheduler!.add(action: action, target: self, paused: !self.active)
         }
     }
@@ -41,7 +39,7 @@ public extension Node {
      *
      *  @param name Name of the action to remove.
      */
-    public func stopActionByName(by tag: Int) {
+    public func stopAction(by tag: Int) {
         scheduler?.removeAction(by: tag, target: self)
     }
     

@@ -25,7 +25,7 @@ class MainScene: Scene {
         sprite.positionType = CCPositionTypeNormalized
         let action = ActionSkewTo(skewX: 15.0, skewY: 45.0).continously(duration: 15.0)
         sprite.run(action: action)
-        addChild(sprite)
+        add(child: sprite)
         
         colorNode = ColorNode()
         colorNode.contentSize = Size(width: 64.0, height: 64.0)
@@ -41,7 +41,7 @@ class MainScene: Scene {
             colorNode.position = startPosition
             colorNode.positionType = CCPositionTypeNormalized
             colorNodes.append(colorNode)
-            self.addChild(colorNode)
+            self.add(child: colorNode)
         }
         
         let rotate = ActionRotateTo(angle: 45°).continously(duration: 2.0)
@@ -85,7 +85,7 @@ class MainScene: Scene {
         physicsCircle.collisionBitmask = mask
         physicsCircle.isDynamic = false
         staticBody.physicsBody = physicsCircle
-        addChild(staticBody)
+        add(child: staticBody)
         
         for j in 0..<10 {
             let physicsSquare = ColorNode()
@@ -96,14 +96,20 @@ class MainScene: Scene {
             physicsSquare.physicsBody = physicsBody
             physicsSquare.position = p2d(64.0 * Float(j), 256.0)
             
-            addChild(physicsSquare)
+            if j % 2 == 0 {
+                physicsSquare.add(component: UpdateComponent())
+            } else {
+                physicsSquare.add(component: FixedUpdateComponent())
+            }
+            
+            add(child: physicsSquare)
         }
         
         
         ground.contentSize = Size(1.0, 0.1)
         ground.contentSizeType = CCSizeTypeNormalized
         
-        addChild(ground)
+        add(child: ground)
         
         let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
         boxBody.isDynamic = false
@@ -121,11 +127,11 @@ class MainScene: Scene {
         rt.end()
         
         //colorNode.runAction(repeatForever!)
-        addChild(colorNode)
+        add(child: colorNode)
         rt.sprite.positionType = CCPositionTypeNormalized
         rt.sprite.position = p2d(0.5, 0.5)
         rt.sprite.opacity = 0.5
-        self.addChild(rt.sprite)
+        add(child: rt.sprite)
         
         print(sprite.active)
     }
@@ -147,7 +153,7 @@ class MainScene: Scene {
         physicsCircle.physicsBody = physicsBody
         physicsCircle.position = theEvent.location(in: self)
         
-        addChild(physicsCircle)
+        add(child: physicsCircle)
     }
     
     override func scrollWheel(_ theEvent: NSEvent) {

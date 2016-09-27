@@ -8,7 +8,7 @@
 
 // purposefully undocumented: used only internally
 // Protocol for a view that CCDirector will use to render into.
-internal protocol DirectorView: class {
+public protocol DirectorView: class {
     var sizeInPixels: Size { get }
     var size: Size { get }
     // Prepare the view to render a new frame.
