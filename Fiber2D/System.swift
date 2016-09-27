@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public protocol System: AnyObject, Enterable, Exitable {
+public protocol System: class, Enterable, Exitable {
     
     func onAdd(to director: Director)
     func onRemove()
@@ -33,4 +33,6 @@ public protocol System: AnyObject, Enterable, Exitable {
 public extension System {
     func onAdd(to director: Director) {}
     func onRemove() {}
+    func onEnter() {}
+    func onExit() {}
 }
