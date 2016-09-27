@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		054764D91D82944D003DC740 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054764D81D82944D003DC740 /* libSwiftBGFX.dylib */; };
-		05BC34AC1D853E2000306A4F /* RenderTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD051D46289A005838B8 /* RenderTexture.swift */; };
+		059228231D9B17FB0041B9B4 /* RenderTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD051D46289A005838B8 /* RenderTexture.swift */; };
 		05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BC1D85B8A300306A4F /* Renderer.swift */; };
 		05BC34C01D85B8A300306A4F /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BD1D85B8A300306A4F /* Shader.swift */; };
 		05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */; };
@@ -1142,7 +1142,6 @@
 				081FBD1E1D46289A005838B8 /* ResponderManager.swift in Sources */,
 				08C1CB231D8EFFD5006CDCCB /* cpRatchetJoint.c in Sources */,
 				080307211D9B1337008CAC8E /* UserComponents.swift in Sources */,
-				081FBD1B1D46289A005838B8 /* RenderTexture.swift in Sources */,
 				0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */,
 				08C1CB1E1D8EFFD5006CDCCB /* cpMarch.c in Sources */,
 				081FBD261D4628F8005838B8 /* MainScene.swift in Sources */,
@@ -1161,7 +1160,6 @@
 				08C1CB4B1D917A6A006CDCCB /* PhysicsBody+Shapes.swift in Sources */,
 				081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */,
 				081FBD1C1D46289A005838B8 /* RenderTextureSprite.swift in Sources */,
-				05BC34B51D85467400306A4F /* Matrix3x3+simd.swift in Sources */,
 				081FBCE11D462732005838B8 /* cocos2d.m in Sources */,
 				0812AD011D538D6600AE46E8 /* Vector4.swift in Sources */,
 				081FBD141D46289A005838B8 /* Node+Convenience.swift in Sources */,
@@ -1199,6 +1197,7 @@
 				081FBD1D1D46289A005838B8 /* Responder.swift in Sources */,
 				08C1CB191D8EFFD5006CDCCB /* cpDampedSpring.c in Sources */,
 				0812AD001D538D6600AE46E8 /* Vector4+simd.swift in Sources */,
+				059228231D9B17FB0041B9B4 /* RenderTexture.swift in Sources */,
 				0812ACFD1D538D6600AE46E8 /* Vector2.swift in Sources */,
 				081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */,
 				088509951D7B876D003EF800 /* ActionEase.swift in Sources */,
