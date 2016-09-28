@@ -303,9 +303,15 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
 }
 
 extension PhysicsBody {
-    func addToPhysicsWorld() { owner?.scene?.physicsWorld.add(body: self) }
+    func addToPhysicsWorld() {
+        let physicsSystem = owner?.director?.system(for: PhysicsSystem.self)
+        physicsSystem?.world.add(body: self)
+    }
     /** remove the body from the world it added to */
-    func removeFromPhysicsWorld() { owner?.scene?.physicsWorld.remove(body: self) }
+    func removeFromPhysicsWorld() {
+        let physicsSystem = owner?.director?.system(for: PhysicsSystem.self)
+        physicsSystem?.world.remove(body: self)
+    }
 }
 
 public extension PhysicsBody {

@@ -85,8 +85,8 @@ internal extension PhysicsWorld {
             return
         }
         
-        let sceneToWorldTransform = scene.nodeToParentMatrix
-        scene.beforeSimulation(parentToWorldTransform: sceneToWorldTransform,
+        let sceneToWorldTransform = rootNode.nodeToParentMatrix
+        rootNode.beforeSimulation(parentToWorldTransform: sceneToWorldTransform,
                                nodeParentScaleX: 1, nodeParentScaleY: 1,
                                parentRotation: Angle.zero)
         
@@ -126,7 +126,7 @@ internal extension PhysicsWorld {
         // debugDraw()
         
         // Update physics position, should loop as the same sequence as node tree.
-        scene.afterSimulation(parentToWorldTransform: sceneToWorldTransform, parentRotation: Angle.zero)
+        rootNode.afterSimulation(parentToWorldTransform: sceneToWorldTransform, parentRotation: Angle.zero)
     }
 
 }

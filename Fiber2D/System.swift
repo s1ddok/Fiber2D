@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public protocol System: class, Enterable, Exitable {
+public protocol System: class, Enterable, Exitable, Pausable {
     
     func onAdd(to director: Director)
     func onRemove()

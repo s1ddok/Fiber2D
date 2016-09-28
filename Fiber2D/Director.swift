@@ -138,7 +138,6 @@ public class Director: NSObject {
         self.calculateDeltaTime()
         /* tick before glClear: issue #533 */
         if !isPaused {
-            runningScene!.updatePhysics(delta: dt)
             runningScene!.scheduler.update(dt)
         }
         /* to avoid flickr, nextScene MUST be here: after tick and before draw.

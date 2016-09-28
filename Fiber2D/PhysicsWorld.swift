@@ -8,9 +8,7 @@
 
 /**
  * @class PhysicsWorld
- * @brief An PhysicsWorld object simulates collisions and other physical properties. 
- * You do not create PhysicsWorld objects directly;
- * instead, you can get it from an Scene object.
+ * @brief An PhysicsWorld object simulates collisions and other physical properties.
  */
 public class PhysicsWorld {
     
@@ -100,12 +98,12 @@ public class PhysicsWorld {
     }
 
     /**
-     * Get a scene contain this physics world.
+     * A root node that contains this physics world.
      *
      * @attention This value is initialized in constructor
-     * @return A Scene object reference.
+     * @return A Node object reference.
      */
-    public let scene: Scene
+    public let rootNode: Node
     
     internal(set) public var joints = [PhysicsJoint]()
     
@@ -116,8 +114,8 @@ public class PhysicsWorld {
      */
     internal(set) public var bodies = [PhysicsBody]()
     
-    public init(scene: Scene) {
-        self.scene = scene
+    public init(rootNode: Node) {
+        self.rootNode = rootNode
         chipmunkSpace = cpHastySpaceNew()
         cpHastySpaceSetThreads(chipmunkSpace, 0)
         
