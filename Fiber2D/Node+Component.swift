@@ -64,9 +64,7 @@ public extension Node {
             
             // If it is first component
             if updatableComponents.count == 1 {
-                if let scheduler = self.scheduler {
-                    scheduler.schedule(updatable: self)
-                }
+                scheduler?.schedule(updatable: self)
             }
         }
         
@@ -76,9 +74,7 @@ public extension Node {
             
             // If it is first component
             if fixedUpdatableComponentns.count == 1 {
-                if let scheduler = self.scheduler {
-                    scheduler.schedule(updatable: self)
-                }
+                scheduler?.schedule(updatable: self)
             }
         }
     
