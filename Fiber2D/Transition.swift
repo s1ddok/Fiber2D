@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 /**
  A transition animates the presesntation of a new scene while moving the current scene out of view.

@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 /** Scene is a subclass of Node. The scene represents the root node of the node hierarchy.
  */

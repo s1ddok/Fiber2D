@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 internal struct PhysicsNode {
     unowned let node: Node
     weak var physicsBody: PhysicsBody?

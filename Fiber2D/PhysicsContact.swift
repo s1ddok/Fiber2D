@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 public enum EventCode {
     case none, begin, presolve, postsolve, separate
 }

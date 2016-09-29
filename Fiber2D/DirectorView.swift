@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 // purposefully undocumented: used only internally
 // Protocol for a view that CCDirector will use to render into.
 public protocol DirectorView: class {

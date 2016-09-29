@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 /**
  *  Image format when saving render textures. Used by CCRenderTexture.

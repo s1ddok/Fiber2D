@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 /**
  This action rotates the target to the specified angle.
  The direction will be decided by the shortest route.

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Fiber2D. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 open class Responder: NSObject {
     /// -----------------------------------------------------------------------

@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 /**
  * @class PhysicsWorld
  * @brief An PhysicsWorld object simulates collisions and other physical properties.

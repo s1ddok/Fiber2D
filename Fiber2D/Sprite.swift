@@ -5,6 +5,8 @@
 //  Copyright © 2016. All rights reserved.
 //
 
+import SwiftMath
+
 /// The four CCVertexes of a sprite.
 /// Bottom left, bottom right, top right, top left.
 struct SpriteVertexes {

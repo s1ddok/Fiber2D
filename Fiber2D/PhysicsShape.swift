@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 public enum PhysicsShapeType {
     case unknown, circle, box, polygon
     case edgeSegment, edgeBox, edgePolygon, edgeChain

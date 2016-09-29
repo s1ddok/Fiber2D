@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreGraphics
+import SwiftMath
 
 public extension Node {
     /** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.

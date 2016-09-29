@@ -6,6 +6,7 @@
 //
 
 import MetalKit
+import SwiftMath
 
 class MetalView: MTKView, DirectorView {
     var context: CCMetalContext!

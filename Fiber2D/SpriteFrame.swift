@@ -1,3 +1,12 @@
+//
+//  SpriteFrame.swift
+//
+//  Created by Andrey Volodin on 23.07.16.
+//  Copyright © 2016. All rights reserved.
+//
+
+import SwiftMath
+
 @objc class SpriteFrame: NSObject {
     var texture: CCTexture {
         return _texture ?? lazyTexture

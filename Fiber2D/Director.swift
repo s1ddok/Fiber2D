@@ -7,6 +7,7 @@
 
 import Foundation
 import MetalKit
+import SwiftMath
 
 let DirectorCurrentKey = "DirectorCurrentKey"
 let DirectorStackKey   = "DirectorStackKey"

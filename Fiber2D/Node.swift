@@ -5,6 +5,8 @@
 //  Copyright © 2016. All rights reserved.
 //
 
+import SwiftMath
+
 /** Node is the base class for all objects displayed by Fiber2D. Node handles transformations, can have a content size and provides a coordinate system
  for its child nodes.
  
