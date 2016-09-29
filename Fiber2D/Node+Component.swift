@@ -6,8 +6,6 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-// TODO:
-// Add to scheduler only nodes with at least one component
 public extension Node {
     /// @name component functions
     /**
@@ -68,10 +66,6 @@ public extension Node {
             if updatableComponents.count == 1 {
                 if let scheduler = self.scheduler {
                     scheduler.schedule(updatable: self)
-                } else {
-                    queuedActions.append {
-                        self.scheduler!.schedule(updatable: self)
-                    }
                 }
             }
         }
@@ -84,10 +78,6 @@ public extension Node {
             if fixedUpdatableComponentns.count == 1 {
                 if let scheduler = self.scheduler {
                     scheduler.schedule(updatable: self)
-                } else {
-                    queuedActions.append {
-                        self.scheduler!.schedule(updatable: self)
-                    }
                 }
             }
         }
@@ -146,6 +136,48 @@ public extension Node {
     @discardableResult
     public func remove(component: Component) -> Bool {
         return removeComponent(by: component.tag)
+    }
+
+    /**
+     * Removes a component by its type.
+     *
+     * @param component A given component type.
+     * @return True if removed success.
+     */
+    @discardableResult
+    public func removeComponent<U>(by type: U.Type) -> Bool {
+        let oldCount = components.count
+        components = components.filter {
+            if $0 is U {
+                $0.onRemove()
+                
+                // FIXME: This will not work if component will be removed when node doesn't have any scheduler
+                // And we also cant remove it from queuedActions since blocks are incomparable
+                // Need to find more clever solution
+                if $0 is Updatable {
+                    self.updatableComponents = self.updatableComponents.filter {
+                        return !($0 is U)
+                    }
+                    
+                    if self.updatableComponents.isEmpty {
+                        self.scheduler?.unschedule(updatable: self)
+                    }
+                }
+                
+                if $0 is FixedUpdatable {
+                    self.fixedUpdatableComponentns = self.fixedUpdatableComponentns.filter {
+                        return !($0 is U)
+                    }
+                    
+                    if self.fixedUpdatableComponentns.isEmpty {
+                        self.scheduler?.unschedule(fixedUpdatable: self)
+                    }
+                }
+                return false
+            }
+            return true
+        }
+        return oldCount < components.count
     }
     
     /**

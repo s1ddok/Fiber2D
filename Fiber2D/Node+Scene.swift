@@ -25,11 +25,11 @@ extension Node: Enterable, Exitable {
         for block: ()->() in queuedActions {
             block()
         }
+        self.queuedActions.removeAll()
         
         components.forEach {
             if let c = $0 as? Enterable { c.onEnter() }
         }
-        self.queuedActions.removeAll()
         self.wasRunning(wasRunning)
     }
     
@@ -41,7 +41,7 @@ extension Node: Enterable, Exitable {
      @see onEnter
      @see onExit
      */
-    func onEnterTransitionDidFinish() {
+    public func onEnterTransitionDidFinish() {
         children.forEach { $0.onEnterTransitionDidFinish() }
     }
     
@@ -52,7 +52,7 @@ extension Node: Enterable, Exitable {
      @see onExit
      @see onEnter
      */
-    func onExitTransitionDidStart() {
+    public func onExitTransitionDidStart() {
         children.forEach { $0.onExitTransitionDidStart() }
     }
     
@@ -70,6 +70,9 @@ extension Node: Enterable, Exitable {
         
         components.forEach {
             if let c = $0 as? Exitable { c.onExit() }
+        }
+        if updatableComponents.count > 0 || fixedUpdatableComponentns.count > 0 {
+            scheduler!.unscheduleUpdates(from: self)
         }
         children.forEach { $0.onExit() }
     }

@@ -79,7 +79,7 @@ open class Scene: Node {
         director.responderManager.markAsDirty()
     }
     
-    override func onEnterTransitionDidFinish() {
+    override public func onEnterTransitionDidFinish() {
         super.onEnterTransitionDidFinish()
         // mark starting scene as dirty, to make sure responder manager is updated
         director.responderManager.markAsDirty()

@@ -242,12 +242,33 @@ extension Scheduler {
         if !scheduledTarget.enableUpdates {
             scheduledTarget.enableUpdates = true
             
-            // TODO: Let target schedule itself only when at least one component is added to it
-            schedule(updatable: target)
-            schedule(fixedUpdatable: target)
+            if target.updatableComponents.count > 0 {
+                schedule(updatable: target)
+            }
+            
+            if target.fixedUpdatableComponentns.count > 0 {
+                schedule(fixedUpdatable: target)
+            }
         }
     }
     
+    func unscheduleUpdates(from target: Node) {
+        guard let scheduledTarget = self.scheduledTarget(for: target, insert: false) else {
+            return
+        }
+        
+        scheduledTarget.enableUpdates = false
+        let target = scheduledTarget.target!
+        
+        if target.updatableComponents.count > 0 {
+            unschedule(updatable: target)
+        }
+        
+        if target.fixedUpdatableComponentns.count > 0 {
+            unschedule(fixedUpdatable: target)
+        }
+
+    }
     func unschedule(target: Node) {
         if let scheduledTarget = self.scheduledTarget(for: target, insert: false) {
             // Remove the update methods if they are scheduled
