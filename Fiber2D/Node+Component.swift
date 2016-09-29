@@ -98,9 +98,6 @@ public extension Node {
             if $0.tag == tag {
                 $0.onRemove()
             
-                // FIXME: This will not work if component will be removed when node doesn't have any scheduler
-                // And we also cant remove it from queuedActions since blocks are incomparable
-                // Need to find more clever solution
                 if $0 is Updatable {
                     self.updatableComponents = self.updatableComponents.filter {
                         return $0.tag != tag
@@ -150,10 +147,7 @@ public extension Node {
         components = components.filter {
             if $0 is U {
                 $0.onRemove()
-                
-                // FIXME: This will not work if component will be removed when node doesn't have any scheduler
-                // And we also cant remove it from queuedActions since blocks are incomparable
-                // Need to find more clever solution
+
                 if $0 is Updatable {
                     self.updatableComponents = self.updatableComponents.filter {
                         return !($0 is U)
