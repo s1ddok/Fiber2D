@@ -15,6 +15,6 @@ public protocol Prioritized {
 
 public extension Prioritized {
     var priority: Int {
-        return Int.max
+        return 0
     }
 }
