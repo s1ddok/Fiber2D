@@ -23,7 +23,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "ccTypes.h"
 
 @class NSWindow;
 @class CCGLView;
@@ -131,7 +130,7 @@ typedef NS_ENUM(NSUInteger, CCGraphicsAPI) {
 
  @since 4.0.0
  */
-@property(nonatomic, assign) CCTime fixedUpdateInterval;
+@property(nonatomic, assign) float fixedUpdateInterval;
 
 /**
 *  Loads configCocos2D.plist from disk or returns a default dictionary.

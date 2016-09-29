@@ -72,7 +72,7 @@ public final class Scheduler {
     internal var fixedUpdatableTargetsNeedSorting = true
     var fixedUpdateTimer: Timer!
     private let mock = MockNode()
-    var actionsRunInFixedMode = false
+    public var actionsRunInFixedMode = false
     
     init() {
         fixedUpdateTimer = schedule(block: { [unowned self](timer:Timer) in

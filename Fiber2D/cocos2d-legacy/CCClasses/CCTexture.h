@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  */
 
-
-#import "ccTypes.h"
 #import <Metal/Metal.h>
 
 @class SpriteFrame;

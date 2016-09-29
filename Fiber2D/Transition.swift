@@ -9,29 +9,29 @@ import SwiftMath
 
 /**
  A transition animates the presesntation of a new scene while moving the current scene out of view.
- A transition is optionally played when calling one of the presentScene:withTransition: methods of CCDirector.
+ A transition is optionally played when calling one of the presentScene:withTransition: methods of Director.
  
  @note Since both scenes remain in memory and are being rendered, a transition may raise performance issues or
  memory warnings. If two complex scenes can not be reliably transitioned from/to it is best to not use transitions
  or to introduce an in-between scene that is presented only for a short period of time (ie a loading scene or merely
  a "fade to black" scene).
  */
-class Transition: Scene {
+public class Transition: Scene {
     /**
      *  Creates a blank transition from outgoing to incoming scene.
      *
      *  @param duration The duration of the transition in seconds.
      *
-     *  @return The CCTransition Object.
+     *  @return The Transition Object.
      *  @note Use this initializer only for implementing custom transitions.
      */
-    init(duration: TimeInterval) {
+    init(duration: Time) {
         self.duration = duration
         super.init()
         self.userInteractionEnabled = false
     }
     
-    private let duration: Double
+    private let duration: Time
     private var incomingScene: Scene!
     private var outgoingScene: Scene!
     var incomingPauseState = false
@@ -85,13 +85,13 @@ class Transition: Scene {
     /// @name For use with Custom Transitions
     /// -----------------------------------------------------------------------
     /**
-     *  CCRenderTexture, holding the incoming scene as a texture
+     *  RenderTexture, holding the incoming scene as a texture
      *  Only valid after StartTransition has been called.
      */
     var incomingTexture: RenderTexture!
     
     /**
-     *  CCRenderTexture, holding the outgoing scene as a texture
+     *  RenderTexture, holding the outgoing scene as a texture
      *  Only valid after StartTransition has been called.
      */
     var outgoingTexture: RenderTexture!
@@ -100,11 +100,12 @@ class Transition: Scene {
     /// @name Transition Running Time and Progress
     /// -----------------------------------------------------------------------
     /** The actual transition runtime in seconds. */
-    var runTime: Double = 0.0
+    var runTime: Time = 0.0
     /** Normalized (percentage) transition progress in the range 0.0 to 1.0. */
     var progress: Float = 0.0
     
-    func update(_ delta: CCTime) {
+    // FIXME: Not called
+    func update(_ delta: Time) {
         // update progress
         self.runTime += delta
         self.progress = clampf(Float(runTime / duration), 0.0, 1.0)

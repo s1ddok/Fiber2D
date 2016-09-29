@@ -18,7 +18,7 @@ public extension Node {
             // Get content size
             // Convert position to points
             var positionInPoints: p2d
-            if CCPositionTypeIsBasicPoints(positionType) {
+            if positionType.isBasicPoints {
                 // Optimization for basic points (most common case)
                 positionInPoints = position
             } else {

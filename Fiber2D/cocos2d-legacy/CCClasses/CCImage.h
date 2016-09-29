@@ -22,14 +22,10 @@
  * THE SOFTWARE.
  */
 
-
+#import <Foundation/Foundation.h>
 #import <CoreGraphics/CGImage.h>
 
-#import "ccTypes.h"
-
-
 @class CCFile;
-
 
 /**
  How much to rescale the image while loading it.

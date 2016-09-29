@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-
-#import "ccTypes.h"
+#import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 
 /** NSValue category to easily create NSValue from GLKit structs. Mainly used internally by CCRenderer and CCEffect classes. */
 @interface NSValue(CCRenderer)

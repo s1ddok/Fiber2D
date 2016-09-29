@@ -47,7 +47,6 @@
 
 #import "ccConfig.h"
 
-#import "ccTypes.h"
 #import "ccMacros.h"
 
 // Singletons:

@@ -22,9 +22,6 @@
  * THE SOFTWARE.
  */
 
-
-#import "ccTypes.h"
-
 #if __CC_METAL_SUPPORTED_AND_ENABLED
 #import <Metal/Metal.h>
 

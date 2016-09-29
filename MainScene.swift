@@ -32,11 +32,10 @@ class MainScene: Scene {
         
         super.onEnter()
         
-        
         sprite = Sprite(imageNamed: "image.jpeg")
         sprite.scale = 6.0
         sprite.position = p2d(0.5, 0.5)
-        sprite.positionType = CCPositionTypeNormalized
+        sprite.positionType = .normalized
         let action = ActionSkewTo(skewX: 15°, skewY: 45°).continously(duration: 15.0)
         sprite.run(action: action)
         add(child: sprite)
@@ -44,7 +43,7 @@ class MainScene: Scene {
         colorNode = ColorNode()
         colorNode.contentSize = Size(width: 64.0, height: 64.0)
         colorNode.position = p2d(0.5, 0.5)
-        colorNode.positionType = CCPositionTypeNormalized
+        colorNode.positionType = .normalized
         var startPosition = p2d(0.1, 0.0)
         var colorNodes = [ColorNode]()
         for _ in 0..<13 {
@@ -53,7 +52,7 @@ class MainScene: Scene {
             colorNode.anchorPoint = p2d(0.5, 0.5)
             startPosition = startPosition + p2d(0.0, 0.1)
             colorNode.position = startPosition
-            colorNode.positionType = CCPositionTypeNormalized
+            colorNode.positionType = .normalized
             colorNodes.append(colorNode)
             self.add(child: colorNode)
         }
@@ -121,7 +120,7 @@ class MainScene: Scene {
         
         
         ground.contentSize = Size(1.0, 0.1)
-        ground.contentSizeType = CCSizeTypeNormalized
+        ground.contentSizeType = SizeType.normalized
         
         add(child: ground)
         
@@ -136,7 +135,7 @@ class MainScene: Scene {
         
         //colorNode.runAction(repeatForever!)
         add(child: colorNode)
-        rt.sprite.positionType = CCPositionTypeNormalized
+        rt.sprite.positionType = PositionType.normalized
         rt.sprite.position = p2d(0.5, 0.5)
         rt.sprite.opacity = 0.5
         add(child: rt.sprite)

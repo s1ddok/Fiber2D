@@ -110,9 +110,6 @@ import SwiftMath
  An advanced subclassing style aims to minimize subclassing node classes except for Node itself. A Node subclass acts as the controller for its node tree,
  with one or more child nodes representing the controller node's views. This is particularly useful for composite nodes, such as a player
  with multiple body parts (head, torso, limbs), attachments (armor, weapons) and effects (health bar, name label, selection rectangle, particle effects).
- 
- The userObject property can be used to add custom data and methods (model, components) to any node, in particular to avoid subclassing where the subclass
- would only add minimal functionality or just data.
  */
 open class Node: Responder, Prioritized, Pausable {
         
@@ -161,7 +158,7 @@ open class Node: Responder, Prioritized, Pausable {
      @see PositionType, PositionUnit, PositionReferenceCorner
      @see position
      @see positionInPoints */
-    var positionType: CCPositionType = CCPositionTypePoints {
+    var positionType = PositionType.points {
         didSet {
             isTransformDirty = true
         }
@@ -309,10 +306,10 @@ open class Node: Responder, Prioritized, Pausable {
     /** The scaleType defines scale behavior for this node. ScaleTypeScaled indicates that the node will be scaled by [Director UIScaleFactor].
      This property is analagous to positionType. ScaleType affects the scaleInPoints of a Node.
      See "Coordinate System and Positioning" in class overview for more information.
-     @see CCScaleType
+     @see ScaleType
      @see scale
      @see scaleInPoints */
-    var scaleType: CCScaleType = .points {
+    var scaleType = ScaleType.points {
         didSet {
             isTransformDirty = true
         }
@@ -347,10 +344,10 @@ open class Node: Responder, Prioritized, Pausable {
     }
     /** Defines the contentSize type used for the width and height components of the contentSize property.
      
-     @see CCSizeType, CCSizeUnit
+     @see SizeType, SizeUnit
      @see contentSize
      @see contentSizeInPoints */
-    var contentSizeType: CCSizeType = CCSizeTypePoints {
+    var contentSizeType = SizeType.points {
         didSet {
             contentSizeChanged()
         }
@@ -771,8 +768,8 @@ open class Node: Responder, Prioritized, Pausable {
             layout.needsLayout()
         }
         // Update the children (if needed)
-        for child  in children {
-            if !CCPositionTypeIsBasicPoints(child.positionType) {
+        for child in children {
+            if !child.positionType.isBasicPoints {
                 // This is a position type affected by content size
                 child.isTransformDirty = true
             }
