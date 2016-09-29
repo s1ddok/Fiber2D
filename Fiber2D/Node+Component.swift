@@ -42,6 +42,13 @@ public extension Node {
      */
     @discardableResult
     public func add(component: Component) -> Bool {
+        guard director != nil else {
+            queuedActions.append {
+                self.add(component: component)
+            }
+            return false
+        }
+        
         guard component.owner == nil else {
             fatalError("ERROR: Component already add. It can't be added to more than one owner")
         }

@@ -25,12 +25,6 @@ class MainScene: Scene {
         physicsSystem = PhysicsSystem(world: world)
     
         world.contactDelegate = self
-    }
-    
-    override func onEnter() {
-        director!.register(system: physicsSystem)
-        
-        super.onEnter()
         
         sprite = Sprite(imageNamed: "image.jpeg")
         sprite.scale = 6.0
@@ -127,6 +121,12 @@ class MainScene: Scene {
         let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
         boxBody.isDynamic = false
         ground.add(component: boxBody)
+    }
+    
+    override func onEnter() {
+        director!.register(system: physicsSystem)
+        
+        super.onEnter()
         
         let rt = RenderTexture(width: 64, height: 64)
         let _ = rt.begin()
