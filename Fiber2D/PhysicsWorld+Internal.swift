@@ -43,7 +43,7 @@ internal func collisionSeparateCallbackFunc(_ arb: UnsafeMutablePointer<cpArbite
 
 internal extension PhysicsWorld {
     
-    internal func update(dt: Time, userCall: Bool = false) {
+    internal func updateDelaysIfNeeded() {
         if !delayAddBodies.isEmpty || !delayRemoveBodies.isEmpty {
             updateBodies()
         }
@@ -51,7 +51,9 @@ internal extension PhysicsWorld {
         if !delayAddJoints.isEmpty || !delayRemoveJoints.isEmpty {
             updateJoints()
         }
-        
+    }
+    
+    internal func update(dt: Time, userCall: Bool = false) {
         guard dt > FLT_EPSILON else {
             return
         }

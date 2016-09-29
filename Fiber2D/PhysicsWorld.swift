@@ -96,6 +96,7 @@ public class PhysicsWorld {
             return
         }
         
+        updateDelaysIfNeeded()
         update(dt: dt, userCall: true)
     }
 

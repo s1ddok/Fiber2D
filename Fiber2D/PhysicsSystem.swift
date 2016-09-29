@@ -50,6 +50,8 @@ public class PhysicsSystem: System {
         }
         
         if world.autoStep {
+            world.updateDelaysIfNeeded()
+            
             let sceneToWorldTransform = rootNode.node.nodeToParentMatrix
             rootNode.beforeSimulation(parentToWorldTransform: sceneToWorldTransform,
                                       nodeParentScaleX: 1, nodeParentScaleY: 1,
