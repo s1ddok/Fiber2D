@@ -37,7 +37,7 @@ class MainScene: Scene {
         sprite.scale = 6.0
         sprite.position = p2d(0.5, 0.5)
         sprite.positionType = CCPositionTypeNormalized
-        let action = ActionSkewTo(skewX: 15.0, skewY: 45.0).continously(duration: 15.0)
+        let action = ActionSkewTo(skewX: 15°, skewY: 45°).continously(duration: 15.0)
         sprite.run(action: action)
         add(child: sprite)
         
@@ -59,9 +59,9 @@ class MainScene: Scene {
         }
         
         let rotate = ActionRotateTo(angle: 45°).continously(duration: 2.0)
-        let skew   = ActionSkewTo(skewX: 30, skewY: 30).continously(duration: 1.0)
+        let skew   = ActionSkewTo(skewX: 30°, skewY: 30°).continously(duration: 1.0)
         let rotate2 = ActionRotateTo(angle: 0°).continously(duration: 2.0)
-        let skew2   = ActionSkewTo(skewX: 15, skewY: 10).instantly
+        let skew2   = ActionSkewTo(skewX: 15°, skewY: 10°).instantly
         
         let rotateBy = ActionRotateBy(angle: 15°).continously(duration: 1.0)
         

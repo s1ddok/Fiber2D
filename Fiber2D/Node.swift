@@ -201,7 +201,7 @@ open class Node: Responder, Prioritized, Pausable {
      Thus, it is the angle between the Y axis and the left edge of the shape
      The default skewX angle is 0, with valid ranges from -90 to 90. Positive values distort the node in a clockwise direction.
      @see skewY, rotationalSkewX */
-    var skewX: Float = 0.0 {
+    var skewX: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
@@ -211,7 +211,7 @@ open class Node: Responder, Prioritized, Pausable {
      Thus, it is the angle between the X axis and the bottom edge of the shape
      The default skewY angle is 0, with valid ranges from -90 to 90. Positive values distort the node in a counter-clockwise direction.
      @see skewX, rotationalSkewY */
-    var skewY: Float = 0.0 {
+    var skewY: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
