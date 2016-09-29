@@ -98,7 +98,7 @@ class MainScene: Scene {
         let physicsCircle = PhysicsBody.circle(radius: 49.0, material: material)
         physicsCircle.collisionBitmask = mask
         physicsCircle.isDynamic = false
-        staticBody.physicsBody = physicsCircle
+        staticBody.add(component: physicsCircle)
         add(child: staticBody)
         
         for j in 0..<10 {
@@ -107,7 +107,7 @@ class MainScene: Scene {
             physicsSquare.contentSize = Size(24.0, 24.0)
             let physicsBody = PhysicsBody.box(size: vec2(24.0, 24.0), material: material)
             physicsBody.isDynamic = true
-            physicsSquare.physicsBody = physicsBody
+            physicsSquare.add(component: physicsBody)
             physicsSquare.position = p2d(64.0 * Float(j), 256.0)
             
             if j % 2 == 0 {
@@ -127,7 +127,7 @@ class MainScene: Scene {
         
         let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
         boxBody.isDynamic = false
-        ground.physicsBody = boxBody
+        ground.add(component: boxBody)
         
         let rt = RenderTexture(width: 64, height: 64)
         let _ = rt.begin()
@@ -158,10 +158,10 @@ class MainScene: Scene {
         let physicsBody = PhysicsBody.circle(radius: 6.0)
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
-        physicsCircle.physicsBody = physicsBody
         physicsCircle.position = theEvent.location(in: self)
         
         add(child: physicsCircle)
+        physicsCircle.add(component: physicsBody)
     }
     
     override func scrollWheel(_ theEvent: NSEvent) {

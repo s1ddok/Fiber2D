@@ -21,6 +21,22 @@ public extension Node {
     }
     
     /**
+     * Gets a component by its type.
+     *
+     * @param name A given type of component.
+     * @return The Component by type.
+     */
+    public func getComponent<U>(by type: U.Type) -> U?
+    where U: Component {
+        for c in components {
+            if let retVal = c as? U {
+                return retVal
+            }
+        }
+        return nil
+    }
+    
+    /**
      * Adds a component.
      *
      * @param component A given component.
@@ -36,45 +52,46 @@ public extension Node {
             return false
         }
         
-        if let system = director?.system(for: component) {
-            system.add(component: component)
-        } else {
+        let system = director?.system(for: component)
+        system?.add(component: component)
+        
+        if system == nil || !system!.ownsComponents {
             components.append(component)
-            component.onAdd(to: self)
+        }
+        component.onAdd(to: self)
+        
+        if let c = component as? Updatable & Tagged {
+            // TODO: Insert with priority in mind
+            updatableComponents.append(c)
             
-            if let c = component as? Updatable & Tagged {
-                // TODO: Insert with priority in mind
-                updatableComponents.append(c)
-                
-                // If it is first component
-                if updatableComponents.count == 1 {
-                    if let scheduler = self.scheduler {
-                        scheduler.schedule(updatable: self)
-                    } else {
-                        queuedActions.append {
-                            self.scheduler!.schedule(updatable: self)
-                        }
-                    }
-                }
-            }
-            
-            if let c = component as? FixedUpdatable & Tagged {
-                // TODO: Insert with priority in mind
-                fixedUpdatableComponentns.append(c)
-                
-                // If it is first component
-                if fixedUpdatableComponentns.count == 1 {
-                    if let scheduler = self.scheduler {
-                        scheduler.schedule(updatable: self)
-                    } else {
-                        queuedActions.append {
-                            self.scheduler!.schedule(updatable: self)
-                        }
+            // If it is first component
+            if updatableComponents.count == 1 {
+                if let scheduler = self.scheduler {
+                    scheduler.schedule(updatable: self)
+                } else {
+                    queuedActions.append {
+                        self.scheduler!.schedule(updatable: self)
                     }
                 }
             }
         }
         
+        if let c = component as? FixedUpdatable & Tagged {
+            // TODO: Insert with priority in mind
+            fixedUpdatableComponentns.append(c)
+            
+            // If it is first component
+            if fixedUpdatableComponentns.count == 1 {
+                if let scheduler = self.scheduler {
+                    scheduler.schedule(updatable: self)
+                } else {
+                    queuedActions.append {
+                        self.scheduler!.schedule(updatable: self)
+                    }
+                }
+            }
+        }
+    
         return true
     }
     

@@ -254,7 +254,6 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
     }
     public override func onAdd(to owner: Node) {
         super.onAdd(to: owner)
-        owner._physicsBody = self
         let contentSize = owner.contentSizeInPoints
         ownerCenterOffset = contentSize * 0.5
         

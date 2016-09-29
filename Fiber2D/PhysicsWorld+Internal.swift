@@ -6,35 +6,6 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-internal extension Node {
-    internal func beforeSimulation(parentToWorldTransform: Matrix4x4f, nodeParentScaleX: Float, nodeParentScaleY: Float, parentRotation: Angle) {
-        let scaleX = nodeParentScaleX * self.scaleX
-        let scaleY = nodeParentScaleY * self.scaleY
-        let rotation = parentRotation + self.rotation
-        
-        let nodeToWorldTransform = parentToWorldTransform * self.nodeToParentMatrix
-        
-        physicsBody?.beforeSimulation(parentToWorldTransform: parentToWorldTransform, nodeToWorldTransform: nodeToWorldTransform, scaleX: scaleX, scaleY: scaleY, rotation: rotation)
-        
-        for c in children {
-            c.beforeSimulation(parentToWorldTransform: nodeToWorldTransform,
-                               nodeParentScaleX: scaleX, nodeParentScaleY: scaleY,
-                               parentRotation: rotation)
-        }
-    }
-    
-    internal func afterSimulation(parentToWorldTransform: Matrix4x4f, parentRotation: Angle) {
-        let nodeToWorldTransform = parentToWorldTransform * self.nodeToParentMatrix
-        let nodeRotation = parentRotation + self.rotation
-        
-        physicsBody?.afterSimulation(parentToWorldTransform: parentToWorldTransform, parentRotation: parentRotation)
-        
-        for c in children {
-            c.afterSimulation(parentToWorldTransform: nodeToWorldTransform, parentRotation: nodeRotation)
-        }
-    }
-}
-
 internal func collisionBeginCallbackFunc(_ arb: UnsafeMutablePointer<cpArbiter>?, _ space: UnsafeMutablePointer<cpSpace>?, _ world: cpDataPointer?) -> cpBool {
     
     var a: UnsafeMutablePointer<cpShape>? = nil
@@ -85,11 +56,6 @@ internal extension PhysicsWorld {
             return
         }
         
-        let sceneToWorldTransform = rootNode.nodeToParentMatrix
-        rootNode.beforeSimulation(parentToWorldTransform: sceneToWorldTransform,
-                               nodeParentScaleX: 1, nodeParentScaleY: 1,
-                               parentRotation: Angle.zero)
-        
         if userCall {
             cpHastySpaceStep(chipmunkSpace, cpFloat(dt))
         } else {
@@ -124,9 +90,6 @@ internal extension PhysicsWorld {
         }
         
         // debugDraw()
-        
-        // Update physics position, should loop as the same sequence as node tree.
-        rootNode.afterSimulation(parentToWorldTransform: sceneToWorldTransform, parentRotation: Angle.zero)
     }
 
 }
