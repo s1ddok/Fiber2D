@@ -745,7 +745,7 @@ open class Node: Responder, Prioritized, Pausable {
      */
     var vertexZ: Float = 0.0
 
-    /* Event that is called when the running node is no longer running (eg: its CCScene is being removed from the "stage" ).
+    /* Event that is called when the running node is no longer running (eg: its Scene is being removed from the "stage" ).
      On cleanup you should break any possible circular references.
      Node's cleanup removes any possible scheduled timer and/or any possible action.
      If you override cleanup, you shall call [super cleanup]

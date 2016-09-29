@@ -195,7 +195,7 @@ public class Director: NSObject {
     }
     
     func calculateDeltaTime() {
-        let now: Time = Time(CCAbsoluteTime())
+        let now = Time.absoluteTime
         // new delta time
         if nextDeltaTimeZero {
             self.dt = 0
@@ -478,7 +478,7 @@ public class Director: NSObject {
             delegate!.resume!()
         }*/
         self.frameSkipInterval = oldFrameSkipInterval
-        self.lastUpdate = Time(CCAbsoluteTime())
+        self.lastUpdate = Time.absoluteTime
         self.willChangeValue(forKey: "isPaused")
         self.isPaused = false
         self.didChangeValue(forKey: "isPaused")
