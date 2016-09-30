@@ -58,6 +58,13 @@ public extension Node {
         components.append(component)
         component.onAdd(to: self)
         
+        // TODO: Either add removing functionality for systems (in removeComponent methods) 
+        // or make components responsible for subscribing/unsubscribing for System
+        // the latter is more verbous and require user to write more code in custom components, 
+        // but will improve performance in such methods like onExit, as we don't need to search for
+        // a system for every component.
+        // A thing to discuss for sure.
+        // In the meanwhile, this code doesn't work, as you can only subscribe to system, and never actually remove stuff
         let system = director.system(for: component)
         system?.add(component: component)
         
