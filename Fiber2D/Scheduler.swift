@@ -333,7 +333,9 @@ extension Scheduler {
     func removeAllActions(from target: Node) {
         let scheduledTarget = self.scheduledTarget(for: target, insert: true)!
         scheduledTarget.actions = []
-        actionTargets.remove(at: actionTargets.index { $0.value === scheduledTarget }!)
+        if let idx = actionTargets.index(where: { $0.value === scheduledTarget }) {
+            actionTargets.remove(at: idx)
+        }
     }
     
     func removeAction(by tag: Int, target: Node) {

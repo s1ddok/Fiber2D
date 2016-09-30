@@ -359,15 +359,14 @@ open class Node: Responder, Prioritized, Pausable {
      * Subclasses may override to actually do something when the view resizes.
      * @param newViewSize The new size of the view after it has been resized.
      */
-    
-    func viewDidResizeTo(_ newViewSize: Size) {
+    open func viewDidResizeTo(_ newViewSize: Size) {
         children.forEach { $0.viewDidResizeTo(newViewSize) }
     }
+    
     /** Returns an axis aligned bounding box in points, in the parent node's coordinate system.
      @see contentSize
      @see nodeToParentTransform */
-    
-    var boundingBox: Rect {
+    public var boundingBox: Rect {
         let rect = Rect(origin: p2d.zero, size: contentSizeInPoints)
 
         return rect.applying(matrix: nodeToParentMatrix)
@@ -646,8 +645,8 @@ open class Node: Responder, Prioritized, Pausable {
         return self.isInActiveScene && !paused && pausedAncestors == 0
     }
     
-    // Blocks that are scheduled to run on this node when onEnter is called, contains scheduled stuff and actions.
-    internal var queuedActions    = [()->()]()
+    // Components and actions that are scheduled to run on this node when onEnter is called
+    internal var queuedActions    = [ActionContainer]()
     internal var queuedComponents = [Component]()
     
     // MARK: Travers + Rendering
@@ -788,7 +787,7 @@ open class Node: Responder, Prioritized, Pausable {
     /**
      You probably want "active" instead, but this tells you if the node is in the active scene wihtout regards to its pause state.
      */
-    var isInActiveScene: Bool = false
+    internal(set) var isInActiveScene: Bool = false
     
     // For Scheduler target
     

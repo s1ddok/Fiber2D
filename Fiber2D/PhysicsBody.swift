@@ -16,7 +16,7 @@ import SwiftMath
  * If you create body with createEdgeXXX, the mass and moment will be inifinity by default. And it's a static body.
  * You can change mass and moment with `mass` and `moment`. And you can change the body to be dynamic or static by use `dynamic`.
  */
-public class PhysicsBody: Behaviour, FixedUpdatable, Enterable, Exitable {
+public class PhysicsBody: Behaviour, FixedUpdatable {
     // MARK: State
     /** Whether the body is at rest. */
     public var isResting: Bool {
@@ -110,7 +110,7 @@ public class PhysicsBody: Behaviour, FixedUpdatable, Enterable, Exitable {
         
     }
     
-    /** set body position offset, it's the position witch relative to node */
+    /** set body position offset, it's the position which is relative to the node */
     public var positionOffset: Vector2f {
         get {
             return _positionOffset
@@ -249,27 +249,12 @@ public class PhysicsBody: Behaviour, FixedUpdatable, Enterable, Exitable {
         }
     }
     
-    public func onEnter() {
-        addToPhysicsWorld()
-    }
-    
-    public func onExit() {
-        removeFromPhysicsWorld()
-    }
-    
     public override func onAdd(to owner: Node) {
         super.onAdd(to: owner)
         let contentSize = owner.contentSizeInPoints
         ownerCenterOffset = contentSize * 0.5
         
         rotationOffset = owner.rotation
-        // component may be added after onEnter() has been invoked, so we should add
-        // this line to make sure physics body is added to physics world
-        addToPhysicsWorld()
-    }
-    public override func onRemove() {
-        removeFromPhysicsWorld()
-        super.onRemove()
     }
     
     // MARK: Internal vars

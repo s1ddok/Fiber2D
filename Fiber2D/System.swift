@@ -15,7 +15,7 @@ public protocol System: class, Enterable, Exitable, Pausable {
       * Component related methods
       */
     func add(component: Component)
-    func removeComponent(by tag: Int)
+    func remove(component: Component)
     
     /** Returns true if system needs to know about certain type of components
       * This method is called for every component that is added to the node

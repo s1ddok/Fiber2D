@@ -18,6 +18,8 @@ class MainScene: Scene {
     
     var physicsSystem: PhysicsSystem!
     
+    var staticBody: ColorNode!
+    
     override init() {
         super.init()
         
@@ -83,7 +85,7 @@ class MainScene: Scene {
         
         let mask: UInt32 = 1
         
-        let staticBody = ColorNode()
+        staticBody = ColorNode()
         staticBody.position = p2d(256.0, 128.0)
         staticBody.contentSize = Size(98.0, 98.0)
         
@@ -161,6 +163,14 @@ class MainScene: Scene {
         
         add(child: physicsCircle)
         physicsCircle.add(component: physicsBody)
+        
+        if button == .right {
+            if staticBody.parent == nil {
+                self.add(child: staticBody)
+            } else {
+                staticBody.removeFromParent()
+            }
+        }
     }
     
     override func scrollWheel(_ theEvent: NSEvent) {

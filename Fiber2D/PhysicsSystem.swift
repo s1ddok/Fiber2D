@@ -29,13 +29,15 @@ public class PhysicsSystem: System {
      * Component related methods
      */
     public func add(component: Component) {
+        world.add(body: component as! PhysicsBody)
         dirty = true
     }
     
-    public func removeComponent(by tag: Int) {
+    public func remove(component: Component) {
+        world.remove(body: component as! PhysicsBody)
         dirty = true
     }
-    
+
     public func wants(component: Component) -> Bool {
         return component is PhysicsBody
     }

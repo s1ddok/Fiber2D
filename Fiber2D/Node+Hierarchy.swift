@@ -146,7 +146,7 @@ public extension Node {
             child.cleanup()
         }
         // set parent nil at the end (issue #476)
-        child.parent = nil
+        child._parent = nil
         Director.currentDirector!.responderManager.markAsDirty()
         children.removeObject(child)
         childWasRemoved(child: child)
