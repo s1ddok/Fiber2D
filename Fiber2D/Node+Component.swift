@@ -179,6 +179,9 @@ public extension Node {
             if isInActiveScene, let e = c as? Exitable {
                 e.onExit()
             }
+            
+            director?.system(for: c)?.remove(component: c)
+            
             c.onRemove()
             
             if c is Updatable {
