@@ -79,9 +79,8 @@ internal extension PhysicsWorld {
                         cpHastySpaceStep(chipmunkSpace, cpFloat(dt))
                         
                         for b in bodies {
-                            b.update(delta: dt)
+                            b.fixedUpdate(delta: dt)
                         }
-                        //bodies.forEach { $0.update(delta: dt) }
                     }
                     
                     updateRateCount = 0

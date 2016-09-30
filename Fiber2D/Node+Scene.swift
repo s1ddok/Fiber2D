@@ -20,16 +20,21 @@ extension Node: Enterable, Exitable {
         children.forEach { $0.onEnter() }
         scheduler!.schedule(target: self)
         let wasRunning: Bool = self.active
-        self.isInActiveScene = true
         // Add queued actions or scheduled code, if needed:
         for block: ()->() in queuedActions {
             block()
         }
         self.queuedActions.removeAll()
         
+        for c in queuedComponents {
+            add(component: c)
+        }
+        self.queuedComponents.removeAll()
+        
         components.forEach {
             if let c = $0 as? Enterable { c.onEnter() }
         }
+        self.isInActiveScene = true
         self.wasRunning(wasRunning)
     }
     

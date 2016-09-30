@@ -27,8 +27,6 @@ public protocol System: class, Enterable, Exitable, Pausable {
       * it will lead to undefined behaviour
       */
     func wants(component: Component) -> Bool
-    
-    var ownsComponents: Bool { get }
 }
 
 // default implementations AKA optional methods

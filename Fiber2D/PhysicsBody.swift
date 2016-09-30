@@ -16,7 +16,7 @@ import SwiftMath
  * If you create body with createEdgeXXX, the mass and moment will be inifinity by default. And it's a static body.
  * You can change mass and moment with `mass` and `moment`. And you can change the body to be dynamic or static by use `dynamic`.
  */
-public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
+public class PhysicsBody: Behaviour, FixedUpdatable, Enterable, Exitable {
     // MARK: State
     /** Whether the body is at rest. */
     public var isResting: Bool {
@@ -228,12 +228,12 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
         cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
     
-    public func update(delta: Time) {
+    public func fixedUpdate(delta: Time) {
         // damping compute
         if (_isDamping && isDynamic && !isResting) {
             chipmunkBody.pointee.v.x *= cpfclamp(1.0 - cpFloat(delta * linearDamping), 0.0, 1.0)
             chipmunkBody.pointee.v.y *= cpfclamp(1.0 - cpFloat(delta * linearDamping), 0.0, 1.0)
-            chipmunkBody.pointee.w *= cpfclamp(1.0 - cpFloat(delta * angularDamping), 0.0, 1.0)
+            chipmunkBody.pointee.w   *= cpfclamp(1.0 - cpFloat(delta * angularDamping), 0.0, 1.0)
         }
     }
     // MARK: Component stuff
@@ -248,12 +248,15 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
             }
         }
     }
+    
     public func onEnter() {
         addToPhysicsWorld()
     }
+    
     public func onExit() {
         removeFromPhysicsWorld()
     }
+    
     public override func onAdd(to owner: Node) {
         super.onAdd(to: owner)
         let contentSize = owner.contentSizeInPoints
@@ -305,13 +308,18 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
 
 extension PhysicsBody {
     func addToPhysicsWorld() {
-        let physicsSystem = owner?.director?.system(for: PhysicsSystem.self)
-        physicsSystem?.world.add(body: self)
+        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+            physicsSystem.world.add(body: self)
+            physicsSystem.dirty = true
+        }
     }
+    
     /** remove the body from the world it added to */
     func removeFromPhysicsWorld() {
-        let physicsSystem = owner?.director?.system(for: PhysicsSystem.self)
-        physicsSystem?.world.remove(body: self)
+        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+            physicsSystem.world.remove(body: self)
+            physicsSystem.dirty = true
+        }
     }
 }
 

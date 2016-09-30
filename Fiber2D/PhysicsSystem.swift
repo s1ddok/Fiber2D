@@ -16,9 +16,6 @@ internal struct PhysicsNode {
 }
 
 public class PhysicsSystem: System {
-    public var ownsComponents: Bool {
-        return false
-    }
     public var paused: Bool = false
     public var dirty: Bool = true
     public let world: PhysicsWorld
@@ -71,7 +68,7 @@ public class PhysicsSystem: System {
 
 extension PhysicsSystem: FixedUpdatable {
     public var priority: Int {
-        return Int.min
+        return Int.max
     }
     
     public func fixedUpdate(delta: Time) {

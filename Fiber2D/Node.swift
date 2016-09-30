@@ -647,7 +647,8 @@ open class Node: Responder, Prioritized, Pausable {
     }
     
     // Blocks that are scheduled to run on this node when onEnter is called, contains scheduled stuff and actions.
-    internal var queuedActions = [()->()]()
+    internal var queuedActions    = [()->()]()
+    internal var queuedComponents = [Component]()
     
     // MARK: Travers + Rendering
     /// -----------------------------------------------------------------------
