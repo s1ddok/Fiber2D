@@ -41,8 +41,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         pd.context = UnsafeMutableRawPointer(Unmanaged.passRetained(view.context.device!).toOpaque())
         bgfx.setPlatformData(pd)
         
+        bgfx.renderFrame()
         bgfx.initialize(type: .metal)
-        bgfx.reset(width: 1024, height: 768, options: [.vsync])
+        bgfx.reset(width: 1024, height: 768, options: [.vsync, .flipAfterRender])
         
         //bgfx.renderFrame()
         

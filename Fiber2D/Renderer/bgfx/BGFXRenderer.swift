@@ -66,6 +66,7 @@ class BGFXRenderer: Renderer {
         let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
         let fs = Shader(source: fs_shader, language: .metal, type: .fragment)
         prog = Program(vertex: vs, fragment: fs)
+        bgfx.frame()
     }
     
     func enqueueClear(color: vec4) {
@@ -106,6 +107,7 @@ class BGFXRenderer: Renderer {
 
         bgfx.submit(0, program: prog)
         bgfx.frame()
+        bgfx.renderFrame()
     }
     
     func makeFrameBufferObject() -> FrameBufferObject {

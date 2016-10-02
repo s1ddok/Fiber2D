@@ -101,8 +101,8 @@ class MetalView: MTKView, DirectorView {
     }
     
     func presentFrame() {
-        context.currentCommandBuffer.present(self.currentDrawable!)
-        context.flushCommandBuffer()
+        //context.currentCommandBuffer.present(self.currentDrawable!)
+        //context.flushCommandBuffer()
     }
     
     func add(frameCompletionHandler handler: @escaping ()->()) {

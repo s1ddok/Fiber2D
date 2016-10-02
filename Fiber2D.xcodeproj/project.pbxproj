@@ -14,6 +14,7 @@
 		05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */; };
 		05BC34C51D85BBB100306A4F /* BGFXRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */; };
 		05BC358F1D8850B000306A4F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BC358E1D8850B000306A4F /* GLKit.framework */; };
+		05D231C11D9CD19000611AA3 /* BGFXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D231C01D9CD19000611AA3 /* BGFXView.swift */; };
 		080306AA1D932B3B008CAC8E /* PhysicsShapeCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306A91D932B3B008CAC8E /* PhysicsShapeCircle.swift */; };
 		080306AC1D933B4D008CAC8E /* PhysicsContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306AB1D933B4D008CAC8E /* PhysicsContact.swift */; };
 		080306AE1D941F4D008CAC8E /* PhysicsShapeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306AD1D941F4D008CAC8E /* PhysicsShapeBox.swift */; };
@@ -193,6 +194,7 @@
 		05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGFXRenderer.swift; sourceTree = "<group>"; };
 		05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRendererImpl.swift; sourceTree = "<group>"; };
 		05BC358E1D8850B000306A4F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		05D231C01D9CD19000611AA3 /* BGFXView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGFXView.swift; sourceTree = "<group>"; };
 		080306A91D932B3B008CAC8E /* PhysicsShapeCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShapeCircle.swift; sourceTree = "<group>"; };
 		080306AB1D933B4D008CAC8E /* PhysicsContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsContact.swift; sourceTree = "<group>"; };
 		080306AD1D941F4D008CAC8E /* PhysicsShapeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShapeBox.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */,
+				05D231C01D9CD19000611AA3 /* BGFXView.swift */,
 			);
 			path = bgfx;
 			sourceTree = "<group>";
@@ -1192,6 +1195,7 @@
 				081FBCDC1D462732005838B8 /* CCShader.m in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,
 				08C1CB2B1D8EFFD5006CDCCB /* cpSpaceDebug.c in Sources */,
+				05D231C11D9CD19000611AA3 /* BGFXView.swift in Sources */,
 				081FBD101D46289A005838B8 /* Layout.swift in Sources */,
 				08C1CB431D915950006CDCCB /* PhysicsShape.swift in Sources */,
 				081FBD1D1D46289A005838B8 /* Responder.swift in Sources */,
