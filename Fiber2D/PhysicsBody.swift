@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 /**
  * A body affect by physics.
  *
@@ -14,7 +16,7 @@
  * If you create body with createEdgeXXX, the mass and moment will be inifinity by default. And it's a static body.
  * You can change mass and moment with `mass` and `moment`. And you can change the body to be dynamic or static by use `dynamic`.
  */
-public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
+public class PhysicsBody: Behaviour, FixedUpdatable {
     // MARK: State
     /** Whether the body is at rest. */
     public var isResting: Bool {
@@ -108,7 +110,7 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
         
     }
     
-    /** set body position offset, it's the position witch relative to node */
+    /** set body position offset, it's the position which is relative to the node */
     public var positionOffset: Vector2f {
         get {
             return _positionOffset
@@ -226,12 +228,12 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
         cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
     
-    public func update(delta: Time) {
+    public func fixedUpdate(delta: Time) {
         // damping compute
         if (_isDamping && isDynamic && !isResting) {
             chipmunkBody.pointee.v.x *= cpfclamp(1.0 - cpFloat(delta * linearDamping), 0.0, 1.0)
             chipmunkBody.pointee.v.y *= cpfclamp(1.0 - cpFloat(delta * linearDamping), 0.0, 1.0)
-            chipmunkBody.pointee.w *= cpfclamp(1.0 - cpFloat(delta * angularDamping), 0.0, 1.0)
+            chipmunkBody.pointee.w   *= cpfclamp(1.0 - cpFloat(delta * angularDamping), 0.0, 1.0)
         }
     }
     // MARK: Component stuff
@@ -246,26 +248,13 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
             }
         }
     }
-    public func onEnter() {
-        addToPhysicsWorld()
-    }
-    public func onExit() {
-        removeFromPhysicsWorld()
-    }
+    
     public override func onAdd(to owner: Node) {
         super.onAdd(to: owner)
-        owner._physicsBody = self
         let contentSize = owner.contentSizeInPoints
         ownerCenterOffset = contentSize * 0.5
         
         rotationOffset = owner.rotation
-        // component may be added after onEnter() has been invoked, so we should add
-        // this line to make sure physics body is added to physics world
-        addToPhysicsWorld()
-    }
-    public override func onRemove() {
-        removeFromPhysicsWorld()
-        super.onRemove()
     }
     
     // MARK: Internal vars
@@ -303,9 +292,20 @@ public class PhysicsBody: Behaviour, Updatable, Enterable, Exitable {
 }
 
 extension PhysicsBody {
-    func addToPhysicsWorld() { owner?.scene?.physicsWorld.add(body: self) }
+    func addToPhysicsWorld() {
+        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+            physicsSystem.world.add(body: self)
+            physicsSystem.dirty = true
+        }
+    }
+    
     /** remove the body from the world it added to */
-    func removeFromPhysicsWorld() { owner?.scene?.physicsWorld.remove(body: self) }
+    func removeFromPhysicsWorld() {
+        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+            physicsSystem.world.remove(body: self)
+            physicsSystem.dirty = true
+        }
+    }
 }
 
 public extension PhysicsBody {

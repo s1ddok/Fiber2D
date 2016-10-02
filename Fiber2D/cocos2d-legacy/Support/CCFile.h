@@ -23,7 +23,7 @@
  */
 
 
-#import "ccTypes.h"
+#import "ccMacros.h"
 #if __CC_PLATFORM_IOS || __CC_PLATFORM_MAC
 
 #import <ImageIO/CGImageSource.h>

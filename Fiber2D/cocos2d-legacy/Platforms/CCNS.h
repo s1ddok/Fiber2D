@@ -24,7 +24,12 @@
  * THE SOFTWARE.
  */
 
-#import "ccTypes.h"
+#import "CGPointExtension.h"
+
+#import "ccMacros.h"
+#if __CC_PLATFORM_IOS || __CC_PLATFORM_MAC
+#import <GLKit/GLKMath.h>
+#endif
 
 #ifndef __CC_CG_STRING_UTILS
 #define __CC_CG_STRING_UTILS

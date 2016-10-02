@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 public class PhysicsShapeBox: PhysicsShapePolygon {
     /**
      * Get this box's width and height.

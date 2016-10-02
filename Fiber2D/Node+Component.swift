@@ -6,8 +6,6 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-// TODO:
-// Add to scheduler only nodes with at least one component
 public extension Node {
     /// @name component functions
     /**
@@ -21,6 +19,22 @@ public extension Node {
     }
     
     /**
+     * Gets a component by its type.
+     *
+     * @param name A given type of component.
+     * @return The Component by type.
+     */
+    public func getComponent<U>(by type: U.Type) -> U?
+    where U: Component {
+        for c in components {
+            if let retVal = c as? U {
+                return retVal
+            }
+        }
+        return nil
+    }
+    
+    /**
      * Adds a component.
      *
      * @param component A given component.
@@ -28,6 +42,11 @@ public extension Node {
      */
     @discardableResult
     public func add(component: Component) -> Bool {
+        guard let director = self.director else {
+            queuedComponents.append(component)
+            return false
+        }
+        
         guard component.owner == nil else {
             fatalError("ERROR: Component already add. It can't be added to more than one owner")
         }
@@ -36,45 +55,38 @@ public extension Node {
             return false
         }
         
-        if let system = director?.system(for: component) {
-            system.add(component: component)
-        } else {
-            components.append(component)
-            component.onAdd(to: self)
+        components.append(component)
+        component.onAdd(to: self)
+        
+        if isInActiveScene {
+            let system = director.system(for: component)
+            system?.add(component: component)
             
-            if let c = component as? Updatable & Tagged {
-                // TODO: Insert with priority in mind
-                updatableComponents.append(c)
-                
-                // If it is first component
-                if updatableComponents.count == 1 {
-                    if let scheduler = self.scheduler {
-                        scheduler.schedule(updatable: self)
-                    } else {
-                        queuedActions.append {
-                            self.scheduler!.schedule(updatable: self)
-                        }
-                    }
-                }
-            }
-            
-            if let c = component as? FixedUpdatable & Tagged {
-                // TODO: Insert with priority in mind
-                fixedUpdatableComponentns.append(c)
-                
-                // If it is first component
-                if fixedUpdatableComponentns.count == 1 {
-                    if let scheduler = self.scheduler {
-                        scheduler.schedule(updatable: self)
-                    } else {
-                        queuedActions.append {
-                            self.scheduler!.schedule(updatable: self)
-                        }
-                    }
-                }
+            if let e = component as? Enterable {
+                e.onEnter()
             }
         }
         
+        if let c = component as? Updatable & Tagged {
+            // TODO: Insert with priority in mind
+            updatableComponents.append(c)
+            
+            // If it is first component
+            if updatableComponents.count == 1 {
+                scheduler?.schedule(updatable: self)
+            }
+        }
+        
+        if let c = component as? FixedUpdatable & Tagged {
+            // TODO: Insert with priority in mind
+            fixedUpdatableComponentns.append(c)
+            
+            // If it is first component
+            if fixedUpdatableComponentns.count == 1 {
+                scheduler?.schedule(updatable: self)
+            }
+        }
+    
         return true
     }
     
@@ -86,42 +98,58 @@ public extension Node {
      */
     @discardableResult
     public func removeComponent(by tag: Int) -> Bool {
-        let oldCount = components.count
-        components = components.filter {
-            if $0.tag == tag {
-                $0.onRemove()
-            
-                // FIXME: This will not work if component will be removed when node doesn't have any scheduler
-                // And we also cant remove it from queuedActions since blocks are incomparable
-                // Need to find more clever solution
-                if $0 is Updatable {
-                    self.updatableComponents = self.updatableComponents.filter {
-                        return $0.tag != tag
-                    }
-                    
-                    if self.updatableComponents.isEmpty {
-                        self.scheduler?.unschedule(updatable: self)
-                    }
-                }
-                
-                if $0 is FixedUpdatable {
-                    self.fixedUpdatableComponentns = self.fixedUpdatableComponentns.filter {
-                        return $0.tag != tag
-                    }
-                    
-                    if self.fixedUpdatableComponentns.isEmpty {
-                        self.scheduler?.unschedule(fixedUpdatable: self)
-                    }
-                }
-                return false
-            }
+        // if it still waits to be added
+        if let idx = queuedComponents.index(where: { $0.tag == tag }) {
+            queuedComponents.remove(at: idx)
             return true
         }
-        return oldCount < components.count
+        
+        // if it is already added
+        if let idx = components.index(where: { $0.tag == tag }) {
+            let c = components[idx]
+            if isInActiveScene, let e = c as? Exitable {
+                e.onExit()
+            }
+            
+            director?.system(for: c)?.remove(component: c)
+            
+            c.onRemove()
+            
+            if c is Updatable {
+                if let idx = updatableComponents.index(where: { $0.tag == tag } ) {
+                    updatableComponents.remove(at: idx)
+                }
+                
+                if self.updatableComponents.isEmpty {
+                    self.scheduler?.unschedule(updatable: self)
+                }
+            }
+            
+            if c is FixedUpdatable {
+                if let idx = fixedUpdatableComponentns.index(where: { $0.tag == tag } ) {
+                    fixedUpdatableComponentns.remove(at: idx)
+                }
+                
+                if self.fixedUpdatableComponentns.isEmpty {
+                    self.scheduler?.unschedule(fixedUpdatable: self)
+                }
+            }
+            
+            return true
+        }
+        
+        return false
     }
     
     /**
-     * Removes a component by its pointer.
+       Removes all components with given tag
+     */
+    public func removeAllComponents(by tag: Int) {
+        while removeComponent(by: tag) {}
+    }
+    
+    /**
+     * Removes a component by its value.
      *
      * @param component A given component.
      * @return True if removed success.
@@ -129,6 +157,64 @@ public extension Node {
     @discardableResult
     public func remove(component: Component) -> Bool {
         return removeComponent(by: component.tag)
+    }
+
+    /**
+     * Removes a component by its type.
+     *
+     * @param component A given component type.
+     * @return True if removed success.
+     */
+    @discardableResult
+    public func removeComponent<U>(by type: U.Type) -> Bool {
+        // if it still waits to be added
+        if let idx = queuedComponents.index(where: { $0 is U }) {
+            queuedComponents.remove(at: idx)
+            return true
+        }
+        
+        // if it is already added
+        if let idx = components.index(where: { $0 is U }) {
+            let c = components[idx]
+            if isInActiveScene, let e = c as? Exitable {
+                e.onExit()
+            }
+            
+            director?.system(for: c)?.remove(component: c)
+            
+            c.onRemove()
+            
+            if c is Updatable {
+                if let idx = updatableComponents.index(where: { $0 is U } ) {
+                    updatableComponents.remove(at: idx)
+                }
+                
+                if self.updatableComponents.isEmpty {
+                    self.scheduler?.unschedule(updatable: self)
+                }
+            }
+            
+            if c is FixedUpdatable {
+                if let idx = fixedUpdatableComponentns.index(where: { $0 is U } ) {
+                    fixedUpdatableComponentns.remove(at: idx)
+                }
+                
+                if self.fixedUpdatableComponentns.isEmpty {
+                    self.scheduler?.unschedule(fixedUpdatable: self)
+                }
+            }
+
+            return true
+        }
+        
+        return false
+    }
+    
+    /**
+     * Removes all components of given type
+     */
+    public func removeAllComponents<U>(by type: U.Type) {
+        while removeComponent(by: type) {}
     }
     
     /**

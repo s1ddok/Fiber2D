@@ -6,8 +6,20 @@
 //  Copyright © 2016 Fiber2D. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
+/**
+ Responder is the base class for all nodes.
+ It exposes the touch and mouse interface to any node, which enables user interaction.
+ It is somewhat similar to [UIResponder](https://developer.apple.com/library/IOs/documentation/UIKit/Reference/UIResponder_Class/index.html).
+ 
+ To make a responder react to user interaction, the touchesXXX / mouseXXX event must be overridden in your node subclass.
+ If a class does not implement these selectors, the event will be passed on to the next node in the Fiber2D responder chain.
+ To force the events to be passed to next responder, call the super implementation before returning from the event.
+ 
+ ### Subclassing Notes
+ You should not create subclasses of Responder. Instead subclass from Node if you need a plain basic node, or other node classes that best fit the purpose.
+ */
 open class Responder: NSObject {
     /// -----------------------------------------------------------------------
     /// @name Enabling Input Events
@@ -48,15 +60,7 @@ open class Responder: NSObject {
      *  Only touches within this node's context rect will be sent to its children.
      */
     var clipsInput: Bool = false
-    
-    override init() {
-        super.init()
-        
-        // TODO
-        // Maybe userInteractionEnabled must be set with defer keyword, so handler is called, will see later
-    
-    }
-    
+
     func hitTestWithWorldPos(_ pos: Point) -> Bool {
         return false
     }

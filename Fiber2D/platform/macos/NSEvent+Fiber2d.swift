@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftMath
 
 #if os(OSX)
 

@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 class ColorNode: RenderableNode {
     

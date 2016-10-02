@@ -5,6 +5,8 @@
 //  Copyright © 2016. All rights reserved.
 //
 
+import SwiftMath
+
 /// The four CCVertexes of a sprite.
 /// Bottom left, bottom right, top right, top left.
 struct SpriteVertexes {
@@ -222,10 +224,9 @@ class Sprite: RenderableNode {
      *  @param rotated YES if texture is rotated.
      *  @param size    Untrimmed size.
      */
-    
     func setTextureRect(_ rect: Rect, forTexture texture: CCTexture, rotated: Bool, untrimmedSize: Size) {
         self.textureRectRotated = rotated
-        self.contentSizeType = CCSizeTypePoints
+        self.contentSizeType = .points
         self.contentSize = untrimmedSize
         self.textureRect = rect
         let texCoords: SpriteTexCoordSet = Sprite.textureCoordsForTexture(texture, withRect: rect, rotated: rotated, xFlipped: flipX, yFlipped: flipY)

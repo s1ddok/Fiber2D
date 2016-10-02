@@ -17,19 +17,17 @@ public extension Node {
      @see ActionContainer
      */
     public func run(action: ActionContainer) {
-        let scheduler = self.scheduler
-        if scheduler == nil {
-            queuedActions.append {
-                self.scheduler!.add(action: action, target: self, paused: !self.active)
-            }
+        if let scheduler = self.scheduler {
+            scheduler.add(action: action, target: self, paused: !self.active)
         } else {
-            scheduler!.add(action: action, target: self, paused: !self.active)
+            queuedActions.append(action)
         }
     }
     
     /** Stops and removes all actions running on the node.
      @node It is not necessary to call this when removing a node. Removing a node from its parent will also stop its actions. */
     public func stopAllActions() {
+        queuedActions = []
         scheduler?.removeAllActions(from: self)
     }
 
@@ -40,6 +38,10 @@ public extension Node {
      *  @param name Name of the action to remove.
      */
     public func stopAction(by tag: Int) {
+        if let idx = queuedActions.index(where: { $0.tag == tag }) {
+            queuedActions.remove(at: idx)
+            return
+        }
         scheduler?.removeAction(by: tag, target: self)
     }
     

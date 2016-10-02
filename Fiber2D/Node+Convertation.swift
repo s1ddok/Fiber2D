@@ -5,19 +5,19 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 extension Node {
     // MARK: Position
     
-    /** Converts the given position in points to position values converted based on the provided CCPositionType.
+    /** Converts the given position in points to position values converted based on the provided PositionType.
      
      @param positionInPoints The position in points to convert.
      @param type How the input position values should be converted.
      @returns The position values in the format specified by type.
      @see position
-     @see CCPositionType, CCPositionUnit, CCPositionReferenceCorner */
-    func convertPositionFromPoints(_ positionInPoints: Point, type: CCPositionType) -> Point {
+     @see PositionType, PositionUnit, PositionReferenceCorner */
+    func convertPositionFromPoints(_ positionInPoints: Point, type: PositionType) -> Point {
         let setup: CCSetup = CCSetup.shared()
         let UIScale = setup.uiScale
         var parentsContentSizeInPoints = Size.zero
@@ -95,8 +95,8 @@ extension Node {
      @param type How the input position values should be interpreted.
      @returns The converted position in points.
      @see positionInPoints
-     @see CCPositionType, CCPositionUnit, CCPositionReferenceCorner */
-    func convertPositionToPoints(_ position: Point, type: CCPositionType) -> Point {
+     @see PositionType, PositionUnit, PositionReferenceCorner */
+    func convertPositionToPoints(_ position: Point, type: PositionType) -> Point {
         let setup: CCSetup = CCSetup.shared()
         let UIScale = setup.uiScale
         var gotParentSize: Bool = parent == nil
@@ -170,13 +170,13 @@ extension Node {
      @param type How the input contentSize values should be interpreted.
      @returns The converted size in points.
      @see contentSizeInPoints
-     @see CCSizeType, CCSizeUnit */
-    func convertContentSizeToPoints(_ contentSize: Size, type: CCSizeType) -> Size {
+     @see SizeType, SizeUnit */
+    func convertContentSizeToPoints(_ contentSize: Size, type: SizeType) -> Size {
         var size: Size = Size.zero
         let setup: CCSetup = CCSetup.shared()
         let UIScale = Float(setup.uiScale)
-        let widthUnit = type.widthUnit
-        let heightUnit = type.heightUnit
+        let widthUnit = type.xUnit
+        let heightUnit = type.yUnit
         var gotParentSize: Bool = parent == nil
         var parentsContentSizeInPoints = Size.zero
         // Width
@@ -227,29 +227,27 @@ extension Node {
         
         return size
     }
-    /** Converts the given size in points to size values converted based on the provided CCSizeType.
+    /** Converts the given size in points to size values converted based on the provided SizeType.
      
      @param pointSize The size in points to convert.
      @param type How the input size values should be converted.
      @returns The size values in the format specified by type.
      @see contentSize
-     @see CCSizeType, CCSizeUnit */
-    func convertContentSizeFromPoints(_ pointSize: Size, type: CCSizeType) -> Size {
+     @see SizeType, SizeUnit */
+    func convertContentSizeFromPoints(_ pointSize: Size, type: SizeType) -> Size {
         var size: Size = Size.zero
         let setup: CCSetup = CCSetup.shared()
         let UIScale = Float(setup.uiScale)
-        let widthUnit = type.widthUnit
-        let heightUnit = type.heightUnit
+        let widthUnit = type.xUnit
+        let heightUnit = type.yUnit
         var gotParentSize: Bool = parent == nil
         var parentsContentSizeInPoints = Size.zero
         // Width
         if widthUnit == .points {
             size.width = pointSize.width
-        }
-        else if widthUnit == .uiPoints {
+        } else if widthUnit == .uiPoints {
             size.width = pointSize.width / UIScale
-        }
-        else if widthUnit == .normalized {
+        } else if widthUnit == .normalized {
             if !gotParentSize {
                 gotParentSize = true
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
@@ -257,19 +255,16 @@ extension Node {
             let parentWidthInPoints = parentsContentSizeInPoints.width
             if parentWidthInPoints > 0 {
                 size.width = pointSize.width / parentWidthInPoints
-            }
-            else {
+            } else {
                 size.width = 0
             }
-        }
-        else if widthUnit == .insetPoints {
+        } else if widthUnit == .insetPoints {
             if !gotParentSize {
                 gotParentSize = true
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
             }
             size.width = parentsContentSizeInPoints.width - pointSize.width
-        }
-        else if widthUnit == .insetUIPoints {
+        } else if widthUnit == .insetUIPoints {
             if !gotParentSize {
                 gotParentSize = true
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
@@ -280,20 +275,16 @@ extension Node {
         // Height
         if heightUnit == .points {
             size.height = pointSize.height
-        }
-        else if heightUnit == .uiPoints {
+        } else if heightUnit == .uiPoints {
             size.height = pointSize.height / UIScale
-        }
-        else if heightUnit == .normalized {
+        } else if heightUnit == .normalized {
             let parentHeightInPoints = gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height
             if parentHeightInPoints > 0 {
                 size.height = pointSize.height / parentHeightInPoints
-            }
-            else {
+            } else {
                 size.height = 0
             }
-        }
-        else if heightUnit == .insetPoints {
+        } else if heightUnit == .insetPoints {
             size.height = (gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height) - pointSize.height;
         } else if (heightUnit == .insetUIPoints) {
             size.height = ((gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height) - pointSize.height) / UIScale;

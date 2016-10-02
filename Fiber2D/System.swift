@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public protocol System: AnyObject, Enterable, Exitable {
+public protocol System: class, Enterable, Exitable, Pausable {
     
     func onAdd(to director: Director)
     func onRemove()
@@ -15,7 +15,7 @@ public protocol System: AnyObject, Enterable, Exitable {
       * Component related methods
       */
     func add(component: Component)
-    func removeComponent(by tag: Int)
+    func remove(component: Component)
     
     /** Returns true if system needs to know about certain type of components
       * This method is called for every component that is added to the node
@@ -33,4 +33,6 @@ public protocol System: AnyObject, Enterable, Exitable {
 public extension System {
     func onAdd(to director: Director) {}
     func onRemove() {}
+    func onEnter() {}
+    func onExit() {}
 }

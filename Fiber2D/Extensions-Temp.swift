@@ -6,22 +6,24 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 // TEMPORARY
 extension Color {
     var glkVector4: GLKVector4 {
-        return GLKVector4(v: (d.x, d.y, d.z, d.w))
+        return GLKVector4(v: (x, y, z, w))
     }
 }
 
 extension Matrix4x4f {
     var glkMatrix4: GLKMatrix4 {
-        return unsafeBitCast(d, to: GLKMatrix4.self)
+        return unsafeBitCast(self, to: GLKMatrix4.self)
     }
 }
 
 extension Vector3f {
     var glkVector3: GLKVector3 {
-        return GLKVector3(v: (d.x, d.y, d.z))
+        return GLKVector3(v: (x, y, z))
     }
 }
 
@@ -35,7 +37,7 @@ extension Vector2f {
     }
     
     init(_ cgPoint: CGPoint) {
-        d = float2(Float(cgPoint.x), Float(cgPoint.y))
+        self.init(Float(cgPoint.x), Float(cgPoint.y))
     }
 }
 
@@ -56,8 +58,7 @@ extension Matrix4x4f {
         let w = Float(size.width)
         let h = Float(size.height)
         
-        let m = Matrix4x4f.ortho(left: 0, right: w, bottom: 0, top: h, near: -1024, far: 1024)
-        d = m.d
+        self.init(Matrix4x4f.ortho(left: 0, right: w, bottom: 0, top: h, near: -1024, far: 1024))
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftMath
 
 /**
  *  Image format when saving render textures. Used by CCRenderTexture.
@@ -73,6 +74,7 @@ class RenderTexture: RenderableNode {
         //CCRenderer.bindRenderer(renderer)
         return renderer
     }
+    
     /**
      *  Starts rendering to the texture while clearing the texture first.
      *  This is more efficient then calling clear and begin separately.
@@ -163,7 +165,7 @@ class RenderTexture: RenderableNode {
          paddedSize.height = CCNextPOT(pixelSize.height);
         	}*/
         let image: CCImage = CCImage(pixelSize: paddedSize.cgSize, contentScale: CGFloat(contentScale), pixelData: nil)
-        image.contentSize = CC_SIZE_SCALE(pixelSize.cgSize, 1.0 / CGFloat(contentScale))
+        image.contentSize = (pixelSize * (1.0 / contentScale)).cgSize
         self.texture = CCTexture(image: image, options: nil, rendertexture: true)
         self.framebuffer = CCFrameBufferObjectMetal(texture: texture, depthStencilFormat: .bgra8Unorm)
         // XXX Thayer says: I think this is incorrect for any situations where the content

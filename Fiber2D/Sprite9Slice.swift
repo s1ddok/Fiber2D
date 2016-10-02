@@ -1,3 +1,12 @@
+//
+//  Sprite9Slice.swift
+//
+//  Created by Andrey Volodin on 23.07.16.
+//  Copyright © 2016. All rights reserved.
+//
+
+import SwiftMath
+
 let SPRITE_9SLICE_MARGIN_DEFAULT: Float = 1.0 / 3.0
 
 func PositionInterpolationMatrix(_ verts: inout SpriteVertexes, transform: Matrix4x4f) -> Matrix4x4f {

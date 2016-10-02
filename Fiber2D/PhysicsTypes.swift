@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 let CP_ALL_CATEGORIES: UInt32 = UInt32.max
 
 let PHYSICS_INFINITY = Float.infinity

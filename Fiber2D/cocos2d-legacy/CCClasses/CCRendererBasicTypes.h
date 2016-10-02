@@ -22,9 +22,8 @@
  * THE SOFTWARE.
  */
 
-#import "ccTypes.h"
+#import <GLKit/GLKit.h>
 #import "CCRendererSharedTypes.h"
-
 
 /// Multiply the vertex's position by the given transform. Pass the rest.
 static inline CCVertex

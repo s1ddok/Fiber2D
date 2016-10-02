@@ -1,3 +1,5 @@
+import SwiftMath
+
 /**
  Declares the possible directions for laying out nodes in a LayoutBox.
  */
@@ -60,7 +62,7 @@ class LayoutBox: Layout {
                 let localPos: Point = p2d(roundf(width), roundf(maxHeight - childSize.height / 2.0))
                 let position: Point = localPos + offset
                 child.position = position
-                child.positionType = CCPositionTypePoints
+                child.positionType = PositionType.points
                 width += Float(childSize.width)
                 width += spacing
             }
@@ -69,7 +71,7 @@ class LayoutBox: Layout {
             if width < 0 {
                 width = 0
             }
-            self.contentSizeType = CCSizeTypePoints
+            self.contentSizeType = SizeType.points
             self.contentSize = Size(width: Float(roundUpToEven(width)), height: Float(roundUpToEven(maxHeight)))
         }
         else {
@@ -89,7 +91,7 @@ class LayoutBox: Layout {
                 let localPos: Point = p2d(Float(roundf((maxWidth - Float(childSize.width)) / 2.0)), Float(roundf(height)))
                 let position: Point = localPos + offset
                 child.position = position
-                child.positionType = CCPositionTypePoints
+                child.positionType = PositionType.points
                 height += Float(childSize.height)
                 height += spacing
             }
@@ -98,7 +100,7 @@ class LayoutBox: Layout {
             if height < 0 {
                 height = 0
             }
-            self.contentSizeType = CCSizeTypePoints
+            self.contentSizeType = SizeType.points
             self.contentSize = Size(width: Float(roundUpToEven(maxWidth)), height: Float(roundUpToEven(height)))
         }
     }

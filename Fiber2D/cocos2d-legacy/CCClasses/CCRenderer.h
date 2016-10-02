@@ -22,12 +22,10 @@
  * THE SOFTWARE.
  */
 
-
-#import "ccTypes.h"
-
 #import "CCRendererBasicTypes.h"
 #import "CCShader.h"
 #import "NSValue+CCRenderer.h"
+#import <MetalKit/MetalKit.h>
 
 
 /// Check if the given bounding box as specified by it's center and extents (half with/height) is visible onscreen.	

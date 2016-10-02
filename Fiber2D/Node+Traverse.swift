@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 extension Node {    
     // purposefully undocumented: users needn't override/implement visit in their own subclasses

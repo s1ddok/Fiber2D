@@ -6,6 +6,10 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+public protocol Pausable {
+    var paused: Bool { get set }
+}
+
 public protocol Updatable: class, Prioritized {
     func update(delta: Time)
 }

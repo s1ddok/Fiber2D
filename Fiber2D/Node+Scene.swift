@@ -5,9 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
-
-extension Node: Enterable, Exitable {    
+extension Node: Enterable, Exitable {
     /** Called every time the Node (or one of its parents) has been added to the scene, or when the scene is presented.
      If a new scene is presented with a transition, this event is sent to nodes when the transition animation starts.
      
@@ -20,16 +18,22 @@ extension Node: Enterable, Exitable {
         children.forEach { $0.onEnter() }
         scheduler!.schedule(target: self)
         let wasRunning: Bool = self.active
-        self.isInActiveScene = true
         // Add queued actions or scheduled code, if needed:
-        for block: ()->() in queuedActions {
-            block()
-        }
-        
-        components.forEach {
-            if let c = $0 as? Enterable { c.onEnter() }
+        for a in queuedActions {
+            run(action: a)
         }
         self.queuedActions.removeAll()
+        
+        for c in queuedComponents {
+            add(component: c)
+        }
+        self.queuedComponents.removeAll()
+        
+        components.forEach {
+            director!.system(for: $0)?.add(component: $0)
+            if let c = $0 as? Enterable { c.onEnter() }
+        }
+        self.isInActiveScene = true
         self.wasRunning(wasRunning)
     }
     
@@ -41,7 +45,7 @@ extension Node: Enterable, Exitable {
      @see onEnter
      @see onExit
      */
-    func onEnterTransitionDidFinish() {
+    public func onEnterTransitionDidFinish() {
         children.forEach { $0.onEnterTransitionDidFinish() }
     }
     
@@ -52,7 +56,7 @@ extension Node: Enterable, Exitable {
      @see onExit
      @see onEnter
      */
-    func onExitTransitionDidStart() {
+    public func onExitTransitionDidStart() {
         children.forEach { $0.onExitTransitionDidStart() }
     }
     
@@ -70,6 +74,10 @@ extension Node: Enterable, Exitable {
         
         components.forEach {
             if let c = $0 as? Exitable { c.onExit() }
+            self.director!.system(for: $0)?.remove(component: $0)
+        }
+        if updatableComponents.count > 0 || fixedUpdatableComponentns.count > 0 {
+            scheduler!.unscheduleUpdates(from: self)
         }
         children.forEach { $0.onExit() }
     }

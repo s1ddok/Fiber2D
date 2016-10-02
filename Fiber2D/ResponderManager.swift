@@ -5,6 +5,8 @@
 //  Copyright © 2016. All rights reserved.
 //
 
+import SwiftMath
+
 public enum MouseButton: Int {
     case left
     case right

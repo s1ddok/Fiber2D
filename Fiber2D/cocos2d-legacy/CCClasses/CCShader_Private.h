@@ -45,9 +45,7 @@ typedef void (^CCUniformSetter)(
 	NSDictionary *_uniformSetters;
 	
 	// TODO This should really be split into a separate subclass somehow.
-#if __CC_METAL_SUPPORTED_AND_ENABLED
 	id<MTLFunction> _vertexFunction, _fragmentFunction;
-#endif
 }
 
 @end

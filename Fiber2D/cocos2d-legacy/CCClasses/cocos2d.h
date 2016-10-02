@@ -47,7 +47,6 @@
 
 #import "ccConfig.h"
 
-#import "ccTypes.h"
 #import "ccMacros.h"
 
 // Singletons:
@@ -73,8 +72,6 @@
 #import "CCFileLocator.h"
 #import "CGPointExtension.h"
 #import "ccUtils.h"
-#import "uthash.h"
-#import "utlist.h"
 #import "UITouch+CC.h"
 
 // Platform Support:

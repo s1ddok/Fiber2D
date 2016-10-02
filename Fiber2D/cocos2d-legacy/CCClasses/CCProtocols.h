@@ -24,10 +24,6 @@
  * THE SOFTWARE.
  */
 
-
-#import "ccTypes.h"
-
-
 @class CCTexture;
 @class CCBlendMode;
 @class CCShader;

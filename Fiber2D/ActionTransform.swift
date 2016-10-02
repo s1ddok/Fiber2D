@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 /**
  This action rotates the target to the specified angle.
  The direction will be decided by the shortest route.
@@ -143,14 +145,14 @@ struct ActionRotateBy: ActionModel {
  *  This action skews the target to the specified angles. Skewing changes the rectangular shape of the node to that of a parallelogram.
  */
 struct ActionSkewTo: ActionModel {
-    private var skewX:         Float = 0.0
-    private var skewY:         Float = 0.0
-    private var startSkewX:    Float = 0.0
-    private var startSkewY:    Float = 0.0
-    private(set) var endSkewX: Float = 0.0
-    private(set) var endSkewY: Float = 0.0
-    private var deltaX:        Float = 0.0
-    private var deltaY:        Float = 0.0
+    private var skewX:         Angle = 0°
+    private var skewY:         Angle = 0°
+    private var startSkewX:    Angle = 0°
+    private var startSkewY:    Angle = 0°
+    private(set) var endSkewX: Angle = 0°
+    private(set) var endSkewY: Angle = 0°
+    private var deltaX:        Angle = 0°
+    private var deltaY:        Angle = 0°
     
     private(set) var target: Node!
     
@@ -163,7 +165,7 @@ struct ActionSkewTo: ActionModel {
      *
      *  @return New skew action.
      */
-    init(skewX sx: Float, skewY sy: Float) {
+    init(skewX sx: Angle, skewY sy: Angle) {
         self.endSkewX = sx
         self.endSkewY = sy
     }
@@ -172,33 +174,26 @@ struct ActionSkewTo: ActionModel {
         self.target = target as! Node
         let target = self.target!
         
+        // X
         self.startSkewX = target.skewX
-        if startSkewX > 0 {
-            self.startSkewX = fmodf(startSkewX, 180.0)
-        }
-        else {
-            self.startSkewX = fmodf(startSkewX, -180.0)
-        }
+        self.startSkewX = startSkewX % (self.startSkewX > Angle.zero ? Angle.pi : -Angle.pi)
         self.deltaX = endSkewX - startSkewX
-        if deltaX > 180 {
-            self.deltaX -= 360
+        if deltaX > Angle.pi {
+            self.deltaX -= Angle.pi2
         }
-        if deltaX < -180 {
-            self.deltaX += 360
+        if deltaX < -Angle.pi {
+            self.deltaX += Angle.pi2
         }
+        
+        // Y
         self.startSkewY = target.skewY
-        if startSkewY > 0 {
-            self.startSkewY = fmodf(startSkewY, 360.0)
-        }
-        else {
-            self.startSkewY = fmodf(startSkewY, -360.0)
-        }
+        self.startSkewY = startSkewY % (startSkewY > Angle.zero ? Angle.pi2 : -Angle.pi2)
         self.deltaY = endSkewY - startSkewY
-        if deltaY > 180 {
-            self.deltaY -= 360
+        if deltaY > Angle.pi {
+            self.deltaY -= Angle.pi2
         }
-        if deltaY < -180 {
-            self.deltaY += 360
+        if deltaY < -Angle.pi {
+            self.deltaY += Angle.pi2
         }
     }
     
@@ -212,10 +207,10 @@ struct ActionSkewTo: ActionModel {
  *  This action skews a target by the specified skewX and skewY degrees values. Skewing changes the rectangular shape of the node to that of a parallelogram.
  */
 struct ActionSkewBy: ActionModel {
-    private var startSkewX:    Float = 0.0
-    private var startSkewY:    Float = 0.0
-    private let deltaX:        Float
-    private let deltaY:        Float
+    private var startSkewX:    Angle = 0°
+    private var startSkewY:    Angle = 0°
+    private let deltaX:        Angle
+    private let deltaY:        Angle
     
     private(set) var target: Node!
     
@@ -228,7 +223,7 @@ struct ActionSkewBy: ActionModel {
      *
      *  @return New skew action.
      */
-    init(skewX sx: Float = 0.0, skewY sy: Float = 0.0) {
+    init(skewX sx: Angle = 0°, skewY sy: Angle = 0°) {
         self.deltaX = sx
         self.deltaY = sy
     }

@@ -6,19 +6,19 @@
 //
 
 import Foundation
-import CoreGraphics
+import SwiftMath
 
-extension Node {
+public extension Node {
     /** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
      The matrix is in points.
      @see parentToNodeMatrix
      */
-    var nodeToParentMatrix: Matrix4x4f {
+    public var nodeToParentMatrix: Matrix4x4f {
         if isTransformDirty {
             // Get content size
             // Convert position to points
             var positionInPoints: p2d
-            if CCPositionTypeIsBasicPoints(positionType) {
+            if positionType.isBasicPoints {
                 // Optimization for basic points (most common case)
                 positionInPoints = position
             } else {
@@ -43,7 +43,7 @@ extension Node {
                 cy = cosf(radiansY)
                 sy = sinf(radiansY)
             }
-            let needsSkewMatrix = skewX != 0.0 || skewY != 0.0
+            let needsSkewMatrix = skewX != 0° || skewY != 0°
             var scaleFactor: Float = 1
             if scaleType == .scaled {
                 scaleFactor = CCSetup.shared().uiScale
@@ -64,14 +64,14 @@ extension Node {
             // XXX: Try to inline skew
             // If skew is needed, apply skew and then anchor point
             if needsSkewMatrix {
-                let skewMatrix = Matrix4x4f(vec4(1.0, tanf(CC_DEGREES_TO_RADIANS(skewY)), 0.0, 0.0),
-                                            vec4(tanf(CC_DEGREES_TO_RADIANS(skewX)), 1.0, 0.0, 0.0),
+                let skewMatrix = Matrix4x4f(vec4(1.0, tanf(skewY.radians), 0.0, 0.0),
+                                            vec4(tanf(skewX.radians), 1.0, 0.0, 0.0),
                                             vec4(0.0, 0.0, 1.0, 0.0),
                                             vec4(0.0, 0.0, 0.0, 1.0))
                 self.transform = transform * skewMatrix
                 // adjust anchor point
                 if !anchorPointInPoints.isZero {
-                    self.transform = transform.translated(by: vec3(-anchorPointInPoints.x, -anchorPointInPoints.y, 0.0))
+                    self.transform = transform.translated(by: vec3(-anchorPointInPoints))
                 }
             }
             isTransformDirty = false
@@ -79,17 +79,19 @@ extension Node {
         
         return transform
     }
+    
     /** Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates. The matrix is in points.
      @see nodeToParentMatrix
      */
-    var parentToNodeMatrix: Matrix4x4f {
+    public var parentToNodeMatrix: Matrix4x4f {
         return nodeToParentMatrix.inversed
     }
+    
     /** Returns the world transform matrix. The matrix is in points.
      @see nodeToParentMatrix
      @see worldToNodeMatrix
      */
-    var nodeToWorldMatrix: Matrix4x4f {
+    public var nodeToWorldMatrix: Matrix4x4f {
         var t = self.nodeToParentMatrix
         var p = parent
         while p != nil {
@@ -102,7 +104,7 @@ extension Node {
     /** Returns the inverse world transform matrix. The matrix is in points.
      @see nodeToWorldTransform
      */
-    var worldToNodeMatrix: Matrix4x4f {
+    public var worldToNodeMatrix: Matrix4x4f {
         return nodeToWorldMatrix.inversed
     }
 }

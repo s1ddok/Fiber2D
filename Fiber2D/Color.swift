@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 typealias Color = Vector4f
 
 extension Color {
@@ -20,39 +22,34 @@ extension Color {
         let chroma: Float = saturation * brightness
         let hueSection: Float = hue / 60.0
         let X: Float = chroma * (1.0 - abs(fmod(hueSection, 2.0) - 1.0))
-        var rgb = float4()
+        var r:Float = 0.0, g:Float = 0.0, b:Float = 0.0, a: Float = 0.0
         if hueSection < 1.0 {
-            rgb.x = chroma
-            rgb.y = X
-        }
-        else if hueSection < 2.0 {
-            rgb.x = X
-            rgb.y = chroma
-        }
-        else if hueSection < 3.0 {
-            rgb.y = chroma
-            rgb.z = X
-        }
-        else if hueSection < 4.0 {
-            rgb.y = X
-            rgb.z = chroma
-        }
-        else if hueSection < 5.0 {
-            rgb.x = X
-            rgb.z = chroma
-        }
-        else if hueSection <= 6.0 {
-            rgb.x = chroma
-            rgb.z = X
+            r = chroma
+            g = X
+        } else if hueSection < 2.0 {
+            r = X
+            g = chroma
+        } else if hueSection < 3.0 {
+            g = chroma
+            b = X
+        } else if hueSection < 4.0 {
+            g = X
+            b = chroma
+        } else if hueSection < 5.0 {
+            r = X
+            b = chroma
+        } else if hueSection <= 6.0 {
+            r = chroma
+            b = X
         }
         
         let Min: Float = brightness - chroma
-        rgb.x += Min
-        rgb.x += Min
-        rgb.z += Min
-        rgb.w = alpha
+        r += Min
+        g += Min
+        b += Min
+        a = alpha
         
-        d = rgb
+        self.init(r, g, b, a)
     }
     
     mutating func premultiplyAlpha() {

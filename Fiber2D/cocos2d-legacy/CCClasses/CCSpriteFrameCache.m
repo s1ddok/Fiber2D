@@ -35,6 +35,7 @@
  */
 
 #import "Platforms/CCNS.h"
+#import <CoreGraphics/CoreGraphics.h>
 #import "ccMacros.h"
 
 #import "CCTexture_Private.h"

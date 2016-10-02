@@ -5,6 +5,8 @@
 //  Copyright © 2016. All rights reserved.
 //
 
+import SwiftMath
+
 /** Node is the base class for all objects displayed by Fiber2D. Node handles transformations, can have a content size and provides a coordinate system
  for its child nodes.
  
@@ -108,9 +110,6 @@
  An advanced subclassing style aims to minimize subclassing node classes except for Node itself. A Node subclass acts as the controller for its node tree,
  with one or more child nodes representing the controller node's views. This is particularly useful for composite nodes, such as a player
  with multiple body parts (head, torso, limbs), attachments (armor, weapons) and effects (health bar, name label, selection rectangle, particle effects).
- 
- The userObject property can be used to add custom data and methods (model, components) to any node, in particular to avoid subclassing where the subclass
- would only add minimal functionality or just data.
  */
 open class Node: Responder, Prioritized, Pausable {
         
@@ -159,7 +158,7 @@ open class Node: Responder, Prioritized, Pausable {
      @see PositionType, PositionUnit, PositionReferenceCorner
      @see position
      @see positionInPoints */
-    var positionType: CCPositionType = CCPositionTypePoints {
+    var positionType = PositionType.points {
         didSet {
             isTransformDirty = true
         }
@@ -201,7 +200,7 @@ open class Node: Responder, Prioritized, Pausable {
      Thus, it is the angle between the Y axis and the left edge of the shape
      The default skewX angle is 0, with valid ranges from -90 to 90. Positive values distort the node in a clockwise direction.
      @see skewY, rotationalSkewX */
-    var skewX: Float = 0.0 {
+    var skewX: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
@@ -211,7 +210,7 @@ open class Node: Responder, Prioritized, Pausable {
      Thus, it is the angle between the X axis and the bottom edge of the shape
      The default skewY angle is 0, with valid ranges from -90 to 90. Positive values distort the node in a counter-clockwise direction.
      @see skewX, rotationalSkewY */
-    var skewY: Float = 0.0 {
+    var skewY: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
@@ -307,10 +306,10 @@ open class Node: Responder, Prioritized, Pausable {
     /** The scaleType defines scale behavior for this node. ScaleTypeScaled indicates that the node will be scaled by [Director UIScaleFactor].
      This property is analagous to positionType. ScaleType affects the scaleInPoints of a Node.
      See "Coordinate System and Positioning" in class overview for more information.
-     @see CCScaleType
+     @see ScaleType
      @see scale
      @see scaleInPoints */
-    var scaleType: CCScaleType = .points {
+    var scaleType = ScaleType.points {
         didSet {
             isTransformDirty = true
         }
@@ -345,10 +344,10 @@ open class Node: Responder, Prioritized, Pausable {
     }
     /** Defines the contentSize type used for the width and height components of the contentSize property.
      
-     @see CCSizeType, CCSizeUnit
+     @see SizeType, SizeUnit
      @see contentSize
      @see contentSizeInPoints */
-    var contentSizeType: CCSizeType = CCSizeTypePoints {
+    var contentSizeType = SizeType.points {
         didSet {
             contentSizeChanged()
         }
@@ -360,15 +359,14 @@ open class Node: Responder, Prioritized, Pausable {
      * Subclasses may override to actually do something when the view resizes.
      * @param newViewSize The new size of the view after it has been resized.
      */
-    
-    func viewDidResizeTo(_ newViewSize: Size) {
+    open func viewDidResizeTo(_ newViewSize: Size) {
         children.forEach { $0.viewDidResizeTo(newViewSize) }
     }
+    
     /** Returns an axis aligned bounding box in points, in the parent node's coordinate system.
      @see contentSize
      @see nodeToParentTransform */
-    
-    var boundingBox: Rect {
+    public var boundingBox: Rect {
         let rect = Rect(origin: p2d.zero, size: contentSizeInPoints)
 
         return rect.applying(matrix: nodeToParentMatrix)
@@ -647,8 +645,9 @@ open class Node: Responder, Prioritized, Pausable {
         return self.isInActiveScene && !paused && pausedAncestors == 0
     }
     
-    // Blocks that are scheduled to run on this node when onEnter is called, contains scheduled stuff and actions.
-    internal var queuedActions = [()->()]()
+    // Components and actions that are scheduled to run on this node when onEnter is called
+    internal var queuedActions    = [ActionContainer]()
+    internal var queuedComponents = [Component]()
     
     // MARK: Travers + Rendering
     /// -----------------------------------------------------------------------
@@ -745,7 +744,7 @@ open class Node: Responder, Prioritized, Pausable {
      */
     var vertexZ: Float = 0.0
 
-    /* Event that is called when the running node is no longer running (eg: its CCScene is being removed from the "stage" ).
+    /* Event that is called when the running node is no longer running (eg: its Scene is being removed from the "stage" ).
      On cleanup you should break any possible circular references.
      Node's cleanup removes any possible scheduled timer and/or any possible action.
      If you override cleanup, you shall call [super cleanup]
@@ -769,8 +768,8 @@ open class Node: Responder, Prioritized, Pausable {
             layout.needsLayout()
         }
         // Update the children (if needed)
-        for child  in children {
-            if !CCPositionTypeIsBasicPoints(child.positionType) {
+        for child in children {
+            if !child.positionType.isBasicPoints {
                 // This is a position type affected by content size
                 child.isTransformDirty = true
             }
@@ -788,7 +787,7 @@ open class Node: Responder, Prioritized, Pausable {
     /**
      You probably want "active" instead, but this tells you if the node is in the active scene wihtout regards to its pause state.
      */
-    var isInActiveScene: Bool = false
+    internal(set) var isInActiveScene: Bool = false
     
     // For Scheduler target
     
@@ -799,20 +798,4 @@ open class Node: Responder, Prioritized, Pausable {
     }
 
     internal(set) public var priority: Int = 0
-    
-    //FIXME: Temporary
-    public var physicsBody: PhysicsBody? {
-        get {
-            return _physicsBody
-        }
-        set {
-            if newValue != nil && _physicsBody != nil {
-                remove(component: _physicsBody!)
-            }
-            
-            add(component: newValue!)
-        }
-    }
-    
-    internal var _physicsBody: PhysicsBody?
 }

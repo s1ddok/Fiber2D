@@ -65,8 +65,9 @@ public extension Node {
      is to temporarily remove the node from the screen.
      @see visible */
     func removeFromParent(cleanup: Bool = true) {
-        parent?.remove(child :self, cleanup: cleanup)
+        parent?.remove(child: self, cleanup: cleanup)
     }
+    
     /**
      Removes a child from the container. The node must be a child of this node.
      Will stop the node's scheduled selectors/blocks and actions.
@@ -80,7 +81,6 @@ public extension Node {
      @param child The child node to remove.
      @see removeFromParent
      */
-    
     func remove(child: Node, cleanup: Bool = true) {
         detach(child: child, cleanup: cleanup)
     }
@@ -98,6 +98,7 @@ public extension Node {
         
         detach(child: child, cleanup: cleanup)
     }
+    
     /**
      Removes all children from the container.
      @note It is unnecessary to call this when replacing scenes or removing nodes. All nodes call this method on themselves automatically
@@ -145,7 +146,7 @@ public extension Node {
             child.cleanup()
         }
         // set parent nil at the end (issue #476)
-        child.parent = nil
+        child._parent = nil
         Director.currentDirector!.responderManager.markAsDirty()
         children.removeObject(child)
         childWasRemoved(child: child)

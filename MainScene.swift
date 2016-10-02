@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
+import SwiftMath
 
 class MainScene: Scene {
     
@@ -16,21 +16,30 @@ class MainScene: Scene {
     
     let ground = ColorNode()
     
+    var physicsSystem: PhysicsSystem!
+    
+    var staticBody: ColorNode!
+    
     override init() {
         super.init()
+        
+        let world = PhysicsWorld(rootNode: self)
+        physicsSystem = PhysicsSystem(world: world)
+    
+        world.contactDelegate = self
         
         sprite = Sprite(imageNamed: "image.jpeg")
         sprite.scale = 6.0
         sprite.position = p2d(0.5, 0.5)
-        sprite.positionType = CCPositionTypeNormalized
-        let action = ActionSkewTo(skewX: 15.0, skewY: 45.0).continously(duration: 15.0)
+        sprite.positionType = .normalized
+        let action = ActionSkewTo(skewX: 15°, skewY: 45°).continously(duration: 15.0)
         sprite.run(action: action)
         add(child: sprite)
         
         colorNode = ColorNode()
         colorNode.contentSize = Size(width: 64.0, height: 64.0)
         colorNode.position = p2d(0.5, 0.5)
-        colorNode.positionType = CCPositionTypeNormalized
+        colorNode.positionType = .normalized
         var startPosition = p2d(0.1, 0.0)
         var colorNodes = [ColorNode]()
         for _ in 0..<13 {
@@ -39,15 +48,15 @@ class MainScene: Scene {
             colorNode.anchorPoint = p2d(0.5, 0.5)
             startPosition = startPosition + p2d(0.0, 0.1)
             colorNode.position = startPosition
-            colorNode.positionType = CCPositionTypeNormalized
+            colorNode.positionType = .normalized
             colorNodes.append(colorNode)
             self.add(child: colorNode)
         }
         
         let rotate = ActionRotateTo(angle: 45°).continously(duration: 2.0)
-        let skew   = ActionSkewTo(skewX: 30, skewY: 30).continously(duration: 1.0)
+        let skew   = ActionSkewTo(skewX: 30°, skewY: 30°).continously(duration: 1.0)
         let rotate2 = ActionRotateTo(angle: 0°).continously(duration: 2.0)
-        let skew2   = ActionSkewTo(skewX: 15, skewY: 10).instantly
+        let skew2   = ActionSkewTo(skewX: 15°, skewY: 10°).instantly
         
         let rotateBy = ActionRotateBy(angle: 15°).continously(duration: 1.0)
         
@@ -76,7 +85,7 @@ class MainScene: Scene {
         
         let mask: UInt32 = 1
         
-        let staticBody = ColorNode()
+        staticBody = ColorNode()
         staticBody.position = p2d(256.0, 128.0)
         staticBody.contentSize = Size(98.0, 98.0)
         
@@ -84,7 +93,7 @@ class MainScene: Scene {
         let physicsCircle = PhysicsBody.circle(radius: 49.0, material: material)
         physicsCircle.collisionBitmask = mask
         physicsCircle.isDynamic = false
-        staticBody.physicsBody = physicsCircle
+        staticBody.add(component: physicsCircle)
         add(child: staticBody)
         
         for j in 0..<10 {
@@ -93,7 +102,7 @@ class MainScene: Scene {
             physicsSquare.contentSize = Size(24.0, 24.0)
             let physicsBody = PhysicsBody.box(size: vec2(24.0, 24.0), material: material)
             physicsBody.isDynamic = true
-            physicsSquare.physicsBody = physicsBody
+            physicsSquare.add(component: physicsBody)
             physicsSquare.position = p2d(64.0 * Float(j), 256.0)
             
             if j % 2 == 0 {
@@ -107,18 +116,18 @@ class MainScene: Scene {
         
         
         ground.contentSize = Size(1.0, 0.1)
-        ground.contentSizeType = CCSizeTypeNormalized
+        ground.contentSizeType = SizeType.normalized
         
         add(child: ground)
         
         let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
         boxBody.isDynamic = false
-        ground.physicsBody = boxBody
-        
-        self.physicsWorld.contactDelegate = self
+        ground.add(component: boxBody)
     }
     
     override func onEnter() {
+        director!.register(system: physicsSystem)
+        
         super.onEnter()
         
         let rt = RenderTexture(width: 64, height: 64)
@@ -128,7 +137,7 @@ class MainScene: Scene {
         
         //colorNode.runAction(repeatForever!)
         add(child: colorNode)
-        rt.sprite.positionType = CCPositionTypeNormalized
+        rt.sprite.positionType = PositionType.normalized
         rt.sprite.position = p2d(0.5, 0.5)
         rt.sprite.opacity = 0.5
         add(child: rt.sprite)
@@ -150,10 +159,18 @@ class MainScene: Scene {
         let physicsBody = PhysicsBody.circle(radius: 6.0)
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
-        physicsCircle.physicsBody = physicsBody
         physicsCircle.position = theEvent.location(in: self)
         
         add(child: physicsCircle)
+        physicsCircle.add(component: physicsBody)
+        
+        if button == .right {
+            if staticBody.parent == nil {
+                self.add(child: staticBody)
+            } else {
+                staticBody.removeFromParent()
+            }
+        }
     }
     
     override func scrollWheel(_ theEvent: NSEvent) {
