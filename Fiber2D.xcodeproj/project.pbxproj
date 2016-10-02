@@ -95,7 +95,6 @@
 		088509951D7B876D003EF800 /* ActionEase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509941D7B876D003EF800 /* ActionEase.swift */; };
 		088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509981D7C6A5E003EF800 /* ActionSequence.swift */; };
 		088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */; };
-		08855BD81D9D60300090EA84 /* SwiftMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08855BD41D9D60270090EA84 /* SwiftMath.framework */; };
 		08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855BE31D9DA6540090EA84 /* UnitTypes.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
@@ -400,7 +399,6 @@
 			files = (
 				05BC358F1D8850B000306A4F /* GLKit.framework in Frameworks */,
 				054764D91D82944D003DC740 /* libSwiftBGFX.dylib in Frameworks */,
-				08855BD81D9D60300090EA84 /* SwiftMath.framework in Frameworks */,
 				0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1293,7 +1291,6 @@
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
-				OTHER_LDFLAGS = "-lz";
 				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1315,7 +1312,6 @@
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
-				OTHER_LDFLAGS = "-lz";
 				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 public protocol Renderer {
     func enqueueClear(color: vec4)
     func enqueueTriangles(count: UInt, verticesCount: UInt, state: RendererState, globalSortOrder: Int) -> RendererBuffer

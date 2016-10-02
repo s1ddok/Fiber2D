@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 class CCRendererImpl: Renderer {
     public var projection: Matrix4x4f {
         get {
