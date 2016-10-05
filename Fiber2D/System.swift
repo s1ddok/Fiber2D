@@ -37,7 +37,7 @@ public extension System {
     func onExit() {}
 }
 
-public struct ComponentNode<T> where T: Component{
+public struct ComponentNode<T> where T: ComponentBase {
     unowned let node: Node
     weak var component: T?
     

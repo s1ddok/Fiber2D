@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public class UpdateComponent: Component, Updatable {
+public class UpdateComponent: ComponentBase, Updatable {
     
     override init() {
         super.init()
@@ -17,7 +17,7 @@ public class UpdateComponent: Component, Updatable {
     }
 }
 
-public class FixedUpdateComponent: Component, FixedUpdatable {
+public class FixedUpdateComponent: ComponentBase, FixedUpdatable {
     override init() {
         super.init()
         tag = 98
