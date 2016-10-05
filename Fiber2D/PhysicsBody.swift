@@ -16,7 +16,7 @@ import SwiftMath
  * If you create body with createEdgeXXX, the mass and moment will be inifinity by default. And it's a static body.
  * You can change mass and moment with `mass` and `moment`. And you can change the body to be dynamic or static by use `dynamic`.
  */
-public class PhysicsBody: ComponentBase, Behaviour, FixedUpdatable {
+public class PhysicsBody: ComponentBase, Behaviour, FixedUpdatable, Pausable {
     // MARK: State
     /** Whether the body is at rest. */
     public var isResting: Bool {
@@ -228,6 +228,7 @@ public class PhysicsBody: ComponentBase, Behaviour, FixedUpdatable {
         cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
     
+    public var paused: Bool = false
     public func fixedUpdate(delta: Time) {
         // damping compute
         if (_isDamping && isDynamic && !isResting) {
@@ -242,8 +243,10 @@ public class PhysicsBody: ComponentBase, Behaviour, FixedUpdatable {
             if oldValue != enabled {
                 if enabled {
                     world?.addBodyOrDelay(body: self)
+                    paused = false
                 } else {
                     world?.removeBodyOrDelay(body: self)
+                    paused = true
                 }
             }
         }
