@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/wily64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -55,12 +55,22 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-     apt-get update
-     apt-get install -y clang
-     wget https://swift.org/builds/swift-3.0-release/ubuntu1404/swift-3.0-RELEASE/swift-3.0-RELEASE-ubuntu14.04.tar.gz
-     tar xvf swift-3.0-RELEASE-ubuntu14.04.tar.gz -C /opt
-     mv /opt/swift-3.0-RELEASE-ubuntu14.04.tar.gz /opt/swift
-     echo "export PATH=$PATH:/opt/swift/usr/bin" >> /etc/profile
-     chown -R vagrant /opt/swift
+    apt-get update
+    apt-get install -y git clang
+    # Setup android remove debug tools
+    sudo apt-get install -y android-tools-adb
+
+    echo --- install NDK
+    curl -LOs http://dl.google.com/android/ndk/android-ndk-r12b-linux-x86_64.bin
+    chmod a+x android-ndk-r10e-linux-x86_64.bin
+    ./android-ndk-r10e-linux-x86_64.bin > /dev/null
+    export ANDROID_NDK_HOME=$HOME/android-ndk-r10e
+
+    # Install Swift 3.0 RELEASE
+    wget https://swift.org/builds/swift-3.0-release/ubuntu1510/swift-3.0-RELEASE/swift-3.0-RELEASE-ubuntu15.10.tar.gz
+    tar xvf swift-3.0-RELEASE-ubuntu15.10.tar.gz -C /opt
+    mv /opt/swift-3.0-RELEASE-ubuntu15.10.tar.gz /opt/swift
+    echo "export PATH=$PATH:/opt/swift/usr/bin" >> /etc/profile
+    chown -R vagrant /opt/swift
   SHELL
 end
