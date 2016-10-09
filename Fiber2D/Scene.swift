@@ -61,14 +61,12 @@ open class Scene: Node {
     /// @name Creating a Scene
     
     /// Initialize the node.
-    override init() {
+    public init(size: Size) {
         super.init()
-        let s = Director.currentDirector!.designSize
         self.anchorPoint = p2d(0.0, 0.0)
-        self.contentSize = s
+        self.contentSize = size
         self.colorRGBA = Color.black
         self._scheduler = Scheduler()
-        //self.projectionDelegate = CCOrthoProjection(target: self)
         self._projection = Matrix4x4f.orthoProjection(for: self)
         self.color = Color.black
     }

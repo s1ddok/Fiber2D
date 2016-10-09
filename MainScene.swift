@@ -20,8 +20,8 @@ class MainScene: Scene {
     
     var staticBody: ColorNode!
     
-    override init() {
-        super.init()
+    override init(size: Size) {
+        super.init(size: size)
         
         let world = PhysicsWorld(rootNode: self)
         physicsSystem = PhysicsSystem(world: world)

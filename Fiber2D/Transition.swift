@@ -27,7 +27,7 @@ public class Transition: Scene {
      */
     init(duration: Time) {
         self.duration = duration
-        super.init()
+        super.init(size: Director.currentDirector!.designSize)
         self.userInteractionEnabled = false
     }
     
