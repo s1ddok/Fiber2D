@@ -69,7 +69,7 @@ open class Scene: Node {
         self.colorRGBA = Color.black
         self._scheduler = Scheduler()
         //self.projectionDelegate = CCOrthoProjection(target: self)
-        self._projection = Matrix4x4f(target: self)
+        self._projection = Matrix4x4f.orthoProjection(for: self)
         self.color = Color.black
     }
     
