@@ -69,7 +69,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
     public mutating func start(with target: AnyObject?) {
         elapsed = 0
         self.target = target
-        self.split = actions[0].duration / max(duration, FLT_EPSILON)
+        self.split = actions[0].duration / max(duration, Float.ulpOfOne)
         self.last = -1
     }
     
@@ -86,7 +86,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         elapsed += dt
         
         self.update(state: max(0, // needed for rewind. elapsed could be negative
-            min(1, elapsed / max(duration,FLT_EPSILON)) // division by 0
+            min(1, elapsed / max(duration, Float.ulpOfOne)) // division by 0
             )
         )
     }

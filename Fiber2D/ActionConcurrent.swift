@@ -63,7 +63,7 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
         elapsed += dt
         
         self.update(state: max(0, // needed for rewind. elapsed could be negative
-            min(1, elapsed / max(duration,FLT_EPSILON)) // division by 0
+            min(1, elapsed / max(duration, Float.ulpOfOne)) // division by 0
             )
         )
     }

@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import SwiftMath
+
 /**
  *  Repeats an action indefinitely (until stopped).
  *  To repeat the action for a limited number of times use the ActionRepeat action.
@@ -70,7 +72,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
                 self.nextDt = Float(Int(repeatCount - remainingRepeats) + 1) / Float(repeatCount)
             }
             // fix for issue #1288, incorrect end value of repeat
-            if fabsf(dt - 1.0) < FLT_EPSILON && remainingRepeats > 0 {
+            if dt ~= 1.0 && remainingRepeats > 0 {
                 innerContainer.update(state: 1.0)
                 remainingRepeats -= 1
             }
@@ -113,7 +115,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
         
         elapsed += dt
         self.update(state: max(0, // needed for rewind. elapsed could be negative
-            min(1, elapsed / max(duration,FLT_EPSILON)) // division by 0
+            min(1, elapsed / max(duration, Float.ulpOfOne)) // division by 0
             )
         )
     }
