@@ -37,9 +37,9 @@ public extension Node {
      * If a class want's to extend the 'add child' behaviour it only needs
      * to override this method
      */
-    func add(child: Node, z: Int? = nil, name: String? = nil) {
+    public func add(child: Node, z: Int? = nil, name: String? = nil) {
         assert(child.parent == nil, "child already added to another node. It can't be added again")
-        //assert((child as? Scene) == nil, "Scenes may not be added as children of other nodes or scenes. Only one scene can exist in a hierarchy.")
+        assert((child as? Scene) == nil, "Scenes may not be added as children of other nodes or scenes. Only one scene can exist in a hierarchy.")
         child.zOrder = z ?? child.zOrder
         child.name = name ?? child.name
         child._parent = self
@@ -64,7 +64,7 @@ public extension Node {
      @note It is typically more efficient to change a node's visible status rather than remove + add(child: if all you need
      is to temporarily remove the node from the screen.
      @see visible */
-    func removeFromParent(cleanup: Bool = true) {
+    public func removeFromParent(cleanup: Bool = true) {
         parent?.remove(child: self, cleanup: cleanup)
     }
     
@@ -81,7 +81,7 @@ public extension Node {
      @param child The child node to remove.
      @see removeFromParent
      */
-    func remove(child: Node, cleanup: Bool = true) {
+    public func remove(child: Node, cleanup: Bool = true) {
         detach(child: child, cleanup: cleanup)
     }
     /**
@@ -90,7 +90,7 @@ public extension Node {
      
      @param name Name of node to be removed.
      */
-    func removeChild(by name: String, cleanup: Bool = true) {
+    public func removeChild(by name: String, cleanup: Bool = true) {
         guard let child = getChild(by: name, recursively: false) else {
             print("WARNING: Node doesn't contain specified child")
             return
@@ -104,7 +104,7 @@ public extension Node {
      @note It is unnecessary to call this when replacing scenes or removing nodes. All nodes call this method on themselves automatically
      when removed from a parent node or when a new scene is presented.
      */
-    func removeAllChildren(cleanup: Bool = true) {
+    public func removeAllChildren(cleanup: Bool = true) {
         // not using detachChild improves speed here
         for c: Node in children {
             // IMPORTANT:
@@ -130,7 +130,7 @@ public extension Node {
      *  @param node    The child node to remove
      *  @param cleanup Stops all scheduled events and actions
      */
-    func detach(child: Node, cleanup doCleanup: Bool) {
+    public func detach(child: Node, cleanup doCleanup: Bool) {
         // IMPORTANT:
         //  -1st do onExit
         //  -2nd cleanup
@@ -154,7 +154,7 @@ public extension Node {
     
     /** performance improvement, Sort the children array once before drawing, instead of every time when a child is added or reordered
      don't call this manually unless a child added needs to be removed in the same frame */
-    func sortAllChildren() {
+    internal func sortAllChildren() {
         if isReorderChildDirty {
             children.sort { $0.zOrder < $1.zOrder }
             
@@ -166,7 +166,7 @@ public extension Node {
     
     /// Recursively get a child by name, but don't return the root of the search.
     private func getChildRecursive(by name: String, root: Node) -> Node? {
-        if self != root && (name == name) { return self }
+        if self !== root && (name == name) { return self }
         for node in children {
             let n = node.getChildRecursive(by: name, root: root)
             if n != nil {
@@ -189,7 +189,7 @@ public extension Node {
      @return Returns the first node with a matching name, or nil if no node with that name was found.
      @see name
      */
-    func getChild(by name: String, recursively isRecursive: Bool) -> Node? {
+    public func getChild(by name: String, recursively isRecursive: Bool) -> Node? {
         if isRecursive {
             return self.getChildRecursive(by: name, root: self)
         }
