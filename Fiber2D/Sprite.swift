@@ -41,7 +41,7 @@ struct SpriteTexCoordSet {
  
  The default anchorPoint in Sprite is (0.5, 0.5).
  */
-class Sprite: RenderableNode {
+open class Sprite: RenderableNode {
     // Vertex coords, texture coords and color info.
     var verts = SpriteVertexes()
     // Center of extents (half width/height) of the sprite for culling purposes.

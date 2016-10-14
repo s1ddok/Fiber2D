@@ -71,13 +71,13 @@ open class Scene: Node {
         self.color = Color.black
     }
     
-    override public func onEnter() {
+    override open func onEnter() {
         super.onEnter()
         // mark starting scene as dirty, to make sure responder manager is updated
         director.responderManager.markAsDirty()
     }
     
-    override public func onEnterTransitionDidFinish() {
+    override open func onEnterTransitionDidFinish() {
         super.onEnterTransitionDidFinish()
         // mark starting scene as dirty, to make sure responder manager is updated
         director.responderManager.markAsDirty()

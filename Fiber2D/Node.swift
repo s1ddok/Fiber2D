@@ -111,21 +111,53 @@ import SwiftMath
  with one or more child nodes representing the controller node's views. This is particularly useful for composite nodes, such as a player
  with multiple body parts (head, torso, limbs), attachments (armor, weapons) and effects (health bar, name label, selection rectangle, particle effects).
  */
-open class Node: Responder, Prioritized, Pausable {
-        
+open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
+    
+    // MARK: Convenience
+    /// Should be in +Convenience, but are being overriden in Scene
+    
+    /** The scene this node is added to, or nil if it's not part of a scene.
+     
+     @note The scene property is nil during a node's init methods. The scene property is set only after addChild: was used to add it
+     as a child node to a node that already is in the scene.
+     @see Scene */
+    public var scene: Scene? {
+        return parent?.scene
+    }
+    
+    /** The DirectorView this node is a member of, accessed via the scene and director associated with this node.
+     
+     @see DirectorView */
+    public var view: DirectorView? {
+        return director?.view
+    }
+    
+    /** The Director this node is a member of, accessed via the node's scene.
+     
+     @see Director */
+    public var director: Director? {
+        return scene?.director
+    }
+    
+    /** Scheduler used to schedule all "updates" and timers. */
+    var scheduler: Scheduler? {
+        return scene?.scheduler
+    }
+    
     // MARK: Components
     /// Array of components added to the node
     internal(set) public var components = [Component]()
     internal var fixedUpdatableComponents = [FixedUpdatable & Tagged]()
     internal var updatableComponents = [Updatable & Tagged]()
     
+    // MARK: Hierarchy
     internal weak var _parent: Node?
+    /** Array of child nodes. Used to enumerate child nodes. */
+    internal(set) public var children = [Node]()
+
     // MARK: Transforms
     internal var isTransformDirty = true
     internal var transform = Matrix4x4f.identity
-    
-    /** Array of child nodes. Used to enumerate child nodes. */
-    internal(set) public var children = [Node]()
     
     // MARK: Position
     /// -----------------------------------------------------------------------
@@ -351,16 +383,6 @@ open class Node: Responder, Prioritized, Pausable {
         didSet {
             contentSizeChanged()
         }
-    }
-    /**
-     * Invoked automatically when the OS view has been resized.
-     *
-     * This implementation simply propagates the same method to the children.
-     * Subclasses may override to actually do something when the view resizes.
-     * @param newViewSize The new size of the view after it has been resized.
-     */
-    open func viewDidResizeTo(_ newViewSize: Size) {
-        children.forEach { $0.viewDidResizeTo(newViewSize) }
     }
     
     /** Returns an axis aligned bounding box in points, in the parent node's coordinate system.
@@ -649,7 +671,18 @@ open class Node: Responder, Prioritized, Pausable {
     internal var queuedActions    = [ActionContainer]()
     internal var queuedComponents = [Component]()
     
-    // MARK: Travers + Rendering
+    // MARK: Traverse + Rendering
+    /** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+     The matrix is in points.
+     @see parentToNodeMatrix
+     */
+    // should really be in +Transform but is being overriden in Camera
+    public var nodeToParentMatrix: Matrix4x4f {
+        calculateTransformIfNeeded()
+        
+        return transform
+    }
+    
     /// -----------------------------------------------------------------------
     /// @name Rendering (Implemented in Subclasses)
     /// -----------------------------------------------------------------------
@@ -759,6 +792,11 @@ open class Node: Responder, Prioritized, Pausable {
     // MARK: Subclasses
     open func childWasAdded(child: Node) { }
     open func childWasRemoved(child: Node) { }
+    open func onExit() { }
+    open func onEnter() { }
+    open func onExitTransitionDidStart() { }
+    open func onEnterTransitionDidFinish() { }
+    
     open func contentSizeChanged() {
         // Update children
         let contentSizeInPoints: Size = self.contentSizeInPoints
@@ -775,27 +813,32 @@ open class Node: Responder, Prioritized, Pausable {
             }
         }
     }
+    
+    /**
+     * Invoked automatically when the OS view has been resized.
+     *
+     * This implementation simply propagates the same method to the children.
+     * Subclasses may override to actually do something when the view resizes.
+     * @param newViewSize The new size of the view after it has been resized.
+     */
+    open func viewDidResize(to newViewSize: Size) {
+        children.forEach { $0.viewDidResize(to: newViewSize) }
+    }
+    
     /**
      In certain special situations, you may wish to designate a node's parent without adding that node to the list
      of children. In particular this can be useful when a node references another node in an atypical non-child
      way, such as how the the CCClipNode tracks the stencil. The stencil is kept outside of the normal heirarchy,
      but still needs a parent to function in a scene.
      */
-    func setRawParent(_ parent: Node) {
+    public func setRawParent(_ parent: Node) {
         _parent = parent
     }
     /**
      You probably want "active" instead, but this tells you if the node is in the active scene wihtout regards to its pause state.
      */
-    internal(set) var isInActiveScene: Bool = false
+    internal(set) public var isInActiveScene: Bool = false
     
     // For Scheduler target
-    
-    /** Scheduler used to schedule all "updates" and timers. */
-    // Should be in +Convenience, but is overriden in Scene
-    var scheduler: Scheduler? {
-        return scene?.scheduler
-    }
-
     internal(set) public var priority: Int = 0
 }

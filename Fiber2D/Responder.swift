@@ -20,7 +20,7 @@ import SwiftMath
  ### Subclassing Notes
  You should not create subclasses of Responder. Instead subclass from Node if you need a plain basic node, or other node classes that best fit the purpose.
  */
-open class Responder: NSObject {
+open class Responder {
     /// -----------------------------------------------------------------------
     /// @name Enabling Input Events
     /// -----------------------------------------------------------------------

@@ -375,8 +375,8 @@ public class Director: NSObject {
         while c > level {
             let current = scenesStack.lastObject as! Scene
             if current.active {
-                current.onExitTransitionDidStart()
-                current.onExit()
+                current._onExitTransitionDidStart()
+                current._onExit()
             }
             current.cleanup()
             scenesStack.removeLastObject()
@@ -394,8 +394,8 @@ public class Director: NSObject {
     }
     
     func end() {
-        runningScene!.onExitTransitionDidStart()
-        runningScene!.onExit()
+        runningScene!._onExitTransitionDidStart()
+        runningScene!._onExit()
         runningScene!.cleanup()
         self.runningScene = nil
         self.nextScene = nil
@@ -420,7 +420,7 @@ public class Director: NSObject {
             self.nextScene!.director = self
             self.runningScene = nextScene
             self.nextScene = nil
-            runningScene!.onEnter()
+            runningScene!._onEnter()
             return
         }
         // If running scene is a transition class, the transition has ended
@@ -428,7 +428,7 @@ public class Director: NSObject {
         // Clean up transition
         // Outgoing scene was stopped by transition
         if (runningScene is Transition) {
-            runningScene!.onExit()
+            runningScene!._onExit()
             runningScene!.cleanup()
             self.runningScene!.director = nil
             self.runningScene = nil
@@ -438,8 +438,8 @@ public class Director: NSObject {
         }
         // if next scene is not a transition, force exit calls
         if !(nextScene is Transition) {
-            runningScene?.onExitTransitionDidStart()
-            runningScene?.onExit()
+            runningScene?._onExitTransitionDidStart()
+            runningScene?._onExit()
             // issue #709. the root node (scene) should receive the cleanup message too
             // otherwise it might be leaked.
             if sendCleanupToScene {
@@ -450,8 +450,8 @@ public class Director: NSObject {
         self.nextScene = nil
         // if running scene is not a transition, force enter calls
         if !(runningScene is Transition) {
-            runningScene!.onEnter()
-            runningScene!.onEnterTransitionDidFinish()
+            runningScene!._onEnter()
+            runningScene!._onEnterTransitionDidFinish()
             runningScene!.paused = false
         }
     }

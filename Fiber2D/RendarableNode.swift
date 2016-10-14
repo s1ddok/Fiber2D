@@ -5,9 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-import Foundation
-
-class RenderableNode: Node {
+open class RenderableNode: Node {
     var shader: CCShader {
         didSet {
             //render state dirty

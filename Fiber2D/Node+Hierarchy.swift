@@ -52,8 +52,8 @@ public extension Node {
         child.pausedAncestors = pausedAncestors + (paused ? 1 : 0)
         child.recursivelyIncrementPausedAncestors(child.pausedAncestors)
         if isInActiveScene {
-            child.onEnter()
-            child.onEnterTransitionDidFinish()
+            child._onEnter()
+            child._onEnterTransitionDidFinish()
         }
         
         childWasAdded(child: child)
@@ -111,8 +111,8 @@ public extension Node {
             //  -1st do onExit
             //  -2nd cleanup
             if self.isInActiveScene {
-                c.onExitTransitionDidStart()
-                c.onExit()
+                c._onExitTransitionDidStart()
+                c._onExit()
             }
             c.recursivelyIncrementPausedAncestors(-c.pausedAncestors)
             c.pausedAncestors = 0
@@ -135,8 +135,8 @@ public extension Node {
         //  -1st do onExit
         //  -2nd cleanup
         if self.isInActiveScene {
-            child.onExitTransitionDidStart()
-            child.onExit()
+            child._onExitTransitionDidStart()
+            child._onExit()
         }
         child.recursivelyIncrementPausedAncestors(-child.pausedAncestors)
         child.pausedAncestors = 0
