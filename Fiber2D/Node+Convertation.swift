@@ -7,7 +7,7 @@
 
 import SwiftMath
 
-extension Node {
+public extension Node {
     // MARK: Position
     
     /** Converts the given position in points to position values converted based on the provided PositionType.
@@ -17,7 +17,7 @@ extension Node {
      @returns The position values in the format specified by type.
      @see position
      @see PositionType, PositionUnit, PositionReferenceCorner */
-    func convertPositionFromPoints(_ positionInPoints: Point, type: PositionType) -> Point {
+    public func convertPositionFromPoints(_ positionInPoints: Point, type: PositionType) -> Point {
         let setup: CCSetup = CCSetup.shared()
         let UIScale = setup.uiScale
         var parentsContentSizeInPoints = Size.zero
@@ -30,16 +30,14 @@ extension Node {
         if corner == .bottomLeft {
             // Nothing needs to be done
             // Nothing needs to be done
-        }
-        else if corner == .topLeft {
+        } else if corner == .topLeft {
             // Reverse y-axis
             if !gotParentSize {
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
                 gotParentSize = true
             }
             y = parentsContentSizeInPoints.height - y
-        }
-        else if corner == .topRight {
+        } else if corner == .topRight {
             // Reverse x-axis and y-axis
             if !gotParentSize {
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
@@ -47,8 +45,7 @@ extension Node {
             }
             x = parentsContentSizeInPoints.width - x
             y = parentsContentSizeInPoints.height - y
-        }
-        else if corner == .bottomRight {
+        } else if corner == .bottomRight {
             // Reverse x-axis
             if !gotParentSize {
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
@@ -61,11 +58,9 @@ extension Node {
         let xUnit = type.xUnit
         if xUnit == .points {
             position.x = x
-        }
-        else if xUnit == .uiPoints {
+        } else if xUnit == .uiPoints {
             position.x = x / UIScale
-        }
-        else if xUnit == .normalized {
+        } else if xUnit == .normalized {
             let parentWidth = gotParentSize ? parentsContentSizeInPoints.width : parent!.contentSizeInPoints.width
             if parentWidth > 0 {
                 position.x = x / parentWidth
@@ -75,11 +70,9 @@ extension Node {
         let yUnit = type.yUnit
         if yUnit == .points {
             position.y = y
-        }
-        else if yUnit == .uiPoints {
+        } else if yUnit == .uiPoints {
             position.y = y / UIScale
-        }
-        else if yUnit == .normalized {
+        } else if yUnit == .normalized {
             let parentHeight = gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height
             if parentHeight > 0 {
                 position.y = y / parentHeight
@@ -96,7 +89,7 @@ extension Node {
      @returns The converted position in points.
      @see positionInPoints
      @see PositionType, PositionUnit, PositionReferenceCorner */
-    func convertPositionToPoints(_ position: Point, type: PositionType) -> Point {
+    public func convertPositionToPoints(_ position: Point, type: PositionType) -> Point {
         let setup: CCSetup = CCSetup.shared()
         let UIScale = setup.uiScale
         var gotParentSize: Bool = parent == nil
@@ -108,11 +101,9 @@ extension Node {
         let xUnit = type.xUnit
         if xUnit == .points {
             x = position.x
-        }
-        else if xUnit == .uiPoints {
+        } else if xUnit == .uiPoints {
             x = position.x * UIScale
-        }
-        else if xUnit == .normalized {
+        } else if xUnit == .normalized {
             if !gotParentSize {
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
                 gotParentSize = true
@@ -123,11 +114,9 @@ extension Node {
         let yUnit = type.yUnit
         if yUnit == .points {
             y = position.y
-        }
-        else if yUnit == .uiPoints {
+        } else if yUnit == .uiPoints {
             y = position.y * UIScale
-        }
-        else if yUnit == .normalized {
+        } else if yUnit == .normalized {
             if gotParentSize {
                 y = position.y * parentsContentSizeInPoints.height
             }
@@ -143,17 +132,14 @@ extension Node {
         if corner == .bottomLeft {
             // Nothing needs to be done
             // Nothing needs to be done
-        }
-        else if corner == .topLeft {
+        } else if corner == .topLeft {
             // Reverse y-axis
             y = gotParentSize ? parentsContentSizeInPoints.height - y : parent!.contentSizeInPoints.height - y
-        }
-        else if corner == .topRight {
+        } else if corner == .topRight {
             // Reverse x-axis and y-axis
             x = gotParentSize ? parentsContentSizeInPoints.width - x : parent!.contentSizeInPoints.width - x
             y = gotParentSize ? parentsContentSizeInPoints.height - y : parent!.contentSizeInPoints.height - y
-        }
-        else if corner == .bottomRight {
+        } else if corner == .bottomRight {
             // Reverse x-axis
             x = gotParentSize ? parentsContentSizeInPoints.width - x : parent!.contentSizeInPoints.width - x
         }
@@ -171,7 +157,7 @@ extension Node {
      @returns The converted size in points.
      @see contentSizeInPoints
      @see SizeType, SizeUnit */
-    func convertContentSizeToPoints(_ contentSize: Size, type: SizeType) -> Size {
+    public func convertContentSizeToPoints(_ contentSize: Size, type: SizeType) -> Size {
         var size: Size = Size.zero
         let setup: CCSetup = CCSetup.shared()
         let UIScale = Float(setup.uiScale)
@@ -182,25 +168,21 @@ extension Node {
         // Width
         if widthUnit == .points {
             size.width = contentSize.width
-        }
-        else if widthUnit == .uiPoints {
+        } else if widthUnit == .uiPoints {
             size.width = UIScale * contentSize.width
-        }
-        else if widthUnit == .normalized {
+        } else if widthUnit == .normalized {
             if !gotParentSize {
                 gotParentSize = true
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
             }
             size.width = contentSize.width * parentsContentSizeInPoints.width
-        }
-        else if widthUnit == .insetPoints {
+        } else if widthUnit == .insetPoints {
             if !gotParentSize {
                 gotParentSize = true
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
             }
             size.width = parentsContentSizeInPoints.width - contentSize.width
-        }
-        else if widthUnit == .insetUIPoints {
+        } else if widthUnit == .insetUIPoints {
             if !gotParentSize {
                 gotParentSize = true
                 parentsContentSizeInPoints = parent!.contentSizeInPoints
@@ -211,17 +193,13 @@ extension Node {
         // Height
         if heightUnit == .points {
             size.height = contentSize.height
-        }
-        else if heightUnit == .uiPoints {
+        } else if heightUnit == .uiPoints {
             size.height = UIScale * contentSize.height
-        }
-        else if heightUnit == .normalized {
+        } else if heightUnit == .normalized {
             size.height = contentSize.height * (gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height)
-        }
-        else if heightUnit == .insetPoints {
+        } else if heightUnit == .insetPoints {
             size.height = (gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height) - contentSize.height
-        }
-        else if heightUnit == .insetUIPoints {
+        } else if heightUnit == .insetUIPoints {
             size.height = (gotParentSize ? parentsContentSizeInPoints.height : parent!.contentSizeInPoints.height) - contentSize.height * UIScale
         }
         
@@ -234,7 +212,7 @@ extension Node {
      @returns The size values in the format specified by type.
      @see contentSize
      @see SizeType, SizeUnit */
-    func convertContentSizeFromPoints(_ pointSize: Size, type: SizeType) -> Size {
+    public func convertContentSizeFromPoints(_ pointSize: Size, type: SizeType) -> Size {
         var size: Size = Size.zero
         let setup: CCSetup = CCSetup.shared()
         let UIScale = Float(setup.uiScale)
@@ -300,7 +278,7 @@ extension Node {
      *
      *  @return Local position in points.
      */
-    func convertToNodeSpace(_ worldPoint: Point) -> Point {
+    public func convertToNodeSpace(_ worldPoint: Point) -> Point {
         return worldToNodeMatrix * worldPoint
     }
     
@@ -311,7 +289,7 @@ extension Node {
      *
      *  @return World position in points.
      */
-    func convertToWorldSpace(_ nodePoint: Point) -> Point {
+    public func convertToWorldSpace(_ nodePoint: Point) -> Point {
         return self.nodeToWorldMatrix * nodePoint
     }
     /**
@@ -322,7 +300,7 @@ extension Node {
      *
      *  @return Local position in points.
      */
-    func convertToNodeSpaceAR(_ worldPoint: Point) -> Point {
+    public func convertToNodeSpaceAR(_ worldPoint: Point) -> Point {
         let nodePoint = convertToNodeSpace(worldPoint)
         return nodePoint - anchorPointInPoints
     }
@@ -335,7 +313,7 @@ extension Node {
      *
      *  @return World position in points.
      */
-    func convertToWorldSpaceAR(_ nodePoint: Point) -> Point {
+    public func convertToWorldSpaceAR(_ nodePoint: Point) -> Point {
         let np = nodePoint + anchorPointInPoints
         return self.convertToWorldSpace(np)
     }
@@ -347,7 +325,7 @@ extension Node {
      *
      *  @return UI position in points.
      */
-    func convertToWindowSpace(_ nodePoint: Point) -> Point {
+    public func convertToWindowSpace(_ nodePoint: Point) -> Point {
         let wp = self.convertToWorldSpace(nodePoint)
         return Director.currentDirector!.convertToUI(wp)
     }
