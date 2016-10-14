@@ -116,7 +116,7 @@ open class Node: Responder, Prioritized, Pausable {
     // MARK: Components
     /// Array of components added to the node
     internal(set) public var components = [Component]()
-    internal var fixedUpdatableComponentns = [FixedUpdatable & Tagged]()
+    internal var fixedUpdatableComponents = [FixedUpdatable & Tagged]()
     internal var updatableComponents = [Updatable & Tagged]()
     
     internal weak var _parent: Node?

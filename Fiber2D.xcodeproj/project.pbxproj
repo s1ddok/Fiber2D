@@ -14,7 +14,6 @@
 		080306F31D97F093008CAC8E /* BehaviourProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306F21D97F093008CAC8E /* BehaviourProtocol.swift */; };
 		080306F81D97F233008CAC8E /* Prioritized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306F71D97F233008CAC8E /* Prioritized.swift */; };
 		080307191D994FED008CAC8E /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307181D994FED008CAC8E /* System.swift */; };
-		0803071B1D995331008CAC8E /* Director+Systems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071A1D995331008CAC8E /* Director+Systems.swift */; };
 		0803071F1D9AFFDC008CAC8E /* Node+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */; };
 		080307211D9B1337008CAC8E /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307201D9B1337008CAC8E /* UserComponents.swift */; };
 		080307231D9B1C45008CAC8E /* PhysicsSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307221D9B1C44008CAC8E /* PhysicsSystem.swift */; };
@@ -139,6 +138,9 @@
 		08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */; };
 		08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */; };
 		08C1CB511D91B000006CDCCB /* PhysicsBody+Joints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB501D91B000006CDCCB /* PhysicsBody+Joints.swift */; };
+		08DE0B9A1DB02BE400721CA0 /* ViewportNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B991DB02BE400721CA0 /* ViewportNode.swift */; };
+		08DE0B9C1DB1054300721CA0 /* Scene+Systems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B9B1DB1054300721CA0 /* Scene+Systems.swift */; };
+		08FAB6DF1DAACA0200B3C10C /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAB6DE1DAACA0200B3C10C /* Camera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,7 +189,6 @@
 		080306F21D97F093008CAC8E /* BehaviourProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BehaviourProtocol.swift; path = protocols/BehaviourProtocol.swift; sourceTree = "<group>"; };
 		080306F71D97F233008CAC8E /* Prioritized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Prioritized.swift; path = protocols/Prioritized.swift; sourceTree = "<group>"; };
 		080307181D994FED008CAC8E /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
-		0803071A1D995331008CAC8E /* Director+Systems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Director+Systems.swift"; sourceTree = "<group>"; };
 		0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Hierarchy.swift"; sourceTree = "<group>"; };
 		080307201D9B1337008CAC8E /* UserComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserComponents.swift; sourceTree = "<group>"; };
 		080307221D9B1C44008CAC8E /* PhysicsSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsSystem.swift; sourceTree = "<group>"; };
@@ -376,6 +377,9 @@
 		08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Simulation.swift"; sourceTree = "<group>"; };
 		08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsShape+Internal.swift"; sourceTree = "<group>"; };
 		08C1CB501D91B000006CDCCB /* PhysicsBody+Joints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Joints.swift"; sourceTree = "<group>"; };
+		08DE0B991DB02BE400721CA0 /* ViewportNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewportNode.swift; sourceTree = "<group>"; };
+		08DE0B9B1DB1054300721CA0 /* Scene+Systems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scene+Systems.swift"; sourceTree = "<group>"; };
+		08FAB6DE1DAACA0200B3C10C /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -657,11 +661,13 @@
 		081FBD331D463463005838B8 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				08FAB6DE1DAACA0200B3C10C /* Camera.swift */,
 				081FBD091D46289A005838B8 /* Scene.swift */,
+				08DE0B9B1DB1054300721CA0 /* Scene+Systems.swift */,
+				08DE0B991DB02BE400721CA0 /* ViewportNode.swift */,
 				081FBD0D1D46289A005838B8 /* Transition.swift */,
 				081FBCF91D46289A005838B8 /* Director.swift */,
 				080307261D9D4017008CAC8E /* Director+Internal.swift */,
-				0803071A1D995331008CAC8E /* Director+Systems.swift */,
 				087BFA171D82F60500F940D4 /* Director+macOS.swift */,
 				087BFA151D82F5C200F940D4 /* DirectorView.swift */,
 			);
@@ -1004,6 +1010,7 @@
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
 				08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
+				08DE0B9C1DB1054300721CA0 /* Scene+Systems.swift in Sources */,
 				080306F31D97F093008CAC8E /* BehaviourProtocol.swift in Sources */,
 				081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */,
 				08C1CB321D8F00C6006CDCCB /* PhysicsBody.swift in Sources */,
@@ -1043,6 +1050,7 @@
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
+				08FAB6DF1DAACA0200B3C10C /* Camera.swift in Sources */,
 				08C1CB181D8EFFD5006CDCCB /* cpDampedRotarySpring.c in Sources */,
 				087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */,
 				08C1CB261D8EFFD5006CDCCB /* cpShape.c in Sources */,
@@ -1056,6 +1064,7 @@
 				080307191D994FED008CAC8E /* System.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
+				08DE0B9A1DB02BE400721CA0 /* ViewportNode.swift in Sources */,
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
@@ -1121,7 +1130,6 @@
 				088509951D7B876D003EF800 /* ActionEase.swift in Sources */,
 				080306F81D97F233008CAC8E /* Prioritized.swift in Sources */,
 				087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */,
-				0803071B1D995331008CAC8E /* Director+Systems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

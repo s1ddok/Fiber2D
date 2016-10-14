@@ -246,7 +246,7 @@ extension Scheduler {
                 schedule(updatable: target)
             }
             
-            if target.fixedUpdatableComponentns.count > 0 {
+            if target.fixedUpdatableComponents.count > 0 {
                 schedule(fixedUpdatable: target)
             }
         }
@@ -264,7 +264,7 @@ extension Scheduler {
             unschedule(updatable: target)
         }
         
-        if target.fixedUpdatableComponentns.count > 0 {
+        if target.fixedUpdatableComponents.count > 0 {
             unschedule(fixedUpdatable: target)
         }
 

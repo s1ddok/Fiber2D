@@ -79,10 +79,10 @@ public extension Node {
         
         if let c = component as? FixedUpdatable & Tagged {
             // TODO: Insert with priority in mind
-            fixedUpdatableComponentns.append(c)
+            fixedUpdatableComponents.append(c)
             
             // If it is first component
-            if fixedUpdatableComponentns.count == 1 {
+            if fixedUpdatableComponents.count == 1 {
                 scheduler?.schedule(updatable: self)
             }
         }
@@ -126,11 +126,11 @@ public extension Node {
             }
             
             if c is FixedUpdatable {
-                if let idx = fixedUpdatableComponentns.index(where: { $0.tag == tag } ) {
-                    fixedUpdatableComponentns.remove(at: idx)
+                if let idx = fixedUpdatableComponents.index(where: { $0.tag == tag } ) {
+                    fixedUpdatableComponents.remove(at: idx)
                 }
                 
-                if self.fixedUpdatableComponentns.isEmpty {
+                if self.fixedUpdatableComponents.isEmpty {
                     self.scheduler?.unschedule(fixedUpdatable: self)
                 }
             }
@@ -195,11 +195,11 @@ public extension Node {
             }
             
             if c is FixedUpdatable {
-                if let idx = fixedUpdatableComponentns.index(where: { $0 is U } ) {
-                    fixedUpdatableComponentns.remove(at: idx)
+                if let idx = fixedUpdatableComponents.index(where: { $0 is U } ) {
+                    fixedUpdatableComponents.remove(at: idx)
                 }
                 
-                if self.fixedUpdatableComponentns.isEmpty {
+                if self.fixedUpdatableComponents.isEmpty {
                     self.scheduler?.unschedule(fixedUpdatable: self)
                 }
             }
@@ -226,7 +226,7 @@ public extension Node {
         }
         components = []
         updatableComponents = []
-        fixedUpdatableComponentns = []
+        fixedUpdatableComponents = []
         
         let scheduler = self.scheduler
         scheduler?.unschedule(updatable: self)
@@ -241,6 +241,6 @@ extension Node: Updatable, FixedUpdatable {
     }
     
     public final func fixedUpdate(delta: Time) {
-        fixedUpdatableComponentns.forEach { $0.fixedUpdate(delta: delta) }
+        fixedUpdatableComponents.forEach { $0.fixedUpdate(delta: delta) }
     }
 }

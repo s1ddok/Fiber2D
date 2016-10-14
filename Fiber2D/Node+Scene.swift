@@ -76,7 +76,7 @@ extension Node: Enterable, Exitable {
             if let c = $0 as? Exitable { c.onExit() }
             self.director!.system(for: $0)?.remove(component: $0)
         }
-        if updatableComponents.count > 0 || fixedUpdatableComponentns.count > 0 {
+        if updatableComponents.count > 0 || fixedUpdatableComponents.count > 0 {
             scheduler!.unscheduleUpdates(from: self)
         }
         children.forEach { $0.onExit() }
