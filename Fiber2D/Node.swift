@@ -148,7 +148,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     /// Array of components added to the node
     internal(set) public var components = [Component]()
     internal var fixedUpdatableComponents = [FixedUpdatable & Tagged]()
-    internal var updatableComponents = [Updatable & Tagged]()
+    internal var updatableComponents      = [Updatable      & Tagged]()
     
     // MARK: Hierarchy
     internal weak var _parent: Node?

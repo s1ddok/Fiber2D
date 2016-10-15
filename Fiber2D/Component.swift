@@ -33,7 +33,7 @@ public protocol Component: Tagged {
 open class ComponentBase: Component {
     public weak var owner: Node?
     
-    public var tag: Int = 0
+    open var tag: Int = 0
     
     open func onAdd(to owner: Node) {
         self.owner = owner

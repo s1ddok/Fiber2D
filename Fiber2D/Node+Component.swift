@@ -42,7 +42,7 @@ public extension Node {
      */
     @discardableResult
     public func add(component: Component) -> Bool {
-        guard let director = self.director else {
+        guard let scene = self.scene else {
             queuedComponents.append(component)
             return false
         }
@@ -59,7 +59,7 @@ public extension Node {
         component.onAdd(to: self)
         
         if isInActiveScene {
-            let system = director.system(for: component)
+            let system = scene.system(for: component)
             system?.add(component: component)
             
             if let e = component as? Enterable {
@@ -72,8 +72,8 @@ public extension Node {
             updatableComponents.append(c)
             
             // If it is first component
-            if updatableComponents.count == 1 {
-                scheduler?.schedule(updatable: self)
+            if isInActiveScene && updatableComponents.count == 1 {
+                scene.scheduler.schedule(updatable: self)
             }
         }
         
@@ -82,8 +82,8 @@ public extension Node {
             fixedUpdatableComponents.append(c)
             
             // If it is first component
-            if fixedUpdatableComponents.count == 1 {
-                scheduler?.schedule(updatable: self)
+            if isInActiveScene && fixedUpdatableComponents.count == 1 {
+                scene.scheduler.schedule(fixedUpdatable: self)
             }
         }
     
@@ -111,7 +111,7 @@ public extension Node {
                 e.onExit()
             }
             
-            director?.system(for: c)?.remove(component: c)
+            scene?.system(for: c)?.remove(component: c)
             
             c.onRemove()
             
@@ -180,7 +180,7 @@ public extension Node {
                 e.onExit()
             }
             
-            director?.system(for: c)?.remove(component: c)
+            scene?.system(for: c)?.remove(component: c)
             
             c.onRemove()
             
@@ -241,6 +241,12 @@ extension Node: Updatable, FixedUpdatable {
     }
     
     public final func fixedUpdate(delta: Time) {
-        fixedUpdatableComponents.forEach { $0.fixedUpdate(delta: delta) }
+        // this is a workaround of what seems to be a Swift compiler bug
+        // commented line does not work ...
+        for c in fixedUpdatableComponents as [FixedUpdatable] {
+            c.fixedUpdate(delta: delta)
+        }
+        //fixedUpdatableComponents.forEach { $0.fixedUpdate(delta: delta) }
     }
+    
 }

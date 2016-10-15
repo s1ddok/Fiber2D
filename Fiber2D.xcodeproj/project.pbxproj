@@ -48,7 +48,6 @@
 		081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFB1D46289A005838B8 /* LayoutBox.swift */; };
 		081FBD121D46289A005838B8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFC1D46289A005838B8 /* Node.swift */; };
 		081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFD1D46289A005838B8 /* Node+Actions.swift */; };
-		081FBD141D46289A005838B8 /* Node+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFE1D46289A005838B8 /* Node+Convenience.swift */; };
 		081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFF1D46289A005838B8 /* Node+Convertation.swift */; };
 		081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD011D46289A005838B8 /* Node+Scene.swift */; };
 		081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD021D46289A005838B8 /* Node+Transform.swift */; };
@@ -255,7 +254,6 @@
 		081FBCFB1D46289A005838B8 /* LayoutBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutBox.swift; sourceTree = "<group>"; };
 		081FBCFC1D46289A005838B8 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		081FBCFD1D46289A005838B8 /* Node+Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Actions.swift"; sourceTree = "<group>"; };
-		081FBCFE1D46289A005838B8 /* Node+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Convenience.swift"; sourceTree = "<group>"; };
 		081FBCFF1D46289A005838B8 /* Node+Convertation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Convertation.swift"; sourceTree = "<group>"; };
 		081FBD011D46289A005838B8 /* Node+Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Scene.swift"; sourceTree = "<group>"; };
 		081FBD021D46289A005838B8 /* Node+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Transform.swift"; sourceTree = "<group>"; };
@@ -608,7 +606,6 @@
 			children = (
 				081FBCFC1D46289A005838B8 /* Node.swift */,
 				081FBCFD1D46289A005838B8 /* Node+Actions.swift */,
-				081FBCFE1D46289A005838B8 /* Node+Convenience.swift */,
 				081FBCFF1D46289A005838B8 /* Node+Convertation.swift */,
 				0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */,
 				081FBD011D46289A005838B8 /* Node+Scene.swift */,
@@ -1094,7 +1091,6 @@
 				081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */,
 				081FBD1C1D46289A005838B8 /* RenderTextureSprite.swift in Sources */,
 				081FBCE11D462732005838B8 /* cocos2d.m in Sources */,
-				081FBD141D46289A005838B8 /* Node+Convenience.swift in Sources */,
 				08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */,
 				08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */,
 				081FBD121D46289A005838B8 /* Node.swift in Sources */,
@@ -1235,6 +1231,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};
@@ -1257,6 +1254,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};

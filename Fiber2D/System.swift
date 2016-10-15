@@ -8,7 +8,7 @@
 
 public protocol System: class, Enterable, Exitable, Pausable {
     
-    func onAdd(to director: Director)
+    func onAdd(to scene: Scene)
     func onRemove()
     
     /**
@@ -31,7 +31,7 @@ public protocol System: class, Enterable, Exitable, Pausable {
 
 // default implementations AKA optional methods
 public extension System {
-    func onAdd(to director: Director) {}
+    func onAdd(to scene: Scene) {}
     func onRemove() {}
     func onEnter() {}
     func onExit() {}

@@ -16,7 +16,6 @@ internal extension Node {
     internal func _onEnter() {
         assert(self.scene != nil, "Missing scene on node. Was it not added to the hierarchy?")
         children.forEach { $0._onEnter() }
-        scheduler!.schedule(target: self)
         let wasRunning: Bool = self.active
         // Add queued actions or scheduled code, if needed:
         for a in queuedActions {
@@ -29,12 +28,15 @@ internal extension Node {
         }
         self.queuedComponents.removeAll()
         
-        components.forEach {
-            director!.system(for: $0)?.add(component: $0)
-            if let c = $0 as? Enterable { c.onEnter() }
-        }
+        scheduler!.schedule(target: self)
+        
         self.isInActiveScene = true
         self.wasRunning(wasRunning)
+        
+        components.forEach {
+            scene!.system(for: $0)?.add(component: $0)
+            if let c = $0 as? Enterable { c.onEnter() }
+        }
         onEnter()
     }
     
@@ -77,7 +79,7 @@ internal extension Node {
         
         components.forEach {
             if let c = $0 as? Exitable { c.onExit() }
-            self.director!.system(for: $0)?.remove(component: $0)
+            self.scene!.system(for: $0)?.remove(component: $0)
         }
         if updatableComponents.count > 0 || fixedUpdatableComponents.count > 0 {
             scheduler!.unscheduleUpdates(from: self)

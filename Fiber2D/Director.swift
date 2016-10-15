@@ -48,8 +48,6 @@ public class Director: NSObject {
         stack.removeLastObject()
     }
     
-    internal(set) public var systems = [System]()
-    
     // internal timer
     var oldFrameSkipInterval: Int = 1
     var frameSkipInterval: Int = 1
@@ -136,7 +134,7 @@ public class Director: NSObject {
         }
         Director.pushCurrentDirector(self)
         /* calculate "global" dt */
-        self.calculateDeltaTime()
+        calculateDeltaTime()
         /* tick before glClear: issue #533 */
         if !isPaused {
             runningScene!.scheduler.update(dt)
@@ -421,6 +419,7 @@ public class Director: NSObject {
             self.runningScene = nextScene
             self.nextScene = nil
             runningScene!._onEnter()
+            responderManager.markAsDirty()
             return
         }
         // If running scene is a transition class, the transition has ended
@@ -452,6 +451,7 @@ public class Director: NSObject {
         if !(runningScene is Transition) {
             runningScene!._onEnter()
             runningScene!._onEnterTransitionDidFinish()
+            responderManager.markAsDirty()
             runningScene!.paused = false
         }
     }

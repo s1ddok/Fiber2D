@@ -296,7 +296,7 @@ public class PhysicsBody: ComponentBase, Behaviour, FixedUpdatable, Pausable {
 
 extension PhysicsBody {
     func addToPhysicsWorld() {
-        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+        if let physicsSystem = owner?.scene?.system(for: PhysicsSystem.self) {
             physicsSystem.world.add(body: self)
             physicsSystem.dirty = true
         }
@@ -304,7 +304,7 @@ extension PhysicsBody {
     
     /** remove the body from the world it added to */
     func removeFromPhysicsWorld() {
-        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+        if let physicsSystem = owner?.scene?.system(for: PhysicsSystem.self) {
             physicsSystem.world.remove(body: self)
             physicsSystem.dirty = true
         }

@@ -25,7 +25,8 @@ class MainScene: Scene {
         
         let world = PhysicsWorld(rootNode: self)
         physicsSystem = PhysicsSystem(world: world)
-    
+        register(system: physicsSystem)
+        
         world.contactDelegate = self
         
         sprite = Sprite(imageNamed: "image.jpeg")
@@ -96,6 +97,15 @@ class MainScene: Scene {
         staticBody.add(component: physicsCircle)
         add(child: staticBody)
         
+        ground.contentSize = Size(1.0, 0.1)
+        ground.contentSizeType = SizeType.normalized
+        add(child: ground)
+        
+        let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
+        boxBody.isDynamic = false
+        ground.add(component: boxBody)
+        
+        
         for j in 0..<10 {
             let physicsSquare = ColorNode()
             physicsSquares.append(physicsSquare)
@@ -114,20 +124,10 @@ class MainScene: Scene {
             add(child: physicsSquare)
         }
         
-        
-        ground.contentSize = Size(1.0, 0.1)
-        ground.contentSizeType = SizeType.normalized
-        
-        add(child: ground)
-        
-        let boxBody = PhysicsBody.box(size: ground.contentSizeInPoints, material: material)
-        boxBody.isDynamic = false
-        ground.add(component: boxBody)
+ 
     }
     
     override func onEnter() {
-        director!.register(system: physicsSystem)
-        
         super.onEnter()
         
         let rt = RenderTexture(width: 64, height: 64)
