@@ -24,8 +24,14 @@ internal func setViewport(_ minx: Float, _ miny: Float, _ maxx: Float, _ maxy: F
 public class ViewportNode: Node {
     public var projection = Matrix4x4f.identity
     
+    /**
+     *  Node that controls the camera's transform (position/rotation/zoom)
+     */
     public var camera: Camera!
     
+    /**
+     *  User assignable node that holds the content that the viewport will show.
+     */
     public var contentNode: Node {
         get { return camera.children.first! }
         set {
@@ -33,10 +39,21 @@ public class ViewportNode: Node {
             camera.add(child: newValue)
         }
     }
+    
+    /**
+     *  Create a viewport with the size of the screen and an empty contentNode.
+     */
     convenience override init() {
         self.init(contentNode: Node())
     }
     
+    /**
+     *  Create a viewport with the given size and content node. Uses a orthographic projection. Initially the viewport is screen-sized.
+     *
+     *  @param contentNode Provide the content node. Its children are drawn into the viewport.
+     *
+     *  @return The ViewportNode
+     */
     init(contentNode: Node) {
         super.init()
         contentSize = Director.currentDirector!.viewSize
@@ -48,6 +65,7 @@ public class ViewportNode: Node {
         projection = Matrix4x4f.orthoProjection(for: self)
     }
     
+    // Convenience constructors to create screen sized viewports.
     public static func centered(size: Size) -> ViewportNode {
         let viewport = ViewportNode()
         viewport.camera.position = size * 0.5
