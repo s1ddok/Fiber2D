@@ -27,6 +27,11 @@ class ViewportScene: Scene {
         //viewport.zOrder = 99
         add(child: viewport)
         
+        let placeholder = ColorNode()
+        placeholder.contentSizeType = .normalized
+        placeholder.contentSize = Size(1.0, 1.0)
+        //container.add(child: placeholder)
+        
         userInteractionEnabled = true
     }
     
@@ -38,6 +43,22 @@ class ViewportScene: Scene {
     
     override func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
         viewport.camera.positionInPoints = theEvent.location(in: self)
+    }
+    
+    override func keyDown(_ theEvent: NSEvent) {
+        
+        switch theEvent.keyCode {
+        case 123:
+            viewport.camera.positionInPoints = viewport.camera.positionInPoints - vec2(10.0, 0.0)
+        case 124:
+            viewport.camera.positionInPoints = viewport.camera.positionInPoints + vec2(10.0, 0.0)
+        case 125:
+            viewport.camera.positionInPoints = viewport.camera.positionInPoints - vec2(0.0, 10.0)
+        case 126:
+            viewport.camera.positionInPoints = viewport.camera.positionInPoints + vec2(0.0, 10.0)
+        default:
+            ()
+        }
     }
     
     //func update(delta: Time) {
