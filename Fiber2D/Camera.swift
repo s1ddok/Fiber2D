@@ -60,7 +60,7 @@ public class Camera: Node {
     
     public var cameraMatrix: Matrix4x4f {
         let cameraTransform = super.nodeToParentMatrix.inversed
-        return cameraTransform * viewport.projection
+        return viewport.projection * cameraTransform
     }
 
 }

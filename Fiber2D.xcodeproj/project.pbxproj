@@ -89,6 +89,7 @@
 		08855BD81D9D60300090EA84 /* SwiftMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08855BD41D9D60270090EA84 /* SwiftMath.framework */; };
 		08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855BE31D9DA6540090EA84 /* UnitTypes.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
+		08B3B51C1DB2B98200D564CB /* ViewportScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51B1DB2B98200D564CB /* ViewportScene.swift */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
 		08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CAEE1D8EFFD5006CDCCB /* chipmunk.c */; };
 		08C1CB111D8EFFD5006CDCCB /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 08C1CAEF1D8EFFD5006CDCCB /* CMakeLists.txt */; };
@@ -296,6 +297,7 @@
 		08855BCE1D9D60270090EA84 /* SwiftMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMath.xcodeproj; path = external/math/SwiftMath.xcodeproj; sourceTree = SOURCE_ROOT; };
 		08855BE31D9DA6540090EA84 /* UnitTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTypes.swift; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
+		08B3B51B1DB2B98200D564CB /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewportScene.swift; sourceTree = "<group>"; };
 		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
 		08C1CACF1D8EFFD5006CDCCB /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		08C1CAD01D8EFFD5006CDCCB /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 				080307201D9B1337008CAC8E /* UserComponents.swift */,
 				081FBCF81D46289A005838B8 /* ColorNode.swift */,
 				081FBD251D4628F8005838B8 /* MainScene.swift */,
+				08B3B51B1DB2B98200D564CB /* ViewportScene.swift */,
 			);
 			name = Custom;
 			path = ..;
@@ -1117,6 +1120,7 @@
 				08C1CB2D1D8EFFD5006CDCCB /* cpSpaceQuery.c in Sources */,
 				081FBCDC1D462732005838B8 /* CCShader.m in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,
+				08B3B51C1DB2B98200D564CB /* ViewportScene.swift in Sources */,
 				08C1CB2B1D8EFFD5006CDCCB /* cpSpaceDebug.c in Sources */,
 				081FBD101D46289A005838B8 /* Layout.swift in Sources */,
 				08C1CB431D915950006CDCCB /* PhysicsShape.swift in Sources */,
