@@ -26,6 +26,17 @@ public class ViewportNode: Node {
     
     public var camera: Camera!
     
+    public var contentNode: Node {
+        get { return camera.children.first! }
+        set {
+            contentNode.removeFromParent()
+            camera.add(child: newValue)
+        }
+    }
+    convenience override init() {
+        self.init(contentNode: Node())
+    }
+    
     init(contentNode: Node) {
         super.init()
         contentSize = Director.currentDirector!.viewSize
@@ -35,6 +46,17 @@ public class ViewportNode: Node {
         camera.add(child: contentNode)
         
         projection = Matrix4x4f.orthoProjection(for: self)
+    }
+    
+    public static func centered(size: Size) -> ViewportNode {
+        let viewport = ViewportNode()
+        viewport.camera.position = size * 0.5
+    
+        let s = viewport.contentSizeInPoints
+        viewport.projection = Matrix4x4f.ortho(left: -s.width / 2, right: s.width / 2,
+                                               bottom: -s.height / 2, top: s.height / 2,
+                                               near: 1024, far: -1024)
+        return viewport
     }
     
     override func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {

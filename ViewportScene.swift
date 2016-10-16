@@ -16,7 +16,7 @@ class CustomBehaviour: ComponentBase, Updatable {
     }
     
     func update(delta: Time) {
-        vps.viewport.camera.position = vps.cn.positionInPoints - (vps.viewport.contentSizeInPoints * 0.5)
+        vps.viewport.camera.position = vps.cn.positionInPoints
     }
 }
 
@@ -33,11 +33,11 @@ class ViewportScene: Scene {
         cn.contentSize = Size(62.0, 32.0)
         cn.positionType = .normalized
         cn.position = p2d(0.5, 0.5)
+        cn.anchorPoint = cn.position
         container.add(child: cn)
-        viewport = ViewportNode(contentNode: container)
-        //viewport.camera.position = cn.positionInPoints
+        viewport = ViewportNode.centered(size: size)
+        viewport.contentNode = container
         viewport.userInteractionEnabled = false
-        //viewport.zOrder = 99
         add(child: viewport)
         
         let bl = ColorNode()
