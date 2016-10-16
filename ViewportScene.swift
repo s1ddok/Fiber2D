@@ -8,15 +8,28 @@
 
 import SwiftMath
 
+class CustomBehaviour: ComponentBase, Updatable {
+    let vps: ViewportScene
+    
+    init(v: ViewportScene) {
+        vps = v
+    }
+    
+    func update(delta: Time) {
+        vps.viewport.camera.position = vps.cn.positionInPoints - (vps.viewport.contentSizeInPoints * 0.5)
+    }
+}
+
 class ViewportScene: Scene {
     var viewport: ViewportNode!
+    let cn = ColorNode()
     
     override init(size: Size) {
         super.init(size: size)
         
         let container = Node()
         container.contentSizeInPoints = Size(1048, 1048)
-        let cn = ColorNode()
+        
         cn.contentSize = Size(62.0, 32.0)
         cn.positionType = .normalized
         cn.position = p2d(0.5, 0.5)
@@ -27,11 +40,22 @@ class ViewportScene: Scene {
         //viewport.zOrder = 99
         add(child: viewport)
         
+        let bl = ColorNode()
+        bl.contentSize = Size(32.0, 32.0)
+        bl.position = .zero
+        container.add(child: bl)
+        
+        let tr = ColorNode()
+        tr.contentSize = Size(32.0, 32.0)
+        tr.position = p2d(1.0, 1.0)
+        tr.positionType = .normalized
+        container.add(child: tr)
+        
         let placeholder = ColorNode()
         placeholder.contentSizeType = .normalized
         placeholder.contentSize = Size(1.0, 1.0)
         //container.add(child: placeholder)
-        
+        add(component: CustomBehaviour(v: self))
         userInteractionEnabled = true
     }
     
@@ -48,7 +72,7 @@ class ViewportScene: Scene {
     override func keyDown(_ theEvent: NSEvent) {
         
         switch theEvent.keyCode {
-        case 123:
+        /*case 123:
             viewport.camera.positionInPoints = viewport.camera.positionInPoints - vec2(10.0, 0.0)
         case 124:
             viewport.camera.positionInPoints = viewport.camera.positionInPoints + vec2(10.0, 0.0)
@@ -57,10 +81,17 @@ class ViewportScene: Scene {
         case 126:
             viewport.camera.positionInPoints = viewport.camera.positionInPoints + vec2(0.0, 10.0)
         default:
-            ()
+            ()*/
+         case 123:
+         cn.position = cn.position - vec2(0.01, 0.0)
+         case 124:
+         cn.position = cn.position + vec2(0.01, 0.0)
+         case 125:
+         cn.position = cn.position - vec2(0.0, 0.01)
+         case 126:
+         cn.position = cn.position + vec2(0.0, 0.01)
+         default:
+         ()
         }
     }
-    
-    //func update(delta: Time) {
-    //}
 }
