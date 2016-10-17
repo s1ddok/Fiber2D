@@ -36,7 +36,6 @@
 		081FBCE31D462732005838B8 /* CCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCAE1D462732005838B8 /* CCSetup.m */; };
 		081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB21D462732005838B8 /* CCMetalSupport.m */; };
 		081FBCE61D462732005838B8 /* CCShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB41D462732005838B8 /* CCShaders.metal */; };
-		081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB61D462732005838B8 /* UITouch+CC.m */; };
 		081FBCE91D462732005838B8 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBA1D462732005838B8 /* MetalView.swift */; };
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
 		081FBCEC1D462732005838B8 /* CCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCC01D462732005838B8 /* CCFile.m */; };
@@ -90,6 +89,7 @@
 		08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855BE31D9DA6540090EA84 /* UnitTypes.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08B3B51C1DB2B98200D564CB /* ViewportScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51B1DB2B98200D564CB /* ViewportScene.swift */; };
+		08B3B51E1DB5378100D564CB /* UITouch+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51D1DB5378100D564CB /* UITouch+Node.swift */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
 		08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CAEE1D8EFFD5006CDCCB /* chipmunk.c */; };
 		08C1CB111D8EFFD5006CDCCB /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 08C1CAEF1D8EFFD5006CDCCB /* CMakeLists.txt */; };
@@ -236,8 +236,6 @@
 		081FBCB21D462732005838B8 /* CCMetalSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMetalSupport.m; sourceTree = "<group>"; };
 		081FBCB31D462732005838B8 /* CCMetalSupport_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMetalSupport_Private.h; sourceTree = "<group>"; };
 		081FBCB41D462732005838B8 /* CCShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CCShaders.metal; sourceTree = "<group>"; };
-		081FBCB51D462732005838B8 /* UITouch+CC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITouch+CC.h"; sourceTree = "<group>"; };
-		081FBCB61D462732005838B8 /* UITouch+CC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITouch+CC.m"; sourceTree = "<group>"; };
 		081FBCBA1D462732005838B8 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = "cocos2d-legacy/Platforms/MetalView.swift"; sourceTree = "<group>"; };
 		081FBCBC1D462732005838B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		081FBCBF1D462732005838B8 /* CCFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFile.h; sourceTree = "<group>"; };
@@ -298,6 +296,7 @@
 		08855BE31D9DA6540090EA84 /* UnitTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTypes.swift; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
 		08B3B51B1DB2B98200D564CB /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewportScene.swift; sourceTree = "<group>"; };
+		08B3B51D1DB5378100D564CB /* UITouch+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITouch+Node.swift"; path = "platform/ios/UITouch+Node.swift"; sourceTree = "<group>"; };
 		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
 		08C1CACF1D8EFFD5006CDCCB /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		08C1CAD01D8EFFD5006CDCCB /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
@@ -529,8 +528,6 @@
 				081FBCB21D462732005838B8 /* CCMetalSupport.m */,
 				081FBCB31D462732005838B8 /* CCMetalSupport_Private.h */,
 				081FBCB41D462732005838B8 /* CCShaders.metal */,
-				081FBCB51D462732005838B8 /* UITouch+CC.h */,
-				081FBCB61D462732005838B8 /* UITouch+CC.m */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -642,6 +639,7 @@
 		081FBD311D463450005838B8 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				08B3B51D1DB5378100D564CB /* UITouch+Node.swift */,
 				081FBD071D46289A005838B8 /* Responder.swift */,
 				081FBD081D46289A005838B8 /* ResponderManager.swift */,
 			);
@@ -1058,7 +1056,6 @@
 				08C1CB471D915A1A006CDCCB /* PhysicsWorld+Shapes.swift in Sources */,
 				08C1CB411D914A07006CDCCB /* PhysicsWorld+Bodies.swift in Sources */,
 				08C1CB1D1D8EFFD5006CDCCB /* cpHastySpace.c in Sources */,
-				081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
 				080307191D994FED008CAC8E /* System.swift in Sources */,
@@ -1098,6 +1095,7 @@
 				08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */,
 				081FBD121D46289A005838B8 /* Node.swift in Sources */,
 				08C1CB291D8EFFD5006CDCCB /* cpSpace.c in Sources */,
+				08B3B51E1DB5378100D564CB /* UITouch+Node.swift in Sources */,
 				081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */,
 				081FBCD61D462732005838B8 /* CCNoARC.m in Sources */,
 				080306AE1D941F4D008CAC8E /* PhysicsShapeBox.swift in Sources */,

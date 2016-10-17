@@ -35,10 +35,11 @@ extension Vector2f {
     var glkVec2: GLKVector2 {
         return GLKVector2Make(x, y)
     }
-    
+    #if os(iOS) || os(tvOS) || os(OSX)
     init(_ cgPoint: CGPoint) {
         self.init(Float(cgPoint.x), Float(cgPoint.y))
     }
+    #endif
 }
 
 extension GLKVector2 {

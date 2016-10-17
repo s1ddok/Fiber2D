@@ -72,7 +72,6 @@
 #import "CCFileLocator.h"
 #import "CGPointExtension.h"
 #import "ccUtils.h"
-#import "UITouch+CC.h"
 
 // Platform Support:
 #import "CCNS.h"
