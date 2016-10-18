@@ -34,6 +34,7 @@ class ViewportScene: Scene {
         cn.positionType = .normalized
         cn.position = p2d(0.5, 0.5)
         cn.anchorPoint = cn.position
+        cn.color = .red
         container.add(child: cn)
         viewport = ViewportNode.centered(size: size)
         viewport.contentNode = container
@@ -43,12 +44,14 @@ class ViewportScene: Scene {
         let bl = ColorNode()
         bl.contentSize = Size(32.0, 32.0)
         bl.position = .zero
+        bl.color = .blue
         container.add(child: bl)
         
         let tr = ColorNode()
         tr.contentSize = Size(32.0, 32.0)
         tr.position = p2d(1.0, 1.0)
         tr.positionType = .normalized
+        tr.color = .blue
         container.add(child: tr)
         
         let placeholder = ColorNode()
