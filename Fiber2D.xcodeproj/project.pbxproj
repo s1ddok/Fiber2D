@@ -247,7 +247,7 @@
 		081FBCC71D462732005838B8 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
 		081FBCC81D462732005838B8 /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
 		081FBCF41D462765005838B8 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		081FBCF81D46289A005838B8 /* ColorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorNode.swift; path = Fiber2D/ColorNode.swift; sourceTree = "<group>"; };
+		081FBCF81D46289A005838B8 /* ColorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorNode.swift; sourceTree = "<group>"; };
 		081FBCF91D46289A005838B8 /* Director.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
 		081FBCFA1D46289A005838B8 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		081FBCFB1D46289A005838B8 /* LayoutBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutBox.swift; sourceTree = "<group>"; };
@@ -574,6 +574,7 @@
 		081FBCF71D462871005838B8 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				08B3B5221DB56CB000D564CB /* File Handling */,
 				08855BDC1D9DA6340090EA84 /* typedefs */,
 				0885098B1D7B4F62003EF800 /* Protocols */,
 				081FBD2F1D46343D005838B8 /* Layout */,
@@ -584,6 +585,7 @@
 				087BFA0C1D82D16600F940D4 /* Behaviour */,
 				086652731D7333BA00BCD9CE /* Scheduling */,
 				081FBD321D463457005838B8 /* Sprites */,
+				082E8FEF1DB68AB600AD32AA /* Misc */,
 				08C1CAC41D8EFFA6006CDCCB /* Physics */,
 			);
 			name = Engine;
@@ -593,7 +595,6 @@
 			isa = PBXGroup;
 			children = (
 				080307201D9B1337008CAC8E /* UserComponents.swift */,
-				081FBCF81D46289A005838B8 /* ColorNode.swift */,
 				081FBD251D4628F8005838B8 /* MainScene.swift */,
 				08B3B51B1DB2B98200D564CB /* ViewportScene.swift */,
 			);
@@ -670,6 +671,14 @@
 				087BFA151D82F5C200F940D4 /* DirectorView.swift */,
 			);
 			name = Scene;
+			sourceTree = "<group>";
+		};
+		082E8FEF1DB68AB600AD32AA /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				081FBCF81D46289A005838B8 /* ColorNode.swift */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		086652731D7333BA00BCD9CE /* Scheduling */ = {
@@ -752,6 +761,13 @@
 				08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		08B3B5221DB56CB000D564CB /* File Handling */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "File Handling";
 			sourceTree = "<group>";
 		};
 		08C1CAC41D8EFFA6006CDCCB /* Physics */ = {
