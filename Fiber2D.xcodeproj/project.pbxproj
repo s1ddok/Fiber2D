@@ -209,7 +209,6 @@
 		081FBC851D462732005838B8 /* CCImage_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCImage_Private.h; sourceTree = "<group>"; };
 		081FBC861D462732005838B8 /* ccMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccMacros.h; sourceTree = "<group>"; };
 		081FBC871D462732005838B8 /* CCNoARC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNoARC.m; sourceTree = "<group>"; };
-		081FBC8C1D462732005838B8 /* CCProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCProtocols.h; sourceTree = "<group>"; };
 		081FBC8D1D462732005838B8 /* CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderer.h; sourceTree = "<group>"; };
 		081FBC8E1D462732005838B8 /* CCRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRenderer.m; sourceTree = "<group>"; };
 		081FBC8F1D462732005838B8 /* CCRenderer_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderer_Private.h; sourceTree = "<group>"; };
@@ -484,7 +483,6 @@
 				081FBC851D462732005838B8 /* CCImage_Private.h */,
 				081FBC861D462732005838B8 /* ccMacros.h */,
 				081FBC871D462732005838B8 /* CCNoARC.m */,
-				081FBC8C1D462732005838B8 /* CCProtocols.h */,
 				081FBC8D1D462732005838B8 /* CCRenderer.h */,
 				081FBC8E1D462732005838B8 /* CCRenderer.m */,
 				081FBC8F1D462732005838B8 /* CCRenderer_Private.h */,

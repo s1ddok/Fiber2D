@@ -53,7 +53,6 @@
 #import "CCSetup.h"
 
 // Basic Types:
-#import "CCProtocols.h"
 #import "CCImage.h"
 #import "CCTexture.h"
 #import "CCShader.h"
