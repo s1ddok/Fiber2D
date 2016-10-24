@@ -13,3 +13,5 @@
 #import "CCSpriteFrameCache_Private.h"
 #import "chipmunk_private.h"
 #import "cpHastySpace.h"
+#import "CCFile_Private.h"
+#import "Image.h"

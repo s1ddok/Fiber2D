@@ -22,7 +22,7 @@ class CustomBehaviour: ComponentBase, Updatable {
 
 class ViewportScene: Scene {
     var viewport: ViewportNode!
-    let cn = ColorNode()
+    let cn = Sprite(imageNamed: "circle.png")//ColorNode()
     
     override init(size: Size) {
         super.init(size: size)
@@ -30,11 +30,11 @@ class ViewportScene: Scene {
         let container = Node()
         container.contentSizeInPoints = Size(1048, 1048)
         
-        cn.contentSize = Size(62.0, 32.0)
+        //cn.contentSize = Size(62.0, 32.0)
         cn.positionType = .normalized
         cn.position = p2d(0.5, 0.5)
-        cn.anchorPoint = cn.position
-        cn.color = .red
+        //cn.anchorPoint = cn.position
+        //cn.color = .red
         container.add(child: cn)
         viewport = ViewportNode.centered(size: size)
         viewport.contentNode = container

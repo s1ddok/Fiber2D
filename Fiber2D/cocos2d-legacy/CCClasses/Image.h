@@ -1,9 +1,7 @@
 /*
  * Cocos2D-SpriteBuilder: http://cocos2d.spritebuilder.com
  *
- * Copyright (c) 2008-2010 Ricardo Quesada
- * Copyright (c) 2011 Zynga Inc.
- * Copyright (c) 2013-2014 Cocos2D Authors
+ * Copyright (c) 2014 Cocos2D Authors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +22,10 @@
  * THE SOFTWARE.
  */
 
-
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import <CoreGraphics/CGImage.h>
 
-NSString *cocos2dVersion()
-{
-    int major   = (COCOS2D_VERSION >> 16) & 0x0000FF;
-    int minor   = (COCOS2D_VERSION >>  8) & 0x0000FF;
-    int rev     = (COCOS2D_VERSION >>  0) & 0x0000FF;
-    
-    if ([COCOS2D_BUILD isEqualToString:@"release"])
-    {
-        return [NSString stringWithFormat:@"Cocos2D-Swift version %d.%d.%d", major, minor, rev];
-    }
-    else
-    {
-        return([[NSString stringWithFormat:@"Cocos2D-Swift version %d.%d.%d-", major, minor, rev] stringByAppendingString:COCOS2D_BUILD]);
-    }
-}
+@class CCFile;
+
+extern NSMutableData *
+LoadPNG(CCFile *file, BOOL flip, BOOL rgb, BOOL alpha, BOOL premultiply, NSUInteger scale, CGSize *size);

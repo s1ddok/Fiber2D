@@ -26,7 +26,7 @@
 
 @class SpriteFrame;
 @class CCFile;
-@class CCImage;
+@class Image;
 
 
 /**
@@ -141,14 +141,14 @@ extern NSString * const CCTextureOptionAddressModeY;
 -(instancetype)initWithMTLTexture:(id<MTLTexture>)tex options:(NSDictionary*)options;
 
 /**
- Create a texture from a CCImage.
+ Create a texture from a Image.
 
  @param image   The image to create the texture from.
  @param options A dictionary using the CCTextureOption* keys to specify how the texture should be set up.
 
  @return A texture with the contents of the image, or nil if there was an error.
  */
--(instancetype)initWithImage:(CCImage *)image options:(NSDictionary *)options;
+-(instancetype)initWithImage:(Image *)image options:(NSDictionary *)options;
 
 /**
  Create a cached texture from an image on disk.
@@ -169,13 +169,13 @@ extern NSString * const CCTextureOptionAddressModeY;
 +(instancetype)textureForKey:(NSString *)key loader:(CCTexture *(^)())loader;
 
 /**
- An options dictionary that will be passed to [CCFileUtils fileNamed:options:], [CCImage initWithfile:options:], and [CCTexture initWithImage:options:].
+ An options dictionary that will be passed to [CCFileUtils fileNamed:options:], [Image initWithfile:options:], and [CCTexture initWithImage:options:].
  @return The current value of the default options dictionary.
  */
 +(NSDictionary *)defaultOptions;
 
 /**
- When loading cached textures, several methods take configurable options. [CCFileUtils fileNamed:options:], [CCImage initWithfile:options:], and [CCTexture initWithImage:options:].
+ When loading cached textures, several methods take configurable options. [CCFileUtils fileNamed:options:], [Image initWithfile:options:], and [CCTexture initWithImage:options:].
  You can configure Cocos2D's default texture loading by overriding this value.
  For instance, you may want to force all textures to use nearest filtering in a pixel art game, or always enable mipmapping.
  
@@ -244,62 +244,5 @@ extern NSString * const CCTextureOptionAddressModeY;
  @return A texture with the contents of the file, or nil if there was an error.
  */
 -(instancetype)initPVRWithCCFile:(CCFile *)file options:(NSDictionary *)options;
-
-@end
-
-
-@interface CCTexture(Cubemap)
-
-/**
- Load a cubemap texture from 6 images for the faces. This is primarily useful for making effect shaders.
-
- @param posX    An image for the right side of the cube.
- @param negX    An image for the left side of the cube.
- @param posY    An image for the top side of the cube.
- @param negY    An image for the bottom side of the cube.
- @param posZ    An image for the front side of the cube.
- @param negZ    An image for the back side of the cube.
- @param options A dictionary using the CCTextureOption* keys to specify how the texture should be set up. Addressing modes generally do nothing for cubemap textures.
-
- @return A cubemap texture with the contents of the images, or nil if there was an error.
- */
--(instancetype)initCubemapFromImagesPosX:(CCImage *)posX negX:(CCImage *)negX
-                                    posY:(CCImage *)posY negY:(CCImage *)negY
-                                    posZ:(CCImage *)posZ negZ:(CCImage *)negZ
-                                    options:(NSDictionary *)options;
-
-/**
- Load a cubemap texture from 6 image files for the faces. This is primarily useful for making effect shaders.
-
- @param posXFilePath An image file for the right side of the cube.
- @param negXFilePath An image file for the left side of the cube.
- @param posYFilePath An image file for the top side of the cube.
- @param negYFilePath An image file for the bottom side of the cube.
- @param posZFilePath An image file for the front side of the cube.
- @param negZFilePath An image file for the back side of the cube.
- @param options A dictionary using the CCTextureOption* keys to specify how the texture should be set up. Addressing modes generally do nothing for cubemap textures.
-
- @return A cubemap texture with the contents of the image files, or nil if there was an error.
- */
--(instancetype)initCubemapFromFilesPosX:(NSString *)posXFilePath negX:(NSString *)negXFilePath
-                                   posY:(NSString *)posYFilePath negY:(NSString *)negYFilePath
-                                   posZ:(NSString *)posZFilePath negZ:(NSString *)negZFilePath
-                                   options:(NSDictionary *)options;
-
-/**
- Load a cubemap texture from 6 image files for the faces. The filenames are found using a format string.
- 
- For instance you would use @"Skybox%@.png" if you had the following files:
- SkyboxPosX.png
- SkyboxNegX.png
- ...
- SkyboxPosZ.png
-
- @param aFilePathPattern The format string to use as a pattern. %@ will be replaced with "PosX", "NegZ", etc.
- @param options A dictionary using the CCTextureOption* keys to specify how the texture should be set up. Addressing modes generally do nothing for cubemap textures.
-
- @return A cubemap texture with the contents of the image files, or nil if there was an error.
- */
--(instancetype)initCubemapFromFilePattern:(NSString *)aFilePathPattern options:(NSDictionary *)options;
 
 @end

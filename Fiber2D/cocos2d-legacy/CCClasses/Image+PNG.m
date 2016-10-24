@@ -1,7 +1,6 @@
 #import "png.h"
 
 #import "ccUtils.h"
-#import "CCImage_Private.h"
 #import "CCFile_Private.h"
 
 #import "CCSetup.h"
@@ -159,7 +158,7 @@ ProgressiveRow(png_structp png, png_bytep rowPixels, png_uint_32 row, int pass)
 	}
 }
 
-static NSMutableData *
+NSMutableData *
 LoadPNG(CCFile *file, BOOL flip, BOOL rgb, BOOL alpha, BOOL premultiply, NSUInteger scale, CGSize *size)
 {
 	NSCAssert(scale == 1 || scale == 2 || scale == 4, @"Scale must be 1, 2 or 4.");
@@ -212,20 +211,3 @@ LoadPNG(CCFile *file, BOOL flip, BOOL rgb, BOOL alpha, BOOL premultiply, NSUInte
     return [NSMutableData dataWithBytesNoCopy:info.scaled_pixels length:info.scaled_height*info.scaled_row_bytes freeWhenDone:YES];
 }
 
-
-@implementation CCImage(PNG)
-
--(instancetype)initWithPNGFile:(CCFile *)file options:(NSDictionary *)options;
-{
-    options = NormalizeCCImageOptions(options);
-    CGFloat rescale = file.autoScaleFactor*[options[CCImageOptionRescaleFactor] doubleValue];
-    
-    CGSize size = {};
-    BOOL flip = [options[CCImageOptionFlipVertical] boolValue];
-    BOOL premultiply = [options[CCImageOptionPremultiply] boolValue];
-    NSMutableData *data = LoadPNG(file, flip, TRUE, TRUE, premultiply, 1.0/rescale, &size);
-    
-    return [self initWithPixelSize:size contentScale:file.contentScale*rescale pixelData:data options:options];
-}
-
-@end

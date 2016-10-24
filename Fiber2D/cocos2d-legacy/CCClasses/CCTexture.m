@@ -26,7 +26,6 @@
 #import "CCNS.h"
 
 #import "CCTexture.h"
-#import "CCImage_Private.h"
 #import "CCTexture_Private.h"
 
 #import "ccConfig.h"
@@ -214,12 +213,12 @@ static NSDictionary *_DEFAULT_OPTIONS = nil;
     [self _setupSampler:type minFilter:minFilter magFilter:magFilter mipFilter:mipFilter addressX:addressX addressY:addressY];
 }
 
--(instancetype)initWithImage:(CCImage *)image options:(NSDictionary *)options;
+-(instancetype)initWithImage:(Image *)image options:(NSDictionary *)options;
 {
     return [self initWithImage:image options:options rendertexture:NO];
 }
 
--(instancetype)initWithImage:(CCImage *)image options:(NSDictionary *)options rendertexture:(BOOL)rendertexture;
+-(instancetype)initWithImage:(Image *)image options:(NSDictionary *)options rendertexture:(BOOL)rendertexture;
 {
     options = [CCTexture normalizeOptions:options];
     
@@ -415,85 +414,6 @@ static NSDictionary *_DEFAULT_OPTIONS = nil;
     [blitter generateMipmapsForTexture:_metalTexture];
     [blitter endEncoding];
     [blitCommands commit];
-}
-
-@end
-
-
-@implementation CCTexture(Cubemap)
-
--(instancetype)initCubemapFromImagesPosX:(CCImage *)posX negX:(CCImage *)negX
-                                    posY:(CCImage *)posY negY:(CCImage *)negY
-                                    posZ:(CCImage *)posZ negZ:(CCImage *)negZ
-                                    options:(NSDictionary *)options;
-{
-    options = [CCTexture normalizeOptions:options];
-    
-    NSUInteger maxTextureSize = 4096;
-    CGSize sizeInPixels = posX.sizeInPixels;
-    
-    if(sizeInPixels.width > maxTextureSize || sizeInPixels.height > maxTextureSize){
-        CCLOGWARN(@"cocos2d: Error: Image (%d x %d) is bigger than the maximum supported texture size %d",
-            (int)sizeInPixels.width, (int)sizeInPixels.height, (int)maxTextureSize
-        );
-        
-        return nil;
-    }
-    
-	if((self = [super init])) {
-        [self setupTexture:CCTextureTypeCubemap rendertexture:NO sizeInPixels:sizeInPixels options:options];
-        
-        [self _uploadTextureCubeFace:0 sizeInPixels:sizeInPixels miplevel:0 pixelData:posX.pixelData.bytes];
-        [self _uploadTextureCubeFace:1 sizeInPixels:sizeInPixels miplevel:0 pixelData:negX.pixelData.bytes];
-        [self _uploadTextureCubeFace:2 sizeInPixels:sizeInPixels miplevel:0 pixelData:posY.pixelData.bytes];
-        [self _uploadTextureCubeFace:3 sizeInPixels:sizeInPixels miplevel:0 pixelData:negY.pixelData.bytes];
-        [self _uploadTextureCubeFace:4 sizeInPixels:sizeInPixels miplevel:0 pixelData:posZ.pixelData.bytes];
-        [self _uploadTextureCubeFace:5 sizeInPixels:sizeInPixels miplevel:0 pixelData:negZ.pixelData.bytes];
-        
-        // Generate mipmaps.
-        if([options[CCTextureOptionGenerateMipmaps] boolValue]){
-            [self _generateMipmaps:CCTextureTypeCubemap];
-        }
-    
-        
-        _type = CCTextureTypeCubemap;
-        _sizeInPixels = sizeInPixels;
-        _contentScale = posX.contentScale;
-        _contentSizeInPixels = CC_SIZE_SCALE(posX.contentSize, _contentScale);
-    }
-    
-	return self;
-}
-
--(instancetype)initCubemapFromFilesPosX:(NSString *)posXFilePath negX:(NSString *)negXFilePath
-                                   posY:(NSString *)posYFilePath negY:(NSString *)negYFilePath
-                                   posZ:(NSString *)posZFilePath negZ:(NSString *)negZFilePath
-                                   options:(NSDictionary *)options;
-{
-    NSMutableDictionary *opts = [options mutableCopy];
-    opts[CCImageOptionFlipVertical] = @(YES);
-    
-    CCFileLocator *locator = [CCFileLocator sharedFileLocator];
-    return [self initCubemapFromImagesPosX:[[CCImage alloc] initWithCCFile:[locator fileNamedWithResolutionSearch:posXFilePath error:nil] options:opts]
-        negX:[[CCImage alloc] initWithCCFile:[locator fileNamedWithResolutionSearch:negXFilePath error:nil] options:opts]
-        posY:[[CCImage alloc] initWithCCFile:[locator fileNamedWithResolutionSearch:posYFilePath error:nil] options:opts]
-        negY:[[CCImage alloc] initWithCCFile:[locator fileNamedWithResolutionSearch:negYFilePath error:nil] options:opts]
-        posZ:[[CCImage alloc] initWithCCFile:[locator fileNamedWithResolutionSearch:posZFilePath error:nil] options:opts]
-        negZ:[[CCImage alloc] initWithCCFile:[locator fileNamedWithResolutionSearch:negZFilePath error:nil] options:opts]
-        options:opts
-    ];
-}
-
--(instancetype)initCubemapFromFilePattern:(NSString *)aFilePathPattern options:(NSDictionary *)options;
-{
-	return [self initCubemapFromFilesPosX:[NSString stringWithFormat: aFilePathPattern, @"PosX"]
-        negX:[NSString stringWithFormat:aFilePathPattern, @"NegX"]
-        posY:[NSString stringWithFormat:aFilePathPattern, @"PosY"]
-        negY:[NSString stringWithFormat:aFilePathPattern, @"NegY"]
-        posZ:[NSString stringWithFormat:aFilePathPattern, @"PosZ"]
-        negZ:[NSString stringWithFormat:aFilePathPattern, @"NegZ"]
-        options:options
-    ];
 }
 
 @end

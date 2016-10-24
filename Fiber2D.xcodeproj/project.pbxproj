@@ -22,8 +22,7 @@
 		0812AD031D538D7600AE46E8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812AD021D538D7600AE46E8 /* Color.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
 		081FBCD31D462732005838B8 /* CCCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7F1D462732005838B8 /* CCCache.m */; };
-		081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* CCImage+PNG.m */; };
-		081FBCD51D462732005838B8 /* CCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC841D462732005838B8 /* CCImage.m */; };
+		081FBCD41D462732005838B8 /* Image+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* Image+PNG.m */; };
 		081FBCD61D462732005838B8 /* CCNoARC.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC871D462732005838B8 /* CCNoARC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		081FBCD91D462732005838B8 /* CCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC8E1D462732005838B8 /* CCRenderer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC911D462732005838B8 /* CCRendererBasicTypes.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -31,7 +30,6 @@
 		081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC9A1D462732005838B8 /* CCSpriteFrameCache.m */; };
 		081FBCDE1D462732005838B8 /* CCTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC9D1D462732005838B8 /* CCTexture.m */; };
 		081FBCDF1D462732005838B8 /* CCTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA01D462732005838B8 /* CCTextureCache.m */; };
-		081FBCE11D462732005838B8 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA71D462732005838B8 /* cocos2d.m */; };
 		081FBCE21D462732005838B8 /* NSValue+CCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */; };
 		081FBCE31D462732005838B8 /* CCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCAE1D462732005838B8 /* CCSetup.m */; };
 		081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB21D462732005838B8 /* CCMetalSupport.m */; };
@@ -63,6 +61,8 @@
 		081FBD231D46289A005838B8 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0D1D46289A005838B8 /* Transition.swift */; };
 		081FBD261D4628F8005838B8 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD251D4628F8005838B8 /* MainScene.swift */; };
 		081FBD2D1D463207005838B8 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 081FBD2C1D463207005838B8 /* Resources */; };
+		082E904E1DBE92DF00AD32AA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904D1DBE92DF00AD32AA /* Image.swift */; };
+		082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904F1DBE9B8700AD32AA /* Image+PNG.swift */; };
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
 		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
@@ -203,10 +203,8 @@
 		081FBC7F1D462732005838B8 /* CCCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCache.m; sourceTree = "<group>"; };
 		081FBC801D462732005838B8 /* ccConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccConfig.h; sourceTree = "<group>"; };
 		081FBC811D462732005838B8 /* CCFileLocator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileLocator_Private.h; sourceTree = "<group>"; };
-		081FBC821D462732005838B8 /* CCImage+PNG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCImage+PNG.m"; sourceTree = "<group>"; };
-		081FBC831D462732005838B8 /* CCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCImage.h; sourceTree = "<group>"; };
-		081FBC841D462732005838B8 /* CCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCImage.m; sourceTree = "<group>"; };
-		081FBC851D462732005838B8 /* CCImage_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCImage_Private.h; sourceTree = "<group>"; };
+		081FBC821D462732005838B8 /* Image+PNG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Image+PNG.m"; sourceTree = "<group>"; };
+		081FBC831D462732005838B8 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		081FBC861D462732005838B8 /* ccMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccMacros.h; sourceTree = "<group>"; };
 		081FBC871D462732005838B8 /* CCNoARC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNoARC.m; sourceTree = "<group>"; };
 		081FBC8D1D462732005838B8 /* CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderer.h; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 		081FBC9F1D462732005838B8 /* CCTextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextureCache.h; sourceTree = "<group>"; };
 		081FBCA01D462732005838B8 /* CCTextureCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTextureCache.m; sourceTree = "<group>"; };
 		081FBCA61D462732005838B8 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
-		081FBCA71D462732005838B8 /* cocos2d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d.m; sourceTree = "<group>"; };
 		081FBCA81D462732005838B8 /* NSValue+CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+CCRenderer.h"; sourceTree = "<group>"; };
 		081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+CCRenderer.m"; sourceTree = "<group>"; };
 		081FBCAC1D462732005838B8 /* CCNS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNS.h; sourceTree = "<group>"; };
@@ -269,6 +266,8 @@
 		081FBD251D4628F8005838B8 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCRendererSharedTypes.h; sourceTree = "<group>"; };
 		081FBD2C1D463207005838B8 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		082E904D1DBE92DF00AD32AA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		082E904F1DBE9B8700AD32AA /* Image+PNG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+PNG.swift"; sourceTree = "<group>"; };
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
 		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
@@ -477,10 +476,8 @@
 				081FBC7F1D462732005838B8 /* CCCache.m */,
 				081FBC801D462732005838B8 /* ccConfig.h */,
 				081FBC811D462732005838B8 /* CCFileLocator_Private.h */,
-				081FBC821D462732005838B8 /* CCImage+PNG.m */,
-				081FBC831D462732005838B8 /* CCImage.h */,
-				081FBC841D462732005838B8 /* CCImage.m */,
-				081FBC851D462732005838B8 /* CCImage_Private.h */,
+				081FBC821D462732005838B8 /* Image+PNG.m */,
+				081FBC831D462732005838B8 /* Image.h */,
 				081FBC861D462732005838B8 /* ccMacros.h */,
 				081FBC871D462732005838B8 /* CCNoARC.m */,
 				081FBC8D1D462732005838B8 /* CCRenderer.h */,
@@ -500,7 +497,6 @@
 				081FBC9F1D462732005838B8 /* CCTextureCache.h */,
 				081FBCA01D462732005838B8 /* CCTextureCache.m */,
 				081FBCA61D462732005838B8 /* cocos2d.h */,
-				081FBCA71D462732005838B8 /* cocos2d.m */,
 				081FBCA81D462732005838B8 /* NSValue+CCRenderer.h */,
 				081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */,
 			);
@@ -764,6 +760,8 @@
 		08B3B5221DB56CB000D564CB /* File Handling */ = {
 			isa = PBXGroup;
 			children = (
+				082E904D1DBE92DF00AD32AA /* Image.swift */,
+				082E904F1DBE9B8700AD32AA /* Image+PNG.swift */,
 			);
 			name = "File Handling";
 			sourceTree = "<group>";
@@ -1035,7 +1033,8 @@
 				087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */,
 				081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */,
 				081FBCE31D462732005838B8 /* CCSetup.m in Sources */,
-				081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */,
+				082E904E1DBE92DF00AD32AA /* Image.swift in Sources */,
+				081FBCD41D462732005838B8 /* Image+PNG.m in Sources */,
 				08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */,
 				08C1CB361D8F03D2006CDCCB /* PhysicsTypes.swift in Sources */,
 				0812AD031D538D7600AE46E8 /* Color.swift in Sources */,
@@ -1043,7 +1042,6 @@
 				08C1CB241D8EFFD5006CDCCB /* cpRobust.c in Sources */,
 				080307271D9D4017008CAC8E /* Director+Internal.swift in Sources */,
 				08C1CB1B1D8EFFD5006CDCCB /* cpGrooveJoint.c in Sources */,
-				081FBCD51D462732005838B8 /* CCImage.m in Sources */,
 				081FBD221D46289A005838B8 /* SpriteFrame.swift in Sources */,
 				081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */,
 				08C1CB2C1D8EFFD5006CDCCB /* cpSpaceHash.c in Sources */,
@@ -1061,6 +1059,7 @@
 				08C1CB221D8EFFD5006CDCCB /* cpPolyShape.c in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
+				082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
 				08FAB6DF1DAACA0200B3C10C /* Camera.swift in Sources */,
 				08C1CB181D8EFFD5006CDCCB /* cpDampedRotarySpring.c in Sources */,
@@ -1104,7 +1103,6 @@
 				08C1CB4B1D917A6A006CDCCB /* PhysicsBody+Shapes.swift in Sources */,
 				081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */,
 				081FBD1C1D46289A005838B8 /* RenderTextureSprite.swift in Sources */,
-				081FBCE11D462732005838B8 /* cocos2d.m in Sources */,
 				08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */,
 				08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */,
 				081FBD121D46289A005838B8 /* Node.swift in Sources */,

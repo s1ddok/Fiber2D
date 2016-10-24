@@ -160,8 +160,8 @@ class RenderTexture: RenderableNode {
          paddedSize.width = CCNextPOT(pixelSize.width);
          paddedSize.height = CCNextPOT(pixelSize.height);
         	}*/
-        let image: CCImage = CCImage(pixelSize: paddedSize.cgSize, contentScale: CGFloat(contentScale), pixelData: nil)
-        image.contentSize = (pixelSize * (1.0 / contentScale)).cgSize
+        let image = Image(pixelSize: paddedSize, contentScale: contentScale, pixelData: nil)
+        image.contentSize = pixelSize * (1.0 / contentScale)
         self.texture = CCTexture(image: image, options: nil, rendertexture: true)
         self.framebuffer = CCFrameBufferObjectMetal(texture: texture, depthStencilFormat: .bgra8Unorm)
         // XXX Thayer says: I think this is incorrect for any situations where the content
