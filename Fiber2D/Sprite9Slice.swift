@@ -23,7 +23,7 @@ func TexCoordInterpolationMatrix(_ verts: inout SpriteVertexes) -> Matrix3x3f {
     return Matrix3x3f(basisX.x, basisX.y, 0.0, basisY.x, basisY.y, 0.0, origin.x, origin.y, 1.0)
 }
 
-@objc class Sprite9Slice : Sprite {
+open class Sprite9Slice: Sprite {
     var originalContentSize = Size.zero
     
     var margin : Float {

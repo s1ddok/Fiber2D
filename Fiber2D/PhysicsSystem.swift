@@ -8,18 +8,11 @@
 
 import SwiftMath
 
-internal struct PhysicsNode {
-    unowned let node: Node
-    weak var physicsBody: PhysicsBody?
-    
-    var children = [PhysicsNode]()
-}
-
 public class PhysicsSystem: System {
     public var paused: Bool = false
     public var dirty: Bool = true
     public let world: PhysicsWorld
-    internal var rootNode: PhysicsNode!
+    internal var rootNode: ComponentNode<PhysicsBody>!
     
     public init(world: PhysicsWorld) {
         self.world = world
@@ -64,7 +57,7 @@ public class PhysicsSystem: System {
     }
     
     public func updatePhysicsBodyTree() {
-        rootNode = world.rootNode.subtree
+        rootNode = world.rootNode.subtree(of: PhysicsBody.self)
     }
 }
 
@@ -78,22 +71,7 @@ extension PhysicsSystem: FixedUpdatable {
     }
 }
 
-internal extension Node {
-    var subtree: PhysicsNode {
-        let body = self.getComponent(by: PhysicsBody.self)
-        var children = [PhysicsNode]()
-        for c in self.children {
-            let subtree = c.subtree
-            if subtree.physicsBody != nil || subtree.children.count > 0 {
-                children.append(subtree)
-            }
-        }
-        
-        return PhysicsNode(node: self, physicsBody: body, children: children)
-    }
-}
-
-internal extension PhysicsNode {
+internal extension ComponentNode where T: PhysicsBody {
     internal func beforeSimulation(parentToWorldTransform: Matrix4x4f, nodeParentScaleX: Float, nodeParentScaleY: Float, parentRotation: Angle) {
         let scaleX = nodeParentScaleX * node.scaleX
         let scaleY = nodeParentScaleY * node.scaleY
@@ -101,7 +79,7 @@ internal extension PhysicsNode {
         
         let nodeToWorldTransform = parentToWorldTransform * node.nodeToParentMatrix
         
-        physicsBody?.beforeSimulation(parentToWorldTransform: parentToWorldTransform, nodeToWorldTransform: nodeToWorldTransform, scaleX: scaleX, scaleY: scaleY, rotation: rotation)
+        component?.beforeSimulation(parentToWorldTransform: parentToWorldTransform, nodeToWorldTransform: nodeToWorldTransform, scaleX: scaleX, scaleY: scaleY, rotation: rotation)
         
         for c in children {
             c.beforeSimulation(parentToWorldTransform: nodeToWorldTransform,
@@ -114,7 +92,7 @@ internal extension PhysicsNode {
         let nodeToWorldTransform = parentToWorldTransform * node.nodeToParentMatrix
         let nodeRotation = parentRotation + node.rotation
         
-        physicsBody?.afterSimulation(parentToWorldTransform: parentToWorldTransform, parentRotation: parentRotation)
+        component?.afterSimulation(parentToWorldTransform: parentToWorldTransform, parentRotation: parentRotation)
         
         for c in children {
             c.afterSimulation(parentToWorldTransform: nodeToWorldTransform, parentRotation: nodeRotation)

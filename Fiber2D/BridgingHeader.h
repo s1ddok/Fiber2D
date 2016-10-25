@@ -11,6 +11,7 @@
 #import "CCMetalSupport_Private.h"
 #import "CCTexture_Private.h"
 #import "CCSpriteFrameCache_Private.h"
-#import "CCProtocols.h"
 #import "chipmunk_private.h"
 #import "cpHastySpace.h"
+#import "CCFile_Private.h"
+#import "Image.h"

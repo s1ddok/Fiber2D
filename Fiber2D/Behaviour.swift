@@ -9,8 +9,8 @@
 /**
  * Behaviours are Components that can be enabled or disabled.
  */
-open class Behaviour: Component {
+public protocol Behaviour: Component {
     
     // Enabled Behaviours are Updated, disabled Behaviours are not
-    public var enabled = true
+    var enabled: Bool { get set }
 }

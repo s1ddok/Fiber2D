@@ -21,7 +21,6 @@
 		080306F31D97F093008CAC8E /* BehaviourProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306F21D97F093008CAC8E /* BehaviourProtocol.swift */; };
 		080306F81D97F233008CAC8E /* Prioritized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080306F71D97F233008CAC8E /* Prioritized.swift */; };
 		080307191D994FED008CAC8E /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307181D994FED008CAC8E /* System.swift */; };
-		0803071B1D995331008CAC8E /* Director+Systems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071A1D995331008CAC8E /* Director+Systems.swift */; };
 		0803071F1D9AFFDC008CAC8E /* Node+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */; };
 		080307211D9B1337008CAC8E /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307201D9B1337008CAC8E /* UserComponents.swift */; };
 		080307231D9B1C45008CAC8E /* PhysicsSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307221D9B1C44008CAC8E /* PhysicsSystem.swift */; };
@@ -30,8 +29,7 @@
 		0812AD031D538D7600AE46E8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812AD021D538D7600AE46E8 /* Color.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
 		081FBCD31D462732005838B8 /* CCCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7F1D462732005838B8 /* CCCache.m */; };
-		081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* CCImage+PNG.m */; };
-		081FBCD51D462732005838B8 /* CCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC841D462732005838B8 /* CCImage.m */; };
+		081FBCD41D462732005838B8 /* Image+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* Image+PNG.m */; };
 		081FBCD61D462732005838B8 /* CCNoARC.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC871D462732005838B8 /* CCNoARC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		081FBCD91D462732005838B8 /* CCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC8E1D462732005838B8 /* CCRenderer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC911D462732005838B8 /* CCRendererBasicTypes.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -39,12 +37,10 @@
 		081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC9A1D462732005838B8 /* CCSpriteFrameCache.m */; };
 		081FBCDE1D462732005838B8 /* CCTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC9D1D462732005838B8 /* CCTexture.m */; };
 		081FBCDF1D462732005838B8 /* CCTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA01D462732005838B8 /* CCTextureCache.m */; };
-		081FBCE11D462732005838B8 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA71D462732005838B8 /* cocos2d.m */; };
 		081FBCE21D462732005838B8 /* NSValue+CCRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */; };
 		081FBCE31D462732005838B8 /* CCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCAE1D462732005838B8 /* CCSetup.m */; };
 		081FBCE51D462732005838B8 /* CCMetalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB21D462732005838B8 /* CCMetalSupport.m */; };
 		081FBCE61D462732005838B8 /* CCShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB41D462732005838B8 /* CCShaders.metal */; };
-		081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB61D462732005838B8 /* UITouch+CC.m */; };
 		081FBCE91D462732005838B8 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBA1D462732005838B8 /* MetalView.swift */; };
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
 		081FBCEC1D462732005838B8 /* CCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCC01D462732005838B8 /* CCFile.m */; };
@@ -56,7 +52,6 @@
 		081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFB1D46289A005838B8 /* LayoutBox.swift */; };
 		081FBD121D46289A005838B8 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFC1D46289A005838B8 /* Node.swift */; };
 		081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFD1D46289A005838B8 /* Node+Actions.swift */; };
-		081FBD141D46289A005838B8 /* Node+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFE1D46289A005838B8 /* Node+Convenience.swift */; };
 		081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFF1D46289A005838B8 /* Node+Convertation.swift */; };
 		081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD011D46289A005838B8 /* Node+Scene.swift */; };
 		081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD021D46289A005838B8 /* Node+Transform.swift */; };
@@ -72,6 +67,8 @@
 		081FBD231D46289A005838B8 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0D1D46289A005838B8 /* Transition.swift */; };
 		081FBD261D4628F8005838B8 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD251D4628F8005838B8 /* MainScene.swift */; };
 		081FBD2D1D463207005838B8 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 081FBD2C1D463207005838B8 /* Resources */; };
+		082E904E1DBE92DF00AD32AA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904D1DBE92DF00AD32AA /* Image.swift */; };
+		082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904F1DBE9B8700AD32AA /* Image+PNG.swift */; };
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
 		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
@@ -145,6 +142,9 @@
 		08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */; };
 		08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */; };
 		08C1CB511D91B000006CDCCB /* PhysicsBody+Joints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB501D91B000006CDCCB /* PhysicsBody+Joints.swift */; };
+		08DE0B9A1DB02BE400721CA0 /* ViewportNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B991DB02BE400721CA0 /* ViewportNode.swift */; };
+		08DE0B9C1DB1054300721CA0 /* Scene+Systems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B9B1DB1054300721CA0 /* Scene+Systems.swift */; };
+		08FAB6DF1DAACA0200B3C10C /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAB6DE1DAACA0200B3C10C /* Camera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,7 +186,6 @@
 		080306F21D97F093008CAC8E /* BehaviourProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BehaviourProtocol.swift; path = protocols/BehaviourProtocol.swift; sourceTree = "<group>"; };
 		080306F71D97F233008CAC8E /* Prioritized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Prioritized.swift; path = protocols/Prioritized.swift; sourceTree = "<group>"; };
 		080307181D994FED008CAC8E /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
-		0803071A1D995331008CAC8E /* Director+Systems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Director+Systems.swift"; sourceTree = "<group>"; };
 		0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Hierarchy.swift"; sourceTree = "<group>"; };
 		080307201D9B1337008CAC8E /* UserComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserComponents.swift; sourceTree = "<group>"; };
 		080307221D9B1C44008CAC8E /* PhysicsSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsSystem.swift; sourceTree = "<group>"; };
@@ -201,13 +200,10 @@
 		081FBC7F1D462732005838B8 /* CCCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCache.m; sourceTree = "<group>"; };
 		081FBC801D462732005838B8 /* ccConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccConfig.h; sourceTree = "<group>"; };
 		081FBC811D462732005838B8 /* CCFileLocator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileLocator_Private.h; sourceTree = "<group>"; };
-		081FBC821D462732005838B8 /* CCImage+PNG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCImage+PNG.m"; sourceTree = "<group>"; };
-		081FBC831D462732005838B8 /* CCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCImage.h; sourceTree = "<group>"; };
-		081FBC841D462732005838B8 /* CCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCImage.m; sourceTree = "<group>"; };
-		081FBC851D462732005838B8 /* CCImage_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCImage_Private.h; sourceTree = "<group>"; };
+		081FBC821D462732005838B8 /* Image+PNG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Image+PNG.m"; sourceTree = "<group>"; };
+		081FBC831D462732005838B8 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		081FBC861D462732005838B8 /* ccMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccMacros.h; sourceTree = "<group>"; };
 		081FBC871D462732005838B8 /* CCNoARC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNoARC.m; sourceTree = "<group>"; };
-		081FBC8C1D462732005838B8 /* CCProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCProtocols.h; sourceTree = "<group>"; };
 		081FBC8D1D462732005838B8 /* CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderer.h; sourceTree = "<group>"; };
 		081FBC8E1D462732005838B8 /* CCRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRenderer.m; sourceTree = "<group>"; };
 		081FBC8F1D462732005838B8 /* CCRenderer_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderer_Private.h; sourceTree = "<group>"; };
@@ -225,7 +221,6 @@
 		081FBC9F1D462732005838B8 /* CCTextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextureCache.h; sourceTree = "<group>"; };
 		081FBCA01D462732005838B8 /* CCTextureCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTextureCache.m; sourceTree = "<group>"; };
 		081FBCA61D462732005838B8 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
-		081FBCA71D462732005838B8 /* cocos2d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d.m; sourceTree = "<group>"; };
 		081FBCA81D462732005838B8 /* NSValue+CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+CCRenderer.h"; sourceTree = "<group>"; };
 		081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+CCRenderer.m"; sourceTree = "<group>"; };
 		081FBCAC1D462732005838B8 /* CCNS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNS.h; sourceTree = "<group>"; };
@@ -234,8 +229,6 @@
 		081FBCB21D462732005838B8 /* CCMetalSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMetalSupport.m; sourceTree = "<group>"; };
 		081FBCB31D462732005838B8 /* CCMetalSupport_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMetalSupport_Private.h; sourceTree = "<group>"; };
 		081FBCB41D462732005838B8 /* CCShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CCShaders.metal; sourceTree = "<group>"; };
-		081FBCB51D462732005838B8 /* UITouch+CC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITouch+CC.h"; sourceTree = "<group>"; };
-		081FBCB61D462732005838B8 /* UITouch+CC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITouch+CC.m"; sourceTree = "<group>"; };
 		081FBCBA1D462732005838B8 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = "cocos2d-legacy/Platforms/MetalView.swift"; sourceTree = "<group>"; };
 		081FBCBC1D462732005838B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		081FBCBF1D462732005838B8 /* CCFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFile.h; sourceTree = "<group>"; };
@@ -247,13 +240,12 @@
 		081FBCC71D462732005838B8 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
 		081FBCC81D462732005838B8 /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
 		081FBCF41D462765005838B8 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
-		081FBCF81D46289A005838B8 /* ColorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorNode.swift; path = Fiber2D/ColorNode.swift; sourceTree = "<group>"; };
+		081FBCF81D46289A005838B8 /* ColorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorNode.swift; sourceTree = "<group>"; };
 		081FBCF91D46289A005838B8 /* Director.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
 		081FBCFA1D46289A005838B8 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		081FBCFB1D46289A005838B8 /* LayoutBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutBox.swift; sourceTree = "<group>"; };
 		081FBCFC1D46289A005838B8 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		081FBCFD1D46289A005838B8 /* Node+Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Actions.swift"; sourceTree = "<group>"; };
-		081FBCFE1D46289A005838B8 /* Node+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Convenience.swift"; sourceTree = "<group>"; };
 		081FBCFF1D46289A005838B8 /* Node+Convertation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Convertation.swift"; sourceTree = "<group>"; };
 		081FBD011D46289A005838B8 /* Node+Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Scene.swift"; sourceTree = "<group>"; };
 		081FBD021D46289A005838B8 /* Node+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Transform.swift"; sourceTree = "<group>"; };
@@ -271,6 +263,8 @@
 		081FBD251D4628F8005838B8 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCRendererSharedTypes.h; sourceTree = "<group>"; };
 		081FBD2C1D463207005838B8 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		082E904D1DBE92DF00AD32AA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		082E904F1DBE9B8700AD32AA /* Image+PNG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+PNG.swift"; sourceTree = "<group>"; };
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
 		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
@@ -375,6 +369,9 @@
 		08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Simulation.swift"; sourceTree = "<group>"; };
 		08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsShape+Internal.swift"; sourceTree = "<group>"; };
 		08C1CB501D91B000006CDCCB /* PhysicsBody+Joints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhysicsBody+Joints.swift"; sourceTree = "<group>"; };
+		08DE0B991DB02BE400721CA0 /* ViewportNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewportNode.swift; sourceTree = "<group>"; };
+		08DE0B9B1DB1054300721CA0 /* Scene+Systems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scene+Systems.swift"; sourceTree = "<group>"; };
+		08FAB6DE1DAACA0200B3C10C /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,13 +520,10 @@
 				081FBC7F1D462732005838B8 /* CCCache.m */,
 				081FBC801D462732005838B8 /* ccConfig.h */,
 				081FBC811D462732005838B8 /* CCFileLocator_Private.h */,
-				081FBC821D462732005838B8 /* CCImage+PNG.m */,
-				081FBC831D462732005838B8 /* CCImage.h */,
-				081FBC841D462732005838B8 /* CCImage.m */,
-				081FBC851D462732005838B8 /* CCImage_Private.h */,
+				081FBC821D462732005838B8 /* Image+PNG.m */,
+				081FBC831D462732005838B8 /* Image.h */,
 				081FBC861D462732005838B8 /* ccMacros.h */,
 				081FBC871D462732005838B8 /* CCNoARC.m */,
-				081FBC8C1D462732005838B8 /* CCProtocols.h */,
 				081FBC8D1D462732005838B8 /* CCRenderer.h */,
 				081FBC8E1D462732005838B8 /* CCRenderer.m */,
 				081FBC8F1D462732005838B8 /* CCRenderer_Private.h */,
@@ -547,7 +541,6 @@
 				081FBC9F1D462732005838B8 /* CCTextureCache.h */,
 				081FBCA01D462732005838B8 /* CCTextureCache.m */,
 				081FBCA61D462732005838B8 /* cocos2d.h */,
-				081FBCA71D462732005838B8 /* cocos2d.m */,
 				081FBCA81D462732005838B8 /* NSValue+CCRenderer.h */,
 				081FBCA91D462732005838B8 /* NSValue+CCRenderer.m */,
 			);
@@ -573,8 +566,6 @@
 				081FBCB21D462732005838B8 /* CCMetalSupport.m */,
 				081FBCB31D462732005838B8 /* CCMetalSupport_Private.h */,
 				081FBCB41D462732005838B8 /* CCShaders.metal */,
-				081FBCB51D462732005838B8 /* UITouch+CC.h */,
-				081FBCB61D462732005838B8 /* UITouch+CC.m */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -621,6 +612,7 @@
 		081FBCF71D462871005838B8 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				08B3B5221DB56CB000D564CB /* File Handling */,
 				08855BDC1D9DA6340090EA84 /* typedefs */,
 				0885098B1D7B4F62003EF800 /* Protocols */,
 				081FBD2F1D46343D005838B8 /* Layout */,
@@ -631,6 +623,7 @@
 				087BFA0C1D82D16600F940D4 /* Behaviour */,
 				086652731D7333BA00BCD9CE /* Scheduling */,
 				081FBD321D463457005838B8 /* Sprites */,
+				082E8FEF1DB68AB600AD32AA /* Misc */,
 				08C1CAC41D8EFFA6006CDCCB /* Physics */,
 			);
 			name = Engine;
@@ -640,8 +633,8 @@
 			isa = PBXGroup;
 			children = (
 				080307201D9B1337008CAC8E /* UserComponents.swift */,
-				081FBCF81D46289A005838B8 /* ColorNode.swift */,
 				081FBD251D4628F8005838B8 /* MainScene.swift */,
+				08B3B51B1DB2B98200D564CB /* ViewportScene.swift */,
 			);
 			name = Custom;
 			path = ..;
@@ -652,7 +645,6 @@
 			children = (
 				081FBCFC1D46289A005838B8 /* Node.swift */,
 				081FBCFD1D46289A005838B8 /* Node+Actions.swift */,
-				081FBCFE1D46289A005838B8 /* Node+Convenience.swift */,
 				081FBCFF1D46289A005838B8 /* Node+Convertation.swift */,
 				0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */,
 				081FBD011D46289A005838B8 /* Node+Scene.swift */,
@@ -686,6 +678,7 @@
 		081FBD311D463450005838B8 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				08B3B51D1DB5378100D564CB /* UITouch+Node.swift */,
 				081FBD071D46289A005838B8 /* Responder.swift */,
 				081FBD081D46289A005838B8 /* ResponderManager.swift */,
 			);
@@ -705,15 +698,25 @@
 		081FBD331D463463005838B8 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				08FAB6DE1DAACA0200B3C10C /* Camera.swift */,
 				081FBD091D46289A005838B8 /* Scene.swift */,
+				08DE0B9B1DB1054300721CA0 /* Scene+Systems.swift */,
+				08DE0B991DB02BE400721CA0 /* ViewportNode.swift */,
 				081FBD0D1D46289A005838B8 /* Transition.swift */,
 				081FBCF91D46289A005838B8 /* Director.swift */,
 				080307261D9D4017008CAC8E /* Director+Internal.swift */,
-				0803071A1D995331008CAC8E /* Director+Systems.swift */,
 				087BFA171D82F60500F940D4 /* Director+macOS.swift */,
 				087BFA151D82F5C200F940D4 /* DirectorView.swift */,
 			);
 			name = Scene;
+			sourceTree = "<group>";
+		};
+		082E8FEF1DB68AB600AD32AA /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				081FBCF81D46289A005838B8 /* ColorNode.swift */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 		086652731D7333BA00BCD9CE /* Scheduling */ = {
@@ -786,6 +789,15 @@
 				08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		08B3B5221DB56CB000D564CB /* File Handling */ = {
+			isa = PBXGroup;
+			children = (
+				082E904D1DBE92DF00AD32AA /* Image.swift */,
+				082E904F1DBE9B8700AD32AA /* Image+PNG.swift */,
+			);
+			name = "File Handling";
 			sourceTree = "<group>";
 		};
 		08C1CAC41D8EFFA6006CDCCB /* Physics */ = {
@@ -1041,6 +1053,7 @@
 				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
 				08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
+				08DE0B9C1DB1054300721CA0 /* Scene+Systems.swift in Sources */,
 				080306F31D97F093008CAC8E /* BehaviourProtocol.swift in Sources */,
 				081FBD131D46289A005838B8 /* Node+Actions.swift in Sources */,
 				08C1CB321D8F00C6006CDCCB /* PhysicsBody.swift in Sources */,
@@ -1053,7 +1066,8 @@
 				087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */,
 				081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */,
 				081FBCE31D462732005838B8 /* CCSetup.m in Sources */,
-				081FBCD41D462732005838B8 /* CCImage+PNG.m in Sources */,
+				082E904E1DBE92DF00AD32AA /* Image.swift in Sources */,
+				081FBCD41D462732005838B8 /* Image+PNG.m in Sources */,
 				08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */,
 				08C1CB361D8F03D2006CDCCB /* PhysicsTypes.swift in Sources */,
 				0812AD031D538D7600AE46E8 /* Color.swift in Sources */,
@@ -1061,7 +1075,6 @@
 				08C1CB241D8EFFD5006CDCCB /* cpRobust.c in Sources */,
 				080307271D9D4017008CAC8E /* Director+Internal.swift in Sources */,
 				08C1CB1B1D8EFFD5006CDCCB /* cpGrooveJoint.c in Sources */,
-				081FBCD51D462732005838B8 /* CCImage.m in Sources */,
 				081FBD221D46289A005838B8 /* SpriteFrame.swift in Sources */,
 				081FBCDD1D462732005838B8 /* CCSpriteFrameCache.m in Sources */,
 				05BC34C01D85B8A300306A4F /* Shader.swift in Sources */,
@@ -1081,6 +1094,7 @@
 				08C1CB221D8EFFD5006CDCCB /* cpPolyShape.c in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
+				082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
 				05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */,
 				08C1CB181D8EFFD5006CDCCB /* cpDampedRotarySpring.c in Sources */,
@@ -1090,12 +1104,12 @@
 				08C1CB471D915A1A006CDCCB /* PhysicsWorld+Shapes.swift in Sources */,
 				08C1CB411D914A07006CDCCB /* PhysicsWorld+Bodies.swift in Sources */,
 				08C1CB1D1D8EFFD5006CDCCB /* cpHastySpace.c in Sources */,
-				081FBCE71D462732005838B8 /* UITouch+CC.m in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
 				080307191D994FED008CAC8E /* System.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
+				08DE0B9A1DB02BE400721CA0 /* ViewportNode.swift in Sources */,
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
@@ -1123,12 +1137,11 @@
 				08C1CB4B1D917A6A006CDCCB /* PhysicsBody+Shapes.swift in Sources */,
 				081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */,
 				081FBD1C1D46289A005838B8 /* RenderTextureSprite.swift in Sources */,
-				081FBCE11D462732005838B8 /* cocos2d.m in Sources */,
-				081FBD141D46289A005838B8 /* Node+Convenience.swift in Sources */,
 				08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */,
 				08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */,
 				081FBD121D46289A005838B8 /* Node.swift in Sources */,
 				08C1CB291D8EFFD5006CDCCB /* cpSpace.c in Sources */,
+				08B3B51E1DB5378100D564CB /* UITouch+Node.swift in Sources */,
 				081FBCDA1D462732005838B8 /* CCRendererBasicTypes.m in Sources */,
 				081FBCD61D462732005838B8 /* CCNoARC.m in Sources */,
 				080306AE1D941F4D008CAC8E /* PhysicsShapeBox.swift in Sources */,
@@ -1152,6 +1165,7 @@
 				08C1CB2D1D8EFFD5006CDCCB /* cpSpaceQuery.c in Sources */,
 				081FBCDC1D462732005838B8 /* CCShader.m in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,
+				08B3B51C1DB2B98200D564CB /* ViewportScene.swift in Sources */,
 				08C1CB2B1D8EFFD5006CDCCB /* cpSpaceDebug.c in Sources */,
 				05D231C11D9CD19000611AA3 /* BGFXView.swift in Sources */,
 				081FBD101D46289A005838B8 /* Layout.swift in Sources */,
@@ -1163,7 +1177,6 @@
 				088509951D7B876D003EF800 /* ActionEase.swift in Sources */,
 				080306F81D97F233008CAC8E /* Prioritized.swift in Sources */,
 				087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */,
-				0803071B1D995331008CAC8E /* Director+Systems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1288,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};
@@ -1302,6 +1316,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};

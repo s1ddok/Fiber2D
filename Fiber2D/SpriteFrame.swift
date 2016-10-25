@@ -26,7 +26,8 @@ import SwiftMath
         return _proxy!
     }
     
-    private var _proxy: CCProxy?
+    private weak var _proxy: CCProxy?
+    
     var lazyTexture: CCTexture {
         if _lazyTexture == nil && textureFilename != "" {
             _lazyTexture = CCTextureCache.shared().addImage(textureFilename)

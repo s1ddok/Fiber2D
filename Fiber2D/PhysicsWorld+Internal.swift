@@ -54,7 +54,7 @@ internal extension PhysicsWorld {
     }
     
     internal func update(dt: Time, userCall: Bool = false) {
-        guard dt > FLT_EPSILON else {
+        guard dt > Float.ulpOfOne else {
             return
         }
         

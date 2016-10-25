@@ -24,7 +24,6 @@
 
 
 #import "CCRenderer.h"
-#import "CCCache.h"
 #import "CCRendererBasicTypes_Private.h"
 
 /// Options dictionary for the disabled blending mode.

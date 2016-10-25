@@ -8,7 +8,7 @@
 
 public protocol System: class, Enterable, Exitable, Pausable {
     
-    func onAdd(to director: Director)
+    func onAdd(to scene: Scene)
     func onRemove()
     
     /**
@@ -31,8 +31,31 @@ public protocol System: class, Enterable, Exitable, Pausable {
 
 // default implementations AKA optional methods
 public extension System {
-    func onAdd(to director: Director) {}
+    func onAdd(to scene: Scene) {}
     func onRemove() {}
     func onEnter() {}
     func onExit() {}
+}
+
+public struct ComponentNode<T> where T: ComponentBase {
+    unowned let node: Node
+    weak var component: T?
+    
+    var children = [ComponentNode<T>]()
+}
+
+public extension Node {
+    public func subtree<T>(of type: T.Type) -> ComponentNode<T>
+    where T: Component {
+        let body = self.getComponent(by: type)
+        var children = [ComponentNode<T>]()
+        for c in self.children {
+            let subtree = c.subtree(of: type)
+            if subtree.component != nil || subtree.children.count > 0 {
+                children.append(subtree)
+            }
+        }
+        
+        return ComponentNode(node: self, component: body, children: children)
+    }
 }

@@ -5,7 +5,7 @@
 //  Copyright © 2016. All rights reserved.
 //
 
-extension Node: Enterable, Exitable {
+internal extension Node {
     /** Called every time the Node (or one of its parents) has been added to the scene, or when the scene is presented.
      If a new scene is presented with a transition, this event is sent to nodes when the transition animation starts.
      
@@ -13,10 +13,9 @@ extension Node: Enterable, Exitable {
      @see onExit
      @see onEnterTransitionDidFinish
      */
-    public func onEnter() {
+    internal func _onEnter() {
         assert(self.scene != nil, "Missing scene on node. Was it not added to the hierarchy?")
-        children.forEach { $0.onEnter() }
-        scheduler!.schedule(target: self)
+        children.forEach { $0._onEnter() }
         let wasRunning: Bool = self.active
         // Add queued actions or scheduled code, if needed:
         for a in queuedActions {
@@ -29,12 +28,16 @@ extension Node: Enterable, Exitable {
         }
         self.queuedComponents.removeAll()
         
-        components.forEach {
-            director!.system(for: $0)?.add(component: $0)
-            if let c = $0 as? Enterable { c.onEnter() }
-        }
+        scheduler!.schedule(target: self)
+        
         self.isInActiveScene = true
         self.wasRunning(wasRunning)
+        
+        components.forEach {
+            scene!.system(for: $0)?.add(component: $0)
+            if let c = $0 as? Enterable { c.onEnter() }
+        }
+        onEnter()
     }
     
     /** Called every time the Node (or one of its parents) has been added to the scene, or when the scene is presented.
@@ -45,8 +48,9 @@ extension Node: Enterable, Exitable {
      @see onEnter
      @see onExit
      */
-    public func onEnterTransitionDidFinish() {
-        children.forEach { $0.onEnterTransitionDidFinish() }
+    internal func _onEnterTransitionDidFinish() {
+        children.forEach { $0._onEnterTransitionDidFinish() }
+        onEnterTransitionDidFinish()
     }
     
     /** Called every time the Node is removed from the node tree.
@@ -56,8 +60,9 @@ extension Node: Enterable, Exitable {
      @see onExit
      @see onEnter
      */
-    public func onExitTransitionDidStart() {
-        children.forEach { $0.onExitTransitionDidStart() }
+    internal func _onExitTransitionDidStart() {
+        children.forEach { $0._onExitTransitionDidStart() }
+        onExitTransitionDidStart()
     }
     
     /** Called every time the Node is removed from the node tree.
@@ -67,18 +72,19 @@ extension Node: Enterable, Exitable {
      @see onEnter
      @see onExitTransitionDidStart
      */
-    public func onExit() {
+    internal func _onExit() {
         let wasRunning: Bool = self.active
         self.isInActiveScene = false
         self.wasRunning(wasRunning)
         
         components.forEach {
             if let c = $0 as? Exitable { c.onExit() }
-            self.director!.system(for: $0)?.remove(component: $0)
+            self.scene!.system(for: $0)?.remove(component: $0)
         }
-        if updatableComponents.count > 0 || fixedUpdatableComponentns.count > 0 {
+        if updatableComponents.count > 0 || fixedUpdatableComponents.count > 0 {
             scheduler!.unscheduleUpdates(from: self)
         }
-        children.forEach { $0.onExit() }
+        onExit()
+        children.forEach { $0._onExit() }
     }
 }

@@ -84,21 +84,6 @@
 -(void) addImageAsync:(NSString*) filename target:(id)target selector:(SEL)selector;
 
 /**
- * Returns a Texture2D object given an CGImageRef image.
- *
- * If the image was not previously loaded, it will create a new CCTexture2D object and it will return it.
- * Otherwise it will return a reference of a previously loaded image.
- * The "key" parameter will be used as the "key" for the cache.
- * If "key" is nil, then a new texture will be created each time.
- *
- *  @param image CG image to create texture from.
- *  @param key   Key used to define texture in cache.
- *
- *  @return Texture.
- */
--(CCTexture*) addCGImage: (CGImageRef) image forKey: (NSString *)key;
-
-/**
  *  Returns an already created texture. Returns nil if the texture doesn't exist.
  *
  *  @param key Key to look for.

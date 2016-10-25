@@ -10,7 +10,7 @@ import SwiftMath
 /** Scene is a subclass of Node. The scene represents the root node of the node hierarchy.
  */
 open class Scene: Node {
-    
+    // Override these with self and stored properties
     override public var scene: Scene {
         return self
     }
@@ -58,30 +58,18 @@ open class Scene: Node {
     }
     private var _projection: Matrix4x4f!
     
+    internal(set) public var systems = [System]()
+    
     /// @name Creating a Scene
     
     /// Initialize the node.
-    override init() {
+    public init(size: Size) {
         super.init()
-        let s = Director.currentDirector!.designSize
-        self.anchorPoint = p2d(0.0, 0.0)
-        self.contentSize = s
-        self.colorRGBA = Color.black
-        self._scheduler = Scheduler()
-        //self.projectionDelegate = CCOrthoProjection(target: self)
-        self._projection = Matrix4x4f(target: self)
-        self.color = Color.black
-    }
-    
-    override public func onEnter() {
-        super.onEnter()
-        // mark starting scene as dirty, to make sure responder manager is updated
-        director.responderManager.markAsDirty()
-    }
-    
-    override public func onEnterTransitionDidFinish() {
-        super.onEnterTransitionDidFinish()
-        // mark starting scene as dirty, to make sure responder manager is updated
-        director.responderManager.markAsDirty()
+        self.contentSize = size
+        self.anchorPoint = .zero
+        self.colorRGBA   = .black
+        self.color       = .black
+        self._scheduler  = Scheduler()
+        self._projection = Matrix4x4f.orthoProjection(for: self)
     }
 }

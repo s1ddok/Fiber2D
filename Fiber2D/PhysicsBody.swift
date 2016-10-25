@@ -16,7 +16,7 @@ import SwiftMath
  * If you create body with createEdgeXXX, the mass and moment will be inifinity by default. And it's a static body.
  * You can change mass and moment with `mass` and `moment`. And you can change the body to be dynamic or static by use `dynamic`.
  */
-public class PhysicsBody: Behaviour, FixedUpdatable {
+public class PhysicsBody: ComponentBase, Behaviour, FixedUpdatable, Pausable {
     // MARK: State
     /** Whether the body is at rest. */
     public var isResting: Bool {
@@ -228,6 +228,7 @@ public class PhysicsBody: Behaviour, FixedUpdatable {
         cpBodySetVelocityUpdateFunc(chipmunkBody, internalBodyUpdateVelocity)
     }
     
+    public var paused: Bool = false
     public func fixedUpdate(delta: Time) {
         // damping compute
         if (_isDamping && isDynamic && !isResting) {
@@ -237,13 +238,15 @@ public class PhysicsBody: Behaviour, FixedUpdatable {
         }
     }
     // MARK: Component stuff
-    public override var enabled: Bool {
+    public var enabled: Bool = true {
         didSet {
             if oldValue != enabled {
                 if enabled {
                     world?.addBodyOrDelay(body: self)
+                    paused = false
                 } else {
                     world?.removeBodyOrDelay(body: self)
+                    paused = true
                 }
             }
         }
@@ -293,7 +296,7 @@ public class PhysicsBody: Behaviour, FixedUpdatable {
 
 extension PhysicsBody {
     func addToPhysicsWorld() {
-        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+        if let physicsSystem = owner?.scene?.system(for: PhysicsSystem.self) {
             physicsSystem.world.add(body: self)
             physicsSystem.dirty = true
         }
@@ -301,7 +304,7 @@ extension PhysicsBody {
     
     /** remove the body from the world it added to */
     func removeFromPhysicsWorld() {
-        if let physicsSystem = owner?.director?.system(for: PhysicsSystem.self) {
+        if let physicsSystem = owner?.scene?.system(for: PhysicsSystem.self) {
             physicsSystem.world.remove(body: self)
             physicsSystem.dirty = true
         }

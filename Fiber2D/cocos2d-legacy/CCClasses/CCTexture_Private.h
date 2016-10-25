@@ -27,6 +27,7 @@
 
 #import <Metal/Metal.h>
 
+@class Image;
 // -------------------------------------------------------------
 
 // Proxy object returned in place of a CCTexture or CCSpriteFrame by the texture cache.
@@ -40,7 +41,7 @@
 
 @interface CCTexture ()
 
--(instancetype)initWithImage:(CCImage *)image options:(NSDictionary *)options rendertexture:(BOOL)rendertexture;
+-(instancetype)initWithImage:(Image *)image options:(NSDictionary *)options rendertexture:(BOOL)rendertexture;
 
 // Fill in any missing fields of an options dictionary.
 +(NSDictionary *)normalizeOptions:(NSDictionary *)options;

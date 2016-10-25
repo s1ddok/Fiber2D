@@ -1,12 +1,12 @@
 //
-//  Director+Systems.swift
+//  Scene+Systems.swift
 //  Fiber2D
 //
-//  Created by Andrey Volodin on 26.09.16.
+//  Created by Andrey Volodin on 14.10.16.
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public extension Director {
+public extension Scene {
     public func register(system: System) {
         let idx = systems.first { s in s === system }
         
@@ -15,13 +15,13 @@ public extension Director {
         }
         
         systems.append(system)
-
+        
         if let s = system as? Updatable & Pausable {
-            runningScene?.scheduler.schedule(updatable: s)
+            scheduler.schedule(updatable: s)
         }
         
         if let s = system as? FixedUpdatable & Pausable {
-            runningScene?.scheduler.schedule(fixedUpdatable: s)
+            scheduler.schedule(fixedUpdatable: s)
         }
         system.onAdd(to: self)
     }
@@ -42,15 +42,15 @@ public extension Director {
     }
     
     public func system<U>(for type: U.Type) -> U?
-    where U: System {
-        for s in systems {
-            if let retVal = s as? U {
-                return retVal
+        where U: System {
+            for s in systems {
+                if let retVal = s as? U {
+                    return retVal
+                }
             }
-        }
-        
-        return nil
-        
+            
+            return nil
+            
     }
     
 }

@@ -7,7 +7,51 @@
 
 import SwiftMath
 
-class ColorNode: RenderableNode {
+/**
+ Draws a rectangle filled with a solid color.
+ */
+open class ColorNode: RenderableNode {
+    internal var colors = Color.clear
+    /**
+     *  Creates a node with color, width and height in Points.
+     *
+     *  @param color Color of the node.
+     *  @param size  Width and Height of the node.
+     *
+     *  @return An initialized ColorNode Object.
+     *  @see Color
+     */
+    public init(color: Color = .clear, size: Size = .zero) {
+        super.init()
+        self.color = color
+        self.contentSizeInPoints = size
+        
+        self.blendMode = CCBlendMode.premultipliedAlpha()
+        self.shader = CCShader.positionColor()
+        
+        updateColor()
+    }
+    
+    override var color: Color {
+        didSet {
+           updateColor()
+        }
+    }
+    
+    override var opacity: Float {
+        didSet {
+            updateColor()
+        }
+    }
+    
+    override func updateDisplayedOpacity(_ parentOpacity: Float) {
+        super.updateDisplayedOpacity(parentOpacity)
+        updateColor()
+    }
+    
+    internal func updateColor() {
+        colors = displayedColor.premultiplyingAlpha
+    }
     
     override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
         var buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: renderState, globalSortOrder: 0)

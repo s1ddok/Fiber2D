@@ -48,8 +48,6 @@ public class Director: NSObject {
         stack.removeLastObject()
     }
     
-    internal(set) public var systems = [System]()
-    
     // internal timer
     var oldFrameSkipInterval: Int = 1
     var frameSkipInterval: Int = 1
@@ -142,7 +140,7 @@ public class Director: NSObject {
         }
         Director.pushCurrentDirector(self)
         /* calculate "global" dt */
-        self.calculateDeltaTime()
+        calculateDeltaTime()
         /* tick before glClear: issue #533 */
         if !isPaused {
             runningScene!.scheduler.update(dt)
@@ -389,8 +387,8 @@ public class Director: NSObject {
         while c > level {
             let current = scenesStack.lastObject as! Scene
             if current.active {
-                current.onExitTransitionDidStart()
-                current.onExit()
+                current._onExitTransitionDidStart()
+                current._onExit()
             }
             current.cleanup()
             scenesStack.removeLastObject()
@@ -408,8 +406,8 @@ public class Director: NSObject {
     }
     
     func end() {
-        runningScene!.onExitTransitionDidStart()
-        runningScene!.onExit()
+        runningScene!._onExitTransitionDidStart()
+        runningScene!._onExit()
         runningScene!.cleanup()
         self.runningScene = nil
         self.nextScene = nil
@@ -434,7 +432,8 @@ public class Director: NSObject {
             self.nextScene!.director = self
             self.runningScene = nextScene
             self.nextScene = nil
-            runningScene!.onEnter()
+            runningScene!._onEnter()
+            responderManager.markAsDirty()
             return
         }
         // If running scene is a transition class, the transition has ended
@@ -442,7 +441,7 @@ public class Director: NSObject {
         // Clean up transition
         // Outgoing scene was stopped by transition
         if (runningScene is Transition) {
-            runningScene!.onExit()
+            runningScene!._onExit()
             runningScene!.cleanup()
             self.runningScene!.director = nil
             self.runningScene = nil
@@ -452,8 +451,8 @@ public class Director: NSObject {
         }
         // if next scene is not a transition, force exit calls
         if !(nextScene is Transition) {
-            runningScene?.onExitTransitionDidStart()
-            runningScene?.onExit()
+            runningScene?._onExitTransitionDidStart()
+            runningScene?._onExit()
             // issue #709. the root node (scene) should receive the cleanup message too
             // otherwise it might be leaked.
             if sendCleanupToScene {
@@ -464,8 +463,9 @@ public class Director: NSObject {
         self.nextScene = nil
         // if running scene is not a transition, force enter calls
         if !(runningScene is Transition) {
-            runningScene!.onEnter()
-            runningScene!.onEnterTransitionDidFinish()
+            runningScene!._onEnter()
+            runningScene!._onEnterTransitionDidFinish()
+            responderManager.markAsDirty()
             runningScene!.paused = false
         }
     }

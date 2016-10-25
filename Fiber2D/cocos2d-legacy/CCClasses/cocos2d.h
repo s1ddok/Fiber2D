@@ -38,13 +38,6 @@
  * @todo A native English speaker should check the grammar. We need your help!
  *
  */
-
-// 0x00 HI ME LO
-// 00   03 01 01
-#define COCOS2D_VERSION 0x00030403
-#define COCOS2D_BUILD @"develop"
-
-
 #import "ccConfig.h"
 
 #import "ccMacros.h"
@@ -53,8 +46,6 @@
 #import "CCSetup.h"
 
 // Basic Types:
-#import "CCProtocols.h"
-#import "CCImage.h"
 #import "CCTexture.h"
 #import "CCShader.h"
 
@@ -72,7 +63,6 @@
 #import "CCFileLocator.h"
 #import "CGPointExtension.h"
 #import "ccUtils.h"
-#import "UITouch+CC.h"
 
 // Platform Support:
 #import "CCNS.h"

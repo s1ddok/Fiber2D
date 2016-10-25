@@ -36,7 +36,6 @@
 #import "Fiber2D-Swift.h"
 #import "CCFileLocator.h"
 #import "CCFile_Private.h"
-#import "CCImage.h"
 
 @implementation CCTextureCache
 
@@ -139,7 +138,7 @@ static CCTextureCache *sharedTextureCache;
         if([lowerCase hasSuffix:@".pvr"] || [lowerCase hasSuffix:@".pvr.gz"] || [lowerCase hasSuffix:@".pvr.ccz"]){
             tex = [self addPVRImage:path];
         } else {
-            CCImage *image = [[CCImage alloc] initWithCCFile:file options:nil];
+            Image* image = [[Image alloc] initWithFile: file];
             tex = [[CCTexture alloc] initWithImage:image options:nil];
 
             if(tex){
@@ -151,36 +150,6 @@ static CCTextureCache *sharedTextureCache;
                 CCLOG(@"cocos2d: Couldn't create texture for file:%@ in CCTextureCache", path);
             }
         }
-	}
-
-	return((id)tex.proxy);
-}
-
-
--(CCTexture*) addCGImage: (CGImageRef) imageref forKey: (NSString *)key
-{
-	NSAssert(imageref != nil, @"TextureCache: image MUST not be nill");
-
-	__block CCTexture * tex = nil;
-
-	// If key is nil, then create a new texture each time
-	if( key ) {
-		dispatch_sync(_dictQueue, ^{
-			tex = [_textures objectForKey:key];
-		});
-		if(tex)
-			return((id)tex.proxy);
-	}
-    
-    CCImage *image = [[CCImage alloc] initWithCGImage:imageref contentScale:1.0 options:nil];
-	tex = [[CCTexture alloc] initWithImage:image options:nil];
-
-	if(tex && key){
-		dispatch_sync(_dictQueue, ^{
-			[_textures setObject: tex forKey:key];
-		});
-	}else{
-		CCLOG(@"cocos2d: Couldn't add CGImage in CCTextureCache");
 	}
 
 	return((id)tex.proxy);

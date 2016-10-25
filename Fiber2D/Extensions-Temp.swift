@@ -35,10 +35,11 @@ extension Vector2f {
     var glkVec2: GLKVector2 {
         return GLKVector2Make(x, y)
     }
-    
+    #if os(iOS) || os(tvOS) || os(OSX)
     init(_ cgPoint: CGPoint) {
         self.init(Float(cgPoint.x), Float(cgPoint.y))
     }
+    #endif
 }
 
 extension GLKVector2 {
@@ -53,12 +54,12 @@ extension GLKVector2 {
 }
 
 extension Matrix4x4f {
-    init(target: Node) {
+    static func orthoProjection(for target: Node) -> Matrix4x4f {
         let size = target.contentSizeInPoints
         let w = Float(size.width)
         let h = Float(size.height)
         
-        self.init(Matrix4x4f.ortho(left: 0, right: w, bottom: 0, top: h, near: -1024, far: 1024))
+        return Matrix4x4f.ortho(left: 0, right: w, bottom: 0, top: h, near: -1024, far: 1024)
     }
 }
 

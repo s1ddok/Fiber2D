@@ -42,7 +42,7 @@ public extension Node {
      */
     @discardableResult
     public func add(component: Component) -> Bool {
-        guard let director = self.director else {
+        guard let scene = self.scene else {
             queuedComponents.append(component)
             return false
         }
@@ -59,7 +59,7 @@ public extension Node {
         component.onAdd(to: self)
         
         if isInActiveScene {
-            let system = director.system(for: component)
+            let system = scene.system(for: component)
             system?.add(component: component)
             
             if let e = component as? Enterable {
@@ -72,18 +72,18 @@ public extension Node {
             updatableComponents.append(c)
             
             // If it is first component
-            if updatableComponents.count == 1 {
-                scheduler?.schedule(updatable: self)
+            if isInActiveScene && updatableComponents.count == 1 {
+                scene.scheduler.schedule(updatable: self)
             }
         }
         
         if let c = component as? FixedUpdatable & Tagged {
             // TODO: Insert with priority in mind
-            fixedUpdatableComponentns.append(c)
+            fixedUpdatableComponents.append(c)
             
             // If it is first component
-            if fixedUpdatableComponentns.count == 1 {
-                scheduler?.schedule(updatable: self)
+            if isInActiveScene && fixedUpdatableComponents.count == 1 {
+                scene.scheduler.schedule(fixedUpdatable: self)
             }
         }
     
@@ -111,7 +111,7 @@ public extension Node {
                 e.onExit()
             }
             
-            director?.system(for: c)?.remove(component: c)
+            scene?.system(for: c)?.remove(component: c)
             
             c.onRemove()
             
@@ -126,11 +126,11 @@ public extension Node {
             }
             
             if c is FixedUpdatable {
-                if let idx = fixedUpdatableComponentns.index(where: { $0.tag == tag } ) {
-                    fixedUpdatableComponentns.remove(at: idx)
+                if let idx = fixedUpdatableComponents.index(where: { $0.tag == tag } ) {
+                    fixedUpdatableComponents.remove(at: idx)
                 }
                 
-                if self.fixedUpdatableComponentns.isEmpty {
+                if self.fixedUpdatableComponents.isEmpty {
                     self.scheduler?.unschedule(fixedUpdatable: self)
                 }
             }
@@ -180,7 +180,7 @@ public extension Node {
                 e.onExit()
             }
             
-            director?.system(for: c)?.remove(component: c)
+            scene?.system(for: c)?.remove(component: c)
             
             c.onRemove()
             
@@ -195,11 +195,11 @@ public extension Node {
             }
             
             if c is FixedUpdatable {
-                if let idx = fixedUpdatableComponentns.index(where: { $0 is U } ) {
-                    fixedUpdatableComponentns.remove(at: idx)
+                if let idx = fixedUpdatableComponents.index(where: { $0 is U } ) {
+                    fixedUpdatableComponents.remove(at: idx)
                 }
                 
-                if self.fixedUpdatableComponentns.isEmpty {
+                if self.fixedUpdatableComponents.isEmpty {
                     self.scheduler?.unschedule(fixedUpdatable: self)
                 }
             }
@@ -226,7 +226,7 @@ public extension Node {
         }
         components = []
         updatableComponents = []
-        fixedUpdatableComponentns = []
+        fixedUpdatableComponents = []
         
         let scheduler = self.scheduler
         scheduler?.unschedule(updatable: self)
@@ -241,6 +241,12 @@ extension Node: Updatable, FixedUpdatable {
     }
     
     public final func fixedUpdate(delta: Time) {
-        fixedUpdatableComponentns.forEach { $0.fixedUpdate(delta: delta) }
+        // this is a workaround of what seems to be a Swift compiler bug
+        // commented line does not work ...
+        for c in fixedUpdatableComponents as [FixedUpdatable] {
+            c.fixedUpdate(delta: delta)
+        }
+        //fixedUpdatableComponents.forEach { $0.fixedUpdate(delta: delta) }
     }
+    
 }

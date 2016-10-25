@@ -26,7 +26,7 @@ extension Director: MTKViewDelegate {
     
     public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         runningScene?.contentSize = Size(CGSize: size)
-        runningScene?.viewDidResizeTo(Size(CGSize:size))
+        runningScene?.viewDidResize(to: Size(CGSize:size))
     }
 }
 #endif

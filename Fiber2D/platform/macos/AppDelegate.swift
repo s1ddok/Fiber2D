@@ -52,7 +52,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let director: Director = view.director
 //        director = Director(view: self)
         Director.pushCurrentDirector(director)
-        director.presentScene(MainScene())
+        director.presentScene(MainScene(size: director.designSize))
+        //director.presentScene(ViewportScene(size: director.designSize))
         Director.popCurrentDirector()
     }
 
