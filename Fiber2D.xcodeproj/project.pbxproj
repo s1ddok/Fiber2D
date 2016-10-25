@@ -94,6 +94,7 @@
 		08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855BE31D9DA6540090EA84 /* UnitTypes.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08AA0EE71DBFC5F800748555 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */; };
+		08B3B51E1DB5378100D564CB /* UITouch+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51D1DB5378100D564CB /* UITouch+Node.swift */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
 		08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CAEE1D8EFFD5006CDCCB /* chipmunk.c */; };
 		08C1CB111D8EFFD5006CDCCB /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 08C1CAEF1D8EFFD5006CDCCB /* CMakeLists.txt */; };
@@ -142,9 +143,7 @@
 		08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4C1D917B0A006CDCCB /* PhysicsBody+Simulation.swift */; };
 		08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB4E1D919BCA006CDCCB /* PhysicsShape+Internal.swift */; };
 		08C1CB511D91B000006CDCCB /* PhysicsBody+Joints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CB501D91B000006CDCCB /* PhysicsBody+Joints.swift */; };
-		08DE0B9A1DB02BE400721CA0 /* ViewportNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B991DB02BE400721CA0 /* ViewportNode.swift */; };
 		08DE0B9C1DB1054300721CA0 /* Scene+Systems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B9B1DB1054300721CA0 /* Scene+Systems.swift */; };
-		08FAB6DF1DAACA0200B3C10C /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAB6DE1DAACA0200B3C10C /* Camera.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,6 +289,8 @@
 		08855BE31D9DA6540090EA84 /* UnitTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTypes.swift; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
 		08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftBGFX.dylib; path = external/SwiftBGFX/SwiftBGFX/.build/debug/libSwiftBGFX.dylib; sourceTree = "<group>"; };
+		08B3B51B1DB2B98200D564CB /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewportScene.swift; sourceTree = "<group>"; };
+		08B3B51D1DB5378100D564CB /* UITouch+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITouch+Node.swift"; path = "platform/ios/UITouch+Node.swift"; sourceTree = "<group>"; };
 		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
 		08C1CACF1D8EFFD5006CDCCB /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		08C1CAD01D8EFFD5006CDCCB /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
@@ -1109,7 +1110,6 @@
 				080307191D994FED008CAC8E /* System.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
-				08DE0B9A1DB02BE400721CA0 /* ViewportNode.swift in Sources */,
 				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
@@ -1165,7 +1165,6 @@
 				08C1CB2D1D8EFFD5006CDCCB /* cpSpaceQuery.c in Sources */,
 				081FBCDC1D462732005838B8 /* CCShader.m in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,
-				08B3B51C1DB2B98200D564CB /* ViewportScene.swift in Sources */,
 				08C1CB2B1D8EFFD5006CDCCB /* cpSpaceDebug.c in Sources */,
 				05D231C11D9CD19000611AA3 /* BGFXView.swift in Sources */,
 				081FBD101D46289A005838B8 /* Layout.swift in Sources */,
