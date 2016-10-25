@@ -34,8 +34,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.window.acceptsMouseMovedEvents = true
         let director: Director = view.director
         Director.pushCurrentDirector(director)
-        //director.presentScene(MainScene(size: director.designSize))
-        director.presentScene(ViewportScene(size: director.designSize))
+        director.presentScene(MainScene(size: director.designSize))
+        //director.presentScene(ViewportScene(size: director.designSize))
         Director.popCurrentDirector()
     }
 
