@@ -12,10 +12,10 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3E4E5F86-8B1E-4D1E-BCCE-E273F3D9B586",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "6A1162D3940A6E35EFA0DC5C72134140347287DB" : "Fiber2D\/external\/SwiftBGFX\/",
-    "999D2B244F4BEADDDD09CD5EE2574031B24F399A" : "Fiber2D\/external\/chipmunk\/",
-    "15CDD3D44F6D433AF7946E3CCB33353A33C52F1D" : "Fiber2D\/",
-    "7D39869EA4CC9A83A3F4FB03D5AECCACD0642011" : "Fiber2D\/external\/libpng\/",
+    "6A1162D3940A6E35EFA0DC5C72134140347287DB" : "f2dbgfx3\/external\/SwiftBGFX\/",
+    "999D2B244F4BEADDDD09CD5EE2574031B24F399A" : "f2dbgfx3\/external\/chipmunk\/",
+    "15CDD3D44F6D433AF7946E3CCB33353A33C52F1D" : "f2dbgfx3\/",
+    "7D39869EA4CC9A83A3F4FB03D5AECCACD0642011" : "f2dbgfx3\/external\/libpng\/",
     "CD48A33CC8DECA9AE6AA0181A11622958355048F" : "Fiber2D\/external\/math\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Fiber2D",

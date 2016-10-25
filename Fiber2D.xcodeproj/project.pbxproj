@@ -1260,7 +1260,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Fiber2D/cocos2d-legacy/**",
-					"$(SRCROOT)/external/**",
+					"$(SRCROOT)/external/math/**",
+					"$(SRCROOT)/external/libpng/**",
+					"$(SRCROOT)/external/chipmunk/**",
 				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1285,7 +1287,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Fiber2D/cocos2d-legacy/**",
-					"$(SRCROOT)/external/**",
+					"$(SRCROOT)/external/math/**",
+					"$(SRCROOT)/external/libpng/**",
+					"$(SRCROOT)/external/chipmunk/**",
 				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
