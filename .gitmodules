@@ -7,3 +7,6 @@
 [submodule "external/chipmunk"]
 	path = external/chipmunk
 	url = https://github.com/slembcke/Chipmunk2D.git
+[submodule "external/SwiftBGFX"]
+	path = external/SwiftBGFX
+	url = https://github.com/SwiftGFX/SwiftBGFX.git

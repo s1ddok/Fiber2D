@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		054764D91D82944D003DC740 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054764D81D82944D003DC740 /* libSwiftBGFX.dylib */; };
 		059228231D9B17FB0041B9B4 /* RenderTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD051D46289A005838B8 /* RenderTexture.swift */; };
 		05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BC1D85B8A300306A4F /* Renderer.swift */; };
 		05BC34C01D85B8A300306A4F /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BD1D85B8A300306A4F /* Shader.swift */; };
@@ -97,6 +96,7 @@
 		088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */; };
 		08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855BE31D9DA6540090EA84 /* UnitTypes.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
+		08AA0EE71DBFC5F800748555 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
 		08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CAEE1D8EFFD5006CDCCB /* chipmunk.c */; };
 		08C1CB111D8EFFD5006CDCCB /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 08C1CAEF1D8EFFD5006CDCCB /* CMakeLists.txt */; };
@@ -169,24 +169,9 @@
 			remoteGlobalIDString = D331FC831ADB97FE0013FFBE;
 			remoteInfo = "libpng (Android)";
 		};
-		08855BD31D9D60270090EA84 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08855BCE1D9D60270090EA84 /* SwiftMath.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_SwiftMath";
-			remoteInfo = SwiftMath;
-		};
-		08855BD51D9D60270090EA84 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08855BCE1D9D60270090EA84 /* SwiftMath.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_SwiftMathTests";
-			remoteInfo = SwiftMathTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		054764D81D82944D003DC740 /* libSwiftBGFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftBGFX.dylib; path = ../../swift/SwiftBGFX/.build/debug/libSwiftBGFX.dylib; sourceTree = "<group>"; };
 		054764DE1D829473003DC740 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		05BC34BC1D85B8A300306A4F /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		05BC34BD1D85B8A300306A4F /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
@@ -308,9 +293,9 @@
 		088509941D7B876D003EF800 /* ActionEase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionEase.swift; sourceTree = "<group>"; };
 		088509981D7C6A5E003EF800 /* ActionSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSequence.swift; sourceTree = "<group>"; };
 		088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ActionInstant+Node.swift"; sourceTree = "<group>"; };
-		08855BCE1D9D60270090EA84 /* SwiftMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMath.xcodeproj; path = external/math/SwiftMath.xcodeproj; sourceTree = SOURCE_ROOT; };
 		08855BE31D9DA6540090EA84 /* UnitTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTypes.swift; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
+		08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftBGFX.dylib; path = external/SwiftBGFX/SwiftBGFX/.build/debug/libSwiftBGFX.dylib; sourceTree = "<group>"; };
 		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
 		08C1CACF1D8EFFD5006CDCCB /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		08C1CAD01D8EFFD5006CDCCB /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
@@ -397,8 +382,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08AA0EE71DBFC5F800748555 /* libSwiftBGFX.dylib in Frameworks */,
 				05BC358F1D8850B000306A4F /* GLKit.framework in Frameworks */,
-				054764D91D82944D003DC740 /* libSwiftBGFX.dylib in Frameworks */,
 				0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,8 +394,8 @@
 		054764D71D82944D003DC740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */,
 				05BC358E1D8850B000306A4F /* GLKit.framework */,
-				054764D81D82944D003DC740 /* libSwiftBGFX.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -779,15 +764,6 @@
 			name = Actions;
 			sourceTree = "<group>";
 		};
-		08855BCF1D9D60270090EA84 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				08855BD41D9D60270090EA84 /* SwiftMath.framework */,
-				08855BD61D9D60270090EA84 /* SwiftMathTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		08855BDC1D9DA6340090EA84 /* typedefs */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,7 +783,6 @@
 		08A8D54B1D53DA8600262C0B /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				08855BCE1D9D60270090EA84 /* SwiftMath.xcodeproj */,
 				08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */,
 			);
 			name = Support;
@@ -945,6 +920,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 081FBC2D1D4625A6005838B8 /* Build configuration list for PBXNativeTarget "Fiber2D" */;
 			buildPhases = (
+				08AA0EE81DBFCB4D00748555 /* ShellScript */,
 				081FBC1C1D4625A6005838B8 /* Sources */,
 				081FBC1D1D4625A6005838B8 /* Frameworks */,
 				081FBC1E1D4625A6005838B8 /* Resources */,
@@ -990,10 +966,6 @@
 					ProductGroup = 0812ACE11D52A6F900AE46E8 /* Products */;
 					ProjectRef = 0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */;
 				},
-				{
-					ProductGroup = 08855BCF1D9D60270090EA84 /* Products */;
-					ProjectRef = 08855BCE1D9D60270090EA84 /* SwiftMath.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1024,20 +996,6 @@
 			remoteRef = 0812ACEA1D52A6F900AE46E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		08855BD41D9D60270090EA84 /* SwiftMath.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftMath.framework;
-			remoteRef = 08855BD31D9D60270090EA84 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		08855BD61D9D60270090EA84 /* SwiftMathTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = file;
-			path = SwiftMathTests.xctest;
-			remoteRef = 08855BD51D9D60270090EA84 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1052,6 +1010,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08AA0EE81DBFCB4D00748555 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# uncomment line below to build bgfx every time\n# sh prepare_bgfx_macos.sh\necho \"bgfx is built\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		081FBC1C1D4625A6005838B8 /* Sources */ = {
@@ -1290,6 +1264,10 @@
 				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/external/SwiftBGFX/SwiftBGFX/.build/debug",
+				);
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
@@ -1311,6 +1289,10 @@
 				);
 				INFOPLIST_FILE = Fiber2D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/external/SwiftBGFX/SwiftBGFX/.build/debug",
+				);
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
