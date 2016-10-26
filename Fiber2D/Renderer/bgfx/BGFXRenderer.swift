@@ -80,7 +80,7 @@ class BGFXRenderer: Renderer {
     func prepare(withProjection: Matrix4x4f, framebuffer: FrameBufferObject) {
         self.bindings.clear()
         let proj = unsafeBitCast(withProjection, to: SwiftMath.Matrix4x4f.self)
-        bgfx.setViewRect(viewId: 0, x: 0, y: 0, width: 1024, height: 768)
+        bgfx.setViewRect(viewId: 0, x: 0, y: 0, width: 1024, height: 750)
         bgfx.touch(0)
 
         bgfx.setViewTransform(viewId: 0, proj: proj)
@@ -94,7 +94,6 @@ class BGFXRenderer: Renderer {
             return
         }
         
-
         let vb = TransientVertexBuffer(count: UInt32(bindings.vertexCount), layout: RendererVertex.layout)
         memcpy(vb.data, bindings.vertices, bindings.vertexCount * MemoryLayout<RendererVertex>.size)
         bgfx.setVertexBuffer(vb)
@@ -116,13 +115,13 @@ class BGFXRenderer: Renderer {
 }
 
 class BGFXBufferBindings {
-    fileprivate var vertices: [BGFXRendererVertex]
+    fileprivate var vertices: [RendererVertex]
     fileprivate var vertexCount: Int
     fileprivate var indices: [UInt16]
     fileprivate var indexCount: Int
     
     init() {
-        vertices    = [BGFXRendererVertex](repeating: BGFXRendererVertex(), count: 16*1024)
+        vertices    = [RendererVertex](repeating: RendererVertex(), count: 16*1024)
         vertexCount = 0
         indices     = [UInt16](repeating: 0, count: 1024)
         indexCount  = 0
@@ -161,8 +160,8 @@ class BGFXBufferBindings {
         }
         
         func setVertex(index: Int, vertex: RendererVertex) {
-            let v = unsafeBitCast(vertex, to: BGFXRendererVertex.self)
-            buf.vertices[vertexOffset+index] = v
+            //let v = unsafeBitCast(vertex, to: BGFXRendererVertex.self)
+            buf.vertices[vertexOffset+index] = vertex
         }
         
         func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16) {
@@ -177,6 +176,7 @@ extension SwiftBGFX.FrameBuffer: FrameBufferObject {
     
 }
 
+/* Why?
 private struct _texcoord {
     var u, v: Float
     init() {
@@ -209,7 +209,7 @@ private struct BGFXRendererVertex {
         texCoord1 = _texcoord()
         color0 = _color()
     }
-}
+}*/
 
 extension RendererVertex {
     static var layout: VertexLayout {
