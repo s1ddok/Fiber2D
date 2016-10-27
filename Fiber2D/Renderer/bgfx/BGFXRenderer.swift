@@ -80,6 +80,7 @@ class BGFXRenderer: Renderer {
     func prepare(withProjection: Matrix4x4f, framebuffer: FrameBufferObject) {
         self.bindings.clear()
         let proj = unsafeBitCast(withProjection, to: SwiftMath.Matrix4x4f.self)
+        bgfx.setViewSequential(viewId: 0, enabled: true)
         bgfx.setViewRect(viewId: 0, x: 0, y: 0, width: 1024, height: 750)
         bgfx.touch(0)
 
@@ -133,13 +134,15 @@ class BGFXBufferBindings {
     }
     
     func makeView(vertexCount: Int, triangleCount: Int) -> View {
+        let vrequired = self.vertexCount + vertexCount
         if vertices.capacity < self.vertexCount + vertexCount {
             // Why 1.5? https://github.com/facebook/folly/blob/master/folly/docs/FBVector.md
-            vertices.reserveCapacity(Int(Double(vertices.capacity) * 1.5))
+            vertices.reserveCapacity(Int(Double(vrequired) * 1.5))
         }
         
-        if indices.capacity < self.indexCount + triangleCount*3 {
-            indices.reserveCapacity(Int(Double(indices.capacity) * 1.5))
+        let irequired = self.indexCount + triangleCount*3
+        if indices.capacity < irequired {
+            indices.reserveCapacity(Int(Double(irequired) * 1.5))
         }
         
         let v = View(buf: self, vertexOffset: self.vertexCount, indexOffset: self.indexCount)
@@ -165,9 +168,9 @@ class BGFXBufferBindings {
         }
         
         func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16) {
-            buf.indices[(indexOffset+index)*3 + 0] = UInt16(vertexOffset)+v1
-            buf.indices[(indexOffset+index)*3 + 1] = UInt16(vertexOffset)+v2
-            buf.indices[(indexOffset+index)*3 + 2] = UInt16(vertexOffset)+v3
+            buf.indices[indexOffset + index * 3 + 0] = UInt16(vertexOffset)+v1
+            buf.indices[indexOffset + index * 3 + 1] = UInt16(vertexOffset)+v2
+            buf.indices[indexOffset + index * 3 + 2] = UInt16(vertexOffset)+v3
         }
     }
 }
