@@ -69,8 +69,13 @@ public class Director: NSObject {
     /* will be the next 'runningScene' in the next frame
      nextScene is a weak reference. */
     internal weak var nextScene: Scene?
+    
+    /* Whether or not the replaced scene will receive the cleanup message.
+     If the new scene is pushed, then the old scene won't receive the "cleanup" message.
+     If the new scene replaces the old one, the it will receive the "cleanup" message.
+     */
     /* If YES, then "old" scene will receive the cleanup message */
-    var sendCleanupToScene: Bool = false
+    internal var sendCleanupToScene: Bool = false
     /* scheduled scenes */
     var scenesStack = NSMutableArray()
     /* last time the main loop was updated */
@@ -134,78 +139,7 @@ public class Director: NSObject {
         }
     }
     
-    func mainLoopBody() {
-        if !animating {
-            return
-        }
-        Director.pushCurrentDirector(self)
-        /* calculate "global" dt */
-        calculateDeltaTime()
-        /* tick before glClear: issue #533 */
-        if !isPaused {
-            runningScene!.scheduler.update(dt)
-        }
-        /* to avoid flickr, nextScene MUST be here: after tick and before draw.
-         XXX: Which bug is this one. It seems that it can't be reproduced with v0.9 */
-        if nextScene != nil {
-            self.setNextScene()
-        }
-        view!.beginFrame()
-        let projection = runningScene!.projection
-        // Synchronize the framebuffer with the view.
-        framebuffer.sync(with: self.view as! MetalView)
-        let renderer: Renderer = self.rendererFromPool()
-    
-        renderer.prepare(withProjection: projection, framebuffer: framebuffer)
-        
-        //CCRenderer.bindRenderer(renderer)
-        currentRenderer = renderer
-        renderer.enqueueClear(color: runningScene!.colorRGBA)
-        // Render
-        runningScene!.visit(renderer, parentTransform: projection)
-        notificationNode?.visit(renderer, parentTransform: projection)
-
-        //CCRenderer.bindRenderer(nil)
-        currentRenderer = nil
-        view!.add {
-            // Return the renderer to the pool when the frame completes.
-            self.poolRenderer(renderer)
-        }
-        renderer.flush()
-        view!.presentFrame()
-        totalFrames += 1
-        Director.popCurrentDirector()
-    }
-    
     var r: Renderer?
-    
-    func rendererFromPool() -> Renderer {
-        if r == nil {
-            r = BGFXRenderer()
-        }
-        /*let lockQueue = dispatch_queue_create("com.test.LockQueue")
-        dispatch_sync(lockQueue) {
-            if rendererPool.count > 0 {
-                var renderer: CCRenderer = rendererPool.lastObject
-                rendererPool.removeLastObject()
-                return renderer
-            }
-        }*/
-        // Allocate and return a new renderer.
-        //return CCRendererImpl(renderer: CCRenderer())
-        return r!
-    }
-    
-    func poolRenderer(_ renderer: Renderer) {
-        /*let lockQueue = dispatch_queue_create("com.test.LockQueue")
-        dispatch_sync(lockQueue) {
-            rendererPool.append(renderer)
-        }*/
-    }
-    
-    func addFrameCompletionHandler(_ handler: @escaping ()->()) {
-        self.view!.add(frameCompletionHandler: handler)
-    }
     
     func calculateDeltaTime() {
         let now = Time.absoluteTime
@@ -268,28 +202,13 @@ public class Director: NSObject {
         return view!.sizeInPixels
     }
     
-    var viewportRect: Rect {
-        var projection = runningScene!.projection
-        // TODO It's _possible_ that a user will use a non-axis aligned projection. Weird, but possible.
-        let projectionInv = projection.inversed
-        // Calculate z=0 using -> transform*[0, 0, 0, 1]/w
-        let zClip = projection[3, 2] / projection[3, 3]
-        // Bottom left and top right coords of viewport in clip coords.
-        let clipBL = Vector3f(-1.0, -1.0, zClip)
-        let clipTR = Vector3f(1.0, 1.0, zClip)
-        // Bottom left and top right coords in GL coords.
-        let glBL = projectionInv.multiplyAndProject(v: clipBL).xy
-        let glTR = projectionInv.multiplyAndProject(v: clipTR).xy
-        return Rect(bottomLeft: glBL, topRight: glTR)
-    }
-    
     func antiFlickrDrawCall() {
         // Questionable "anti-flickr", extra draw call:
         // overridden for android.
         self.mainLoopBody()
     }
     
-    func presentScene(_ scene: Scene) {
+    func present(scene: Scene) {
         if runningScene != nil {
             self.sendCleanupToScene = true
             scenesStack.removeLastObject()
@@ -298,38 +217,38 @@ public class Director: NSObject {
             // _nextScene is a weak ref
         }
         else {
-            self.runWithScene(scene)
+            self.run(with: scene)
         }
     }
     
-    func presentScene(_ scene: Scene, withTransition transition: Transition) {
+    func present(scene: Scene, withTransition transition: Transition) {
         if runningScene != nil {
             self.sendCleanupToScene = true
             // the transition gets to become the running scene
             transition.startTransition(scene, withDirector: self)
         }
         else {
-            self.runWithScene(scene)
+            self.run(with: scene)
         }
     }
     
-    func runWithScene(_ scene: Scene) {
+    public func run(with scene: Scene) {
         assert(runningScene == nil, "This command can only be used to start the Director. There is already a scene present.")
-        self.pushScene(scene)
+        self.push(scene: scene)
         scene.director = self
         self.antiFlickrDrawCall()
         self.setNextScene()
         self.startRunLoop()
     }
     
-    func pushScene(_ scene: Scene) {
+    public func push(scene: Scene) {
         self.sendCleanupToScene = false
         scenesStack.add(scene)
         self.nextScene = scene
         // _nextScene is a weak ref
     }
     
-    func pushScene(_ scene: Scene, withTransition transition: Transition) {
+    func push(scene: Scene, withTransition transition: Transition) {
         scenesStack.add(scene)
         self.sendCleanupToScene = false
         transition.startTransition(scene, withDirector: self)
@@ -348,7 +267,7 @@ public class Director: NSObject {
         }
     }
     
-    func popSceneWithTransition(_ transition: Transition) {
+    func popScene(with transition: Transition) {
         assert(runningScene != nil, "A running Scene is needed")
         if scenesStack.count < 2 {
             self.end()
@@ -365,7 +284,7 @@ public class Director: NSObject {
         self.popToSceneStackLevel(1)
     }
     
-    func popToRootSceneWithTransition(_ transition: Transition) {
+    func popToRootScene(with transition: Transition) {
         self.popToRootScene()
         self.sendCleanupToScene = true
         transition.startTransition(nextScene!, withDirector: self)
@@ -398,7 +317,7 @@ public class Director: NSObject {
         self.sendCleanupToScene = false
     }
     
-    func startTransition(_ transition: Transition) {
+    func start(transition: Transition) {
         assert(runningScene != nil, "There must be a running scene")
         scenesStack.removeLastObject()
         scenesStack.add(transition)
@@ -498,14 +417,5 @@ public class Director: NSObject {
         self.isPaused = false
         self.didChangeValue(forKey: "isPaused")
         self.dt = 0
-    }
-    // This method is also overridden by platform specific directors.
-    
-    func startRunLoop() {
-        self.nextDeltaTimeZero = true
-    }
-    
-    func stopRunLoop() {
-        print("Director#stopRunLoop. Override me")
     }
 }

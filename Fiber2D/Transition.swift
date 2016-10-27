@@ -118,7 +118,7 @@ public class Transition: Scene {
             }
             self.outgoingScene = nil
             // Start incoming scene
-            Director.currentDirector!.presentScene(incomingScene)
+            Director.currentDirector!.present(scene: incomingScene)
             incomingScene.onEnterTransitionDidFinish()
             incomingScene.paused = false
             self.incomingScene = nil
@@ -182,7 +182,7 @@ public class Transition: Scene {
         self.renderOutgoing(0)
         self.renderIncoming(0)
         // switch to transition scene
-        director.startTransition(self)
+        director.start(transition: self)
 
     }
 }

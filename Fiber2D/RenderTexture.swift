@@ -99,7 +99,7 @@ class RenderTexture: RenderableNode {
     func end() {
         let renderer = currentRenderer!
         let director: Director = Director.currentDirector!
-        director.addFrameCompletionHandler {
+        director.add {
             // Return the renderer to the pool when the frame completes.
             director.poolRenderer(renderer)
         }
