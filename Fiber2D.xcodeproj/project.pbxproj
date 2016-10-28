@@ -10,7 +10,6 @@
 		059228231D9B17FB0041B9B4 /* RenderTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD051D46289A005838B8 /* RenderTexture.swift */; };
 		05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BC1D85B8A300306A4F /* Renderer.swift */; };
 		05BC34C01D85B8A300306A4F /* Shader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34BD1D85B8A300306A4F /* Shader.swift */; };
-		05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */; };
 		05BC34C51D85BBB100306A4F /* BGFXRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */; };
 		05BC358F1D8850B000306A4F /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BC358E1D8850B000306A4F /* GLKit.framework */; };
 		05D231C11D9CD19000611AA3 /* BGFXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D231C01D9CD19000611AA3 /* BGFXView.swift */; };
@@ -27,6 +26,7 @@
 		080307271D9D4017008CAC8E /* Director+Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080307261D9D4017008CAC8E /* Director+Internal.swift */; };
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812AD031D538D7600AE46E8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812AD021D538D7600AE46E8 /* Color.swift */; };
+		0817EE7D1DC381B40084DAD3 /* Texture+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
 		081FBCD31D462732005838B8 /* CCCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC7F1D462732005838B8 /* CCCache.m */; };
 		081FBCD41D462732005838B8 /* Image+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* Image+PNG.m */; };
@@ -175,7 +175,6 @@
 		05BC34BC1D85B8A300306A4F /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		05BC34BD1D85B8A300306A4F /* Shader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shader.swift; sourceTree = "<group>"; };
 		05BC34C11D85B8AB00306A4F /* BGFXRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGFXRenderer.swift; sourceTree = "<group>"; };
-		05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRendererImpl.swift; sourceTree = "<group>"; };
 		05BC358E1D8850B000306A4F /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		05D231C01D9CD19000611AA3 /* BGFXView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGFXView.swift; sourceTree = "<group>"; };
 		080306A91D932B3B008CAC8E /* PhysicsShapeCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsShapeCircle.swift; sourceTree = "<group>"; };
@@ -192,6 +191,7 @@
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		0812AD021D538D7600AE46E8 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Texture+Image.swift"; sourceTree = "<group>"; };
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -410,19 +410,10 @@
 			isa = PBXGroup;
 			children = (
 				05BC34B81D85B75600306A4F /* bgfx */,
-				05BC34A61D85396900306A4F /* legacy */,
 				05BC34BC1D85B8A300306A4F /* Renderer.swift */,
 				05BC34BD1D85B8A300306A4F /* Shader.swift */,
 			);
 			path = Renderer;
-			sourceTree = "<group>";
-		};
-		05BC34A61D85396900306A4F /* legacy */ = {
-			isa = PBXGroup;
-			children = (
-				05BC34C31D85B8B500306A4F /* CCRendererImpl.swift */,
-			);
-			path = legacy;
 			sourceTree = "<group>";
 		};
 		05BC34B81D85B75600306A4F /* bgfx */ = {
@@ -797,6 +788,7 @@
 			children = (
 				082E904D1DBE92DF00AD32AA /* Image.swift */,
 				082E904F1DBE9B8700AD32AA /* Image+PNG.swift */,
+				0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */,
 			);
 			name = "File Handling";
 			sourceTree = "<group>";
@@ -1087,6 +1079,7 @@
 				08C1CB131D8EFFD5006CDCCB /* cpArray.c in Sources */,
 				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
 				08C1CB201D8EFFD5006CDCCB /* cpPivotJoint.c in Sources */,
+				0817EE7D1DC381B40084DAD3 /* Texture+Image.swift in Sources */,
 				08C1CB2E1D8EFFD5006CDCCB /* cpSpaceStep.c in Sources */,
 				08C1CB121D8EFFD5006CDCCB /* cpArbiter.c in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,
@@ -1097,7 +1090,6 @@
 				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
 				082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
-				05BC34C41D85B8B500306A4F /* CCRendererImpl.swift in Sources */,
 				08C1CB181D8EFFD5006CDCCB /* cpDampedRotarySpring.c in Sources */,
 				087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */,
 				08C1CB261D8EFFD5006CDCCB /* cpShape.c in Sources */,

@@ -93,13 +93,8 @@ class BGFXRenderer: Renderer {
         prog = Program(vertex: vs, fragment: fs)
         
         let image = Image(pngFile: try! CCFileLocator.shared().fileNamed(withResolutionSearch: "circle.png"))
-        let w = UInt16(image.sizeInPixels.width)
-        let h = UInt16(image.sizeInPixels.height)
-        let size = UInt32(w * h) * UInt32(MemoryLayout<Float>.size / MemoryLayout<UInt8>.size)
-        let memoryBlock = MemoryBlock(size: size)
-        image.pixelData?.copyBytes(to: memoryBlock.data, count: Int(size))
-        
-        texture = Texture.make2D(width: w, height: h, mipCount: 1, format: .bgra8, memory: memoryBlock)
+
+        texture = Texture.make(from: image)
         bgfx.frame()
     }
     
@@ -215,6 +210,14 @@ class BGFXBufferBindings {
 }
 
 extension SwiftBGFX.FrameBuffer: FrameBufferObject {
+    
+}
+
+extension CCFrameBufferObject: FrameBufferObject {
+    
+}
+
+extension CCRenderState: RendererState {
     
 }
 
