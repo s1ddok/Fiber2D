@@ -5,8 +5,10 @@
 //  Copyright © 2016. All rights reserved.
 //
 
+import SwiftBGFX
+
 open class RenderableNode: Node {
-    var shader: CCShader {
+    var shader: Program {
         didSet {
             //render state dirty
             renderState = nil
@@ -61,12 +63,12 @@ open class RenderableNode: Node {
                 let texture: CCTexture = self.texture ?? CCTexture.none()
                 if CheckDefaultUniforms(shaderUniforms, texture: texture) {
                     // Create a cached render state so we can use the fast path.
-                    self._renderState = CCRenderState(blendMode: blendMode, shader: shader, mainTexture: texture)
+                    //self._renderState = CCRenderState(blendMode: blendMode, shader: shader, mainTexture: texture)
                     // If the uniform dictionary was set, it was the default. Throw it away.
                     self.shaderUniforms = nil
                 } else {
                     // Since the node has unique uniforms, it cannot be batched or use the fast path.
-                    self._renderState = CCRenderState(blendMode: blendMode, shader: shader, shaderUniforms: shaderUniforms, copyUniforms: false)
+                    //self._renderState = CCRenderState(blendMode: blendMode, shader: shader, shaderUniforms: shaderUniforms, copyUniforms: false)
                 }
             }
             return _renderState
@@ -79,7 +81,7 @@ open class RenderableNode: Node {
     private var _renderState: CCRenderState? = nil
     
     override init() {
-        shader = CCShader.positionColor()
+        shader = .posColor
         blendMode = CCBlendMode.premultipliedAlpha()
         
         super.init()

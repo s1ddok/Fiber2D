@@ -6,6 +6,7 @@
 //
 
 import SwiftMath
+import SwiftBGFX
 
 /// The four CCVertexes of a sprite.
 /// Bottom left, bottom right, top right, top left.
@@ -100,10 +101,14 @@ open class Sprite: RenderableNode {
      *
      *  @return A newly initialized Sprite object.
      */
-    
+    internal var tex: Texture!
     convenience init(imageNamed imageName: String) {
+        let image = Image(pngFile: try! CCFileLocator.shared().fileNamed(withResolutionSearch: imageName))
+        
         let spriteFrame = SpriteFrame.frameWithImageNamed(imageName)
         self.init(spriteFrame: spriteFrame!)
+        
+        tex = Texture.make(from: image)
     }
     /**
      *  Initializes an sprite with an existing SpriteFrame.
@@ -138,7 +143,7 @@ open class Sprite: RenderableNode {
     init(texture: CCTexture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
         super.init()
         self.blendMode = CCBlendMode.premultipliedAlpha()
-        self.shader = CCShader.positionTextureColor()
+        self.shader = .posTexture
         // default transform anchor: center
         self.anchorPoint = p2d(0.5, 0.5)
         self.updateColor()
@@ -318,20 +323,29 @@ open class Sprite: RenderableNode {
     
     
     override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
-        var t = transform.glkMatrix4
-        guard CCRenderCheckVisibility(&t, vertexCenter.glkVec2, vertexExtents.glkVec2) else {
-            return
-        }
-        
-        var buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: self.renderState, globalSortOrder: 0)
 
-        buffer.setVertex(index: 0, vertex: verts.bl.transformed(transform))
-        buffer.setVertex(index: 1, vertex: verts.br.transformed(transform))
-        buffer.setVertex(index: 2, vertex: verts.tr.transformed(transform))
-        buffer.setVertex(index: 3, vertex: verts.tl.transformed(transform))
+        let vertices = [verts.bl.transformed(transform),
+                        verts.br.transformed(transform),
+                        verts.tr.transformed(transform),
+                        verts.tl.transformed(transform)]
         
-        buffer.setTriangle(index: 0, v1: 0, v2: 1, v3: 2)
-        buffer.setTriangle(index: 1, v1: 0, v2: 2, v3: 3)
+        let vb = TransientVertexBuffer(count: 4, layout: RendererVertex.layout)
+        memcpy(vb.data, vertices, 4 * MemoryLayout<RendererVertex>.size)
+        bgfx.setVertexBuffer(vb)
+        
+        let ib = TransientIndexBuffer(count: 6)
+        let indices: [UInt16] = [0, 1, 2, 0, 2, 3]
+        memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
+        bgfx.setIndexBuffer(ib)
+        
+        var renderState = RenderStateOptions.default
+            | RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
+        renderState.remove(.depthWrite)
+        bgfx.setRenderState(renderState, colorRgba: 0x00)
+        let uniform = Uniform(name: "u_mainTexture", type: .int1)
+        bgfx.setTexture(0, sampler: uniform, texture: tex)
+        bgfx.setRenderState(renderState, colorRgba: 0x00)
+        bgfx.submit(0, program: shader)
     }
     
 }

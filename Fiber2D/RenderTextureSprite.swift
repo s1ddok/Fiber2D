@@ -17,7 +17,7 @@ class RenderTextureSprite: Sprite {
                 // Copy the uniforms if custom uniforms are not being used.
                 let copyUniforms: Bool = !self.usesCustomShaderUniforms
                 // Create an uncached renderstate so the texture can be released before the renderstate cache is flushed.
-                self.renderState = CCRenderState(blendMode: blendMode, shader: shader, shaderUniforms: self.shaderUniforms, copyUniforms: copyUniforms)
+                //self.renderState = CCRenderState(blendMode: blendMode, shader: shader, shaderUniforms: self.shaderUniforms, copyUniforms: copyUniforms)
             }
             return super.renderState
         }

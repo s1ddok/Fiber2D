@@ -88,7 +88,7 @@ open class Sprite9Slice: Sprite {
         let interpolatePosition = PositionInterpolationMatrix(&verts, transform: transform)
         let interpolateTexCoord = TexCoordInterpolationMatrix(&verts)
         let color = verts.bl.color
-        var buffer = renderer.enqueueTriangles(count: 18, verticesCount: 16, state: self.renderState, globalSortOrder: 0)
+        /*var buffer = renderer.enqueueTriangles(count: 18, verticesCount: 16, state: self.renderState, globalSortOrder: 0)
         
         // Interpolate the vertexes!
         for y in 0..<4 {
@@ -113,7 +113,7 @@ open class Sprite9Slice: Sprite {
                                    v2: UInt16((y + 1) * 4 + x + 1),
                                    v3: UInt16((y + 1) * 4 + x))
             }
-        }
+        }*/
     }
 
 

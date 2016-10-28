@@ -10,7 +10,6 @@ import SwiftMath
 
 public protocol Renderer {
     func enqueueClear(color: vec4)
-    func enqueueTriangles(count: UInt, verticesCount: UInt, state: RendererState, globalSortOrder: Int) -> RendererBuffer
     func prepare(withProjection: Matrix4x4f, framebuffer: FrameBufferObject)
     func flush()
     

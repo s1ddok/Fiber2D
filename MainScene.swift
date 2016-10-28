@@ -121,7 +121,7 @@ class MainScene: Scene {
  
     }
     
-    override func onEnter() {
+    /*override func onEnter() {
         super.onEnter()
         
         let rt = RenderTexture(width: 64, height: 64)
@@ -137,7 +137,7 @@ class MainScene: Scene {
         add(child: rt.sprite)
         
         print(sprite.active)
-    }
+    }*/
     
     override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
         //colorNode.positionInPoints = theEvent.location(in: self)

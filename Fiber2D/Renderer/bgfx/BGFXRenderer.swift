@@ -79,22 +79,27 @@ let fs_texture_shader =
         "  return _mtl_o; \n" +
 "} \n"
 
+extension Program {
+    public static let posColor: Program = {
+        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
+        let fs = Shader(source: fs_shader, language: .metal, type: .fragment)
+        return Program(vertex: vs, fragment: fs)
+    }()
+    
+    public static let posTexture: Program = {
+        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
+        let fs = Shader(source: fs_texture_shader, language: .metal, type: .fragment)
+        return Program(vertex: vs, fragment: fs)
+    }()
+}
+
 class BGFXRenderer: Renderer {
     
     var projection: Matrix4x4f = Matrix4x4f.identity
     
-    var bindings = BGFXBufferBindings()
+    let prog: Program = .posTexture
     
-    let prog: Program
-    let texture: Texture
     init() {
-        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
-        let fs = Shader(source: fs_texture_shader, language: .metal, type: .fragment)
-        prog = Program(vertex: vs, fragment: fs)
-        
-        let image = Image(pngFile: try! CCFileLocator.shared().fileNamed(withResolutionSearch: "circle.png"))
-
-        texture = Texture.make(from: image)
         bgfx.frame()
     }
     
@@ -102,13 +107,7 @@ class BGFXRenderer: Renderer {
         bgfx.setViewClear(viewId: 0, options: [.color, .depth], rgba: 0x30_30_30_ff, depth: 1.0, stencil: 0)
     }
     
-    func enqueueTriangles(count: UInt, verticesCount: UInt, state: RendererState, globalSortOrder: Int) -> RendererBuffer {
-        return bindings.makeView(vertexCount: Int(verticesCount), triangleCount: Int(count))
-    }
-    
-    func prepare(withProjection: Matrix4x4f, framebuffer: FrameBufferObject) {
-        self.bindings.clear()
-        let proj = unsafeBitCast(withProjection, to: SwiftMath.Matrix4x4f.self)
+    func prepare(withProjection proj: Matrix4x4f, framebuffer: FrameBufferObject) {
         bgfx.setViewSequential(viewId: 0, enabled: true)
         bgfx.setViewRect(viewId: 0, x: 0, y: 0, width: 1024, height: 750)
         bgfx.touch(0)
@@ -119,92 +118,13 @@ class BGFXRenderer: Renderer {
     func flush() {
         bgfx.debugTextClear()
         bgfx.debugTextPrint(x: 0, y: 1, foreColor: .white, backColor: .darkGray, format: "going")
-        
-        if bindings.vertexCount == 0 || bindings.indexCount == 0 {
-            return
-        }
-        
-        let vb = TransientVertexBuffer(count: UInt32(bindings.vertexCount), layout: RendererVertex.layout)
-        memcpy(vb.data, bindings.vertices, bindings.vertexCount * MemoryLayout<RendererVertex>.size)
-        bgfx.setVertexBuffer(vb)
-        
-        let ib = TransientIndexBuffer(count: UInt32(bindings.indexCount))
-        memcpy(ib.data, bindings.indices, bindings.indexCount * MemoryLayout<UInt16>.size)
-        bgfx.setIndexBuffer(ib)
 
-        var renderState = RenderStateOptions.default
-            | RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
-        renderState.remove(.depthWrite)
-        bgfx.setRenderState(renderState, colorRgba: 0x00)
-        let uniform = Uniform(name: "u_mainTexture", type: .int1)
-        bgfx.setTexture(0, sampler: uniform, texture: texture)
-        bgfx.submit(0, program: prog)
         bgfx.frame()
         bgfx.renderFrame()
     }
     
     func makeFrameBufferObject() -> FrameBufferObject {
         return SwiftBGFX.FrameBuffer(ratio: .equal, format: .bgra8)
-    }
-}
-
-class BGFXBufferBindings {
-    fileprivate var vertices: [RendererVertex]
-    fileprivate var vertexCount: Int
-    fileprivate var indices: [UInt16]
-    fileprivate var indexCount: Int
-    
-    init() {
-        vertices    = [RendererVertex](repeating: RendererVertex(), count: 16*1024)
-        vertexCount = 0
-        indices     = [UInt16](repeating: 0, count: 1024)
-        indexCount  = 0
-    }
-    
-    func clear() {
-        self.vertexCount = 0
-        self.indexCount  = 0
-    }
-    
-    func makeView(vertexCount: Int, triangleCount: Int) -> View {
-        let vrequired = self.vertexCount + vertexCount
-        if vertices.capacity < self.vertexCount + vertexCount {
-            // Why 1.5? https://github.com/facebook/folly/blob/master/folly/docs/FBVector.md
-            vertices.reserveCapacity(Int(Double(vrequired) * 1.5))
-        }
-        
-        let irequired = self.indexCount + triangleCount*3
-        if indices.capacity < irequired {
-            indices.reserveCapacity(Int(Double(irequired) * 1.5))
-        }
-        
-        let v = View(buf: self, vertexOffset: self.vertexCount, indexOffset: self.indexCount)
-        self.vertexCount += vertexCount
-        self.indexCount  += triangleCount*3
-        return v
-    }
-    
-    class View: RendererBuffer {
-        var buf: BGFXBufferBindings
-        let vertexOffset: Int
-        let indexOffset: Int
-        
-        init(buf: BGFXBufferBindings, vertexOffset: Int, indexOffset: Int) {
-            self.buf = buf
-            self.vertexOffset = vertexOffset
-            self.indexOffset  = indexOffset
-        }
-        
-        func setVertex(index: Int, vertex: RendererVertex) {
-            //let v = unsafeBitCast(vertex, to: BGFXRendererVertex.self)
-            buf.vertices[vertexOffset+index] = vertex
-        }
-        
-        func setTriangle(index: Int, v1: UInt16, v2: UInt16, v3: UInt16) {
-            buf.indices[indexOffset + index * 3 + 0] = UInt16(vertexOffset)+v1
-            buf.indices[indexOffset + index * 3 + 1] = UInt16(vertexOffset)+v2
-            buf.indices[indexOffset + index * 3 + 2] = UInt16(vertexOffset)+v3
-        }
     }
 }
 
@@ -219,41 +139,6 @@ extension CCFrameBufferObject: FrameBufferObject {
 extension CCRenderState: RendererState {
     
 }
-
-/* Why?
-private struct _texcoord {
-    var u, v: Float
-    init() {
-        u = 0
-        v = 0
-    }
-}
-
-private struct _color {
-    var r, g, b, a: Float
-    init() {
-        r = 0
-        g = 0
-        b = 0
-        a = 0
-    }
-}
-
-private struct BGFXRendererVertex {
-    var x, y, z, w: Float
-    var texCoord0: _texcoord
-    var texCoord1: _texcoord
-    var color0: _color
-    init() {
-        x = 0
-        y = 0
-        z = 0
-        w = 0
-        texCoord0 = _texcoord()
-        texCoord1 = _texcoord()
-        color0 = _color()
-    }
-}*/
 
 extension RendererVertex {
     static var layout: VertexLayout {

@@ -6,12 +6,14 @@
 //
 
 import SwiftMath
+import SwiftBGFX
 
 /**
  Draws a rectangle filled with a solid color.
  */
 open class ColorNode: RenderableNode {
     internal var colors = Color.clear
+    
     /**
      *  Creates a node with color, width and height in Points.
      *
@@ -27,7 +29,6 @@ open class ColorNode: RenderableNode {
         self.contentSizeInPoints = size
         
         self.blendMode = CCBlendMode.premultipliedAlpha()
-        self.shader = CCShader.positionColor()
         
         updateColor()
     }
@@ -54,17 +55,35 @@ open class ColorNode: RenderableNode {
     }
     
     override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
-        var buffer = renderer.enqueueTriangles(count: 2, verticesCount: 4, state: renderState, globalSortOrder: 0)
         
         let w = Float(contentSizeInPoints.width)
         let h = Float(contentSizeInPoints.height)
 
-        buffer.setVertex(index: 0, vertex: RendererVertex(position: transform * vec4(0, 0, 0, 1), texCoord1: vec2.zero, texCoord2: vec2.zero, color: colors))
-        buffer.setVertex(index: 1, vertex: RendererVertex(position: transform * vec4(w, 0, 0, 1), texCoord1: vec2.zero, texCoord2: vec2.zero, color: colors))
-        buffer.setVertex(index: 2, vertex: RendererVertex(position: transform * vec4(w, h, 0, 1), texCoord1: vec2.zero, texCoord2: vec2.zero, color: colors))
-        buffer.setVertex(index: 3, vertex: RendererVertex(position: transform * vec4(0, h, 0, 1), texCoord1: vec2.zero, texCoord2: vec2.zero, color: colors))
+        let vertices = [RendererVertex(position: transform * vec4(0, 0, 0, 1),
+                                       texCoord1: vec2.zero, texCoord2: vec2.zero,
+                                       color: colors),
+            RendererVertex(position: transform * vec4(w, 0, 0, 1),
+                                       texCoord1: vec2.zero, texCoord2: vec2.zero,
+                                       color: colors),
+            RendererVertex(position: transform * vec4(w, h, 0, 1),
+                           texCoord1: vec2.zero, texCoord2: vec2.zero,
+                           color: colors),
+            RendererVertex(position: transform * vec4(0, h, 0, 1),
+                           texCoord1: vec2.zero, texCoord2: vec2.zero,
+                           color: colors)]
         
-        buffer.setTriangle(index: 0, v1: 0, v2: 1, v3: 2)
-        buffer.setTriangle(index: 1, v1: 0, v2: 2, v3: 3)
+        let vb = TransientVertexBuffer(count: 4, layout: RendererVertex.layout)
+        memcpy(vb.data, vertices, 4 * MemoryLayout<RendererVertex>.size)
+        bgfx.setVertexBuffer(vb)
+        
+        let ib = TransientIndexBuffer(count: 6)
+        let indices: [UInt16] = [0, 1, 2, 0, 2, 3]
+        memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
+        bgfx.setIndexBuffer(ib)
+        var renderState = RenderStateOptions.default
+            | RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
+        renderState.remove(.depthWrite)
+        bgfx.setRenderState(renderState, colorRgba: 0x00)
+        bgfx.submit(0, program: shader)
     }
 }
