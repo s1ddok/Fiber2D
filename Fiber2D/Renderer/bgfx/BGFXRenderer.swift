@@ -6,8 +6,9 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-import SwiftBGFX
 import SwiftMath
+import Cbgfx
+import SwiftBGFX
 
 let vs_shader =
     "using namespace metal; \n" +
@@ -19,6 +20,8 @@ let vs_shader =
         "}; \n" +
         "struct xlatMtlShaderOutput { \n" +
         "  float4 gl_Position [[position]]; \n" +
+        "  float2 v_texcoord0; " +
+        "  float2 v_texcoord1; " +
         "  float4 v_color0; \n" +
         "}; \n" +
         "struct xlatMtlShaderUniform { \n" +
@@ -32,6 +35,8 @@ let vs_shader =
         "  tmpvar_1 = _mtl_i.a_position; \n" +
         //"  _mtl_o.gl_Position = (_mtl_u.u_modelViewProj * tmpvar_1); \n" +
         "  _mtl_o.gl_Position = _mtl_i.a_position; \n" +
+        "  _mtl_o.v_texcoord0 = _mtl_i.a_texcoord0; \n" +
+        "  _mtl_o.v_texcoord1 = _mtl_i.a_texcoord1; \n" +
         "  _mtl_o.v_color0 = _mtl_i.a_color0; \n" +
         "  return _mtl_o; \n" +
 "} \n";
@@ -53,6 +58,26 @@ let fs_shader =
         "  return _mtl_o; \n" +
 "} \n"
 
+let fs_texture_shader =
+    "using namespace metal; \n" +
+        "struct xlatMtlShaderInput { \n" +
+        "  float4 v_color0; \n" +
+        "  float2 v_texcoord0; \n" +
+        "}; \n" +
+        "struct xlatMtlShaderOutput { \n" +
+        "  float4 gl_FragColor; \n" +
+        "}; \n" +
+        "struct xlatMtlShaderUniform { \n" +
+        "}; \n" +
+        "fragment xlatMtlShaderOutput xlatMtlMain (xlatMtlShaderInput _mtl_i [[stage_in]]," +
+        "                                          constant xlatMtlShaderUniform& _mtl_u [[buffer(0)]], \n" +
+        "                                          texture2d<float> u_mainTexture [[texture(0)]]," +
+        "                                          sampler u_mainTextureSampler [[sampler(0)]])" +
+        "{ \n" +
+        "  xlatMtlShaderOutput _mtl_o; \n" +
+        "  _mtl_o.gl_FragColor = _mtl_i.v_color0 * u_mainTexture.sample(u_mainTextureSampler, _mtl_i.v_texcoord0); \n" +
+        "  return _mtl_o; \n" +
+"} \n"
 
 class BGFXRenderer: Renderer {
     
@@ -61,11 +86,20 @@ class BGFXRenderer: Renderer {
     var bindings = BGFXBufferBindings()
     
     let prog: Program
-    
+    let texture: Texture
     init() {
         let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
-        let fs = Shader(source: fs_shader, language: .metal, type: .fragment)
+        let fs = Shader(source: fs_texture_shader, language: .metal, type: .fragment)
         prog = Program(vertex: vs, fragment: fs)
+        
+        let image = Image(pngFile: try! CCFileLocator.shared().fileNamed(withResolutionSearch: "circle.png"))
+        let w = UInt16(image.sizeInPixels.width)
+        let h = UInt16(image.sizeInPixels.height)
+        let size = UInt32(w * h) * UInt32(MemoryLayout<Float>.size / MemoryLayout<UInt8>.size)
+        let memoryBlock = MemoryBlock(size: size)
+        image.pixelData?.copyBytes(to: memoryBlock.data, count: Int(size))
+        
+        texture = Texture.make2D(width: w, height: h, mipCount: 1, format: .bgra8, memory: memoryBlock)
         bgfx.frame()
     }
     
@@ -103,8 +137,13 @@ class BGFXRenderer: Renderer {
         memcpy(ib.data, bindings.indices, bindings.indexCount * MemoryLayout<UInt16>.size)
         bgfx.setIndexBuffer(ib)
 
-        bgfx.setRenderState(.default, colorRgba: 0x00)
-
+        let renderState = RenderStateOptions.default
+            // Why would premultiplied blend mode produce such a strange result?
+            //| RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
+            //| RenderStateOptions.blend(equation: .blendEquationAdd)
+        bgfx.setRenderState(renderState, colorRgba: 0x00)
+        let uniform = Uniform(name: "u_mainTexture", type: .int1)
+        bgfx.setTexture(0, sampler: uniform, texture: texture)
         bgfx.submit(0, program: prog)
         bgfx.frame()
         bgfx.renderFrame()
