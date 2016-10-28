@@ -132,10 +132,9 @@ class BGFXRenderer: Renderer {
         memcpy(ib.data, bindings.indices, bindings.indexCount * MemoryLayout<UInt16>.size)
         bgfx.setIndexBuffer(ib)
 
-        let renderState = RenderStateOptions.default
-            // Why would premultiplied blend mode produce such a strange result?
-            //| RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
-            //| RenderStateOptions.blend(equation: .blendEquationAdd)
+        var renderState = RenderStateOptions.default
+            | RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
+        renderState.remove(.depthWrite)
         bgfx.setRenderState(renderState, colorRgba: 0x00)
         let uniform = Uniform(name: "u_mainTexture", type: .int1)
         bgfx.setTexture(0, sampler: uniform, texture: texture)
