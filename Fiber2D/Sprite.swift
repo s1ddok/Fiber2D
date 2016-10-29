@@ -34,11 +34,8 @@ struct SpriteTexCoordSet {
     }
 }
 
-// The output below is limited by 4 KB.
-// Upgrade your plan to remove this limitation.
-
 /**
- Sprite draws a CCTexture on the screen. Sprite can be created with an image, with a sub-rectangle of an (atlas) image.
+ Sprite draws a Texture on the screen. Sprite can be created with an image, with a sub-rectangle of an (atlas) image.
  
  The default anchorPoint in Sprite is (0.5, 0.5).
  */
@@ -102,6 +99,7 @@ open class Sprite: RenderableNode {
      *  @return A newly initialized Sprite object.
      */
     internal var tex: Texture!
+    let uniform = Uniform(name: "u_mainTexture", type: .int1)
     convenience init(imageNamed imageName: String) {
         let image = Image(pngFile: try! CCFileLocator.shared().fileNamed(withResolutionSearch: imageName))
         
@@ -142,7 +140,7 @@ open class Sprite: RenderableNode {
     
     init(texture: CCTexture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
         super.init()
-        self.blendMode = CCBlendMode.premultipliedAlpha()
+        self.blendMode = .premultipliedAlphaMode
         self.shader = .posTexture
         // default transform anchor: center
         self.anchorPoint = p2d(0.5, 0.5)
@@ -338,10 +336,7 @@ open class Sprite: RenderableNode {
         memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
         bgfx.setIndexBuffer(ib)
         
-        var renderState = RenderStateOptions.default
-            | RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
-        renderState.remove(.depthWrite)
-        let uniform = Uniform(name: "u_mainTexture", type: .int1)
+        //let uniform = Uniform(name: "u_mainTexture", type: .int1)
         bgfx.setTexture(0, sampler: uniform, texture: tex)
         bgfx.setRenderState(renderState, colorRgba: 0x00)
         bgfx.submit(0, program: shader)

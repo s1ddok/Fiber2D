@@ -28,7 +28,7 @@ open class ColorNode: RenderableNode {
         self.color = color
         self.contentSizeInPoints = size
         
-        self.blendMode = CCBlendMode.premultipliedAlpha()
+        self.blendMode = .premultipliedAlphaMode
         
         updateColor()
     }
@@ -80,9 +80,6 @@ open class ColorNode: RenderableNode {
         let indices: [UInt16] = [0, 1, 2, 0, 2, 3]
         memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
         bgfx.setIndexBuffer(ib)
-        var renderState = RenderStateOptions.default
-            | RenderStateOptions.blend(source: .blendSourceAlpha, destination: .blendInverseSourceAlpha)
-        renderState.remove(.depthWrite)
         bgfx.setRenderState(renderState, colorRgba: 0x00)
         bgfx.submit(0, program: shader)
     }

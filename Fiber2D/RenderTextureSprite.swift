@@ -10,7 +10,7 @@ import SwiftMath
 class RenderTextureSprite: Sprite {
     weak var renderTexture: RenderTexture?
     
-    override var renderState: CCRenderState! {
+    /*override var renderState: CCRenderState! {
         get {
             if super.renderState == nil {
                 // Allowing the uniforms to be copied speeds up the rendering by making the render state immutable.
@@ -24,7 +24,7 @@ class RenderTextureSprite: Sprite {
         set {
             super.renderState = newValue
         }
-    }
+    }*/
     
     var nodeToWorldTransform: Matrix4x4f {
         var t = self.nodeToParentMatrix

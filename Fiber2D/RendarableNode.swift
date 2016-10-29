@@ -11,7 +11,7 @@ open class RenderableNode: Node {
     var shader: Program {
         didSet {
             //render state dirty
-            renderState = nil
+            renderStateDirty = true
         }
     }
     private(set) var shaderUniforms: [String : Any]! {
@@ -29,17 +29,18 @@ open class RenderableNode: Node {
     private var _shaderUniforms: [String: Any]?
     
     
-    var blendMode: CCBlendMode {
+    public var blendMode: BlendMode {
         didSet {
             if blendMode != oldValue {
-                renderState = nil
+                renderStateDirty = true
             }
         }
     }
+    
     var texture: CCTexture! {
         didSet {
             if texture != oldValue {
-                renderState = nil
+                renderStateDirty = true
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
                 shaderUniforms?[ShaderUniformMainTexture] = texture ?? CCTexture.none()
             }
@@ -48,7 +49,7 @@ open class RenderableNode: Node {
     var secondaryTexture: CCTexture? {
         didSet {
             if texture != oldValue {
-                renderState = nil
+                renderStateDirty = true
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
                 shaderUniforms?[ShaderUniformSecondaryTexture] = texture ?? CCTexture.none()
             }
@@ -56,20 +57,12 @@ open class RenderableNode: Node {
     }
 
     /// Cache and return the current render state.
-    /// Should be set to nil whenever changing a property that affects the renderstate.
-    var renderState: CCRenderState! {
+    internal(set) public var renderState: RenderStateOptions {
         get {
-            if _renderState == nil {
-                let texture: CCTexture = self.texture ?? CCTexture.none()
-                if CheckDefaultUniforms(shaderUniforms, texture: texture) {
-                    // Create a cached render state so we can use the fast path.
-                    //self._renderState = CCRenderState(blendMode: blendMode, shader: shader, mainTexture: texture)
-                    // If the uniform dictionary was set, it was the default. Throw it away.
-                    self.shaderUniforms = nil
-                } else {
-                    // Since the node has unique uniforms, it cannot be batched or use the fast path.
-                    //self._renderState = CCRenderState(blendMode: blendMode, shader: shader, shaderUniforms: shaderUniforms, copyUniforms: false)
-                }
+            if renderStateDirty {
+                _renderState = .default | blendMode.state | blendMode.equation
+                _renderState.remove(.depthWrite)
+                renderStateDirty = false
             }
             return _renderState
         }
@@ -78,11 +71,13 @@ open class RenderableNode: Node {
         }
     }
     
-    private var _renderState: CCRenderState? = nil
+    internal var renderStateDirty = true
+    
+    private var _renderState: RenderStateOptions = .default
     
     override init() {
         shader = .posColor
-        blendMode = CCBlendMode.premultipliedAlpha()
+        blendMode = .premultipliedAlphaMode
         
         super.init()
     }

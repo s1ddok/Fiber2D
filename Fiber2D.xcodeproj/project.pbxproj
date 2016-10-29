@@ -72,6 +72,7 @@
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
 		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
+		085567861DC53858009B5B60 /* BlendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085567851DC53858009B5B60 /* BlendMode.swift */; };
 		086652721D7333B500BCD9CE /* Scheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086652711D7333B500BCD9CE /* Scheduling.swift */; };
 		0866527D1D73359800BCD9CE /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866527C1D73359800BCD9CE /* Scheduler.swift */; };
 		0866527F1D7335D800BCD9CE /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866527E1D7335D800BCD9CE /* Timer.swift */; };
@@ -267,6 +268,7 @@
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
 		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
+		085567851DC53858009B5B60 /* BlendMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlendMode.swift; sourceTree = "<group>"; };
 		086652711D7333B500BCD9CE /* Scheduling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduling.swift; sourceTree = "<group>"; };
 		0866527C1D73359800BCD9CE /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		0866527E1D7335D800BCD9CE /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 		081FBD301D463446005838B8 /* Rendering */ = {
 			isa = PBXGroup;
 			children = (
+				085567851DC53858009B5B60 /* BlendMode.swift */,
 				0812AD021D538D7600AE46E8 /* Color.swift */,
 				081FBD051D46289A005838B8 /* RenderTexture.swift */,
 				081FBD061D46289A005838B8 /* RenderTextureSprite.swift */,
@@ -1089,6 +1092,7 @@
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
 				082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */,
+				085567861DC53858009B5B60 /* BlendMode.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
 				08C1CB181D8EFFD5006CDCCB /* cpDampedRotarySpring.c in Sources */,
 				087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */,
