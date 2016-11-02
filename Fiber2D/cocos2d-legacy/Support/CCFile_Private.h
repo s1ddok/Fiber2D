@@ -33,16 +33,6 @@
 @end
 
 
-// Read data from a gzip compressed stream.
-@interface CCGZippedInputStream : CCWrappedInputStream
-@end
-
-
-// Read data from an encrypted .ccp file.
-@interface CCEncryptedInputStream : CCWrappedInputStream
-@end
-
-
 // Return an opened input stream to read from.
 // May be called more than once if the file is rewound.
 typedef NSInputStream *(^CCStreamedImageSourceStreamBlock)();
@@ -68,17 +58,6 @@ typedef NSInputStream *(^CCStreamedImageSourceStreamBlock)();
 @property(nonatomic, assign) CGFloat contentScale;
 @property(nonatomic, assign) BOOL hasResolutionTag;
 
-/**
- Set the key used on encrypted files the app will be loading.
- It's recommended to set this value only once in your app delegate.
- 
- TODO where would a user find or create such a key.
-
- @param key A 32 digit hexadecimal number as a string.
-
- @since 4.0
- */
-+(void)setEncryptionKey:(NSString *)key;
 
 -(instancetype)initWithName:(NSString *)name url:(NSURL *)url contentScale:(CGFloat)contentScale tagged:(BOOL)tagged;
 -(CGImageSourceRef)createCGImageSource;
