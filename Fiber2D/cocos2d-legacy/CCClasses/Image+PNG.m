@@ -1,6 +1,5 @@
 #import "png.h"
 
-#import "ccUtils.h"
 #import "CCFile_Private.h"
 
 #import "CCSetup.h"

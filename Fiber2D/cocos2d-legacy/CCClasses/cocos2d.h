@@ -46,8 +46,6 @@
 // Misc:
 #import "CCFile.h"
 #import "CCFileLocator.h"
-#import "CGPointExtension.h"
-#import "ccUtils.h"
 
 #ifdef __cplusplus
 extern "C" {

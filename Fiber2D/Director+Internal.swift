@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import Quartz
 
 /**
  Get the current time in seconds.

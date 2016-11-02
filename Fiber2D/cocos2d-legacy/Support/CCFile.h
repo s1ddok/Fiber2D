@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+#import <Foundation/Foundation.h>
+
 /**
  Abstract file handling class. Files may reference local or remote files, such as files on an HTTP or FTP server.
  If a file is compressed with gzip (must end in .gz) it will be transparently decompressed.

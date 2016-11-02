@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import Cocoa
 
 /**
  Responder is the base class for all nodes.

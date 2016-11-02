@@ -6,6 +6,7 @@
 //
 
 import SwiftMath
+import Cocoa
 
 class MainScene: Scene {
     

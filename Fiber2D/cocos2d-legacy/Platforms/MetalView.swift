@@ -14,11 +14,6 @@ class MetalView: MTKView, DirectorView {
     var director: Director!
     var surfaceSize = CGSize.zero
     
-    @objc(sizeInPixels)
-    var cgsizeInPixels: CGSize {
-        return CC_SIZE_SCALE(self.bounds.size, self.contentScaleFactor)
-    }
-    
     var sizeInPixels: Size {
         return Size(CGSize: self.bounds.size) *  Float(self.contentScaleFactor)
     }
@@ -65,7 +60,7 @@ class MetalView: MTKView, DirectorView {
     
     func layoutSubviews() {
         self.layerSizeDidUpdate = true
-        self.surfaceSize = CC_SIZE_SCALE(self.bounds.size, self.contentScaleFactor)
+        self.surfaceSize = (Size(CGSize: self.bounds.size) * Float(self.contentScaleFactor)).cgSize
     }
     
     func beginFrame() {

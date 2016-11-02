@@ -42,7 +42,6 @@
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
 		081FBCEC1D462732005838B8 /* CCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCC01D462732005838B8 /* CCFile.m */; };
 		081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCC31D462732005838B8 /* CCFileLocator.m */; };
-		081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCC81D462732005838B8 /* CGPointExtension.m */; };
 		081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCF81D46289A005838B8 /* ColorNode.swift */; };
 		081FBD0F1D46289A005838B8 /* Director.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCF91D46289A005838B8 /* Director.swift */; };
 		081FBD101D46289A005838B8 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFA1D46289A005838B8 /* Layout.swift */; };
@@ -209,9 +208,6 @@
 		081FBCC11D462732005838B8 /* CCFile_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFile_Private.h; sourceTree = "<group>"; };
 		081FBCC21D462732005838B8 /* CCFileLocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileLocator.h; sourceTree = "<group>"; };
 		081FBCC31D462732005838B8 /* CCFileLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileLocator.m; sourceTree = "<group>"; };
-		081FBCC41D462732005838B8 /* ccUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccUtils.h; sourceTree = "<group>"; };
-		081FBCC71D462732005838B8 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
-		081FBCC81D462732005838B8 /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
 		081FBCF41D462765005838B8 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		081FBCF81D46289A005838B8 /* ColorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorNode.swift; sourceTree = "<group>"; };
 		081FBCF91D46289A005838B8 /* Director.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
@@ -531,9 +527,6 @@
 				081FBCC11D462732005838B8 /* CCFile_Private.h */,
 				081FBCC21D462732005838B8 /* CCFileLocator.h */,
 				081FBCC31D462732005838B8 /* CCFileLocator.m */,
-				081FBCC41D462732005838B8 /* ccUtils.h */,
-				081FBCC71D462732005838B8 /* CGPointExtension.h */,
-				081FBCC81D462732005838B8 /* CGPointExtension.m */,
 			);
 			name = Support;
 			path = "cocos2d-legacy/Support";
@@ -1068,7 +1061,6 @@
 				080307191D994FED008CAC8E /* System.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
 				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
-				081FBCEF1D462732005838B8 /* CGPointExtension.m in Sources */,
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
 				080306B01D942000008CAC8E /* PhysicsShapePolygon.swift in Sources */,

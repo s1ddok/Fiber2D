@@ -6,6 +6,7 @@
 //
 
 import SwiftMath
+import Cocoa
 
 public enum MouseButton: Int {
     case left

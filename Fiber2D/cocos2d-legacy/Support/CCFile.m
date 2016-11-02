@@ -25,7 +25,7 @@
 
 #import <zlib.h>
 
-#import "ccUtils.h"
+
 #import "CCFile_Private.h"
 
 #import "CCSetup.h"
@@ -469,7 +469,7 @@ static const CGDataProviderSequentialCallbacks callbacks = {
         return 1.0;
     } else {
         float relativeScale = MAX(1.0, self.contentScale/[CCSetup sharedSetup].assetScale);
-        return 1.0/CCNextPOT(relativeScale);
+        return 1.0/ /*CCNextPOT(*/relativeScale;
     }
 }
 

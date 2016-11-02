@@ -6,7 +6,7 @@
 //
 
 import SwiftMath
-
+import Metal
 /**
  A transition animates the presesntation of a new scene while moving the current scene out of view.
  A transition is optionally played when calling one of the presentScene:withTransition: methods of Director.
@@ -108,7 +108,7 @@ public class Transition: Scene {
     func update(_ delta: Time) {
         // update progress
         self.runTime += delta
-        self.progress = clampf(Float(runTime / duration), 0.0, 1.0)
+        self.progress = clamp(Float(runTime / duration), min: 0.0, max: 1.0)
         // check for runtime expired
         if progress >= 1.0 {
             // Exit out scene

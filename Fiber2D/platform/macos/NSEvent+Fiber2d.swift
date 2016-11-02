@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftMath
+import Cocoa
 
 #if os(OSX)
 
