@@ -42,9 +42,9 @@ public struct ImageOptions {
 }
 
 
-@objc public final class Image: NSObject {
+public final class Image {
     
-    @objc public convenience init(file: CCFile) {
+    public convenience init(file: CCFile) {
         self.init(file: file, options: .default)
     }
     /**
@@ -65,7 +65,6 @@ public struct ImageOptions {
         self.options   = options
         self.pixelData = pixelData
         
-        super.init()
         self.sizeInPixels.width  = floor(pixelSize.width)
         self.sizeInPixels.height = floor(pixelSize.height)
         
@@ -91,13 +90,7 @@ public struct ImageOptions {
     /**
      Size of the image's bitmap in pixels.
      */
-    @nonobjc
     internal(set) public var sizeInPixels = Size.zero
-    
-    @objc(sizeInPixels)
-    public var objc_sizeInPixels: CGSize {
-        return sizeInPixels.cgSize
-    }
     
     /**
      Bitmap data pointer. The format will always be RGBA8.
@@ -115,14 +108,7 @@ public struct ImageOptions {
      This value may not equal pixelSize/contentScale if the image is padded.
      It defaults to the original size of the image in points.
      */
-    @nonobjc
     public var contentSize: Size
     
-    @objc(contentSize)
-    public var objc_contentSize: CGSize {
-        return contentSize.cgSize
-    }
-    
     internal var options: ImageOptions
-    
 }

@@ -17,7 +17,7 @@ open class RenderableNode: Node {
     private(set) var shaderUniforms: [String : Any]! {
         get {
             if _shaderUniforms == nil {
-                _shaderUniforms = [ShaderUniformMainTexture : texture ?? CCTexture.none()]
+                _shaderUniforms = [ShaderUniformMainTexture : texture]
             }
             
             return _shaderUniforms
@@ -37,21 +37,20 @@ open class RenderableNode: Node {
         }
     }
     
-    var texture: CCTexture! {
+    public var texture: Texture! {
         didSet {
-            if texture != oldValue {
-                renderStateDirty = true
+            if texture !== oldValue {
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
-                shaderUniforms?[ShaderUniformMainTexture] = texture ?? CCTexture.none()
+                shaderUniforms?[ShaderUniformMainTexture] = texture
             }
         }
     }
-    var secondaryTexture: CCTexture? {
+    
+    public var secondaryTexture: Texture? {
         didSet {
-            if texture != oldValue {
-                renderStateDirty = true
+            if secondaryTexture !== oldValue {
                 // Set the main texture in the uniforms dictionary (if the dictionary exists).
-                shaderUniforms?[ShaderUniformSecondaryTexture] = texture ?? CCTexture.none()
+                shaderUniforms?[ShaderUniformSecondaryTexture] = secondaryTexture
             }
         }
     }
@@ -83,22 +82,23 @@ open class RenderableNode: Node {
     }
     
     var usesCustomShaderUniforms: Bool {
-        let texture: CCTexture = self.texture ?? CCTexture.none()
+        /*let texture: CCTexture = self.texture ?? CCTexture.none()
         if CheckDefaultUniforms(shaderUniforms, texture: texture) {
             // If the uniform dictionary was set, it was the default. Throw it away.
             self.shaderUniforms = nil
             return false
         }
         
-        return true
+        return true*/
+        return false
     }
     
-    private func CheckDefaultUniforms(_ uniforms: [String: Any]?, texture: CCTexture) -> Bool
+    /*private func CheckDefaultUniforms(_ uniforms: [String: Any]?, texture: CCTexture) -> Bool
     {
         guard uniforms != nil else {
             return true
         }
         // Check that the uniforms has only one key for the main texture.
         return uniforms!.count == 1 && uniforms![ShaderUniformMainTexture] as! CCTexture == texture
-    }
+    }*/
 }

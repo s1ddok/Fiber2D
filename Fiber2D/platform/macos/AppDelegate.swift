@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         var pd = PlatformData()
         pd.nwh = UnsafeMutableRawPointer(Unmanaged.passRetained(view).toOpaque())
-        pd.context = UnsafeMutableRawPointer(Unmanaged.passRetained(view.context.device!).toOpaque())
+        pd.context = UnsafeMutableRawPointer(Unmanaged.passRetained(view.device!).toOpaque())
         bgfx.setPlatformData(pd)
         
         bgfx.renderFrame()

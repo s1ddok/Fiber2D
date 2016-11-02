@@ -43,7 +43,7 @@ class RenderTexture: RenderableNode {
         self.contentScale = CCSetup.shared().assetScale
         self.contentSize = Size(width: w, height: h)
         self.projection = Matrix4x4f.ortho(left: 0.0, right: Float(w), bottom: 0.0, top: Float(h), near: -1024, far: 1024)
-        let rtSprite: RenderTextureSprite = RenderTextureSprite(texture: CCTexture.none(), rect: Rect.zero, rotated: false)
+        let rtSprite: RenderTextureSprite = RenderTextureSprite(texture: /*CCTexture.none()*/nil, rect: Rect.zero, rotated: false)
         rtSprite.renderTexture = self
         self.sprite = rtSprite
 
@@ -61,14 +61,14 @@ class RenderTexture: RenderableNode {
      */
     
     func begin() -> Renderer {
-        var texture: CCTexture! = self.texture
+        /*var texture: CCTexture! = self.texture
         if texture == nil {
             self.create()
             texture = self.texture
-        }
+        }*/
         let renderer: Renderer = Director.currentDirector!.rendererFromPool()
         // TODO: Renderer
-        renderer.prepare(withProjection: _projection, framebuffer: framebuffer!)
+        renderer.prepare(withProjection: _projection)
         self.previousRenderer = currentRenderer
         currentRenderer = renderer
         //CCRenderer.bindRenderer(renderer)
@@ -155,11 +155,11 @@ class RenderTexture: RenderableNode {
     }
     private var _projection  = Matrix4x4f.identity
 
-    var framebuffer: CCFrameBufferObject?
+    //var framebuffer: CCFrameBufferObject?
     
     
     func createTextureAndFboWithPixelSize(_ pixelSize: Size) {
-        let paddedSize: Size = pixelSize
+        /*let paddedSize: Size = pixelSize
         /*if(![[CCDeviceInfo sharedDeviceInfo] supportsNPOT]){
          paddedSize.width = CCNextPOT(pixelSize.width);
          paddedSize.height = CCNextPOT(pixelSize.height);
@@ -175,7 +175,7 @@ class RenderTexture: RenderableNode {
         self.assignSpriteTexture()
         let size = self.contentSize
         let textureSize = Rect(origin: p2d.zero, size: size)
-        sprite.setTextureRect(textureSize, forTexture: sprite.texture, rotated: false, untrimmedSize: textureSize.size)
+        sprite.setTextureRect(textureSize, forTexture: sprite.texture, rotated: false, untrimmedSize: textureSize.size)*/
     }
     
     func create() {
@@ -184,7 +184,7 @@ class RenderTexture: RenderableNode {
         self.createTextureAndFboWithPixelSize(pixelSize)
     }
     func destroy() {
-        framebuffer = nil
+        //framebuffer = nil
         texture = nil
     }
     
@@ -192,8 +192,8 @@ class RenderTexture: RenderableNode {
         sprite.texture = texture
     }
     /** The render texture's (and its sprite's) texture.
-     @see CCTexture */
-    override var texture: CCTexture! {
+     @see Texture */
+    override var texture: Texture! {
         get {
             if (super.texture == nil) {
                 create()

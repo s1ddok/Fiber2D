@@ -159,7 +159,7 @@ public class Director: NSObject {
     
     func purgeCachedData() {
         if Director.currentDirector?.view != nil {
-            CCTextureCache.shared().removeUnusedTextures()
+            TextureCache.shared.removeUnusedTextures()
         }
         CCFileLocator.shared().purgeCache()
     }
@@ -334,7 +334,7 @@ public class Director: NSObject {
         //self.delegate = nil
         // Purge all managers / caches
         SpriteFrame.purgeCache()
-        CCTextureCache.purgeSharedTextureCache()
+        TextureCache.shared.removeUnusedTextures()
         CCFileLocator.shared().purgeCache()
     }
     

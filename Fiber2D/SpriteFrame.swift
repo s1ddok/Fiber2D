@@ -7,11 +7,11 @@
 
 import SwiftMath
 
-@objc class SpriteFrame: NSObject {
-    var texture: CCTexture {
+public class SpriteFrame {
+    var texture: Texture {
         return _texture ?? lazyTexture
     }
-    var _texture: CCTexture?
+    var _texture: Texture?
     var textureFilename: String = "" {
         didSet {
             // Make sure any previously loaded texture is cleared.
@@ -19,64 +19,50 @@ import SwiftMath
             self._lazyTexture = nil
         }
     }
-    var proxy: CCProxy {
-        if _proxy == nil {
-            _proxy = CCProxy(target: self)
-        }
-        return _proxy!
-    }
-    
-    private weak var _proxy: CCProxy?
-    
-    var lazyTexture: CCTexture {
+
+    var lazyTexture: Texture {
         if _lazyTexture == nil && textureFilename != "" {
-            _lazyTexture = CCTextureCache.shared().addImage(textureFilename)
+            _lazyTexture = TextureCache.shared.addImage(from: textureFilename)
             _texture = _lazyTexture
         }
         return texture
     }
-    private var _lazyTexture: CCTexture?
+    private var _lazyTexture: Texture?
     
     /** Rectangle of the frame within the texture, in points. */
-    var rect: Rect
-    /** If YES, the frame rectangle is rotated. */
-    var rotated: Bool
-    /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is the original size in points of a frame before it was trimmed. */
-    var untrimmedSize: Size
-    /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is offset of the sprite caused by trimming in points. */
-    var trimOffset: Point
+    public var rect: Rect
     
-    static func frameWithImageNamed(_ imageName: String) -> SpriteFrame! {
-        return CCSpriteFrameCache.shared().spriteFrame(byName: imageName)
+    /** If YES, the frame rectangle is rotated. */
+    public var rotated: Bool
+    
+    /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is the original size in points of a frame before it was trimmed. */
+    public var untrimmedSize: Size
+    
+    /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is offset of the sprite caused by trimming in points. */
+    public var trimOffset: Point
+    
+    public static func with(imageName: String) -> SpriteFrame! {
+        return SpriteFrameCache.shared.spriteFrame(by: imageName)
     }
-    convenience init(texture: CCTexture!, rect: CGRect, rotated: Bool, trimOffset: CGPoint, untrimmedSize: CGSize) {
+    
+    public convenience init(texture: Texture!, rect: CGRect, rotated: Bool, trimOffset: CGPoint, untrimmedSize: CGSize) {
         self.init(texture: texture, rect: Rect(CGRect: rect), rotated: rotated, trimOffset: Point(trimOffset), untrimmedSize: Size(CGSize: untrimmedSize))
     }
-    init(texture: CCTexture!, rect: Rect, rotated: Bool, trimOffset: Point, untrimmedSize: Size) {
+    
+    public init(texture: Texture!, rect: Rect, rotated: Bool, trimOffset: Point, untrimmedSize: Size) {
         self._texture = texture
         self.rect = rect
         self.trimOffset = trimOffset
         self.untrimmedSize = untrimmedSize
         self.rotated = rotated
-        super.init()
     }
     
-    override var description: String {
-        return "<CCSpriteFrame: Texture=\(textureFilename), Rect = \(rect.description)> rotated:\(rotated) offset=\(trimOffset.description))"
+    public var description: String {
+        return "<SpriteFrame: Texture=\(textureFilename), Rect = \(rect.description)> rotated:\(rotated) offset=\(trimOffset.description))"
     }
     
-    func setTexture(_ texture: CCTexture) {
-        if _texture != texture {
-            self._texture = texture
-        }
-    }
-
-    func hasProxy() -> Bool {
-        return _proxy != nil
-    }
-    
-    class func purgeCache() {
+    public static func purgeCache() {
         // TODO not thread safe.
-        CCSpriteFrameCache.shared().removeUnusedSpriteFrames()
+        SpriteFrameCache.shared.removeUnusedSpriteFrames()
     }
 }

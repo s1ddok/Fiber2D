@@ -17,6 +17,11 @@ public extension Texture {
         let memoryBlock = MemoryBlock(size: size)
         image.pixelData?.copyBytes(to: memoryBlock.data, count: Int(size))
         
-        return Texture.make2D(width: w, height: h, mipCount: 1, format: .bgra8, memory: memoryBlock)
+        let tex = Texture(bgfxTexture: BGFXTexture.make2D(width: w, height: h,
+                                                       mipCount: 1, format: .bgra8,
+                                                       memory: memoryBlock))
+        tex.contentScale = image.contentScale
+        tex.contentSizeInPixels = image.sizeInPixels
+        return tex
     }
 }

@@ -48,15 +48,15 @@ open class Sprite: RenderableNode {
     private // Offset Position, used by sprite sheet editors.
     var unflippedOffsetPositionFromCenter = Point.zero
     
-    class func textureCoordsForTexture(_ texture: CCTexture!, withRect rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
+    internal static func textureCoords(for texture: Texture!, withRect rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
         var result = SpriteTexCoordSet()
         guard let texture = texture else {
             return result
         }
         // Need to convert the texel coords for the texel stretch hack. (Bah)
-        let scale = Float(texture.contentScale)
+        let scale = texture.contentScale
         let rect = rect.scaled(by: scale)
-        let sizeInPixels: Size = Size(CGSize: texture.sizeInPixels)
+        let sizeInPixels = texture.sizeInPixels
         let atlasWidth = sizeInPixels.width
         let atlasHeight = sizeInPixels.height
         
@@ -98,16 +98,12 @@ open class Sprite: RenderableNode {
      *
      *  @return A newly initialized Sprite object.
      */
-    internal var tex: Texture!
     let uniform = Uniform(name: "u_mainTexture", type: .int1)
     convenience init(imageNamed imageName: String) {
-        let image = Image(pngFile: try! CCFileLocator.shared().fileNamed(withResolutionSearch: imageName))
-        
-        let spriteFrame = SpriteFrame.frameWithImageNamed(imageName)
+        let spriteFrame = SpriteFrame.with(imageName: imageName)
         self.init(spriteFrame: spriteFrame!)
-        
-        tex = Texture.make(from: image)
     }
+    
     /**
      *  Initializes an sprite with an existing SpriteFrame.
      *
@@ -122,11 +118,11 @@ open class Sprite: RenderableNode {
         self.spriteFrame = spriteFrame
     }
     
-    convenience init(texture: CCTexture? = nil, rect: CGRect = CGRect.zero, rotated: Bool = false) {
+    convenience init(texture: Texture? = nil, rect: CGRect = CGRect.zero, rotated: Bool = false) {
         self.init(texture: texture, rect: Rect(CGRect: rect), rotated: rotated)
     }
     /**
-     *  Initializes a sprite with an existing CCTexture and a rect in points, optionally rotated.
+     *  Initializes a sprite with an existing Texture and a rect in points, optionally rotated.
      *  The offset will be (0,0).
      *  @note This is the designated initializer.
      *
@@ -135,10 +131,9 @@ open class Sprite: RenderableNode {
      *  @param rotated YES if texture is rotated.
      *
      *  @return A newly initialized Sprite object.
-     *  @see CCTexture
+     *  @see Texture
      */
-    
-    init(texture: CCTexture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
+    init(texture: Texture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
         super.init()
         self.blendMode = .premultipliedAlphaMode
         self.shader = .posTexture
@@ -194,9 +189,9 @@ open class Sprite: RenderableNode {
             guard let spriteFrame2 = spriteFrame2 else {
                 return
             }
-            self.secondaryTexture = spriteFrame2.texture
+            //self.secondaryTexture = spriteFrame2.texture
             // Set the second texture coordinate set from the normal map's sprite frame.
-            let texCoords: SpriteTexCoordSet = Sprite.textureCoordsForTexture(spriteFrame2.texture, withRect: spriteFrame2.rect, rotated: spriteFrame2.rotated, xFlipped: flipX, yFlipped: flipY)
+            let texCoords: SpriteTexCoordSet = Sprite.textureCoords(for: spriteFrame2.texture, withRect: spriteFrame2.rect, rotated: spriteFrame2.rotated, xFlipped: flipX, yFlipped: flipY)
             self.verts.bl.texCoord2 = texCoords.bl
             self.verts.br.texCoord2 = texCoords.br
             self.verts.tr.texCoord2 = texCoords.tr
@@ -227,12 +222,12 @@ open class Sprite: RenderableNode {
      *  @param rotated YES if texture is rotated.
      *  @param size    Untrimmed size.
      */
-    func setTextureRect(_ rect: Rect, forTexture texture: CCTexture, rotated: Bool, untrimmedSize: Size) {
+    func setTextureRect(_ rect: Rect, forTexture texture: Texture, rotated: Bool, untrimmedSize: Size) {
         self.textureRectRotated = rotated
         self.contentSizeType = .points
         self.contentSize = untrimmedSize
         self.textureRect = rect
-        let texCoords: SpriteTexCoordSet = Sprite.textureCoordsForTexture(texture, withRect: rect, rotated: rotated, xFlipped: flipX, yFlipped: flipY)
+        let texCoords: SpriteTexCoordSet = Sprite.textureCoords(for: texture, withRect: rect, rotated: rotated, xFlipped: flipX, yFlipped: flipY)
         self.verts.bl.texCoord1 = texCoords.bl
         self.verts.br.texCoord1 = texCoords.br
         self.verts.tr.texCoord1 = texCoords.tr
@@ -337,7 +332,7 @@ open class Sprite: RenderableNode {
         bgfx.setIndexBuffer(ib)
         
         //let uniform = Uniform(name: "u_mainTexture", type: .int1)
-        bgfx.setTexture(0, sampler: uniform, texture: tex)
+        bgfx.setTexture(0, sampler: uniform, texture: texture.texture)
         bgfx.setRenderState(renderState, colorRgba: 0x00)
         bgfx.submit(0, program: shader)
     }

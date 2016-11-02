@@ -46,26 +46,12 @@
 #import "CCSetup.h"
 
 // Basic Types:
-#import "CCTexture.h"
-#import "CCShader.h"
-
-
-#if CC_EFFECTS_EXPERIMENTAL
-#import "CCEffectOutline.h"
-#import "CCEffectDFOutline.h"
-#import "CCEffectDistanceField.h"
-#import "CCEffectDFInnerGlow.h"
-#import "CCEffectStereo.h"
-#endif
 
 // Misc:
 #import "CCFile.h"
 #import "CCFileLocator.h"
 #import "CGPointExtension.h"
 #import "ccUtils.h"
-
-// Platform Support:
-#import "CCNS.h"
 
 #ifdef __cplusplus
 extern "C" {
