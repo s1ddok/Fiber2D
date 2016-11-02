@@ -20,8 +20,6 @@
  * THE SOFTWARE.
  */
 
-#import "ccMacros.h"
-
 @class CCFile;
 @class CCFileMetaData;
 

@@ -192,8 +192,8 @@ NSString * const CCFILELOCATOR_SEARCH_OPTION_NOTRACE = @"CCFILELOCATOR_SEARCH_OP
         // Search for the file again with tracing enabled.
         if(!trace && ![options[CCFILELOCATOR_SEARCH_OPTION_NOTRACE] boolValue])
         {
-            CCLOG(@"CCFileLocator: File not found! '%@'", filename);
-            CCLOG(@"Beginning trace with options:%@", options);
+            //CCLOG(@"CCFileLocator: File not found! '%@'", filename);
+            //CCLOG(@"Beginning trace with options:%@", options);
             [self fileNamed:filename options:options error:error trace:YES];
         }
 #endif
@@ -229,11 +229,11 @@ NSString * const CCFILELOCATOR_SEARCH_OPTION_NOTRACE = @"CCFILELOCATOR_SEARCH_OP
 {
     __block CCFile *ret = nil;
     
-    if(trace) CCLOG(@"Checking in search path:'%@'", searchPath);
+    //if(trace) CCLOG(@"Checking in search path:'%@'", searchPath);
     
     [self tryVariantsForFilename:filename options:options block:^(NSString *variantName, CGFloat contentScale, BOOL tagged) {
         NSURL *fileURL = [NSURL fileURLWithPath:[searchPath stringByAppendingPathComponent:variantName]];
-        if(trace) CCLOG(@"%@", fileURL);
+        //if(trace) CCLOG(@"%@", fileURL);
         
         BOOL isDirectory = NO;
         NSFileManager *fileManager = [NSFileManager defaultManager];

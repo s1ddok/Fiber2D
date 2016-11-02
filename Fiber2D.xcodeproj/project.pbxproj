@@ -195,11 +195,9 @@
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		081FBC801D462732005838B8 /* ccConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccConfig.h; sourceTree = "<group>"; };
 		081FBC811D462732005838B8 /* CCFileLocator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileLocator_Private.h; sourceTree = "<group>"; };
 		081FBC821D462732005838B8 /* Image+PNG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Image+PNG.m"; sourceTree = "<group>"; };
 		081FBC831D462732005838B8 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		081FBC861D462732005838B8 /* ccMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccMacros.h; sourceTree = "<group>"; };
 		081FBCA61D462732005838B8 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
 		081FBCAD1D462732005838B8 /* CCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSetup.h; sourceTree = "<group>"; };
 		081FBCAE1D462732005838B8 /* CCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSetup.m; sourceTree = "<group>"; };
@@ -496,11 +494,9 @@
 			isa = PBXGroup;
 			children = (
 				081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */,
-				081FBC801D462732005838B8 /* ccConfig.h */,
 				081FBC811D462732005838B8 /* CCFileLocator_Private.h */,
 				081FBC821D462732005838B8 /* Image+PNG.m */,
 				081FBC831D462732005838B8 /* Image.h */,
-				081FBC861D462732005838B8 /* ccMacros.h */,
 				081FBCA61D462732005838B8 /* cocos2d.h */,
 			);
 			name = CCClasses;

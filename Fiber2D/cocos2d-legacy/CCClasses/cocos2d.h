@@ -38,10 +38,6 @@
  * @todo A native English speaker should check the grammar. We need your help!
  *
  */
-#import "ccConfig.h"
-
-#import "ccMacros.h"
-
 // Singletons:
 #import "CCSetup.h"
 

@@ -22,19 +22,6 @@
  * THE SOFTWARE.
  */
 
-
-#import "ccMacros.h"
-#if __CC_PLATFORM_IOS || __CC_PLATFORM_MAC
-
-#import <ImageIO/CGImageSource.h>
-
-#elif __CC_PLATFORM_ANDROID
-
-#import <CoreGraphics/CGImageSource.h>
-
-#endif
-
-
 /**
  Abstract file handling class. Files may reference local or remote files, such as files on an HTTP or FTP server.
  If a file is compressed with gzip (must end in .gz) it will be transparently decompressed.

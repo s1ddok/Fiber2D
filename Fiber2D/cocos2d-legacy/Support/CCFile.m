@@ -107,7 +107,6 @@
     }
     
     if(self.streamStatus == NSStreamStatusError){
-        CCLOG(@"Error loading compressed data: %@", self.streamError);
         if(error) *error = self.streamError;
     }
     
@@ -158,7 +157,7 @@
                 _error = [[NSError alloc] initWithDomain:@"ZLib Error" code:result userInfo:@{
                     NSLocalizedDescriptionKey: [NSString stringWithFormat:@"ZLib failed to initialize (%d)", result],
                 }];
-                CCLOG(@"%@", _error);
+                //CCLOG(@"%@", _error);
                 
                 _hasBytesAvailable = NO;
                 goto finish;
@@ -179,7 +178,7 @@
                 _error = [[NSError alloc] initWithDomain:@"ZLib Error" code:result userInfo:@{
                     NSLocalizedDescriptionKey: [NSString stringWithFormat:@"ZLib decompression error (%d)", result],
                 }];
-                CCLOG(@"%@", _error);
+                //CCLOG(@"%@", _error);
             case Z_STREAM_END:
                 _hasBytesAvailable = NO;
                 goto finish;
@@ -251,7 +250,7 @@ static void TEA_decrypt(uint32_t *v, int n, uint32_t const key[4]) {
         _error = [[NSError alloc] initWithDomain:@"CCFile Encryption Error" code:0 userInfo:@{
             NSLocalizedDescriptionKey: @"Error reading encrypted file: Truncated stream.",
         }];
-        CCLOG(@"%@", _error);
+        //CCLOG(@"%@", _error);
         goto fail;
     }
     
@@ -271,7 +270,7 @@ static void TEA_decrypt(uint32_t *v, int n, uint32_t const key[4]) {
         _error = [[NSError alloc] initWithDomain:@"CCFile Encryption Error" code:0 userInfo:@{
             NSLocalizedDescriptionKey: @"Error reading encrypted file: Corrupt stream.",
         }];
-        CCLOG(@"%@", _error);
+        //CCLOG(@"%@", _error);
         goto fail;
     }
     
@@ -479,7 +478,7 @@ static const CGDataProviderSequentialCallbacks callbacks = {
     NSInputStream *stream = [_inputStreamClass inputStreamWithURL:self.url];
     
     if(stream == nil){
-        CCLOG(@"Error opening stream for %@", self.name);
+        //CCLOG(@"Error opening stream for %@", self.name);
     }
     
     [stream open];
@@ -494,7 +493,7 @@ static const CGDataProviderSequentialCallbacks callbacks = {
     [stream close];
     
     if(error && *error){
-        CCLOG(@"Error reading property list from %@: %@", self.name, *error);
+        //CCLOG(@"Error reading property list from %@: %@", self.name, *error);
         return nil;
     } else {
         return plist;
@@ -513,7 +512,7 @@ static const CGDataProviderSequentialCallbacks callbacks = {
         NSData *data = [NSData dataWithContentsOfURL:_url options:NSDataReadingMappedIfSafe error:error];
         
         if(error && *error){
-            CCLOG(@"Error reading data from from %@: %@", self.name, *error);
+            //CCLOG(@"Error reading data from from %@: %@", self.name, *error);
             return nil;
         } else {
             return data;
