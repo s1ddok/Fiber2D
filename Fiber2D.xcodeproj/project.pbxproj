@@ -35,7 +35,6 @@
 		0812AD031D538D7600AE46E8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812AD021D538D7600AE46E8 /* Color.swift */; };
 		0817EE7D1DC381B40084DAD3 /* Texture+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
-		081FBCD41D462732005838B8 /* Image+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* Image+PNG.m */; };
 		081FBCE61D462732005838B8 /* CCShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB41D462732005838B8 /* CCShaders.metal */; };
 		081FBCE91D462732005838B8 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBA1D462732005838B8 /* MetalView.swift */; };
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
@@ -195,8 +194,6 @@
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		081FBC811D462732005838B8 /* CCFileLocator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileLocator_Private.h; sourceTree = "<group>"; };
-		081FBC821D462732005838B8 /* Image+PNG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Image+PNG.m"; sourceTree = "<group>"; };
-		081FBC831D462732005838B8 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		081FBCA61D462732005838B8 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
 		081FBCB41D462732005838B8 /* CCShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CCShaders.metal; sourceTree = "<group>"; };
 		081FBCBA1D462732005838B8 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = "cocos2d-legacy/Platforms/MetalView.swift"; sourceTree = "<group>"; };
@@ -490,8 +487,6 @@
 			children = (
 				081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */,
 				081FBC811D462732005838B8 /* CCFileLocator_Private.h */,
-				081FBC821D462732005838B8 /* Image+PNG.m */,
-				081FBC831D462732005838B8 /* Image.h */,
 				081FBCA61D462732005838B8 /* cocos2d.h */,
 			);
 			name = CCClasses;
@@ -1022,7 +1017,6 @@
 				087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */,
 				081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */,
 				082E904E1DBE92DF00AD32AA /* Image.swift in Sources */,
-				081FBCD41D462732005838B8 /* Image+PNG.m in Sources */,
 				08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */,
 				08C1CB361D8F03D2006CDCCB /* PhysicsTypes.swift in Sources */,
 				0812AD031D538D7600AE46E8 /* Color.swift in Sources */,

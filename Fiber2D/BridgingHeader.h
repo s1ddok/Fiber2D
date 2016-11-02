@@ -9,5 +9,5 @@
 #import "chipmunk_private.h"
 #import "cpHastySpace.h"
 #import "CCFile_Private.h"
-#import "Image.h"
+#import "png.h"
 #import "CCFileLocator_Private.h"
