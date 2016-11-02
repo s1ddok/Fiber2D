@@ -52,8 +52,12 @@ internal extension Director {
         /* calculate "global" dt */
         calculateDeltaTime()
         /* tick before glClear: issue #533 */
+        guard let runningScene = runningScene else {
+            return
+        }
+        
         if !isPaused {
-            runningScene!.scheduler.update(dt)
+            runningScene.scheduler.update(dt)
         }
         /* to avoid flickr, nextScene MUST be here: after tick and before draw.
          XXX: Which bug is this one. It seems that it can't be reproduced with v0.9 */
@@ -61,7 +65,7 @@ internal extension Director {
             self.setNextScene()
         }
         view!.beginFrame()
-        let projection = runningScene!.projection
+        let projection = runningScene.projection
         // Synchronize the framebuffer with the view.
         let renderer: Renderer = self.rendererFromPool()
         
@@ -69,9 +73,9 @@ internal extension Director {
         
         //CCRenderer.bindRenderer(renderer)
         currentRenderer = renderer
-        renderer.enqueueClear(color: runningScene!.colorRGBA)
+        renderer.enqueueClear(color: runningScene.colorRGBA)
         // Render
-        runningScene!.visit(renderer, parentTransform: projection)
+        runningScene.visit(renderer, parentTransform: projection)
         notificationNode?.visit(renderer, parentTransform: projection)
         
         //CCRenderer.bindRenderer(nil)

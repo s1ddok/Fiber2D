@@ -27,6 +27,7 @@
 
 
 #import "CCFile_Private.h"
+#import "Fiber2D-Swift.h"
 
 #pragma mark Wrapped Streams
 
@@ -467,7 +468,8 @@ static const CGDataProviderSequentialCallbacks callbacks = {
     } else {
         /*float relativeScale = MAX(1.0, self.contentScale/[CCSetup sharedSetup].assetScale);
         return 1.0/ CCNextPOT(relativeScale;*/
-        return 2.0;
+        float relativeScale = MAX(1.0, self.contentScale / [Setup sharedInstance].assetScale);
+        return 1.0 / CCNextPOT(relativeScale);
     }
 }
 

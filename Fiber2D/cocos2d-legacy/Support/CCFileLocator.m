@@ -23,9 +23,8 @@
 
 #import <Foundation/Foundation.h>
 #import "CCFileLocator_Private.h"
-
-#import "CCFile.h"
 #import "CCFile_Private.h"
+#import "Fiber2D-Swift.h"
 
 // Options are only used internally for now
 NSString * const CCFILELOCATOR_SEARCH_OPTION_SKIPRESOLUTIONSEARCH = @"CCFILELOCATOR_SEARCH_OPTION_SKIPRESOLUTIONSEARCH";
@@ -271,7 +270,7 @@ NSString * const CCFILELOCATOR_SEARCH_OPTION_NOTRACE = @"CCFILELOCATOR_SEARCH_OP
     else
     {
         // FIXME: TEMPORARY
-        NSUInteger contentScale = 2.0;///*CCNextPOT(ceil(*/[CCSetup sharedSetup].assetScale;
+        NSUInteger contentScale = CCNextPOT(ceil([Setup sharedInstance].assetScale));
         
         // First try the highest-res tagged variant.
         NSString *name = [self contentScaleFilenameWithBasefilename:filename contentScale:contentScale];

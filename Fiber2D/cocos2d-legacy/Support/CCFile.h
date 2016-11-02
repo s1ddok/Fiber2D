@@ -24,6 +24,17 @@
 
 #import <Foundation/Foundation.h>
 
+static unsigned long CCNextPOT(unsigned long x)
+{
+    x = x - 1;
+    x = x | (x >> 1);
+    x = x | (x >> 2);
+    x = x | (x >> 4);
+    x = x | (x >> 8);
+    x = x | (x >>16);
+    return x + 1;
+}
+
 /**
  Abstract file handling class. Files may reference local or remote files, such as files on an HTTP or FTP server.
  If a file is compressed with gzip (must end in .gz) it will be transparently decompressed.
