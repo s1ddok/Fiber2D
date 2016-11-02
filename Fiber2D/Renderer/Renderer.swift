@@ -10,7 +10,7 @@ import SwiftMath
 
 public protocol Renderer {
     func enqueueClear(color: vec4)
-    func prepare(withProjection: Matrix4x4f, framebuffer: FrameBufferObject)
+    func prepare(withProjection: Matrix4x4f)
     func flush()
     
     // MARK: - render objects

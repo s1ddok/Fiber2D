@@ -5,12 +5,11 @@
 //  Copyright © 2016. All rights reserved.
 //
 
+import Metal
 import MetalKit
 import SwiftMath
 
 class MetalView: MTKView, DirectorView {
-    var context: CCMetalContext!
-    //id<MTLDrawable> _currentDrawable;
     var layerSizeDidUpdate: Bool = false
     var director: Director!
     var surfaceSize = CGSize.zero
@@ -40,32 +39,9 @@ class MetalView: MTKView, DirectorView {
     #endif
     
     init(frame: CGRect) {
-        self.context = CCMetalContext()
-        super.init(frame: frame, device: context.device)
-        
-        //TODO Move into CCRenderDispatch to support threaded rendering with Metal?
-        CCMetalContext.setCurrent(context)
-        self.device = context.device
+        super.init(frame: frame, device: MTLCreateSystemDefaultDevice())
         self.framebufferOnly = true
-        /*CAMetalLayer *layer = self.metalLayer;
-         layer.opaque = YES;
-         layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-         layer.framebufferOnly = YES;
-         
-         layer.device = _context.device;
-         layer.pixelFormat = MTLPixelFormatBGRA8Unorm;*/
-        /*self.opaque = true
-        self.backgroundColor = nil
-        // Default to the screen's native scale.
-        var screen: UIScreen = UIScreen.mainScreen()
-        if screen.respondsToSelector("nativeScale") {
-            self.contentScaleFactor = screen.nativeScale
-        }
-        else {
-            self.contentScaleFactor = screen.scale
-        }
-        self.multipleTouchEnabled = true
-        self.director = DirectorDisplayLink(view: self)*/
+
         self.director = Director(view: self)
         self.preferredFramesPerSecond = 60
         self.delegate = director
@@ -76,15 +52,15 @@ class MetalView: MTKView, DirectorView {
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        self.context = CCMetalContext()
+        //self.context = CCMetalContext()
         //TODO Move into CCRenderDispatch to support threaded rendering with Metal?
-        CCMetalContext.setCurrent(context)
-        self.device = context.device
+        //CCMetalContext.setCurrent(context)
+        /*self.device = context.device
         self.framebufferOnly = true
         self.director = Director(view: self)
         self.preferredFramesPerSecond = 60
         self.delegate = director
-        self.sampleCount = 4
+        self.sampleCount = 4*/
     }
     
     func layoutSubviews() {
@@ -107,9 +83,9 @@ class MetalView: MTKView, DirectorView {
     }
     
     func add(frameCompletionHandler handler: @escaping ()->()) {
-        context.currentCommandBuffer.addCompletedHandler {(buffer: MTLCommandBuffer) -> Void in
+        /*context.currentCommandBuffer.addCompletedHandler {(buffer: MTLCommandBuffer) -> Void in
             handler()
-        }
+        }*/
     }
     
     func convertPointFromViewToSurface(_ point: CGPoint) -> CGPoint {

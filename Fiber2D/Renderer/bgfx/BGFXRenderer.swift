@@ -107,7 +107,7 @@ class BGFXRenderer: Renderer {
         bgfx.setViewClear(viewId: 0, options: [.color, .depth], rgba: 0x30_30_30_ff, depth: 1.0, stencil: 0)
     }
     
-    func prepare(withProjection proj: Matrix4x4f, framebuffer: FrameBufferObject) {
+    func prepare(withProjection proj: Matrix4x4f) {
         bgfx.setViewSequential(viewId: 0, enabled: true)
         bgfx.setViewRect(viewId: 0, x: 0, y: 0, width: 1024, height: 750)
         bgfx.touch(0)
@@ -129,14 +129,6 @@ class BGFXRenderer: Renderer {
 }
 
 extension SwiftBGFX.FrameBuffer: FrameBufferObject {
-    
-}
-
-extension CCFrameBufferObject: FrameBufferObject {
-    
-}
-
-extension CCRenderState: RendererState {
     
 }
 
