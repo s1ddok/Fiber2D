@@ -109,8 +109,6 @@ public class Director: NSObject {
     /// The current global shader values values.
 	var globalShaderUniforms = [String: AnyObject]()
     
-    let framebuffer = CCFrameBufferObjectMetal()
-    
     init(view: DirectorView) {
         self.displayStats = false
         self.totalFrames = 0
@@ -160,7 +158,6 @@ public class Director: NSObject {
     }
     
     func purgeCachedData() {
-        CCRenderState.flushCache()
         if Director.currentDirector?.view != nil {
             CCTextureCache.shared().removeUnusedTextures()
         }

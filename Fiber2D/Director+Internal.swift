@@ -62,10 +62,9 @@ internal extension Director {
         view!.beginFrame()
         let projection = runningScene!.projection
         // Synchronize the framebuffer with the view.
-        framebuffer.sync(with: self.view as! MetalView)
         let renderer: Renderer = self.rendererFromPool()
         
-        renderer.prepare(withProjection: projection, framebuffer: framebuffer)
+        renderer.prepare(withProjection: projection)
         
         //CCRenderer.bindRenderer(renderer)
         currentRenderer = renderer
