@@ -93,7 +93,7 @@ public final class Scheduler {
             }
             }, for: mock, withDelay: 0)
         fixedUpdateTimer.repeatCount = TIMER_REPEAT_COUNT_FOREVER
-        fixedUpdateTimer.repeatInterval = Time(CCSetup.shared().fixedUpdateInterval)
+        fixedUpdateTimer.repeatInterval = Time(Setup.shared.fixedUpdateInterval)
     }
 }
 

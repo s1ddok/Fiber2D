@@ -28,9 +28,6 @@
 
 #import "CCFile_Private.h"
 
-#import "CCSetup.h"
-
-
 #pragma mark Wrapped Streams
 
 #define BUFFER_SIZE 32*1024
@@ -468,8 +465,9 @@ static const CGDataProviderSequentialCallbacks callbacks = {
     if(self.hasResolutionTag){
         return 1.0;
     } else {
-        float relativeScale = MAX(1.0, self.contentScale/[CCSetup sharedSetup].assetScale);
-        return 1.0/ /*CCNextPOT(*/relativeScale;
+        /*float relativeScale = MAX(1.0, self.contentScale/[CCSetup sharedSetup].assetScale);
+        return 1.0/ CCNextPOT(relativeScale;*/
+        return 2.0;
     }
 }
 

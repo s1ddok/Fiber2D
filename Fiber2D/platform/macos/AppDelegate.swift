@@ -16,11 +16,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var renderer: Renderer!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        CCSetup.createCustomSetup()
-        CCSetup.shared().contentScale = 2.0
+        Setup.shared.contentScale = 2.0
         //;2*[_view convertSizeToBacking:NSMakeSize(1, 1)].width;
-        CCSetup.shared().assetScale = CCSetup.shared().contentScale
-        CCSetup.shared().uiScale = 0.5
+        Setup.shared.assetScale = Setup.shared.contentScale
+        Setup.shared.UIScale = 0.5
         let rect: CGRect = CGRect(x: 0, y: 0, width: 1024, height: 768)
         window = NSWindow(contentRect: rect, styleMask: [NSClosableWindowMask, NSResizableWindowMask, NSTitledWindowMask], backing: .buffered, defer: false, screen: NSScreen.main())
         

@@ -26,7 +26,6 @@
 
 #import "CCFile.h"
 #import "CCFile_Private.h"
-#import "CCSetup.h"
 
 // Options are only used internally for now
 NSString * const CCFILELOCATOR_SEARCH_OPTION_SKIPRESOLUTIONSEARCH = @"CCFILELOCATOR_SEARCH_OPTION_SKIPRESOLUTIONSEARCH";
@@ -271,7 +270,8 @@ NSString * const CCFILELOCATOR_SEARCH_OPTION_NOTRACE = @"CCFILELOCATOR_SEARCH_OP
     }
     else
     {
-        NSUInteger contentScale = /*CCNextPOT(ceil(*/[CCSetup sharedSetup].assetScale;
+        // FIXME: TEMPORARY
+        NSUInteger contentScale = 2.0;///*CCNextPOT(ceil(*/[CCSetup sharedSetup].assetScale;
         
         // First try the highest-res tagged variant.
         NSString *name = [self contentScaleFilenameWithBasefilename:filename contentScale:contentScale];

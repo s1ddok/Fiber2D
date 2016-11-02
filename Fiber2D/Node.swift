@@ -305,7 +305,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see scaleType */
     var scaleInPoints: Float {
         if scaleType == .scaled {
-            return scale * CCSetup.shared().uiScale
+            return scale * Setup.shared.UIScale
         }
         return scale
     }
@@ -317,7 +317,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see scaleY, scaleYInPoints */
     var scaleXInPoints: Float {
         if scaleType == .scaled {
-            return scaleX * CCSetup.shared().uiScale
+            return scaleX * Setup.shared.UIScale
         }
         return scaleX
     }
@@ -330,7 +330,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see scaleXInPoints */
     var scaleYInPoints: Float {
         if scaleType == .scaled {
-            return scaleY * CCSetup.shared().uiScale
+            return scaleY * Setup.shared.UIScale
         }
         return scaleY
 

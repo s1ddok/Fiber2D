@@ -36,7 +36,6 @@
 		0817EE7D1DC381B40084DAD3 /* Texture+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
 		081FBCD41D462732005838B8 /* Image+PNG.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBC821D462732005838B8 /* Image+PNG.m */; };
-		081FBCE31D462732005838B8 /* CCSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCAE1D462732005838B8 /* CCSetup.m */; };
 		081FBCE61D462732005838B8 /* CCShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB41D462732005838B8 /* CCShaders.metal */; };
 		081FBCE91D462732005838B8 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBA1D462732005838B8 /* MetalView.swift */; };
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
@@ -63,6 +62,7 @@
 		082E904E1DBE92DF00AD32AA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904D1DBE92DF00AD32AA /* Image.swift */; };
 		082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904F1DBE9B8700AD32AA /* Image+PNG.swift */; };
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
+		084AB53E1DCA33040013AD51 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB53D1DCA33040013AD51 /* Setup.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
 		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
 		085567861DC53858009B5B60 /* BlendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085567851DC53858009B5B60 /* BlendMode.swift */; };
@@ -198,8 +198,6 @@
 		081FBC821D462732005838B8 /* Image+PNG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Image+PNG.m"; sourceTree = "<group>"; };
 		081FBC831D462732005838B8 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		081FBCA61D462732005838B8 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
-		081FBCAD1D462732005838B8 /* CCSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSetup.h; sourceTree = "<group>"; };
-		081FBCAE1D462732005838B8 /* CCSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSetup.m; sourceTree = "<group>"; };
 		081FBCB41D462732005838B8 /* CCShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CCShaders.metal; sourceTree = "<group>"; };
 		081FBCBA1D462732005838B8 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = "cocos2d-legacy/Platforms/MetalView.swift"; sourceTree = "<group>"; };
 		081FBCBC1D462732005838B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
@@ -235,6 +233,7 @@
 		082E904D1DBE92DF00AD32AA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		082E904F1DBE9B8700AD32AA /* Image+PNG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+PNG.swift"; sourceTree = "<group>"; };
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
+		084AB53D1DCA33040013AD51 /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
 		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
 		085567851DC53858009B5B60 /* BlendMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlendMode.swift; sourceTree = "<group>"; };
@@ -502,8 +501,6 @@
 		081FBCAA1D462732005838B8 /* Platforms */ = {
 			isa = PBXGroup;
 			children = (
-				081FBCAD1D462732005838B8 /* CCSetup.h */,
-				081FBCAE1D462732005838B8 /* CCSetup.m */,
 				081FBCAF1D462732005838B8 /* iOS */,
 			);
 			name = Platforms;
@@ -557,6 +554,7 @@
 		081FBCF71D462871005838B8 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				084AB53C1DCA32F70013AD51 /* Config */,
 				08B3B5221DB56CB000D564CB /* File Handling */,
 				08855BDC1D9DA6340090EA84 /* typedefs */,
 				0885098B1D7B4F62003EF800 /* Protocols */,
@@ -665,6 +663,14 @@
 				081FBCF81D46289A005838B8 /* ColorNode.swift */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		084AB53C1DCA32F70013AD51 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				084AB53D1DCA33040013AD51 /* Setup.swift */,
+			);
+			name = Config;
 			sourceTree = "<group>";
 		};
 		086652731D7333BA00BCD9CE /* Scheduling */ = {
@@ -1015,7 +1021,6 @@
 				08C1CB2A1D8EFFD5006CDCCB /* cpSpaceComponent.c in Sources */,
 				087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */,
 				081FBD111D46289A005838B8 /* LayoutBox.swift in Sources */,
-				081FBCE31D462732005838B8 /* CCSetup.m in Sources */,
 				082E904E1DBE92DF00AD32AA /* Image.swift in Sources */,
 				081FBCD41D462732005838B8 /* Image+PNG.m in Sources */,
 				08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */,
@@ -1054,6 +1059,7 @@
 				08C1CB261D8EFFD5006CDCCB /* cpShape.c in Sources */,
 				08C1CB3F1D913C71006CDCCB /* PhysicsWorld+Joints.swift in Sources */,
 				08C1CB471D915A1A006CDCCB /* PhysicsWorld+Shapes.swift in Sources */,
+				084AB53E1DCA33040013AD51 /* Setup.swift in Sources */,
 				08C1CB411D914A07006CDCCB /* PhysicsWorld+Bodies.swift in Sources */,
 				08C1CB1D1D8EFFD5006CDCCB /* cpHastySpace.c in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,

@@ -18,8 +18,8 @@ public extension Node {
      @see position
      @see PositionType, PositionUnit, PositionReferenceCorner */
     public func convertPositionFromPoints(_ positionInPoints: Point, type: PositionType) -> Point {
-        let setup: CCSetup = CCSetup.shared()
-        let UIScale = setup.uiScale
+        let setup = Setup.shared
+        let UIScale = setup.UIScale
         var parentsContentSizeInPoints = Size.zero
         var gotParentSize: Bool = parent == nil
         var position = Point.zero
@@ -90,8 +90,8 @@ public extension Node {
      @see positionInPoints
      @see PositionType, PositionUnit, PositionReferenceCorner */
     public func convertPositionToPoints(_ position: Point, type: PositionType) -> Point {
-        let setup: CCSetup = CCSetup.shared()
-        let UIScale = setup.uiScale
+        let setup = Setup.shared
+        let UIScale = setup.UIScale
         var gotParentSize: Bool = parent == nil
         var parentsContentSizeInPoints = Size(width: 0.0, height: 0.0)
         var positionInPoints = Point.zero
@@ -159,8 +159,8 @@ public extension Node {
      @see SizeType, SizeUnit */
     public func convertContentSizeToPoints(_ contentSize: Size, type: SizeType) -> Size {
         var size: Size = Size.zero
-        let setup: CCSetup = CCSetup.shared()
-        let UIScale = Float(setup.uiScale)
+        let setup = Setup.shared
+        let UIScale = Float(setup.UIScale)
         let widthUnit = type.xUnit
         let heightUnit = type.yUnit
         var gotParentSize: Bool = parent == nil
@@ -214,8 +214,8 @@ public extension Node {
      @see SizeType, SizeUnit */
     public func convertContentSizeFromPoints(_ pointSize: Size, type: SizeType) -> Size {
         var size: Size = Size.zero
-        let setup: CCSetup = CCSetup.shared()
-        let UIScale = Float(setup.uiScale)
+        let setup = Setup.shared
+        let UIScale = Float(setup.UIScale)
         let widthUnit = type.xUnit
         let heightUnit = type.yUnit
         var gotParentSize: Bool = parent == nil

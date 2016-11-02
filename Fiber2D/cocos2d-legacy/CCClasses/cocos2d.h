@@ -38,8 +38,6 @@
  * @todo A native English speaker should check the grammar. We need your help!
  *
  */
-// Singletons:
-#import "CCSetup.h"
 
 // Basic Types:
 

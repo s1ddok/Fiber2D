@@ -2,8 +2,6 @@
 
 #import "CCFile_Private.h"
 
-#import "CCSetup.h"
-
 extern NSString * const CCImageOptionFlipVertical;
 
 
