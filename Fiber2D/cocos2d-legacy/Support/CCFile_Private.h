@@ -25,10 +25,7 @@
 
 #import "CCFile.h"
 
-
-// Abstract parent class for the compressed/encryted streams.
-@interface CCWrappedInputStream : NSInputStream
--(instancetype)initWithInputStream:(NSInputStream *)inputStream;
+@interface NSInputStream (DATA_HINT)
 -(NSData *)loadDataWithSizeHint:(NSUInteger)sizeHint error:(NSError **)error;
 @end
 

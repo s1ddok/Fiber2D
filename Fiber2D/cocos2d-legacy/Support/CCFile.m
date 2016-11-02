@@ -25,7 +25,7 @@
 
 #import <zlib.h>
 
-
+#import <Foundation/Foundation.h>
 #import "CCFile_Private.h"
 #import "Fiber2D-Swift.h"
 
@@ -33,64 +33,7 @@
 
 #define BUFFER_SIZE 32*1024
 
-@implementation CCWrappedInputStream {
-    @protected
-    NSInputStream *_inputStream;
-    BOOL _hasBytesAvailable;
-    
-    NSError *_error;
-}
-
-// Make the designated initializer warnings go away.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wall"
--(instancetype)initWithInputStream:(NSInputStream *)inputStream
-{
-    if((self = [super init])){
-        _inputStream = inputStream;
-        _hasBytesAvailable = YES;
-    }
-    
-    return self;
-}
-#pragma clang diagnostic pop
-
--(instancetype)initWithURL:(NSURL *)url
-{
-    return [self initWithInputStream:[NSInputStream inputStreamWithURL:url]];
-}
-
-// Forward most of the methods on to the regular input stream object.
--(void)open{[_inputStream open];}
--(void)close {[_inputStream close];}
--(id<NSStreamDelegate>)delegate {return _inputStream.delegate;}
--(void)setDelegate:(id<NSStreamDelegate>)delegate {_inputStream.delegate = delegate;}
--(void)scheduleInRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode {[_inputStream scheduleInRunLoop:runLoop forMode:mode];}
--(void)removeFromRunLoop:(NSRunLoop *)runLoop forMode:(NSString *)mode {[_inputStream removeFromRunLoop:runLoop forMode:mode];}
--(id)propertyForKey:(NSString *)key {return [_inputStream propertyForKey:key];}
--(BOOL)setProperty:(id)property forKey:(NSString *)key {return [_inputStream setProperty:property forKey:key];}
-
--(NSStreamStatus)streamStatus {
-    if(_error){
-        return NSStreamStatusError;
-    } else {
-        return _inputStream.streamStatus;
-    }
-}
-
--(NSError *)streamError {
-    return (_error ?: _inputStream.streamError);
-}
-
--(BOOL)getBuffer:(uint8_t **)buffer length:(NSUInteger *)len
-{
-    return NO;
-}
-
--(BOOL)hasBytesAvailable
-{
-    return _hasBytesAvailable;
-}
+@implementation NSInputStream (DATA_HINT)
 
 -(NSData *)loadDataWithSizeHint:(NSUInteger)sizeHint error:(NSError **)error;
 {
@@ -209,7 +152,6 @@ static const CGDataProviderSequentialCallbacks callbacks = {
 #pragma mark CCFile
 
 @implementation CCFile {
-    Class _inputStreamClass;
     BOOL _loadDataFromStream;
 }
 
@@ -221,7 +163,6 @@ static const CGDataProviderSequentialCallbacks callbacks = {
         _contentScale = contentScale;
         _hasResolutionTag = tagged;
         
-        _inputStreamClass = [NSInputStream class];
         _loadDataFromStream = NO;
     }
     
@@ -251,7 +192,7 @@ static const CGDataProviderSequentialCallbacks callbacks = {
 
 -(NSInputStream *)openInputStream
 {
-    NSInputStream *stream = [_inputStreamClass inputStreamWithURL:self.url];
+    NSInputStream *stream = [NSInputStream inputStreamWithURL:self.url];
     
     if(stream == nil){
         //CCLOG(@"Error opening stream for %@", self.name);
@@ -279,7 +220,7 @@ static const CGDataProviderSequentialCallbacks callbacks = {
 -(NSData *)loadData:(NSError *__autoreleasing *)error
 {
     if(_loadDataFromStream){
-       CCWrappedInputStream *stream = (CCWrappedInputStream *)[self openInputStream];
+       NSInputStream *stream = (NSInputStream *)[self openInputStream];
        NSData *data = [stream loadDataWithSizeHint:0 error:error];
        [stream close];
        
