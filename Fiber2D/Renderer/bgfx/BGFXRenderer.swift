@@ -101,6 +101,8 @@ class BGFXRenderer: Renderer {
     
     init() {
         bgfx.frame()
+        
+        bgfx.debug = [.text]
     }
     
     func enqueueClear(color: vec4) {
@@ -120,7 +122,7 @@ class BGFXRenderer: Renderer {
         bgfx.debugTextPrint(x: 0, y: 1, foreColor: .white, backColor: .darkGray, format: "going")
 
         bgfx.frame()
-        bgfx.renderFrame()
+        //bgfx.renderFrame()
     }
     
     func makeFrameBufferObject() -> FrameBufferObject {

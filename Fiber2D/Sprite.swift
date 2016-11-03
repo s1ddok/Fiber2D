@@ -184,10 +184,10 @@ open class Sprite: RenderableNode {
         self.offsetPosition.x = relativeOffset.x + (size.width - textureRect.width) / 2
         self.offsetPosition.y = relativeOffset.y + (size.height - textureRect.height) / 2
         // Atlas: Vertex
-        let x1 = Float(offsetPosition.x)
-        let y1 = Float(offsetPosition.y)
-        let x2 = x1 + Float(textureRect.size.width)
-        let y2 = y1 + Float(textureRect.size.height)
+        let x1 = offsetPosition.x
+        let y1 = offsetPosition.y
+        let x2 = x1 + textureRect.size.width
+        let y2 = y1 + textureRect.size.height
         self.verts.bl.position = vec4(x1, y1, 0.0, 1.0)
         self.verts.br.position = vec4(x2, y1, 0.0, 1.0)
         self.verts.tr.position = vec4(x2, y2, 0.0, 1.0)
@@ -297,13 +297,13 @@ open class Sprite: RenderableNode {
         let sizeInPixels = texture.sizeInPixels
         let atlasWidth = sizeInPixels.width
         let atlasHeight = sizeInPixels.height
-        
-        var left   = Float(rect.origin.x / atlasWidth)
-        var right  = Float((rect.origin.x + rect.size.height) / atlasWidth)
-        var bottom = Float(rect.origin.y / atlasHeight)
-        var top    = Float((rect.origin.y + rect.size.width) / atlasHeight)
-        
+
         if rotated {
+            var left   = rect.origin.x / atlasWidth
+            var right  = (rect.origin.x + rect.size.height) / atlasWidth
+            var bottom = rect.origin.y / atlasHeight
+            var top    = (rect.origin.y + rect.size.width) / atlasHeight
+            
             if flipX {
                 swap(&top, &bottom)
             }
@@ -316,6 +316,11 @@ open class Sprite: RenderableNode {
             result.tl = vec2(right, top)
         }
         else {
+            var left   = rect.origin.x / atlasWidth
+            var right  = (rect.origin.x + rect.size.width) / atlasWidth
+            var bottom = rect.origin.y / atlasHeight
+            var top    = (rect.origin.y + rect.size.height) / atlasHeight
+            
             if flipX {
                 swap(&left, &right)
             }

@@ -59,6 +59,7 @@
 		082E904E1DBE92DF00AD32AA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904D1DBE92DF00AD32AA /* Image.swift */; };
 		082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904F1DBE9B8700AD32AA /* Image+PNG.swift */; };
 		0833CA551DCB47AE0090D4CC /* FileLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833CA541DCB47AE0090D4CC /* FileLocator.swift */; };
+		0833CA591DCBACC70090D4CC /* Sprite9Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0B1D46289A005838B8 /* Sprite9Slice.swift */; };
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		084AB53E1DCA33040013AD51 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB53D1DCA33040013AD51 /* Setup.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
@@ -1029,6 +1030,7 @@
 				08C1CB2E1D8EFFD5006CDCCB /* cpSpaceStep.c in Sources */,
 				08C1CB121D8EFFD5006CDCCB /* cpArbiter.c in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,
+				0833CA591DCBACC70090D4CC /* Sprite9Slice.swift in Sources */,
 				081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */,
 				081FBD1A1D46289A005838B8 /* RendarableNode.swift in Sources */,
 				08C1CB221D8EFFD5006CDCCB /* cpPolyShape.c in Sources */,

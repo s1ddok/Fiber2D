@@ -119,7 +119,12 @@ class MainScene: Scene {
             add(child: physicsSquare)
         }
         
- 
+        let messageBubble = Sprite9Slice(imageNamed: "ninepatch_bubble.png")
+        messageBubble.positionType = PositionType(xUnit: .points, yUnit: .points, corner: .topRight)
+        messageBubble.contentSizeInPoints = messageBubble.contentSizeInPoints * 5.0
+        //messageBubble.scale = 3.0
+        messageBubble.position = p2d(256.0, 256.0)
+        add(child: messageBubble)
     }
     
     /*override func onEnter() {

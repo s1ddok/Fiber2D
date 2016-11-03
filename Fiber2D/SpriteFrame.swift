@@ -50,7 +50,7 @@ public final class SpriteFrame {
     
     /** Texture used by the frame.
      @see Texture */
-    internal(set) public var texture: Texture {
+    public var texture: Texture {
         return _texture ?? lazyTexture
     }
     internal var _texture: Texture?
