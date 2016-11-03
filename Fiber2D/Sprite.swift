@@ -112,15 +112,11 @@ open class Sprite: RenderableNode {
      *  @return A newly initialized Sprite object.
      *  @see SpriteFrame
      */
-    
     convenience init(spriteFrame: SpriteFrame) {
         self.init(texture: spriteFrame.texture, rect: spriteFrame.rect)
         self.spriteFrame = spriteFrame
     }
     
-    convenience init(texture: Texture? = nil, rect: CGRect = CGRect.zero, rotated: Bool = false) {
-        self.init(texture: texture, rect: Rect(CGRect: rect), rotated: rotated)
-    }
     /**
      *  Initializes a sprite with an existing Texture and a rect in points, optionally rotated.
      *  The offset will be (0,0).

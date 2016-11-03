@@ -10,21 +10,19 @@ import Foundation
 import SwiftMath
 
 public extension Image {
-    internal convenience init(pngFile: CCFile, options: ImageOptions = .default) {
-        let rescale = Float(pngFile.autoScaleFactor) * options.rescaleFactor
+    internal convenience init(pngFile: File, options: ImageOptions = .default) {
+        let rescale = pngFile.autoScaleFactor * options.rescaleFactor
         
         let res: (size: Size, data: Data) = loadPNG(file: pngFile, flip: options.shouldFlipY, rgb: true, alpha: true, premultply: options.shouldPremultiply, scale: UInt(1.0 / rescale))
         
-        self.init(pixelSize: res.size, contentScale: Float(pngFile.contentScale) * rescale, pixelData: res.data, options: options)
+        self.init(pixelSize: res.size, contentScale: pngFile.contentScale * rescale, pixelData: res.data, options: options)
     }
 }
 
-fileprivate func loadPNG(file: CCFile, flip: Bool, rgb: Bool, alpha: Bool, premultply pm: Bool, scale: UInt) -> (Size, Data) {
+fileprivate func loadPNG(file: File, flip: Bool, rgb: Bool, alpha: Bool, premultply pm: Bool, scale: UInt) -> (Size, Data) {
     assert(scale == 1 || scale == 2 || scale == 4, "Scale must be 1, 2 or 4.")
     
-    guard let stream = file.openInputStream() else {
-        fatalError("Can't open filestream")
-    }
+    let stream = file.openInputStream() 
     
     //	const NSUInteger PNG_SIG_BYTES = 8
     //	png_byte header[PNG_SIG_BYTES]
@@ -51,7 +49,6 @@ fileprivate func loadPNG(file: CCFile, flip: Bool, rgb: Bool, alpha: Bool, premu
     //	png_init_io(png, file)
     //	png_set_sig_bytes(png, PNG_SIG_BYTES)
     //	png_read_info(png, info)
-    
     var info = ProgressiveInfo(flip: flip,
                                rgb: rgb,
                                alpha: alpha,
@@ -142,15 +139,16 @@ fileprivate func progressiveRow(png: png_structp?, rowPixels: png_bytep?, row: p
     let scale = Int(info.pointee.scale)
     let row_bytes = info.pointee.scaled_row_bytes
     let width = Int(info.pointee.width)
-    guard let accumulated = info.pointee.accumulated_row else {
-        fatalError("We must have accumulated pointer")
-    }
-    
+
     let row_pixels = info.pointee.getScaledRowPixels(row: row)
     
     if scale == 1 {
         memcpy(row_pixels, rowPixels, row_bytes)
     } else {
+        guard let accumulated = info.pointee.accumulated_row else {
+            fatalError("We must have accumulated pointer")
+        }
+        
         for i in 0..<width {
             accumulated[(i/scale)*4 + 0] += UInt16(rowPixels[i*4 + 0])
             accumulated[(i/scale)*4 + 1] += UInt16(rowPixels[i*4 + 1])
@@ -226,7 +224,7 @@ fileprivate func progressiveInfo(png: png_structp?, png_info: png_infop?) {
         let bpp = png_get_rowbytes(png, png_info) / png_size_t(info.pointee.width)
         info.pointee.accumulated_row_bytes = bpp * 2 * png_size_t(info.pointee.scaled_width)
     
-        if(info.pointee.scale > 1){
+        if info.pointee.scale > 1 {
             info.pointee.accumulated_row = calloc(Int(info.pointee.scaled_width), 2*bpp).assumingMemoryBound(to: UInt16.self)
         }
         

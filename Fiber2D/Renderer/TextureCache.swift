@@ -35,7 +35,7 @@ public class TextureCache {
             return tex
         }
         
-        guard let file = try? CCFileLocator.shared().fileNamed(withResolutionSearch: filename) else {
+        guard let file = FileLocator.shared.fileWithResolutionSearch(named: filename) else {
             print("Couldn't find file: \(filename)")
             return nil
         }

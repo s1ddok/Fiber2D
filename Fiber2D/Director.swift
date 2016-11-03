@@ -161,7 +161,7 @@ public class Director: NSObject {
         if Director.currentDirector?.view != nil {
             TextureCache.shared.removeUnusedTextures()
         }
-        CCFileLocator.shared().purgeCache()
+        FileLocator.shared.purgeCache()
     }
     
     var flipY: Float {
@@ -335,7 +335,7 @@ public class Director: NSObject {
         // Purge all managers / caches
         SpriteFrame.purgeCache()
         TextureCache.shared.removeUnusedTextures()
-        CCFileLocator.shared().purgeCache()
+        FileLocator.shared.purgeCache()
     }
     
     func setNextScene() {

@@ -43,10 +43,6 @@ public struct ImageOptions {
 
 
 public final class Image {
-    
-    public convenience init(file: CCFile) {
-        self.init(file: file, options: .default)
-    }
     /**
      Initialize a new image with raw pixel data. All default options are applied to the image.
      
@@ -71,12 +67,12 @@ public final class Image {
     }
     
     /**
-     @param file    The CCFile to load the image data from.
+     @param file    The File to load the image data from.
      @param options Optional parameter of type ImageOptions.
      
      @return An image loaded from the file.
      */
-    public convenience init(file: CCFile, options: ImageOptions = .default) {
+    public convenience init(file: File, options: ImageOptions = .default) {
         //if file.name.hasSuffix(".png") {
             // use libpng
         //} else {

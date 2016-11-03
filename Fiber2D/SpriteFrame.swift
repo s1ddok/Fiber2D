@@ -45,10 +45,6 @@ public class SpriteFrame {
         return SpriteFrameCache.shared.spriteFrame(by: imageName)
     }
     
-    public convenience init(texture: Texture!, rect: CGRect, rotated: Bool, trimOffset: CGPoint, untrimmedSize: CGSize) {
-        self.init(texture: texture, rect: Rect(CGRect: rect), rotated: rotated, trimOffset: Point(trimOffset), untrimmedSize: Size(CGSize: untrimmedSize))
-    }
-    
     public init(texture: Texture!, rect: Rect, rotated: Bool, trimOffset: Point, untrimmedSize: Size) {
         self._texture = texture
         self.rect = rect

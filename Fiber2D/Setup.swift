@@ -6,12 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-@objc public class Setup: NSObject {
+public class Setup {
     public static let shared = Setup()
-    
-    @objc class func sharedInstance() -> Setup {
-        return Setup.shared
-    }
     
     /**
      Global content scale for the app.

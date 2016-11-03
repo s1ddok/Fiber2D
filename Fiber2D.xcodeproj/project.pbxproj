@@ -38,8 +38,6 @@
 		081FBCE61D462732005838B8 /* CCShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB41D462732005838B8 /* CCShaders.metal */; };
 		081FBCE91D462732005838B8 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBA1D462732005838B8 /* MetalView.swift */; };
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
-		081FBCEC1D462732005838B8 /* CCFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCC01D462732005838B8 /* CCFile.m */; };
-		081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCC31D462732005838B8 /* CCFileLocator.m */; };
 		081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCF81D46289A005838B8 /* ColorNode.swift */; };
 		081FBD0F1D46289A005838B8 /* Director.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCF91D46289A005838B8 /* Director.swift */; };
 		081FBD101D46289A005838B8 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFA1D46289A005838B8 /* Layout.swift */; };
@@ -60,6 +58,7 @@
 		081FBD2D1D463207005838B8 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 081FBD2C1D463207005838B8 /* Resources */; };
 		082E904E1DBE92DF00AD32AA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904D1DBE92DF00AD32AA /* Image.swift */; };
 		082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904F1DBE9B8700AD32AA /* Image+PNG.swift */; };
+		0833CA551DCB47AE0090D4CC /* FileLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833CA541DCB47AE0090D4CC /* FileLocator.swift */; };
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		084AB53E1DCA33040013AD51 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB53D1DCA33040013AD51 /* Setup.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
@@ -85,6 +84,7 @@
 		088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509981D7C6A5E003EF800 /* ActionSequence.swift */; };
 		088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */; };
 		08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855BE31D9DA6540090EA84 /* UnitTypes.swift */; };
+		08A73C0A1DCB2A7E00BF5AE8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A73C091DCB2A7E00BF5AE8 /* File.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08AA0EE71DBFC5F800748555 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */; };
 		08B3B51E1DB5378100D564CB /* UITouch+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51D1DB5378100D564CB /* UITouch+Node.swift */; };
@@ -193,16 +193,9 @@
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		081FBC811D462732005838B8 /* CCFileLocator_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileLocator_Private.h; sourceTree = "<group>"; };
-		081FBCA61D462732005838B8 /* cocos2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2d.h; sourceTree = "<group>"; };
 		081FBCB41D462732005838B8 /* CCShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CCShaders.metal; sourceTree = "<group>"; };
 		081FBCBA1D462732005838B8 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = "cocos2d-legacy/Platforms/MetalView.swift"; sourceTree = "<group>"; };
 		081FBCBC1D462732005838B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
-		081FBCBF1D462732005838B8 /* CCFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFile.h; sourceTree = "<group>"; };
-		081FBCC01D462732005838B8 /* CCFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFile.m; sourceTree = "<group>"; };
-		081FBCC11D462732005838B8 /* CCFile_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFile_Private.h; sourceTree = "<group>"; };
-		081FBCC21D462732005838B8 /* CCFileLocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileLocator.h; sourceTree = "<group>"; };
-		081FBCC31D462732005838B8 /* CCFileLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCFileLocator.m; sourceTree = "<group>"; };
 		081FBCF41D462765005838B8 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		081FBCF81D46289A005838B8 /* ColorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorNode.swift; sourceTree = "<group>"; };
 		081FBCF91D46289A005838B8 /* Director.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
@@ -229,6 +222,7 @@
 		081FBD2C1D463207005838B8 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		082E904D1DBE92DF00AD32AA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		082E904F1DBE9B8700AD32AA /* Image+PNG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+PNG.swift"; sourceTree = "<group>"; };
+		0833CA541DCB47AE0090D4CC /* FileLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocator.swift; sourceTree = "<group>"; };
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		084AB53D1DCA33040013AD51 /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
@@ -254,6 +248,7 @@
 		088509981D7C6A5E003EF800 /* ActionSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSequence.swift; sourceTree = "<group>"; };
 		088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ActionInstant+Node.swift"; sourceTree = "<group>"; };
 		08855BE31D9DA6540090EA84 /* UnitTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTypes.swift; sourceTree = "<group>"; };
+		08A73C091DCB2A7E00BF5AE8 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
 		08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftBGFX.dylib; path = external/SwiftBGFX/SwiftBGFX/.build/debug/libSwiftBGFX.dylib; sourceTree = "<group>"; };
 		08B3B51B1DB2B98200D564CB /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewportScene.swift; sourceTree = "<group>"; };
@@ -486,8 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */,
-				081FBC811D462732005838B8 /* CCFileLocator_Private.h */,
-				081FBCA61D462732005838B8 /* cocos2d.h */,
 			);
 			name = CCClasses;
 			path = "cocos2d-legacy/CCClasses";
@@ -514,11 +507,6 @@
 			isa = PBXGroup;
 			children = (
 				081FBCBC1D462732005838B8 /* ArrayExtensions.swift */,
-				081FBCBF1D462732005838B8 /* CCFile.h */,
-				081FBCC01D462732005838B8 /* CCFile.m */,
-				081FBCC11D462732005838B8 /* CCFile_Private.h */,
-				081FBCC21D462732005838B8 /* CCFileLocator.h */,
-				081FBCC31D462732005838B8 /* CCFileLocator.m */,
 			);
 			name = Support;
 			path = "cocos2d-legacy/Support";
@@ -744,6 +732,8 @@
 		08B3B5221DB56CB000D564CB /* File Handling */ = {
 			isa = PBXGroup;
 			children = (
+				08A73C091DCB2A7E00BF5AE8 /* File.swift */,
+				0833CA541DCB47AE0090D4CC /* FileLocator.swift */,
 				082E904D1DBE92DF00AD32AA /* Image.swift */,
 				082E904F1DBE9B8700AD32AA /* Image+PNG.swift */,
 			);
@@ -1001,7 +991,6 @@
 				080B06961DCA09F70037E1F1 /* RenderTextureSprite.swift in Sources */,
 				087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */,
 				0803071F1D9AFFDC008CAC8E /* Node+Hierarchy.swift in Sources */,
-				081FBCEC1D462732005838B8 /* CCFile.m in Sources */,
 				08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
 				08DE0B9C1DB1054300721CA0 /* Scene+Systems.swift in Sources */,
@@ -1019,6 +1008,7 @@
 				082E904E1DBE92DF00AD32AA /* Image.swift in Sources */,
 				08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */,
 				08C1CB361D8F03D2006CDCCB /* PhysicsTypes.swift in Sources */,
+				08A73C0A1DCB2A7E00BF5AE8 /* File.swift in Sources */,
 				0812AD031D538D7600AE46E8 /* Color.swift in Sources */,
 				08C1CB271D8EFFD5006CDCCB /* cpSimpleMotor.c in Sources */,
 				08C1CB241D8EFFD5006CDCCB /* cpRobust.c in Sources */,
@@ -1034,7 +1024,6 @@
 				080B06941DCA092C0037E1F1 /* Transition.swift in Sources */,
 				05BC34C51D85BBB100306A4F /* BGFXRenderer.swift in Sources */,
 				08C1CB131D8EFFD5006CDCCB /* cpArray.c in Sources */,
-				081FBCED1D462732005838B8 /* CCFileLocator.m in Sources */,
 				08C1CB201D8EFFD5006CDCCB /* cpPivotJoint.c in Sources */,
 				0817EE7D1DC381B40084DAD3 /* Texture+Image.swift in Sources */,
 				08C1CB2E1D8EFFD5006CDCCB /* cpSpaceStep.c in Sources */,
@@ -1105,6 +1094,7 @@
 				0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */,
 				08C1CB3D1D8F0DFF006CDCCB /* PhysicsWorld+Internal.swift in Sources */,
 				08C1CB251D8EFFD5006CDCCB /* cpRotaryLimitJoint.c in Sources */,
+				0833CA551DCB47AE0090D4CC /* FileLocator.swift in Sources */,
 				080306AA1D932B3B008CAC8E /* PhysicsShapeCircle.swift in Sources */,
 				080B06931DC9FE3E0037E1F1 /* TextureCache.swift in Sources */,
 				08C1CB2D1D8EFFD5006CDCCB /* cpSpaceQuery.c in Sources */,

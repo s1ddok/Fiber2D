@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import CoreGraphics
 
 #if os(iOS) || os(tvOS) || os(OSX)
     

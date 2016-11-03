@@ -27,9 +27,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         view.wantsBestResolutionOpenGLSurface = true
         self.window.contentView = view
         
-        let locator: CCFileLocator = CCFileLocator.shared()
+        let locator = FileLocator.shared
         locator.untaggedContentScale = 4
-        locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "//Resources" ]
+        locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "/Resources" ]
             
         window.center()
         window.makeFirstResponder(view)

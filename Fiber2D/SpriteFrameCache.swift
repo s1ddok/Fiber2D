@@ -8,6 +8,7 @@
 
 import SwiftBGFX
 import SwiftMath
+import Foundation
 
 /**
  Singleton that manages the loading and caching of sprite frames.
@@ -61,9 +62,9 @@ internal class SpriteFrameCache {
      *  @return The SpriteFrame object.
      */
     internal func spriteFrame(by name: String) -> SpriteFrame! {
-        var frame = spriteFrames[name]
+        var frame = spriteFrames[name] 
         
-        if let file = CCFileLocator.shared().fileNamed(name, options: [CCFILELOCATOR_SEARCH_OPTION_NOTRACE: true], error: nil, trace: false) {
+        if let _ = FileLocator.shared.fileWithResolutionSearch(named: name) {
             let texture = Texture.load(from: name)!
             return texture.spriteFrame
         }
@@ -74,7 +75,7 @@ internal class SpriteFrameCache {
             for len in stride(from: pathComponents.count - 1, to: 0, by: -1) {
                 let path = pathComponents[0...len].joined(separator: "/") + ".plist"
                 
-                if let file = CCFileLocator.shared().fileNamed(path, options: [CCFILELOCATOR_SEARCH_OPTION_NOTRACE: true], error: nil, trace: false) {
+                if let _ = FileLocator.shared.file(named:path) {
                     addSpriteFrames(from: path)
                     
                     frame = spriteFrames[name]
@@ -106,7 +107,7 @@ internal class SpriteFrameCache {
      *  @param plist Sprite sheet file.
      */
     private func registerSpriteFramesFile(plistFile: String) {
-        guard let file = try? CCFileLocator.shared().fileNamed(withResolutionSearch: plistFile) else {
+        guard let file = FileLocator.shared.fileWithResolutionSearch(named: plistFile) else {
             fatalError("Error finding \(plistFile)")
         }
 
@@ -171,7 +172,7 @@ internal extension SpriteFrameCache {
      *  @param plist list file to use.
      */
     internal func removeSpriteFrames(from plist: String) {
-        guard let file = try? CCFileLocator.shared().fileNamed(plist) else {
+        guard let file = FileLocator.shared.file(named: plist) else {
             fatalError("Error finding: \(plist)")
         }
         
