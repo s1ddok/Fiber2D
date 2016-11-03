@@ -92,7 +92,7 @@ open class Sprite9Slice: Sprite {
             for x in 0..<4 {
                 let position = interpolatePosition * vec4(alphaX[x], alphaY[y], 0.0, 1.0)
                 let texCoord = interpolateTexCoord * vec3(alphaTexX[x], alphaTexY[y], 1.0)
-                print(texCoord)
+                
                 vertices[y * 4 + x] = RendererVertex(position: position,
                                                      texCoord1: vec2(texCoord),
                                                      texCoord2: vec2.zero,
