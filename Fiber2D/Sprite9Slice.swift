@@ -86,7 +86,7 @@ open class Sprite9Slice: Sprite {
         let color = verts.bl.color
 
         var vertices = [RendererVertex](repeating: RendererVertex(), count: 4 * 4)
-        print("Start!")
+
         // Interpolate the vertexes!
         for y in 0..<4 {
             for x in 0..<4 {
