@@ -10,7 +10,7 @@ import SwiftBGFX
 
 /// The four CCVertexes of a sprite.
 /// Bottom left, bottom right, top right, top left.
-struct SpriteVertexes {
+public struct SpriteVertexes {
     var bl, br, tr, tl: RendererVertex
     
     init() {
@@ -23,7 +23,7 @@ struct SpriteVertexes {
 
 /// A set of four texture coordinates corresponding to the four
 /// vertices of a sprite.
-struct SpriteTexCoordSet {
+public struct SpriteTexCoordSet {
     var bl, br, tr, tl: Vector2f
     
     init() {
@@ -40,57 +40,6 @@ struct SpriteTexCoordSet {
  The default anchorPoint in Sprite is (0.5, 0.5).
  */
 open class Sprite: RenderableNode {
-    // Vertex coords, texture coords and color info.
-    var verts = SpriteVertexes()
-    // Center of extents (half width/height) of the sprite for culling purposes.
-    var vertexCenter = vec2.zero
-    var vertexExtents = vec2.zero
-    private // Offset Position, used by sprite sheet editors.
-    var unflippedOffsetPositionFromCenter = Point.zero
-    
-    internal static func textureCoords(for texture: Texture!, withRect rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
-        var result = SpriteTexCoordSet()
-        guard let texture = texture else {
-            return result
-        }
-        // Need to convert the texel coords for the texel stretch hack. (Bah)
-        let scale = texture.contentScale
-        let rect = rect.scaled(by: scale)
-        let sizeInPixels = texture.sizeInPixels
-        let atlasWidth = sizeInPixels.width
-        let atlasHeight = sizeInPixels.height
-        
-        var left = Float(rect.origin.x / atlasWidth)
-        var right = Float((rect.origin.x + rect.size.height) / atlasWidth)
-        var bottom = Float(rect.origin.y / atlasHeight)
-        var top = Float((rect.origin.y + rect.size.width) / atlasHeight)
-        
-        if rotated {
-            if flipX {
-                swap(&top, &bottom)
-            }
-            if flipY {
-                swap(&left, &right)
-            }
-            result.bl = vec2(left, top)
-            result.br = vec2(left, bottom)
-            result.tr = vec2(right, bottom)
-            result.tl = vec2(right, top)
-        }
-        else {
-            if flipX {
-                swap(&left, &right)
-            }
-            if flipY {
-                swap(&top, &bottom)
-            }
-            result.bl = vec2(left, bottom)
-            result.br = vec2(right, bottom)
-            result.tr = vec2(right, top)
-            result.tl = vec2(left, top)
-        }
-        return result
-    }
     /**
      *  Initializes a sprite with the name of an image. The name can be either a name in a sprite sheet or the name of a file.
      *
@@ -98,7 +47,6 @@ open class Sprite: RenderableNode {
      *
      *  @return A newly initialized Sprite object.
      */
-    let uniform = Uniform(name: "u_mainTexture", type: .int1)
     convenience init(imageNamed imageName: String) {
         let spriteFrame = SpriteFrame.with(imageName: imageName)
         self.init(spriteFrame: spriteFrame!)
@@ -141,9 +89,8 @@ open class Sprite: RenderableNode {
 
     }
     
-    /// -----------------------------------------------------------------------
     /// @name Flipping a Sprite
-    /// -----------------------------------------------------------------------
+    
     /** Whether or not the sprite is flipped horizontally.
      @note Flipping does not flip any of the sprite's child sprites nor does it alter the anchorPoint.
      If that is what you want, you should try inversing the Node scaleX property: `sprite.scaleX *= -1.0;`.
@@ -166,21 +113,22 @@ open class Sprite: RenderableNode {
             }
         }
     }
-    /// -----------------------------------------------------------------------
+    
     /// @name Accessing the Sprite Frames
-    /// -----------------------------------------------------------------------
+    
     /** The currently displayed spriteFrame.
      @see SpriteFrame */
-    var spriteFrame: SpriteFrame! {
+    public var spriteFrame: SpriteFrame! {
         didSet {
             self.unflippedOffsetPositionFromCenter = spriteFrame.trimOffset
             self.texture = spriteFrame.texture
             self.setTextureRect(spriteFrame.rect, forTexture: self.texture, rotated: spriteFrame.rotated, untrimmedSize: spriteFrame.untrimmedSize)
         }
     }
+    
     /** The secondary spriteFrame used by effect shaders. (Ex: Custom shaders or normal mapping)
      @see SpriteFrame */
-    var spriteFrame2: SpriteFrame? {
+    public var spriteFrame2: SpriteFrame? {
         didSet {
             guard let spriteFrame2 = spriteFrame2 else {
                 return
@@ -194,21 +142,17 @@ open class Sprite: RenderableNode {
             self.verts.tl.texCoord2 = texCoords.tl
         }
     }
-    /// -----------------------------------------------------------------------
+    
     /// @name Working with the Sprite's Texture
-    /// -----------------------------------------------------------------------
-    /*var vertexes: UnsafeMutablePointer<SpriteVertexes> {
-        return &verts
-    }*/
     
     /** The offset position in points of the sprite in points. Calculated automatically by sprite sheet editors. */
-    private(set) var offsetPosition = Point.zero
+    private(set) public var offsetPosition = Point.zero
     
     /** Returns the texture rect of the Sprite in points. */
-    private(set) var textureRect = Rect.zero
+    private(set) public var textureRect = Rect.zero
     
     /** Returns whether or not the texture rectangle is rotated. Sprite sheet editors may rotate sprite frames in a texture to fit more sprites in the same atlas. */
-    private(set) var textureRectRotated: Bool = false
+    private(set) public var textureRectRotated: Bool = false
     
     /**
      *  Set the texture rect, rectRotated and untrimmed size of the Sprite in points.
@@ -218,7 +162,7 @@ open class Sprite: RenderableNode {
      *  @param rotated YES if texture is rotated.
      *  @param size    Untrimmed size.
      */
-    func setTextureRect(_ rect: Rect, forTexture texture: Texture, rotated: Bool, untrimmedSize: Size) {
+    public func setTextureRect(_ rect: Rect, forTexture texture: Texture, rotated: Bool, untrimmedSize: Size) {
         self.textureRectRotated = rotated
         self.contentSizeType = .points
         self.contentSize = untrimmedSize
@@ -255,7 +199,7 @@ open class Sprite: RenderableNode {
     
     /** Returns the matrix that transforms the sprite's (local) space coordinates into the sprite's texture space coordinates.
      */
-    var nodeToTextureTransform: Matrix4x4f {
+    public var nodeToTextureTransform: Matrix4x4f {
         let sx = (verts.br.texCoord1.s - verts.bl.texCoord1.s) / (verts.br.position.x - verts.bl.position.x)
         let sy = (verts.tl.texCoord1.t - verts.bl.texCoord1.t) / (verts.tl.position.y - verts.bl.position.y)
         let tx = verts.bl.texCoord1.s - verts.bl.position.x * sx
@@ -268,12 +212,8 @@ open class Sprite: RenderableNode {
     }
     
     //
-    // RGBA protocol
-    //
-    
     // MARK: RGBA protocol
-    
-    
+    //
     func updateColor() {
         let color4 = displayedColor.premultiplyingAlpha
         self.verts.bl.color = color4
@@ -310,6 +250,8 @@ open class Sprite: RenderableNode {
         self.updateColor()
     }
     
+    // Vertex coords, texture coords and color info.
+    public var verts = SpriteVertexes()
     
     override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
 
@@ -333,4 +275,58 @@ open class Sprite: RenderableNode {
         bgfx.submit(0, program: shader)
     }
     
+    // MARK: Internal stuff
+
+    // Center of extents (half width/height) of the sprite for culling purposes.
+    internal var vertexCenter = vec2.zero
+    internal var vertexExtents = vec2.zero
+    // Offset Position, used by sprite sheet editors.
+    private var unflippedOffsetPositionFromCenter = Point.zero
+    
+    // FIXME: Sits here until bgfx implements bgfx:getUniformInfo
+    internal let uniform = Uniform(name: "u_mainTexture", type: .int1)
+    
+    internal static func textureCoords(for texture: Texture!, withRect rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
+        var result = SpriteTexCoordSet()
+        guard let texture = texture else {
+            return result
+        }
+        // Need to convert the texel coords for the texel stretch hack. (Bah)
+        let scale = texture.contentScale
+        let rect = rect.scaled(by: scale)
+        let sizeInPixels = texture.sizeInPixels
+        let atlasWidth = sizeInPixels.width
+        let atlasHeight = sizeInPixels.height
+        
+        var left   = Float(rect.origin.x / atlasWidth)
+        var right  = Float((rect.origin.x + rect.size.height) / atlasWidth)
+        var bottom = Float(rect.origin.y / atlasHeight)
+        var top    = Float((rect.origin.y + rect.size.width) / atlasHeight)
+        
+        if rotated {
+            if flipX {
+                swap(&top, &bottom)
+            }
+            if flipY {
+                swap(&left, &right)
+            }
+            result.bl = vec2(left, top)
+            result.br = vec2(left, bottom)
+            result.tr = vec2(right, bottom)
+            result.tl = vec2(right, top)
+        }
+        else {
+            if flipX {
+                swap(&left, &right)
+            }
+            if flipY {
+                swap(&top, &bottom)
+            }
+            result.bl = vec2(left, bottom)
+            result.br = vec2(right, bottom)
+            result.tr = vec2(right, top)
+            result.tl = vec2(left, top)
+        }
+        return result
+    }
 }
