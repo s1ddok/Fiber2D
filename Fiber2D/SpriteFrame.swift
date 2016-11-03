@@ -7,12 +7,56 @@
 
 import SwiftMath
 
-public class SpriteFrame {
-    var texture: Texture {
+/**
+ A SpriteFrame contains the texture and rectangle of the texture to be used by a Sprite.
+ You can easily modify the sprite frame of a Sprite using the following handy method:
+ let frame = SpriteFrame.with(imageName: "jump.png")
+ sprite.spriteFrame = frame
+ */
+public final class SpriteFrame {
+    /// @name Creating a Sprite Frame
+    
+    /**
+     *  Create and return a sprite frame object from the specified image name. On first attempt it will check the internal texture/frame cache
+     *  and if not available will then try and create the frame from an image file of the same name.
+     *
+     *  @param imageName Image name.
+     *
+     *  @return The SpriteFrame Object.
+     */
+    public static func with(imageName: String) -> SpriteFrame! {
+        return SpriteFrameCache.shared.spriteFrame(by: imageName)
+    }
+    
+    /**
+     *  Initializes and returns a sprite frame object from the specified texture, texture rectangle, rotation status, offset and originalSize values.
+     *
+     *  @param texture Texture to use.
+     *  @param rect Texture rectangle (in points) to use.
+     *  @param rotated Is rectangle rotated?
+     *  @param trimOffset Offset (in points) to use.
+     *  @param untrimmedSize Original size (in points) before being trimmed.
+     *
+     *  @return An initialized SpriteFrame Object.
+     *  @see Texture
+     */
+    public init(texture: Texture!, rect: Rect, rotated: Bool, trimOffset: Point, untrimmedSize: Size) {
+        self._texture = texture
+        self.rect = rect
+        self.trimOffset = trimOffset
+        self.untrimmedSize = untrimmedSize
+        self.rotated = rotated
+    }
+    
+    /** Texture used by the frame.
+     @see Texture */
+    internal(set) public var texture: Texture {
         return _texture ?? lazyTexture
     }
-    var _texture: Texture?
-    var textureFilename: String = "" {
+    internal var _texture: Texture?
+    
+    /** Texture image file name used to create the texture. Set by the sprite frame cache */
+    internal(set) public var textureFilename: String = "" {
         didSet {
             // Make sure any previously loaded texture is cleared.
             self._texture = nil
@@ -20,7 +64,7 @@ public class SpriteFrame {
         }
     }
 
-    var lazyTexture: Texture {
+    internal var lazyTexture: Texture {
         if _lazyTexture == nil && textureFilename != "" {
             _lazyTexture = TextureCache.shared.addImage(from: textureFilename)
             _texture = _lazyTexture
@@ -41,24 +85,14 @@ public class SpriteFrame {
     /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is offset of the sprite caused by trimming in points. */
     public var trimOffset: Point
     
-    public static func with(imageName: String) -> SpriteFrame! {
-        return SpriteFrameCache.shared.spriteFrame(by: imageName)
-    }
-    
-    public init(texture: Texture!, rect: Rect, rotated: Bool, trimOffset: Point, untrimmedSize: Size) {
-        self._texture = texture
-        self.rect = rect
-        self.trimOffset = trimOffset
-        self.untrimmedSize = untrimmedSize
-        self.rotated = rotated
-    }
-    
     public var description: String {
         return "<SpriteFrame: Texture=\(textureFilename), Rect = \(rect.description)> rotated:\(rotated) offset=\(trimOffset.description))"
     }
     
+    /**
+     Purge all unused spriteframes from the cache.
+     */
     public static func purgeCache() {
-        // TODO not thread safe.
         SpriteFrameCache.shared.removeUnusedSpriteFrames()
     }
 }
