@@ -81,6 +81,6 @@ open class ColorNode: RenderableNode {
         memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
         bgfx.setIndexBuffer(ib)
         bgfx.setRenderState(renderState, colorRgba: 0x00)
-        bgfx.submit(0, program: shader)
+        renderer.submit(shader: shader)
     }
 }

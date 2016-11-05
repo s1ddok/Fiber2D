@@ -7,8 +7,11 @@
 //
 
 import SwiftMath
+import SwiftBGFX
 
 public protocol Renderer {
+    // TODO: Abstract from SwiftBGFX
+    func submit(shader: Program)
     func enqueueClear(color: vec4)
     func prepare(withProjection: Matrix4x4f)
     func flush()
@@ -36,7 +39,7 @@ public protocol RendererBuffer {
 public struct RendererVertex {
     var position: Vector4f
     var texCoord1, texCoord2: Vector2f
-    var color: Vector4f;
+    var color: Vector4f
     
     public init() {
         position = vec4(0)
@@ -46,10 +49,10 @@ public struct RendererVertex {
     }
     
     public init(position: vec4, texCoord1: vec2, texCoord2: vec2, color: vec4) {
-        self.position = position
+        self.position  = position
         self.texCoord1 = texCoord1
         self.texCoord2 = texCoord2
-        self.color = color
+        self.color     = color
     }
     
     public func transformed(_ m: Matrix4x4f) -> RendererVertex {

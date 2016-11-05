@@ -93,11 +93,13 @@ extension Program {
     }()
 }
 
-class BGFXRenderer: Renderer {
+internal class BGFXRenderer: Renderer {
     
     var projection: Matrix4x4f = Matrix4x4f.identity
     
     let prog: Program = .posTexture
+    
+    internal var currentViewID = UInt8.allZeros
     
     init() {
         bgfx.frame()
@@ -115,6 +117,10 @@ class BGFXRenderer: Renderer {
         bgfx.touch(0)
 
         bgfx.setViewTransform(viewId: 0, proj: proj)
+    }
+    
+    public func submit(shader: Program) {
+        bgfx.submit(currentViewID, program: shader)
     }
     
     func flush() {

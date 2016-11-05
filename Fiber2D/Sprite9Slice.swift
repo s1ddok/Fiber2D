@@ -106,7 +106,7 @@ open class Sprite9Slice: Sprite {
         
         bgfx.setTexture(0, sampler: uniform, texture: texture.texture)
         bgfx.setRenderState(renderState, colorRgba: 0x00)
-        bgfx.submit(0, program: shader)
+        renderer.submit(shader: shader)
     }
 
     // MARK: Internal stuff
