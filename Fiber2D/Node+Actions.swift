@@ -82,7 +82,7 @@ public extension Node {
      @return A newly initialized Timer object.
      @see Timer
      */
-    public func scheduleBlock(_ block: @escaping TimerBlock, delay: Time) -> Timer! {
+    public func schedule(block: @escaping TimerBlock, delay: Time) -> Timer! {
         guard let scheduler = self.scheduler else {
             return nil
         }

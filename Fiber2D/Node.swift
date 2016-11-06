@@ -32,18 +32,7 @@ import SwiftMath
  
  ### Scheduling Events / Timers
  
- Implementing a method with a signature of `-(void) update:(Time)delta` in a Node subclass will have that method run once every frame. `Time` is declared as `double`.
- 
- If this doesn't suffice you can use the various schedule methods of a node, such as schedule:interval: or scheduleBlock:delay:. For example the following selector runs
- once every second:
- 
- [self schedule:@selector(everySecond:) interval:1.0];
- 
- The signature of scheduled selectors is always the same with a single Time parameter and no return value:
- 
- -(void) everySecond:(Time)delta {
- NSLog(@"tic-toc ..");
- }
+ You can use the various schedule methods of a node, such as schedule(block:delay:).
  
  **Warning:** Any non-Fiber2D scheduling methods will be unaffected by the node's paused state and may run in indeterminate order, possibly causing rendering
  glitches and timing bugs. It is therfore strongly discouraged to use NSTimer, `performSelector:afterDelay:` or Grand Central Disptach (GCD) `dispatch_xxx` methods
@@ -70,10 +59,10 @@ import SwiftMath
  It's also possible to set positions relative to the different corners of the parent's container. The PositionType has three components, xUnit, yUnit and corner.
  The corner can be any reference corner of the parent's container and the xUnit and yUnit can be any of the following:
  
- - PositionUnitPoints - This is the default, the position value will be in points.
- - PositionUnitScaled - The position is scaled by the UIScaleFactor as defined by CCDirector. This is very useful for scaling up game play without changing the game logic.
+ - .points - This is the default, the position value will be in points.
+ - .scaled - The position is scaled by the UIScaleFactor as defined by Director. This is very useful for scaling up game play without changing the game logic.
  E.g. if you want to support both phones and tablets in native resolutions.
- - PositionUnitNormalized - Using the normalized type allows you to position object in relative to the parents container. E.g. it can be used to center nodes
+ - .normalized - Using the normalized type allows you to position object in relative to the parents container. E.g. it can be used to center nodes
  on the screen regardless of the device type your game is running on.
  
  Similarily to how you set a node's position and positionType you can also set it's contentSize and contentSizeType. However, some classes doesn't allow you
@@ -81,11 +70,11 @@ import SwiftMath
  set the preferredSize and preferredSizeType rather than changing their contentSize directly. The SizeType has two components widthUnit and heightUnit
  which can be any of the following:
  
- - SizeUnitPoints - This is the default, the size will be in points
- - SizeUnitScaled - The size is scaled by the UIScaleFactor.
- - SizeUnitNormalized - The content size will be set as a normalized value of the parent's container.
- - SizeUnitInset - The content size will be the size of it's parent container, but inset by a number of points.
- - SizeUnitInsetScaled - The content size will be the size of it's parent container, but inset by a number of points multiplied by the UIScaleFactor.
+ - .points - This is the default, the size will be in points
+ - .scaled - The size is scaled by the UIScaleFactor.
+ - .normalized - The content size will be set as a normalized value of the parent's container.
+ - .inset - The content size will be the size of it's parent container, but inset by a number of points.
+ - .insetScaled - The content size will be the size of it's parent container, but inset by a number of points multiplied by the UIScaleFactor.
  
  Even if the positions and content sizes are not set in points you can use actions to animate the nodes. See the examples and tests for more information on
  how to set positions and content sizes, or use SpriteBuilder to easily play around with the settings. There are also more positioning options available
@@ -140,7 +129,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     }
     
     /** Scheduler used to schedule all "updates" and timers. */
-    var scheduler: Scheduler? {
+    internal var scheduler: Scheduler? {
         return scene?.scheduler
     }
     
@@ -160,22 +149,23 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     internal var transform = Matrix4x4f.identity
     
     // MARK: Position
-    /// -----------------------------------------------------------------------
+    
     /// @name Position
-    /// -----------------------------------------------------------------------
+    
     /** Position (x,y) of the node in the units specified by the positionType property.
      The distance is measured from one of the corners of the node's parent container, which corner is specified by the positionType property.
      Default setting is referencing the bottom left corner in points.
      @see positionInPoints
      @see positionType */
-    var position = Point.zero {
+    public var position = Point.zero {
         didSet {
             isTransformDirty = true
         }
     }
+    
     /** Position (x,y) of the node in points from the bottom left corner.
      @see position */
-    var positionInPoints: Point {
+    public var positionInPoints: Point {
         get {
             return convertPositionToPoints(position, type: positionType)
         }
@@ -183,26 +173,27 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
             position = convertPositionFromPoints(newValue, type: positionType)
         }
     }
+    
     /** Defines the position type used for the position property. Changing the position type affects the meaning of the values
      assigned to the position property and allows you to change the referenceCorner relative to the parent container.
-     It also allows position to be interpreted as "UIPoints", which are scaled by [Director UIScaleFactor].
+     It also allows position to be interpreted as "UIPoints", which are scaled by Director.UIScaleFactor.
      See "Coordinate System and Positioning" in Class Overview for more information.
      @see PositionType, PositionUnit, PositionReferenceCorner
      @see position
      @see positionInPoints */
-    var positionType = PositionType.points {
+    public var positionType = PositionType.points {
         didSet {
             isTransformDirty = true
         }
     }
     
     // MARK: Rotation and skew
-    /// -----------------------------------------------------------------------
+    
     /// @name Rotation and Skew
-    /// -----------------------------------------------------------------------
+    
     /** The rotation (angle) of the node in degrees. Rotation is relative to the parent node's rotation.
      0 is the default rotation angle. Positive values rotate node clockwise. */
-    var rotation: Angle {
+    public var rotation: Angle {
         get {
             assert(rotationalSkewX == rotationalSkewY, "Node#rotation. rotationalSkewX != rotationalSkewY. Don't know which one to return")
             return rotationalSkewX
@@ -215,14 +206,14 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     /** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node clockwise.
      It only modifies the X rotation performing a horizontal rotational skew.
      @see skewX, skewY */
-    var rotationalSkewX: Angle = 0° {
+    public var rotationalSkewX: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
     }
     /** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node clockwise.
      It only modifies the Y rotation performing a vertical rotational skew. */
-    var rotationalSkewY: Angle = 0° {
+    public var rotationalSkewY: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
@@ -232,7 +223,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      Thus, it is the angle between the Y axis and the left edge of the shape
      The default skewX angle is 0, with valid ranges from -90 to 90. Positive values distort the node in a clockwise direction.
      @see skewY, rotationalSkewX */
-    var skewX: Angle = 0° {
+    public var skewX: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
@@ -242,16 +233,16 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      Thus, it is the angle between the X axis and the bottom edge of the shape
      The default skewY angle is 0, with valid ranges from -90 to 90. Positive values distort the node in a counter-clockwise direction.
      @see skewX, rotationalSkewY */
-    var skewY: Angle = 0° {
+    public var skewY: Angle = 0° {
         didSet {
             isTransformDirty = true
         }
     }
     
     // MARK: Scale
-    /// -----------------------------------------------------------------------
+    
     /// @name Scale
-    /// -----------------------------------------------------------------------
+    
     /** The scale factor of the node. 1.0 is the default scale factor (original size). Meaning depends on scaleType.
      It modifies the X and Y scale at the same time, preserving the node's aspect ratio.
      
@@ -260,7 +251,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see scaleInPoints
      @see scaleType
      @see scaleX, scaleY */
-    var scale: Float {
+    public var scale: Float {
         get {
             assert(scaleX == scaleY, "Node#scale. ScaleX != ScaleY. Don't know which one to return")
             return scaleX
@@ -277,7 +268,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see scaleY
      @see scaleXInPoints
      @see scale */
-    var scaleX: Float = 1.0 {
+    public var scaleX: Float = 1.0 {
         didSet {
             isTransformDirty = true
         }
@@ -289,7 +280,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see scaleX
      @see scaleYInPoints
      @see scale */
-    var scaleY: Float = 1.0 {
+    public var scaleY: Float = 1.0 {
         didSet {
             isTransformDirty = true
         }
@@ -303,7 +294,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      
      @see scale
      @see scaleType */
-    var scaleInPoints: Float {
+    public var scaleInPoints: Float {
         if scaleType == .scaled {
             return scale * Setup.shared.UIScale
         }
@@ -315,7 +306,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      child node appear at its original size.
      
      @see scaleY, scaleYInPoints */
-    var scaleXInPoints: Float {
+    public var scaleXInPoints: Float {
         if scaleType == .scaled {
             return scaleX * Setup.shared.UIScale
         }
@@ -328,34 +319,34 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      
      @see scaleX
      @see scaleXInPoints */
-    var scaleYInPoints: Float {
+    public var scaleYInPoints: Float {
         if scaleType == .scaled {
             return scaleY * Setup.shared.UIScale
         }
         return scaleY
 
     }
-    /** The scaleType defines scale behavior for this node. ScaleTypeScaled indicates that the node will be scaled by [Director UIScaleFactor].
+    /** The scaleType defines scale behavior for this node. ScaleTypeScaled indicates that the node will be scaled by Director.UIScaleFactor.
      This property is analagous to positionType. ScaleType affects the scaleInPoints of a Node.
      See "Coordinate System and Positioning" in class overview for more information.
      @see ScaleType
      @see scale
      @see scaleInPoints */
-    var scaleType = ScaleType.points {
+    public var scaleType = ScaleType.points {
         didSet {
             isTransformDirty = true
         }
     }
     
     // MARK: Size
-    /// -----------------------------------------------------------------------
+    
     /// @name Size
-    /// -----------------------------------------------------------------------
+    
     /** The untransformed size of the node in the unit specified by contentSizeType property.
      The contentSize remains the same regardless of whether the node is scaled or rotated.
      @see contentSizeInPoints
      @see contentSizeType */
-    var contentSize: Size = Size.zero {
+    public var contentSize: Size = Size.zero {
         didSet {
             if oldValue != contentSize {
                 contentSizeChanged()
@@ -363,10 +354,10 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
         }
     }
     /** The untransformed size of the node in Points. The contentSize remains the same regardless of whether the node is scaled or rotated.
-     contentSizeInPoints will be scaled by the [Director UIScaleFactor] if the contentSizeType is CCSizeUnitUIPoints.
+     contentSizeInPoints will be scaled by the Director.UIScaleFactor if the contentSizeType is .uiPoints.
      @see contentSize
      @see contentSizeType */
-    var contentSizeInPoints: Size {
+    public var contentSizeInPoints: Size {
         get {
             return convertContentSizeToPoints(contentSize, type: contentSizeType)
         }
@@ -379,7 +370,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see SizeType, SizeUnit
      @see contentSize
      @see contentSizeInPoints */
-    var contentSizeType = SizeType.points {
+    public var contentSizeType = SizeType.points {
         didSet {
             contentSizeChanged()
         }
@@ -395,16 +386,16 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     }
     
     // MARK: Content's anchor
-    /// -----------------------------------------------------------------------
+    
     /// @name Content Anchor
-    /// -----------------------------------------------------------------------
+    
     /** The anchorPoint is the point around which all transformations (scale, rotate) and positioning manipulations take place.
      The anchorPoint is normalized, like a percentage. (0,0) refers to the bottom-left corner and (1,1) refers to the top-right corner.
      The default anchorPoint is (0,0). It starts in the bottom-left corner. Sprite and some other node subclasses may have a different
      default anchorPoint, typically centered on the node (0.5,0.5).
      @warning The anchorPoint is not a replacement for moving a node. It defines how the node's content is drawn relative to the node's position.
      @see anchorPointInPoints */
-    var anchorPoint = Point.zero {
+    public var anchorPoint = Point.zero {
         didSet {
             if oldValue != anchorPoint {
                 let contentSizeInPoints = self.contentSizeInPoints
@@ -417,12 +408,12 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      It is calculated as follows: `x = contentSizeInPoints.width * anchorPoint.x; y = contentSizeInPoints.height * anchorPoint.y;`
      @note The returned point is relative to the node's contentSize origin, not relative to the node's position.
      @see anchorPoint */
-    private(set) var anchorPointInPoints = Point.zero
+    private(set) public var anchorPointInPoints = Point.zero
     
     // MARK: Visibility and Draw Order
-    /// -----------------------------------------------------------------------
+    
     /// @name Visibility and Draw Order
-    /// -----------------------------------------------------------------------
+    
     /** Whether the node and its children are visible. Default is YES.
      
      @note The children nodes will not change their visible property. Nevertheless they won't be drawn if their parent's visible property is NO.
@@ -430,7 +421,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      
      @note Nodes that are not visible will not be rendered. For recurring use of the same nodes it is typically more
      efficient to temporarily set `node.visible = NO` compared to removeFromParent and a subsequent add(child:. */
-    var visible: Bool = true {
+    public var visible: Bool = true {
         willSet {
             if newValue != visible {
                 director?.responderManager.markAsDirty()
@@ -449,7 +440,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @note Any sibling nodes with the same zOrder will be drawn in the order they were added as children. It is slightly more efficient
      (and certainly less confusing) to make this natural order work to your advantage.
      */
-    var zOrder: Int = 0 {
+    public var zOrder: Int = 0 {
         didSet {
             if zOrder != oldValue {
                 parent?.isReorderChildDirty = true
@@ -459,9 +450,9 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     
     // True to ensure reorder.
     internal var isReorderChildDirty = true
-    /// -----------------------------------------------------------------------
+    
     /// @name Color
-    /// -----------------------------------------------------------------------
+    
     /** Sets and returns the node's color. Alpha is ignored. Changing color has no effect on non-visible nodes (ie Node, Scene).
      
      @note By default color is not "inherited" by child nodes. This can be enabled via cascadeColorEnabled.
@@ -470,7 +461,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see opacity
      @see cascadeColorEnabled
      */
-    var color: Color {
+    public var color: Color {
         get {
             return _color
         }
@@ -494,7 +485,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see opacity
      @see cascadeColorEnabled
      */
-    var colorRGBA: Color {
+    public var colorRGBA: Color {
         get {
             return _color
         }
@@ -513,7 +504,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see color
      @see colorRGBA
      */
-    var displayedColor: Color {
+    public var displayedColor: Color {
         return _displayedColor
     }
     private var _displayedColor = Color.white
@@ -526,7 +517,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see displayedColor
      @see opacity
      */
-    var cascadeColorEnabled: Bool = false
+    public var cascadeColorEnabled: Bool = false
     
     private func cascadeColorIfNeeded() {
         if cascadeColorEnabled {
@@ -559,16 +550,16 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     }
     
     // MARK: Opacity
-    /// -----------------------------------------------------------------------
+    
     /// @name Opacity (Alpha)
-    /// -----------------------------------------------------------------------
+    
     /**
      Sets and returns the opacity in the range 0.0 (fully transparent) to 1.0 (fully opaque).
      
      @note By default opacity is not "inherited" by child nodes. This can be enabled via cascadeOpacityEnabled.
      @warning If the the texture has premultiplied alpha then the RGB channels will be modified.
      */
-    var opacity: Float {
+    public var opacity: Float {
         get {
           return _color.a
         }
@@ -581,7 +572,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     /** Returns the actual opacity, in the range 0.0 to 1.0. This may be different from the opacity property if the parent
      node has cascadeOpacityEnabled.
      @see opacity */
-    var displayedOpacity: Float {
+    public var displayedOpacity: Float {
         return _displayedColor.a
     }
     
@@ -592,7 +583,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
      @see opacity
      @see displayedOpacity
      */
-    var cascadeOpacityEnabled: Bool = false
+    public var cascadeOpacityEnabled: Bool = false
     
     func cascadeOpacityIfNeeded() {
         if cascadeOpacityEnabled {
@@ -621,20 +612,20 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     }
     
     // MARK: Names:
-    /// -----------------------------------------------------------------------
+    
     /// @name Naming Nodes
-    /// -----------------------------------------------------------------------
+    
     /** A name tag used to help identify the node easily. Can be used both to encode custom data but primarily meant
      to obtain a node by its name.
      
      @see getChildByName:recursively:
      @see userObject */
-    var name = ""
+    public var name = ""
     
     // MARK: Actions
-    /// -----------------------------------------------------------------------
+    
     /// @name Working with Actions
-    /// -----------------------------------------------------------------------
+    
     /** If paused is set to YES, all of the node's actions and its scheduled selectors/blocks will be paused until the node is unpaused.
      
      Changing the paused state of a node will also change the paused state of its children recursively.
@@ -683,13 +674,13 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
         return transform
     }
     
-    /// -----------------------------------------------------------------------
+    
     /// @name Rendering (Implemented in Subclasses)
-    /// -----------------------------------------------------------------------
+    
     /**
      Override this method to add custom rendering code to your node.
      
-     @note You should only use Fiber2D's Renderer API to modify the render state and shaders. For further info, please see the CCRenderer documentation.
+     @note You should only use Fiber2D's Renderer API to modify the render state and shaders. For further info, please see the Renderer documentation.
      @warning You **must not** call `super.draw(:transform:)`
      
      @param renderer The Renderer instance to use for drawing.
@@ -780,7 +771,7 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     /* Event that is called when the running node is no longer running (eg: its Scene is being removed from the "stage" ).
      On cleanup you should break any possible circular references.
      Node's cleanup removes any possible scheduled timer and/or any possible action.
-     If you override cleanup, you shall call [super cleanup]
+     If you override cleanup, you shall call super.cleanup()
      */
     func cleanup() {
         // Clean up timers and actions.
@@ -828,12 +819,13 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     /**
      In certain special situations, you may wish to designate a node's parent without adding that node to the list
      of children. In particular this can be useful when a node references another node in an atypical non-child
-     way, such as how the the CCClipNode tracks the stencil. The stencil is kept outside of the normal heirarchy,
+     way, such as how the the ClipNode tracks the stencil. The stencil is kept outside of the normal heirarchy,
      but still needs a parent to function in a scene.
      */
     public func setRawParent(_ parent: Node) {
         _parent = parent
     }
+    
     /**
      You probably want "active" instead, but this tells you if the node is in the active scene wihtout regards to its pause state.
      */

@@ -80,13 +80,10 @@ class MainScene: Scene {
         colorNodes[8].run(action: ActionMoveBy(vec2(0.0, -0.1)).continously(duration: 1.0))
         self.userInteractionEnabled = true
         print(Date())
-        let _ = scheduleBlock({ (t:Timer) in
+        let _ = schedule(block: { (t:Timer) in
             print(Date())
             print(colorNodes[8].rotation)
             }, delay: 10.0)
-        
-        let mask: UInt32 = 1
-        
         
         let material = PhysicsMaterial.default
         
