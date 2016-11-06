@@ -127,23 +127,24 @@ class MainScene: Scene {
         add(child: messageBubble)
     }
     
-    /*override func onEnter() {
+    override func onEnter() {
         super.onEnter()
         
-        let rt = RenderTexture(width: 64, height: 64)
-        let _ = rt.begin()
-        colorNode.visit()
-        rt.end()
+        let rt = RenderTexture(width: 512, height: 512)
+        rt.clearColor = .red
         
-        //colorNode.runAction(repeatForever!)
-        add(child: colorNode)
-        rt.sprite.positionType = PositionType.normalized
-        rt.sprite.position = p2d(0.5, 0.5)
-        rt.sprite.opacity = 0.5
-        add(child: rt.sprite)
+        rt.position = p2d(512, 512)
         
-        print(sprite.active)
-    }*/
+        /*rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
+                 .then(ActionMoveBy(vec2(-150.0, 0)).continously(duration: 1.0))
+                 .repeatForever)*/
+        let cn = ColorNode(color: .green, size: Size(64.0, 64.0))
+        cn.run(action: ActionMoveBy(vec2(250.0, 0)).continously(duration: 1.0)
+                 .then(ActionMoveBy(vec2(-250.0, 0)).continously(duration: 1.0))
+                 .repeatForever)
+        rt.add(child: cn)
+        add(child: rt)
+    }
     
     override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
         //colorNode.positionInPoints = theEvent.location(in: self)

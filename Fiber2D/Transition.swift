@@ -48,6 +48,7 @@ public class Transition: Scene {
             assert((newValue >= 1.0) && (newValue <= 4.0), "Invalid down scale")
         }
     }
+    
     /**
      *  Will downscale incoming scene.
      *  Can be used as an effect, or to decrease render time on complex scenes.
@@ -136,16 +137,16 @@ public class Transition: Scene {
     
     func renderOutgoing(_ progress: Float) {
         let color = outgoingScene.colorRGBA
-        let _ = outgoingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
+        //let _ = outgoingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         outgoingScene.visit()
-        outgoingTexture.end()
+        //outgoingTexture.end()
     }
     
     func renderIncoming(_ progress: Float) {
         let color = incomingScene.colorRGBA
-        let _ = incomingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
+        //let _ = incomingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         incomingScene.visit()
-        incomingTexture.end()
+        //incomingTexture.end()
     }
     
     func startTransition(_ scene: Scene, withDirector director: Director) {
@@ -167,13 +168,13 @@ public class Transition: Scene {
         size.width = ceil(rect.size.width)
         size.height = ceil(rect.size.height)
         // create texture for outgoing scene
-        self.outgoingTexture = RenderTexture(width: Int(size.width), height: Int(size.height))
+        self.outgoingTexture = RenderTexture(width: UInt(size.width), height: UInt(size.height))
         self.outgoingTexture.position = p2d(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.outgoingTexture.contentScale /= outgoingDownScale
         self.outgoingTexture.projection = incomingScene.projection
         self.add(child:outgoingTexture, z: outgoingOverIncoming ? 1 : 0)
         // create texture for incoming scene
-        self.incomingTexture = RenderTexture(width: Int(size.width), height: Int(size.height))
+        self.incomingTexture = RenderTexture(width: UInt(size.width), height: UInt(size.height))
         self.incomingTexture.position = p2d(x: size.width * 0.5 + rect.origin.x, y: size.height * 0.5 + rect.origin.y)
         self.incomingTexture.contentScale /= incomingDownScale
         self.incomingTexture.projection = incomingScene.projection
