@@ -83,7 +83,9 @@ public final class RenderTexture: RenderableNode {
     internal var _projection = Matrix4x4f.identity
     
     internal func createTextureAndFBO(with pixelSize: Size) {
+        // TODO: Pad to POT if hardware doesnt support NPOT
         let paddedSize: Size = pixelSize
+        
         self.texture = Texture.makeRenderTexture(of: paddedSize)
         self.framebuffer = FrameBuffer(textures: [texture.texture], destroyTextures: false)
         
@@ -93,14 +95,8 @@ public final class RenderTexture: RenderableNode {
         // things break.
         self.assignSpriteTexture()
         let size = self.contentSize
-        let textureSize = Rect(origin: p2d.zero, size: size)
+        let textureSize = Rect(size: size)
         sprite.setTextureRect(textureSize, forTexture: sprite.texture, rotated: false, untrimmedSize: textureSize.size)
-    }
-    
-    internal func create() {
-        let size: Size = self.contentSize
-        let pixelSize: Size = Size(width: size.width * Float(contentScale), height: size.height * Float(contentScale))
-        self.createTextureAndFBO(with: pixelSize)
     }
     
     internal func destroy() {
@@ -117,7 +113,7 @@ public final class RenderTexture: RenderableNode {
     override public var texture: Texture! {
         get {
             if (super.texture == nil) {
-                create()
+                createTextureAndFBO(with: pixelSize)
             }
             return super.texture
         }
@@ -135,6 +131,11 @@ public final class RenderTexture: RenderableNode {
         }
     }
     
+    /** The render texture's size in pixels. */
+    public var pixelSize: Size {
+        return contentSize * contentScale
+    }
+    
     internal var framebuffer: FrameBuffer?
     
     override func visit(_ renderer: Renderer, parentTransform: Matrix4x4f) {
@@ -150,7 +151,7 @@ public final class RenderTexture: RenderableNode {
             //! make sure all children are drawn
             self.sortAllChildren()
             for child in children {
-                child.visit(renderer, parentTransform: projection)
+                child.visit(renderer, parentTransform: _projection)
             }
         
             renderer.endRenderTexture()
