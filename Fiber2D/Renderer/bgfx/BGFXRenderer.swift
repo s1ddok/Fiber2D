@@ -10,6 +10,9 @@ import SwiftMath
 import Cbgfx
 import SwiftBGFX
 
+internal let ROOT_RTT_ID  = UInt8(0)
+internal let ROOT_VIEW_ID = UInt8(190)
+
 let vs_shader =
     "using namespace metal; \n" +
         "struct xlatMtlShaderInput { \n" +
@@ -94,12 +97,11 @@ extension Program {
 }
 
 internal class BGFXRenderer: Renderer {
+    internal var viewStack = [UInt8]()
     
-    var projection: Matrix4x4f = Matrix4x4f.identity
+    internal var currentViewID = ROOT_VIEW_ID
     
-    let prog: Program = .posTexture
-    
-    internal var currentViewID = UInt8.allZeros
+    internal var currentRenderTargetViewID = ROOT_RTT_ID
     
     init() {
         bgfx.frame()
@@ -108,15 +110,15 @@ internal class BGFXRenderer: Renderer {
     }
     
     func enqueueClear(color: vec4) {
-        bgfx.setViewClear(viewId: 0, options: [.color, .depth], rgba: 0x30_30_30_ff, depth: 1.0, stencil: 0)
+        bgfx.setViewClear(viewId: currentViewID, options: [.color, .depth], rgba: 0x30_30_30_ff, depth: 1.0, stencil: 0)
     }
     
     func prepare(withProjection proj: Matrix4x4f) {
-        bgfx.setViewSequential(viewId: 0, enabled: true)
-        bgfx.setViewRect(viewId: 0, x: 0, y: 0, width: 1024, height: 750)
-        bgfx.touch(0)
+        bgfx.setViewSequential(viewId: currentViewID, enabled: true)
+        bgfx.setViewRect(viewId: currentViewID, x: 0, y: 0, width: 1024, height: 750)
+        bgfx.touch(currentViewID)
 
-        bgfx.setViewTransform(viewId: 0, proj: proj)
+        bgfx.setViewTransform(viewId: currentViewID, proj: proj)
     }
     
     public func submit(shader: Program) {
@@ -129,6 +131,9 @@ internal class BGFXRenderer: Renderer {
 
         bgfx.frame()
         //bgfx.renderFrame()
+        
+        currentViewID = ROOT_VIEW_ID
+        currentRenderTargetViewID = ROOT_RTT_ID
     }
     
     func makeFrameBufferObject() -> FrameBufferObject {
