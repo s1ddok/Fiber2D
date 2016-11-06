@@ -138,14 +138,14 @@ public class Transition: Scene {
     func renderOutgoing(_ progress: Float) {
         let color = outgoingScene.colorRGBA
         //let _ = outgoingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
-        outgoingScene.visit()
+        //outgoingScene.visit()
         //outgoingTexture.end()
     }
     
     func renderIncoming(_ progress: Float) {
         let color = incomingScene.colorRGBA
         //let _ = incomingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
-        incomingScene.visit()
+        //incomingScene.visit()
         //incomingTexture.end()
     }
     
