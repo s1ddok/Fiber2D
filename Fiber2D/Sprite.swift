@@ -224,13 +224,13 @@ open class Sprite: RenderableNode {
         self.verts.tl.color = color4
     }
     
-    override var color: Color {
+    override public var color: Color {
         didSet {
             self.updateColor()
         }
     }
     
-    override var colorRGBA: Color {
+    override public var colorRGBA: Color {
         didSet {
             self.updateColor()
         }
@@ -241,7 +241,7 @@ open class Sprite: RenderableNode {
         self.updateColor()
     }
     
-    override var opacity: Float {
+    override public var opacity: Float {
         didSet {
             self.updateColor()
         }
