@@ -39,18 +39,15 @@ open class Scene: Node {
     
     /**
      Delegate that calculates the projection matrix for this scene.
-     The default value is an CCProjectionOrthographic delegate that goes from (0, 0) to the screen's size in points.
-     
-     @since 4.0.0
+     The default value is an ProjectionOrthographic delegate that goes from (0, 0) to the screen's size in points.
      */
-    //var projectionDelegate: CCProjectionDelegate?
+    //var projectionDelegate: ProjectionDelegate?
+    
     /**
      Projection matrix for this scene. This value is overridden if the projectionDelegate is set.
      Defaults to the identity matrix.
-     
-     @since 4.0.0
      */
-    var projection: Matrix4x4f {
+    public var projection: Matrix4x4f {
         get {
             //return projectionDelegate?.projection ?? _projection
             return _projection }
@@ -62,7 +59,7 @@ open class Scene: Node {
     
     /// @name Creating a Scene
     
-    /// Initialize the node.
+    /// Initialize the scene.
     public init(size: Size) {
         super.init()
         self.contentSize = size
