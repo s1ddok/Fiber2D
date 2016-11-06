@@ -35,7 +35,6 @@
 		0812AD031D538D7600AE46E8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812AD021D538D7600AE46E8 /* Color.swift */; };
 		0817EE7D1DC381B40084DAD3 /* Texture+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
-		081FBCE61D462732005838B8 /* CCShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCB41D462732005838B8 /* CCShaders.metal */; };
 		081FBCE91D462732005838B8 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBA1D462732005838B8 /* MetalView.swift */; };
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
 		081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCF81D46289A005838B8 /* ColorNode.swift */; };
@@ -192,15 +191,13 @@
 		080B06901DC9FAC80037E1F1 /* Node+Projection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Projection.swift"; sourceTree = "<group>"; };
 		080B06921DC9FE3E0037E1F1 /* TextureCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureCache.swift; sourceTree = "<group>"; };
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
-		0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCRendererSharedTypes.h; path = "cocos2d-legacy/CCRendererSharedTypes.h"; sourceTree = "<group>"; };
 		0812AD021D538D7600AE46E8 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Texture+Image.swift"; path = "../Texture+Image.swift"; sourceTree = "<group>"; };
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		081FBCB41D462732005838B8 /* CCShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = CCShaders.metal; sourceTree = "<group>"; };
-		081FBCBA1D462732005838B8 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = "cocos2d-legacy/Platforms/MetalView.swift"; sourceTree = "<group>"; };
-		081FBCBC1D462732005838B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		081FBCBA1D462732005838B8 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = platform/MetalView.swift; sourceTree = "<group>"; };
+		081FBCBC1D462732005838B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayExtensions.swift; path = utils/ArrayExtensions.swift; sourceTree = "<group>"; };
 		081FBCF41D462765005838B8 /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		081FBCF81D46289A005838B8 /* ColorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorNode.swift; sourceTree = "<group>"; };
 		081FBCF91D46289A005838B8 /* Director.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
@@ -223,7 +220,6 @@
 		081FBD0C1D46289A005838B8 /* SpriteFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteFrame.swift; sourceTree = "<group>"; };
 		081FBD0D1D46289A005838B8 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		081FBD251D4628F8005838B8 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
-		081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCRendererSharedTypes.h; sourceTree = "<group>"; };
 		081FBD2C1D463207005838B8 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
 		082E904D1DBE92DF00AD32AA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		082E904F1DBE9B8700AD32AA /* Image+PNG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+PNG.swift"; sourceTree = "<group>"; };
@@ -445,7 +441,6 @@
 			children = (
 				054764DD1D829466003DC740 /* Config */,
 				081FBC221D4625A6005838B8 /* Fiber2D */,
-				081FBC301D4625B8005838B8 /* cocos2d-legacy */,
 				081FBC211D4625A6005838B8 /* Products */,
 				054764D71D82944D003DC740 /* Frameworks */,
 			);
@@ -470,54 +465,6 @@
 				081FBCF51D462774005838B8 /* Support Files */,
 			);
 			path = Fiber2D;
-			sourceTree = "<group>";
-		};
-		081FBC301D4625B8005838B8 /* cocos2d-legacy */ = {
-			isa = PBXGroup;
-			children = (
-				081FBC7D1D462732005838B8 /* CCClasses */,
-				081FBCAA1D462732005838B8 /* Platforms */,
-				081FBCBB1D462732005838B8 /* Support */,
-				0812ACEE1D52AB8700AE46E8 /* CCRendererSharedTypes.h */,
-				0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */,
-			);
-			name = "cocos2d-legacy";
-			path = Fiber2D;
-			sourceTree = "<group>";
-		};
-		081FBC7D1D462732005838B8 /* CCClasses */ = {
-			isa = PBXGroup;
-			children = (
-				081FBD281D46298A005838B8 /* CCRendererSharedTypes.h */,
-			);
-			name = CCClasses;
-			path = "cocos2d-legacy/CCClasses";
-			sourceTree = "<group>";
-		};
-		081FBCAA1D462732005838B8 /* Platforms */ = {
-			isa = PBXGroup;
-			children = (
-				081FBCAF1D462732005838B8 /* iOS */,
-			);
-			name = Platforms;
-			path = "cocos2d-legacy/Platforms";
-			sourceTree = "<group>";
-		};
-		081FBCAF1D462732005838B8 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				081FBCB41D462732005838B8 /* CCShaders.metal */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		081FBCBB1D462732005838B8 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				081FBCBC1D462732005838B8 /* ArrayExtensions.swift */,
-			);
-			name = Support;
-			path = "cocos2d-legacy/Support";
 			sourceTree = "<group>";
 		};
 		081FBCF51D462774005838B8 /* Support Files */ = {
@@ -731,7 +678,9 @@
 		08A8D54B1D53DA8600262C0B /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */,
 				08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */,
+				081FBCBC1D462732005838B8 /* ArrayExtensions.swift */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1058,7 +1007,6 @@
 				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
 				080307191D994FED008CAC8E /* System.swift in Sources */,
 				081FBCE91D462732005838B8 /* MetalView.swift in Sources */,
-				081FBCE61D462732005838B8 /* CCShaders.metal in Sources */,
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
 				080306B01D942000008CAC8E /* PhysicsShapePolygon.swift in Sources */,
