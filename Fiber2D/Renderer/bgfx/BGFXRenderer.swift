@@ -115,7 +115,7 @@ internal class BGFXRenderer: Renderer {
     
     func prepare(withProjection proj: Matrix4x4f) {
         bgfx.setViewSequential(viewId: currentViewID, enabled: true)
-        bgfx.setViewRect(viewId: currentViewID, x: 0, y: 0, width: 1024, height: 750)
+        bgfx.setViewRect(viewId: currentViewID, x: 0, y: 0, ratio: .equal)
         bgfx.touch(currentViewID)
 
         bgfx.setViewTransform(viewId: currentViewID, proj: proj)
