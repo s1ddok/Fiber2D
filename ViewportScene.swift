@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import Cocoa
 
 class CustomBehaviour: ComponentBase, Updatable {
     let vps: ViewportScene

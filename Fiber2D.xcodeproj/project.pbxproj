@@ -56,6 +56,9 @@
 		081FBD221D46289A005838B8 /* SpriteFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0C1D46289A005838B8 /* SpriteFrame.swift */; };
 		081FBD261D4628F8005838B8 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD251D4628F8005838B8 /* MainScene.swift */; };
 		081FBD2D1D463207005838B8 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 081FBD2C1D463207005838B8 /* Resources */; };
+		082AD79D1DCFD00700BF495A /* ViewportNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B991DB02BE400721CA0 /* ViewportNode.swift */; };
+		082AD7A11DCFD00E00BF495A /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAB6DE1DAACA0200B3C10C /* Camera.swift */; };
+		082AD7A21DCFD38B00BF495A /* ViewportScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51B1DB2B98200D564CB /* ViewportScene.swift */; };
 		082E904E1DBE92DF00AD32AA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904D1DBE92DF00AD32AA /* Image.swift */; };
 		082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082E904F1DBE9B8700AD32AA /* Image+PNG.swift */; };
 		0833CA551DCB47AE0090D4CC /* FileLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833CA541DCB47AE0090D4CC /* FileLocator.swift */; };
@@ -1036,6 +1039,7 @@
 				0833CA591DCBACC70090D4CC /* Sprite9Slice.swift in Sources */,
 				081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */,
 				081FBD1A1D46289A005838B8 /* RendarableNode.swift in Sources */,
+				082AD7A11DCFD00E00BF495A /* Camera.swift in Sources */,
 				08C1CB221D8EFFD5006CDCCB /* cpPolyShape.c in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
@@ -1104,7 +1108,9 @@
 				080306AA1D932B3B008CAC8E /* PhysicsShapeCircle.swift in Sources */,
 				080B06931DC9FE3E0037E1F1 /* TextureCache.swift in Sources */,
 				08C1CB2D1D8EFFD5006CDCCB /* cpSpaceQuery.c in Sources */,
+				082AD79D1DCFD00700BF495A /* ViewportNode.swift in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,
+				082AD7A21DCFD38B00BF495A /* ViewportScene.swift in Sources */,
 				08C1CB2B1D8EFFD5006CDCCB /* cpSpaceDebug.c in Sources */,
 				05D231C11D9CD19000611AA3 /* BGFXView.swift in Sources */,
 				081FBD101D46289A005838B8 /* Layout.swift in Sources */,

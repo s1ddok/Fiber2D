@@ -8,19 +8,6 @@
 
 import SwiftMath
 
-internal func setViewport(_ minx: Float, _ miny: Float, _ maxx: Float, _ maxy: Float) {
-    let context = CCMetalContext.current()
-    let dst = context!.destinationTexture
-    let dstw = Float(dst!.width)
-    let dsth = Float(dst!.height)
-    
-    let minx = max(0, minx); let maxx = min(maxx, dstw)
-    let miny = max(0, miny); let maxy = min(maxy, dsth)
-    
-    let viewport = MTLViewport(originX: Double(minx), originY: Double(dsth - maxy), width: Double(maxx - minx), height: Double(maxy - miny), znear: -1024, zfar: 1024)
-    context!.currentRenderCommandEncoder.setViewport(viewport)
-}
-
 public class ViewportNode: Node {
     public var projection = Matrix4x4f.identity
     
@@ -77,7 +64,7 @@ public class ViewportNode: Node {
         return viewport
     }
     
-    override func visit(_ renderer: CCRenderer, parentTransform: Matrix4x4f) {
+    override func visit(_ renderer: Renderer, parentTransform: Matrix4x4f) {
         guard visible else {
             return
         }
@@ -95,26 +82,24 @@ public class ViewportNode: Node {
         let hw = fbSize.width / 2.0
         let hh = fbSize.width / 2.0
         
-        let minx = floorf(hw + hw*min(min(v0.x, v1.x), min(v2.x, v3.x)))
-        let maxx = floorf(hw + hw*max(max(v0.x, v1.x), max(v2.x, v3.x)))
-        let miny = floorf(hh + hh*min(min(v0.y, v1.y), min(v2.y, v3.y)))
-        let maxy = floorf(hh + hh*max(max(v0.y, v1.y), max(v2.y, v3.y)))
+        var minx = floorf(hw + hw*min(min(v0.x, v1.x), min(v2.x, v3.x)))
+        var maxx = floorf(hw + hw*max(max(v0.x, v1.x), max(v2.x, v3.x)))
+        var miny = floorf(hh + hh*min(min(v0.y, v1.y), min(v2.y, v3.y)))
+        var maxy = floorf(hh + hh*max(max(v0.y, v1.y), max(v2.y, v3.y)))
         
-        renderer.pushGroup()
+        minx = max(0, minx)
+        miny = max(0, miny)
+        maxx = min(maxx, fbSize.width)
+        maxy = min(maxy, fbSize.height)
         
-        renderer.enqueue({ 
-            setViewport(minx, miny, maxx, maxy)
-            }, globalSortOrder: Int.min, debugLabel: "ViewportNode: Set viewport", threadSafe: true)
-        
+        // TODO: Push group of draw calls with the viewport of (minx, miny, maxx - minx, maxy - miny)
         let transform = camera.cameraMatrix
         sortAllChildren()
         for c in camera.children {
             c.visit(renderer, parentTransform: transform)
         }
         
-        renderer.enqueue({ 
-            setViewport(0, 0, fbSize.width, fbSize.height)
-            }, globalSortOrder: Int.max, debugLabel: "ViewportNode: Reset viewport", threadSafe: true)
-        renderer.popGroup(withDebugLabel: "ViewPort renderer", globalSortOrder: 0)
+        // TODO: Pop group here (or push further, in bgfx terms), 
+        // restore viewport to backbuffer's default
     }
 }
