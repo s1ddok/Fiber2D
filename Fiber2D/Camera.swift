@@ -32,17 +32,17 @@ public class Camera: Node {
         self.viewport = viewport
     }
     
-    override var contentSize: Size {
+    override public var contentSize: Size {
         get { return parent!.contentSize }
         set {}
     }
     
-    override var contentSizeType: SizeType {
+    override public var contentSizeType: SizeType {
         get { return parent!.contentSizeType }
         set {}
     }
     
-    override var contentSizeInPoints: Size {
+    override public var contentSizeInPoints: Size {
         get { return parent!.contentSizeInPoints }
         set {}
     }
