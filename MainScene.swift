@@ -130,19 +130,27 @@ class MainScene: Scene {
     override func onEnter() {
         super.onEnter()
         
-        let rt = RenderTexture(width: 512, height: 512)
+        let rt = RenderTexture(width: 128, height: 128)
         rt.clearColor = .red
-        
         rt.position = p2d(512, 512)
         
-        /*rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
+        rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
                  .then(ActionMoveBy(vec2(-150.0, 0)).continously(duration: 1.0))
-                 .repeatForever)*/
-        let cn = ColorNode(color: .green, size: Size(64.0, 64.0))
-        cn.run(action: ActionMoveBy(vec2(250.0, 0)).continously(duration: 1.0)
-                 .then(ActionMoveBy(vec2(-250.0, 0)).continously(duration: 1.0))
                  .repeatForever)
+        let cn = ColorNode(color: .green, size: Size(32.0, 32.0))
+        cn.positionType = .normalized
+        cn.anchorPoint = p2d(0.5, 0.5)
+        cn.run(action: ActionMoveTo(p2d(1, 1)).and(ActionRotateBy(angle: 90°)).continously(duration: 1.0)
+            .then(ActionMoveTo(p2d(1, 0))     .and(ActionRotateBy(angle: 90°)).continously(duration: 1.0))
+            .then(ActionMoveTo(p2d(0, 0))     .and(ActionRotateBy(angle: 90°)).continously(duration: 1.0))
+            .repeatForever)
         rt.add(child: cn)
+        
+        
+        let anotherSprite = Sprite(texture: rt.texture, rect: Rect(size: rt.contentSize), rotated: false)
+        anotherSprite.run(action: ActionRotateBy(angle: 30°).continously(duration: 1.0).repeatForever)
+        anotherSprite.position = p2d(128, 128)
+        add(child: anotherSprite)
         add(child: rt)
     }
     

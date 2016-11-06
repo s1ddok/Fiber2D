@@ -89,3 +89,14 @@ public extension Color {
     public static let purple    = Color(0.5, 0, 0.5 , 1)
     public static let brown     = Color(0.6, 0.4, 0.2 , 1)
 }
+
+public extension Color {
+    public var uint32Representation: UInt32 {
+        let r = UInt32(self.r * 255) << 24
+        let g = UInt32(self.g * 255) << 16
+        let b = UInt32(self.b * 255) << 8
+        let a = UInt32(self.a * 255)
+        
+        return r | g | b | a
+    }
+}

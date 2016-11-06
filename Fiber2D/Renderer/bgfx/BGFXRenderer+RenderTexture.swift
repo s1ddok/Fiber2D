@@ -18,10 +18,12 @@ internal extension BGFXRenderer {
         currentViewID = currentRenderTargetViewID
         
         bgfx.setViewSequential(viewId: currentViewID, enabled: true)
+        
+        let rtPixelSize = rt.pixelSize
         bgfx.setViewRect(viewId: currentViewID, x: 0, y: 0,
-                         width: UInt16(rt.contentSize.width), height: UInt16(rt.contentSize.height))
+                         width: UInt16(rtPixelSize.width), height: UInt16(rtPixelSize.height))
         bgfx.setViewFrameBuffer(viewId: currentViewID, buffer: rt.framebuffer!)
-        bgfx.setViewClear(viewId: currentViewID, options: [.color, .discardDepth, .discardStencil], rgba: 0x30_00_00_ff, depth: 0.0, stencil: 0)
+        bgfx.setViewClear(viewId: currentViewID, options: [.color], rgba: rt.clearColor.uint32Representation, depth: 1.0, stencil: 0)
         bgfx.touch(currentViewID)
         
         bgfx.setViewTransform(viewId: currentViewID, proj: rt.projection)
