@@ -85,8 +85,10 @@ open class Sprite: RenderableNode {
         self.anchorPoint = p2d(0.5, 0.5)
         self.updateColor()
         self.texture = texture
-        self.setTextureRect(rect, forTexture: self.texture, rotated: rotated, untrimmedSize: rect.size)
-
+        
+        if texture != nil {
+            self.setTextureRect(rect, forTexture: self.texture, rotated: rotated, untrimmedSize: rect.size)
+        }
     }
     
     /// @name Flipping a Sprite
@@ -268,8 +270,7 @@ open class Sprite: RenderableNode {
         let indices: [UInt16] = [0, 1, 2, 0, 2, 3]
         memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
         bgfx.setIndexBuffer(ib)
-        
-        //let uniform = Uniform(name: "u_mainTexture", type: .int1)
+
         bgfx.setTexture(0, sampler: uniform, texture: texture.texture)
         bgfx.setRenderState(renderState, colorRgba: 0x00)
         renderer.submit(shader: shader)
