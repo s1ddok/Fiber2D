@@ -9,6 +9,7 @@
 import SwiftMath
 import SwiftBGFX
 
+// All there requires more consideration
 public protocol Renderer {
     // TODO: Abstract from SwiftBGFX
     func submit(shader: Program)
@@ -18,8 +19,11 @@ public protocol Renderer {
     
     // MARK: - render objects
     func makeFrameBufferObject() -> FrameBufferObject
+    func beginRenderTexture(_ rt: RenderTexture)
+    func endRenderTexture()
     
-    var projection: Matrix4x4f { get }
+    // TODO: Push group, pop group
+    // TODO: Compute shader support
 }
 
 var currentRenderer: Renderer?
