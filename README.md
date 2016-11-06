@@ -1,4 +1,9 @@
 # Fiber2D
+
+![Swift Version](https://img.shields.io/badge/swift-3.0.1-green.svg?style=flat)
+![Build State](https://img.shields.io/wercker/ci/wercker/docs.svg)
+![Target Platforms](https://img.shields.io/badge/platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20linux%20%7C%20Android%20-lightgrey.svg)
+
 This project originated as [cocos2d-objc](https://github.com/cocos2d/cocos2d-objc) rewrite to Swift. As I stopped commiting to the repo since June, because Obj-C is dead for me. 
 
 This is still in a very **proof-of-a-concept** state, where you can't really make any use of it yet. Currently it is served as a barely working demo, which compiles only with XCode and has some tricky prepartions to be done before running (more on this later). Some code parts still smell like Objective-C (some does not, though). *Generally the project is in transition from cocos2d-objc to Swifty style and most of (**all**? :) ) API will change.*
