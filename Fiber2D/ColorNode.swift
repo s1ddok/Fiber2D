@@ -33,13 +33,13 @@ open class ColorNode: RenderableNode {
         updateColor()
     }
     
-    override var color: Color {
+    override public var color: Color {
         didSet {
             updateColor()
         }
     }
     
-    override var opacity: Float {
+    override public var opacity: Float {
         didSet {
             updateColor()
         }
