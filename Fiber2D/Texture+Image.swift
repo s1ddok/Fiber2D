@@ -7,6 +7,7 @@
 //
 
 import SwiftBGFX
+import SwiftMath
 import Foundation
 
 public extension Texture {
@@ -23,5 +24,18 @@ public extension Texture {
         tex.contentScale = image.contentScale
         tex.contentSizeInPixels = image.sizeInPixels
         return tex
+    }
+    
+    // TODO: Should have more parameters
+    public static func makeRenderTexture(of size: Size) -> Texture {
+        let w = UInt16(size.width)
+        let h = UInt16(size.height)
+
+        let tex = BGFXTexture.make2D(width: w, height: h, mipCount: 1, format: .bgra8, options: [.renderTarget, .clampU, .clampV], memory: nil)
+        
+        let retVal = Texture(bgfxTexture: tex)
+        retVal.contentScale = Setup.shared.assetScale
+        retVal.contentSizeInPixels = size
+        return retVal
     }
 }
