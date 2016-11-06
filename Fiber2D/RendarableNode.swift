@@ -59,7 +59,7 @@ open class RenderableNode: Node {
     internal(set) public var renderState: RenderStateOptions {
         get {
             if renderStateDirty {
-                _renderState = .default | blendMode.state | blendMode.equation
+                _renderState = .colorWrite | .alphaWrite | .multisampling | blendMode.state | blendMode.equation
                 _renderState.remove(.depthWrite)
                 renderStateDirty = false
             }
