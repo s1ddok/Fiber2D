@@ -1,5 +1,7 @@
 # Fiber2D
 
+[![Join the chat at https://gitter.im/Fiber2D/Lobby](https://badges.gitter.im/Fiber2D/Lobby.svg)](https://gitter.im/Fiber2D/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![Swift Version](https://img.shields.io/badge/swift-3.0.1-green.svg?style=flat)
 ![Build State](https://img.shields.io/wercker/ci/wercker/docs.svg)
 ![Target Platforms](https://img.shields.io/badge/platform-iOS%20%7C%20tvOS%20%7C%20macOS%20%7C%20linux%20%7C%20Android%20-lightgrey.svg)
