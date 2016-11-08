@@ -64,8 +64,8 @@ public struct ActionHide: ActionModel {
     public var target: Node!
     
     public init() { }
-    public mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
+    public mutating func start(with target: Node) {
+        self.target = target
     }
     public mutating func update(state: Float) {
         target.visible = false
@@ -81,8 +81,8 @@ public struct ActionShow: ActionModel {
     public var target: Node!
     
     public init() { }
-    public mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
+    public mutating func start(with target: Node) {
+        self.target = target
     }
     public mutating func update(state: Float) {
         target.visible = true
@@ -98,8 +98,8 @@ public struct ActionToggleVisibility: ActionModel {
     public var target: Node!
     
     public init() { }
-    public mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
+    public mutating func start(with target: Node) {
+        self.target = target
     }
     public mutating func update(state: Float) {
         target.visible = !target.visible
@@ -114,8 +114,8 @@ public struct ActionRemove: ActionModel {
     public var target: Node!
     
     public init() { }
-    public mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
+    public mutating func start(with target: Node) {
+        self.target = target
     }
     public mutating func update(state: Float) {
         target.removeFromParent()

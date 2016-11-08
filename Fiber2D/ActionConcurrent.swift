@@ -15,7 +15,7 @@ public struct ActionConcurrent: ActionModel {
 
     }
     
-    public mutating func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         first.start(with: target)
         second.start(with: target)
     }
@@ -48,7 +48,7 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
         }
     }
     
-    public mutating  func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         elapsed = 0
         first.start(with: target)
         second.start(with: target)

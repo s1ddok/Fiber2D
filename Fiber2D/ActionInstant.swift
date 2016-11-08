@@ -13,7 +13,7 @@ public struct ActionInstantContainer: ActionContainer {
         action.update(state: 1.0)
     }
     
-    mutating public func start(with target: AnyObject?) {
+    mutating public func start(with target: Node) {
         action.start(with: target)
     }
     

@@ -18,7 +18,7 @@ import SwiftMath
 public struct ActionRepeatForeverContainer: ActionContainer {
     public mutating func update(state: Float) { }
     
-    public mutating func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         self.target = target
         innerContainer.start(with: target)
     }
@@ -37,12 +37,14 @@ public struct ActionRepeatForeverContainer: ActionContainer {
                 }
             }
             
-            innerContainer.start(with: target)
+            if let target = target {
+                innerContainer.start(with: target)
+            }
         }
     }
     
     public var tag: Int = 0
-    weak var target: AnyObject? = nil
+    weak var target: Node?
     public var isDone: Bool {
         return false
     }
@@ -68,7 +70,9 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
                 remainingRepeats -= 1
                 
                 innerContainer.stop()
-                innerContainer.start(with: target)
+                if let target = target {
+                    innerContainer.start(with: target)
+                }
                 self.nextDt = Float(Int(repeatCount - remainingRepeats) + 1) / Float(repeatCount)
             }
             // fix for issue #1288, incorrect end value of repeat
@@ -96,7 +100,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
         
     }
     
-    public mutating  func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         self.elapsed = 0
         self.target = target
         self.remainingRepeats = repeatCount
@@ -106,7 +110,9 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
 
     mutating public func step(dt: Time) {
         guard icDuration > 0 else {
-            innerContainer.start(with: target)
+            if let target = target {
+                innerContainer.start(with: target)
+            }
             innerContainer.update(state: 1.0)
             innerContainer.stop()
             remainingRepeats -= 1
@@ -121,7 +127,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
     }
     
     public var tag: Int = 0
-    weak var target: AnyObject? = nil
+    weak var target: Node?
     public var isDone: Bool {
         return remainingRepeats == 0
     }

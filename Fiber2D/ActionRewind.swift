@@ -18,7 +18,7 @@ public struct ActionRewindContainer: ActionContainer, Continous {
         action.update(state: 1.0 - state)
     }
     
-    public mutating  func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         elapsed = 0
         action.start(with: target)
     }

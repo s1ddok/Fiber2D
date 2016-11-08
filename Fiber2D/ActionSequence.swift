@@ -35,7 +35,9 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         if found == 1 {
             if last == -1 {
                 // action[0] was skipped, execute it.
-                actions[0].start(with: target)
+                if let target = target {
+                    actions[0].start(with: target)
+                }
                 actions[0].update(state: 1.0)
                 actions[0].stop()
             }
@@ -59,14 +61,15 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
             return
         }
         // New action. Start it.
-        if found != last {
+        if found != last,
+            let target = target {
             actions[found].start(with: target)
         }
         actions[found].update(state: new_t)
         self.last = found
     }
     
-    public mutating func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         elapsed = 0
         self.target = target
         self.split = actions[0].duration / max(duration, Float.ulpOfOne)
@@ -91,7 +94,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         )
     }
     
-    weak var target: AnyObject? = nil
+    weak var target: Node?
     public var tag: Int = 0
     private(set) public var duration: Time = 0.0
     private(set) public var elapsed:  Time = 0.0
