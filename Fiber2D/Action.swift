@@ -53,7 +53,7 @@ public protocol ActionModel {
      *
      *  @param target Target the action will run on.
      */
-    mutating func start(with target: AnyObject?)
+    mutating func start(with target: Node)
     
     /**
      *  Called after the action has finished.
@@ -117,7 +117,7 @@ public protocol ActionContainer: Tagged {
      *
      *  @param target Target the action will run on.
      */
-    mutating func start(with target: AnyObject?)
+    mutating func start(with target: Node)
     
     /**
      *  Called after the action has finished.
@@ -132,11 +132,11 @@ public typealias ActionContainerFiniteTime = ActionContainer & FiniteTime
 
 // Default implementation
 extension ActionModel {
-    mutating public func start(with target: AnyObject?) {}
+    mutating public func start(with target: Node) {}
     mutating public func stop() {}
     mutating func update(state: Float) {}
 }
 extension ActionContainer {
-    mutating func start(with target: AnyObject?) {}
+    mutating func start(with target: Node) {}
     mutating public func stop() {}
 }

@@ -32,7 +32,7 @@ public struct ActionEaseContainer: ActionContainer, Continous {
         action.update(state: easeBlock(state))
     }
     
-    public mutating func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         elapsed = 0
         action.start(with: target)
     }
@@ -51,7 +51,7 @@ public struct ActionEaseContainer: ActionContainer, Continous {
         )
     }
     
-    weak var target: AnyObject? = nil
+    weak var target: Node?
     public var tag: Int = 0
     public let duration: Time
     private(set) public var elapsed:  Time = 0.0

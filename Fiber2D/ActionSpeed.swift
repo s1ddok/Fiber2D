@@ -12,7 +12,7 @@ public struct ActionSpeedContainer: ActionContainer, Continous {
         action.update(state: state)
     }
     
-    public mutating  func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         elapsed = 0
         self.target = target
         action.start(with: target)
@@ -31,7 +31,7 @@ public struct ActionSpeedContainer: ActionContainer, Continous {
         )
     }
     
-    weak var target: AnyObject? = nil
+    weak var target: Node?
     public var tag: Int = 0
     public let speed: Float
     public let duration: Time

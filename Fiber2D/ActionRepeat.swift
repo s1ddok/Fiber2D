@@ -18,7 +18,7 @@ import SwiftMath
 public struct ActionRepeatForeverContainer: ActionContainer {
     public mutating func update(state: Float) { }
     
-    public mutating func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         self.target = target
         innerContainer.start(with: target)
     }
@@ -42,7 +42,7 @@ public struct ActionRepeatForeverContainer: ActionContainer {
     }
     
     public var tag: Int = 0
-    weak var target: AnyObject? = nil
+    weak var target: Node!
     public var isDone: Bool {
         return false
     }
@@ -96,7 +96,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
         
     }
     
-    public mutating  func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         self.elapsed = 0
         self.target = target
         self.remainingRepeats = repeatCount
@@ -121,7 +121,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
     }
     
     public var tag: Int = 0
-    weak var target: AnyObject? = nil
+    weak var target: Node!
     public var isDone: Bool {
         return remainingRepeats == 0
     }

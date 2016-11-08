@@ -37,8 +37,7 @@ struct ActionRotateTo: ActionModel {
         simple = aX == aY
     }
 
-    mutating func start(with target: AnyObject?) {
-        let target = target as! Node
+    mutating func start(with target: Node) {
         self.target = target
         // Simple Rotation
         if simple {
@@ -119,8 +118,7 @@ struct ActionRotateBy: ActionModel {
         rotateY = aY != nil
     }
     
-    mutating func start(with target: AnyObject?) {
-        let target = target as! Node
+    mutating func start(with target: Node) {
         self.target = target
         self.startAngleX = target.rotationalSkewX
         self.startAngleY = target.rotationalSkewY
@@ -170,9 +168,8 @@ struct ActionSkewTo: ActionModel {
         self.endSkewY = sy
     }
     
-    mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
-        let target = self.target!
+    mutating func start(with target: Node) {
+        self.target = target
         
         // X
         self.startSkewX = target.skewX
@@ -228,10 +225,8 @@ struct ActionSkewBy: ActionModel {
         self.deltaY = sy
     }
     
-    mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
-        let target = self.target!
-        
+    mutating func start(with target: Node) {
+        self.target = target
         self.startSkewX = target.skewX
         self.startSkewY = target.skewY
     }
@@ -265,10 +260,8 @@ struct ActionMoveTo: ActionModel {
         endPosition = p
     }
     
-    mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
-        let target = self.target!
-        
+    mutating func start(with target: Node) {
+        self.target = target
         self.startPosition = target.position
     }
     
@@ -303,10 +296,8 @@ struct ActionMoveBy: ActionModel {
         deltaPosition = p
     }
     
-    mutating func start(with target: AnyObject?) {
-        self.target = target as! Node
-        let target = self.target!
-        
+    mutating func start(with target: Node) {
+        self.target = target
         self.startPosition = target.position
         #if ENABLE_STACKABLE_ACTIONS
         self.previousPosition = startPosition

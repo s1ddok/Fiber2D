@@ -66,7 +66,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         self.last = found
     }
     
-    public mutating func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         elapsed = 0
         self.target = target
         self.split = actions[0].duration / max(duration, Float.ulpOfOne)
@@ -91,10 +91,10 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         )
     }
     
-    weak var target: AnyObject? = nil
+    weak var target: Node!
     public var tag: Int = 0
     private(set) public var duration: Time = 0.0
-    private(set) public var elapsed:  Time = 0.0
+    private(set) public var elapsed: Time = 0.0
     
     public var isDone: Bool {
         return elapsed > duration

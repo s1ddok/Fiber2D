@@ -13,7 +13,7 @@ public struct ActionContinousContainer: ActionContainer, Continous {
         action.update(state: state)
     }
     
-    public mutating  func start(with target: AnyObject?) {
+    public mutating func start(with target: Node) {
         elapsed = 0
         action.start(with: target)
     }
