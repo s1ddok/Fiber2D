@@ -9,45 +9,21 @@ import Foundation
 import MetalKit
 import SwiftMath
 
-let DirectorCurrentKey = "DirectorCurrentKey"
-let DirectorStackKey   = "DirectorStackKey"
-
-func DirectorBindCurrent(_ director: AnyObject?) {
-    if director != nil || !(director is NSNull) {
-        Thread.current.threadDictionary[DirectorCurrentKey] = director
-    } else {
-        Thread.current.threadDictionary.removeObject(forKey: DirectorCurrentKey)
-    }
-}
-
-func DirectorStack() -> NSMutableArray
-{
-    var stack = Thread.current.threadDictionary[DirectorStackKey] as? NSMutableArray
-    if stack == nil {
-        stack = NSMutableArray()
-        Thread.current.threadDictionary[DirectorStackKey] = stack
-    }
-    return stack!
-}
-
-public class Director: NSObject {
-    public class var current: Director! {
-        return Thread.current.threadDictionary[DirectorCurrentKey] as? Director
-    }
+public class Director {
+    internal static var stack = [Director?]()
+    public static var current: Director! = nil
     
     class func pushCurrentDirector(_ director: Director) {
-        let stack = DirectorStack()
-        stack.add(self.current ?? NSNull())
-        DirectorBindCurrent(director)
+        stack.append(current)
+        self.current = director
     }
     
     class func popCurrentDirector() {
-        let stack = DirectorStack()
-        assert(stack.count > 0, "Director stack underflow.")
-        DirectorBindCurrent(stack.lastObject as AnyObject?)
-        stack.removeLastObject()
+        self.current = stack.removeLast()
     }
-    
+    #if os(OSX) || os(iOS) || os(tvOS)
+    internal var metalKitDelegate: MTKDelegate!
+    #endif
     // internal timer
     var oldFrameSkipInterval: Int = 1
     var frameSkipInterval: Int = 1
@@ -114,16 +90,15 @@ public class Director: NSObject {
         self.totalFrames = 0
         self.frames = 0
         self.isPaused = false
-        super.init()
         self.view = view
-        // scenes
-        //self.scenesStack = [Scene]()
-        //self.delegate = nil
         // FPS
 
         self.responderManager = ResponderManager(director: self)
         //self.rendererPool = NSMutableArray()
         self.globalShaderUniforms = Dictionary()
+        #if os(OSX) || os(iOS) || os(tvOS)
+        self.metalKitDelegate = MTKDelegate(director: self)
+        #endif
     }
     
     /*func description() -> String {
@@ -396,9 +371,7 @@ public class Director: NSObject {
         self.oldFrameSkipInterval = frameSkipInterval
         // when paused, don't consume CPU
         self.frameSkipInterval = 15
-        self.willChangeValue(forKey: "isPaused")
         self.isPaused = true
-        self.didChangeValue(forKey: "isPaused")
     }
     
     func resume() {
@@ -410,9 +383,7 @@ public class Director: NSObject {
         }*/
         self.frameSkipInterval = oldFrameSkipInterval
         self.lastUpdate = Time.absoluteTime
-        self.willChangeValue(forKey: "isPaused")
         self.isPaused = false
-        self.didChangeValue(forKey: "isPaused")
         self.dt = 0
     }
 }

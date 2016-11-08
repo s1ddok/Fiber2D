@@ -39,7 +39,7 @@ class MetalView: MTKView, DirectorView {
 
         self.director = Director(view: self)
         self.preferredFramesPerSecond = 60
-        self.delegate = director
+        self.delegate = director.metalKitDelegate
         self.drawableSize = frame.size
         self.surfaceSize = frame.size
         self.colorPixelFormat = .bgra8Unorm

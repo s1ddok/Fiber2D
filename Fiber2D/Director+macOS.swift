@@ -6,9 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+#if os(OSX) || os(iOS) || os(tvOS)
 import SwiftMath
-
-#if os(OSX)
 import MetalKit
     
 internal extension Director {
@@ -18,15 +17,22 @@ internal extension Director {
     }
 }
     
-extension Director: MTKViewDelegate {
+internal class MTKDelegate: NSObject, MTKViewDelegate {
+    internal var director: Director
+    
+    internal init(director: Director) {
+        self.director = director
+        super.init()
+    }
+    
     public func draw(in view: MTKView) {
-        self.animating = true
-        self.mainLoopBody()
+        director.animating = true
+        director.mainLoopBody()
     }
     
     public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        runningScene?.contentSize = Size(CGSize: size)
-        runningScene?.viewDidResize(to: Size(CGSize:size))
+        director.runningScene?.contentSize = Size(CGSize: size)
+        director.runningScene?.viewDidResize(to: Size(CGSize:size))
     }
 }
 #endif

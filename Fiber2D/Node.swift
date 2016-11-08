@@ -87,18 +87,6 @@ import SwiftMath
  variants of properties if you expect the values to be in points.
  
  Otherwise your code will break if you subsequently change the positionType to something other than points (ie UIPoints or Normalized).
- 
- ### Subclassing Notes
- 
- A common pattern in building a Fiber2D game is to subclass Node, add it to a Scene and override the methods for handling user input.
- Consider each node subclass as being the view in a MVC model, but it's also the controller for this node and perhaps even the node's branch of the node tree.
- The model can also be represented by the node subclass itself, or made separate (M-VC model).
- 
- A separate model could simply be any NSObject class initialized by the node subclass and assigned to an ivar/property.
- 
- An advanced subclassing style aims to minimize subclassing node classes except for Node itself. A Node subclass acts as the controller for its node tree,
- with one or more child nodes representing the controller node's views. This is particularly useful for composite nodes, such as a player
- with multiple body parts (head, torso, limbs), attachments (armor, weapons) and effects (health bar, name label, selection rectangle, particle effects).
  */
 open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
     
