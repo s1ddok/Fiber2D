@@ -60,8 +60,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
             return
         }
         // New action. Start it.
-        if found != last,
-            let target = target {
+        if found != last {
             actions[found].start(with: target)
         }
         actions[found].update(state: new_t)
