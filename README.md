@@ -67,7 +67,6 @@ My goals for the near future are (order means nothing):
 * Introduce basic `UI components` (Button, Slider)
 * **Introduce event system**
 * Cover code with `tests`
-* **`Abstract input layer`**
 * **Introduce `Responder Component` and drop the need of overriding `touch***/mouse***` methods**
 * Add `compute shader` support
 * Introduce GPU computed `Particle systems`
