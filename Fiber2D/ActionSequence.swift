@@ -9,6 +9,7 @@
 public struct ActionSequenceContainer: ActionContainer, Continous {
     @inline(__always)
     mutating public func update(state: Float) {
+        guard let target = target else { return }
         let t = state
         var found = 0
         var new_t: Float = 0.0
@@ -35,9 +36,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         if found == 1 {
             if last == -1 {
                 // action[0] was skipped, execute it.
-                if let target = target {
-                    actions[0].start(with: target)
-                }
+                actions[0].start(with: target)
                 actions[0].update(state: 1.0)
                 actions[0].stop()
             }

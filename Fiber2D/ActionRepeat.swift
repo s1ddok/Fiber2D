@@ -109,10 +109,9 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
     }
 
     mutating public func step(dt: Time) {
+        guard let target = target else { return }
         guard icDuration > 0 else {
-            if let target = target {
-                innerContainer.start(with: target)
-            }
+            innerContainer.start(with: target)
             innerContainer.update(state: 1.0)
             innerContainer.stop()
             remainingRepeats -= 1
