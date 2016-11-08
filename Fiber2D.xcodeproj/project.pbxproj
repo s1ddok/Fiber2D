@@ -78,7 +78,7 @@
 		087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0D1D82D1BE00F940D4 /* Component.swift */; };
 		087BFA101D82EB2600F940D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0F1D82EB2600F940D4 /* main.swift */; };
 		087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA111D82EC7700F940D4 /* AppDelegate.swift */; };
-		087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */; };
+		087BFA141D82EC7700F940D4 /* NSEvent+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA121D82EC7700F940D4 /* NSEvent+Node.swift */; };
 		087BFA161D82F5C200F940D4 /* DirectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA151D82F5C200F940D4 /* DirectorView.swift */; };
 		087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA171D82F60500F940D4 /* Director+macOS.swift */; };
 		0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509891D7B4F2F003EF800 /* Tagged.swift */; };
@@ -242,7 +242,7 @@
 		087BFA0D1D82D1BE00F940D4 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		087BFA0F1D82EB2600F940D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = platform/macos/main.swift; sourceTree = "<group>"; };
 		087BFA111D82EC7700F940D4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = platform/macos/AppDelegate.swift; sourceTree = "<group>"; };
-		087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSEvent+Fiber2d.swift"; path = "platform/macos/NSEvent+Fiber2d.swift"; sourceTree = "<group>"; };
+		087BFA121D82EC7700F940D4 /* NSEvent+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSEvent+Node.swift"; path = "platform/macos/NSEvent+Node.swift"; sourceTree = "<group>"; };
 		087BFA151D82F5C200F940D4 /* DirectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectorView.swift; sourceTree = "<group>"; };
 		087BFA171D82F60500F940D4 /* Director+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Director+macOS.swift"; sourceTree = "<group>"; };
 		088509891D7B4F2F003EF800 /* Tagged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tagged.swift; path = protocols/Tagged.swift; sourceTree = "<group>"; };
@@ -486,7 +486,6 @@
 			isa = PBXGroup;
 			children = (
 				087BFA111D82EC7700F940D4 /* AppDelegate.swift */,
-				087BFA121D82EC7700F940D4 /* NSEvent+Fiber2d.swift */,
 				081FBCBA1D462732005838B8 /* MetalView.swift */,
 				087BFA0F1D82EB2600F940D4 /* main.swift */,
 			);
@@ -565,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				08B3B51D1DB5378100D564CB /* UITouch+Node.swift */,
+				087BFA121D82EC7700F940D4 /* NSEvent+Node.swift */,
 				081FBD071D46289A005838B8 /* Responder.swift */,
 				081FBD081D46289A005838B8 /* ResponderManager.swift */,
 				082AD7A51DD1E70200BF495A /* ResponderManager+iOS.swift */,
@@ -951,7 +951,7 @@
 				08C1CB151D8EFFD5006CDCCB /* cpBody.c in Sources */,
 				08C1CB161D8EFFD5006CDCCB /* cpCollision.c in Sources */,
 				080B06961DCA09F70037E1F1 /* RenderTextureSprite.swift in Sources */,
-				087BFA141D82EC7700F940D4 /* NSEvent+Fiber2d.swift in Sources */,
+				087BFA141D82EC7700F940D4 /* NSEvent+Node.swift in Sources */,
 				0803071F1D9AFFDC008CAC8E /* Node+Hierarchy.swift in Sources */,
 				08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
