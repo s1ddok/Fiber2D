@@ -63,14 +63,13 @@ class ViewportScene: Scene {
         userInteractionEnabled = true
     }
     
-    override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
-        
+    override func inputBegan(_ input: Input) {
         viewport.camera.position = viewport.camera.position - vec2(32.0, 32.0)
         print(viewport.camera.children.first!.positionInPoints)
     }
     
-    override func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
-        viewport.camera.positionInPoints = theEvent.location(in: self)
+    override func inputDragged(_ input: Input) {
+        viewport.camera.positionInPoints = input.location(in: self)
     }
     
     override func keyDown(_ theEvent: NSEvent) {

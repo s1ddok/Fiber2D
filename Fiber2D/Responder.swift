@@ -70,42 +70,28 @@ open class Responder {
         return false
     }
     
-    #if os(iOS)
-    func touchBegan(touch: CCTouch, withEvent event: CCTouchEvent) {
+    open func inputBegan(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
     
-    func touchMoved(touch: CCTouch, withEvent event: CCTouchEvent) {
+    open func inputMoved(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
     
-    func touchEnded(touch: CCTouch, withEvent event: CCTouchEvent) {
+    open func inputDragged(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
     
-    func touchCancelled(touch: CCTouch, withEvent event: CCTouchEvent) {
+    open func inputEnd(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    #endif
+    
+    open func inputCancelled(_ input: Input) {
+        Director.current.responderManager.discardCurrentEvent()
+    }
     
     #if os(OSX)
-    func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
-        Director.current.responderManager.discardCurrentEvent()
-    }
-    
-    func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
-        Director.current.responderManager.discardCurrentEvent()
-    }
-    
-    func mouseUp(_ theEvent: NSEvent, button: MouseButton) {
-        Director.current.responderManager.discardCurrentEvent()
-    }
-    
     func scrollWheel(_ theEvent: NSEvent) {
-        Director.current.responderManager.discardCurrentEvent()
-    }
-    
-    func mouseMoved(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
     

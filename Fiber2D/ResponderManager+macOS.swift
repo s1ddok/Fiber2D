@@ -9,6 +9,7 @@
 #if os(OSX)
     
 import Cocoa
+import SwiftMath
 
 internal extension ResponderManager {
     func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
@@ -18,12 +19,16 @@ internal extension ResponderManager {
         if dirty {
             self.buildResponderList()
         }
+        
+        let mouseLocation = director.convertEventToGL(theEvent)
+        let input = Input(screenPosition: mouseLocation, mouseButton: button)
+        
         self.executeOnEachResponder({ node in
-            node.mouseDown(theEvent, button: button)
+            node.inputBegan(input)
             if self.currentEventProcessed {
                 self.add(responder: node, withButton: button)
             }
-        }, withEvent: theEvent)
+        }, screenPosition: mouseLocation)
     }
     
     func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
@@ -34,25 +39,26 @@ internal extension ResponderManager {
             self.buildResponderList()
         }
         
+        let mouseLocation = director.convertEventToGL(theEvent)
+        let input = Input(screenPosition: mouseLocation, mouseButton: button)
+        
         if let responder: RunningResponder = self.responder(for: button) {
             // This drag event is already associated with a specific target.
             // Items that claim user interaction receive events even if they occur outside of the bounds of the object.
-            if responder.target.claimsUserInteraction || responder.target.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
+            if responder.target.claimsUserInteraction || responder.target.clippedHitTestWithWorldPos(mouseLocation) {
                 Director.pushCurrentDirector(director)
-                responder.target.mouseDragged(theEvent, button: button)
+                responder.target.inputDragged(input)
                 Director.popCurrentDirector()
-            }
-            else {
+            } else {
                 runningResponderList.removeObject(responder)
             }
-        }
-        else {
+        } else {
             self.executeOnEachResponder({ node in
-                node.mouseDragged(theEvent, button: button)
+                node.inputDragged(input)
                 if self.currentEventProcessed {
                     self.add(responder: node, withButton: button)
                 }
-            }, withEvent: theEvent)
+            }, screenPosition: mouseLocation)
         }
     }
     
@@ -61,12 +67,48 @@ internal extension ResponderManager {
             self.buildResponderList()
         }
         
+        let mouseLocation = director.convertEventToGL(theEvent)
+        let input = Input(screenPosition: mouseLocation, mouseButton: button)
+        
         if let responder = self.responder(for: button) {
             Director.pushCurrentDirector(director)
-            responder.target.mouseUp(theEvent, button: button)
+            responder.target.inputEnd(input)
             Director.popCurrentDirector()
             runningResponderList.removeObject(responder)
         }
+    }
+    
+    func mouseMoved(_ theEvent: NSEvent) {
+        if !enabled {
+            return
+        }
+        if dirty {
+            self.buildResponderList()
+        }
+        
+        let mouseLocation = director.convertEventToGL(theEvent)
+        let input = Input(screenPosition: mouseLocation, mouseButton: .none)
+        
+        self.executeOnEachResponder({ node in
+            node.inputMoved(input)
+        }, screenPosition: mouseLocation)
+    }
+    
+    func executeOnEachResponder(_ block: (Node) -> Void, screenPosition: Point) {
+        Director.pushCurrentDirector(director)
+        // scan through responders, and find first one
+        for node in responderList.reversed().lazy {
+            // check for hit test
+            if node.clippedHitTestWithWorldPos(screenPosition) {
+                self.currentEventProcessed = true
+                block(node)
+                // if mouse was accepted, break
+                if currentEventProcessed {
+                    break
+                }
+            }
+        }
+        Director.popCurrentDirector()
     }
     
     func scrollWheel(_ theEvent: NSEvent) {
@@ -76,9 +118,11 @@ internal extension ResponderManager {
         if dirty {
             self.buildResponderList()
         }
+        
+        let mouseLocation = director.convertEventToGL(theEvent)
+        
         // if otherMouse is active, scrollWheel goes to that node
         // otherwise, scrollWheel goes to the node under the cursor
-        
         if let responder: RunningResponder = self.responder(for: .other) {
             self.currentEventProcessed = true
             Director.pushCurrentDirector(director)
@@ -89,38 +133,10 @@ internal extension ResponderManager {
                 return
             }
         }
-        self.executeOnEachResponder({(node: Node) -> Void in
+        
+        self.executeOnEachResponder({ node in
             node.scrollWheel(theEvent)
-        }, withEvent: theEvent)
-    }
-    
-    func mouseMoved(_ theEvent: NSEvent) {
-        if !enabled {
-            return
-        }
-        if dirty {
-            self.buildResponderList()
-        }
-        self.executeOnEachResponder({(node: Node) -> Void in
-            node.mouseMoved(theEvent)
-        }, withEvent: theEvent)
-    }
-    
-    func executeOnEachResponder(_ block: (Node) -> Void, withEvent theEvent: NSEvent) {
-        Director.pushCurrentDirector(director)
-        // scan through responders, and find first one
-        for node in responderList.reversed().lazy {
-            // check for hit test
-            if node.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
-                self.currentEventProcessed = true
-                block(node)
-                // if mouse was accepted, break
-                if currentEventProcessed {
-                    
-                }
-            }
-        }
-        Director.popCurrentDirector()
+        }, screenPosition: mouseLocation)
     }
     
     func keyDown(_ theEvent: NSEvent) {
@@ -165,8 +181,12 @@ internal extension ResponderManager {
         Director.popCurrentDirector()
     }
     
+    internal func cancel(responder: RunningResponder) {
+        runningResponderList.removeObject(responder)
+    }
+    
     // finds a responder object for an event
-    func responder(for button: MouseButton) -> RunningResponder? {
+    fileprivate func responder(for button: MouseButton) -> RunningResponder? {
         for touchEntry in runningResponderList {
             if touchEntry.button == button {
                 return touchEntry
@@ -176,15 +196,11 @@ internal extension ResponderManager {
     }
     
     // adds a responder object ( running responder ) to the responder object list
-    func add(responder: Node, withButton button: MouseButton) {
+    fileprivate func add(responder: Node, withButton button: MouseButton) {
         // create a new input object
         let touchEntry = RunningResponder(target: responder)
         touchEntry.button = button
         runningResponderList.append(touchEntry)
-    }
-    
-    func cancel(responder: RunningResponder) {
-        runningResponderList.removeObject(responder)
     }
 }
     

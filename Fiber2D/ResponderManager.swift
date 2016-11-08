@@ -8,12 +8,6 @@
 import SwiftMath
 import Cocoa
 
-public enum MouseButton: Int {
-    case left
-    case right
-    case other
-}
-
 /**
  *  Defines a running iOS/OSX responder.
  */

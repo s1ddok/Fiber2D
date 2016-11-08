@@ -78,7 +78,6 @@
 		087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0D1D82D1BE00F940D4 /* Component.swift */; };
 		087BFA101D82EB2600F940D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA0F1D82EB2600F940D4 /* main.swift */; };
 		087BFA131D82EC7700F940D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA111D82EC7700F940D4 /* AppDelegate.swift */; };
-		087BFA141D82EC7700F940D4 /* NSEvent+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA121D82EC7700F940D4 /* NSEvent+Node.swift */; };
 		087BFA161D82F5C200F940D4 /* DirectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA151D82F5C200F940D4 /* DirectorView.swift */; };
 		087BFA181D82F60500F940D4 /* Director+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087BFA171D82F60500F940D4 /* Director+macOS.swift */; };
 		0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509891D7B4F2F003EF800 /* Tagged.swift */; };
@@ -93,8 +92,8 @@
 		08A73C0A1DCB2A7E00BF5AE8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A73C091DCB2A7E00BF5AE8 /* File.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08AA0EE71DBFC5F800748555 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */; };
-		08B3B51E1DB5378100D564CB /* UITouch+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51D1DB5378100D564CB /* UITouch+Node.swift */; };
 		08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BB5C811D7EE09E004A5561 /* ActionRewind.swift */; };
+		08BD5CB61DD245A70093C5B2 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5CB51DD245A70093C5B2 /* Input.swift */; };
 		08C1CB101D8EFFD5006CDCCB /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CAEE1D8EFFD5006CDCCB /* chipmunk.c */; };
 		08C1CB111D8EFFD5006CDCCB /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 08C1CAEF1D8EFFD5006CDCCB /* CMakeLists.txt */; };
 		08C1CB121D8EFFD5006CDCCB /* cpArbiter.c in Sources */ = {isa = PBXBuildFile; fileRef = 08C1CAF01D8EFFD5006CDCCB /* cpArbiter.c */; };
@@ -242,7 +241,6 @@
 		087BFA0D1D82D1BE00F940D4 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		087BFA0F1D82EB2600F940D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = platform/macos/main.swift; sourceTree = "<group>"; };
 		087BFA111D82EC7700F940D4 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = platform/macos/AppDelegate.swift; sourceTree = "<group>"; };
-		087BFA121D82EC7700F940D4 /* NSEvent+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSEvent+Node.swift"; path = "platform/macos/NSEvent+Node.swift"; sourceTree = "<group>"; };
 		087BFA151D82F5C200F940D4 /* DirectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectorView.swift; sourceTree = "<group>"; };
 		087BFA171D82F60500F940D4 /* Director+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Director+macOS.swift"; sourceTree = "<group>"; };
 		088509891D7B4F2F003EF800 /* Tagged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tagged.swift; path = protocols/Tagged.swift; sourceTree = "<group>"; };
@@ -258,8 +256,8 @@
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
 		08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftBGFX.dylib; path = external/SwiftBGFX/SwiftBGFX/.build/debug/libSwiftBGFX.dylib; sourceTree = "<group>"; };
 		08B3B51B1DB2B98200D564CB /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewportScene.swift; sourceTree = "<group>"; };
-		08B3B51D1DB5378100D564CB /* UITouch+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITouch+Node.swift"; path = "platform/ios/UITouch+Node.swift"; sourceTree = "<group>"; };
 		08BB5C811D7EE09E004A5561 /* ActionRewind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRewind.swift; sourceTree = "<group>"; };
+		08BD5CB51DD245A70093C5B2 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Input.swift; path = structs/Input.swift; sourceTree = "<group>"; };
 		08C1CACF1D8EFFD5006CDCCB /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		08C1CAD01D8EFFD5006CDCCB /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
 		08C1CAD11D8EFFD5006CDCCB /* chipmunk_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_private.h; sourceTree = "<group>"; };
@@ -425,6 +423,7 @@
 		080B068D1DC9EC900037E1F1 /* structs */ = {
 			isa = PBXGroup;
 			children = (
+				08BD5CB51DD245A70093C5B2 /* Input.swift */,
 				080B068B1DC9EC8C0037E1F1 /* WeakBox.swift */,
 			);
 			name = structs;
@@ -563,8 +562,6 @@
 		081FBD311D463450005838B8 /* Input */ = {
 			isa = PBXGroup;
 			children = (
-				08B3B51D1DB5378100D564CB /* UITouch+Node.swift */,
-				087BFA121D82EC7700F940D4 /* NSEvent+Node.swift */,
 				081FBD071D46289A005838B8 /* Responder.swift */,
 				081FBD081D46289A005838B8 /* ResponderManager.swift */,
 				082AD7A51DD1E70200BF495A /* ResponderManager+iOS.swift */,
@@ -951,7 +948,6 @@
 				08C1CB151D8EFFD5006CDCCB /* cpBody.c in Sources */,
 				08C1CB161D8EFFD5006CDCCB /* cpCollision.c in Sources */,
 				080B06961DCA09F70037E1F1 /* RenderTextureSprite.swift in Sources */,
-				087BFA141D82EC7700F940D4 /* NSEvent+Node.swift in Sources */,
 				0803071F1D9AFFDC008CAC8E /* Node+Hierarchy.swift in Sources */,
 				08C1CB491D91769C006CDCCB /* PhysicsBody+Internal.swift in Sources */,
 				0885098A1D7B4F2F003EF800 /* Tagged.swift in Sources */,
@@ -1043,7 +1039,6 @@
 				08C1CB4D1D917B0A006CDCCB /* PhysicsBody+Simulation.swift in Sources */,
 				081FBD121D46289A005838B8 /* Node.swift in Sources */,
 				08C1CB291D8EFFD5006CDCCB /* cpSpace.c in Sources */,
-				08B3B51E1DB5378100D564CB /* UITouch+Node.swift in Sources */,
 				080B06951DCA09410037E1F1 /* RenderTexture.swift in Sources */,
 				080306AE1D941F4D008CAC8E /* PhysicsShapeBox.swift in Sources */,
 				081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */,
@@ -1052,6 +1047,7 @@
 				08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */,
 				0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */,
 				05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */,
+				08BD5CB61DD245A70093C5B2 /* Input.swift in Sources */,
 				08C1CB1A1D8EFFD5006CDCCB /* cpGearJoint.c in Sources */,
 				081FBD201D46289A005838B8 /* Sprite.swift in Sources */,
 				087BFA081D82D16100F940D4 /* Behaviour.swift in Sources */,

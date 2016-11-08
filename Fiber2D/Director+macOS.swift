@@ -11,8 +11,8 @@ import SwiftMath
 #if os(OSX)
 import MetalKit
     
-extension Director {
-    func convertEventToGL(_ event: NSEvent) -> Point {
+internal extension Director {
+    internal func convertEventToGL(_ event: NSEvent) -> Point {
         let point: NSPoint = (self.view as! MetalView).convert(event.locationInWindow, from: nil)
         return self.convertToGL(Point(NSPointToCGPoint(point)))
     }

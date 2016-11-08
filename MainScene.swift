@@ -151,21 +151,12 @@ class MainScene: Scene {
         add(child: rt)
     }
     
-    override func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
-        //colorNode.positionInPoints = theEvent.location(in: self)
-        //print(theEvent.location(in: self))
-        
-        for j in 0..<physicsSquares.count {
-            //print(physicsSquares[j].physicsBody!.mass)
-            //physicsSquares[j].physicsBody?.apply(force: vec2(0.0, Float(j) * 25.0))
-            //physicsSquares[j].physicsBody!.isDynamic = !physicsSquares[j].physicsBody!.isDynamic
-        }
-        
+    override func inputBegan(_ input: Input) {
         let physicsCircle = Sprite(imageNamed: "circle.png")
         let physicsBody = PhysicsBody.circle(radius: 6.0)
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
-        physicsCircle.position = theEvent.location(in: self)
+        physicsCircle.position = input.location(in: self)
         
         add(child: physicsCircle)
         physicsCircle.add(component: physicsBody)
@@ -175,13 +166,9 @@ class MainScene: Scene {
         print("scroll")
     }
     
-    override func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
+    override func inputDragged(_ input: Input) {
         print("drag")
     }
-    
-    /*override func update(delta: Time) {
-        colorNode.rotation += 1°
-    }*/
 }
 
 extension Scene: PhysicsContactDelegate {
