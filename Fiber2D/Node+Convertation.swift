@@ -327,6 +327,6 @@ public extension Node {
      */
     public func convertToWindowSpace(_ nodePoint: Point) -> Point {
         let wp = self.convertToWorldSpace(nodePoint)
-        return Director.currentDirector!.convertToUI(wp)
+        return Director.current.convertToUI(wp)
     }
 }

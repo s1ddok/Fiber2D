@@ -43,7 +43,7 @@ public class ViewportNode: Node {
      */
     init(contentNode: Node) {
         super.init()
-        contentSize = Director.currentDirector!.viewSize
+        contentSize = Director.current.viewSize
         camera = Camera(viewport: self)
         clipsInput = true
         add(child: camera)
@@ -78,7 +78,7 @@ public class ViewportNode: Node {
         let v2 = viewportTransform.multiplyAndProject(v: vec3(w, h, 0))
         let v3 = viewportTransform.multiplyAndProject(v: vec3(0, h, 0))
         
-        let fbSize = Director.currentDirector!.viewSizeInPixels
+        let fbSize = Director.current.viewSizeInPixels
         let hw = fbSize.width / 2.0
         let hh = fbSize.width / 2.0
         

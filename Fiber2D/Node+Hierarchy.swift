@@ -57,7 +57,7 @@ public extension Node {
         }
         
         childWasAdded(child: child)
-        Director.currentDirector!.responderManager.markAsDirty()
+        Director.current.responderManager.markAsDirty()
     }
     
     /** Removes the node from its parent node. Will stop the node's scheduled selectors/blocks and actions.
@@ -121,7 +121,7 @@ public extension Node {
             }
             // set parent nil at the end (issue #476)
             c.parent = nil
-            Director.currentDirector!.responderManager.markAsDirty()
+            Director.current.responderManager.markAsDirty()
         }
         children.removeAll()
     }
@@ -147,7 +147,7 @@ public extension Node {
         }
         // set parent nil at the end (issue #476)
         child._parent = nil
-        Director.currentDirector!.responderManager.markAsDirty()
+        Director.current.responderManager.markAsDirty()
         children.removeObject(child)
         childWasRemoved(child: child)
     }
@@ -160,7 +160,7 @@ public extension Node {
             
             //don't need to check children recursively, that's done in visit of each child
             self.isReorderChildDirty = false
-            Director.currentDirector!.responderManager.markAsDirty()
+            Director.current.responderManager.markAsDirty()
         }
     }
     

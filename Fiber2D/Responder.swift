@@ -29,7 +29,7 @@ open class Responder {
     var userInteractionEnabled = false {
         didSet {
             if userInteractionEnabled != userInteractionEnabled {
-                Director.currentDirector!.responderManager.markAsDirty()
+                Director.current.responderManager.markAsDirty()
             }
         }
     }
@@ -72,53 +72,53 @@ open class Responder {
     
     #if os(iOS)
     func touchBegan(touch: CCTouch, withEvent event: CCTouchEvent) {
-        Director.currentDirector.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func touchMoved(touch: CCTouch, withEvent event: CCTouchEvent) {
-        Director.currentDirector.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func touchEnded(touch: CCTouch, withEvent event: CCTouchEvent) {
-        Director.currentDirector.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func touchCancelled(touch: CCTouch, withEvent event: CCTouchEvent) {
-        Director.currentDirector.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     #endif
     
     #if os(OSX)
     func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func mouseUp(_ theEvent: NSEvent, button: MouseButton) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func scrollWheel(_ theEvent: NSEvent) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func mouseMoved(_ theEvent: NSEvent) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func keyDown(_ theEvent: NSEvent) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func keyUp(_ theEvent: NSEvent) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     
     func flagsChanged(_ theEvent: NSEvent) {
-        Director.currentDirector!.responderManager.discardCurrentEvent()
+        Director.current.responderManager.discardCurrentEvent()
     }
     #endif
 }

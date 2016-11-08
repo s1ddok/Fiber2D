@@ -27,7 +27,7 @@ public class Transition: Scene {
      */
     init(duration: Time) {
         self.duration = duration
-        super.init(size: Director.currentDirector!.designSize)
+        super.init(size: Director.current.designSize)
         self.userInteractionEnabled = false
     }
     
@@ -114,12 +114,12 @@ public class Transition: Scene {
         if progress >= 1.0 {
             // Exit out scene
             outgoingScene.onExit()
-            if Director.currentDirector!.sendCleanupToScene {
+            if Director.current.sendCleanupToScene {
                 outgoingScene.cleanup()
             }
             self.outgoingScene = nil
             // Start incoming scene
-            Director.currentDirector!.present(scene: incomingScene)
+            Director.current.present(scene: incomingScene)
             incomingScene.onEnterTransitionDidFinish()
             incomingScene.paused = false
             self.incomingScene = nil

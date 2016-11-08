@@ -13,11 +13,11 @@ import Cocoa
 public extension NSEvent {
 
     public var locationInWorld: Point {
-        return Director.currentDirector!.convertEventToGL(self)
+        return Director.current.convertEventToGL(self)
     }
     
     public func location(in node: Node) -> Point {
-        let director = Director.currentDirector!
+        let director = Director.current!
         let mouseLocation = director.convertEventToGL(self)
         return node.convertToNodeSpace(mouseLocation)
     }

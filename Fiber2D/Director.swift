@@ -31,13 +31,13 @@ func DirectorStack() -> NSMutableArray
 }
 
 public class Director: NSObject {
-    class var currentDirector: Director? {
+    public class var current: Director! {
         return Thread.current.threadDictionary[DirectorCurrentKey] as? Director
     }
     
     class func pushCurrentDirector(_ director: Director) {
         let stack = DirectorStack()
-        stack.add(self.currentDirector ?? NSNull())
+        stack.add(self.current ?? NSNull())
         DirectorBindCurrent(director)
     }
     
@@ -158,7 +158,7 @@ public class Director: NSObject {
     }
     
     func purgeCachedData() {
-        if Director.currentDirector?.view != nil {
+        if Director.current.view != nil {
             TextureCache.shared.removeUnusedTextures()
         }
         FileLocator.shared.purgeCache()
