@@ -21,7 +21,7 @@ internal final class RunningResponder {
     /**
      *  Holdes the target of the touch. This is the node which accepted the touch.
      */
-    var target: Node!
+    unowned var target: Node
     #if os(iOS)
     /**
      *  Holds the current touch. Note that touches must not be retained.
@@ -39,6 +39,10 @@ internal final class RunningResponder {
      */
     var button: MouseButton!
     #endif
+    
+    public init(target: Node) {
+        self.target = target
+    }
 }
 
 /**
@@ -87,8 +91,12 @@ internal final class ResponderManager {
     func buildResponderList() {
         // rebuild responder list
         self.removeAllResponders()
-        assert(director.runningScene != nil, "Missing current running scene.")
-        self.buildResponderList(director.runningScene!)
+        
+        guard let scene = director.runningScene else {
+            fatalError("Missing current running scene.")
+        }
+        
+        self.buildResponderList(scene)
         self.dirty = false
     }
     
@@ -135,7 +143,7 @@ internal final class ResponderManager {
     }
     
     internal func cancelAllResponders() {
-        runningResponderList.forEach { self.cancelResponder($0) }
+        runningResponderList.forEach { self.cancel(responder: $0) }
         runningResponderList = []
         self.exclusiveMode = false
     }

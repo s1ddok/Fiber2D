@@ -21,7 +21,7 @@ internal extension ResponderManager {
         self.executeOnEachResponder({(node: Node) -> Void in
             node.mouseDown(theEvent, button: button)
             if self.currentEventProcessed {
-                self.addResponder(node, withButton: button)
+                self.add(responder: node, withButton: button)
             }
         }, withEvent: theEvent)
     }
@@ -34,7 +34,7 @@ internal extension ResponderManager {
             self.buildResponderList()
         }
         
-        if let responder: RunningResponder = self.responderForButton(button) {
+        if let responder: RunningResponder = self.responder(for: button) {
             // This drag event is already associated with a specific target.
             // Items that claim user interaction receive events even if they occur outside of the bounds of the object.
             if responder.target.claimsUserInteraction || responder.target.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
@@ -50,7 +50,7 @@ internal extension ResponderManager {
             self.executeOnEachResponder({(node: Node) -> Void in
                 node.mouseDragged(theEvent, button: button)
                 if self.currentEventProcessed {
-                    self.addResponder(node, withButton: button)
+                    self.add(responder: node, withButton: button)
                 }
             }, withEvent: theEvent)
         }
@@ -61,7 +61,7 @@ internal extension ResponderManager {
             self.buildResponderList()
         }
         
-        if let responder = self.responderForButton(button) {
+        if let responder = self.responder(for: button) {
             Director.pushCurrentDirector(director)
             responder.target.mouseUp(theEvent, button: button)
             Director.popCurrentDirector()
@@ -79,7 +79,7 @@ internal extension ResponderManager {
         // if otherMouse is active, scrollWheel goes to that node
         // otherwise, scrollWheel goes to the node under the cursor
         
-        if let responder: RunningResponder = self.responderForButton(.other) {
+        if let responder: RunningResponder = self.responder(for: .other) {
             self.currentEventProcessed = true
             Director.pushCurrentDirector(director)
             responder.target.scrollWheel(theEvent)
@@ -109,7 +109,7 @@ internal extension ResponderManager {
     func executeOnEachResponder(_ block: (Node) -> Void, withEvent theEvent: NSEvent) {
         Director.pushCurrentDirector(director)
         // scan through responders, and find first one
-        for node in responderList.reversed() {
+        for node in responderList.reversed().lazy {
             // check for hit test
             if node.clippedHitTestWithWorldPos(director.convertEventToGL(theEvent)) {
                 self.currentEventProcessed = true
@@ -131,7 +131,7 @@ internal extension ResponderManager {
             self.buildResponderList()
         }
         Director.pushCurrentDirector(director)
-        responderList.reversed().forEach {
+        responderList.reversed().lazy.forEach {
             $0.keyDown(theEvent)
         }
         Director.popCurrentDirector()
@@ -145,7 +145,7 @@ internal extension ResponderManager {
             self.buildResponderList()
         }
         Director.pushCurrentDirector(director)
-        responderList.reversed().forEach {
+        responderList.reversed().lazy.forEach {
             $0.keyUp(theEvent)
         }
         Director.popCurrentDirector()
@@ -159,33 +159,31 @@ internal extension ResponderManager {
             self.buildResponderList()
         }
         Director.pushCurrentDirector(director)
-        responderList.reversed().forEach {
+        responderList.reversed().lazy.forEach {
             $0.flagsChanged(theEvent)
         }
         Director.popCurrentDirector()
     }
-    // finds a responder object for an event
     
-    func responderForButton(_ button: MouseButton) -> RunningResponder? {
-        for touchEntry: RunningResponder in runningResponderList {
+    // finds a responder object for an event
+    func responder(for button: MouseButton) -> RunningResponder? {
+        for touchEntry in runningResponderList {
             if touchEntry.button == button {
                 return touchEntry
             }
         }
         return nil
     }
-    // adds a responder object ( running responder ) to the responder object list
     
-    func addResponder(_ node: Node, withButton button: MouseButton) {
-        var touchEntry: RunningResponder
-        // create a new touch object
-        touchEntry = RunningResponder()
-        touchEntry.target = node
+    // adds a responder object ( running responder ) to the responder object list
+    func add(responder: Node, withButton button: MouseButton) {
+        // create a new input object
+        let touchEntry = RunningResponder(target: responder)
         touchEntry.button = button
         runningResponderList.append(touchEntry)
     }
     
-    func cancelResponder(_ responder: RunningResponder) {
+    func cancel(responder: RunningResponder) {
         runningResponderList.removeObject(responder)
     }
 }
