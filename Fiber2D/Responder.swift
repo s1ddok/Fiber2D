@@ -90,6 +90,14 @@ open class Responder {
         Director.current.responderManager.discardCurrentEvent()
     }
     
+    open func keyDown(_ key: Key) {
+        Director.current.responderManager.discardCurrentEvent()
+    }
+    
+    open func keyUp(_ key: Key) {
+        Director.current.responderManager.discardCurrentEvent()
+    }
+    
     #if os(OSX)
     func scrollWheel(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
