@@ -18,7 +18,7 @@ internal extension ResponderManager {
         if dirty {
             self.buildResponderList()
         }
-        self.executeOnEachResponder({(node: Node) -> Void in
+        self.executeOnEachResponder({ node in
             node.mouseDown(theEvent, button: button)
             if self.currentEventProcessed {
                 self.add(responder: node, withButton: button)
@@ -47,7 +47,7 @@ internal extension ResponderManager {
             }
         }
         else {
-            self.executeOnEachResponder({(node: Node) -> Void in
+            self.executeOnEachResponder({ node in
                 node.mouseDragged(theEvent, button: button)
                 if self.currentEventProcessed {
                     self.add(responder: node, withButton: button)
