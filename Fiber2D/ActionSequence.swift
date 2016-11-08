@@ -9,7 +9,6 @@
 public struct ActionSequenceContainer: ActionContainer, Continous {
     @inline(__always)
     mutating public func update(state: Float) {
-        guard let target = target else { return }
         let t = state
         var found = 0
         var new_t: Float = 0.0
@@ -92,10 +91,10 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         )
     }
     
-    weak var target: Node?
+    weak var target: Node!
     public var tag: Int = 0
     private(set) public var duration: Time = 0.0
-    private(set) public var elapsed:  Time = 0.0
+    private(set) public var elapsed: Time = 0.0
     
     public var isDone: Bool {
         return elapsed > duration

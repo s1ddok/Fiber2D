@@ -37,14 +37,12 @@ public struct ActionRepeatForeverContainer: ActionContainer {
                 }
             }
             
-            if let target = target {
-                innerContainer.start(with: target)
-            }
+            innerContainer.start(with: target)
         }
     }
     
     public var tag: Int = 0
-    weak var target: Node?
+    weak var target: Node!
     public var isDone: Bool {
         return false
     }
@@ -70,9 +68,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
                 remainingRepeats -= 1
                 
                 innerContainer.stop()
-                if let target = target {
-                    innerContainer.start(with: target)
-                }
+                innerContainer.start(with: target)
                 self.nextDt = Float(Int(repeatCount - remainingRepeats) + 1) / Float(repeatCount)
             }
             // fix for issue #1288, incorrect end value of repeat
@@ -109,7 +105,6 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
     }
 
     mutating public func step(dt: Time) {
-        guard let target = target else { return }
         guard icDuration > 0 else {
             innerContainer.start(with: target)
             innerContainer.update(state: 1.0)
@@ -126,7 +121,7 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
     }
     
     public var tag: Int = 0
-    weak var target: Node?
+    weak var target: Node!
     public var isDone: Bool {
         return remainingRepeats == 0
     }
