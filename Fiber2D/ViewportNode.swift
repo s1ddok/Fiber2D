@@ -45,7 +45,6 @@ public class ViewportNode: Node {
         super.init()
         contentSize = Director.current.viewSize
         camera = Camera(viewport: self)
-        clipsInput = true
         add(child: camera)
         camera.add(child: contentNode)
         

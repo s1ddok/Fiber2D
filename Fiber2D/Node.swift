@@ -88,7 +88,7 @@ import SwiftMath
  
  Otherwise your code will break if you subsequently change the positionType to something other than points (ie UIPoints or Normalized).
  */
-open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
+open class Node: Prioritized, Pausable, Enterable, Exitable {
     
     // MARK: Convenience
     /// Should be in +Convenience, but are being overriden in Scene
@@ -662,6 +662,20 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
         return transform
     }
     
+    // MARK: Input
+    public var responder: Responder? {
+        willSet {
+            guard newValue?.owner == nil else {
+                fatalError("Can't add responder that already has a parent")
+            }
+            
+            responder?.owner = nil
+            newValue?.owner = self
+            
+            Director.current.responderManager.markAsDirty()
+        }
+    }
+    
     
     /// @name Rendering (Implemented in Subclasses)
     
@@ -702,45 +716,6 @@ open class Node: Responder, Prioritized, Pausable, Enterable, Exitable {
         if !drawn {
             self.draw(renderer, transform: transform)
         }
-    }
-    
-    //
-    // MARK: Input
-    //
-    /** Returns YES, if touch is inside sprite
-     Added hit area expansion / contraction
-     Override for alternative clipping behavior, such as if you want to clip input to a circle.
-     */
-    override func hitTestWithWorldPos(_ pos: Point) -> Bool {
-        let p = self.convertToNodeSpace(pos)
-        let h = -hitAreaExpansion
-        let offset = Point(-h, -h)
-        // optimization
-        let contentSizeInPoints = self.contentSizeInPoints
-        let size: Size = Size(width: contentSizeInPoints.width - offset.x, height: contentSizeInPoints.height - offset.y)
-        return !(p.y < offset.y || p.y > size.height || p.x < offset.x || p.x > size.width)
-    }
-    
-    override func clippedHitTestWithWorldPos(_ pos: Point) -> Bool {
-        // If *any* parent node clips input and we're outside their clipping range, reject the hit.
-        guard parent == nil || !parent!.rejectClippedInput(pos) else {
-            return false
-        }
-        
-        return self.hitTestWithWorldPos(pos)
-    }
-    
-    func rejectClippedInput(_ pos: Point) -> Bool {
-        // If this clips input, do the bounds test to clip against this node
-        if self.clipsInput && !self.hitTestWithWorldPos(pos) {
-            // outside of this node, reject this!
-            return true
-        }
-        guard let parent = self.parent else {
-            // Terminating condition, the hit was not rejected
-            return false
-        }
-        return parent.rejectClippedInput(pos)
     }
     
     //

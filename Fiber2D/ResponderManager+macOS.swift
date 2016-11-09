@@ -45,7 +45,7 @@ internal extension ResponderManager {
         if let responder: RunningResponder = self.responder(for: button) {
             // This drag event is already associated with a specific target.
             // Items that claim user interaction receive events even if they occur outside of the bounds of the object.
-            if responder.target.claimsUserInteraction || responder.target.clippedHitTestWithWorldPos(mouseLocation) {
+            if responder.target.claimsUserInteraction || responder.target.hitTest(worldPosition: mouseLocation) {
                 Director.pushCurrentDirector(director)
                 responder.target.inputDragged(input)
                 Director.popCurrentDirector()
@@ -94,14 +94,14 @@ internal extension ResponderManager {
         }, screenPosition: mouseLocation)
     }
     
-    func executeOnEachResponder(_ block: (Node) -> Void, screenPosition: Point) {
+    func executeOnEachResponder(_ block: (Responder) -> Void, screenPosition: Point) {
         Director.pushCurrentDirector(director)
         // scan through responders, and find first one
-        for node in responderList.reversed().lazy {
+        for responder in responderList.reversed().lazy {
             // check for hit test
-            if node.clippedHitTestWithWorldPos(screenPosition) {
+            if responder.hitTest(worldPosition: screenPosition) {
                 self.currentEventProcessed = true
-                block(node)
+                block(responder)
                 // if mouse was accepted, break
                 if currentEventProcessed {
                     break
@@ -196,7 +196,7 @@ internal extension ResponderManager {
     }
     
     // adds a responder object ( running responder ) to the responder object list
-    fileprivate func add(responder: Node, withButton button: MouseButton) {
+    fileprivate func add(responder: Responder, withButton button: MouseButton) {
         // create a new input object
         let touchEntry = RunningResponder(target: responder)
         touchEntry.button = button

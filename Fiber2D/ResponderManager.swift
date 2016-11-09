@@ -8,6 +8,9 @@
 import SwiftMath
 import Cocoa
 
+// TODO: Current implementation doesn't handle the case when responder is being removed during move events
+// I bet it sits in runningResponders forever
+
 /**
  *  Defines a running iOS/OSX responder.
  */
@@ -15,7 +18,7 @@ internal final class RunningResponder {
     /**
      *  Holdes the target of the touch. This is the node which accepted the touch.
      */
-    unowned var target: Node
+    unowned var target: Responder
     #if os(iOS)
     /**
      *  Holds the current touch. Note that touches must not be retained.
@@ -34,7 +37,7 @@ internal final class RunningResponder {
     var button: MouseButton!
     #endif
     
-    public init(target: Node) {
+    public init(target: Responder) {
         self.target = target
     }
 }
@@ -60,7 +63,7 @@ internal final class ResponderManager {
         }
     }
     
-    internal var responderList = [Node]() // list of active responders
+    internal var responderList = [Responder]() // list of active responders
     internal var dirty = true// list of responders should be rebuild
     internal var currentEventProcessed: Bool = false // current event was processed
     internal var exclusiveMode = false // manager only responds to current exclusive responder
@@ -99,19 +102,20 @@ internal final class ResponderManager {
         if !node.visible {
             return
         }
-        var shouldAddNode: Bool = node.userInteractionEnabled
+        
+        var shouldAddNode = node.responder != nil && node.responder!.userInteractionEnabled
         
         defer {
             // if eligible, add the current node to the responder list
             if shouldAddNode {
-                self.add(responder: node)
+                self.add(responder: node.responder!)
             }
         }
 
         // scan through children, and build responder list
         for child: Node in node.children {
             if shouldAddNode && child.zOrder >= 0 {
-                self.add(responder: node)
+                self.add(responder: node.responder!)
                 shouldAddNode = false
             }
             self.buildResponderList(child)
@@ -124,7 +128,7 @@ internal final class ResponderManager {
      *
      *  @param responder A Node object.
      */
-    internal func add(responder: Node) {
+    internal func add(responder: Responder) {
         responderList.append(responder)
     }
     
@@ -163,10 +167,10 @@ internal final class ResponderManager {
         }
         
         // scan backwards through touch responders
-        for node in responderList.reversed().lazy {
+        for responder in responderList.reversed().lazy {
             // check for hit test
-            if node.hitTestWithWorldPos(pos) {
-                return (node)
+            if responder.hitTest(worldPosition: pos) {
+                return responder.owner!
             }
         }
         // nothing found
@@ -186,7 +190,7 @@ internal final class ResponderManager {
         }
         
         return responderList.filter {
-            $0.hitTestWithWorldPos(pos)
-        }
+            $0.hitTest(worldPosition: pos)
+        }.map { $0.owner! }
     }
 }

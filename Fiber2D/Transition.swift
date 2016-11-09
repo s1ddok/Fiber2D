@@ -28,7 +28,6 @@ public class Transition: Scene {
     init(duration: Time) {
         self.duration = duration
         super.init(size: Director.current.designSize)
-        self.userInteractionEnabled = false
     }
     
     private let duration: Time
