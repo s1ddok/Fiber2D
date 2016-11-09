@@ -103,6 +103,11 @@ internal class BGFXRenderer: Renderer {
     
     internal var currentRenderTargetViewID = ROOT_RTT_ID
     
+    internal var framesToUpdateStats = 10
+    internal var frameCount = 0
+    internal var gpuFreq = 0.0
+    internal var cpuFreq = 0.0
+    
     init() {
         bgfx.frame()
         
@@ -126,9 +131,18 @@ internal class BGFXRenderer: Renderer {
     }
     
     func flush() {
+        frameCount = (frameCount + 1) % framesToUpdateStats
+        if frameCount == 0 {
+            let stats = bgfx.stats
+            
+            gpuFreq = Double(stats.gpuTimeEnd - stats.gpuTimeBegin) / 1000
+            cpuFreq = Double(stats.cpuTimeEnd - stats.cpuTimeBegin) / 1000
+        }
+        
         bgfx.debugTextClear()
-        bgfx.debugTextPrint(x: 0, y: 1, foreColor: .white, backColor: .darkGray, format: "going")
-
+        bgfx.debugTextPrint(x: 0, y: 1, foreColor: .white, backColor: .darkGray, format: "Fiber2D BGFX Renderer")
+        bgfx.debugTextPrint(x: 0, y: 2, foreColor: .white, backColor: .darkGray, format: "CPU: \(cpuFreq)")
+        bgfx.debugTextPrint(x: 0, y: 3, foreColor: .white, backColor: .darkGray, format: "GPU: \(gpuFreq)")
         bgfx.frame()
         //bgfx.renderFrame()
         
