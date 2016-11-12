@@ -154,17 +154,6 @@ class MainScene: Scene {
     
 }
 
-extension Scene: PhysicsContactDelegate {
-    public func didEnd(contact: PhysicsContact) {
-        print("did end")
-        
-    }
-    
-    public func didBegin(contact: PhysicsContact) {
-        print("did begin")
-    }
-}
-
 public class MainSceneResponder: Responder {
     override public func inputBegan(_ input: Input) {
         let physicsCircle = Sprite(imageNamed: "circle.png")

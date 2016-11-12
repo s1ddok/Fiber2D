@@ -6,7 +6,6 @@
 //
 
 import SwiftMath
-import Cocoa
 
 // TODO: Current implementation doesn't handle the case when responder is being removed during move events
 // I bet it sits in runningResponders forever

@@ -42,7 +42,7 @@ internal extension ResponderManager {
         let mouseLocation = director.convertEventToGL(theEvent)
         let input = Input(screenPosition: mouseLocation, mouseButton: button)
         
-        if let responder: RunningResponder = self.responder(for: button) {
+        if let responder = self.responder(for: button) {
             // This drag event is already associated with a specific target.
             // Items that claim user interaction receive events even if they occur outside of the bounds of the object.
             if responder.target.claimsUserInteraction || responder.target.hitTest(worldPosition: mouseLocation) {
@@ -123,7 +123,7 @@ internal extension ResponderManager {
         
         // if otherMouse is active, scrollWheel goes to that node
         // otherwise, scrollWheel goes to the node under the cursor
-        if let responder: RunningResponder = self.responder(for: .other) {
+        if let responder = self.responder(for: .other) {
             self.currentEventProcessed = true
             Director.pushCurrentDirector(director)
             responder.target.scrollWheel(theEvent)
