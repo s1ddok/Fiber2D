@@ -171,7 +171,7 @@ class MainScene: Scene {
     }
 }
 
-extension Scene: PhysicsContactDelegate {
+extension MainScene: PhysicsContactDelegate {
     public func didEnd(contact: PhysicsContact) {
         print("did end")
         
