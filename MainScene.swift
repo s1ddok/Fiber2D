@@ -22,6 +22,8 @@ class MainScene: Scene {
     override init(size: Size) {
         super.init(size: size)
         
+        self.responder = MainSceneResponder()
+        
         let world = PhysicsWorld(rootNode: self)
         physicsSystem = PhysicsSystem(world: world)
         register(system: physicsSystem)
@@ -78,7 +80,6 @@ class MainScene: Scene {
         //    .then(ActionCallBlock { print(colorNodes[8].position) }.instantly.repeat(times: 7)))
         colorNodes[8].run(action: rotateAndMove.then(ActionCallBlock { print(colorNodes[8].position) }.instantly))
         colorNodes[8].run(action: ActionMoveBy(vec2(0.0, -0.1)).continously(duration: 1.0))
-        self.userInteractionEnabled = true
         print(Date())
         let _ = schedule(block: { (t:Timer) in
             print(Date())
@@ -151,14 +152,28 @@ class MainScene: Scene {
         add(child: rt)
     }
     
-    override func inputBegan(_ input: Input) {
+}
+
+extension Scene: PhysicsContactDelegate {
+    public func didEnd(contact: PhysicsContact) {
+        print("did end")
+        
+    }
+    
+    public func didBegin(contact: PhysicsContact) {
+        print("did begin")
+    }
+}
+
+public class MainSceneResponder: Responder {
+    override public func inputBegan(_ input: Input) {
         let physicsCircle = Sprite(imageNamed: "circle.png")
         let physicsBody = PhysicsBody.circle(radius: 6.0)
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
-        physicsCircle.position = input.location(in: self)
+        physicsCircle.position = input.location(in: owner!)
         
-        add(child: physicsCircle)
+        owner!.add(child: physicsCircle)
         physicsCircle.add(component: physicsBody)
     }
     
@@ -166,7 +181,7 @@ class MainScene: Scene {
         print("scroll")
     }
     
-    override func inputDragged(_ input: Input) {
+    override public func inputDragged(_ input: Input) {
         print("drag")
     }
 }

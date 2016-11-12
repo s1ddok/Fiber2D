@@ -39,7 +39,6 @@ class ViewportScene: Scene {
         container.add(child: cn)
         viewport = ViewportNode.centered(size: size)
         viewport.contentNode = container
-        viewport.userInteractionEnabled = false
         add(child: viewport)
         
         let bl = ColorNode()
@@ -60,10 +59,9 @@ class ViewportScene: Scene {
         placeholder.contentSize = Size(1.0, 1.0)
         //container.add(child: placeholder)
         add(component: CustomBehaviour(v: self))
-        userInteractionEnabled = true
     }
     
-    override func inputBegan(_ input: Input) {
+    /*override func inputBegan(_ input: Input) {
         viewport.camera.position = viewport.camera.position - vec2(32.0, 32.0)
         print(viewport.camera.children.first!.positionInPoints)
     }
@@ -96,5 +94,5 @@ class ViewportScene: Scene {
          default:
          ()
         }
-    }
+    }*/
 }
