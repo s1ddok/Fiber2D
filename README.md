@@ -93,6 +93,9 @@ Okay, so how we build this monster? I tried to simplify the whole process for yo
 -#    define BGFX_CHECK_RENDER_THREAD() BX_CHECK(BGFX_MAIN_THREAD_MAGIC != s_threadIndex, "Must be called from render thread.")
 +#    define BGFX_CHECK_RENDER_THREAD() BX_CHECK(s_ctx->m_singleThreaded || BGFX_MAIN_THREAD_MAGIC != s_threadIndex, "Must be called from render thread.")
 ```
+   In `renderer_mtl.mm` revert this back:
+![Commit-Revert](https://i.gyazo.com/ae405d376d3af77b4cde53d26379149c.png)
+
    - **Question:** OMG! WHY??? 
    - **Answer:** We are not sure if this is a correct fix yet, but it is required to work for now.
    
