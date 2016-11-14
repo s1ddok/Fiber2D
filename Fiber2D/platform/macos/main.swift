@@ -12,4 +12,7 @@ import AppKit
 let delegate = AppDelegate()
 let app = NSApplication.shared()
 app.delegate = delegate
-app.run()
+app.setActivationPolicy(.regular)
+app.activate(ignoringOtherApps: true)
+app.performSelector(onMainThread: #selector(NSApplication.run),
+                    with: nil, waitUntilDone: true)
