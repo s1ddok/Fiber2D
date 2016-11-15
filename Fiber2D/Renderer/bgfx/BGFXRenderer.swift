@@ -144,7 +144,6 @@ internal class BGFXRenderer: Renderer {
         bgfx.debugTextPrint(x: 0, y: 2, foreColor: .white, backColor: .darkGray, format: "CPU: \(cpuFreq)")
         bgfx.debugTextPrint(x: 0, y: 3, foreColor: .white, backColor: .darkGray, format: "GPU: \(gpuFreq)")
         bgfx.frame()
-        //bgfx.renderFrame()
         
         currentViewID = ROOT_VIEW_ID
         currentRenderTargetViewID = ROOT_RTT_ID

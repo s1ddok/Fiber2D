@@ -84,27 +84,12 @@ Okay, so how we build this monster? I tried to simplify the whole process for yo
 1. Clone
 
    ```$ git clone --recursive https://github.com/s1ddok/Fiber2D.git```
-   
-2. Go to `/external/SwiftBGFX/3rdparty/bgfx/src`
 
-3. In `bgfx.cpp` change:
+2. Call helper script, that will do all the stuff for you. (You have to have `ninja build` installed)
 
-```
--#    define BGFX_CHECK_RENDER_THREAD() BX_CHECK(BGFX_MAIN_THREAD_MAGIC != s_threadIndex, "Must be called from render thread.")
-+#    define BGFX_CHECK_RENDER_THREAD() BX_CHECK(s_ctx->m_singleThreaded || BGFX_MAIN_THREAD_MAGIC != s_threadIndex, "Must be called from render thread.")
-```
-   In `renderer_mtl.mm` revert this back:
-![Commit-Revert](https://i.gyazo.com/ae405d376d3af77b4cde53d26379149c.png)
+   ``` sh prepare_bgfx_macos.sh ```
 
-   - **Question:** OMG! WHY??? 
-   - **Answer:** We are not sure if this is a correct fix yet, but it is required to work for now.
-   
-4\. Return to root repository and call helper script, that will do all the stuff for you. (You have to have `ninja build` installed)
-```
-sh prepare_bgfx_macos.sh
-```
-
-5\. Open XCode project, compile and run. You should see the demo yourself.
+3. Open XCode project, compile and run. You should see the demo yourself.
 
 # Contributors 
 

@@ -39,17 +39,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         pd.nwh = UnsafeMutableRawPointer(Unmanaged.passRetained(view).toOpaque())
         pd.context = UnsafeMutableRawPointer(Unmanaged.passRetained(view.device!).toOpaque())
         bgfx.setPlatformData(pd)
-        
-        bgfx.renderFrame()
+
         bgfx.initialize(type: .metal)
         bgfx.reset(width: 1024, height: 768, options: [.vsync, .flipAfterRender])
         
-        //bgfx.renderFrame()
-        
-        
         self.window.acceptsMouseMovedEvents = true
         let director: Director = view.director
-//        director = Director(view: self)
         Director.pushCurrentDirector(director)
         director.present(scene: MainScene(size: director.designSize))
         //director.present(scene: ViewportScene(size: director.designSize))
