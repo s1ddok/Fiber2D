@@ -1176,13 +1176,13 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/external/SwiftBGFX/SwiftBGFX/.build/debug",
+					"$(PROJECT_DIR)/external/SwiftBGFX/.build/debug",
 				);
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = me.s1ddok.Fiber2D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/external/SwiftBGFX/SwiftBGFX/.build/debug";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/external/SwiftBGFX/.build/debug";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1205,7 +1205,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/external/SwiftBGFX/SwiftBGFX/.build/debug",
+					"$(PROJECT_DIR)/external/SwiftBGFX/.build/debug",
 				);
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/Fiber2D/cocos2d-legacy/**";
 				OTHER_SWIFT_FLAGS = "-DENABLE_STACKABLE_ACTIONS";

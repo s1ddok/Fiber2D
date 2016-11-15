@@ -7,5 +7,5 @@ MACOSX_DEPLOYMENT_TARGET=10.11 make config=debug64 clean
 MACOSX_DEPLOYMENT_TARGET=10.11 make config=release64 clean
 MACOSX_DEPLOYMENT_TARGET=10.11 make config=debug64 bgfx
 MACOSX_DEPLOYMENT_TARGET=10.11 make config=release64 bgfx
-cd ../../../../../SwiftBGFX
+cd ../../../../../
 sh build_metal_macos.sh
