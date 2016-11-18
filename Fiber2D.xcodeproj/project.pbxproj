@@ -66,6 +66,7 @@
 		0833CA591DCBACC70090D4CC /* Sprite9Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0B1D46289A005838B8 /* Sprite9Slice.swift */; };
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		084AB53E1DCA33040013AD51 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB53D1DCA33040013AD51 /* Setup.swift */; };
+		084F4CA41DDE52E100F24BC1 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F4CA31DDE52E100F24BC1 /* Tree.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
 		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
 		085567861DC53858009B5B60 /* BlendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085567851DC53858009B5B60 /* BlendMode.swift */; };
@@ -229,6 +230,7 @@
 		0833CA541DCB47AE0090D4CC /* FileLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocator.swift; sourceTree = "<group>"; };
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		084AB53D1DCA33040013AD51 /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
+		084F4CA31DDE52E100F24BC1 /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tree.swift; path = structs/Tree.swift; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
 		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
 		085567851DC53858009B5B60 /* BlendMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlendMode.swift; path = ../../BlendMode.swift; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				08BD5CB51DD245A70093C5B2 /* Input.swift */,
+				084F4CA31DDE52E100F24BC1 /* Tree.swift */,
 				080B068B1DC9EC8C0037E1F1 /* WeakBox.swift */,
 			);
 			name = structs;
@@ -1046,6 +1049,7 @@
 				08C1CB1F1D8EFFD5006CDCCB /* cpPinJoint.c in Sources */,
 				08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */,
 				0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */,
+				084F4CA41DDE52E100F24BC1 /* Tree.swift in Sources */,
 				05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */,
 				08BD5CB61DD245A70093C5B2 /* Input.swift in Sources */,
 				08C1CB1A1D8EFFD5006CDCCB /* cpGearJoint.c in Sources */,
@@ -1185,7 +1189,7 @@
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/external/SwiftBGFX/.build/debug";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};
 			name = Debug;
@@ -1214,7 +1218,7 @@
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = Fiber2D/BridgingHeader.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 3.0.1;
 				USER_HEADER_SEARCH_PATHS = "Fiber2D/cocos2d-legacy/** $(SRCROOT)/external/**";
 			};
 			name = Release;

@@ -8,6 +8,33 @@
 import SwiftMath
 import Cocoa
 
+fileprivate func createRT(size: Size, clearColor: Color, geometryColor: Color = .green) -> RenderTexture {
+    let rt = RenderTexture(width: UInt(size.width), height: UInt(size.height))
+    rt.clearColor = clearColor
+    
+    let cn = ColorNode(color: geometryColor, size: size * 0.2)
+    cn.positionType = .normalized
+    cn.anchorPoint = p2d(0.5, 0.5)
+    cn.run(action: ActionMoveTo(p2d(1, 1)).and(ActionRotateBy(angle: 90°)).continously(duration: 1.0)
+        .then(ActionMoveTo(p2d(1, 0))     .and(ActionRotateBy(angle: 90°)).continously(duration: 1.0))
+        .then(ActionMoveTo(p2d(0, 0))     .and(ActionRotateBy(angle: 90°)).continously(duration: 1.0))
+        .repeatForever)
+    
+    rt.add(child: cn)
+
+    return rt
+}
+
+fileprivate func createChildRT(size: Size, clearColor: Color,geometryColor: Color = .white) -> RenderTexture {
+    let rtChild = createRT(size: size * 0.5, clearColor: clearColor, geometryColor: geometryColor)
+    rtChild.positionType = .normalized
+    rtChild.position = p2d(0.5, 0.5)
+    
+    rtChild.run(action: ActionRotateBy(angle: .pi_4).continously(duration: Time.random(1.0, 4.0)).repeatForever)
+    
+    return rtChild
+}
+
 class MainScene: Scene {
     
     var colorNode: ColorNode!
@@ -124,32 +151,42 @@ class MainScene: Scene {
         messageBubble.position = p2d(256.0, 256.0)
         add(child: messageBubble)
     }
-    
+
     override func onEnter() {
         super.onEnter()
         
-        let rt = RenderTexture(width: 128, height: 128)
-        rt.clearColor = .red
+        let rt = createRT(size: Size(128.0), clearColor: .red)
         rt.position = p2d(512, 512)
-        
         rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
-                 .then(ActionMoveBy(vec2(-150.0, 0)).continously(duration: 1.0))
-                 .repeatForever)
-        let cn = ColorNode(color: .green, size: Size(32.0, 32.0))
-        cn.positionType = .normalized
-        cn.anchorPoint = p2d(0.5, 0.5)
-        cn.run(action: ActionMoveTo(p2d(1, 1)).and(ActionRotateBy(angle: 90°)).continously(duration: 1.0)
-            .then(ActionMoveTo(p2d(1, 0))     .and(ActionRotateBy(angle: 90°)).continously(duration: 1.0))
-            .then(ActionMoveTo(p2d(0, 0))     .and(ActionRotateBy(angle: 90°)).continously(duration: 1.0))
+            .then(ActionMoveBy(vec2(-150.0, 0)).continously(duration: 1.0))
             .repeatForever)
-        rt.add(child: cn)
-        
-        
         let anotherSprite = Sprite(texture: rt.texture, rect: Rect(size: rt.contentSize), rotated: false)
         anotherSprite.run(action: ActionRotateBy(angle: 30°).continously(duration: 1.0).repeatForever)
         anotherSprite.position = p2d(128, 128)
         add(child: anotherSprite)
         add(child: rt)
+        
+        let colors: [Color] = [ .red, .blue, .purple ]
+        let positionType = PositionType(xUnit: .points, yUnit: .points, corner: .bottomRight)
+        let baseSize = Size(128, 128)
+        var initialPosition = p2d(0, baseSize.height)
+        for _ in 0...1 {
+            let rt = createRT(size: baseSize, clearColor: .red/* colors[Int.random(0, colors.count - 1)]*/)
+            rt.positionType = positionType
+            initialPosition.width = initialPosition.width + baseSize.width + 24.0
+            rt.position = initialPosition
+            self.add(child: rt)
+            
+            let rtChild = createChildRT(size: baseSize, clearColor: .gray, geometryColor: .white)
+            rt.add(child: rtChild)
+            
+            //if Int.random() % 2 == 0 {
+            let anotherChild = createChildRT(size: baseSize, clearColor: .darkGray, geometryColor: .white)
+                //anotherChild.position = .zero
+                //anotherChild.positionType = .points
+                rt.add(child: anotherChild)
+            //}
+        }
     }
     
 }

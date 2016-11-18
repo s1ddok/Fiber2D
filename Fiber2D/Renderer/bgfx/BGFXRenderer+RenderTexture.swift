@@ -14,8 +14,25 @@ internal extension BGFXRenderer {
     internal func beginRenderTexture(_ rt: RenderTexture) {
         // Push current view ID
         viewStack.append(currentViewID)
-        
         currentViewID = currentRenderTargetViewID
+        
+        if currentTree == nil {
+            // Means this is a top-level tree
+            currentTree = Tree(value: currentRenderTargetViewID)
+            rtTrees.append(currentTree!)
+        } else {
+            // Means we are creating +1 level of nested RTs
+            // Create new entry
+            let newTree = Tree(value: currentRenderTargetViewID)
+            
+            // put that as a child of current tree
+            currentTree!.add(child: newTree)
+            // Make that new tree a new current one
+            currentTree = newTree
+            
+            // Assign every time
+            currentFrameHasNestedRTS = true
+        }
         
         bgfx.setViewSequential(viewId: currentViewID, enabled: true)
         
@@ -27,12 +44,16 @@ internal extension BGFXRenderer {
         bgfx.touch(currentViewID)
         
         bgfx.setViewTransform(viewId: currentViewID, proj: rt.projection)
+        
+        currentRenderTargetViewID += 1
     }
     
     internal func endRenderTexture() {
         // Pop current view ID
         currentViewID = viewStack.removeLast()
-        
-        currentRenderTargetViewID += 1
+        if currentTree == nil {
+            fatalError("Can't pop RTs group as we don't have none")
+        }
+        currentTree = currentTree!.parent
     }
 }

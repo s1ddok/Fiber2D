@@ -108,6 +108,10 @@ internal class BGFXRenderer: Renderer {
     internal var gpuFreq = 0.0
     internal var cpuFreq = 0.0
     
+    internal var rtTrees = [Tree<UInt8>]()
+    internal var currentTree: Tree<UInt8>?
+    internal var currentFrameHasNestedRTS = false
+    
     init() {
         bgfx.frame()
         
@@ -124,6 +128,13 @@ internal class BGFXRenderer: Renderer {
         bgfx.touch(currentViewID)
 
         bgfx.setViewTransform(viewId: currentViewID, proj: proj)
+        
+        // Prepare stuff for RTs
+        if currentFrameHasNestedRTS {
+            bgfx.clearViewRemap(viewId: 0)
+        }
+        rtTrees.removeAll(keepingCapacity: true)
+        currentFrameHasNestedRTS = false
     }
     
     public func submit(shader: Program) {
@@ -143,6 +154,16 @@ internal class BGFXRenderer: Renderer {
         bgfx.debugTextPrint(x: 0, y: 1, foreColor: .white, backColor: .darkGray, format: "Fiber2D BGFX Renderer")
         bgfx.debugTextPrint(x: 0, y: 2, foreColor: .white, backColor: .darkGray, format: "CPU: \(cpuFreq)")
         bgfx.debugTextPrint(x: 0, y: 3, foreColor: .white, backColor: .darkGray, format: "GPU: \(gpuFreq)")
+        
+        if currentFrameHasNestedRTS {
+            let treeViews = rtTrees.childrenFirstTraverse()
+            var newViewOrder = [UInt8](repeating: 0, count: treeViews.count)
+            for i in 0..<newViewOrder.count {
+                newViewOrder[Int(treeViews[i] - ROOT_RTT_ID)] = ROOT_RTT_ID + UInt8(i)
+            }
+            bgfx.setViewRemap(viewId: ROOT_RTT_ID, ids: newViewOrder)
+        }
+        
         bgfx.frame()
         
         currentViewID = ROOT_VIEW_ID
