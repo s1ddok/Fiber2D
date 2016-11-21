@@ -170,8 +170,8 @@ class MainScene: Scene {
         let positionType = PositionType(xUnit: .points, yUnit: .points, corner: .bottomRight)
         let baseSize = Size(128, 128)
         var initialPosition = p2d(0, baseSize.height)
-        for _ in 0...1 {
-            let rt = createRT(size: baseSize, clearColor: .red/* colors[Int.random(0, colors.count - 1)]*/)
+        for _ in 0...4 {
+            let rt = createRT(size: baseSize, clearColor: colors[Int.random(0, colors.count - 1)])
             rt.positionType = positionType
             initialPosition.width = initialPosition.width + baseSize.width + 24.0
             rt.position = initialPosition
@@ -180,12 +180,12 @@ class MainScene: Scene {
             let rtChild = createChildRT(size: baseSize, clearColor: .gray, geometryColor: .white)
             rt.add(child: rtChild)
             
-            //if Int.random() % 2 == 0 {
-            let anotherChild = createChildRT(size: baseSize, clearColor: .darkGray, geometryColor: .white)
-                //anotherChild.position = .zero
-                //anotherChild.positionType = .points
+            if Int.random() % 2 == 0 {
+                let anotherChild = createChildRT(size: baseSize, clearColor: .darkGray, geometryColor: .white)
+                anotherChild.position = .zero
+                anotherChild.positionType = .points
                 rt.add(child: anotherChild)
-            //}
+            }
         }
     }
     
