@@ -131,7 +131,7 @@ internal class BGFXRenderer: Renderer {
         
         // Prepare stuff for RTs
         if currentFrameHasNestedRTS {
-            bgfx.clearViewRemap(viewId: 0)
+            bgfx.clearViewRemap()
         }
         rtTrees.removeAll(keepingCapacity: true)
         currentFrameHasNestedRTS = false
@@ -161,7 +161,7 @@ internal class BGFXRenderer: Renderer {
             for i in 0..<newViewOrder.count {
                 newViewOrder[Int(treeViews[i] - ROOT_RTT_ID)] = ROOT_RTT_ID + UInt8(i)
             }
-            bgfx.setViewRemap(viewId: ROOT_RTT_ID, ids: newViewOrder)
+            bgfx.setViewOrder(viewId: ROOT_RTT_ID, ids: newViewOrder)
         }
         
         bgfx.frame()
