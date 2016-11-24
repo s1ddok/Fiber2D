@@ -18,9 +18,9 @@ public final class Material {
     internal var mat4Uniforms       = [Uniform: Matrix4x4f]()
     internal var vec4BufferUniforms = [Uniform: [Vector4f]]()
     internal var mat4BufferUniforms = [Uniform: [Matrix4x4f]]()
-    internal var textureUniforms    = [Uniform: Texture]()
+    internal var textureUniforms    = [Uniform: (unit: UInt8, texture: Texture)]()
     
-    public var blendMode: BlendMode {
+    public var blendMode: BlendMode = .premultipliedAlphaMode {
         didSet {
             if blendMode != oldValue {
                 renderStateDirty = true
@@ -44,28 +44,29 @@ public final class Material {
     
     private var _renderState: RenderStateOptions = .default
     
-    public func set(uniform: [Vector4f], for name: String) {
+    public func set(uniform: [Vector4f], name: String) {
         let handle = Material.handle(for: name, type: .vector4, num: uniform.count)
         vec4BufferUniforms[handle] = uniform
     }
     
-    public func set(uniform: [Matrix4x4f], for name: String) {
+    public func set(uniform: [Matrix4x4f], name: String) {
         let handle = Material.handle(for: name, type: .matrix4x4, num: uniform.count)
         mat4BufferUniforms[handle] = uniform
     }
     
-    public func set(uniform: Vector4f, for name: String) {
+    public func set(uniform: Vector4f, name: String) {
         let handle = Material.handle(for: name, type: .vector4)
         vec4Uniforms[handle] = uniform
     }
     
-    public func set(uniform: Matrix4x4f, for name: String) {
+    public func set(uniform: Matrix4x4f, name: String) {
         let handle = Material.handle(for: name, type: .matrix4x4)
         mat4Uniforms[handle] = uniform
     }
     
-    public func set(texture: Texture, for name: String) {
-        // We either should get texture unit automatically here or add an extra argument
+    public func set(texture: Texture, unit: UInt8, name: String) {
+        let handle = Material.handle(for: name, type: .int1)
+        textureUniforms[handle] = (unit: unit, texture: texture)
     }
 }
 
@@ -83,6 +84,5 @@ internal extension Material {
         let newHandle = Uniform(name: name, type: type, num: UInt16(num))
         Material.handles[key] = newHandle
         return newHandle
-        
     }
 }
