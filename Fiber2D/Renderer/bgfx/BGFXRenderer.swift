@@ -179,8 +179,8 @@ extension SwiftBGFX.FrameBuffer: FrameBufferObject {
     
 }
 
-extension RendererVertex {
-    static var layout: VertexLayout {
+public extension RendererVertex {
+    public static let layout: VertexLayout = {
         let l = VertexLayout()
         l.begin()
             .add(attrib: .position, num: 4, type: .float)
@@ -190,5 +190,5 @@ extension RendererVertex {
             .end()
         
         return l
-    }
+    }()
 }
