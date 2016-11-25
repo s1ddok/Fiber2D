@@ -20,29 +20,7 @@ public final class Material {
     internal var mat4BufferUniforms = [Uniform: [Matrix4x4f]]()
     internal var textureUniforms    = [Uniform: (unit: UInt8, texture: Texture)]()
     
-    public var blendMode: BlendMode = .premultipliedAlphaMode {
-        didSet {
-            if blendMode != oldValue {
-                renderStateDirty = true
-            }
-        }
-    }
-    
-    /// Cache and return the current render state.
-    internal(set) public var renderState: RenderStateOptions {
-        get {
-            if renderStateDirty {
-                _renderState = .colorWrite | .alphaWrite | .multisampling | blendMode.state | blendMode.equation
-                renderStateDirty = false
-            }
-            return _renderState
-        }
-        set { _renderState = newValue }
-    }
-    
-    internal var renderStateDirty = true
-    
-    private var _renderState: RenderStateOptions = .default
+    public var cullMode: CullMode = .none 
     
     public func set(uniform: [Vector4f], name: String) {
         let handle = Material.handle(for: name, type: .vector4, num: uniform.count)
