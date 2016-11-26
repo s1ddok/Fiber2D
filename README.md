@@ -31,28 +31,12 @@ Thanks to them we currently have:
   * Metal (WIP)
   * OpenGL 2.1, 3.1+, ES 2, ES 3.1
   * WebGL 1.0, 2.0
- 
-# Current state of implementation
-Alright, cool. But what do we have now?
-
-What is done so far:
-* Converted cocos2d core:
-   * `Responder`, `Node`, `Scene graph`, `Director`, `SpriteFrame`/`Texture` (+ Caches), `ColorNode`, `Sprite` (+ 9 slice), `File handling` (only `.png`), `Layout`
-*  `libpng` Swift bindings to load and scale `png`s on the fly
-*  Implemented Swift bindings to `Chipmunk2D` physics engine (Not finished)
-*  Implemented *hello-world* `bgfx renderer`
-   * Render texture (done)
-   * Viewport node (WIP)
-* Scheduling, including **new Action API**, that has *zero ARC* impact and modern syntax as well.
-* Prototype of a feature component system.
-  * Physics already work as a pluggable component, adding custom scripting behaviour is possible already too, but the whole API must be reconsidered.
 
 ### What it looks like?
 Currently we have only `macOS` demo for the ease of development, but it will seamlessly port to `iOS` and `tvOS` as it uses `MetalKit` for now (GL support will land later). `Linux` and `Android` are a bit more complicated, but 85% of existing code base is x-platform, what is more important: other 15% is **possible to convert today** (more on this later).
 
 You can get the idea from this GIF: 
 ![Fiber2D Demo Gif](http://imgur.com/CP6d9kT.gif)
-
 
 # Goals
 My goals for the near future are (order means nothing):
@@ -70,7 +54,7 @@ My goals for the near future are (order means nothing):
 * Add `compute shader` support
 * Introduce GPU computed `Particle systems`
 * Add support of cross-platform shader loading from `shaderc` 
-* **Drop `RenderableNode` concept and use `Geometry Component` instead**
+* **Introduce `Geometry Component` concept**
 * **Drop the concept of `contentScale` and use `one set of assets` for all screen resolutions**
 * Add support for more asset format loading from `.jpg` to `.pvr`
 * **Add easy post-processing mechanism**
