@@ -17,3 +17,17 @@ public final class Technique {
         passes.append(pass)
     }
 }
+
+public extension Technique {
+    public static let positionColor: Technique = {
+        let retVal = Technique()
+        retVal.add(pass: .positionColor)
+        return retVal
+    }()
+    
+    public static let positionTexture: Technique = {
+        let retVal = Technique()
+        retVal.add(pass: .positionTexture)
+        return retVal
+    }()
+}

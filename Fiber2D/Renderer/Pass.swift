@@ -85,3 +85,17 @@ extension Pass: Hashable {
                lhs.vertexShader   == rhs.vertexShader
     }
 }
+
+extension Pass {
+    public static let positionColor: Pass = {
+        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
+        let fs = Shader(source: fs_shader, language: .metal, type: .fragment)
+        return Pass(vertexShader: vs, fragmentShader: fs)
+    }()
+    
+    public static let positionTexture: Pass = {
+        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
+        let fs = Shader(source: fs_texture_shader, language: .metal, type: .fragment)
+        return Pass(vertexShader: vs, fragmentShader: fs)
+    }()
+}
