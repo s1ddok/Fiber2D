@@ -10,6 +10,11 @@ import SwiftMath
 import SwiftBGFX
 
 public final class Material {
+    public var technique: Technique
+    
+    public init(technique: Technique) {
+        self.technique = technique
+    }
     
     // Global uniform handle cache
     internal static var handles = [String: Uniform]()
@@ -19,8 +24,6 @@ public final class Material {
     internal var vec4BufferUniforms = [Uniform: [Vector4f]]()
     internal var mat4BufferUniforms = [Uniform: [Matrix4x4f]]()
     internal var textureUniforms    = [Uniform: (unit: UInt8, texture: Texture)]()
-    
-    public var cullMode: CullMode = .none 
     
     public func set(uniform: [Vector4f], name: String) {
         let handle = Material.handle(for: name, type: .vector4, num: uniform.count)
@@ -62,5 +65,35 @@ internal extension Material {
         let newHandle = Uniform(name: name, type: type, num: UInt16(num))
         Material.handles[key] = newHandle
         return newHandle
+    }
+}
+
+internal extension Material {
+    internal func apply() {
+        if vec4Uniforms.count > 0 {
+            for (key, value) in vec4Uniforms {
+                bgfx.setUniform(key, value: value)
+            }
+        }
+        
+        if mat4Uniforms.count > 0 {
+            for (key, value) in mat4Uniforms {
+                bgfx.setUniform(key, value: value)
+            }
+        }
+        
+        // vec4/mat4 arrays and mat3 supports have to be done in SwiftBGFX
+        
+        if textureUniforms.count > 0 {
+            for (key, value) in textureUniforms {
+                bgfx.setTexture(value.unit, sampler: key, texture: value.texture.texture)
+            }
+        }
+    }
+}
+
+extension Material: Cloneable {
+    public var clone: Material {
+        return Material(technique: technique)
     }
 }
