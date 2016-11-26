@@ -70,11 +70,10 @@ My goals for the near future are (order means nothing):
 * Add `compute shader` support
 * Introduce GPU computed `Particle systems`
 * Add support of cross-platform shader loading from `shaderc` 
-* **Add support of `custom shader uniforms`**
-* **Introduce `data-driven Material/Technique/Pass render model` with multi-pass rendering for post-processing effects**
 * **Drop `RenderableNode` concept and use `Geometry Component` instead**
 * **Drop the concept of `contentScale` and use `one set of assets` for all screen resolutions**
 * Add support for more asset format loading from `.jpg` to `.pvr`
+* **Add easy post-processing mechanism**
 
 We have a [trello](https://trello.com/b/eUe8CkrW/fiber2d) which I will try to maintain soon.
 
