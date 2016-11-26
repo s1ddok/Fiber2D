@@ -20,6 +20,7 @@ import SwiftBGFX
 public final class Pass {
     internal(set) public var fragmentShader: Shader
     internal(set) public var vertexShader:   Shader
+    internal var program: Program
     
     internal(set) public var blendMode: BlendMode {
         didSet {
@@ -68,6 +69,7 @@ public final class Pass {
                 multisampling: Bool = true) {
         self.vertexShader = vertexShader
         self.fragmentShader = fragmentShader
+        self.program = Program(vertex: vertexShader, fragment: fragmentShader)
         self.blendMode = blendMode
         self.depthWrite = depthWrite
         self.multisampling = multisampling
