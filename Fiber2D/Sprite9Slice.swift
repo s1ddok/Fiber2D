@@ -101,12 +101,14 @@ open class Sprite9Slice: Sprite {
         }
         let vb = TransientVertexBuffer(count: 16, layout: RendererVertex.layout)
         memcpy(vb.data, vertices, 16 * MemoryLayout<RendererVertex>.size)
-        bgfx.setVertexBuffer(vb)
-        bgfx.setIndexBuffer(Sprite9Slice.indexBuffer)
         
-        bgfx.setTexture(0, sampler: uniform, texture: texture.texture)
-        bgfx.setRenderState(renderState, colorRgba: 0x00)
-        renderer.submit(shader: shader)
+        for pass in material.technique.passes {
+            material.apply()
+            bgfx.setVertexBuffer(vb)
+            bgfx.setIndexBuffer(Sprite9Slice.indexBuffer)
+            bgfx.setRenderState(pass.renderState, colorRgba: 0x0)
+            renderer.submit(shader: pass.program)
+        }
     }
 
     // MARK: Internal stuff

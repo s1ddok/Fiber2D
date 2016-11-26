@@ -15,7 +15,7 @@ let ShaderUniformTime = "cc_Time"
 let ShaderUniformSinTime = "cc_SinTime"
 let ShaderUniformCosTime = "cc_CosTime"
 let ShaderUniformRandom01 = "cc_Random01"
-let ShaderUniformMainTexture = "cc_MainTexture"
+let ShaderUniformMainTexture = "u_mainTexture"
 let ShaderUniformSecondaryTexture = "cc_SecondaryTexture"
 let ShaderUniformAlphaTestValue = "cc_AlphaTestValue"
 

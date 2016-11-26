@@ -8,7 +8,7 @@
 import SwiftMath
 import SwiftBGFX
 
-/// The four CCVertexes of a sprite.
+/// The four RendererVertexes of a sprite.
 /// Bottom left, bottom right, top right, top left.
 public struct SpriteVertexes {
     var bl, br, tr, tl: RendererVertex
@@ -39,7 +39,7 @@ public struct SpriteTexCoordSet {
  
  The default anchorPoint in Sprite is (0.5, 0.5).
  */
-open class Sprite: RenderableNode {
+open class Sprite: Node {
     /**
      *  Initializes a sprite with the name of an image. The name can be either a name in a sprite sheet or the name of a file.
      *
@@ -78,16 +78,23 @@ open class Sprite: RenderableNode {
      *  @see Texture
      */
     init(texture: Texture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
+        material = Material(technique: .positionTexture)
         super.init()
-        self.blendMode = .premultipliedAlphaMode
-        self.shader = .posTexture
         // default transform anchor: center
         self.anchorPoint = p2d(0.5, 0.5)
         self.updateColor()
         self.texture = texture
         
-        if texture != nil {
-            self.setTextureRect(rect, forTexture: self.texture, rotated: rotated, untrimmedSize: rect.size)
+        if let t = self.texture {
+            material.set(texture: t, unit: 0, name: ShaderUniformMainTexture)
+            self.setTextureRect(rect, forTexture: t, rotated: rotated, untrimmedSize: rect.size)
+        }
+    }
+
+    /// The main texture that will be passed to this node's shader.
+    public var texture: Texture! {
+        didSet {
+            material.set(texture: texture, unit: 0, name: ShaderUniformMainTexture)
         }
     }
     
@@ -256,7 +263,6 @@ open class Sprite: RenderableNode {
     public var verts = SpriteVertexes()
     
     override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
-
         let vertices = [verts.bl.transformed(transform),
                         verts.br.transformed(transform),
                         verts.tr.transformed(transform),
@@ -264,16 +270,18 @@ open class Sprite: RenderableNode {
         
         let vb = TransientVertexBuffer(count: 4, layout: RendererVertex.layout)
         memcpy(vb.data, vertices, 4 * MemoryLayout<RendererVertex>.size)
-        bgfx.setVertexBuffer(vb)
         
         let ib = TransientIndexBuffer(count: 6)
         let indices: [UInt16] = [0, 1, 2, 0, 2, 3]
         memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
-        bgfx.setIndexBuffer(ib)
 
-        bgfx.setTexture(0, sampler: uniform, texture: texture.texture)
-        bgfx.setRenderState(renderState, colorRgba: 0x00)
-        renderer.submit(shader: shader)
+        for pass in material.technique.passes {
+            material.apply()
+            bgfx.setVertexBuffer(vb)
+            bgfx.setIndexBuffer(ib)
+            bgfx.setRenderState(pass.renderState, colorRgba: 0x0)
+            renderer.submit(shader: pass.program)
+        }
     }
     
     // MARK: Internal stuff
@@ -284,8 +292,7 @@ open class Sprite: RenderableNode {
     // Offset Position, used by sprite sheet editors.
     private var unflippedOffsetPositionFromCenter = Point.zero
     
-    // FIXME: Sits here until bgfx implements bgfx:getUniformInfo
-    internal let uniform = Uniform(name: "u_mainTexture", type: .int1)
+    public var material: Material
     
     internal static func textureCoords(for texture: Texture!, withRect rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
         var result = SpriteTexCoordSet()

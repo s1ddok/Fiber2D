@@ -45,9 +45,13 @@ public final class Material {
         mat4Uniforms[handle] = uniform
     }
     
-    public func set(texture: Texture, unit: UInt8, name: String) {
+    public func set(texture: Texture?, unit: UInt8, name: String) {
         let handle = Material.handle(for: name, type: .int1)
-        textureUniforms[handle] = (unit: unit, texture: texture)
+        if let texture = texture {
+            textureUniforms[handle] = (unit: unit, texture: texture)
+        } else {
+            textureUniforms[handle] = nil
+        }
     }
 }
 

@@ -29,7 +29,7 @@ enum RenderTextureImageFormat : Int {
  
  There are also functions for saving the render texture to disk in PNG or JPG format.
  */
-public final class RenderTexture: RenderableNode {
+public final class RenderTexture: Node {
     
     /**
      *  Initializes a RenderTexture object with width and height in points 
@@ -110,17 +110,18 @@ public final class RenderTexture: RenderableNode {
     
     /** The render texture's (and its sprite's) texture.
      @see Texture */
-    override public var texture: Texture! {
+    public var texture: Texture! {
         get {
-            if (super.texture == nil) {
+            if (_texture == nil) {
                 createTextureAndFBO(with: pixelSize)
             }
-            return super.texture
+            return _texture
         }
         set {
-            super.texture = newValue
+            _texture = newValue
         }
     }
+    private var _texture: Texture!
     
     /** The render texture's content scale factor. */
     public var contentScale: Float = Setup.shared.assetScale {
