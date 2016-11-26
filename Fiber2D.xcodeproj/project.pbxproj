@@ -56,6 +56,7 @@
 		081FBD221D46289A005838B8 /* SpriteFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0C1D46289A005838B8 /* SpriteFrame.swift */; };
 		081FBD261D4628F8005838B8 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD251D4628F8005838B8 /* MainScene.swift */; };
 		081FBD2D1D463207005838B8 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 081FBD2C1D463207005838B8 /* Resources */; };
+		0823AE841DE88032008BAD28 /* Cloneable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823AE831DE88032008BAD28 /* Cloneable.swift */; };
 		082AD79D1DCFD00700BF495A /* ViewportNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE0B991DB02BE400721CA0 /* ViewportNode.swift */; };
 		082AD7A11DCFD00E00BF495A /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FAB6DE1DAACA0200B3C10C /* Camera.swift */; };
 		082AD7A21DCFD38B00BF495A /* ViewportScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B51B1DB2B98200D564CB /* ViewportScene.swift */; };
@@ -68,6 +69,9 @@
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		084AB53E1DCA33040013AD51 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB53D1DCA33040013AD51 /* Setup.swift */; };
 		084F4CA41DDE52E100F24BC1 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F4CA31DDE52E100F24BC1 /* Tree.swift */; };
+		084F4CB41DE781DF00F24BC1 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F4CB31DE781DF00F24BC1 /* Pass.swift */; };
+		084F4CBB1DE7838B00F24BC1 /* CullMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F4CBA1DE7838B00F24BC1 /* CullMode.swift */; };
+		084F4CC01DE785E500F24BC1 /* Technique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F4CBF1DE785E500F24BC1 /* Technique.swift */; };
 		0854AB371D7C91A90037AB56 /* ActionSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB361D7C91A90037AB56 /* ActionSpeed.swift */; };
 		0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */; };
 		085567861DC53858009B5B60 /* BlendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085567851DC53858009B5B60 /* BlendMode.swift */; };
@@ -225,6 +229,7 @@
 		081FBD0D1D46289A005838B8 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		081FBD251D4628F8005838B8 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		081FBD2C1D463207005838B8 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		0823AE831DE88032008BAD28 /* Cloneable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cloneable.swift; path = protocols/Cloneable.swift; sourceTree = "<group>"; };
 		082AD7A51DD1E70200BF495A /* ResponderManager+iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ResponderManager+iOS.swift"; sourceTree = "<group>"; };
 		082AD7A71DD1E77000BF495A /* ResponderManager+macOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ResponderManager+macOS.swift"; sourceTree = "<group>"; };
 		082E904D1DBE92DF00AD32AA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -233,6 +238,9 @@
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		084AB53D1DCA33040013AD51 /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		084F4CA31DDE52E100F24BC1 /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tree.swift; path = structs/Tree.swift; sourceTree = "<group>"; };
+		084F4CB31DE781DF00F24BC1 /* Pass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
+		084F4CBA1DE7838B00F24BC1 /* CullMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CullMode.swift; sourceTree = "<group>"; };
+		084F4CBF1DE785E500F24BC1 /* Technique.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Technique.swift; sourceTree = "<group>"; };
 		0854AB361D7C91A90037AB56 /* ActionSpeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSpeed.swift; sourceTree = "<group>"; };
 		0854AB381D7C95BF0037AB56 /* ActionConcurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionConcurrent.swift; sourceTree = "<group>"; };
 		085567851DC53858009B5B60 /* BlendMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlendMode.swift; path = ../../BlendMode.swift; sourceTree = "<group>"; };
@@ -385,6 +393,8 @@
 				0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */,
 				080B06921DC9FE3E0037E1F1 /* TextureCache.swift */,
 				05BC34BD1D85B8A300306A4F /* Shader.swift */,
+				084F4CB31DE781DF00F24BC1 /* Pass.swift */,
+				084F4CBF1DE785E500F24BC1 /* Technique.swift */,
 				080ED8A91DE63E4C00B5462B /* Material.swift */,
 			);
 			path = Renderer;
@@ -646,6 +656,7 @@
 				088509891D7B4F2F003EF800 /* Tagged.swift */,
 				080306F71D97F233008CAC8E /* Prioritized.swift */,
 				080306F21D97F093008CAC8E /* BehaviourProtocol.swift */,
+				0823AE831DE88032008BAD28 /* Cloneable.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -679,6 +690,7 @@
 		08855BDD1D9DA6340090EA84 /* enums */ = {
 			isa = PBXGroup;
 			children = (
+				084F4CBA1DE7838B00F24BC1 /* CullMode.swift */,
 				08855BE31D9DA6540090EA84 /* UnitTypes.swift */,
 			);
 			path = enums;
@@ -995,12 +1007,14 @@
 				08C1CB121D8EFFD5006CDCCB /* cpArbiter.c in Sources */,
 				086652721D7333B500BCD9CE /* Scheduling.swift in Sources */,
 				0833CA591DCBACC70090D4CC /* Sprite9Slice.swift in Sources */,
+				084F4CC01DE785E500F24BC1 /* Technique.swift in Sources */,
 				081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */,
 				081FBD1A1D46289A005838B8 /* RendarableNode.swift in Sources */,
 				082AD7A11DCFD00E00BF495A /* Camera.swift in Sources */,
 				08C1CB221D8EFFD5006CDCCB /* cpPolyShape.c in Sources */,
 				081FBD0F1D46289A005838B8 /* Director.swift in Sources */,
 				08C1CB4F1D919BCA006CDCCB /* PhysicsShape+Internal.swift in Sources */,
+				084F4CB41DE781DF00F24BC1 /* Pass.swift in Sources */,
 				082E90501DBE9B8700AD32AA /* Image+PNG.swift in Sources */,
 				085567861DC53858009B5B60 /* BlendMode.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
@@ -1031,6 +1045,7 @@
 				08C1CB1E1D8EFFD5006CDCCB /* cpMarch.c in Sources */,
 				081FBD261D4628F8005838B8 /* MainScene.swift in Sources */,
 				081FBD1F1D46289A005838B8 /* Scene.swift in Sources */,
+				084F4CBB1DE7838B00F24BC1 /* CullMode.swift in Sources */,
 				080B06831DC9380E0037E1F1 /* SpriteFrameCache.swift in Sources */,
 				088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */,
 				08C1CB141D8EFFD5006CDCCB /* cpBBTree.c in Sources */,
@@ -1053,6 +1068,7 @@
 				08C1CB1F1D8EFFD5006CDCCB /* cpPinJoint.c in Sources */,
 				08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */,
 				0854AB391D7C95BF0037AB56 /* ActionConcurrent.swift in Sources */,
+				0823AE841DE88032008BAD28 /* Cloneable.swift in Sources */,
 				084F4CA41DDE52E100F24BC1 /* Tree.swift in Sources */,
 				05BC34BF1D85B8A300306A4F /* Renderer.swift in Sources */,
 				08BD5CB61DD245A70093C5B2 /* Input.swift in Sources */,
