@@ -120,8 +120,7 @@ public class Director {
         if nextDeltaTimeZero {
             self.dt = 0
             self.nextDeltaTimeZero = false
-        }
-        else {
+        } else {
             self.dt = now - lastUpdate
             self.dt = max(0, dt)
         }
@@ -187,8 +186,7 @@ public class Director {
             scenesStack.add(scene)
             self.nextScene = scene
             // _nextScene is a weak ref
-        }
-        else {
+        } else {
             self.run(with: scene)
         }
     }
@@ -198,8 +196,7 @@ public class Director {
             self.sendCleanupToScene = true
             // the transition gets to become the running scene
             transition.startTransition(scene, withDirector: self)
-        }
-        else {
+        } else {
             self.run(with: scene)
         }
     }
@@ -232,8 +229,7 @@ public class Director {
         let c: Int = scenesStack.count
         if c == 0 {
             self.end()
-        }
-        else {
+        } else {
             self.sendCleanupToScene = true
             self.nextScene = scenesStack[c - 1] as? Scene
         }
@@ -243,8 +239,7 @@ public class Director {
         assert(runningScene != nil, "A running Scene is needed")
         if scenesStack.count < 2 {
             self.end()
-        }
-        else {
+        } else {
             scenesStack.removeLastObject()
             let incomingScene = scenesStack.lastObject as! Scene
             self.sendCleanupToScene = true

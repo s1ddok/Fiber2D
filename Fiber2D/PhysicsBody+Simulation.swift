@@ -151,8 +151,7 @@ public extension PhysicsBody {
             _mass = PHYSICS_INFINITY
             _massDefault = false
             _density = PHYSICS_INFINITY
-        }
-        else if mass == -PHYSICS_INFINITY {
+        } else if mass == -PHYSICS_INFINITY {
             return
         } else {
             if _massDefault {

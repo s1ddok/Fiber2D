@@ -21,8 +21,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
             else {
                 new_t = 1
             }
-        }
-        else {
+        } else {
             // action[1]
             found = 1
             if split == 1 {
@@ -44,8 +43,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
                 actions[0].update(state: 1.0)
                 actions[0].stop()
             }
-        }
-        else if found == 0 && last == 1 {
+        } else if found == 0 && last == 1 {
             // Reverse mode ?
             // XXX: Bug. this case doesn't contemplate when _last==-1, found=0 and in "reverse mode"
             // since it will require a hack to know if an action is on reverse mode or not.

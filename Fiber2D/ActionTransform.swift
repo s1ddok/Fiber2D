@@ -51,8 +51,7 @@ struct ActionRotateTo: ActionModel {
         self.startAngleX = target.rotationalSkewX
         if startAngleX > Angle.zero {
             self.startAngleX = startAngleX % Angle.pi2
-        }
-        else {
+        } else {
             self.startAngleX = startAngleX % -Angle.pi2
         }
         self.diffAngleX = dstAngleX - startAngleX
@@ -66,8 +65,7 @@ struct ActionRotateTo: ActionModel {
         self.startAngleY = target.rotationalSkewY
         if startAngleY > Angle.zero {
             self.startAngleY = startAngleY % Angle.pi2
-        }
-        else {
+        } else {
             self.startAngleY = startAngleY % -Angle.pi2
         }
         self.diffAngleY = dstAngleY - startAngleY

@@ -322,8 +322,7 @@ open class Sprite: Node {
             result.br = vec2(left, bottom)
             result.tr = vec2(right, bottom)
             result.tl = vec2(right, top)
-        }
-        else {
+        } else {
             var left   = rect.origin.x / atlasWidth
             var right  = (rect.origin.x + rect.size.width) / atlasWidth
             var bottom = rect.origin.y / atlasHeight

@@ -83,8 +83,7 @@ public class LayoutBox: Layout {
             }
             self.contentSizeType = SizeType.points
             self.contentSize = Size(width: Float(roundUpToEven(width)), height: Float(roundUpToEven(maxHeight)))
-        }
-        else {
+        } else {
             // Get the maximum width
             var maxWidth: Float = 0
             for child in self.children {

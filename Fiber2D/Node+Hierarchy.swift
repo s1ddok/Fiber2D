@@ -190,8 +190,7 @@ public extension Node {
     public func getChild(by name: String, recursively isRecursive: Bool) -> Node? {
         if isRecursive {
             return self.getChildRecursive(by: name, root: self)
-        }
-        else {
+        } else {
             for node in children {
                 if node.name == name {
                     return node
