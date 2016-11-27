@@ -48,7 +48,6 @@ My goals for the near future are (order means nothing):
 * Remove code parts that has `Obj-C smell` (this includes making the whole API more Swifty, moving forward to `protocol-obsessed` world)
 * **Add `FreeType 2` support for cross-platform text rendering**
 * Introduce basic `UI components` (Button, Slider)
-* **Introduce event system**
 * Cover code with `tests`
 * Introduce GPU computed `Particle systems`
 * Add support of cross-platform shader loading from `shaderc` 
