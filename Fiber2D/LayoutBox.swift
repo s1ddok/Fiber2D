@@ -1,44 +1,54 @@
+//
+//  LayoutBox.swift
+//
+//  Created by Andrey Volodin on 26.07.16.
+//  Copyright © 2016. All rights reserved.
+//
+
 import SwiftMath
 
 /**
  Declares the possible directions for laying out nodes in a LayoutBox.
  */
-enum LayoutBoxDirection {    /// The children will be horizontally aligned.
+public enum LayoutBoxDirection {
+    /// The children will be horizontally aligned.
     case horizontal
     /// The children will be vertically aligned.
     case vertical
 }
+
 func roundUpToEven(_ f: Float) -> Float {
     return ceilf(f / 2.0) * 2.0
 }
+
 /**
  The box layout lays out its child nodes in a horizontal row or a vertical column. Optionally you can set a spacing between the child nodes.
  
  @note In order to layout nodes in a grid, you can add one or more LayoutBox as child node with the opposite layout direction, ie the parent
  box layout node uses vertical and the child box layout nodes use horizontal LayoutBoxDirection to create a grid of nodes.
  */
-
-class LayoutBox: Layout {
+public class LayoutBox: Layout {
     /** @name Layout Options */
     /**
      The direction is either horizontal or vertical.
-     @see CCLayoutBoxDirection
+     @see LayoutBoxDirection
      */
-    var direction: LayoutBoxDirection = .horizontal {
-        didSet {
-            needsLayout()
-        }
-    }
-    /**
-     The spacing in points between the child nodes.
-     */
-    var spacing: Float = 0.0 {
+    public var direction: LayoutBoxDirection = .horizontal {
         didSet {
             needsLayout()
         }
     }
     
-    override func layout() {
+    /**
+     The spacing in points between the child nodes.
+     */
+    public var spacing: Float = 0.0 {
+        didSet {
+            needsLayout()
+        }
+    }
+    
+    override public func layout() {
         super.layout()
         
         guard children.count > 0 else {
@@ -103,9 +113,5 @@ class LayoutBox: Layout {
             self.contentSizeType = SizeType.points
             self.contentSize = Size(width: Float(roundUpToEven(maxWidth)), height: Float(roundUpToEven(height)))
         }
-    }
-    
-    override func childWasRemoved(child: Node) {
-        needsLayout()
     }
 }
