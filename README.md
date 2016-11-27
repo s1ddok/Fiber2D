@@ -41,8 +41,6 @@ You can get the idea from this GIF:
 # Goals
 My goals for the near future are (order means nothing):
 
-* Migrate to **SwiftPM project structure completely**, drop XCode as a heart of the project
-  * Introduce `CChipmunk`, `Clibpng`, etc
 * Fully drop inheriting based structure by finishing `Component/System` code
 * **Port to `Linux` using `SDL` for Windowing and Input handle (first step on the way to `Android`)** (remember those 15%?)
 * Remove code parts that has `Obj-C smell` (this includes making the whole API more Swifty, moving forward to `protocol-obsessed` world)
