@@ -150,41 +150,39 @@ class MainScene: Scene {
         //messageBubble.scale = 3.0
         messageBubble.position = p2d(256.0, 256.0)
         add(child: messageBubble)
-    }
-
-    override func onEnter() {
-        super.onEnter()
         
-        let rt = createRT(size: Size(128.0), clearColor: .red)
-        rt.position = p2d(512, 512)
-        rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
-            .then(ActionMoveBy(vec2(-150.0, 0)).continously(duration: 1.0))
-            .repeatForever)
-        let anotherSprite = Sprite(texture: rt.texture, rect: Rect(size: rt.contentSize), rotated: false)
-        anotherSprite.run(action: ActionRotateBy(angle: 30°).continously(duration: 1.0).repeatForever)
-        anotherSprite.position = p2d(128, 128)
-        add(child: anotherSprite)
-        add(child: rt)
-        
-        let colors: [Color] = [ .red, .blue, .purple ]
-        let positionType = PositionType(xUnit: .points, yUnit: .points, corner: .bottomRight)
-        let baseSize = Size(128, 128)
-        var initialPosition = p2d(0, baseSize.height)
-        for _ in 0...4 {
-            let rt = createRT(size: baseSize, clearColor: colors[Int.random(0, colors.count - 1)])
-            rt.positionType = positionType
-            initialPosition.width = initialPosition.width + baseSize.width + 24.0
-            rt.position = initialPosition
+        onEnter.subscribeOnce(on: self) { [unowned self] in
+            let rt = createRT(size: Size(128.0), clearColor: .red)
+            rt.position = p2d(512, 512)
+            rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
+                .then(ActionMoveBy(vec2(-150.0, 0)).continously(duration: 1.0))
+                .repeatForever)
+            let anotherSprite = Sprite(texture: rt.texture, rect: Rect(size: rt.contentSize), rotated: false)
+            anotherSprite.run(action: ActionRotateBy(angle: 30°).continously(duration: 1.0).repeatForever)
+            anotherSprite.position = p2d(128, 128)
+            self.add(child: anotherSprite)
             self.add(child: rt)
             
-            let rtChild = createChildRT(size: baseSize, clearColor: .gray, geometryColor: .white)
-            rt.add(child: rtChild)
-            
-            if Int.random() % 2 == 0 {
-                let anotherChild = createChildRT(size: baseSize, clearColor: .darkGray, geometryColor: .white)
-                anotherChild.position = .zero
-                anotherChild.positionType = .points
-                rt.add(child: anotherChild)
+            let colors: [Color] = [ .red, .blue, .purple ]
+            let positionType = PositionType(xUnit: .points, yUnit: .points, corner: .bottomRight)
+            let baseSize = Size(128, 128)
+            var initialPosition = p2d(0, baseSize.height)
+            for _ in 0...4 {
+                let rt = createRT(size: baseSize, clearColor: colors[Int.random(0, colors.count - 1)])
+                rt.positionType = positionType
+                initialPosition.width = initialPosition.width + baseSize.width + 24.0
+                rt.position = initialPosition
+                self.add(child: rt)
+                
+                let rtChild = createChildRT(size: baseSize, clearColor: .gray, geometryColor: .white)
+                rt.add(child: rtChild)
+                
+                if Int.random() % 2 == 0 {
+                    let anotherChild = createChildRT(size: baseSize, clearColor: .darkGray, geometryColor: .white)
+                    anotherChild.position = .zero
+                    anotherChild.positionType = .points
+                    rt.add(child: anotherChild)
+                }
             }
         }
     }

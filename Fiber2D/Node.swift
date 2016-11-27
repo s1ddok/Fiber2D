@@ -88,7 +88,7 @@ import SwiftMath
  
  Otherwise your code will break if you subsequently change the positionType to something other than points (ie UIPoints or Normalized).
  */
-open class Node: Prioritized, Pausable, Enterable, Exitable {
+open class Node: Prioritized, Pausable {
     
     // MARK: Convenience
     /// Should be in +Convenience, but are being overriden in Scene
@@ -719,6 +719,45 @@ open class Node: Prioritized, Pausable, Enterable, Exitable {
     }
     
     //
+    // MARK: Events
+    //
+    public let onChildWasAdded = Event<Node>()
+    public let onChildWasRemoved = Event<Node>()
+    
+    /** Called every time the Node is removed from the node tree.
+     If a new scene is presented with a transition, this event is sent when the transition animation ended.
+     
+     @see onEnter
+     @see onExitTransitionDidStart
+     */
+    public let onExit = Event<Void>()
+    
+    /** Called every time the Node (or one of its parents) has been added to the scene, or when the scene is presented.
+     If a new scene is presented with a transition, this event is sent to nodes when the transition animation starts.
+     
+     @see onExit
+     @see onEnterTransitionDidFinish
+     */
+    public let onEnter = Event<Void>()
+    
+    /** Called every time the Node is removed from the node tree.
+     If a new scene is presented with a transition, this event is sent when the transition animation starts.
+     
+     @see onExit
+     @see onEnter
+     */
+    public let onExitTransitionDidStart = Event<Void>()
+    
+    /** Called every time the Node (or one of its parents) has been added to the scene, or when the scene is presented.
+     If a new scene is presented with a transition, this event is sent to nodes after the transition animation ended. Otherwise
+     it will be called immediately after onEnter.
+
+     @see onEnter
+     @see onExit
+     */
+    public let onEnterTransitionDidFinish = Event<Void>()
+    
+    //
     // MARK: Power user functionality 
     //
     
@@ -742,14 +781,6 @@ open class Node: Prioritized, Pausable, Enterable, Exitable {
         scheduler?.unschedule(target: self)
         children.forEach { $0.cleanup() }
     }
-    
-    // MARK: Subclasses
-    open func childWasAdded(child: Node) { }
-    open func childWasRemoved(child: Node) { }
-    open func onExit() { }
-    open func onEnter() { }
-    open func onExitTransitionDidStart() { }
-    open func onEnterTransitionDidFinish() { }
     
     open func contentSizeChanged() {
         // Update children

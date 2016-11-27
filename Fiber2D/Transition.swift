@@ -112,14 +112,14 @@ public class Transition: Scene {
         // check for runtime expired
         if progress >= 1.0 {
             // Exit out scene
-            outgoingScene.onExit()
+            outgoingScene._onExit()
             if Director.current.sendCleanupToScene {
                 outgoingScene.cleanup()
             }
             self.outgoingScene = nil
             // Start incoming scene
             Director.current.present(scene: incomingScene)
-            incomingScene.onEnterTransitionDidFinish()
+            incomingScene._onEnterTransitionDidFinish()
             incomingScene.paused = false
             self.incomingScene = nil
             return
@@ -153,11 +153,11 @@ public class Transition: Scene {
         self.director = director
         
         self.incomingScene = scene
-        incomingScene.onEnter()
+        incomingScene._onEnter()
         self.incomingPauseState = incomingScene.paused
         self.incomingScene.paused = incomingScene.paused || !incomingSceneAnimated
         self.outgoingScene = director.runningScene
-        outgoingScene.onExitTransitionDidStart()
+        outgoingScene._onExitTransitionDidStart()
         self.outgoingScene.paused = outgoingScene.paused || !outgoingSceneAnimated
         // create render textures
         // get viewport size

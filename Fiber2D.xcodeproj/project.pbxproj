@@ -516,6 +516,7 @@
 				0885098B1D7B4F62003EF800 /* Protocols */,
 				081FBD2F1D46343D005838B8 /* Layout */,
 				081FBD2E1D463435005838B8 /* Base */,
+				083FD4161DEAF947009DD64A /* Events */,
 				081FBD301D463446005838B8 /* Rendering */,
 				081FBD311D463450005838B8 /* Input */,
 				081FBD331D463463005838B8 /* Scene */,
@@ -543,7 +544,6 @@
 			isa = PBXGroup;
 			children = (
 				081FBCFC1D46289A005838B8 /* Node.swift */,
-				083FD4141DEAF373009DD64A /* Event.swift */,
 				081FBCFD1D46289A005838B8 /* Node+Actions.swift */,
 				081FBCFF1D46289A005838B8 /* Node+Convertation.swift */,
 				0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */,
@@ -619,6 +619,14 @@
 				081FBCF81D46289A005838B8 /* ColorNode.swift */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		083FD4161DEAF947009DD64A /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				083FD4141DEAF373009DD64A /* Event.swift */,
+			);
+			name = Events;
 			sourceTree = "<group>";
 		};
 		084AB53C1DCA32F70013AD51 /* Config */ = {
