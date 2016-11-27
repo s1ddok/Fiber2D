@@ -35,3 +35,6 @@ xcuserdata
 *.pyc
 *.orig
 *.ninja_log
+
+Packages/
+.build/
