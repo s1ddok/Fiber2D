@@ -133,8 +133,16 @@ open class Node: Prioritized, Pausable {
     internal(set) public var children = [Node]()
 
     // MARK: Transforms
-    internal var isTransformDirty = true
+    internal var isTransformDirty = true {
+        didSet {
+            if isTransformDirty {
+                isInverseTransformDirty = true
+            }
+        }
+    }
+    internal var isInverseTransformDirty = true
     internal var transform = Matrix4x4f.identity
+    internal var inverseTransform = Matrix4x4.identity
     
     // MARK: Position
     
@@ -757,6 +765,7 @@ open class Node: Prioritized, Pausable {
      */
     public let onEnterTransitionDidFinish = Event<Void>()
     
+    public let onContentSizeInPointsChanged = Event<Size>()
     //
     // MARK: Power user functionality 
     //
@@ -782,20 +791,27 @@ open class Node: Prioritized, Pausable {
         children.forEach { $0.cleanup() }
     }
     
-    open func contentSizeChanged() {
+    internal func contentSizeChanged() {
         // Update children
-        let contentSizeInPoints: Size = self.contentSizeInPoints
-        self.anchorPointInPoints = p2d(contentSizeInPoints.width * anchorPoint.x, contentSizeInPoints.height * anchorPoint.y)
+        let contentSizeInPoints = self.contentSizeInPoints
+        self.anchorPointInPoints = contentSizeInPoints * anchorPoint
         self.isTransformDirty = true
         if let layout = parent as? Layout {
             layout.needsLayout()
         }
-        // Update the children (if needed)
+        
         for child in children {
-            if !child.positionType.isBasicPoints {
-                // This is a position type affected by content size
-                child.isTransformDirty = true
-            }
+            child.parentContentSizeChanged()
+        }
+        
+        onContentSizeInPointsChanged.fire(contentSizeInPoints)
+    }
+    
+    internal func parentContentSizeChanged() {
+        if !contentSizeType.isBasicPoints {
+            contentSizeChanged()
+        } else if !positionType.isBasicPoints {
+            isTransformDirty = true
         }
     }
     

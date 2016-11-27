@@ -80,7 +80,12 @@ public extension Node {
      @see nodeToParentMatrix
      */
     public var parentToNodeMatrix: Matrix4x4f {
-        return nodeToParentMatrix.inversed
+        if isInverseTransformDirty {
+            inverseTransform = nodeToParentMatrix.inversed
+            isInverseTransformDirty = false
+        }
+        
+        return inverseTransform
     }
     
     /** Returns the world transform matrix. The matrix is in points.
