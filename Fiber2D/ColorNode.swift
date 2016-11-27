@@ -7,6 +7,7 @@
 
 import SwiftMath
 import SwiftBGFX
+import Darwin
 
 /**
  Draws a rectangle filled with a solid color.

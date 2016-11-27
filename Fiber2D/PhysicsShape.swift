@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import CChipmunk2D
 
 public enum PhysicsShapeType {
     case unknown, circle, box, polygon

@@ -7,6 +7,7 @@
 
 import SwiftMath
 import SwiftBGFX
+import Darwin
 
 /**
  Sprite9Slice will render an image in nine quads, keeping the margins fixed and stretching the center quad to fit the content size.

@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import CChipmunk2D
+
 /**
  * @brief An PhysicsJoint object connects two physics bodies together.
  */

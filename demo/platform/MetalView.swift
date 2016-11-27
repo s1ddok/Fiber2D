@@ -9,7 +9,7 @@ import Metal
 import MetalKit
 import SwiftMath
 
-class MetalView: MTKView, DirectorView {
+public class MetalView: MTKView, DirectorView {
     var layerSizeDidUpdate: Bool = false
     var director: Director!
     var surfaceSize = CGSize.zero
@@ -39,7 +39,7 @@ class MetalView: MTKView, DirectorView {
 
         self.director = Director(view: self)
         self.preferredFramesPerSecond = 60
-        self.delegate = director.metalKitDelegate
+        self.delegate = director.metalKitDelegate as! MTKDelegate
         self.drawableSize = frame.size
         self.surfaceSize = frame.size
         self.colorPixelFormat = .bgra8Unorm

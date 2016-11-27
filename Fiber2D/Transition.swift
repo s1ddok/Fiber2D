@@ -58,11 +58,7 @@ public class Transition: Scene {
             assert((newValue >= 1.0) && (newValue <= 4.0), "Invalid down scale")
         }
     }
-    /**
-     *  Depth/stencil format used for transition.
-     *  Default `GL_DEPTH24_STENCIL8_OES`.
-     */
-    var transitionDepthStencilFormat: MTLPixelFormat = .depth32Float_stencil8
+    
     /// -----------------------------------------------------------------------
     /// @name Controlling Scene Animation during Transition
     /// -----------------------------------------------------------------------

@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import Darwin
 
 public typealias Color = Vector4f
 

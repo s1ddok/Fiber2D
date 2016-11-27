@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import CChipmunk2D
+
 internal func internalBodySetMass(_ body: UnsafeMutablePointer<cpBody>, _ mass: cpFloat)
 {
     cpBodyActivate(body);

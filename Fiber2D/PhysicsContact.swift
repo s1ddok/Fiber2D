@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import CChipmunk2D
 
 public enum EventCode {
     case none, begin, presolve, postsolve, separate

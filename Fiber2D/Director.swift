@@ -9,6 +9,7 @@ import Foundation
 import MetalKit
 import SwiftMath
 
+//@available(OSX, introduced: 10.11)
 public class Director {
     internal static var stack = [Director?]()
     public static var current: Director! = nil
@@ -22,7 +23,7 @@ public class Director {
         self.current = stack.removeLast()
     }
     #if os(OSX) || os(iOS) || os(tvOS)
-    internal var metalKitDelegate: MTKDelegate!
+    internal var metalKitDelegate: _MTKDelegate!
     #endif
     // internal timer
     var oldFrameSkipInterval: Int = 1
@@ -97,7 +98,9 @@ public class Director {
         //self.rendererPool = NSMutableArray()
         self.globalShaderUniforms = Dictionary()
         #if os(OSX) || os(iOS) || os(tvOS)
-        self.metalKitDelegate = MTKDelegate(director: self)
+        if #available(OSX 10.11, *) {
+            self.metalKitDelegate = MTKDelegate(director: self)
+        }
         #endif
     }
     

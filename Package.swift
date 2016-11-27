@@ -9,3 +9,5 @@ let package = Package(
     ],
     exclude: ["demo", "external"]
 )
+
+let ar = Product(name: "Fiber2D", type: .Library(.Dynamic), modules: ["Fiber2D"])

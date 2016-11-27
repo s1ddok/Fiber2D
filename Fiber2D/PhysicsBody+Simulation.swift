@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import CChipmunk2D
 
 public extension PhysicsBody {
     /**

@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import CChipmunk2D
+
 public extension PhysicsWorld {
     /**
      * Adds a joint to this physics world.

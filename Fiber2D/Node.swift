@@ -142,7 +142,7 @@ open class Node: Prioritized, Pausable {
     }
     internal var isInverseTransformDirty = true
     internal var transform = Matrix4x4f.identity
-    internal var inverseTransform = Matrix4x4.identity
+    internal var inverseTransform = Matrix4x4f.identity
     
     // MARK: Position
     

@@ -22,4 +22,8 @@ public protocol DirectorView: class {
     // The block may not be invoked from the main thread.
     // @param handler The completion block. The block takes no arguments and has no return value.
     func add(frameCompletionHandler handler: @escaping () -> ())
+    
+    #if os(OSX)
+    func set(delegate: _MTKDelegate)
+    #endif
 }
