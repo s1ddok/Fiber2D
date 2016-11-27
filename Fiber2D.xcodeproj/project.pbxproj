@@ -66,6 +66,7 @@
 		0833CA551DCB47AE0090D4CC /* FileLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0833CA541DCB47AE0090D4CC /* FileLocator.swift */; };
 		0833CA591DCBACC70090D4CC /* Sprite9Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0B1D46289A005838B8 /* Sprite9Slice.swift */; };
 		083FD4131DEA415B009DD64A /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083FD4121DEA415B009DD64A /* MetalView.swift */; };
+		083FD4151DEAF373009DD64A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083FD4141DEAF373009DD64A /* Event.swift */; };
 		0847405E1D8362FA0053DD2E /* Node+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0847405D1D8362FA0053DD2E /* Node+Component.swift */; };
 		084AB53E1DCA33040013AD51 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB53D1DCA33040013AD51 /* Setup.swift */; };
 		084F4CA41DDE52E100F24BC1 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F4CA31DDE52E100F24BC1 /* Tree.swift */; };
@@ -234,6 +235,7 @@
 		082E904F1DBE9B8700AD32AA /* Image+PNG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+PNG.swift"; sourceTree = "<group>"; };
 		0833CA541DCB47AE0090D4CC /* FileLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocator.swift; sourceTree = "<group>"; };
 		083FD4121DEA415B009DD64A /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MetalView.swift; path = demo/platform/MetalView.swift; sourceTree = SOURCE_ROOT; };
+		083FD4141DEAF373009DD64A /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = events/Event.swift; sourceTree = "<group>"; };
 		0847405D1D8362FA0053DD2E /* Node+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Component.swift"; sourceTree = "<group>"; };
 		084AB53D1DCA33040013AD51 /* Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		084F4CA31DDE52E100F24BC1 /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tree.swift; path = structs/Tree.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				081FBCFC1D46289A005838B8 /* Node.swift */,
+				083FD4141DEAF373009DD64A /* Event.swift */,
 				081FBCFD1D46289A005838B8 /* Node+Actions.swift */,
 				081FBCFF1D46289A005838B8 /* Node+Convertation.swift */,
 				0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */,
@@ -1022,6 +1025,7 @@
 				084AB53E1DCA33040013AD51 /* Setup.swift in Sources */,
 				08C1CB411D914A07006CDCCB /* PhysicsWorld+Bodies.swift in Sources */,
 				08C1CB1D1D8EFFD5006CDCCB /* cpHastySpace.c in Sources */,
+				083FD4151DEAF373009DD64A /* Event.swift in Sources */,
 				081FBD0E1D46289A005838B8 /* ColorNode.swift in Sources */,
 				08BB5C821D7EE09E004A5561 /* ActionRewind.swift in Sources */,
 				080307191D994FED008CAC8E /* System.swift in Sources */,
