@@ -32,7 +32,7 @@ internal class MTKDelegate: NSObject, MTKViewDelegate {
     
     public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         director.runningScene?.contentSize = Size(CGSize: size)
-        director.runningScene?.viewDidResize(to: Size(CGSize:size))
+        director.runningScene?.onViewDidResize.fire(Size(CGSize: size))
     }
 }
 #endif

@@ -38,6 +38,13 @@ open class Scene: Node {
     private var _scheduler: Scheduler!
     
     /**
+     * Invoked automatically when the OS view has been resized.
+     *
+     * @param The new size of the view after it has been resized.
+     */
+    public let onViewDidResize = Event<Size>()
+    
+    /**
      Delegate that calculates the projection matrix for this scene.
      The default value is an ProjectionOrthographic delegate that goes from (0, 0) to the screen's size in points.
      */

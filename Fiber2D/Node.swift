@@ -800,17 +800,6 @@ open class Node: Prioritized, Pausable {
     }
     
     /**
-     * Invoked automatically when the OS view has been resized.
-     *
-     * This implementation simply propagates the same method to the children.
-     * Subclasses may override to actually do something when the view resizes.
-     * @param newViewSize The new size of the view after it has been resized.
-     */
-    open func viewDidResize(to newViewSize: Size) {
-        children.forEach { $0.viewDidResize(to: newViewSize) }
-    }
-    
-    /**
      In certain special situations, you may wish to designate a node's parent without adding that node to the list
      of children. In particular this can be useful when a node references another node in an atypical non-child
      way, such as how the the ClipNode tracks the stencil. The stencil is kept outside of the normal heirarchy,
