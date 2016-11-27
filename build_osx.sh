@@ -4,4 +4,6 @@ MACOSX_DEPLOYMENT_TARGET=10.11 swift build -Xlinker -lz \
 -Xlinker -lSwiftBGFX \
 -Xlinker -framework -Xlinker Metal -Xlinker -framework -Xlinker Quartz \
 -Xlinker -framework -Xlinker MetalKit \
--Xcc -DCP_USE_CGTYPES=0
+-Xcc -DCP_USE_CGTYPES=0 \
+-Xlinker -lCpng \
+-Xlinker -lCChipmunk2D

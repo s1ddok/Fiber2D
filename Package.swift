@@ -11,3 +11,4 @@ let package = Package(
 )
 
 let ar = Product(name: "Fiber2D", type: .Library(.Dynamic), modules: ["Fiber2D"])
+products.append(ar)
