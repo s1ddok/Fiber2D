@@ -43,9 +43,7 @@ public extension Node {
         child.zOrder = z ?? child.zOrder
         child.name = name ?? child.name
         child._parent = self
-        // this is needed for the case when node has Normalize positon type and switched parents
-        // we should've add method `parentContentSizeChanged` and trigger that instead
-        child.isTransformDirty = true
+        child.parentContentSizeChanged()
         children.append(child)
         self.isReorderChildDirty = true
         // Update pausing parameters
