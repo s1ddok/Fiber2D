@@ -56,7 +56,7 @@ public extension Node {
             child._onEnterTransitionDidFinish()
         }
         
-        childWasAdded(child: child)
+        onChildWasAdded.fire(child)
         Director.current.responderManager.markAsDirty()
     }
     
@@ -149,7 +149,7 @@ public extension Node {
         child._parent = nil
         Director.current.responderManager.markAsDirty()
         children.removeObject(child)
-        childWasRemoved(child: child)
+        onChildWasRemoved.fire(child)
     }
     
     /** performance improvement, Sort the children array once before drawing, instead of every time when a child is added or reordered
