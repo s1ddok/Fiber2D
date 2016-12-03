@@ -470,9 +470,12 @@ open class Node: Prioritized, Pausable {
             _color.a = oldAlpha
             _displayedColor.a = oldAlpha
             cascadeColorIfNeeded()
+            
+            onDisplayedColorChanged.fire(_displayedColor)
         }
     }
     private var _color = Color.white
+    
     /** Sets and returns the node's color including alpha. Changing color has no effect on non-visible nodes (ie Node, Scene).
      
      @note By default color is not "inherited" by child nodes. This can be enabled via cascadeColorEnabled.
@@ -491,8 +494,11 @@ open class Node: Prioritized, Pausable {
             
             cascadeColorIfNeeded()
             cascadeOpacityIfNeeded()
+            
+            onDisplayedColorChanged.fire(_displayedColor)
         }
     }
+    
     /** Returns the actual color used by the node. This may be different from the color and colorRGBA properties if the parent
      node has cascadeColorEnabled.
      
@@ -504,6 +510,7 @@ open class Node: Prioritized, Pausable {
         return _displayedColor
     }
     private var _displayedColor = Color.white
+    
     /**
      CascadeColorEnabled causes changes to this node's color to cascade down to it's children. The new color is multiplied
      in with the color of each child, so it doesn't bash the current color of those nodes. Opacity is unaffected by this
@@ -526,23 +533,21 @@ open class Node: Prioritized, Pausable {
             self.updateDisplayedColor(parentColor)
         }
     }
+    
     // purposefully undocumented: internal method users needn't know about
     /*
      *  Recursive method that updates display color.
      *
      *  @param color Color used for update.
      */
-    
     func updateDisplayedColor(_ parentColor: Color) {
         _displayedColor.r = _color.r * parentColor.r
         _displayedColor.g = _color.g * parentColor.g
         _displayedColor.b = _color.b * parentColor.b
-        // if (_cascadeColorEnabled) {
+        
         for item: Node in children {
             item.updateDisplayedColor(_displayedColor)
         }
-        // }
-        // }
     }
     
     // MARK: Opacity
@@ -563,6 +568,8 @@ open class Node: Prioritized, Pausable {
             _color.a = newValue
             _displayedColor.a = newValue
             cascadeOpacityIfNeeded()
+            
+            onDisplayedColorChanged.fire(_displayedColor)
         }
     }
     /** Returns the actual opacity, in the range 0.0 to 1.0. This may be different from the opacity property if the parent
@@ -592,17 +599,17 @@ open class Node: Prioritized, Pausable {
             self.updateDisplayedOpacity(parentOpacity)
         }
     }
+    
     // purposefully undocumented: internal method users needn't know about
     /*
      *  Recursive method that updates the displayed opacity.
      *
      *  @param opacity Opacity to use for update.
      */
-    
     func updateDisplayedOpacity(_ parentOpacity: Float) {
         _displayedColor.a = _color.a * parentOpacity
-        // if (_cascadeOpacityEnabled) {
-        for item: Node in children {
+        
+        for item in children {
             item.updateDisplayedOpacity(_displayedColor.a)
         }
     }
@@ -776,6 +783,8 @@ open class Node: Prioritized, Pausable {
     public let onEnterTransitionDidFinish = Event<Void>()
     
     public let onContentSizeInPointsChanged = Event<Size>()
+    public let onDisplayedColorChanged = Event<Color>()
+    
     //
     // MARK: Power user functionality 
     //

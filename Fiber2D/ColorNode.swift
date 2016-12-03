@@ -28,27 +28,6 @@ open class ColorNode: Node {
     
         self.renderComponent = BackgroundColorRenderComponent(size: size, color: color)
     }
-    
-    override public var color: Color {
-        didSet {
-            updateColor()
-        }
-    }
-    
-    override public var opacity: Float {
-        didSet {
-            updateColor()
-        }
-    }
-    
-    override func updateDisplayedOpacity(_ parentOpacity: Float) {
-        super.updateDisplayedOpacity(parentOpacity)
-        updateColor()
-    }
-    
-    internal func updateColor() {
-        renderComponent?.geometry.color = displayedColor.premultiplyingAlpha
-    }
 }
 
 public class BackgroundColorRenderComponent: QuadRenderer {
@@ -77,6 +56,10 @@ public class BackgroundColorRenderComponent: QuadRenderer {
         super.onAdd(to: owner)
         owner.onContentSizeInPointsChanged.subscribe(on: self) {
             self.update(for: $0)
+        }
+        
+        owner.onDisplayedColorChanged.subscribe(on: self) {
+            self.geometry.color = $0
         }
     }
     
