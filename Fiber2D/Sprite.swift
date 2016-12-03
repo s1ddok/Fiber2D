@@ -104,7 +104,7 @@ open class Sprite: Node {
      @note Flipping does not flip any of the sprite's child sprites nor does it alter the anchorPoint.
      If that is what you want, you should try inversing the Node scaleX property: `sprite.scaleX *= -1.0;`.
      */
-    var flipX: Bool = false {
+    public var flipX: Bool = false {
         didSet {
             if flipX != oldValue {
                 self.setTextureRect(textureRect, forTexture: self.texture, rotated: textureRectRotated, untrimmedSize: self.contentSize)
@@ -115,7 +115,7 @@ open class Sprite: Node {
      @note Flipping does not flip any of the sprite's child sprites nor does it alter the anchorPoint.
      If that is what you want, you should try inversing the Node scaleY property: `sprite.scaleY *= -1.0;`.
      */
-    var flipY: Bool = false {
+    public var flipY: Bool = false {
         didSet {
             if flipY != oldValue {
                 self.setTextureRect(textureRect, forTexture: self.texture, rotated: textureRectRotated, untrimmedSize: self.contentSize)
