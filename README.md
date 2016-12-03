@@ -51,7 +51,6 @@ My goals for the near future are (order means nothing):
 * Cover code with `tests`
 * Introduce GPU computed `Particle systems`
 * Add support of cross-platform shader loading from `shaderc` 
-* **Introduce `Geometry Component` concept**
 * **Drop the concept of `contentScale` and use `one set of assets` for all screen resolutions**
 * Add support for more asset format loading from `.jpg` to `.pvr`
 * **Add easy post-processing mechanism**
