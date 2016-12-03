@@ -35,6 +35,8 @@
 		0812ACEC1D52A70700AE46E8 /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0812ACE91D52A6F900AE46E8 /* libpng.a */; };
 		0812AD031D538D7600AE46E8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0812AD021D538D7600AE46E8 /* Color.swift */; };
 		0817EE7D1DC381B40084DAD3 /* Texture+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */; };
+		081866881DF2A8E3006758E6 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081866871DF2A8E3006758E6 /* Geometry.swift */; };
+		0818668D1DF350A0006758E6 /* RenderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818668C1DF350A0006758E6 /* RenderComponent.swift */; };
 		081FBC261D4625A6005838B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081FBC251D4625A6005838B8 /* Assets.xcassets */; };
 		081FBCE91D462732005838B8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBA1D462732005838B8 /* main.swift */; };
 		081FBCEA1D462732005838B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCBC1D462732005838B8 /* ArrayExtensions.swift */; };
@@ -201,6 +203,8 @@
 		0812ACE01D52A6F900AE46E8 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = external/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0812AD021D538D7600AE46E8 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		0817EE7C1DC381B40084DAD3 /* Texture+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Texture+Image.swift"; path = "../Texture+Image.swift"; sourceTree = "<group>"; };
+		081866871DF2A8E3006758E6 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		0818668C1DF350A0006758E6 /* RenderComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderComponent.swift; sourceTree = "<group>"; };
 		081FBC201D4625A6005838B8 /* Fiber2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiber2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		081FBC251D4625A6005838B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		081FBC2A1D4625A6005838B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 				084F4CB31DE781DF00F24BC1 /* Pass.swift */,
 				084F4CBF1DE785E500F24BC1 /* Technique.swift */,
 				080ED8A91DE63E4C00B5462B /* Material.swift */,
+				0818668C1DF350A0006758E6 /* RenderComponent.swift */,
+				081866871DF2A8E3006758E6 /* Geometry.swift */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -1026,6 +1032,7 @@
 				085567861DC53858009B5B60 /* BlendMode.swift in Sources */,
 				0885098F1D7B548B003EF800 /* ActionContinous.swift in Sources */,
 				08C1CB181D8EFFD5006CDCCB /* cpDampedRotarySpring.c in Sources */,
+				0818668D1DF350A0006758E6 /* RenderComponent.swift in Sources */,
 				087BFA0E1D82D1BE00F940D4 /* Component.swift in Sources */,
 				08C1CB261D8EFFD5006CDCCB /* cpShape.c in Sources */,
 				08C1CB3F1D913C71006CDCCB /* PhysicsWorld+Joints.swift in Sources */,
@@ -1054,6 +1061,7 @@
 				081FBD261D4628F8005838B8 /* MainScene.swift in Sources */,
 				083FD4131DEA415B009DD64A /* MetalView.swift in Sources */,
 				081FBD1F1D46289A005838B8 /* Scene.swift in Sources */,
+				081866881DF2A8E3006758E6 /* Geometry.swift in Sources */,
 				084F4CBB1DE7838B00F24BC1 /* CullMode.swift in Sources */,
 				080B06831DC9380E0037E1F1 /* SpriteFrameCache.swift in Sources */,
 				088509911D7B55AF003EF800 /* ActionInstant.swift in Sources */,

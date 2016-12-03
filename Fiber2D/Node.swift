@@ -687,6 +687,16 @@ open class Node: Prioritized, Pausable {
     
     /// @name Rendering (Implemented in Subclasses)
     
+    public var renderComponent: RenderComponent? {
+        didSet {
+            if renderComponent == nil {
+                oldValue?.onRemove()
+            } else {
+                renderComponent!.onAdd(to: self)
+            }
+        }
+    }
+    
     /**
      Override this method to add custom rendering code to your node.
      
@@ -715,14 +725,14 @@ open class Node: Prioritized, Pausable {
         
         for child in children {
             if !drawn && child.zOrder >= 0 {
-                self.draw(renderer, transform: transform)
+                renderComponent?.draw(in: renderer, transform: transform)
                 drawn = true
             }
             child.visit(renderer, parentTransform: transform)
         }
         
         if !drawn {
-            self.draw(renderer, transform: transform)
+            renderComponent?.draw(in: renderer, transform: transform)
         }
     }
     

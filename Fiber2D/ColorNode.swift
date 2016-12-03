@@ -12,10 +12,6 @@ import SwiftBGFX
  Draws a rectangle filled with a solid color.
  */
 open class ColorNode: Node {
-    internal var colors = Color.clear
-    
-    public var material: Material
-    
     /**
      *  Creates a node with color, width and height in Points.
      *
@@ -26,12 +22,11 @@ open class ColorNode: Node {
      *  @see Color
      */
     public init(color: Color = .clear, size: Size = .zero) {
-        self.material = Material(technique: .positionColor)
         super.init()
         self.color = color
         self.contentSizeInPoints = size
-        
-        updateColor()
+    
+        self.renderComponent = BackgroundColorRenderComponent(size: size, color: color)
     }
     
     override public var color: Color {
@@ -52,41 +47,49 @@ open class ColorNode: Node {
     }
     
     internal func updateColor() {
-        colors = displayedColor.premultiplyingAlpha
+        renderComponent?.geometry.color = displayedColor.premultiplyingAlpha
+    }
+}
+
+public class BackgroundColorRenderComponent: QuadRenderer {
+    
+    public init(size: Size, color: Color) {
+        let vertices = [
+            RendererVertex(position: vec4(0, 0, 0, 1),
+                           texCoord1: .zero, texCoord2: .zero,
+                           color: color),
+            RendererVertex(position: vec4(size.width, 0, 0, 1),
+                           texCoord1: .zero, texCoord2: .zero,
+                           color: color),
+            RendererVertex(position: vec4(size.width, size.height, 0, 1),
+                           texCoord1: .zero, texCoord2: .zero,
+                           color: color),
+            RendererVertex(position: vec4(0, size.height, 0, 1),
+                           texCoord1: .zero, texCoord2: .zero,
+                           color: color)]
+        
+        // Index buffer is ignored
+        let geometry = Geometry(vertexBuffer: vertices, indexBuffer: [])
+        super.init(material: Material(technique: .positionColor), geometry: geometry)
     }
     
-    override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
-        let s = contentSizeInPoints
-        let w = s.width
-        let h = s.height
-
-        let vertices = [
-            RendererVertex(position: transform * vec4(0, 0, 0, 1),
-                           texCoord1: vec2.zero, texCoord2: vec2.zero,
-                           color: colors),
-            RendererVertex(position: transform * vec4(w, 0, 0, 1),
-                           texCoord1: vec2.zero, texCoord2: vec2.zero,
-                           color: colors),
-            RendererVertex(position: transform * vec4(w, h, 0, 1),
-                           texCoord1: vec2.zero, texCoord2: vec2.zero,
-                           color: colors),
-            RendererVertex(position: transform * vec4(0, h, 0, 1),
-                           texCoord1: vec2.zero, texCoord2: vec2.zero,
-                           color: colors)]
-        
-        let vb = TransientVertexBuffer(count: 4, layout: RendererVertex.layout)
-        memcpy(vb.data, vertices, 4 * MemoryLayout<RendererVertex>.size)
-
-        let ib = TransientIndexBuffer(count: 6)
-        let indices: [UInt16] = [0, 1, 2, 0, 2, 3]
-        memcpy(ib.data, indices, 6 * MemoryLayout<UInt16>.size)
-        
-        for pass in material.technique.passes {
-            material.apply()
-            bgfx.setVertexBuffer(vb)
-            bgfx.setIndexBuffer(ib)
-            bgfx.setRenderState(pass.renderState, colorRgba: 0x0)
-            renderer.submit(shader: pass.program)
+    public override func onAdd(to owner: Node) {
+        super.onAdd(to: owner)
+        owner.onContentSizeInPointsChanged.subscribe(on: self) {
+            self.update(for: $0)
         }
+    }
+    
+    public override func onRemove() {
+        // Do it before super, as it assigns owner to nil
+        owner?.onContentSizeInPointsChanged.cancelSubscription(for: self)
+        super.onRemove()
+    }
+    
+    public func update(for size: Size) {
+        geometry.positions = [vec4(0, 0, 0, 1),
+                              vec4(size.width, 0, 0, 1),
+                              vec4(size.width, size.height, 0, 1),
+                              vec4(0, size.height, 0, 1)]
     }
 }
