@@ -74,16 +74,16 @@ public final class SpriteFrame {
     private var _lazyTexture: Texture?
     
     /** Rectangle of the frame within the texture, in points. */
-    public var rect: Rect
+    public let rect: Rect
     
     /** If YES, the frame rectangle is rotated. */
-    public var rotated: Bool
+    public let rotated: Bool
     
     /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is the original size in points of a frame before it was trimmed. */
-    public var untrimmedSize: Size
+    public let untrimmedSize: Size
     
     /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is offset of the sprite caused by trimming in points. */
-    public var trimOffset: Point
+    public let trimOffset: Point
     
     public var description: String {
         return "<SpriteFrame: Texture=\(textureFilename), Rect = \(rect.description)> rotated:\(rotated) offset=\(trimOffset.description))"
