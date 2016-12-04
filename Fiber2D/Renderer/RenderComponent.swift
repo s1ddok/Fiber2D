@@ -12,11 +12,10 @@ import SwiftBGFX
 /**
  * Base protocol for all render components
  *
- * All render components must have geometry and material.
+ * All render components must have material.
  */
 public protocol RenderComponent: Component {
     var material: Material { get set }
-    var geometry: Geometry { get set }
     
     func draw(in renderer: Renderer, transform: Matrix4x4f)
 }
