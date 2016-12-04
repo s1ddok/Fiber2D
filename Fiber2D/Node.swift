@@ -696,10 +696,8 @@ open class Node: Prioritized, Pausable {
     
     public var renderComponent: RenderComponent? {
         didSet {
-            if renderComponent !== oldValue {
-                oldValue?.onRemove()
-                renderComponent?.onAdd(to: self)
-            }
+            oldValue?.onRemove()
+            renderComponent?.onAdd(to: self)
         }
     }
     
