@@ -123,7 +123,7 @@ open class Node: Prioritized, Pausable {
     
     // MARK: Components
     /// Array of components added to the node
-    internal(set) public var components = [Component]()
+    internal(set) public var components   = [Component]()
     internal var fixedUpdatableComponents = [FixedUpdatable & Tagged]()
     internal var updatableComponents      = [Updatable      & Tagged]()
     
@@ -696,10 +696,9 @@ open class Node: Prioritized, Pausable {
     
     public var renderComponent: RenderComponent? {
         didSet {
-            if renderComponent == nil {
+            if renderComponent !== oldValue {
                 oldValue?.onRemove()
-            } else {
-                renderComponent!.onAdd(to: self)
+                renderComponent?.onAdd(to: self)
             }
         }
     }
