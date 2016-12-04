@@ -28,11 +28,12 @@ public class QuadRenderer: ComponentBase, RenderComponent {
     
     /// Geometry to be rendered. 
     /// Must be exactly 4 vertices long, index buffer is ignored
-    public var geometry: Geometry
+    public var geometry = Geometry(vertexBuffer: [RendererVertex](repeating: RendererVertex(),
+                                                                  count: 4),
+                                   indexBuffer: [])
     
-    public init(material: Material, geometry: Geometry) {
+    public init(material: Material) {
         self.material = material
-        self.geometry = geometry
         super.init()
     }
     
