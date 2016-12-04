@@ -45,7 +45,7 @@ public final class SpriteFrame {
         self.rect = rect
         self.trimOffset = trimOffset
         self.untrimmedSize = untrimmedSize
-        self.rotated = rotated
+        self.isRotated = rotated
     }
     
     /** Texture used by the frame.
@@ -76,8 +76,8 @@ public final class SpriteFrame {
     /** Rectangle of the frame within the texture, in points. */
     public let rect: Rect
     
-    /** If YES, the frame rectangle is rotated. */
-    public let rotated: Bool
+    /** Returns whether or not the texture rectangle is rotated. Sprite sheet editors may rotate sprite frames in a texture to fit more sprites in the same atlas. */
+    public let isRotated: Bool
     
     /** To save space in a spritesheet, the transparent edges of a frame may be trimmed. This is the original size in points of a frame before it was trimmed. */
     public let untrimmedSize: Size
@@ -86,7 +86,7 @@ public final class SpriteFrame {
     public let trimOffset: Point
     
     public var description: String {
-        return "<SpriteFrame: Texture=\(textureFilename), Rect = \(rect.description)> rotated:\(rotated) offset=\(trimOffset.description))"
+        return "<SpriteFrame: Texture = \(textureFilename), Rect = \(rect.description)> rotated:\(isRotated) offset = \(trimOffset.description))"
     }
     
     /**
