@@ -26,40 +26,30 @@ open class ColorNode: Node {
         self.color = color
         self.contentSizeInPoints = size
     
-        self.renderComponent = BackgroundColorRenderComponent(size: size, color: color)
+        // So that didSet will be called
+        defer {
+            self.renderComponent = BackgroundColorRenderComponent()
+        }
     }
 }
 
 public class BackgroundColorRenderComponent: QuadRenderer {
     
-    public init(size: Size, color: Color) {
-        let vertices = [
-            RendererVertex(position: vec4(0, 0, 0, 1),
-                           texCoord1: .zero, texCoord2: .zero,
-                           color: color),
-            RendererVertex(position: vec4(size.width, 0, 0, 1),
-                           texCoord1: .zero, texCoord2: .zero,
-                           color: color),
-            RendererVertex(position: vec4(size.width, size.height, 0, 1),
-                           texCoord1: .zero, texCoord2: .zero,
-                           color: color),
-            RendererVertex(position: vec4(0, size.height, 0, 1),
-                           texCoord1: .zero, texCoord2: .zero,
-                           color: color)]
-        
-        // Index buffer is ignored
-        let geometry = Geometry(vertexBuffer: vertices, indexBuffer: [])
-        super.init(material: Material(technique: .positionColor), geometry: geometry)
+    public init() {
+        super.init(material: Material(technique: .positionColor))
     }
     
     public override func onAdd(to owner: Node) {
         super.onAdd(to: owner)
+        
+        self.update(for: owner.contentSizeInPoints)
         owner.onContentSizeInPointsChanged.subscribe(on: self) {
             self.update(for: $0)
         }
         
+        self.geometry.color = owner.displayedColor.premultiplyingAlpha
         owner.onDisplayedColorChanged.subscribe(on: self) {
-            self.geometry.color = $0
+            self.geometry.color = $0.premultiplyingAlpha
         }
     }
     
