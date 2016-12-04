@@ -96,6 +96,8 @@
 		088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509981D7C6A5E003EF800 /* ActionSequence.swift */; };
 		088509A51D7DADFB003EF800 /* ActionInstant+Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */; };
 		08855BE41D9DA6540090EA84 /* UnitTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08855BE31D9DA6540090EA84 /* UnitTypes.swift */; };
+		089B16E91DF4B6E100DB9E33 /* Sprite9Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD0B1D46289A005838B8 /* Sprite9Slice.swift */; };
+		089B16EB1DF4C01100DB9E33 /* Sprite9SliceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B16EA1DF4C01100DB9E33 /* Sprite9SliceNode.swift */; };
 		08A73C0A1DCB2A7E00BF5AE8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A73C091DCB2A7E00BF5AE8 /* File.swift */; };
 		08A8D54D1D53DA9600262C0B /* Extensions-Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */; };
 		08AA0EE71DBFC5F800748555 /* libSwiftBGFX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */; };
@@ -269,6 +271,7 @@
 		088509981D7C6A5E003EF800 /* ActionSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSequence.swift; sourceTree = "<group>"; };
 		088509A41D7DADFB003EF800 /* ActionInstant+Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ActionInstant+Node.swift"; sourceTree = "<group>"; };
 		08855BE31D9DA6540090EA84 /* UnitTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTypes.swift; sourceTree = "<group>"; };
+		089B16EA1DF4C01100DB9E33 /* Sprite9SliceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprite9SliceNode.swift; sourceTree = "<group>"; };
 		08A73C091DCB2A7E00BF5AE8 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		08A8D54C1D53DA9600262C0B /* Extensions-Temp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions-Temp.swift"; sourceTree = "<group>"; };
 		08AA0EE61DBFC5F800748555 /* libSwiftBGFX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSwiftBGFX.dylib; path = external/SwiftBGFX/SwiftBGFX/.build/debug/libSwiftBGFX.dylib; sourceTree = "<group>"; };
@@ -600,6 +603,7 @@
 				081FBD0A1D46289A005838B8 /* Sprite.swift */,
 				081866911DF4953F006758E6 /* SpriteNode.swift */,
 				081FBD0B1D46289A005838B8 /* Sprite9Slice.swift */,
+				089B16EA1DF4C01100DB9E33 /* Sprite9SliceNode.swift */,
 				081FBD0C1D46289A005838B8 /* SpriteFrame.swift */,
 				080B06821DC9380E0037E1F1 /* SpriteFrameCache.swift */,
 			);
@@ -1013,6 +1017,7 @@
 				08C1CB2C1D8EFFD5006CDCCB /* cpSpaceHash.c in Sources */,
 				081866901DF494E6006758E6 /* MainScene.swift in Sources */,
 				088509991D7C6A5E003EF800 /* ActionSequence.swift in Sources */,
+				089B16E91DF4B6E100DB9E33 /* Sprite9Slice.swift in Sources */,
 				08C1CB341D8F01CB006CDCCB /* PhysicsWorld.swift in Sources */,
 				088509931D7B7AD8003EF800 /* ActionRepeat.swift in Sources */,
 				080B06941DCA092C0037E1F1 /* Transition.swift in Sources */,
@@ -1106,6 +1111,7 @@
 				082AD7A81DD1E77000BF495A /* ResponderManager+macOS.swift in Sources */,
 				081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */,
 				08C1CB2B1D8EFFD5006CDCCB /* cpSpaceDebug.c in Sources */,
+				089B16EB1DF4C01100DB9E33 /* Sprite9SliceNode.swift in Sources */,
 				05D231C11D9CD19000611AA3 /* BGFXView.swift in Sources */,
 				081FBD101D46289A005838B8 /* Layout.swift in Sources */,
 				08C1CB431D915950006CDCCB /* PhysicsShape.swift in Sources */,

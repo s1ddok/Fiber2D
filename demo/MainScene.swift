@@ -144,13 +144,13 @@ class MainScene: Scene {
             add(child: physicsSquare)
         }
         
-        /*let messageBubble = SpriteNode9Slice(imageNamed: "ninepatch_bubble.png")
+        let messageBubble = Sprite9SliceNode(imageNamed: "ninepatch_bubble.png")
         messageBubble.positionType = PositionType(xUnit: .points, yUnit: .points, corner: .topRight)
         messageBubble.contentSizeInPoints = messageBubble.contentSizeInPoints * 5.0
         //messageBubble.scale = 3.0
         messageBubble.position = p2d(256.0, 256.0)
         add(child: messageBubble)
-        */
+ 
         onEnter.subscribeOnce(on: self) { [unowned self] in
             let rt = createRT(size: Size(128.0), clearColor: .red)
             rt.position = p2d(512, 512)

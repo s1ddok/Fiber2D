@@ -66,7 +66,7 @@ public struct SpriteTexCoordSet {
 /**
  * Sprite can be created with an image, with a sub-rectangle of an (atlas) image.
  */
-public final class Sprite {
+public class Sprite {
     
     /**
      * Geometry of the sprite that will be used by a render component
