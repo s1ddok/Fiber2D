@@ -8,6 +8,61 @@
 import SwiftMath
 import SwiftBGFX
 
+/// The four RendererVertexes of a sprite.
+/// Bottom left, bottom right, top right, top left.
+public struct SpriteVertexes {
+    var bl, br, tr, tl: RendererVertex
+    
+    public var uv: SpriteTexCoordSet {
+        get {
+            return SpriteTexCoordSet(bl: bl.texCoord1, br: br.texCoord1,
+                                     tr: tr.texCoord1, tl: tl.texCoord1)
+        }
+        set {
+            bl.texCoord1 = newValue.bl
+            br.texCoord1 = newValue.br
+            tr.texCoord1 = newValue.tr
+            tl.texCoord1 = newValue.tl
+        }
+    }
+    
+    public var uv2: SpriteTexCoordSet {
+        get {
+            return SpriteTexCoordSet(bl: bl.texCoord2, br: br.texCoord2,
+                                     tr: tr.texCoord2, tl: tl.texCoord2)
+        }
+        set {
+            bl.texCoord2 = newValue.bl
+            br.texCoord2 = newValue.br
+            tr.texCoord2 = newValue.tr
+            tl.texCoord2 = newValue.tl
+        }
+    }
+    
+    public var color: Color {
+        get {
+            return bl.color
+        }
+        set {
+            bl.color = newValue
+            br.color = newValue
+            tr.color = newValue
+            tl.color = newValue
+        }
+    }
+    
+    public static let zero = SpriteVertexes(bl: RendererVertex(),
+                                            br: RendererVertex(),
+                                            tr: RendererVertex(),
+                                            tl: RendererVertex())
+}
+
+/// A set of four texture coordinates corresponding to the four
+/// vertices of a sprite.
+public struct SpriteTexCoordSet {
+    var bl, br, tr, tl: Vector2f
+}
+
 /**
  * Sprite can be created with an image, with a sub-rectangle of an (atlas) image.
  */
@@ -16,9 +71,8 @@ public final class Sprite {
     /**
      * Geometry of the sprite that will be used by a render component
      */
-    public var geometry = Geometry(vertexBuffer: [RendererVertex](repeating: RendererVertex(),
-                                                                  count: 4),
-                                   indexBuffer: [])
+    // Vertex coords, texture coords and color info.
+    public var verts = SpriteVertexes.zero
     
     /**
      *  Initializes a sprite with the name of an image. The name can be either a name in a sprite sheet or the name of a file.
@@ -113,7 +167,7 @@ public final class Sprite {
             }
             let secondaryTexture = spriteFrame2.texture
             // Set the second texture coordinate set from the normal map's sprite frame.
-            geometry.uv2 = secondaryTexture.uv(for: spriteFrame2.rect, rotated: spriteFrame2.isRotated, xFlipped: flipX, yFlipped: flipY)
+            verts.uv2 = secondaryTexture.uv(for: spriteFrame2.rect, rotated: spriteFrame2.isRotated, xFlipped: flipX, yFlipped: flipY)
         }
     }
     
@@ -136,7 +190,7 @@ public final class Sprite {
         let untrimmedSize = spriteFrame.untrimmedSize
         self.textureRect = rect
         
-        geometry.uv = texture.uv(for: rect, rotated: rotated, xFlipped: flipX, yFlipped: flipY)
+        verts.uv = texture.uv(for: rect, rotated: rotated, xFlipped: flipX, yFlipped: flipY)
 
         var relativeOffset = spriteFrame.trimOffset
         // issue #732
@@ -155,10 +209,10 @@ public final class Sprite {
         let x2 = x1 + textureRect.size.width
         let y2 = y1 + textureRect.size.height
         
-        geometry.positions = [vec4(x1, y1, 0.0, 1.0),
-                              vec4(x2, y1, 0.0, 1.0),
-                              vec4(x2, y2, 0.0, 1.0),
-                              vec4(x1, y2, 0.0, 1.0)]
+        verts.bl.position = vec4(x1, y1, 0.0, 1.0)
+        verts.br.position = vec4(x2, y1, 0.0, 1.0)
+        verts.tr.position = vec4(x2, y2, 0.0, 1.0)
+        verts.tl.position = vec4(x1, y2, 0.0, 1.0)
         // Set the center/extents for culling purposes.
         self.vertexCenter = vec2((x1 + x2) * 0.5, (y1 + y2) * 0.5)
         self.vertexExtents = vec2((x2 - x1) * 0.5, (y2 - y1) * 0.5)
@@ -167,9 +221,9 @@ public final class Sprite {
     /** Returns the matrix that transforms the sprite's (local) space coordinates into the sprite's texture space coordinates.
      */
     public var nodeToTextureTransform: Matrix4x4f {
-        let bl = geometry.vertexBuffer[0],
-            br = geometry.vertexBuffer[1],
-            tl = geometry.vertexBuffer[3]
+        let bl = verts.bl,
+            br = verts.br,
+            tl = verts.tl
         
         let sx = (br.texCoord1.s - bl.texCoord1.s) / (br.position.x - bl.position.x)
         let sy = (tl.texCoord1.t - bl.texCoord1.t) / (tl.position.y - bl.position.y)
@@ -219,9 +273,9 @@ public class SpriteRenderComponent: ComponentBase, RenderComponent {
     public override func onAdd(to owner: Node) {
         super.onAdd(to: owner)
   
-        self.sprite?.geometry.color = owner.displayedColor.premultiplyingAlpha
+        self.sprite?.verts.color = owner.displayedColor.premultiplyingAlpha
         owner.onDisplayedColorChanged.subscribe(on: self) {
-            self.sprite?.geometry.color = $0.premultiplyingAlpha
+            self.sprite?.verts.color = $0.premultiplyingAlpha
         }
     }
     
@@ -236,7 +290,11 @@ public class SpriteRenderComponent: ComponentBase, RenderComponent {
         guard let sprite = sprite else {
             return
         }
-        let vertices = sprite.geometry.vertexBuffer.map { $0.transformed(transform) }
+        let verts = sprite.verts
+        let vertices = [verts.bl.transformed(transform),
+                        verts.br.transformed(transform),
+                        verts.tr.transformed(transform),
+                        verts.tl.transformed(transform)]
         let vb = TransientVertexBuffer(count: 4, layout: RendererVertex.layout)
         memcpy(vb.data, vertices, 4 * MemoryLayout<RendererVertex>.size)
         

@@ -11,7 +11,7 @@ import SwiftMath
 public extension Texture {
     /// Returns an array of 4 elements that represents UV coordinates
     /// Return order: [bottom left, bottom right, top right, top left]
-    public func uv(for rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> [Vector2f] {
+    public func uv(for rect: Rect, rotated: Bool, xFlipped flipX: Bool, yFlipped flipY: Bool) -> SpriteTexCoordSet {
         // Need to convert the texel coords for the texel stretch hack. (Bah)
         let scale = self.contentScale
         let rect = rect.scaled(by: scale)
@@ -31,10 +31,10 @@ public extension Texture {
             if flipY {
                 swap(&left, &right)
             }
-            return [vec2(left, top),
-                    vec2(left, bottom),
-                    vec2(right, bottom),
-                    vec2(right, top)]
+            return SpriteTexCoordSet(bl: vec2(left, top),
+                                     br: vec2(left, bottom),
+                                     tr: vec2(right, bottom),
+                                     tl: vec2(right, top))
         } else {
             var left   = rect.origin.x / atlasWidth
             var right  = (rect.origin.x + rect.size.width) / atlasWidth
@@ -47,10 +47,10 @@ public extension Texture {
             if flipY {
                 swap(&top, &bottom)
             }
-            return [vec2(left, bottom),
-                    vec2(right, bottom),
-                    vec2(right, top),
-                    vec2(left, top)]
+            return SpriteTexCoordSet(bl: vec2(left, bottom),
+                                     br: vec2(right, bottom),
+                                     tr: vec2(right, top),
+                                     tl: vec2(left, top))
         }
     }
 }
