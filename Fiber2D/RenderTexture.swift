@@ -44,10 +44,6 @@ public final class RenderTexture: Node {
         self.contentScale = Setup.shared.assetScale
         self.contentSize = Size(width: Float(w), height: Float(h))
         self.projection = Matrix4x4f.orthoProjection(for: self)
-        let rtSprite: RenderTextureSprite = RenderTextureSprite(texture: nil, rect: Rect.zero, rotated: false)
-        rtSprite.renderTexture = self
-        self.sprite = rtSprite
-
     }
 
     /** Clear color value. Valid only when autoDraw is YES.
@@ -63,11 +59,11 @@ public final class RenderTexture: Node {
     /**
      *  @name Accessing the Sprite and Texture
      */
-    /** The Sprite that is used for rendering.
+    /** The SpriteNode that is used for rendering.
      
-     @see Sprite
+     @see SpriteNode
      */
-    public var sprite: Sprite!
+    public var sprite: SpriteNode!
     
     // Raw projection matrix used for rendering.
     // For metal will be flipped on the y-axis compared to the ._projection property.
@@ -93,19 +89,13 @@ public final class RenderTexture: Node {
         // size type isn't (points, points). The call to setTextureRect below eventually arrives
         // at some code that assumes the supplied size is in points so, if the size is not in points,
         // things break.
-        self.assignSpriteTexture()
-        let size = self.contentSize
-        let textureSize = Rect(size: size)
-        sprite.setTextureRect(textureSize, forTexture: sprite.texture, rotated: false, untrimmedSize: textureSize.size)
+        self.sprite = SpriteNode(sprite: Sprite(texture: texture, rect: Rect(size: contentSize), rotated: false))
+        sprite.setRawParent(self)
     }
     
     internal func destroy() {
         framebuffer = nil
         texture = nil
-    }
-    
-    internal func assignSpriteTexture() {
-        sprite.texture = texture
     }
     
     /** The render texture's (and its sprite's) texture.
@@ -137,7 +127,20 @@ public final class RenderTexture: Node {
         return contentSize * contentScale
     }
     
-    internal var framebuffer: FrameBuffer?
+    internal var framebuffer: FrameBuffer? {
+        get {
+            if _framebuffer == nil {
+                createTextureAndFBO(with: pixelSize)
+            }
+            
+            return _framebuffer
+        }
+        set {
+            _framebuffer = newValue
+        }
+        
+    }
+    private var _framebuffer: FrameBuffer? = nil
     
     override func visit(_ renderer: Renderer, parentTransform: Matrix4x4f) {
         // override visit.
@@ -147,7 +150,6 @@ public final class RenderTexture: Node {
         }
         
         if autoDraw {
-            assignSpriteTexture()
             renderer.beginRenderTexture(self)
             //! make sure all children are drawn
             self.sortAllChildren()
@@ -158,16 +160,10 @@ public final class RenderTexture: Node {
             renderer.endRenderTexture()
             
             let transform = parentTransform * self.nodeToParentMatrix
-            self.draw(renderer, transform: transform)
+            sprite.visit(renderer, parentTransform: transform)
         } else {
             // Render normally, v3.0 and earlier skipped this.
-            super.visit(renderer, parentTransform: parentTransform)
+            sprite.visit(renderer, parentTransform: transform)
         }
-    }
-    
-    override func draw(_ renderer: Renderer, transform: Matrix4x4f) {
-        assert(sprite.zOrder == 0, "Changing the sprite's zOrder is not supported.")
-        // Force the sprite to render itself
-        sprite.visit(renderer, parentTransform: transform)
     }
 }

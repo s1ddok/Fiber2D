@@ -38,7 +38,7 @@ fileprivate func createChildRT(size: Size, clearColor: Color,geometryColor: Colo
 class MainScene: Scene {
     
     var colorNode: ColorNode!
-    var sprite: Sprite!
+    var sprite: SpriteNode!
     
     var physicsSquares = [ColorNode]()
     
@@ -57,7 +57,7 @@ class MainScene: Scene {
         
         world.contactDelegate = self
         
-        sprite = Sprite(imageNamed: "circle.png")
+        sprite = SpriteNode(imageNamed: "circle.png")
         sprite.scale = 16.0
         sprite.position = p2d(0.5, 0.5)
         sprite.positionType = .normalized
@@ -144,23 +144,23 @@ class MainScene: Scene {
             add(child: physicsSquare)
         }
         
-        let messageBubble = Sprite9Slice(imageNamed: "ninepatch_bubble.png")
+        /*let messageBubble = SpriteNode9Slice(imageNamed: "ninepatch_bubble.png")
         messageBubble.positionType = PositionType(xUnit: .points, yUnit: .points, corner: .topRight)
         messageBubble.contentSizeInPoints = messageBubble.contentSizeInPoints * 5.0
         //messageBubble.scale = 3.0
         messageBubble.position = p2d(256.0, 256.0)
         add(child: messageBubble)
-        
+        */
         onEnter.subscribeOnce(on: self) { [unowned self] in
             let rt = createRT(size: Size(128.0), clearColor: .red)
             rt.position = p2d(512, 512)
             rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
                 .then(ActionMoveBy(vec2(-150.0, 0)).continously(duration: 1.0))
                 .repeatForever)
-            let anotherSprite = Sprite(texture: rt.texture, rect: Rect(size: rt.contentSize), rotated: false)
-            anotherSprite.run(action: ActionRotateBy(angle: 30°).continously(duration: 1.0).repeatForever)
-            anotherSprite.position = p2d(128, 128)
-            self.add(child: anotherSprite)
+            let anotherSpriteNode = SpriteNode(sprite: Sprite(texture: rt.texture, rect: Rect(size: rt.contentSize), rotated: false))
+            anotherSpriteNode.run(action: ActionRotateBy(angle: 30°).continously(duration: 1.0).repeatForever)
+            anotherSpriteNode.position = p2d(128, 128)
+            self.add(child: anotherSpriteNode)
             self.add(child: rt)
             
             let colors: [Color] = [ .red, .blue, .purple ]
@@ -191,7 +191,7 @@ class MainScene: Scene {
 
 public class MainSceneResponder: Responder {
     override public func inputBegan(_ input: Input) {
-        let physicsCircle = Sprite(imageNamed: "circle.png")
+        let physicsCircle = SpriteNode(imageNamed: "circle.png")
         let physicsBody = PhysicsBody.circle(radius: 6.0)
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
