@@ -66,6 +66,7 @@ public class BackgroundColorRenderComponent: QuadRenderer {
     public override func onRemove() {
         // Do it before super, as it assigns owner to nil
         owner?.onContentSizeInPointsChanged.cancelSubscription(for: self)
+        owner?.onDisplayedColorChanged.cancelSubscription(for: self)
         super.onRemove()
     }
     
