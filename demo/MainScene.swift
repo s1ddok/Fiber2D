@@ -197,6 +197,8 @@ public class MainSceneResponder: Responder {
         physicsBody.isGravityEnabled = true
         physicsCircle.position = input.location(in: owner!)
         
+        let ec = EnterComponent()
+        physicsCircle.add(component: ec)
         owner!.add(child: physicsCircle)
         physicsCircle.add(component: physicsBody)
     }
