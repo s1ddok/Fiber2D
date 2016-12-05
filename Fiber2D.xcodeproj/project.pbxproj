@@ -51,7 +51,6 @@
 		081FBD151D46289A005838B8 /* Node+Convertation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBCFF1D46289A005838B8 /* Node+Convertation.swift */; };
 		081FBD171D46289A005838B8 /* Node+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD011D46289A005838B8 /* Node+Scene.swift */; };
 		081FBD181D46289A005838B8 /* Node+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD021D46289A005838B8 /* Node+Transform.swift */; };
-		081FBD191D46289A005838B8 /* Node+Traverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD031D46289A005838B8 /* Node+Traverse.swift */; };
 		081FBD1D1D46289A005838B8 /* Responder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD071D46289A005838B8 /* Responder.swift */; };
 		081FBD1E1D46289A005838B8 /* ResponderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD081D46289A005838B8 /* ResponderManager.swift */; };
 		081FBD1F1D46289A005838B8 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FBD091D46289A005838B8 /* Scene.swift */; };
@@ -223,7 +222,6 @@
 		081FBCFF1D46289A005838B8 /* Node+Convertation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Convertation.swift"; sourceTree = "<group>"; };
 		081FBD011D46289A005838B8 /* Node+Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Scene.swift"; sourceTree = "<group>"; };
 		081FBD021D46289A005838B8 /* Node+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Transform.swift"; sourceTree = "<group>"; };
-		081FBD031D46289A005838B8 /* Node+Traverse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Node+Traverse.swift"; sourceTree = "<group>"; };
 		081FBD051D46289A005838B8 /* RenderTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderTexture.swift; sourceTree = "<group>"; };
 		081FBD061D46289A005838B8 /* RenderTextureSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderTextureSprite.swift; sourceTree = "<group>"; };
 		081FBD071D46289A005838B8 /* Responder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responder.swift; sourceTree = "<group>"; };
@@ -560,7 +558,6 @@
 				0803071E1D9AFFDC008CAC8E /* Node+Hierarchy.swift */,
 				081FBD011D46289A005838B8 /* Node+Scene.swift */,
 				081FBD021D46289A005838B8 /* Node+Transform.swift */,
-				081FBD031D46289A005838B8 /* Node+Traverse.swift */,
 				0847405D1D8362FA0053DD2E /* Node+Component.swift */,
 				080B06901DC9FAC80037E1F1 /* Node+Projection.swift */,
 			);
@@ -1055,7 +1052,6 @@
 				08C1CB211D8EFFD5006CDCCB /* cpPolyline.c in Sources */,
 				086652811D73412600BCD9CE /* Action.swift in Sources */,
 				080306B01D942000008CAC8E /* PhysicsShapePolygon.swift in Sources */,
-				081FBD191D46289A005838B8 /* Node+Traverse.swift in Sources */,
 				0885098D1D7B5428003EF800 /* ActionTransform.swift in Sources */,
 				08C1CB381D8F04A5006CDCCB /* PhysicsJoint.swift in Sources */,
 				081FBD1E1D46289A005838B8 /* ResponderManager.swift in Sources */,
