@@ -28,7 +28,6 @@ internal extension Node {
         
         components.forEach {
             scene!.system(for: $0)?.add(component: $0)
-            if let c = $0 as? Enterable { c.onEnter() }
         }
         onEnter.fire()
     }
@@ -49,7 +48,6 @@ internal extension Node {
         self.wasRunning(wasRunning)
         
         components.forEach {
-            if let c = $0 as? Exitable { c.onExit() }
             self.scene!.system(for: $0)?.remove(component: $0)
         }
         if updatableComponents.count > 0 || fixedUpdatableComponents.count > 0 {

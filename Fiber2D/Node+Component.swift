@@ -61,10 +61,6 @@ public extension Node {
         if isInActiveScene {
             let system = scene.system(for: component)
             system?.add(component: component)
-            
-            if let e = component as? Enterable {
-                e.onEnter()
-            }
         }
         
         if let c = component as? Updatable & Tagged {
@@ -107,10 +103,7 @@ public extension Node {
         // if it is already added
         if let idx = components.index(where: { $0.tag == tag }) {
             let c = components[idx]
-            if isInActiveScene, let e = c as? Exitable {
-                e.onExit()
-            }
-            
+
             scene?.system(for: c)?.remove(component: c)
             
             c.onRemove()
@@ -176,10 +169,7 @@ public extension Node {
         // if it is already added
         if let idx = components.index(where: { $0 is U }) {
             let c = components[idx]
-            if isInActiveScene, let e = c as? Exitable {
-                e.onExit()
-            }
-            
+
             scene?.system(for: c)?.remove(component: c)
             
             c.onRemove()

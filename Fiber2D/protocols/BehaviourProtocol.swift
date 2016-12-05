@@ -22,11 +22,3 @@ public protocol FixedUpdatable: class, Prioritized {
 public protocol LateUpdatable: class, Prioritized {
     func lateUpdate(delta: Time)
 }
-
-public protocol Enterable {
-    func onEnter()
-}
-
-public protocol Exitable {
-    func onExit()
-}

@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public protocol System: class, Enterable, Exitable, Pausable {
+public protocol System: class, Pausable {
     
     func onAdd(to scene: Scene)
     func onRemove()
@@ -33,8 +33,6 @@ public protocol System: class, Enterable, Exitable, Pausable {
 public extension System {
     func onAdd(to scene: Scene) {}
     func onRemove() {}
-    func onEnter() {}
-    func onExit() {}
 }
 
 public struct ComponentNode<T> where T: ComponentBase {
