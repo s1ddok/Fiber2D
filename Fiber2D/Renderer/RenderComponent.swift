@@ -17,6 +17,16 @@ import SwiftBGFX
 public protocol RenderableComponent: Component {
     var material: Material { get set }
     
+    /**
+     Implement this method to add custom rendering code to your node.
+     
+     @note You should only use Fiber2D's Renderer API to modify the render state and shaders. For further info, please see the Renderer documentation.
+     @warning You **must not** call `super.draw(in:transform:)`
+     
+     @param renderer The Renderer instance to use for drawing.
+     @param transform The parent node's transform.
+     @see Renderer
+     */
     func draw(in renderer: Renderer, transform: Matrix4x4f)
 }
 

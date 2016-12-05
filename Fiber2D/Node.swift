@@ -700,19 +700,7 @@ open class Node: Prioritized, Pausable {
             renderComponent?.onAdd(to: self)
         }
     }
-    
-    /**
-     Override this method to add custom rendering code to your node.
-     
-     @note You should only use Fiber2D's Renderer API to modify the render state and shaders. For further info, please see the Renderer documentation.
-     @warning You **must not** call `super.draw(:transform:)`
-     
-     @param renderer The Renderer instance to use for drawing.
-     @param transform The parent node's transform.
-     @see Renderer
-     */
-    func draw(_ renderer: Renderer, transform: Matrix4x4f) {}
-    
+
     // purposefully undocumented: internal method, users should prefer to implement draw:transform:
     /* Recursive method that visit its children and draw them.
      * @param renderer The Renderer instance to use for drawing.
