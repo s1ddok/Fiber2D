@@ -694,7 +694,7 @@ open class Node: Prioritized, Pausable {
     
     /// @name Rendering (Implemented in Subclasses)
     
-    public var renderComponent: RenderComponent? {
+    public var renderComponent: RenderableComponent? {
         didSet {
             oldValue?.onRemove()
             renderComponent?.onAdd(to: self)

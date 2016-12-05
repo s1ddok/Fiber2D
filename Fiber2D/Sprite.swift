@@ -250,7 +250,7 @@ public class Sprite {
  *
  * @note this component adjusts Node's contentSizeInPoints as Sprite's sprite frame changes
  */
-public class SpriteRenderComponent: ComponentBase, RenderComponent {
+public class SpriteRenderComponent: ComponentBase, RenderableComponent {
     public var material = Material(technique: .positionTexture)
     
     public init(sprite: Sprite) {

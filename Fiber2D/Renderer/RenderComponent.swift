@@ -14,7 +14,7 @@ import SwiftBGFX
  *
  * All render components must have material.
  */
-public protocol RenderComponent: Component {
+public protocol RenderableComponent: Component {
     var material: Material { get set }
     
     func draw(in renderer: Renderer, transform: Matrix4x4f)
@@ -23,7 +23,7 @@ public protocol RenderComponent: Component {
 //
 // MARK: Default renderers
 //
-public class QuadRenderer: ComponentBase, RenderComponent {
+public class QuadRenderer: ComponentBase, RenderableComponent {
     public var material: Material
     
     /// Geometry to be rendered. 

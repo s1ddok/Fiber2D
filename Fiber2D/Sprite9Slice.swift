@@ -170,7 +170,7 @@ internal extension SpriteVertexes {
     }
 }
 
-public class Sprite9SliceRenderComponent: ComponentBase, RenderComponent {
+public class Sprite9SliceRenderComponent: ComponentBase, RenderableComponent {
     public var material = Material(technique: .positionTexture)
     
     public var sprite: Sprite9Slice? {
