@@ -38,12 +38,11 @@ Currently we have only `macOS` demo for the ease of development, but it will sea
 You can get the idea from this GIF: 
 ![Fiber2D Demo Gif](http://imgur.com/CP6d9kT.gif)
 
-# Goals
+# Goals (updated 3 DEC 2016)
 My goals for the near future are (order means nothing):
 
 * Migrate to **SwiftPM project structure completely**, drop XCode as a heart of the project
   * Introduce `CChipmunk`, `Clibpng`, etc
-* Fully drop inheriting based structure by finishing `Component/System` code
 * **Port to `Linux` using `SDL` for Windowing and Input handle (first step on the way to `Android`)** (remember those 15%?)
 * Remove code parts that has `Obj-C smell` (this includes making the whole API more Swifty, moving forward to `protocol-obsessed` world)
 * **Add `FreeType 2` support for cross-platform text rendering**
