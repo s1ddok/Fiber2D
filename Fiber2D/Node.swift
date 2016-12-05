@@ -130,7 +130,7 @@ open class Node: Prioritized, Pausable {
     // MARK: Hierarchy
     internal weak var _parent: Node?
     /** Array of child nodes. Used to enumerate child nodes. */
-    internal(set) public var children = [Node]()
+    internal(set) public var children = ContiguousArray<Node>()
 
     // MARK: Transforms
     internal var isTransformDirty = true {

@@ -146,7 +146,7 @@ public extension Node {
         // set parent nil at the end (issue #476)
         child._parent = nil
         Director.current.responderManager.markAsDirty()
-        children.removeObject(child)
+        children.remove(object: child)
         onChildWasRemoved.fire(child)
     }
     

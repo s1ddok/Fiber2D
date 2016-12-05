@@ -23,3 +23,19 @@ extension Array {
         return false
     }
 }
+
+public extension ContiguousArray where Element: AnyObject {
+    @discardableResult
+    mutating func remove(object: AnyObject) -> Bool {
+        var idx = 0
+        for e in self {
+            if e === object {
+                remove(at: idx)
+                return true
+            }
+            idx += 1
+        }
+        
+        return false
+    }
+}
