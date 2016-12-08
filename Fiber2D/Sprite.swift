@@ -252,6 +252,7 @@ public class Sprite {
  */
 public class SpriteRenderComponent: ComponentBase, RenderableComponent {
     public var material = Material(technique: .positionTexture)
+    public var zOrder: Int = 0
     
     public init(sprite: Sprite) {
         super.init()

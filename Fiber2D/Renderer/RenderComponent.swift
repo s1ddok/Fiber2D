@@ -15,7 +15,17 @@ import SwiftBGFX
  * All render components must have material.
  */
 public protocol RenderableComponent: Component {
+    /**
+     * Customizable material that will be used to draw geometry.
+     *
+     * @see Material
+     */
     var material: Material { get set }
+    
+    /**
+     * Local z order that indicates drawing order between owner's renderable components.
+     */
+    var zOrder: Int { get set }
     
     /**
      Implement this method to add custom rendering code to your node.
@@ -33,8 +43,11 @@ public protocol RenderableComponent: Component {
 //
 // MARK: Default renderers
 //
+
 public class QuadRenderer: ComponentBase, RenderableComponent {
     public var material: Material
+    
+    public var zOrder: Int = 0
     
     /// Geometry to be rendered. 
     /// Must be exactly 4 vertices long, index buffer is ignored
