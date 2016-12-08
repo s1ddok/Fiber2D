@@ -16,7 +16,7 @@ import SwiftMath
 open class SpriteNode: Node {
     
     public var sprite: Sprite? {
-        if let src = renderComponent as? SpriteRenderComponent {
+        if let src = getComponent(by: SpriteRenderComponent.self) {
             return src.sprite
         }
         return nil
@@ -32,10 +32,7 @@ open class SpriteNode: Node {
         let src = SpriteRenderComponent(sprite: sprite)
         
         self.contentSizeInPoints = sprite.spriteFrame.untrimmedSize
-        // So that didSet will be called
-        defer {
-            self.renderComponent = src
-        }
+        add(component: src)
     }
     
 }

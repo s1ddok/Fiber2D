@@ -15,7 +15,7 @@ public extension Node {
      * @return The Component by tag.
      */
     public func getComponent(by tag: Int) -> Component? {
-        return components.first { $0.tag == tag }
+        return components.first { $0.tag == tag } ?? renderableComponents.first { $0.tag == tag }
     }
     
     /**
@@ -28,6 +28,12 @@ public extension Node {
     where U: Component {
         for c in components {
             if let retVal = c as? U {
+                return retVal
+            }
+        }
+        
+        for rc in renderableComponents {
+            if let retVal = rc as? U {
                 return retVal
             }
         }
@@ -51,11 +57,15 @@ public extension Node {
             fatalError("ERROR: Component already add. It can't be added to more than one owner")
         }
         
-        guard getComponent(by: component.tag) == nil else {
+        /*guard getComponent(by: component.tag) == nil else {
             return false
-        }
+        }*/
         
-        components.append(component)
+        if let rc = component as? RenderableComponent {
+            renderableComponents.insert(rc, at: renderableComponents.index { $0.zOrder >= rc.zOrder } ?? renderableComponents.count)
+        } else {
+            components.append(component)
+        }
         component.onAdd(to: self)
         
         if isInActiveScene {
@@ -94,44 +104,7 @@ public extension Node {
      */
     @discardableResult
     public func removeComponent(by tag: Int) -> Bool {
-        // if it still waits to be added
-        if let idx = queuedComponents.index(where: { $0.tag == tag }) {
-            queuedComponents.remove(at: idx)
-            return true
-        }
-        
-        // if it is already added
-        if let idx = components.index(where: { $0.tag == tag }) {
-            let c = components[idx]
-
-            scene?.system(for: c)?.remove(component: c)
-            
-            c.onRemove()
-            
-            if c is Updatable {
-                if let idx = updatableComponents.index(where: { $0.tag == tag } ) {
-                    updatableComponents.remove(at: idx)
-                }
-                
-                if self.updatableComponents.isEmpty {
-                    self.scheduler?.unschedule(updatable: self)
-                }
-            }
-            
-            if c is FixedUpdatable {
-                if let idx = fixedUpdatableComponents.index(where: { $0.tag == tag } ) {
-                    fixedUpdatableComponents.remove(at: idx)
-                }
-                
-                if self.fixedUpdatableComponents.isEmpty {
-                    self.scheduler?.unschedule(fixedUpdatable: self)
-                }
-            }
-            
-            return true
-        }
-        
-        return false
+        return removeComponent(with: { $0.tag == tag })
     }
     
     /**
@@ -160,44 +133,7 @@ public extension Node {
      */
     @discardableResult
     public func removeComponent<U>(by type: U.Type) -> Bool {
-        // if it still waits to be added
-        if let idx = queuedComponents.index(where: { $0 is U }) {
-            queuedComponents.remove(at: idx)
-            return true
-        }
-        
-        // if it is already added
-        if let idx = components.index(where: { $0 is U }) {
-            let c = components[idx]
-
-            scene?.system(for: c)?.remove(component: c)
-            
-            c.onRemove()
-            
-            if c is Updatable {
-                if let idx = updatableComponents.index(where: { $0 is U } ) {
-                    updatableComponents.remove(at: idx)
-                }
-                
-                if self.updatableComponents.isEmpty {
-                    self.scheduler?.unschedule(updatable: self)
-                }
-            }
-            
-            if c is FixedUpdatable {
-                if let idx = fixedUpdatableComponents.index(where: { $0 is U } ) {
-                    fixedUpdatableComponents.remove(at: idx)
-                }
-                
-                if self.fixedUpdatableComponents.isEmpty {
-                    self.scheduler?.unschedule(fixedUpdatable: self)
-                }
-            }
-
-            return true
-        }
-        
-        return false
+        return removeComponent(with: { $0 is U })
     }
     
     /**
@@ -223,6 +159,61 @@ public extension Node {
         scheduler?.unschedule(fixedUpdatable: self)
     }    
 }
+
+fileprivate extension Node {
+    @inline(__always)
+    fileprivate func removeComponent(with block: (Component) -> Bool) -> Bool {
+        // if it still waits to be added
+        if let idx = queuedComponents.index(where: block) {
+            queuedComponents.remove(at: idx)
+            return true
+        }
+        
+        var c: Component!
+        
+        // if it is already added
+        if let idx = components.index(where: block) {
+            c = components[idx]
+            components.remove(at: idx)
+        }
+        
+        if let idx = renderableComponents.index(where: block) {
+            c = renderableComponents[idx]
+            renderableComponents.remove(at: idx)
+        }
+        
+        guard c != nil else {
+            return false
+        }
+        
+        scene?.system(for: c)?.remove(component: c)
+        
+        c.onRemove()
+        
+        if let uc = c as? Updatable & AnyObject {
+            if let idx = updatableComponents.index(where: { $0 === uc } ) {
+                updatableComponents.remove(at: idx)
+            }
+            
+            if self.updatableComponents.isEmpty {
+                self.scheduler?.unschedule(updatable: self)
+            }
+        }
+        
+        if let fuc = c as? FixedUpdatable & AnyObject {
+            if let idx = fixedUpdatableComponents.index(where: { $0 === fuc } ) {
+                fixedUpdatableComponents.remove(at: idx)
+            }
+            
+            if self.fixedUpdatableComponents.isEmpty {
+                self.scheduler?.unschedule(fixedUpdatable: self)
+            }
+        }
+        
+        return true
+    }
+}
+
 
 extension Node: Updatable, FixedUpdatable {
     

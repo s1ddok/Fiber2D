@@ -123,9 +123,15 @@ open class Node: Prioritized, Pausable {
     
     // MARK: Components
     /// Array of components added to the node
+    // TODO: Should use ContiguousArray<> here, but due to a Swift bug we can not for now
     internal(set) public var components   = [Component]()
-    internal var fixedUpdatableComponents = [FixedUpdatable & Tagged]()
-    internal var updatableComponents      = [Updatable      & Tagged]()
+    internal var renderableComponents     = [RenderableComponent]()
+    internal var fixedUpdatableComponents = [FixedUpdatable & Tagged & AnyObject]()
+    internal var updatableComponents      = [Updatable      & Tagged & AnyObject]()
+    
+    // Components and actions that are scheduled to run on this node when onEnter is called
+    internal var queuedActions    = [ActionContainer]()
+    internal var queuedComponents = [Component]()
     
     // MARK: Hierarchy
     internal weak var _parent: Node?
@@ -661,22 +667,6 @@ open class Node: Prioritized, Pausable {
         return self.isInActiveScene && !paused && pausedAncestors == 0
     }
     
-    // Components and actions that are scheduled to run on this node when onEnter is called
-    internal var queuedActions    = [ActionContainer]()
-    internal var queuedComponents = [Component]()
-    
-    // MARK: Traverse + Rendering
-    /** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
-     The matrix is in points.
-     @see parentToNodeMatrix
-     */
-    // should really be in +Transform but is being overriden in Camera
-    public var nodeToParentMatrix: Matrix4x4f {
-        calculateTransformIfNeeded()
-        
-        return transform
-    }
-    
     // MARK: Input
     public var responder: Responder? {
         willSet {
@@ -691,16 +681,9 @@ open class Node: Prioritized, Pausable {
         }
     }
     
-    
+    // MARK: Traverse + Rendering
     /// @name Rendering (Implemented in Subclasses)
     
-    public var renderComponent: RenderableComponent? {
-        didSet {
-            oldValue?.onRemove()
-            renderComponent?.onAdd(to: self)
-        }
-    }
-
     // purposefully undocumented: internal method, users should prefer to implement draw:transform:
     /* Recursive method that visit its children and draw them.
      * @param renderer The Renderer instance to use for drawing.
@@ -717,14 +700,14 @@ open class Node: Prioritized, Pausable {
         
         for child in children {
             if !drawn && child.zOrder >= 0 {
-                renderComponent?.draw(in: renderer, transform: transform)
+                renderableComponents.forEach { $0.draw(in: renderer, transform: transform) }
                 drawn = true
             }
             child.visit(renderer, parentTransform: transform)
         }
         
         if !drawn {
-            renderComponent?.draw(in: renderer, transform: transform)
+            renderableComponents.forEach { $0.draw(in: renderer, transform: transform) }
         }
     }
     
@@ -836,4 +819,15 @@ open class Node: Prioritized, Pausable {
     
     // For Scheduler target
     internal(set) public var priority: Int = 0
+    
+    /** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+     The matrix is in points.
+     @see parentToNodeMatrix
+     */
+    // should really be in +Transform but is being overriden in Camera
+    public var nodeToParentMatrix: Matrix4x4f {
+        calculateTransformIfNeeded()
+        
+        return transform
+    }
 }

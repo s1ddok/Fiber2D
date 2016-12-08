@@ -25,11 +25,7 @@ open class ColorNode: Node {
         super.init()
         self.color = color
         self.contentSizeInPoints = size
-    
-        // So that didSet will be called
-        defer {
-            self.renderComponent = BackgroundColorRenderComponent()
-        }
+        self.add(component: BackgroundColorRenderComponent())
     }
 }
 

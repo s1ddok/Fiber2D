@@ -172,6 +172,7 @@ internal extension SpriteVertexes {
 
 public class Sprite9SliceRenderComponent: ComponentBase, RenderableComponent {
     public var material = Material(technique: .positionTexture)
+    public var zOrder: Int = 0
     
     public var sprite: Sprite9Slice? {
         didSet {

@@ -42,6 +42,7 @@ public final class RenderTexture: Node {
     public init(width w: UInt, height h: UInt) {
         super.init()
         self.contentScale = Setup.shared.assetScale
+        self.anchorPoint = p2d(0.5, 0.5)
         self.contentSize = Size(width: Float(w), height: Float(h))
         self.projection = Matrix4x4f.orthoProjection(for: self)
     }
@@ -63,7 +64,8 @@ public final class RenderTexture: Node {
      
      @see SpriteNode
      */
-    public var sprite: SpriteNode!
+    //public var sprite: SpriteNode!
+    //public var sprite: SpriteRenderComponent!
     
     // Raw projection matrix used for rendering.
     // For metal will be flipped on the y-axis compared to the ._projection property.
@@ -89,8 +91,12 @@ public final class RenderTexture: Node {
         // size type isn't (points, points). The call to setTextureRect below eventually arrives
         // at some code that assumes the supplied size is in points so, if the size is not in points,
         // things break.
-        self.sprite = SpriteNode(sprite: Sprite(texture: texture, rect: Rect(size: contentSize), rotated: false))
-        sprite.setRawParent(self)
+        /*self.sprite = SpriteNode(sprite: Sprite(texture: texture, rect: Rect(size: contentSize), rotated: false))
+        sprite.setRawParent(self)*/
+        let sprite = Sprite(texture: texture, rect: Rect(size: contentSize), rotated: false)
+        let src = SpriteRenderComponent(sprite: sprite)
+        add(component: src)
+        
     }
     
     internal func destroy() {
@@ -160,10 +166,11 @@ public final class RenderTexture: Node {
             renderer.endRenderTexture()
             
             let transform = parentTransform * self.nodeToParentMatrix
-            sprite.visit(renderer, parentTransform: transform)
+            renderableComponents.forEach { $0.draw(in: renderer, transform: transform) }
+            //sprite.visit(renderer, parentTransform: transform)
         } else {
             // Render normally, v3.0 and earlier skipped this.
-            sprite.visit(renderer, parentTransform: transform)
+            //sprite.visit(renderer, parentTransform: transform)
         }
     }
 }
