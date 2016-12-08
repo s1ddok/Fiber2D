@@ -196,10 +196,15 @@ public class MainSceneResponder: Responder {
         physicsBody.isDynamic = true
         physicsBody.isGravityEnabled = true
         physicsCircle.position = input.location(in: owner!)
-        
+
         let ec = EnterComponent()
         physicsCircle.add(component: ec)
         owner!.add(child: physicsCircle)
+        
+        if Int.random() % 2 == 0 {
+            physicsCircle.color = Int.random() % 3 == 0 ? .red : .green
+            physicsCircle.add(component: BackgroundColorRenderComponent())
+        }
         physicsCircle.add(component: physicsBody)
     }
     
