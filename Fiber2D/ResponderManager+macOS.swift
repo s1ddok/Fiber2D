@@ -11,8 +11,8 @@
 import Cocoa
 import SwiftMath
 
-internal extension ResponderManager {
-    func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
+public extension ResponderManager {
+    public func mouseDown(_ theEvent: NSEvent, button: MouseButton) {
         if !enabled {
             return
         }
@@ -31,7 +31,7 @@ internal extension ResponderManager {
         }, screenPosition: mouseLocation)
     }
     
-    func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
+    public func mouseDragged(_ theEvent: NSEvent, button: MouseButton) {
         if !enabled {
             return
         }
@@ -62,7 +62,7 @@ internal extension ResponderManager {
         }
     }
     
-    func mouseUp(_ theEvent: NSEvent, button: MouseButton) {
+    public func mouseUp(_ theEvent: NSEvent, button: MouseButton) {
         if dirty {
             self.buildResponderList()
         }
@@ -78,7 +78,7 @@ internal extension ResponderManager {
         }
     }
     
-    func mouseMoved(_ theEvent: NSEvent) {
+    public func mouseMoved(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -94,7 +94,7 @@ internal extension ResponderManager {
         }, screenPosition: mouseLocation)
     }
     
-    func executeOnEachResponder(_ block: (Responder) -> Void, screenPosition: Point) {
+    public func executeOnEachResponder(_ block: (Responder) -> Void, screenPosition: Point) {
         Director.pushCurrentDirector(director)
         // scan through responders, and find first one
         for responder in responderList.reversed().lazy {
@@ -111,7 +111,7 @@ internal extension ResponderManager {
         Director.popCurrentDirector()
     }
     
-    func scrollWheel(_ theEvent: NSEvent) {
+    public func scrollWheel(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -139,7 +139,7 @@ internal extension ResponderManager {
         }, screenPosition: mouseLocation)
     }
     
-    func keyDown(_ theEvent: NSEvent) {
+    public func keyDown(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -153,7 +153,7 @@ internal extension ResponderManager {
         Director.popCurrentDirector()
     }
     
-    func keyUp(_ theEvent: NSEvent) {
+    public func keyUp(_ theEvent: NSEvent) {
         if !enabled {
             return
         }
@@ -167,7 +167,7 @@ internal extension ResponderManager {
         Director.popCurrentDirector()
     }
     
-    func flagsChanged(_ theEvent: NSEvent) {
+    public func flagsChanged(_ theEvent: NSEvent) {
         if !enabled {
             return
         }

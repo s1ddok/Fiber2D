@@ -48,7 +48,7 @@ open class Sprite: Node {
      *
      *  @return A newly initialized Sprite object.
      */
-    convenience init(imageNamed imageName: String) {
+    convenience public init(imageNamed imageName: String) {
         let spriteFrame = SpriteFrame.with(imageName: imageName)
         self.init(spriteFrame: spriteFrame!)
     }
@@ -61,7 +61,7 @@ open class Sprite: Node {
      *  @return A newly initialized Sprite object.
      *  @see SpriteFrame
      */
-    convenience init(spriteFrame: SpriteFrame) {
+    convenience public init(spriteFrame: SpriteFrame) {
         self.init(texture: spriteFrame.texture, rect: spriteFrame.rect)
         self.spriteFrame = spriteFrame
     }
@@ -78,7 +78,7 @@ open class Sprite: Node {
      *  @return A newly initialized Sprite object.
      *  @see Texture
      */
-    init(texture: Texture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
+    public init(texture: Texture? = nil, rect: Rect = Rect.zero, rotated: Bool = false) {
         material = Material(technique: .positionTexture)
         super.init()
         // default transform anchor: center

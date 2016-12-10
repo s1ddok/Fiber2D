@@ -64,6 +64,12 @@ public struct PositionType {
     public let yUnit: PositionUnit
     public let corner: PositionReferencePoint
     
+    public init(xUnit: PositionUnit, yUnit: PositionUnit, corner: PositionReferencePoint) {
+        self.xUnit  = xUnit
+        self.yUnit  = yUnit
+        self.corner = corner
+    }
+    
     public var isBasicPoints: Bool {
         return xUnit  == .points
             && yUnit  == .points
@@ -80,9 +86,14 @@ public struct SizeType {
     public let xUnit: SizeUnit
     public let yUnit: SizeUnit
     
+    public init(xUnit: SizeUnit, yUnit: SizeUnit) {
+        self.xUnit = xUnit
+        self.yUnit = yUnit
+    }
+    
     public var isBasicPoints: Bool {
-        return xUnit  == .points
-            && yUnit  == .points
+        return xUnit == .points
+            && yUnit == .points
     }
 
     public static let points     = SizeType(xUnit: .points, yUnit: .points)

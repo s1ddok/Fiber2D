@@ -18,7 +18,7 @@ import Cocoa
  To force the events to be passed to next responder, call the super implementation before returning from the event.
  */
 open class Responder {
-
+    public init() {}
     /// @name Enabling Input Events
 
     /** Enables user interaction on a node. */
