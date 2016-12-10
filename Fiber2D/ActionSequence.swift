@@ -128,7 +128,7 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
     }
 }*/
 
-extension ActionContainer where Self: FiniteTime {
+public extension ActionContainer where Self: FiniteTime {
     public func then(_ next: ActionContainerFiniteTime) -> ActionSequenceContainer {
         return ActionSequenceContainer(first: self, second: next)
     }

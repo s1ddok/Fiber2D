@@ -47,8 +47,8 @@ public struct ActionContinousContainer: ActionContainer, Continous {
     
 }
 
-extension ActionModel {
-    func continously(duration: Time) -> ActionContinousContainer {
+public extension ActionModel {
+    public func continously(duration: Time) -> ActionContinousContainer {
         return ActionContinousContainer(action: self, duration: duration)
     }
 }

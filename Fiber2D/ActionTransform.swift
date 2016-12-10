@@ -12,7 +12,7 @@ import SwiftMath
  This action rotates the target to the specified angle.
  The direction will be decided by the shortest route.
  */
-struct ActionRotateTo: ActionModel {
+public struct ActionRotateTo: ActionModel {
     private let dstAngleX   : Angle
     private var startAngleX : Angle!
     private let dstAngleY   : Angle
@@ -25,11 +25,11 @@ struct ActionRotateTo: ActionModel {
     private var diffAngleY  = Angle.zero
     private var diffAngleX  = Angle.zero
     
-    init(angle: Angle) {
+    public init(angle: Angle) {
         self.init(angleX: angle, angleY: angle)
     }
     
-    init(angleX aX: Angle? = nil, angleY aY: Angle? = nil) {
+    public init(angleX aX: Angle? = nil, angleY aY: Angle? = nil) {
         self.dstAngleX = aX ?? Angle.zero
         self.dstAngleY = aY ?? Angle.zero
         rotateX = aX != nil
@@ -37,7 +37,7 @@ struct ActionRotateTo: ActionModel {
         simple = aX == aY
     }
 
-    mutating func start(with target: Node) {
+    mutating public func start(with target: Node) {
         self.target = target
         // Simple Rotation
         if simple {
@@ -77,7 +77,7 @@ struct ActionRotateTo: ActionModel {
         }
     }
 
-    mutating func update(state: Float) {
+    mutating public func update(state: Float) {
         // added to support overriding setRotation only
         if startAngleX == startAngleY && diffAngleX == diffAngleY {
             target.rotation = startAngleX + diffAngleX * state
@@ -95,7 +95,7 @@ struct ActionRotateTo: ActionModel {
 /**
  This action rotates the target clockwise by the number of degrees specified.
  */
-struct ActionRotateBy: ActionModel {
+public struct ActionRotateBy: ActionModel {
     private var startAngleX : Angle!
     private var startAngleY : Angle!
     private let rotateX: Bool
@@ -105,24 +105,24 @@ struct ActionRotateBy: ActionModel {
     private let diffAngleY: Angle
     private let diffAngleX: Angle
     
-    init(angle: Angle) {
+    public init(angle: Angle) {
         self.init(angleX: angle, angleY: angle)
     }
     
-    init(angleX aX: Angle? = nil, angleY aY: Angle? = nil) {
+    public init(angleX aX: Angle? = nil, angleY aY: Angle? = nil) {
         self.diffAngleX = aX ?? Angle.zero
         self.diffAngleY = aY ?? Angle.zero
         rotateX = aX != nil
         rotateY = aY != nil
     }
     
-    mutating func start(with target: Node) {
+    mutating public func start(with target: Node) {
         self.target = target
         self.startAngleX = target.rotationalSkewX
         self.startAngleY = target.rotationalSkewY
     
     }
-    mutating func update(state: Float) {
+    mutating public func update(state: Float) {
         // added to support overriding setRotation only
         if startAngleX == startAngleY && diffAngleX == diffAngleY {
             target.rotation = startAngleX + diffAngleX * state
@@ -140,7 +140,7 @@ struct ActionRotateBy: ActionModel {
 /**
  *  This action skews the target to the specified angles. Skewing changes the rectangular shape of the node to that of a parallelogram.
  */
-struct ActionSkewTo: ActionModel {
+public struct ActionSkewTo: ActionModel {
     private var skewX:         Angle = 0°
     private var skewY:         Angle = 0°
     private var startSkewX:    Angle = 0°
@@ -161,12 +161,12 @@ struct ActionSkewTo: ActionModel {
      *
      *  @return New skew action.
      */
-    init(skewX sx: Angle, skewY sy: Angle) {
+    public init(skewX sx: Angle, skewY sy: Angle) {
         self.endSkewX = sx
         self.endSkewY = sy
     }
     
-    mutating func start(with target: Node) {
+    mutating public func start(with target: Node) {
         self.target = target
         
         // X
@@ -192,7 +192,7 @@ struct ActionSkewTo: ActionModel {
         }
     }
     
-    mutating func update(state: Float) {
+    mutating public func update(state: Float) {
         target.skewX = startSkewX + deltaX * state
         target.skewY = startSkewY + deltaY * state
     }
@@ -201,7 +201,7 @@ struct ActionSkewTo: ActionModel {
 /**
  *  This action skews a target by the specified skewX and skewY degrees values. Skewing changes the rectangular shape of the node to that of a parallelogram.
  */
-struct ActionSkewBy: ActionModel {
+public struct ActionSkewBy: ActionModel {
     private var startSkewX:    Angle = 0°
     private var startSkewY:    Angle = 0°
     private let deltaX:        Angle
@@ -218,18 +218,18 @@ struct ActionSkewBy: ActionModel {
      *
      *  @return New skew action.
      */
-    init(skewX sx: Angle = 0°, skewY sy: Angle = 0°) {
+    public init(skewX sx: Angle = 0°, skewY sy: Angle = 0°) {
         self.deltaX = sx
         self.deltaY = sy
     }
     
-    mutating func start(with target: Node) {
+    mutating public func start(with target: Node) {
         self.target = target
         self.startSkewX = target.skewX
         self.startSkewY = target.skewY
     }
     
-    mutating func update(state: Float) {
+    mutating public func update(state: Float) {
         target.skewX = startSkewX + deltaX * state
         target.skewY = startSkewY + deltaY * state
     }
@@ -239,7 +239,7 @@ struct ActionSkewBy: ActionModel {
  This action moves the target to the position specified, these are absolute coordinates.
  Several MoveTo actions can be concurrently called, and the resulting movement will be the sum of individual movements.
  */
-struct ActionMoveTo: ActionModel {
+public struct ActionMoveTo: ActionModel {
     private var startPosition: Point!
     private let endPosition: Point
     
@@ -254,16 +254,16 @@ struct ActionMoveTo: ActionModel {
      *
      *  @return New moveto action.
      */
-    init(_ p: Point) {
+    public init(_ p: Point) {
         endPosition = p
     }
     
-    mutating func start(with target: Node) {
+    mutating public func start(with target: Node) {
         self.target = target
         self.startPosition = target.position
     }
     
-    mutating func update(state: Float) {
+    mutating public func update(state: Float) {
         target.position = startPosition.interpolated(to: endPosition, factor: state)
     }
 }
@@ -273,7 +273,7 @@ struct ActionMoveTo: ActionModel {
  X and Y are relative to the position of the object.
  Several MoveBy actions can be concurrently called, and the resulting movement will be the sum of individual movements.
  */
-struct ActionMoveBy: ActionModel {
+public struct ActionMoveBy: ActionModel {
     private var startPosition: Point!
     public let deltaPosition: Point
     #if ENABLE_STACKABLE_ACTIONS
@@ -290,11 +290,11 @@ struct ActionMoveBy: ActionModel {
      *
      *  @return New moveby action.
      */
-    init(_ p: Point) {
+    public init(_ p: Point) {
         deltaPosition = p
     }
     
-    mutating func start(with target: Node) {
+    mutating public func start(with target: Node) {
         self.target = target
         self.startPosition = target.position
         #if ENABLE_STACKABLE_ACTIONS
@@ -302,7 +302,7 @@ struct ActionMoveBy: ActionModel {
         #endif
     }
     
-    mutating func update(state: Float) {
+    mutating public func update(state: Float) {
         #if ENABLE_STACKABLE_ACTIONS
         let currentPosition = target.position
         let diff = currentPosition - previousPosition
