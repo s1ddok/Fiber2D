@@ -25,7 +25,7 @@ internal extension Director {
 }
     
 @available(OSX, introduced: 10.11)
-internal class MTKDelegate: NSObject, MTKViewDelegate, _MTKDelegate {
+public class MTKDelegate: NSObject, MTKViewDelegate, _MTKDelegate {
     internal var director: Director
     
     internal init(director: Director) {

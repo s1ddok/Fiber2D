@@ -22,8 +22,8 @@ extension Vector2f {
     }
 }
 
-extension Size {
-    init(CGSize: CGSize) {
+public extension Size {
+    public init(CGSize: CGSize) {
         self.init(Float(CGSize.width), Float(CGSize.height))
     }
     

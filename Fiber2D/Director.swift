@@ -23,9 +23,6 @@ public class Director {
         self.current = stack.removeLast()
     }
     
-    #if os(OSX) || os(iOS) || os(tvOS)
-    internal var metalKitDelegate: _MTKDelegate!
-    #endif
     // internal timer
     var oldFrameSkipInterval: Int = 1
     var frameSkipInterval: Int = 1
@@ -84,7 +81,8 @@ public class Director {
     /// View used by the director for rendering.
     public weak var view: DirectorView?
     
-    init(view: DirectorView) {
+    #if os(OSX) || os(iOS) || os(tvOS)
+    public init(view: DirectorView) {
         self.displayStats = false
         self.totalFrames = 0
         self.frames = 0
@@ -94,12 +92,13 @@ public class Director {
 
         self.responderManager = ResponderManager(director: self)
 
-        #if os(OSX) || os(iOS) || os(tvOS)
         if #available(OSX 10.11, *) {
             self.metalKitDelegate = MTKDelegate(director: self)
         }
-        #endif
     }
+    
+    public var metalKitDelegate: _MTKDelegate!
+    #endif
     
     var r: Renderer?
     
