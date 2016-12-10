@@ -7,6 +7,7 @@
 
 import SwiftMath
 import Cocoa
+import Fiber2D
 
 fileprivate func createRT(size: Size, clearColor: Color, geometryColor: Color = .green) -> RenderTexture {
     let rt = RenderTexture(width: UInt(size.width), height: UInt(size.height))
