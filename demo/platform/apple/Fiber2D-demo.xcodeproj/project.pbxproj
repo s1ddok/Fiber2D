@@ -1,0 +1,355 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08781A4A1DFF3B6000C4F39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A491DFF3B6000C4F39D /* AppDelegate.swift */; };
+		08781A4C1DFF3B6000C4F39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08781A4B1DFF3B6000C4F39D /* Assets.xcassets */; };
+		08781A4F1DFF3B6000C4F39D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08781A4D1DFF3B6000C4F39D /* MainMenu.xib */; };
+		08781A581DFF3BA800C4F39D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A561DFF3BA800C4F39D /* main.swift */; };
+		08781A591DFF3BA800C4F39D /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A571DFF3BA800C4F39D /* MetalView.swift */; };
+		08781A5E1DFF3FDB00C4F39D /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
+		08781A5F1DFF3FDB00C4F39D /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */; };
+		08781A601DFF3FDB00C4F39D /* ViewportScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5D1DFF3FDB00C4F39D /* ViewportScene.swift */; };
+		08781A631DFF40B400C4F39D /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 08781A621DFF40B400C4F39D /* Resources */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08781A461DFF3B6000C4F39D /* Fiber2D-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fiber2D-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		08781A491DFF3B6000C4F39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		08781A4B1DFF3B6000C4F39D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		08781A4E1DFF3B6000C4F39D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		08781A501DFF3B6000C4F39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08781A561DFF3BA800C4F39D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		08781A571DFF3BA800C4F39D /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		08781A5B1DFF3FDB00C4F39D /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScene.swift; path = ../../../MainScene.swift; sourceTree = "<group>"; };
+		08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserComponents.swift; path = ../../../UserComponents.swift; sourceTree = "<group>"; };
+		08781A5D1DFF3FDB00C4F39D /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewportScene.swift; path = ../../../ViewportScene.swift; sourceTree = "<group>"; };
+		08781A621DFF40B400C4F39D /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../../../Resources; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		08781A431DFF3B6000C4F39D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08781A3D1DFF3B6000C4F39D = {
+			isa = PBXGroup;
+			children = (
+				08781A481DFF3B6000C4F39D /* Fiber2D-demo */,
+				08781A471DFF3B6000C4F39D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		08781A471DFF3B6000C4F39D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				08781A461DFF3B6000C4F39D /* Fiber2D-demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		08781A481DFF3B6000C4F39D /* Fiber2D-demo */ = {
+			isa = PBXGroup;
+			children = (
+				08781A611DFF3FDF00C4F39D /* Demo */,
+				08781A5A1DFF3FB800C4F39D /* System */,
+			);
+			path = "Fiber2D-demo";
+			sourceTree = "<group>";
+		};
+		08781A5A1DFF3FB800C4F39D /* System */ = {
+			isa = PBXGroup;
+			children = (
+				08781A491DFF3B6000C4F39D /* AppDelegate.swift */,
+				08781A561DFF3BA800C4F39D /* main.swift */,
+				08781A571DFF3BA800C4F39D /* MetalView.swift */,
+				08781A4B1DFF3B6000C4F39D /* Assets.xcassets */,
+				08781A4D1DFF3B6000C4F39D /* MainMenu.xib */,
+				08781A501DFF3B6000C4F39D /* Info.plist */,
+			);
+			name = System;
+			sourceTree = "<group>";
+		};
+		08781A611DFF3FDF00C4F39D /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				08781A621DFF40B400C4F39D /* Resources */,
+				08781A5B1DFF3FDB00C4F39D /* MainScene.swift */,
+				08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */,
+				08781A5D1DFF3FDB00C4F39D /* ViewportScene.swift */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		08781A451DFF3B6000C4F39D /* Fiber2D-demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08781A531DFF3B6000C4F39D /* Build configuration list for PBXNativeTarget "Fiber2D-demo" */;
+			buildPhases = (
+				08781A421DFF3B6000C4F39D /* Sources */,
+				08781A431DFF3B6000C4F39D /* Frameworks */,
+				08781A441DFF3B6000C4F39D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fiber2D-demo";
+			productName = "Fiber2D-demo";
+			productReference = 08781A461DFF3B6000C4F39D /* Fiber2D-demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08781A3E1DFF3B6000C4F39D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = s1ddok;
+				TargetAttributes = {
+					08781A451DFF3B6000C4F39D = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = PR6HV9J6AD;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 08781A411DFF3B6000C4F39D /* Build configuration list for PBXProject "Fiber2D-demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 08781A3D1DFF3B6000C4F39D;
+			productRefGroup = 08781A471DFF3B6000C4F39D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				08781A451DFF3B6000C4F39D /* Fiber2D-demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		08781A441DFF3B6000C4F39D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08781A4C1DFF3B6000C4F39D /* Assets.xcassets in Resources */,
+				08781A4F1DFF3B6000C4F39D /* MainMenu.xib in Resources */,
+				08781A631DFF40B400C4F39D /* Resources in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		08781A421DFF3B6000C4F39D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08781A591DFF3BA800C4F39D /* MetalView.swift in Sources */,
+				08781A5E1DFF3FDB00C4F39D /* MainScene.swift in Sources */,
+				08781A601DFF3FDB00C4F39D /* ViewportScene.swift in Sources */,
+				08781A5F1DFF3FDB00C4F39D /* UserComponents.swift in Sources */,
+				08781A581DFF3BA800C4F39D /* main.swift in Sources */,
+				08781A4A1DFF3B6000C4F39D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		08781A4D1DFF3B6000C4F39D /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08781A4E1DFF3B6000C4F39D /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		08781A511DFF3B6000C4F39D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		08781A521DFF3B6000C4F39D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		08781A541DFF3B6000C4F39D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PR6HV9J6AD;
+				HEADER_SEARCH_PATHS = "../../../Packages/**";
+				INFOPLIST_FILE = "Fiber2D-demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					../../../external/SwiftBGFX/.build/debug,
+					../../../.build/debug,
+				);
+				OTHER_LDFLAGS = (
+					"-lFiber2D",
+					"-lSwiftMath",
+					"-lSwiftBGFX",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "../../../.build/debug/** ../../../external/SwiftBGFX/.build/debug";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		08781A551DFF3B6000C4F39D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PR6HV9J6AD;
+				HEADER_SEARCH_PATHS = "../../../Packages/**";
+				INFOPLIST_FILE = "Fiber2D-demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					../../../external/SwiftBGFX/.build/debug,
+					../../../.build/debug,
+				);
+				OTHER_LDFLAGS = (
+					"-lFiber2D",
+					"-lSwiftMath",
+					"-lSwiftBGFX",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "../../../.build/debug/** ../../../external/SwiftBGFX/.build/debug";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08781A411DFF3B6000C4F39D /* Build configuration list for PBXProject "Fiber2D-demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08781A511DFF3B6000C4F39D /* Debug */,
+				08781A521DFF3B6000C4F39D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08781A531DFF3B6000C4F39D /* Build configuration list for PBXNativeTarget "Fiber2D-demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08781A541DFF3B6000C4F39D /* Debug */,
+				08781A551DFF3B6000C4F39D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08781A3E1DFF3B6000C4F39D /* Project object */;
+}
