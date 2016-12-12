@@ -63,11 +63,15 @@ Okay, so how we build this monster? I tried to simplify the whole process for yo
 
    ```$ git clone --recursive https://github.com/s1ddok/Fiber2D.git```
 
-2. Call helper script, that will do all the stuff for you. (You have to have `ninja build` installed)
+2. Call helper script, that will do all the preparation stuff for you. (You have to have `ninja build` installed)
 
    ``` sh prepare_bgfx_macos.sh ```
+   
+3. Call build script that will build Fiber2D.
 
-3. Open XCode project, compile and run. You should see the demo yourself.
+  ``` sh build_osx.sh ```
+
+4. Open demo XCode project, compile and run. You should see the demo yourself.
 
 # Contributors 
 
