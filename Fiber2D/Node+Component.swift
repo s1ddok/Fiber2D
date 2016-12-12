@@ -237,7 +237,10 @@ public extension Node {
 extension Node: Updatable, FixedUpdatable {
     
     public final func update(delta: Time) {
-        updatableComponents.forEach { $0.update(delta: delta) }
+        // workaround Swift bug same way as in fixedUpdate method
+        for c in updatableComponents as [Updatable] {
+            c.update(delta: delta)
+        }
     }
     
     public final func fixedUpdate(delta: Time) {
