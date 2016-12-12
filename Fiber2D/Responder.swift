@@ -18,7 +18,7 @@ import Cocoa
  To force the events to be passed to next responder, call the super implementation before returning from the event.
  */
 open class Responder {
-
+    public init() {}
     /// @name Enabling Input Events
 
     /** Enables user interaction on a node. */
@@ -111,19 +111,19 @@ open class Responder {
     }
     
     #if os(OSX)
-    func scrollWheel(_ theEvent: NSEvent) {
+    open func scrollWheel(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
     
-    func keyDown(_ theEvent: NSEvent) {
+    open func keyDown(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
     
-    func keyUp(_ theEvent: NSEvent) {
+    open func keyUp(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
     
-    func flagsChanged(_ theEvent: NSEvent) {
+    open func flagsChanged(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
     #endif

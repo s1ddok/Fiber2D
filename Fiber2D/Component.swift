@@ -35,6 +35,8 @@ open class ComponentBase: Component {
     
     open var tag: Int = 0
     
+    public init() {}
+    
     open func onAdd(to owner: Node) {
         self.owner = owner
     }

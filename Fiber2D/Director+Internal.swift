@@ -44,6 +44,12 @@ internal extension Director {
         print("Director#stopRunLoop. Override me")
     }
     
+    internal func antiFlickrDrawCall() {
+        // Questionable "anti-flickr", extra draw call:
+        // overridden for android.
+        self.mainLoopBody()
+    }
+
     internal func mainLoopBody() {
         if !animating {
             return
@@ -88,6 +94,32 @@ internal extension Director {
         view!.presentFrame()
         totalFrames += 1
         Director.popCurrentDirector()
+    }
+    
+    internal func calculateDeltaTime() {
+        let now = Time.absoluteTime
+        // new delta time
+        if nextDeltaTimeZero {
+            self.dt = 0
+            self.nextDeltaTimeZero = false
+        } else {
+            self.dt = now - lastUpdate
+            self.dt = max(0, dt)
+        }
+        // If we are debugging our code, prevent big delta time
+        if dt > 0.2 {
+            self.dt = 1 / 60.0
+        }
+        self.lastUpdate = now
+    }
+    
+    internal var flipY: Float {
+        #if os(iOS)
+            return -1.0
+        #endif
+        #if os(OSX)
+            return 1.0
+        #endif
     }
     
     /// Rect of the visible screen area in GL coordinates.

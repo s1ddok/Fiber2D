@@ -46,7 +46,7 @@ public struct ActionCallBlock: ActionModel {
      *
      *  @return The call block action.
      */
-    init(block: @escaping () -> ()) {
+    public init(block: @escaping () -> ()) {
         self.block = block
     }
     

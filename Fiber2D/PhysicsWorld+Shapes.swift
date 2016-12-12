@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import CChipmunk2D
+
 internal extension PhysicsWorld {
     
     internal func add(shape: PhysicsShape) {

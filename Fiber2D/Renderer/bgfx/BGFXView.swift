@@ -8,6 +8,7 @@
 
 import MetalKit
 
+@available(OSX, introduced: 10.11)
 class BGFXView: MTKView {
     
 }

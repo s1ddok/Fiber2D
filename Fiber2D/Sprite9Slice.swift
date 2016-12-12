@@ -7,6 +7,7 @@
 
 import SwiftMath
 import SwiftBGFX
+import Darwin
 
 internal let SPRITE_9SLICE_MARGIN_DEFAULT: Float = 1.0 / 3.0
 

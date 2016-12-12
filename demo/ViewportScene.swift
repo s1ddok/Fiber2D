@@ -8,6 +8,7 @@
 
 import SwiftMath
 import Cocoa
+import Fiber2D
 
 class CustomBehaviour: ComponentBase, Updatable {
     let vps: ViewportScene

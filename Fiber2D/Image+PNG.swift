@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftMath
+import Cpng
 
 public extension Image {
     internal convenience init(pngFile: File, options: ImageOptions = .default) {

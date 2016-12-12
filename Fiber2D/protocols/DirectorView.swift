@@ -9,7 +9,7 @@
 import SwiftMath
 
 // purposefully undocumented: used only internally
-// Protocol for a view that CCDirector will use to render into.
+// Protocol for a view that Director will use to render into.
 public protocol DirectorView: class {
     var sizeInPixels: Size { get }
     var size: Size { get }
@@ -22,4 +22,8 @@ public protocol DirectorView: class {
     // The block may not be invoked from the main thread.
     // @param handler The completion block. The block takes no arguments and has no return value.
     func add(frameCompletionHandler handler: @escaping () -> ())
+    
+    #if os(OSX)
+    func set(delegate: _MTKDelegate)
+    #endif
 }

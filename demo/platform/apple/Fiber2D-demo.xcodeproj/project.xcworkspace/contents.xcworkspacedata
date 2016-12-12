@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Fiber2D.xcodeproj">
+      location = "self:Fiber2D-demo.xcodeproj">
    </FileRef>
 </Workspace>

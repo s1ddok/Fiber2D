@@ -95,14 +95,14 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
     
 }
 
-extension ActionContainer where Self: FiniteTime {
-    func and(_ action: ActionContainerFiniteTime) -> ActionConcurrentContainer {
+public extension ActionContainer where Self: FiniteTime {
+    public func and(_ action: ActionContainerFiniteTime) -> ActionConcurrentContainer {
         return ActionConcurrentContainer(first: self, second: action)
     }
 }
 
-extension ActionModel {
-    func and(_ action: ActionModel) -> ActionConcurrent {
+public extension ActionModel {
+    public func and(_ action: ActionModel) -> ActionConcurrent {
         return ActionConcurrent(first: self, second: action)
     }
 }

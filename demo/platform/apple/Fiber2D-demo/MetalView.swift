@@ -8,17 +8,22 @@
 import Metal
 import MetalKit
 import SwiftMath
+import Fiber2D
 
-class MetalView: MTKView, DirectorView {
+public class MetalView: MTKView, DirectorView {
+    public func set(delegate: _MTKDelegate) {
+        
+    }
+
     var layerSizeDidUpdate: Bool = false
     var director: Director!
     var surfaceSize = CGSize.zero
     
-    var sizeInPixels: Size {
+    public var sizeInPixels: Size {
         return Size(CGSize: self.bounds.size) *  Float(self.contentScaleFactor)
     }
     
-    var size: Size {
+    public var size: Size {
         return Size(CGSize: self.bounds.size)
     }
     
@@ -28,7 +33,7 @@ class MetalView: MTKView, DirectorView {
         return screen.backingScaleFactor
     }
     
-    override var acceptsFirstResponder : Bool {
+    override public var acceptsFirstResponder : Bool {
         return true
     }
     #endif
@@ -39,13 +44,13 @@ class MetalView: MTKView, DirectorView {
 
         self.director = Director(view: self)
         self.preferredFramesPerSecond = 60
-        self.delegate = director.metalKitDelegate
+        self.delegate = director.metalKitDelegate as! MTKDelegate
         self.drawableSize = frame.size
         self.surfaceSize = frame.size
         self.colorPixelFormat = .bgra8Unorm
     }
     
-    required init(coder: NSCoder) {
+    required public init(coder: NSCoder) {
         super.init(coder: coder)
         //self.context = CCMetalContext()
         //TODO Move into CCRenderDispatch to support threaded rendering with Metal?
@@ -63,7 +68,7 @@ class MetalView: MTKView, DirectorView {
         self.surfaceSize = (Size(CGSize: self.bounds.size) * Float(self.contentScaleFactor)).cgSize
     }
     
-    func beginFrame() {
+    public func beginFrame() {
         //dispatch_semaphore_wait(_queuedFramesSemaphore, DISPATCH_TIME_FOREVER);
         if layerSizeDidUpdate {
             self.drawableSize = surfaceSize
@@ -72,12 +77,12 @@ class MetalView: MTKView, DirectorView {
         
     }
     
-    func presentFrame() {
+    public func presentFrame() {
         //context.currentCommandBuffer.present(self.currentDrawable!)
         //context.flushCommandBuffer()
     }
     
-    func add(frameCompletionHandler handler: @escaping ()->()) {
+    public func add(frameCompletionHandler handler: @escaping ()->()) {
         /*context.currentCommandBuffer.addCompletedHandler {(buffer: MTLCommandBuffer) -> Void in
             handler()
         }*/
@@ -121,59 +126,59 @@ class MetalView: MTKView, DirectorView {
     #if os(OSX)
     // NSResponder Mac events are forwarded to the responderManager associated with this view's Director.
     
-    override func mouseDown(with theEvent: NSEvent) {
+    override public func mouseDown(with theEvent: NSEvent) {
         director.responderManager.mouseDown(theEvent, button: .left)
     }
     
-    override func mouseDragged(with theEvent: NSEvent) {
+    override public func mouseDragged(with theEvent: NSEvent) {
         director.responderManager.mouseDragged(theEvent, button: .left)
     }
     
-    override func mouseUp(with theEvent: NSEvent) {
+    override public func mouseUp(with theEvent: NSEvent) {
         director.responderManager.mouseUp(theEvent, button: .left)
     }
     
-    override func mouseMoved(with theEvent: NSEvent) {
+    override public func mouseMoved(with theEvent: NSEvent) {
         director.responderManager.mouseMoved(theEvent)
     }
     
-    override func rightMouseDown(with theEvent: NSEvent) {
+    override public func rightMouseDown(with theEvent: NSEvent) {
         director.responderManager.mouseDown(theEvent, button: .right)
     }
     
-    override func rightMouseDragged(with theEvent: NSEvent) {
+    override public func rightMouseDragged(with theEvent: NSEvent) {
         director.responderManager.mouseDragged(theEvent, button: .right)
     }
     
-    override func rightMouseUp(with theEvent: NSEvent) {
+    override public func rightMouseUp(with theEvent: NSEvent) {
         director.responderManager.mouseUp(theEvent, button: .right)
     }
     
-    override func otherMouseDown(with theEvent: NSEvent) {
+    override public func otherMouseDown(with theEvent: NSEvent) {
         director.responderManager.mouseDown(theEvent, button: .other)
     }
     
-    override func otherMouseDragged(with theEvent: NSEvent) {
+    override public func otherMouseDragged(with theEvent: NSEvent) {
         director.responderManager.mouseDragged(theEvent, button: .other)
     }
     
-    override func otherMouseUp(with theEvent: NSEvent) {
+    override public func otherMouseUp(with theEvent: NSEvent) {
         director.responderManager.mouseUp(theEvent, button: .other)
     }
     
-    override func scrollWheel(with theEvent: NSEvent) {
+    override public func scrollWheel(with theEvent: NSEvent) {
         director.responderManager.scrollWheel(theEvent)
     }
     
-    override func keyDown(with theEvent: NSEvent) {
+    override public func keyDown(with theEvent: NSEvent) {
         director.responderManager.keyDown(theEvent)
     }
     
-    override func keyUp(with theEvent: NSEvent) {
+    override public func keyUp(with theEvent: NSEvent) {
         director.responderManager.keyUp(theEvent)
     }
     
-    override func flagsChanged(with theEvent: NSEvent) {
+    override public func flagsChanged(with theEvent: NSEvent) {
         director.responderManager.flagsChanged(theEvent)
     }
     #endif

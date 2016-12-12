@@ -78,7 +78,7 @@ public struct ActionEaseContainer: ActionContainer, Continous {
     }
 }
 
-extension ActionContainer {
+public extension ActionContainer {
     public func ease(_ type: EaseType) -> ActionEaseContainer {
         return ActionEaseContainer(action: self, easeType: type)
     }

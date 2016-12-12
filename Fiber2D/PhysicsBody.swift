@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import CChipmunk2D
 
 /**
  * A body affect by physics.

@@ -89,6 +89,7 @@ import SwiftMath
  Otherwise your code will break if you subsequently change the positionType to something other than points (ie UIPoints or Normalized).
  */
 open class Node: Prioritized, Pausable {
+    public init() {}
     
     // MARK: Convenience
     /// Should be in +Convenience, but are being overriden in Scene
@@ -400,8 +401,7 @@ open class Node: Prioritized, Pausable {
     public var anchorPoint = Point.zero {
         didSet {
             if oldValue != anchorPoint {
-                let contentSizeInPoints = self.contentSizeInPoints
-                anchorPointInPoints = p2d(contentSizeInPoints.width * anchorPoint.x, contentSizeInPoints.height * anchorPoint.y)
+                anchorPointInPoints = contentSizeInPoints * anchorPoint
                 isTransformDirty = true
             }
         }

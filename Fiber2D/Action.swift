@@ -7,9 +7,9 @@
 //
 
 public protocol Targeted {
-    /// -----------------------------------------------------------------------
+
     /// @name Action Targets
-    /// -----------------------------------------------------------------------
+
     /**
      The "target" is typically the node instance that received the Node.runAction() message.
      The action will modify the target properties. The target will be set with the 'start(with:)' method.

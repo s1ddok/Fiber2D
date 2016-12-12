@@ -38,11 +38,9 @@ Currently we have only `macOS` demo for the ease of development, but it will sea
 You can get the idea from this GIF: 
 ![Fiber2D Demo Gif](http://imgur.com/CP6d9kT.gif)
 
-# Goals (updated 3 DEC 2016)
+# Goals (updated 13 DEC 2016)
 My goals for the near future are (order means nothing):
 
-* Migrate to **SwiftPM project structure completely**, drop XCode as a heart of the project
-  * Introduce `CChipmunk`, `Clibpng`, etc
 * **Port to `Linux` using `SDL` for Windowing and Input handle (first step on the way to `Android`)** (remember those 15%?)
 * Remove code parts that has `Obj-C smell` (this includes making the whole API more Swifty, moving forward to `protocol-obsessed` world)
 * **Add `FreeType 2` support for cross-platform text rendering**
@@ -63,11 +61,15 @@ Okay, so how we build this monster? I tried to simplify the whole process for yo
 
    ```$ git clone --recursive https://github.com/s1ddok/Fiber2D.git```
 
-2. Call helper script, that will do all the stuff for you. (You have to have `ninja build` installed)
+2. Call helper script, that will do all the preparation stuff for you. (You have to have `ninja build` installed)
 
    ``` sh prepare_bgfx_macos.sh ```
+   
+3. Call build script that will build Fiber2D.
 
-3. Open XCode project, compile and run. You should see the demo yourself.
+  ``` sh build_osx.sh ```
+
+4. Open demo XCode project, compile and run. You should see the demo yourself.
 
 # Contributors 
 

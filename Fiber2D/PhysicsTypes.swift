@@ -7,6 +7,7 @@
 //
 
 import SwiftMath
+import CChipmunk2D
 
 let CP_ALL_CATEGORIES: UInt32 = UInt32.max
 

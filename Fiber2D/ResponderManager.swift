@@ -44,7 +44,7 @@ internal final class RunningResponder {
 /**
  *  The responder manager handles touches and mouse.
  */
-internal final class ResponderManager {
+public final class ResponderManager {
     
     /**
      *  Enables the responder manager.

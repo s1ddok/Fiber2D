@@ -6,11 +6,12 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-import SwiftMath
-import CoreGraphics
-
 #if os(iOS) || os(tvOS) || os(OSX)
     
+import SwiftMath
+import CoreGraphics
+import Darwin
+
 extension Vector2f {
     var cgPoint: CGPoint {
         return CGPoint(x: Double(x), y: Double(y))
@@ -21,8 +22,8 @@ extension Vector2f {
     }
 }
 
-extension Size {
-    init(CGSize: CGSize) {
+public extension Size {
+    public init(CGSize: CGSize) {
         self.init(Float(CGSize.width), Float(CGSize.height))
     }
     

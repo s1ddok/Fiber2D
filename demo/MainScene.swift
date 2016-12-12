@@ -7,6 +7,7 @@
 
 import SwiftMath
 import Cocoa
+import Fiber2D
 
 fileprivate func createRT(size: Size, clearColor: Color, geometryColor: Color = .green) -> RenderTexture {
     let rt = RenderTexture(width: UInt(size.width), height: UInt(size.height))
@@ -108,7 +109,7 @@ class MainScene: Scene {
         colorNodes[8].run(action: rotateAndMove.then(ActionCallBlock { print(colorNodes[8].position) }.instantly))
         colorNodes[8].run(action: ActionMoveBy(vec2(0.0, -0.1)).continously(duration: 1.0))
         print(Date())
-        let _ = schedule(block: { (t:Timer) in
+        let _ = schedule(block: { t in
             print(Date())
             print(colorNodes[8].rotation)
             }, delay: 10.0)
@@ -208,7 +209,7 @@ public class MainSceneResponder: Responder {
         physicsCircle.add(component: physicsBody)
     }
     
-    override func scrollWheel(_ theEvent: NSEvent) {
+    override public func scrollWheel(_ theEvent: NSEvent) {
         print("scroll")
     }
     

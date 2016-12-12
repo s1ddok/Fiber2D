@@ -8,6 +8,7 @@
 
 import Cocoa
 import SwiftBGFX
+import Fiber2D
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -30,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let locator = FileLocator.shared
         locator.untaggedContentScale = 4
         locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "/Resources" ]
-            
+        
         window.center()
         window.makeFirstResponder(view)
         window.makeKeyAndOrderFront(window)

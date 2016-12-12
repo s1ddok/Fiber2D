@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import Fiber2D
+
 public class UpdateComponent: ComponentBase, Updatable {
     
     override init() {

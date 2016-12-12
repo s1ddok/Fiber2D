@@ -8,6 +8,9 @@
 
 import SwiftMath
 import SwiftBGFX
+#if os(OSX) || os(iOS) || os(tvOS)
+import Darwin
+#endif
 
 /**
  * Base protocol for all render components

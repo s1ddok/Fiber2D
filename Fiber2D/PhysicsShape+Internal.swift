@@ -6,6 +6,8 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+import CChipmunk2D
+
 internal extension PhysicsShape {
     func add(shape: UnsafeMutablePointer<cpShape>) {
         cpShapeSetUserData(shape, Unmanaged.passRetained(self).toOpaque())

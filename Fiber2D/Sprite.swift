@@ -7,6 +7,7 @@
 
 import SwiftMath
 import SwiftBGFX
+import Darwin
 
 /// The four RendererVertexes of a sprite.
 /// Bottom left, bottom right, top right, top left.
