@@ -8,7 +8,8 @@
 
 This project originated as [cocos2d-objc](https://github.com/cocos2d/cocos2d-objc) rewrite to Swift. As I stopped commiting to the repo since June, because Obj-C is dead for me. 
 
-This is still in a very **proof-of-a-concept** state, where you can't really make any use of it yet. Currently it is served as a barely working demo, which compiles only with XCode. Some code parts still smell like Objective-C (some does not, though). *Generally the project is in transition from cocos2d-objc to Swifty style and most of (**all**? :) ) API will change.*
+This is still in a very **alpha state**, but you already can build some games with it, even though it may be unpleasant process as I change API almost every day. The project served as `.dylib` that builds by Swift Package Manager. It requires some project config in order to use it, but you can experiment with the demo provided in the repo.
+*Generally the project is in transition from cocos2d-objc to Swifty style and most of (**all**? :) ) API will change.*
 
 # Name
 Why is this not called `cocos2d-swift`. How dare you?!
