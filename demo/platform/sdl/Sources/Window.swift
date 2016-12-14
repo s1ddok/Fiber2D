@@ -38,10 +38,10 @@ let WindowPosCentered = SDL_WINDOWPOS_CENTERED_MASK | 0
 
 public class Window {
     
-    let theWindow: OpaquePointer
+    let handle: OpaquePointer
     
     public init(title: String = "Untitled", origin: Point, size: Size, flags: WindowFlags) {
-        theWindow = SDL_CreateWindow(title,
+        handle = SDL_CreateWindow(title,
                                      Int32(origin.x), Int32(origin.y),
                                      Int32(size.width), Int32(size.height),
                                      flags.rawValue)
@@ -49,80 +49,52 @@ public class Window {
     }
     
     deinit {
-        SDL_DestroyWindow(theWindow)
+        SDL_DestroyWindow(handle)
     }
     
     public var title: String {
         get {
-            return String(describing: SDL_GetWindowTitle(theWindow))
+            return String(describing: SDL_GetWindowTitle(handle))
         }
         set(newTitle) {
-            SDL_SetWindowTitle(theWindow, newTitle)
+            SDL_SetWindowTitle(handle, newTitle)
         }
     }
     
     public var id: UInt32 {
-        return SDL_GetWindowID(theWindow)
+        return SDL_GetWindowID(handle)
     }
     
     public var width: Int {
         var width: Int32 = 0
-        SDL_GetWindowSize(theWindow, &width, nil)
+        SDL_GetWindowSize(handle, &width, nil)
         return Int(width)
     }
     
     public var height: Int {
         var height: Int32 = 0
-        SDL_GetWindowSize(theWindow, nil, &height)
+        SDL_GetWindowSize(handle, nil, &height)
         return Int(height)
     }
-    
-    /*public var screenKeyboardShown: Bool {
-        return Keyboard.isScreenKeyboardShownOnWindow(self)
-    }
-    
-    public var renderer: Renderer {
-        if theRenderer == nil {
-            theRenderer = WindowRenderer(window: self)
-        }
-        return theRenderer!
-    }
-    
-    public var surface: Surface {
-        if windowSurface == nil {
-            windowSurface = Surface(sdlSurface: SDL_GetWindowSurface(theWindow), takeOwnership: false)
-        }
-        return windowSurface!
-    }*/
+
+    public lazy var surface: Surface = {
+        let surfaceHandle = SDL_GetWindowSurface(self.handle)!
+        return Surface(handle: surfaceHandle)
+    }()
     
     public func show() {
-        SDL_ShowWindow(theWindow)
+        SDL_ShowWindow(handle)
     }
     
     public func hide() {
-        SDL_HideWindow(theWindow)
+        SDL_HideWindow(handle)
     }
-    
-    public func setWidth(width: Int, height: Int) {
-        SDL_SetWindowSize(theWindow, Int32(width), Int32(height))
-    }
-    
-    /*public func showMessageBox(type: MessageBoxType, title: String, message: String) {
-        showSimpleMessageBox(type, title: title, message: message, window: self)
-    }*/
     
     public func update() {
-        SDL_UpdateWindowSurface(theWindow)
+        SDL_UpdateWindowSurface(handle)
     }
     
     public func updateRects() {
         // TODO: implement using SDL_UpdateWindowSurfaceRects()
     }
-    
-    /*public func _sdlWindow() -> COpaquePointer {
-        return theWindow
-    }
-    
-    var theRenderer: WindowRenderer?
-    var windowSurface: Surface?*/
 }
