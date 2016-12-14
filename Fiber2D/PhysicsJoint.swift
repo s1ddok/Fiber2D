@@ -76,9 +76,9 @@ public class PhysicsJoint: Tagged {
         createConstraints()
         
         for subjoint in chipmunkConstraints {
-            cpConstraintSetMaxForce(subjoint, cpFloat(maxForce));
-            cpConstraintSetErrorBias(subjoint, cpFloat(pow(1.0 - 0.15, 60.0)));
-            cpSpaceAddConstraint(world!.chipmunkSpace, subjoint);
+            cpConstraintSetMaxForce(subjoint, cpFloat(maxForce))
+            cpConstraintSetErrorBias(subjoint, cpFloat(pow(1.0 - 0.15, 60.0)))
+            cpSpaceAddConstraint(world!.chipmunkSpace, subjoint)
         }
         
         chipmunkInitialized = true
