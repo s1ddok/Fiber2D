@@ -1,6 +1,7 @@
 import CSDL2
 import SwiftMath
 import SwiftBGFX
+import Fiber2D
 
 let window = Window(title: "Fiber2D-SDL", origin: .zero, size: Size(1024, 768), flags: [.shown])
 
@@ -19,10 +20,22 @@ pd.nwh = pointer.assumingMemoryBound(to: UnsafeMutableRawPointer.self).pointee
 bgfx.setPlatformData(pd)
 #endif
 
+let locator = FileLocator.shared
+locator.untaggedContentScale = 4
+locator.searchPaths = [ "/Users/s1ddok/Documents/Projects/GitHub/Fiber2D/demo/Resources"]
+
 bgfx.renderFrame()
+bgfx.initialize()
+bgfx.reset(width: 1024, height: 768, options: [.vsync])
 
 var event = SDL_Event()
 var running = true
+
+let director: Director = Director(view: window)
+Director.pushCurrentDirector(director)
+director.present(scene: MainScene(size: director.designSize))
+Director.popCurrentDirector()
+
 while running {
-    SDL_WaitEvent(&event)
+    director.mainLoopBody()
 }
