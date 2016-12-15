@@ -133,14 +133,23 @@ public class Director {
         return glSize * p2d(clipCoord.x * 0.5 + 0.5, clipCoord.y * flipY * 0.5 + 0.5)
     }
     
+    /** @returns The size of the view in points.
+     @see viewSizeInPixels */
     public var viewSize: Size {
         return view!.size
     }
     
+    /** @returns The size of the view in pixels.
+     On Mac winSize and winSizeInPixels return the same value.
+     @see viewSize
+     */
     public var viewSizeInPixels: Size {
         return view!.sizeInPixels
     }
     
+    /** Ends the execution, releases the running scene.
+     It doesn't remove the view from the view hierarchy. You have to do it manually.
+     */
     public func end() {
         runningScene!._onExitTransitionDidStart()
         runningScene!._onExit()
@@ -149,7 +158,7 @@ public class Director {
         self.nextScene = nil
         // remove all objects, but don't release it.
         // runWithScene might be executed after 'end'.
-        scenesStack.removeAllObjects()
+        scenesStack.removeAll()
         self.stopRunLoop()
         //self.delegate = nil
         // Purge all managers / caches
@@ -158,26 +167,31 @@ public class Director {
         FileLocator.shared.purgeCache()
     }
     
+    /** Pauses the running scene. All scheduled timers and actions will be paused.
+     When paused, the director refreshes the screen at a very low framerate (4 fps) to conserve battery power.
+     @see resume
+     */
     public func pause() {
         if isPaused {
             return
         }
-        /*if ((delegate?.respondsToSelector(#selector(Director.pause))) != nil) {
-            delegate?.pause!()
-        }*/
+
         self.oldFrameSkipInterval = frameSkipInterval
         // when paused, don't consume CPU
         self.frameSkipInterval = 15
         self.isPaused = true
     }
     
+    /** Resumes the paused scene and its scheduled timers and actions.
+     The "delta time" will be set to 0 as if the game wasn't paused.
+     @see pause
+     @see nextDeltaTimeZero
+     */
     public func resume() {
         if !isPaused {
             return
         }
-        /*if ((delegate?.respondsToSelector(#selector(Director.resume))) != nil) {
-            delegate!.resume!()
-        }*/
+
         self.frameSkipInterval = oldFrameSkipInterval
         self.lastUpdate = Time.absoluteTime
         self.isPaused = false
