@@ -21,8 +21,8 @@ public extension Director {
     public func present(scene: Scene) {
         if runningScene != nil {
             self.sendCleanupToScene = true
-            scenesStack.removeLastObject()
-            scenesStack.add(scene)
+            scenesStack.removeLast()
+            scenesStack.append(scene)
             self.nextScene = scene
             // _nextScene is a weak ref
         } else {
@@ -70,7 +70,7 @@ public extension Director {
      */
     public func push(scene: Scene) {
         self.sendCleanupToScene = false
-        scenesStack.add(scene)
+        scenesStack.append(scene)
         self.nextScene = scene
         // _nextScene is a weak ref
     }
@@ -83,7 +83,7 @@ public extension Director {
      *  @see Director.push(scene:)
      */
     public func push(scene: Scene, withTransition transition: Transition) {
-        scenesStack.add(scene)
+        scenesStack.append(scene)
         self.sendCleanupToScene = false
         transition.startTransition(scene, withDirector: self)
     }
@@ -99,13 +99,13 @@ public extension Director {
      */
     public func popScene() {
         assert(runningScene != nil, "A running Scene is needed")
-        scenesStack.removeLastObject()
+        scenesStack.removeLast()
         let c: Int = scenesStack.count
         if c == 0 {
             self.end()
         } else {
             self.sendCleanupToScene = true
-            self.nextScene = scenesStack[c - 1] as? Scene
+            self.nextScene = scenesStack[c - 1]
         }
     }
     
@@ -120,8 +120,8 @@ public extension Director {
         if scenesStack.count < 2 {
             self.end()
         } else {
-            scenesStack.removeLastObject()
-            let incomingScene = scenesStack.lastObject as! Scene
+            scenesStack.removeLast()
+            let incomingScene = scenesStack.last!
             self.sendCleanupToScene = true
             transition.startTransition(incomingScene, withDirector: self)
         }
@@ -169,16 +169,16 @@ public extension Director {
         }
         // pop stack until reaching desired level
         while c > level {
-            let current = scenesStack.lastObject as! Scene
+            let current = scenesStack.last!
             if current.active {
                 current._onExitTransitionDidStart()
                 current._onExit()
             }
             current.cleanup()
-            scenesStack.removeLastObject()
+            scenesStack.removeLast()
             c -= 1
         }
-        self.nextScene = scenesStack.lastObject as? Scene
+        self.nextScene = scenesStack.last
         self.sendCleanupToScene = false
     }
     
@@ -201,8 +201,8 @@ internal extension Director {
     
     internal func start(transition: Transition) {
         assert(runningScene != nil, "There must be a running scene")
-        scenesStack.removeLastObject()
-        scenesStack.add(transition)
+        scenesStack.removeLast()
+        scenesStack.append(transition)
         self.nextScene = transition
     }
     

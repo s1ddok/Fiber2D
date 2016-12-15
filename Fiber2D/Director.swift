@@ -52,7 +52,7 @@ public class Director {
     /* If YES, then "old" scene will receive the cleanup message */
     internal var sendCleanupToScene: Bool = false
     /* scheduled scenes */
-    var scenesStack = NSMutableArray()
+    var scenesStack = [Scene]()
     /* last time the main loop was updated */
     var lastUpdate: Time = 0.0
     /* delta time since last tick to main loop */
