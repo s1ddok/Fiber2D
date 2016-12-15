@@ -35,10 +35,6 @@ public class Director {
     var frameRate: Time = 0.0
     /* is the running scene paused */
     var isPaused: Bool = false
-    /* Is the director running */
-    var animating: Bool = false
-    /* The running scene */
-    var runningScene: Scene?
     /* This object will be visited after the scene. Useful to hook a notification node */
     var notificationNode: Node?
     /* will be the next 'runningScene' in the next frame
@@ -59,7 +55,8 @@ public class Director {
     var dt: Time = 0.0
     /* whether or not the next delta time will be zero */
     var nextDeltaTimeZero: Bool = false
-    //var rendererPool: [AnyObject]
+    /* renderer that draws scene on the screen */
+    lazy var renderer: Renderer = BGFXRenderer()
     
     private(set) public var responderManager: ResponderManager!
     
@@ -81,7 +78,16 @@ public class Director {
     /// View used by the director for rendering.
     public weak var view: DirectorView?
     
-    #if os(OSX) || os(iOS) || os(tvOS)
+    /** The current running Scene. Director can only run one Scene at a time.
+     @see presentScene: */
+    internal(set) public var runningScene: Scene?
+    
+    /** Whether or not the Director is active (animating).
+     @see paused
+     @see startRunLoop
+     @see stopRunLoop */
+    internal(set) public var isAnimating: Bool = false
+
     public init(view: DirectorView) {
         self.displayStats = false
         self.totalFrames = 0
