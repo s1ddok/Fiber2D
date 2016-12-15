@@ -10,14 +10,30 @@ import MetalKit
 import SwiftMath
 import Fiber2D
 
-public class MetalView: MTKView, DirectorView {
-    public func set(delegate: _MTKDelegate) {
-        
+@available(OSX, introduced: 10.11)
+public class MTKDelegate: NSObject, MTKViewDelegate {
+    internal var director: Director
+    
+    internal init(director: Director) {
+        self.director = director
+        super.init()
     }
+    
+    public func draw(in view: MTKView) {
+        director.mainLoopBody()
+    }
+    
+    public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        director.runningScene?.contentSize = Size(CGSize: size)
+        director.runningScene?.onViewDidResize.fire(Size(CGSize: size))
+    }
+}
 
+public class MetalView: MTKView, DirectorView {
     var layerSizeDidUpdate: Bool = false
     var director: Director!
     var surfaceSize = CGSize.zero
+    var directorDelegate: MTKDelegate!
     
     public var sizeInPixels: Size {
         return Size(CGSize: self.bounds.size) *  Float(self.contentScaleFactor)
@@ -44,7 +60,8 @@ public class MetalView: MTKView, DirectorView {
 
         self.director = Director(view: self)
         self.preferredFramesPerSecond = 60
-        self.delegate = director.metalKitDelegate as! MTKDelegate
+        self.directorDelegate = MTKDelegate(director: self.director)
+        self.delegate = directorDelegate
         self.drawableSize = frame.size
         self.surfaceSize = frame.size
         self.colorPixelFormat = .bgra8Unorm

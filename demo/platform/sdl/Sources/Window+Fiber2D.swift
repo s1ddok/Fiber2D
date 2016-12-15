@@ -25,7 +25,4 @@ extension Window: DirectorView {
     
     // Present the current frame to the display.
     public func presentFrame() {}
-    
-    public func set(delegate: _MTKDelegate) {}
-    
 }

@@ -27,9 +27,9 @@ public class Director {
     var oldFrameSkipInterval: Int = 1
     var frameSkipInterval: Int = 1
     /* stats */
-    var displayStats: Bool
-    var frames: Int
-    var totalFrames: Int
+    var displayStats: Bool = true
+    var frames: Int = 0
+    var totalFrames: Int = 0
     var secondsPerFrame: Time = 0.0
     var accumDt: Time = 0.0
     var frameRate: Time = 0.0
@@ -89,24 +89,9 @@ public class Director {
     internal(set) public var isAnimating: Bool = false
 
     public init(view: DirectorView) {
-        self.displayStats = false
-        self.totalFrames = 0
-        self.frames = 0
-        self.isPaused = false
         self.view = view
-        // FPS
-
         self.responderManager = ResponderManager(director: self)
-
-        if #available(OSX 10.11, *) {
-            self.metalKitDelegate = MTKDelegate(director: self)
-        }
     }
-    
-    public var metalKitDelegate: _MTKDelegate!
-    #endif
-    
-    var r: Renderer?
     
     public func purgeCachedData() {
         if Director.current.view != nil {
