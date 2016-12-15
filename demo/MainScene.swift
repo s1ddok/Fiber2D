@@ -107,7 +107,7 @@ class MainScene: Scene {
         //colorNodes[8].run(action: rotateBy.repeat(times: 6)
         //    .then(ActionCallBlock { print(colorNodes[8].position) }.instantly.repeat(times: 7)))
         colorNodes[8].run(action: rotateAndMove.then(ActionCallBlock { print(colorNodes[8].position) }.instantly))
-        colorNodes[8].run(action: ActionMoveBy(vec2(0.0, -0.1)).continously(duration: 1.0))
+        colorNodes[9].run(action: ActionMoveBy(vec2(0.0, -0.1)).continously(duration: 1.0))
         print(Date())
         let _ = schedule(block: { t in
             print(Date())
