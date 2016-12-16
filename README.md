@@ -8,17 +8,8 @@
 
 This project originated as [cocos2d-objc](https://github.com/cocos2d/cocos2d-objc) rewrite to Swift. As I stopped commiting to the repo since June, because Obj-C is dead for me. 
 
-This is still in a very **alpha state**, but you already can build some games with it, even though it may be unpleasant process as I change API almost every day. The project served as `.dylib` that builds by Swift Package Manager. It requires some project config in order to use it, but you can experiment with the demo provided in the repo.
+This is still in a very **alpha state**, but you already can build some games with it, even though it may be unpleasant process as I change API almost every day. The project served as `.dylib` (`.so` on Linux) that builds by Swift Package Manager. It requires some project config in order to use it, but you can experiment with the demo provided in the repo.
 *Generally the project is in transition from cocos2d-objc to Swifty style and most of (**all**? :) ) API will change.*
-
-# Name
-Why is this not called `cocos2d-swift`. How dare you?!
-There are couple of reasons:
-
-1. There already was the `cocos2d-swift`. Apportable used this name for cocos2d-objc v3.0+ and most of the google results are related to that. I don't want to create any confusion.
-2. While I have a commit-access to `cocos2d-objc` repo, I dont think Ricardo and the whole cocos2d team will appreciate it if I remove cocos2d-objc and replace it with barely working Swifty prototype. 
-
-*cocos2d-objc is still very good for Apple only development, I use it everyday and provide support on forum, it is not dead, we just don't work on the new features anymore*
 
 ## Basement 
 We worked hard before starting this project and it relies on several self-made libs we made:
@@ -29,26 +20,23 @@ Thanks to them we currently have:
 * Ultra fast cross-platform math lib, that works with `SIMD` on `Darwin` platforms and has self-implemnted algorithms to run on `Glibc` based environment. Not speaking of **zero ARC** impact and modern swifty syntax features.
 * Modern agnostic renderer, which works with following list of backends **out of the box**:
   * Direct3D 9, 11, 12 (WIP)
-  * Metal (WIP)
+  * Metal
   * OpenGL 2.1, 3.1+, ES 2, ES 3.1
   * WebGL 1.0, 2.0
 
 ### What it looks like?
-Currently we have only `macOS` demo for the ease of development, but it will seamlessly port to `iOS` and `tvOS` as it uses `MetalKit` for now (GL support will land later). `Linux` and `Android` are a bit more complicated, but 85% of existing code base is x-platform, what is more important: other 15% is **possible to convert today** (more on this later).
+Currently this repo only contains demos for `Linux` and `macOS`. `macOS demo` can use both `MetalKit` and `SDL`, it also can seamlessly be ported to `iOS` and `tvOS`, but developing is easier with desktop executables. `Linux demo` can only be compiled with `SDL`, hence only `GL` rendering backend is available.
 
 You can get the idea from this GIF: 
 ![Fiber2D Demo Gif](http://imgur.com/CP6d9kT.gif)
 
-# Goals (updated 13 DEC 2016)
+# Goals (updated 17 DEC 2016)
 My goals for the near future are (order means nothing):
 
-* **Port to `Linux` using `SDL` for Windowing and Input handle (first step on the way to `Android`)** (remember those 15%?)
-* Remove code parts that has `Obj-C smell` (this includes making the whole API more Swifty, moving forward to `protocol-obsessed` world)
-* **Add `FreeType 2` support for cross-platform text rendering**
-* Introduce basic `UI components` (Button, Slider)
+* **Port to `Android`**
+* Introduce basic `UI components` (Button, Slider, Label)
 * Cover code with `tests`
-* Introduce GPU computed `Particle systems`
-* Add support of cross-platform shader loading from `shaderc` 
+* Introduce GPU computed `Particle systems` 
 * **Drop the concept of `contentScale` and use `one set of assets` for all screen resolutions**
 * Add support for more asset format loading from `.jpg` to `.pvr`
 * **Add easy post-processing mechanism**
