@@ -6,20 +6,27 @@ import Fiber2D
 let window = Window(title: "Fiber2D-SDL", origin: .zero, size: Size(1024, 768), flags: [.shown])
 
 var wmi = SDL_SysWMinfo()
-SDL_GetWindowWMInfo(window.handle, &wmi)
+SDL_SysWMinfo_init_version(&wmi)
+print(SDL_GetWindowWMInfo(window.handle, &wmi))
+var pd = PlatformData()
 
 #if os(OSX)
-var pd = PlatformData()
 pd.ndt = nil
-
 // Hack around C anonymous structs, will see if it works...
 var cocoa = wmi.info.cocoa
 let pointer = UnsafeMutableRawPointer(&cocoa)
 pd.nwh = pointer.assumingMemoryBound(to: UnsafeMutableRawPointer.self).pointee
-    
-bgfx.setPlatformData(pd)
+
 #endif
 
+#if os(Linux)
+
+pd.ndt = SDL_SysWMinfo_get_x11_display(&wmi)
+pd.nwh = SDL_SysWMinfo_get_x11_window(&wmi)
+
+#endif
+
+bgfx.setPlatformData(pd)
 let locator = FileLocator.shared
 locator.untaggedContentScale = 4
 locator.searchPaths = [ "/Users/s1ddok/Documents/Projects/GitHub/Fiber2D/demo/Resources"]
