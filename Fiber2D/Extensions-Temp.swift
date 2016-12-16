@@ -7,7 +7,7 @@
 //
 
 #if os(iOS) || os(tvOS) || os(OSX)
-    
+
 import SwiftMath
 import CoreGraphics
 import Darwin
@@ -16,7 +16,7 @@ extension Vector2f {
     var cgPoint: CGPoint {
         return CGPoint(x: Double(x), y: Double(y))
     }
-    
+
     init(_ cgPoint: CGPoint) {
         self.init(Float(cgPoint.x), Float(cgPoint.y))
     }
@@ -26,7 +26,7 @@ public extension Size {
     public init(CGSize: CGSize) {
         self.init(Float(CGSize.width), Float(CGSize.height))
     }
-    
+
     var cgSize: CGSize {
         return CGSize(width: CGFloat(width), height: CGFloat(height))
     }
@@ -37,5 +37,5 @@ extension Rect {
         self.init(origin: p2d(CGRect.origin), size: Size(CGSize: CGRect.size))
     }
 }
-    
+
 #endif

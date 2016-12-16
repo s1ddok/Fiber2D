@@ -13,13 +13,13 @@ extension Array {
     mutating func removeObject(_ obj: AnyObject) -> Bool {
         var idx = 0
         for e in self {
-            if (e as AnyObject) === obj {
+            if (e as! AnyObject) === obj {
                 remove(at: idx)
                 return true
             }
             idx += 1
         }
-        
+
         return false
     }
 }
@@ -35,7 +35,7 @@ public extension ContiguousArray where Element: AnyObject {
             }
             idx += 1
         }
-        
+
         return false
     }
 }

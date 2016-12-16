@@ -10,6 +10,8 @@ import SwiftMath
 import SwiftBGFX
 #if os(OSX) || os(iOS) || os(tvOS)
 import Darwin
+#else
+import Glibc
 #endif
 
 /**
@@ -24,18 +26,18 @@ public protocol RenderableComponent: Component {
      * @see Material
      */
     var material: Material { get set }
-    
+
     /**
      * Local z order that indicates drawing order between owner's renderable components.
      */
     var zOrder: Int { get set }
-    
+
     /**
      Implement this method to add custom rendering code to your node.
-     
+
      @note You should only use Fiber2D's Renderer API to modify the render state and shaders. For further info, please see the Renderer documentation.
      @warning You **must not** call `super.draw(in:transform:)`
-     
+
      @param renderer The Renderer instance to use for drawing.
      @param transform The parent node's transform.
      @see Renderer
@@ -49,25 +51,25 @@ public protocol RenderableComponent: Component {
 
 public class QuadRenderer: ComponentBase, RenderableComponent {
     public var material: Material
-    
+
     public var zOrder: Int = 0
-    
-    /// Geometry to be rendered. 
+
+    /// Geometry to be rendered.
     /// Must be exactly 4 vertices long, index buffer is ignored
     public var geometry = Geometry(vertexBuffer: [RendererVertex](repeating: RendererVertex(),
                                                                   count: 4),
                                    indexBuffer: [])
-    
+
     public init(material: Material) {
         self.material = material
         super.init()
     }
-    
+
     public func draw(in renderer: Renderer, transform: Matrix4x4f) {
         let vertices = geometry.vertexBuffer.map { $0.transformed(transform) }
         let vb = TransientVertexBuffer(count: 4, layout: RendererVertex.layout)
         memcpy(vb.data, vertices, 4 * MemoryLayout<RendererVertex>.size)
-        
+
         for pass in material.technique.passes {
             material.apply()
             bgfx.setVertexBuffer(vb)
@@ -76,7 +78,7 @@ public class QuadRenderer: ComponentBase, RenderableComponent {
             renderer.submit(shader: pass.program)
         }
     }
-    
+
     public static let indexBuffer: IndexBuffer = {
         // We have 2 triangles, 6 indices
         let retVal: [UInt16] = [0, 1, 2, 0, 2, 3]

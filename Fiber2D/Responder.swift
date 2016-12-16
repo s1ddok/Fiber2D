@@ -7,13 +7,15 @@
 //
 
 import SwiftMath
+#if os(macOS)
 import Cocoa
+#endif
 
 /**
  Responder is the base class for all components that handle user input.
  It exposes the touch and mouse interface to any node.
  It is somewhat similar to [UIResponder](https://developer.apple.com/library/IOs/documentation/UIKit/Reference/UIResponder_Class/index.html).
- 
+
  To make a responder react to user interaction, the touchesXXX / mouseXXX event must be overridden in your node subclass.
  To force the events to be passed to next responder, call the super implementation before returning from the event.
  */
@@ -30,18 +32,18 @@ open class Responder {
             }
         }
     }
-    
+
     #if os(iOS) || os(tvOS) || os(Android)
     /** Enables multiple touches inside a single node. */
     public var multipleTouchEnabled: Bool = false
-    
+
     /**
      *  All other touches will be cancelled / ignored if a node with exclusive touch is active.
      *  Only one exclusive touch node can be active at a time.
      */
     public var exclusiveTouch: Bool = false
     #endif
-    
+
     /// @name Customize Event Behavior
 
     /**
@@ -57,7 +59,7 @@ open class Responder {
      *  The expansion is calculated as a margin around the sprite, in points.
      */
     public var hitAreaExpansion: Float = 0.0
-    
+
     /**
      * Current owner of this component
      */
@@ -72,7 +74,7 @@ open class Responder {
             print("Can't hit-test orphan component")
             return false
         }
-        
+
         let p = owner.convertToNodeSpace(pos)
         let h = -hitAreaExpansion
         let offset = Point(-h, -h)
@@ -81,48 +83,48 @@ open class Responder {
         let size: Size = Size(width: contentSizeInPoints.width - offset.x, height: contentSizeInPoints.height - offset.y)
         return !(p.y < offset.y || p.y > size.height || p.x < offset.x || p.x > size.width)
     }
-    
+
     open func inputBegan(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func inputMoved(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func inputDragged(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func inputEnd(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func inputCancelled(_ input: Input) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func keyDown(_ key: Key) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func keyUp(_ key: Key) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     #if os(OSX)
     open func scrollWheel(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func keyDown(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func keyUp(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }
-    
+
     open func flagsChanged(_ theEvent: NSEvent) {
         Director.current.responderManager.discardCurrentEvent()
     }

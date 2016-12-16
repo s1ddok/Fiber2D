@@ -7,7 +7,11 @@
 //
 
 import SwiftMath
+#if os(iOS) || os(tvOS) || os(macOS)
 import Quartz
+#else
+import Glibc
+#endif
 
 /**
  Get the current time in seconds.
@@ -15,7 +19,12 @@ import Quartz
 internal extension Time {
     internal static var absoluteTime: Time {
         #if os(iOS) || os(tvOS) || os(OSX) || os(watchOS)
-            return Time(CACurrentMediaTime())
+        return Time(CACurrentMediaTime())
+        #else
+        var t = timespec()
+        clock_gettime(CLOCK_MONOTONIC, &t)
+
+        return Time(t.tv_sec) + Time(t.tv_nsec) / Time(1.0e-9)
         #endif
     }
 }
@@ -26,13 +35,13 @@ internal extension Director {
     internal func add(frameCompletionHandler: @escaping ()->()) {
         self.view!.add(frameCompletionHandler: frameCompletionHandler)
     }
-    
+
     internal func antiFlickrDrawCall() {
         // Questionable "anti-flickr", extra draw call:
         // overridden for android.
         self.mainLoopBody()
     }
-    
+
     internal func calculateDeltaTime() {
         let now = Time.absoluteTime
         // new delta time
@@ -49,16 +58,16 @@ internal extension Director {
         }
         self.lastUpdate = now
     }
-    
+
     internal var flipY: Float {
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
             return -1.0
         #endif
-        #if os(OSX)
+        #if os(OSX) || os(Linux) || os(Android)
             return 1.0
         #endif
     }
-    
+
     /// Rect of the visible screen area in GL coordinates.
     internal var viewportRect: Rect {
         var projection = runningScene!.projection

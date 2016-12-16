@@ -6,7 +6,11 @@
 //
 
 import SwiftMath
+#if os(macOS) || os(iOS) || os(tvOS)
 import Darwin
+#else
+import Glibc
+#endif
 
 /**
  Declares the possible directions for laying out nodes in a LayoutBox.
@@ -24,7 +28,7 @@ func roundUpToEven(_ f: Float) -> Float {
 
 /**
  The box layout lays out its child nodes in a horizontal row or a vertical column. Optionally you can set a spacing between the child nodes.
- 
+
  @note In order to layout nodes in a grid, you can add one or more LayoutBox as child node with the opposite layout direction, ie the parent
  box layout node uses vertical and the child box layout nodes use horizontal LayoutBoxDirection to create a grid of nodes.
  */
@@ -39,7 +43,7 @@ public class LayoutBox: Layout {
             needsLayout()
         }
     }
-    
+
     /**
      The spacing in points between the child nodes.
      */
@@ -48,14 +52,14 @@ public class LayoutBox: Layout {
             needsLayout()
         }
     }
-    
+
     override public func layout() {
         super.layout()
-        
+
         guard children.count > 0 else {
             return
         }
-        
+
         if direction == .horizontal {
             // Get the maximum height
             var maxHeight: Float = 0

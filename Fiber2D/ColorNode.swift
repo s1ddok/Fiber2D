@@ -7,7 +7,6 @@
 
 import SwiftMath
 import SwiftBGFX
-import Darwin
 
 /**
  Draws a rectangle filled with a solid color.
@@ -31,32 +30,32 @@ open class ColorNode: Node {
 }
 
 public class BackgroundColorRenderComponent: QuadRenderer {
-    
+
     public init() {
         super.init(material: Material(technique: .positionColor))
     }
-    
+
     public override func onAdd(to owner: Node) {
         super.onAdd(to: owner)
-        
+
         self.update(for: owner.contentSizeInPoints)
         owner.onContentSizeInPointsChanged.subscribe(on: self) {
             self.update(for: $0)
         }
-        
+
         self.geometry.color = owner.displayedColor.premultiplyingAlpha
         owner.onDisplayedColorChanged.subscribe(on: self) {
             self.geometry.color = $0.premultiplyingAlpha
         }
     }
-    
+
     public override func onRemove() {
         // Do it before super, as it assigns owner to nil
         owner?.onContentSizeInPointsChanged.cancelSubscription(for: self)
         owner?.onDisplayedColorChanged.cancelSubscription(for: self)
         super.onRemove()
     }
-    
+
     public func update(for size: Size) {
         geometry.positions = [vec4(0, 0, 0, 1),
                               vec4(size.width, 0, 0, 1),

@@ -6,11 +6,16 @@
 //
 
 import SwiftMath
-import Metal
+#if os(iOS) || os(tvOS) || os(macOS)
+import Darwin
+#else
+import Glibc
+#endif
+
 /**
  A transition animates the presesntation of a new scene while moving the current scene out of view.
  A transition is optionally played when calling one of the presentScene:withTransition: methods of Director.
- 
+
  @note Since both scenes remain in memory and are being rendered, a transition may raise performance issues or
  memory warnings. If two complex scenes can not be reliably transitioned from/to it is best to not use transitions
  or to introduce an in-between scene that is presented only for a short period of time (ie a loading scene or merely
@@ -29,7 +34,7 @@ public class Transition: Scene {
         self.duration = duration
         super.init(size: Director.current.designSize)
     }
-    
+
     private let duration: Time
     private var incomingScene: Scene!
     private var outgoingScene: Scene!
@@ -47,7 +52,7 @@ public class Transition: Scene {
             assert((newValue >= 1.0) && (newValue <= 4.0), "Invalid down scale")
         }
     }
-    
+
     /**
      *  Will downscale incoming scene.
      *  Can be used as an effect, or to decrease render time on complex scenes.
@@ -58,7 +63,7 @@ public class Transition: Scene {
             assert((newValue >= 1.0) && (newValue <= 4.0), "Invalid down scale")
         }
     }
-    
+
     /// -----------------------------------------------------------------------
     /// @name Controlling Scene Animation during Transition
     /// -----------------------------------------------------------------------
@@ -85,13 +90,13 @@ public class Transition: Scene {
      *  Only valid after StartTransition has been called.
      */
     var incomingTexture: RenderTexture!
-    
+
     /**
      *  RenderTexture, holding the outgoing scene as a texture
      *  Only valid after StartTransition has been called.
      */
     var outgoingTexture: RenderTexture!
-    
+
     /// -----------------------------------------------------------------------
     /// @name Transition Running Time and Progress
     /// -----------------------------------------------------------------------
@@ -99,7 +104,7 @@ public class Transition: Scene {
     var runTime: Time = 0.0
     /** Normalized (percentage) transition progress in the range 0.0 to 1.0. */
     var progress: Float = 0.0
-    
+
     // FIXME: Not called
     func update(_ delta: Time) {
         // update progress
@@ -129,25 +134,25 @@ public class Transition: Scene {
         }
 
     }
-    
+
     func renderOutgoing(_ progress: Float) {
-        let color = outgoingScene.colorRGBA
+        //let color = outgoingScene.colorRGBA
         //let _ = outgoingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         //outgoingScene.visit()
         //outgoingTexture.end()
     }
-    
+
     func renderIncoming(_ progress: Float) {
-        let color = incomingScene.colorRGBA
+        //let color = incomingScene.colorRGBA
         //let _ = incomingTexture.beginWithClear(color.r, g: color.g, b: color.b, a: color.a)
         //incomingScene.visit()
         //incomingTexture.end()
     }
-    
+
     func startTransition(_ scene: Scene, withDirector director: Director) {
         scene.director = director
         self.director = director
-        
+
         self.incomingScene = scene
         incomingScene._onEnter()
         self.incomingPauseState = incomingScene.paused

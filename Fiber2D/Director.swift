@@ -6,23 +6,21 @@
 //
 
 import Foundation
-import MetalKit
 import SwiftMath
 
-//@available(OSX, introduced: 10.11)
 public class Director {
     internal static var stack = [Director?]()
     public static var current: Director! = nil
-    
+
     public static func pushCurrentDirector(_ director: Director) {
         stack.append(current)
         self.current = director
     }
-    
+
     public static func popCurrentDirector() {
         self.current = stack.removeLast()
     }
-    
+
     // internal timer
     var oldFrameSkipInterval: Int = 1
     var frameSkipInterval: Int = 1
@@ -40,7 +38,7 @@ public class Director {
     /* will be the next 'runningScene' in the next frame
      nextScene is a weak reference. */
     internal weak var nextScene: Scene?
-    
+
     /* Whether or not the replaced scene will receive the cleanup message.
      If the new scene is pushed, then the old scene won't receive the "cleanup" message.
      If the new scene replaces the old one, the it will receive the "cleanup" message.
@@ -57,9 +55,9 @@ public class Director {
     var nextDeltaTimeZero: Bool = false
     /* renderer that draws scene on the screen */
     lazy var renderer: Renderer = BGFXRenderer()
-    
+
     private(set) public var responderManager: ResponderManager!
-    
+
     /// User definable value that is used for default contentSizes of many node types (Scene, NodeColor, etc).
     /// Defaults to the view size.
     public var designSize : Size {
@@ -67,21 +65,21 @@ public class Director {
             // Return the viewSize unless designSize has been set.
             return (_designSize == Size.zero ? self.viewSize : _designSize)
         }
-        
+
         set {
             _designSize = newValue
         }
     }
     private var _designSize = Size.zero
-    
+
     /** @name Working with View and Projection */
     /// View used by the director for rendering.
     public weak var view: DirectorView?
-    
+
     /** The current running Scene. Director can only run one Scene at a time.
      @see presentScene: */
     internal(set) public var runningScene: Scene?
-    
+
     /** Whether or not the Director is active (animating).
      @see paused
      @see startRunLoop
@@ -92,14 +90,14 @@ public class Director {
         self.view = view
         self.responderManager = ResponderManager(director: self)
     }
-    
+
     public func purgeCachedData() {
         if Director.current.view != nil {
             TextureCache.shared.removeUnusedTextures()
         }
         FileLocator.shared.purgeCache()
     }
-    
+
     public func convertToGL(_ uiPoint: Point) -> Point {
         var transform = runningScene!.projection
         let invTransform = transform.inversed
@@ -110,20 +108,20 @@ public class Director {
         clipCoord.y *= flipY
         return invTransform.multiplyAndProject(v: clipCoord).xy
     }
-    
+
     public func convertToUI(_ glPoint: Point) -> Point {
         let transform = runningScene!.projection
         let clipCoord = transform.multiplyAndProject(v: vec3(glPoint))
         let glSize: Size = viewSize
         return glSize * p2d(clipCoord.x * 0.5 + 0.5, clipCoord.y * flipY * 0.5 + 0.5)
     }
-    
+
     /** @returns The size of the view in points.
      @see viewSizeInPixels */
     public var viewSize: Size {
         return view!.size
     }
-    
+
     /** @returns The size of the view in pixels.
      On Mac winSize and winSizeInPixels return the same value.
      @see viewSize
@@ -131,7 +129,7 @@ public class Director {
     public var viewSizeInPixels: Size {
         return view!.sizeInPixels
     }
-    
+
     /** Ends the execution, releases the running scene.
      It doesn't remove the view from the view hierarchy. You have to do it manually.
      */
@@ -151,7 +149,7 @@ public class Director {
         TextureCache.shared.removeUnusedTextures()
         FileLocator.shared.purgeCache()
     }
-    
+
     /** Pauses the running scene. All scheduled timers and actions will be paused.
      When paused, the director refreshes the screen at a very low framerate (4 fps) to conserve battery power.
      @see resume
@@ -166,7 +164,7 @@ public class Director {
         self.frameSkipInterval = 15
         self.isPaused = true
     }
-    
+
     /** Resumes the paused scene and its scheduled timers and actions.
      The "delta time" will be set to 0 as if the game wasn't paused.
      @see pause
