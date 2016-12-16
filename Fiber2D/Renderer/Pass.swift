@@ -88,16 +88,12 @@ extension Pass: Hashable {
     }
 }
 
-extension Pass {
+public extension Pass {
     public static let positionColor: Pass = {
-        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
-        let fs = Shader(source: fs_shader, language: .metal, type: .fragment)
-        return Pass(vertexShader: vs, fragmentShader: fs)
+        return Pass(vertexShader: .builtInVertexShader, fragmentShader: .builtInPosColorShader)
     }()
     
     public static let positionTexture: Pass = {
-        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
-        let fs = Shader(source: fs_texture_shader, language: .metal, type: .fragment)
-        return Pass(vertexShader: vs, fragmentShader: fs)
+        return Pass(vertexShader: .builtInVertexShader, fragmentShader: .builtInPosTextureShader)
     }()
 }

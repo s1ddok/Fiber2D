@@ -13,20 +13,6 @@ import SwiftBGFX
 internal let ROOT_RTT_ID  = UInt8(0)
 internal let ROOT_VIEW_ID = UInt8(190)
 
-extension Program {
-    public static let posColor: Program = {
-        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
-        let fs = Shader(source: fs_shader, language: .metal, type: .fragment)
-        return Program(vertex: vs, fragment: fs)
-    }()
-    
-    public static let posTexture: Program = {
-        let vs = Shader(source: vs_shader, language: .metal, type: .vertex)
-        let fs = Shader(source: fs_texture_shader, language: .metal, type: .fragment)
-        return Program(vertex: vs, fragment: fs)
-    }()
-}
-
 internal class BGFXRenderer: Renderer {
     internal var viewStack = [UInt8]()
     

@@ -6,7 +6,7 @@ let package = Package(
         .Package(url: "https://github.com/s1ddok/CChipmunk2D", Version(1, 0, 0)),
         .Package(url: "https://github.com/s1ddok/Cpng", Version(1, 0, 0))
     ],
-    exclude: ["demo", "external"]
+    exclude: ["demo", "external", "shaders"]
 )
 
 let ar = Product(name: "Fiber2D", type: .Library(.Dynamic), modules: ["Fiber2D"])
