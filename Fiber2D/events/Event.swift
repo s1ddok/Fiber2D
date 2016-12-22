@@ -7,9 +7,6 @@
 //
 
 import Foundation
-#if os(Linux)
-import Dispatch
-#endif
 
 /// Create instances of `Event` and assign them to public constants on your class for each event type that your
 /// class fires.
@@ -144,7 +141,6 @@ final public class EventSubscription<T> {
 
     fileprivate var filter:   EventFilter?
     fileprivate var callback: EventCallback
-    fileprivate var dispatchQueue: DispatchQueue?
 
     fileprivate init(observer: AnyObject, callback: @escaping EventCallback) {
         self.observer = observer
