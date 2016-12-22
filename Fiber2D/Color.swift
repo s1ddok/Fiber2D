@@ -7,11 +7,6 @@
 //
 
 import SwiftMath
-#if os(iOS) || os(tvOS) || os(macOS)
-import Darwin
-#else
-import Glibc
-#endif
 
 public typealias Color = Vector4f
 
@@ -26,7 +21,7 @@ public extension Color {
     public init(hue: Float, saturation: Float, brightness: Float, alpha: Float) {
         let chroma: Float = saturation * brightness
         let hueSection: Float = hue / 60.0
-        let X: Float = chroma * (1.0 - abs(fmod(hueSection, 2.0) - 1.0))
+        let X: Float = chroma * (1.0 - abs(hueSection.truncatingRemainder(dividingBy: 2.0) - 1.0))
         var r:Float = 0.0, g:Float = 0.0, b:Float = 0.0, a: Float = 0.0
         if hueSection < 1.0 {
             r = chroma
