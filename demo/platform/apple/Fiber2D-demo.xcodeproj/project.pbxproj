@@ -12,9 +12,10 @@
 		08781A4F1DFF3B6000C4F39D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08781A4D1DFF3B6000C4F39D /* MainMenu.xib */; };
 		08781A581DFF3BA800C4F39D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A561DFF3BA800C4F39D /* main.swift */; };
 		08781A591DFF3BA800C4F39D /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A571DFF3BA800C4F39D /* MetalView.swift */; };
-		08781A5E1DFF3FDB00C4F39D /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
 		08781A5F1DFF3FDB00C4F39D /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */; };
 		08781A631DFF40B400C4F39D /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 08781A621DFF40B400C4F39D /* Resources */; };
+		08B7F5FF1E145019005DD953 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
+		08B7F6001E14501F005DD953 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserComponents.swift; path = ../../../UserComponents.swift; sourceTree = "<group>"; };
 		08781A5D1DFF3FDB00C4F39D /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewportScene.swift; path = ../../../ViewportScene.swift; sourceTree = "<group>"; };
 		08781A621DFF40B400C4F39D /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../../../Resources; sourceTree = "<group>"; };
+		08B7F5FE1E145019005DD953 /* PhysicsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsScene.swift; path = ../../../PhysicsScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				08781A5B1DFF3FDB00C4F39D /* MainScene.swift */,
 				08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */,
 				08781A5D1DFF3FDB00C4F39D /* ViewportScene.swift */,
+				08B7F5FE1E145019005DD953 /* PhysicsScene.swift */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -165,8 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				08781A591DFF3BA800C4F39D /* MetalView.swift in Sources */,
-				08781A5E1DFF3FDB00C4F39D /* MainScene.swift in Sources */,
+				08B7F5FF1E145019005DD953 /* PhysicsScene.swift in Sources */,
 				08781A5F1DFF3FDB00C4F39D /* UserComponents.swift in Sources */,
+				08B7F6001E14501F005DD953 /* MainScene.swift in Sources */,
 				08781A581DFF3BA800C4F39D /* main.swift in Sources */,
 				08781A4A1DFF3B6000C4F39D /* AppDelegate.swift in Sources */,
 			);

@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //;2*[_view convertSizeToBacking:NSMakeSize(1, 1)].width;
         Setup.shared.assetScale = Setup.shared.contentScale
         Setup.shared.UIScale = 0.5
-        let rect: CGRect = CGRect(x: 0, y: 0, width: 1024, height: 768)
+        let rect: CGRect = CGRect(x: 0, y: 0, width: 1280, height: 720)
         window = NSWindow(contentRect: rect, styleMask: [NSClosableWindowMask, NSResizableWindowMask, NSTitledWindowMask], backing: .buffered, defer: false, screen: NSScreen.main())
         
         let view: MetalView = MetalView(frame: rect)
@@ -42,12 +42,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bgfx.setPlatformData(pd)
 
         bgfx.initialize(type: .metal)
-        bgfx.reset(width: 1024, height: 768, options: [.vsync, .flipAfterRender])
+        bgfx.reset(width: 1280, height: 720, options: [.vsync, .flipAfterRender])
         
         self.window.acceptsMouseMovedEvents = true
         let director: Director = view.director
         Director.pushCurrentDirector(director)
-        director.present(scene: MainScene(size: director.designSize))
+        director.present(scene: PhysicsScene(size: director.designSize))
+        //director.present(scene: MainScene(size: director.designSize))
         //director.present(scene: ViewportScene(size: director.designSize))
         Director.popCurrentDirector()
     }
