@@ -1,3 +1,6 @@
 [submodule "external/SwiftBGFX"]
 	path = external/SwiftBGFX
 	url = https://github.com/SwiftGFX/SwiftBGFX.git
+[submodule "demo/platform/android/android-project"]
+	path = demo/platform/android/android-project
+	url = https://github.com/s1ddok/Fiber2D-Android-Project.git
