@@ -9,7 +9,7 @@ public func SDL_main(argc: Int32, argv: OpaquePointer) -> Int32 {
     var pd = PlatformData()
 
     #if os(OSX)
-        
+
     pd.ndt = nil
     // Hack around C anonymous structs, will see if it works...
     var cocoa = wmi.info.cocoa
@@ -19,7 +19,7 @@ public func SDL_main(argc: Int32, argv: OpaquePointer) -> Int32 {
     #endif
 
     #if os(Linux)
-        
+
     let window = Window(title: "Fiber2D-SDL", origin: .zero, size: Size(1024, 768), flags: [.shown])
 
     var wmi = SDL_SysWMinfo()
@@ -35,8 +35,8 @@ public func SDL_main(argc: Int32, argv: OpaquePointer) -> Int32 {
     #if os(Android)
 
     //pd.nwh = SDL_SysWMinfo_get_android_window(&wmi)
-    pd.nwh = F2D_GetNativeWindow()
-        
+    pd.nwh = CAPG_GetNativeWindow()
+
     #endif
     bgfx.setPlatformData(pd)
     let locator = FileLocator.shared
@@ -44,14 +44,14 @@ public func SDL_main(argc: Int32, argv: OpaquePointer) -> Int32 {
     locator.searchPaths = [ "/Users/s1ddok/Documents/Projects/GitHub/Fiber2D/demo/Resources"]
 
     let window = WindowMock()
-    
+
     bgfx.renderFrame()
     bgfx.initialize()
-    bgfx.reset(width: window.sizeInPixels.width, height: window.sizeInPixels.height, options: [.vsync])
+    bgfx.reset(width: UInt16(window.sizeInPixels.width), height: UInt16(window.sizeInPixels.height), options: [.vsync])
 
     var event = SDL_Event()
     var running = true
-    
+
     let director: Director = Director(view: window)
     Director.pushCurrentDirector(director)
     let scene = PhysicsScene(size: director.designSize)
