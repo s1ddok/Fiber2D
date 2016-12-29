@@ -8,7 +8,7 @@
 
 This project originated as [cocos2d-objc](https://github.com/cocos2d/cocos2d-objc) rewrite to Swift. As I stopped commiting to the repo since June, because Obj-C is dead for me. 
 
-This is still in a very **alpha state**, but you already can build some games with it, even though it may be unpleasant process as I change API almost every day. The project served as `.dylib` (`.so` on Linux) that builds by Swift Package Manager. It requires some project config in order to use it, but you can experiment with the demo provided in the repo.
+This is still in a very **alpha state**, but you already can build some games with it, even though it may be unpleasant process as I change API almost every day. The project served as `.dylib` (`.so` on Linux/Android) that builds by Swift Package Manager. It requires some project config in order to use it, but you can experiment with the demo provided in the repo.
 *Generally the project is in transition from cocos2d-objc to Swifty style and most of (**all**? :) ) API will change.*
 
 ## Basement 
@@ -19,23 +19,22 @@ We worked hard before starting this project and it relies on several self-made l
 Thanks to them we currently have:
 * Ultra fast cross-platform math lib, that works with `SIMD` on `Darwin` platforms and has self-implemnted algorithms to run on `Glibc` based environment. Not speaking of **zero ARC** impact and modern swifty syntax features.
 * Modern agnostic renderer, which works with following list of backends **out of the box**:
-  * Direct3D 9, 11, 12 (WIP)
+  * Direct3D 9, 11, 12
   * Metal
   * OpenGL 2.1, 3.1+, ES 2, ES 3.1
   * WebGL 1.0, 2.0
 
 ### What it looks like?
-Currently this repo only contains demos for `Linux` and `macOS`. `macOS demo` can use both `MetalKit` and `SDL`, it also can seamlessly be ported to `iOS` and `tvOS`, but developing is easier with desktop executables. `Linux demo` can only be compiled with `SDL`, hence only `GL` rendering backend is available.
+Currently this repo only contains demos for `Linux`, `Android` and `macOS`. `macOS demo` can use both `MetalKit` and `SDL`, it also can seamlessly be ported to `iOS` and `tvOS`, but developing is easier with desktop executables. `Linux` and `Android` demos can only be compiled with `SDL`, hence only `GL` rendering backend is available.
 
 You can get the idea from this GIF: 
 ![Fiber2D Demo Gif](http://imgur.com/CP6d9kT.gif)
 
-# Goals (updated 17 DEC 2016)
+# Goals (updated 29 DEC 2016)
 My goals for the near future are (order means nothing):
 
-* **Port to `Android`**
+* **Port to `Windows`**
 * Introduce basic `UI components` (Button, Slider, Label)
-* Cover code with `tests`
 * Introduce GPU computed `Particle systems` 
 * **Drop the concept of `contentScale` and use `one set of assets` for all screen resolutions**
 * Add support for more asset format loading from `.jpg` to `.pvr`
@@ -63,6 +62,7 @@ Okay, so how we build this monster? I tried to simplify the whole process for yo
 # Contributors 
 
 * [@stuartcarnie](https://github.com/stuartcarnie) did initial setup of the bgfx renderer along with general support on how to use it
+* [@gonzalolarralde](https://github.com/gonzalolarralde) helped with Android port of libDispatch/libFoundation and Fiber2D itself.
 
 # Questions
 
