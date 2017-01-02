@@ -7,9 +7,13 @@
 //
 
 import SwiftMath
-#if os(iOS) || os(tvOS) || os(macOS)
+#if os(iOS) || os(tvOS)
+import QuartzCore
+#endif
+#if os(macOS)
 import Quartz
-#else
+#endif
+#if os(Android) || os(Linux)
 import Glibc
 #endif
 
