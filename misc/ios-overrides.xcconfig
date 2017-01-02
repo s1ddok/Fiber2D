@@ -1,0 +1,27 @@
+//
+//  ios-overrides.xcconfig
+//  Fiber2D
+//
+//  Created by Andrey Volodin on 30.12.16.
+//
+//
+
+// Disable code signing for successful device builds with Xcode 8. Frameworks do
+// need to be signed, but they don't need to be signed at compile time because
+// they'll be re-signed when you include them in your app.
+CODE_SIGNING_REQUIRED = NO
+CODE_SIGN_IDENTITY =
+
+// Whether this framework should define an LLVM module
+DEFINES_MODULE = YES
+
+// Disallows use of APIs that are not available to app extensions and linking to
+// frameworks that have not been built with this setting enabled.
+APPLICATION_EXTENSION_API_ONLY = YES
+
+// The base SDK to use (if no version is specified, the latest is assumed)
+SDKROOT = iphoneos
+
+// Supported device families (1 is iPhone, 2 is iPad)
+SUPPORTED_PLATFORMS = iphonesimulator iphoneos
+SWIFT_TREAT_WARNINGS_AS_ERRORS = YES
