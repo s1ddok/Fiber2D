@@ -6,10 +6,12 @@
 //
 
 import SwiftMath
+#if os(iOS) || os(tvOS)
+import UIKit
+#endif
 
 // TODO: Current implementation doesn't handle the case when responder is being removed during move events
 // I bet it sits in runningResponders forever
-
 /**
  *  Defines a running iOS/OSX responder.
  */
@@ -18,15 +20,17 @@ internal final class RunningResponder {
      *  Holdes the target of the touch. This is the node which accepted the touch.
      */
     unowned var target: Responder
+    
     #if os(iOS)
     /**
      *  Holds the current touch. Note that touches must not be retained.
      */
-    weak var touch: CCTouch!
+    weak var touch: UITouch!
+    
     /**
      *  Holdes the current event. Note that events must not be retained.
      */
-    weak var event: CCTouchEvent!
+    weak var event: UIEvent!
     #endif
     
     #if os(OSX)
