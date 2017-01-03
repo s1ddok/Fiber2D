@@ -50,9 +50,8 @@ public extension ResponderManager {
                     self.currentEventProcessed = true
                     responder.inputBegan(Input(screenPosition: worldTouchLocation, force: Float(touch.force)))
                     // if touch was processed, add it and break
-                    if currentEventProcessed {
-                        self.add(responder: responder, withTouch: touch, andEvent: event)
-                    }
+                    self.add(responder: responder, withTouch: touch, andEvent: event)
+                    break
                 }
             }
         }
