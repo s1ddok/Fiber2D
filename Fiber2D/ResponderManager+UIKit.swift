@@ -6,7 +6,7 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import UIKit
 import SwiftMath
 
