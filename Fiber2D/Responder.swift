@@ -35,13 +35,13 @@ open class Responder {
 
     #if os(iOS) || os(tvOS) || os(Android)
     /** Enables multiple touches inside a single node. */
-    public var multipleTouchEnabled: Bool = false
+    public var isMultipleTouchEnabled: Bool = false
 
     /**
      *  All other touches will be cancelled / ignored if a node with exclusive touch is active.
      *  Only one exclusive touch node can be active at a time.
      */
-    public var exclusiveTouch: Bool = false
+    public var isExclusiveTouch: Bool = false
     #endif
 
     /// @name Customize Event Behavior
