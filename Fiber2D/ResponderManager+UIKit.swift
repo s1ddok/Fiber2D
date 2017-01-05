@@ -78,7 +78,7 @@ public extension ResponderManager {
                 // check if it locks touches
                 if responder.claimsUserInteraction {
                     // move the touch
-                    responder.inputMoved(input)
+                    responder.inputDragged(input)
                 } else {
                     // as node does not lock touch, check if it was moved outside
                     if !responder.hitTest(worldPosition: worldPosition) {
@@ -90,7 +90,7 @@ public extension ResponderManager {
                         self.exclusiveMode = false
                     } else {
                         // move the touch
-                        responder.inputMoved(input)
+                        responder.inputDragged(input)
                     }
                 }
             } else if !exclusiveMode {
