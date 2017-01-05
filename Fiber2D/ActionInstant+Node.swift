@@ -27,15 +27,14 @@
  
  Example block that reads and modifies a variable in scope and rotates a node to illustrate the code syntax:
  
- let callBlock = ActionCallBlock {[unowned self] () -> () in
-  self.rotation += 90;
+ let callBlock = ActionCallBlock { [unowned self] () -> () in
+  self.someMethod()
  }.instantly
  
- [self runAction:callBlock];
+ self.run(action:callBlock)
  
  @see [Blocks Programming Guide](https://developer.apple.com/library/ios/documentation/cocoa/Conceptual/Blocks/Articles/00_Introduction.html)
  */
-
 public struct ActionCallBlock: ActionModel {
     public let block: () -> ()
     
