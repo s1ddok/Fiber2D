@@ -90,13 +90,13 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
     public let duration: Time
     private let firstDuration: Time
     private let secondDuration: Time
-    private(set) public var elapsed:  Time = 0.0
+    private(set) public var elapsed: Time = 0.0
     
     public var isDone: Bool {
         return elapsed > duration
     }
     
-    private(set) var first: ActionContainerFiniteTime
+    private(set) var first:  ActionContainerFiniteTime
     private(set) var second: ActionContainerFiniteTime
     
     public init(first: ActionContainerFiniteTime, second: ActionContainerFiniteTime) {
