@@ -43,21 +43,19 @@ My goals for the near future are (order means nothing):
 We have a [trello](https://trello.com/b/eUe8CkrW/fiber2d) which I will try to maintain soon.
 
 # Build
-Okay, so how we build this monster? I tried to simplify the whole process for you, so the steps are:
-
+## macOS
 1. Clone
 
    ```$ git clone --recursive https://github.com/s1ddok/Fiber2D.git```
 
 2. Call helper script, that will do all the preparation stuff for you. (You have to have `ninja build` installed)
 
-   ``` sh prepare_bgfx_macos.sh ```
-   
-3. Call build script that will build Fiber2D.
+   ```
+   cd externalSwiftBGFX
+   sh prepare_bgfx_macos.sh
+   ```
 
-  ``` sh build_osx.sh ```
-
-4. Open demo XCode project, compile and run. You should see the demo yourself.
+3. Open demo XCode project, compile and run. You should see the demo yourself.
 
 # Contributors 
 
