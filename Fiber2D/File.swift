@@ -99,7 +99,6 @@ public final class File {
      @return The plist file's contents, or nil if there is an error.
      */
     func loadPlist() throws -> Any {
-        
         let stream = openInputStream()
         
         let plist = try PropertyListSerialization.propertyList(with: stream, options: [], format: nil)

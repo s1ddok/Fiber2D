@@ -13,7 +13,7 @@
 // but as of Action are chosed to be value types, that will be a bit hacky
 // You can't make a lot of use from it, but maybe there are some special cases
 public struct ActionRewindContainer: ActionContainer, Continous {
-    @inline(__always)
+
     mutating public func update(state: Float) {
         action.update(state: 1.0 - state)
     }

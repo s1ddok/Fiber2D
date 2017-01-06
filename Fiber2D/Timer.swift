@@ -113,27 +113,23 @@ extension Timer {
 }
 
 extension Timer: Comparable {
-    @inline(__always)
+
     public static func ==(lhs: Timer, rhs: Timer) -> Bool {
         return lhs.invokeTimeInternal == rhs.invokeTimeInternal
     }
 
-    @inline(__always)
     public static func <(lhs: Timer, rhs: Timer) -> Bool {
         return lhs.invokeTimeInternal < rhs.invokeTimeInternal
     }
     
-    @inline(__always)
     public static func <=(lhs: Timer, rhs: Timer) -> Bool {
         return lhs.invokeTimeInternal <= rhs.invokeTimeInternal
     }
     
-    @inline(__always)
     public static func >(lhs: Timer, rhs: Timer) -> Bool {
         return lhs.invokeTimeInternal > rhs.invokeTimeInternal
     }
     
-    @inline(__always)
     public static func >=(lhs: Timer, rhs: Timer) -> Bool {
         return lhs.invokeTimeInternal >= rhs.invokeTimeInternal
     }

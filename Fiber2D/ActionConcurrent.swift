@@ -11,7 +11,6 @@
  */
 public struct ActionConcurrent: ActionModel {
     
-    @inline(__always)
     mutating public func update(state: Float) {
         first.update(state: state)
         second.update(state: state)

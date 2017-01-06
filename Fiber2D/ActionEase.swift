@@ -27,7 +27,7 @@ public enum EaseSine: EaseType {
 }
 
 public struct ActionEaseContainer: ActionContainer, Continous {
-    @inline(__always)
+
     mutating public func update(state: Float) {
         action.update(state: easeBlock(state))
     }
