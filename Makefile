@@ -28,9 +28,8 @@ ANDROID_FLAGS = -Xswiftc -I$ANDROID_NDK_HOME/sources/android/native_app_glue/ \
 -Xlinker -L$ANDROID_NDK_HOME/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/lib/gcc/arm-linux-androideabi/4.9.x/ \
 -Xlinker -L$ANDROID_NDK_HOME/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/arm-linux-androideabi/lib/armv7-a/ \
 -Xlinker -L$ANDROID_LIBICONV/armeabi-v7a \
--Xlinker -lgcc        -Xlinker -lc++    -Xlinker -ldispatch \
--Xlinker -lFoundation -Xlinker -latomic -Xlinker -licui18n  \
--Xlinker -licuuc \
+-Xlinker -lgcc    -Xlinker -ldispatch -Xlinker -lFoundation \
+-Xlinker -latomic -Xlinker -licui18n  -Xlinker -licuuc \
 -Xlinker --sysroot=$ANDROID_NDK_HOME/platforms/android-21/arch-arm/
 
 CC_FLAGS_METAL = -Xcc -DBGFX_CONFIG_RENDERER_METAL=1
@@ -43,10 +42,17 @@ android:
 	swift build $(SWIFT_FLAGS_COMMON) $(ANDROID_FLAGS)
 
 xcodeproj-ios:
-	swift package generate-xcodeproj --xcconfig-overrides misc/ios-overrides.xcconfig \
-	$(SWIFT_FLAGS_COMMON) $(SWIFT_FLAGS_METAL) $(CC_FLAGS_METAL) $(IOS_FLAGS)
+	swift package \
+	$(SWIFT_FLAGS_COMMON) $(SWIFT_FLAGS_METAL) $(CC_FLAGS_METAL) $(IOS_FLAGS) \
+	generate-xcodeproj --xcconfig-overrides misc/ios-overrides.xcconfig \
+	--output Fiber2D-iOS.xcodeproj
+
+xcodeproj-macos:
+	swift package $(SWIFT_FLAGS_COMMON) $(SWIFT_FLAGS_METAL) $(CC_FLAGS_METAL) $(MACOS_FLAGS) \
+	generate-xcodeproj --xcconfig-overrides misc/macos-overrides.xcconfig \
+	--output Fiber2D-macOS.xcodeproj
 
 clean:
 	swift build --clean
 
-.PHONY: clean xcodeproj-ios macos android
+.PHONY: clean xcodeproj-ios xcodeproj-macos macos android
