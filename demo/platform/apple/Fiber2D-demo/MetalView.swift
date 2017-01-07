@@ -80,7 +80,18 @@ public class MetalView: MTKView, DirectorView {
         self.sampleCount = 4*/
     }
     
+    #if os(iOS) || os(tvOS)
     override public func layoutSubviews() {
+        _layoutSubviews()
+    }
+    #endif
+    #if os(macOS)
+    public func layoutSubviews() {
+        _layoutSubviews()
+    }
+    #endif
+    
+    @inline(__always) internal func _layoutSubviews() {
         self.layerSizeDidUpdate = true
         self.surfaceSize = (Size(CGSize: self.bounds.size) * Float(self.contentScaleFactor)).cgSize
     }
