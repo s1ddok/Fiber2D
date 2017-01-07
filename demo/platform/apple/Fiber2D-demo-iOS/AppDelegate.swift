@@ -7,15 +7,51 @@
 //
 
 import UIKit
+import SwiftBGFX
+import Fiber2D
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        Setup.shared.contentScale = 2.0
+        //;2*[_view convertSizeToBacking:NSMakeSize(1, 1)].width;
+        Setup.shared.assetScale = Setup.shared.contentScale
+        Setup.shared.UIScale = 0.5
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        guard let window = window else {
+            fatalError("Window must be present at this time")
+        }
+        
+        let rect: CGRect = window.bounds
+        
+        let view: MetalView = MetalView(frame: rect)
+
+        let locator = FileLocator.shared
+        locator.untaggedContentScale = 4
+        locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "/images" ]
+        
+        var pd = PlatformData()
+        pd.nwh = UnsafeMutableRawPointer(Unmanaged.passRetained(view).toOpaque())
+        pd.context = UnsafeMutableRawPointer(Unmanaged.passRetained(view.device!).toOpaque())
+        bgfx.setPlatformData(pd)
+        bgfx.renderFrame()
+        bgfx.initialize(type: .metal)
+        bgfx.reset(width: UInt16(rect.width), height: UInt16(rect.height), options: [.vsync, .flipAfterRender])
+        
+        let vc = UIViewController()
+        vc.view = view
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        let director: Director = view.director
+        Director.pushCurrentDirector(director)
+        //director.present(scene: PhysicsScene(size: director.designSize))
+        director.present(scene: MainScene(size: director.designSize))
+        //director.present(scene: ViewportScene(size: director.designSize))
+        Director.popCurrentDirector()
         return true
     }
 
