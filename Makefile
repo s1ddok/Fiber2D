@@ -8,7 +8,7 @@ SWIFT_FLAGS_COMMON = -Xcc -Iexternal/SwiftBGFX/3rdparty/bgfx/3rdparty/khronos \
 -Xlinker -framework -Xlinker Foundation \
 -Xcc -DCP_USE_CGTYPES=0
 
-IOS_FLAGS = -Xlinker -Lexternal/SwiftBGFX/3rdparty/bgfx/.build/ios-simulator/bin \
+IOS_FLAGS = -Xlinker -Lexternal/SwiftBGFX/3rdparty/bgfx/.build/ios-arm64/bin \
 -Xlinker -framework -Xlinker OpenGLES -Xlinker -framework -Xlinker UIKit
 MACOS_FLAGS = -Xlinker -framework -Xlinker AppKit -Xlinker -framework -Xlinker Quartz \
 -Xlinker -Lexternal/SwiftBGFX/3rdparty/bgfx/.build/osx64_clang/bin

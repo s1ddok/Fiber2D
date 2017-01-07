@@ -23,7 +23,18 @@
 		08781A631DFF40B400C4F39D /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 08781A621DFF40B400C4F39D /* Resources */; };
 		08B7F5FF1E145019005DD953 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
 		08B7F6001E14501F005DD953 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
-		08FF6C891E217C950062CA95 /* Fiber2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C881E217C810062CA95 /* Fiber2D.framework */; };
+		08FF6C991E2182040062CA95 /* Fiber2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C881E217C810062CA95 /* Fiber2D.framework */; };
+		08FF6C9A1E2182040062CA95 /* Fiber2D.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C881E217C810062CA95 /* Fiber2D.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08FF6C9E1E2182240062CA95 /* SwiftBGFX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C861E217C810062CA95 /* SwiftBGFX.framework */; };
+		08FF6C9F1E2182240062CA95 /* SwiftBGFX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C861E217C810062CA95 /* SwiftBGFX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08FF6CA21E2182280062CA95 /* CChipmunk2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C7E1E217C810062CA95 /* CChipmunk2D.framework */; };
+		08FF6CA31E2182280062CA95 /* CChipmunk2D.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C7E1E217C810062CA95 /* CChipmunk2D.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08FF6CA61E21822B0062CA95 /* Cpng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C801E217C810062CA95 /* Cpng.framework */; };
+		08FF6CA71E21822B0062CA95 /* Cpng.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C801E217C810062CA95 /* Cpng.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08FF6CAA1E21822E0062CA95 /* Cbgfx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C841E217C810062CA95 /* Cbgfx.framework */; };
+		08FF6CAB1E21822E0062CA95 /* Cbgfx.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C841E217C810062CA95 /* Cbgfx.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08FF6CAE1E2182320062CA95 /* SwiftMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C821E217C810062CA95 /* SwiftMath.framework */; };
+		08FF6CAF1E2182320062CA95 /* SwiftMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C821E217C810062CA95 /* SwiftMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +80,68 @@
 			remoteGlobalIDString = OBJ_295;
 			remoteInfo = Fiber2D;
 		};
+		08FF6C9B1E2182040062CA95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_438;
+			remoteInfo = Fiber2D;
+		};
+		08FF6CA01E2182240062CA95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_399;
+			remoteInfo = SwiftBGFX;
+		};
+		08FF6CA41E2182280062CA95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_296;
+			remoteInfo = CChipmunk2D;
+		};
+		08FF6CA81E21822B0062CA95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_335;
+			remoteInfo = Cpng;
+		};
+		08FF6CAC1E21822E0062CA95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_389;
+			remoteInfo = Cbgfx;
+		};
+		08FF6CB01E2182320062CA95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_358;
+			remoteInfo = SwiftMath;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		08FF6C9D1E2182040062CA95 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				08FF6C9A1E2182040062CA95 /* Fiber2D.framework in Embed Frameworks */,
+				08FF6C9F1E2182240062CA95 /* SwiftBGFX.framework in Embed Frameworks */,
+				08FF6CAF1E2182320062CA95 /* SwiftMath.framework in Embed Frameworks */,
+				08FF6CA71E21822B0062CA95 /* Cpng.framework in Embed Frameworks */,
+				08FF6CAB1E21822E0062CA95 /* Cbgfx.framework in Embed Frameworks */,
+				08FF6CA31E2182280062CA95 /* CChipmunk2D.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0816F1F71E1B19C600461465 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
@@ -100,8 +172,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08FF6C891E217C950062CA95 /* Fiber2D.framework in Frameworks */,
+				08FF6C991E2182040062CA95 /* Fiber2D.framework in Frameworks */,
+				08FF6CAA1E21822E0062CA95 /* Cbgfx.framework in Frameworks */,
+				08FF6CA21E2182280062CA95 /* CChipmunk2D.framework in Frameworks */,
+				08FF6CA61E21822B0062CA95 /* Cpng.framework in Frameworks */,
+				08FF6CAE1E2182320062CA95 /* SwiftMath.framework in Frameworks */,
 				0816F1F81E1B19C600461465 /* Metal.framework in Frameworks */,
+				08FF6C9E1E2182240062CA95 /* SwiftBGFX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,10 +301,17 @@
 				083B0BA61E15D02800F6B9EB /* Sources */,
 				083B0BA71E15D02800F6B9EB /* Frameworks */,
 				083B0BA81E15D02800F6B9EB /* Resources */,
+				08FF6C9D1E2182040062CA95 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				08FF6C9C1E2182040062CA95 /* PBXTargetDependency */,
+				08FF6CA11E2182240062CA95 /* PBXTargetDependency */,
+				08FF6CA51E2182280062CA95 /* PBXTargetDependency */,
+				08FF6CA91E21822B0062CA95 /* PBXTargetDependency */,
+				08FF6CAD1E21822E0062CA95 /* PBXTargetDependency */,
+				08FF6CB11E2182320062CA95 /* PBXTargetDependency */,
 			);
 			name = "Fiber2D-demo-iOS";
 			productName = "Fiber2D-demo-iOS";
@@ -409,6 +493,39 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		08FF6C9C1E2182040062CA95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Fiber2D;
+			targetProxy = 08FF6C9B1E2182040062CA95 /* PBXContainerItemProxy */;
+		};
+		08FF6CA11E2182240062CA95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftBGFX;
+			targetProxy = 08FF6CA01E2182240062CA95 /* PBXContainerItemProxy */;
+		};
+		08FF6CA51E2182280062CA95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CChipmunk2D;
+			targetProxy = 08FF6CA41E2182280062CA95 /* PBXContainerItemProxy */;
+		};
+		08FF6CA91E21822B0062CA95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Cpng;
+			targetProxy = 08FF6CA81E21822B0062CA95 /* PBXContainerItemProxy */;
+		};
+		08FF6CAD1E21822E0062CA95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Cbgfx;
+			targetProxy = 08FF6CAC1E21822E0062CA95 /* PBXContainerItemProxy */;
+		};
+		08FF6CB11E2182320062CA95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftMath;
+			targetProxy = 08FF6CB01E2182320062CA95 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		083B0BB01E15D02800F6B9EB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -440,12 +557,14 @@
 		083B0BBA1E15D02800F6B9EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -458,12 +577,14 @@
 		083B0BBB1E15D02800F6B9EB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";

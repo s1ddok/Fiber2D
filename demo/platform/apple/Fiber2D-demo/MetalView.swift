@@ -80,7 +80,7 @@ public class MetalView: MTKView, DirectorView {
         self.sampleCount = 4*/
     }
     
-    func layoutSubviews() {
+    override public func layoutSubviews() {
         self.layerSizeDidUpdate = true
         self.surfaceSize = (Size(CGSize: self.bounds.size) * Float(self.contentScaleFactor)).cgSize
     }
@@ -115,27 +115,27 @@ public class MetalView: MTKView, DirectorView {
         return CGRect(x: (rect.origin.x - bounds.origin.x) / bounds.size.width * surfaceSize.width, y: (rect.origin.y - bounds.origin.y) / bounds.size.height * surfaceSize.height, width: rect.size.width / bounds.size.width * surfaceSize.width, height: rect.size.height / bounds.size.height * surfaceSize.height)
     }
     #if os(iOS)
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         Director.pushCurrentDirector(director)
-        director.responderManager.touchesBegan(touches, withEvent: event)
+        director.responderManager.touchesBegan(touches, with: event)
         Director.popCurrentDirector()
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         Director.pushCurrentDirector(director)
-        director.responderManager.touchesMoved(touches, withEvent: event)
+        director.responderManager.touchesMoved(touches, with: event)
         Director.popCurrentDirector()
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         Director.pushCurrentDirector(director)
-        director.responderManager.touchesEnded(touches, withEvent: event)
+        director.responderManager.touchesEnded(touches, with: event)
         Director.popCurrentDirector()
     }
-    
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+
+    override public func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
         Director.pushCurrentDirector(director)
-        director.responderManager.touchesCancelled(touches, withEvent: event)
+        director.responderManager.touchesCancelled(touches ?? Set<UITouch>(), with: event)
         Director.popCurrentDirector()
     }
     #endif
