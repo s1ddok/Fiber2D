@@ -8,8 +8,8 @@
 
 This project originated as [cocos2d-objc](https://github.com/cocos2d/cocos2d-objc) rewrite to Swift. As I stopped commiting to the repo since June, because Obj-C is dead for me. 
 
-This is still in a very **alpha state**, but you already can build some games with it, even though it may be unpleasant process as I change API almost every day. The project served as `.dylib` (`.so` on Linux/Android) that builds by Swift Package Manager. It requires some project config in order to use it, but you can experiment with the demo provided in the repo.
-*Generally the project is in transition from cocos2d-objc to Swifty style and most of (**all**? :) ) API will change.*
+This is still in a very **alpha state**, but you already can build some games with it, even though it may be unpleasant process as I change API almost every day. The project served as `.dylib` (`.so` on `Linux`/`Android`) that builds by Swift Package Manager. It requires some project config in order to use it, but you can experiment with the demo provided in the repo.
+*Generally the project should be considered unstable and most of the API is likely to be changed.*
 
 ## Basement 
 We worked hard before starting this project and it relies on several self-made libs we made:
@@ -51,11 +51,17 @@ We have a [trello](https://trello.com/b/eUe8CkrW/fiber2d) which I will try to ma
 2. Call helper script, that will do all the preparation stuff for you. (You have to have `ninja build` installed)
 
    ```
-   cd externalSwiftBGFX
+   cd external/SwiftBGFX
    sh prepare_bgfx_macos.sh
    ```
 
 3. Open demo XCode project, compile and run. You should see the demo yourself.
+
+## iOS
+
+1. Clone, build `bgfx` for `iOS`
+2. ``` make xcodeproj-ios ```
+3. Open demo XCode project, compile and run. 
 
 # Contributors 
 
