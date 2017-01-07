@@ -10,13 +10,23 @@ import Foundation
 
 extension Array {
 	@discardableResult
+    // FIXME: We need to get rid of this
+    // The whole thing is very ugly and does not work the same on all platforms
+    // We need to maintain this because Swift still can't treat :class protocol as AnyObject
     mutating func removeObject(_ obj: AnyObject) -> Bool {
         var idx = 0
         for e in self {
-            if (e as? AnyObject) === obj {
+            #if os(iOS) || os(tvOS)
+            if (e as AnyObject) === obj {
                 remove(at: idx)
                 return true
             }
+            #else
+            if (e as! AnyObject) === obj {
+                remove(at: idx)
+                return true
+            }
+            #endif
             idx += 1
         }
 
