@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let locator = FileLocator.shared
         locator.untaggedContentScale = 4
-        locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "/Resources" ]
+        locator.searchPaths = [ Bundle.main.resourcePath!, Bundle.main.resourcePath! + "/images" ]
         
         window.center()
         window.makeFirstResponder(view)
