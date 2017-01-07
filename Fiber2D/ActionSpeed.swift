@@ -7,7 +7,7 @@
 //
 
 public struct ActionSpeedContainer: ActionContainer, Continous {
-    @inline(__always)
+
     mutating public func update(state: Float) {
         action.update(state: state)
     }

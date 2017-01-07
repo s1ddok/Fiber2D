@@ -7,7 +7,7 @@
 //
 
 public struct ActionSequenceContainer: ActionContainer, Continous {
-    @inline(__always)
+
     mutating public func update(state: Float) {
         let t = state
         var found = 0

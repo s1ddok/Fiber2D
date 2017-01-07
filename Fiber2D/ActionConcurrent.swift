@@ -6,9 +6,11 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
+/**
+ * This model can be used to combine multiple models to treat them as one.
+ */
 public struct ActionConcurrent: ActionModel {
     
-    @inline(__always)
     mutating public func update(state: Float) {
         first.update(state: state)
         second.update(state: state)
@@ -36,16 +38,31 @@ public struct ActionConcurrent: ActionModel {
     }
 }
 
+/** This action can be used in a ActionSequence to allow the sequence to spawn 2 or more actions that run in parallel to the sequence.
+ 
+ Usage example with a sequence, assuming actionX and spawnActionX are previously declared, assigned and are FiniteTime:
+ 
+ let spawn = spawnAction1.and(spawnAction2)
+ let sequence = action1.then(spawn).then(action2)
+ self.run(action:sequence)
+ 
+ This will run action1 to completion. Then spawnAction1 and spawnAction2 will run in parallel to completion. Then action4 will run after
+ both spawnAction1 and spawnAction2 have run to completion. Note that if spawnAction1 and spawnAction2 have different duration, the duration
+ of the longer running action will become the duration of the spawn action.
+ 
+ @note To generally run actions in parallel you can simply call run(action:) for each action rather than creating a sequence with a spawn action.
+ For example, this suffices to run two actions in parallel:
+ 
+ self.run(action:action1)
+ self.run(action:action2)
+ 
+ @note It is not meaningful to use ActionCuncurrentContainer with just one action.
+ */
 public struct ActionConcurrentContainer: ActionContainer, Continous {
     
-    @inline(__always)
     mutating public func update(state: Float) {
-        if state <= firstDuration {
-            first.update(state: state)
-        }
-        if state <= secondDuration {
-            second.update(state: state)
-        }
+        first.update(state: state)
+        second.update(state: state)
     }
     
     public mutating func start(with target: Node) {
@@ -72,25 +89,33 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
     public let duration: Time
     private let firstDuration: Time
     private let secondDuration: Time
-    private(set) public var elapsed:  Time = 0.0
+    private(set) public var elapsed: Time = 0.0
     
     public var isDone: Bool {
         return elapsed > duration
     }
     
-    private(set) var first: ActionContainerFiniteTime
+    private(set) var first:  ActionContainerFiniteTime
     private(set) var second: ActionContainerFiniteTime
     
     public init(first: ActionContainerFiniteTime, second: ActionContainerFiniteTime) {
-        self.first = first
-        self.second = second
-        
         let firstDuration = first.duration
-        let secondDuration = first.duration
+        let secondDuration = second.duration
         self.duration = max(firstDuration, secondDuration)
         
         self.firstDuration = firstDuration / duration
         self.secondDuration = secondDuration / duration
+        
+        if firstDuration > secondDuration {
+            self.first  = first
+            self.second = second.then(ActionWait(for: firstDuration - secondDuration))
+        } else if secondDuration < firstDuration {
+            self.first  = first.then(ActionWait(for: secondDuration - firstDuration))
+            self.second = second
+        } else {
+            self.first = first
+            self.second = second
+        }
     }
     
 }

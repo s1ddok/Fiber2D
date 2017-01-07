@@ -8,7 +8,6 @@
 
 public struct ActionContinousContainer: ActionContainer, Continous {
     
-    @inline(__always)
     mutating public func update(state: Float) {
         action.update(state: state)
     }

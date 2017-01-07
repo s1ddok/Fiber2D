@@ -8,7 +8,6 @@
 
 public struct ActionInstantContainer: ActionContainer {
     
-    @inline(__always)
     mutating public func update(state: Float) {
         action.update(state: 1.0)
     }
