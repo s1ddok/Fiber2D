@@ -29,7 +29,7 @@ pd.nwh = SDL_SysWMinfo_get_x11_window(&wmi)
 bgfx.setPlatformData(pd)
 let locator = FileLocator.shared
 locator.untaggedContentScale = 4
-locator.searchPaths = [ "/Users/s1ddok/Documents/Projects/GitHub/Fiber2D/demo/Resources"]
+locator.searchPaths = [ "/Users/s1ddok/Documents/Projects/GitHub/Fiber2D/demo/images"]
 
 bgfx.renderFrame()
 bgfx.initialize()
