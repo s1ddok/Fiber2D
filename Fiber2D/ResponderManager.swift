@@ -9,6 +9,9 @@ import SwiftMath
 #if os(iOS) || os(tvOS)
 import UIKit
 #endif
+#if os(Linux) || os(Android)
+import CSDL2
+#endif
 
 // TODO: Current implementation doesn't handle the case when responder is being removed during move events
 // I bet it sits in runningResponders forever
@@ -33,11 +36,18 @@ internal final class RunningResponder {
     weak var event: UIEvent!
     #endif
     
-    #if os(OSX)
+    #if os(OSX) || os(Linux)
     /**
      *  Button in the currently ongoing event.
      */
     var button: MouseButton!
+    #endif
+    
+    #if os(Android)
+    /**
+     * Holdes the current touch id.
+     */
+    var touchID: SDL_TouchID!
     #endif
     
     public init(target: Responder) {
