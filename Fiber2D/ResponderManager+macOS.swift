@@ -94,21 +94,6 @@ public extension ResponderManager {
         }, screenPosition: mouseLocation)
     }
     
-    public func executeOnEachResponder(_ block: (Responder) -> Void, screenPosition: Point) {
-        Director.pushCurrentDirector(director)
-        // scan through responders, and find first one
-        for responder in responderList.lazy.reversed() {
-            // check for hit test
-            if responder.hitTest(worldPosition: screenPosition) {
-                self.currentEventProcessed = true
-                block(responder)
-                // if mouse was accepted, break
-                break
-            }
-        }
-        Director.popCurrentDirector()
-    }
-    
     public func scrollWheel(_ theEvent: NSEvent) {
         if !enabled {
             return
@@ -177,28 +162,6 @@ public extension ResponderManager {
             $0.flagsChanged(theEvent)
         }
         Director.popCurrentDirector()
-    }
-    
-    internal func cancel(responder: RunningResponder) {
-        runningResponderList.removeObject(responder)
-    }
-    
-    // finds a responder object for an event
-    fileprivate func responder(for button: MouseButton) -> RunningResponder? {
-        for touchEntry in runningResponderList {
-            if touchEntry.button == button {
-                return touchEntry
-            }
-        }
-        return nil
-    }
-    
-    // adds a responder object ( running responder ) to the responder object list
-    fileprivate func add(responder: Responder, withButton button: MouseButton) {
-        // create a new input object
-        let touchEntry = RunningResponder(target: responder)
-        touchEntry.button = button
-        runningResponderList.append(touchEntry)
     }
 }
     

@@ -156,3 +156,10 @@ public extension ResponderManager {
 }
 
 #endif
+
+
+#if os(Linux)
+import CSDL2
+import SwiftMath
+
+#endif
