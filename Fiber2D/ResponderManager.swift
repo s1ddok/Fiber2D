@@ -13,8 +13,8 @@ import UIKit
 import CSDL2
 #endif
 
-// TODO: Current implementation doesn't handle the case when responder is being removed during move events
-// I bet it sits in runningResponders forever
+// TODO: Current implementation doesn't handle the case when responder is being removed during move events, I bet it sits in runningResponders forever
+// TODO: Gracefully handle potential deallocation of touch/event for UIKit
 /**
  *  Defines a running iOS/OSX responder.
  */
@@ -55,6 +55,7 @@ internal final class RunningResponder {
     }
 }
 
+// TODO: Unify SDL/UIKit code somehow
 /**
  *  The responder manager handles touches and mouse.
  */
