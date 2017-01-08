@@ -97,15 +97,13 @@ public extension ResponderManager {
     public func executeOnEachResponder(_ block: (Responder) -> Void, screenPosition: Point) {
         Director.pushCurrentDirector(director)
         // scan through responders, and find first one
-        for responder in responderList.reversed().lazy {
+        for responder in responderList.lazy.reversed() {
             // check for hit test
             if responder.hitTest(worldPosition: screenPosition) {
                 self.currentEventProcessed = true
                 block(responder)
                 // if mouse was accepted, break
-                if currentEventProcessed {
-                    break
-                }
+                break
             }
         }
         Director.popCurrentDirector()
