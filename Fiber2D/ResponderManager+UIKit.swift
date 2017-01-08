@@ -24,10 +24,11 @@ public extension ResponderManager {
         }
         
         // go through all touches
-        outer: for touch in touches {
-            let worldTouchLocation = director.convertTouchToGL(touch)
+        for touch in touches {
+            let input = director.convertUITouchToInput(touch)
+            let worldTouchLocation = input.screenPosition
             // scan backwards through touch responders
-            for responder in responderList.lazy.reversed() {
+            outer: for responder in responderList.lazy.reversed() {
                 // check for hit test
                 if responder.hitTest(worldPosition: worldTouchLocation) {
                     // check if node has exclusive touch
@@ -48,7 +49,7 @@ public extension ResponderManager {
                     
                     // begin the touch
                     self.currentEventProcessed = true
-                    responder.inputBegan(Input(screenPosition: worldTouchLocation, force: Float(touch.force)))
+                    responder.inputBegan(input)
                     // if touch was processed, add it and break
                     self.add(responder: responder, withTouch: touch, andEvent: event)
                     break
@@ -68,8 +69,8 @@ public extension ResponderManager {
         
         // go through all touches
         for touch in touches {
-            let worldPosition = director.convertTouchToGL(touch)
-            let input = Input(screenPosition: worldPosition, force: Float(touch.force))
+            let input = director.convertUITouchToInput(touch)
+            let worldPosition = input.screenPosition
             
             // get touch object
             // if a touch object was found
@@ -132,9 +133,8 @@ public extension ResponderManager {
         for touch in touches {
             // get touch object
             if let touchEntry = self.responder(for: touch) {
-                let input = Input(screenPosition: director.convertTouchToGL(touch), force: Float(touch.force))
                 // end the touch
-                touchEntry.target.inputEnd(input)
+                touchEntry.target.inputEnd(director.convertUITouchToInput(touch))
                 // remove from list
                 runningResponderList.removeObject(touchEntry)
                 // always end exclusive mode
@@ -174,18 +174,12 @@ public extension ResponderManager {
     
     // finds a responder object for a touch
     internal func responder(for touch: UITouch) -> RunningResponder? {
-        for touchEntry in runningResponderList {
-            if touchEntry.touch == touch {
-                return touchEntry
-            }
-        }
-        
-        return nil
+        return runningResponderList.first { $0.touch == touch }
     }
     
     // cancels a running responder
     internal func cancel(responder: RunningResponder) {
-        responder.target.inputCancelled(Input(screenPosition: director.convertTouchToGL(responder.touch), force: Float(responder.touch.force)))
+        responder.target.inputCancelled(director.convertUITouchToInput(responder.touch))
         // remove from list
         runningResponderList.removeObject(responder)
     }

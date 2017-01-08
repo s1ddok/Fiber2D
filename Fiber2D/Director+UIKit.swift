@@ -11,10 +11,10 @@ import UIKit
 import SwiftMath
 
 internal extension Director {
-    internal func convertTouchToGL(_ touch: UITouch) -> Point {
+    internal func convertUITouchToInput(_ touch: UITouch) -> Input {
         let viewLocation = touch.location(in: view as? UIView)
         
-        return convertToGL(Point(viewLocation))
+        return Input(screenPosition: convertToGL(Point(viewLocation)), force: Float(touch.force))
     }
 }
 #endif
