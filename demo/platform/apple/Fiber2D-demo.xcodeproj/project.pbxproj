@@ -23,9 +23,23 @@
 		089279C51E23A9190084ADE5 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 089279C31E23A9190084ADE5 /* images */; };
 		089279C61E23B0850084ADE5 /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */; };
 		089279C71E23B08D0084ADE5 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
+		089279E91E23B1670084ADE5 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
 		08B7F5FF1E145019005DD953 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
 		08B7F6001E14501F005DD953 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		089279E81E23B0EA0084ADE5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		083B0BAA1E15D02800F6B9EB /* Fiber2D-demo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fiber2D-demo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +167,7 @@
 				083B0BA61E15D02800F6B9EB /* Sources */,
 				083B0BA71E15D02800F6B9EB /* Frameworks */,
 				083B0BA81E15D02800F6B9EB /* Resources */,
+				089279E81E23B0EA0084ADE5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +285,7 @@
 				089279C61E23B0850084ADE5 /* UserComponents.swift in Sources */,
 				083B0BBE1E15D0C900F6B9EB /* MetalView.swift in Sources */,
 				089279C71E23B08D0084ADE5 /* PhysicsScene.swift in Sources */,
+				089279E91E23B1670084ADE5 /* MainScene.swift in Sources */,
 				083B0BAF1E15D02800F6B9EB /* ViewController.swift in Sources */,
 				083B0BAD1E15D02800F6B9EB /* AppDelegate.swift in Sources */,
 			);
@@ -321,10 +337,12 @@
 		083B0BBA1E15D02800F6B9EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -339,10 +357,12 @@
 		083B0BBB1E15D02800F6B9EB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -399,13 +419,13 @@
 					../../../external/CChipmunk2D/CChipmunk2D/include,
 					../../../external/Cpng/Cpng/include,
 				);
-				LIBRARY_SEARCH_PATHS = "../../../.build/debug/**";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_INCLUDE_PATHS = "../../../.build/debug/**";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -448,11 +468,11 @@
 					../../../external/CChipmunk2D/CChipmunk2D/include,
 					../../../external/Cpng/Cpng/include,
 				);
-				LIBRARY_SEARCH_PATHS = "../../../.build/debug/**";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_INCLUDE_PATHS = "../../../.build/debug/**";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
@@ -466,11 +486,14 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Fiber2D-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../../.build/debug/**",
+				);
 				OTHER_LDFLAGS = "-lFiber2D";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(inherited)";
+				SWIFT_INCLUDE_PATHS = "$(inherited) ../../../.build/debug/**";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -484,11 +507,14 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Fiber2D-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"../../../.build/debug/**",
+				);
 				OTHER_LDFLAGS = "-lFiber2D";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(inherited)";
+				SWIFT_INCLUDE_PATHS = "$(inherited) ../../../.build/debug/**";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
