@@ -164,8 +164,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 083B0BB91E15D02800F6B9EB /* Build configuration list for PBXNativeTarget "Fiber2D-demo-iOS" */;
 			buildPhases = (
-				083B0BA61E15D02800F6B9EB /* Sources */,
 				089279EA1E23B2970084ADE5 /* ShellScript */,
+				083B0BA61E15D02800F6B9EB /* Sources */,
 				083B0BA71E15D02800F6B9EB /* Frameworks */,
 				083B0BA81E15D02800F6B9EB /* Resources */,
 				089279E81E23B0EA0084ADE5 /* Embed Frameworks */,
@@ -358,9 +358,9 @@
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "${PROJECT_TEMP_DIR}/SymlinkLibs";
+				LIBRARY_SEARCH_PATHS = "${PROJECT_TEMP_DIR}/SymlinkLibs/**";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -379,9 +379,9 @@
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "${PROJECT_TEMP_DIR}/SymlinkLibs";
+				LIBRARY_SEARCH_PATHS = "${PROJECT_TEMP_DIR}/SymlinkLibs/**";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
