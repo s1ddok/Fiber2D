@@ -61,7 +61,11 @@ We have a [trello](https://trello.com/b/eUe8CkrW/fiber2d) which I will try to ma
 
 1. Clone, build `bgfx` for `iOS`
 2. ``` make xcodeproj-ios ```
-3. Open demo XCode project, compile and run. 
+3. Open demo XCode project, drag `Fiber2D-iOS.xcodeproj` somewhere in `System/iOS` group (just for reasonable structure).
+4. Go to `Project Settings` -> `Fiber2D-demo-iOS Target settings`. Add all frameworks from `Fiber2D-iOS` to `Embedded binaries`:
+![Embedded binaries example](https://i.gyazo.com/9be53aecedc25126a891d26554695c5a.png)
+Double check that the same binaries appear in `Target dependencies` section of `Build Phases`.
+5. Compile and run
 
 # Contributors 
 
