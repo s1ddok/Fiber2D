@@ -21,6 +21,8 @@
 		08781A5F1DFF3FDB00C4F39D /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */; };
 		089279C41E23A9190084ADE5 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 089279C31E23A9190084ADE5 /* images */; };
 		089279C51E23A9190084ADE5 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 089279C31E23A9190084ADE5 /* images */; };
+		089279C61E23B0850084ADE5 /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */; };
+		089279C71E23B08D0084ADE5 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
 		08B7F5FF1E145019005DD953 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
 		08B7F6001E14501F005DD953 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
 /* End PBXBuildFile section */
@@ -265,7 +267,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				089279C61E23B0850084ADE5 /* UserComponents.swift in Sources */,
 				083B0BBE1E15D0C900F6B9EB /* MetalView.swift in Sources */,
+				089279C71E23B08D0084ADE5 /* PhysicsScene.swift in Sources */,
 				083B0BAF1E15D02800F6B9EB /* ViewController.swift in Sources */,
 				083B0BAD1E15D02800F6B9EB /* AppDelegate.swift in Sources */,
 			);
