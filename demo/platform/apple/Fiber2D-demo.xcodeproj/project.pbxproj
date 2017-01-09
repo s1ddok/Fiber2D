@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0816F1F81E1B19C600461465 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0816F1F71E1B19C600461465 /* Metal.framework */; };
 		083B0BAD1E15D02800F6B9EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B0BAC1E15D02800F6B9EB /* AppDelegate.swift */; };
 		083B0BAF1E15D02800F6B9EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B0BAE1E15D02800F6B9EB /* ViewController.swift */; };
 		083B0BB21E15D02800F6B9EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 083B0BB01E15D02800F6B9EB /* Main.storyboard */; };
@@ -20,135 +19,13 @@
 		08781A581DFF3BA800C4F39D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A561DFF3BA800C4F39D /* main.swift */; };
 		08781A591DFF3BA800C4F39D /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A571DFF3BA800C4F39D /* MetalView.swift */; };
 		08781A5F1DFF3FDB00C4F39D /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */; };
-		08781A631DFF40B400C4F39D /* images in Resources */ = {isa = PBXBuildFile; fileRef = 08781A621DFF40B400C4F39D /* images */; };
+		089279C41E23A9190084ADE5 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 089279C31E23A9190084ADE5 /* images */; };
+		089279C51E23A9190084ADE5 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 089279C31E23A9190084ADE5 /* images */; };
 		08B7F5FF1E145019005DD953 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
 		08B7F6001E14501F005DD953 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
-		08FF6C991E2182040062CA95 /* Fiber2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C881E217C810062CA95 /* Fiber2D.framework */; };
-		08FF6C9A1E2182040062CA95 /* Fiber2D.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C881E217C810062CA95 /* Fiber2D.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08FF6C9E1E2182240062CA95 /* SwiftBGFX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C861E217C810062CA95 /* SwiftBGFX.framework */; };
-		08FF6C9F1E2182240062CA95 /* SwiftBGFX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C861E217C810062CA95 /* SwiftBGFX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08FF6CA21E2182280062CA95 /* CChipmunk2D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C7E1E217C810062CA95 /* CChipmunk2D.framework */; };
-		08FF6CA31E2182280062CA95 /* CChipmunk2D.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C7E1E217C810062CA95 /* CChipmunk2D.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08FF6CA61E21822B0062CA95 /* Cpng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C801E217C810062CA95 /* Cpng.framework */; };
-		08FF6CA71E21822B0062CA95 /* Cpng.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C801E217C810062CA95 /* Cpng.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08FF6CAE1E2182320062CA95 /* SwiftMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C821E217C810062CA95 /* SwiftMath.framework */; };
-		08FF6CAF1E2182320062CA95 /* SwiftMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C821E217C810062CA95 /* SwiftMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08FF6CB51E21866E0062CA95 /* PhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7F5FE1E145019005DD953 /* PhysicsScene.swift */; };
-		08FF6CB61E2186720062CA95 /* UserComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */; };
-		08FF6CB71E2186EB0062CA95 /* Cbgfx.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C841E217C810062CA95 /* Cbgfx.framework */; };
-		08FF6CB81E2186EB0062CA95 /* Cbgfx.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08FF6C841E217C810062CA95 /* Cbgfx.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		08FF6CBD1E2194C90062CA95 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 08781A621DFF40B400C4F39D /* images */; };
-		08FF6CBE1E2197C70062CA95 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08781A5B1DFF3FDB00C4F39D /* MainScene.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		08FF6C7D1E217C810062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_290;
-			remoteInfo = CChipmunk2D;
-		};
-		08FF6C7F1E217C810062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_291;
-			remoteInfo = Cpng;
-		};
-		08FF6C811E217C810062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_292;
-			remoteInfo = SwiftMath;
-		};
-		08FF6C831E217C810062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_293;
-			remoteInfo = Cbgfx;
-		};
-		08FF6C851E217C810062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_294;
-			remoteInfo = SwiftBGFX;
-		};
-		08FF6C871E217C810062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_295;
-			remoteInfo = Fiber2D;
-		};
-		08FF6C9B1E2182040062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_438;
-			remoteInfo = Fiber2D;
-		};
-		08FF6CA01E2182240062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_399;
-			remoteInfo = SwiftBGFX;
-		};
-		08FF6CA41E2182280062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_296;
-			remoteInfo = CChipmunk2D;
-		};
-		08FF6CA81E21822B0062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_335;
-			remoteInfo = Cpng;
-		};
-		08FF6CB01E2182320062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_358;
-			remoteInfo = SwiftMath;
-		};
-		08FF6CB91E2186EB0062CA95 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_389;
-			remoteInfo = Cbgfx;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		08FF6C9D1E2182040062CA95 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				08FF6C9A1E2182040062CA95 /* Fiber2D.framework in Embed Frameworks */,
-				08FF6CB81E2186EB0062CA95 /* Cbgfx.framework in Embed Frameworks */,
-				08FF6C9F1E2182240062CA95 /* SwiftBGFX.framework in Embed Frameworks */,
-				08FF6CAF1E2182320062CA95 /* SwiftMath.framework in Embed Frameworks */,
-				08FF6CA71E21822B0062CA95 /* Cpng.framework in Embed Frameworks */,
-				08FF6CA31E2182280062CA95 /* CChipmunk2D.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		0816F1F71E1B19C600461465 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
 		083B0BAA1E15D02800F6B9EB /* Fiber2D-demo-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fiber2D-demo-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		083B0BAC1E15D02800F6B9EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		083B0BAE1E15D02800F6B9EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -166,9 +43,8 @@
 		08781A5B1DFF3FDB00C4F39D /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScene.swift; path = ../../../MainScene.swift; sourceTree = "<group>"; };
 		08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserComponents.swift; path = ../../../UserComponents.swift; sourceTree = "<group>"; };
 		08781A5D1DFF3FDB00C4F39D /* ViewportScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewportScene.swift; path = ../../../ViewportScene.swift; sourceTree = "<group>"; };
-		08781A621DFF40B400C4F39D /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../../images; sourceTree = "<group>"; };
+		089279C31E23A9190084ADE5 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../../images; sourceTree = "<group>"; };
 		08B7F5FE1E145019005DD953 /* PhysicsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsScene.swift; path = ../../../PhysicsScene.swift; sourceTree = "<group>"; };
-		08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Fiber2D-iOS.xcodeproj"; path = "../../../../Fiber2D-iOS.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,13 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08FF6C991E2182040062CA95 /* Fiber2D.framework in Frameworks */,
-				08FF6CA21E2182280062CA95 /* CChipmunk2D.framework in Frameworks */,
-				08FF6CA61E21822B0062CA95 /* Cpng.framework in Frameworks */,
-				08FF6CAE1E2182320062CA95 /* SwiftMath.framework in Frameworks */,
-				08FF6CB71E2186EB0062CA95 /* Cbgfx.framework in Frameworks */,
-				0816F1F81E1B19C600461465 /* Metal.framework in Frameworks */,
-				08FF6C9E1E2182240062CA95 /* SwiftBGFX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,14 +65,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0816F1F61E1B19C600461465 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0816F1F71E1B19C600461465 /* Metal.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		083B0BAB1E15D02800F6B9EB /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,7 +74,6 @@
 				083B0BB31E15D02800F6B9EB /* Assets.xcassets */,
 				083B0BB51E15D02800F6B9EB /* LaunchScreen.storyboard */,
 				083B0BB81E15D02800F6B9EB /* Info.plist */,
-				08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */,
 			);
 			name = iOS;
 			path = "Fiber2D-demo-iOS";
@@ -243,7 +103,6 @@
 				08781A611DFF3FDF00C4F39D /* Demo */,
 				083B0BBC1E15D05600F6B9EB /* System */,
 				08781A471DFF3B6000C4F39D /* Products */,
-				0816F1F61E1B19C600461465 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -272,7 +131,7 @@
 		08781A611DFF3FDF00C4F39D /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				08781A621DFF40B400C4F39D /* images */,
+				089279C31E23A9190084ADE5 /* images */,
 				08781A5B1DFF3FDB00C4F39D /* MainScene.swift */,
 				08781A5C1DFF3FDB00C4F39D /* UserComponents.swift */,
 				08781A5D1DFF3FDB00C4F39D /* ViewportScene.swift */,
@@ -282,19 +141,6 @@
 			path = "Fiber2D-demo";
 			sourceTree = "<group>";
 		};
-		08FF6C751E217C810062CA95 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				08FF6C7E1E217C810062CA95 /* CChipmunk2D.framework */,
-				08FF6C801E217C810062CA95 /* Cpng.framework */,
-				08FF6C821E217C810062CA95 /* SwiftMath.framework */,
-				08FF6C841E217C810062CA95 /* Cbgfx.framework */,
-				08FF6C861E217C810062CA95 /* SwiftBGFX.framework */,
-				08FF6C881E217C810062CA95 /* Fiber2D.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -302,21 +148,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 083B0BB91E15D02800F6B9EB /* Build configuration list for PBXNativeTarget "Fiber2D-demo-iOS" */;
 			buildPhases = (
-				08FF6CBB1E21900C0062CA95 /* ShellScript */,
 				083B0BA61E15D02800F6B9EB /* Sources */,
 				083B0BA71E15D02800F6B9EB /* Frameworks */,
 				083B0BA81E15D02800F6B9EB /* Resources */,
-				08FF6C9D1E2182040062CA95 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				08FF6C9C1E2182040062CA95 /* PBXTargetDependency */,
-				08FF6CA11E2182240062CA95 /* PBXTargetDependency */,
-				08FF6CA51E2182280062CA95 /* PBXTargetDependency */,
-				08FF6CA91E21822B0062CA95 /* PBXTargetDependency */,
-				08FF6CB11E2182320062CA95 /* PBXTargetDependency */,
-				08FF6CBA1E2186EB0062CA95 /* PBXTargetDependency */,
 			);
 			name = "Fiber2D-demo-iOS";
 			productName = "Fiber2D-demo-iOS";
@@ -327,7 +165,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08781A531DFF3B6000C4F39D /* Build configuration list for PBXNativeTarget "Fiber2D-demo" */;
 			buildPhases = (
-				08FF6C731E217AFB0062CA95 /* ShellScript */,
+				083B0BA51E15CF1200F6B9EB /* ShellScript */,
 				08781A421DFF3B6000C4F39D /* Sources */,
 				08781A431DFF3B6000C4F39D /* Frameworks */,
 				08781A441DFF3B6000C4F39D /* Resources */,
@@ -374,12 +212,6 @@
 			mainGroup = 08781A3D1DFF3B6000C4F39D;
 			productRefGroup = 08781A471DFF3B6000C4F39D /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 08FF6C751E217C810062CA95 /* Products */;
-					ProjectRef = 08FF6C741E217C810062CA95 /* Fiber2D-iOS.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				08781A451DFF3B6000C4F39D /* Fiber2D-demo */,
@@ -388,57 +220,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		08FF6C7E1E217C810062CA95 /* CChipmunk2D.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CChipmunk2D.framework;
-			remoteRef = 08FF6C7D1E217C810062CA95 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		08FF6C801E217C810062CA95 /* Cpng.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Cpng.framework;
-			remoteRef = 08FF6C7F1E217C810062CA95 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		08FF6C821E217C810062CA95 /* SwiftMath.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftMath.framework;
-			remoteRef = 08FF6C811E217C810062CA95 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		08FF6C841E217C810062CA95 /* Cbgfx.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Cbgfx.framework;
-			remoteRef = 08FF6C831E217C810062CA95 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		08FF6C861E217C810062CA95 /* SwiftBGFX.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftBGFX.framework;
-			remoteRef = 08FF6C851E217C810062CA95 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		08FF6C881E217C810062CA95 /* Fiber2D.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Fiber2D.framework;
-			remoteRef = 08FF6C871E217C810062CA95 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		083B0BA81E15D02800F6B9EB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08FF6CBD1E2194C90062CA95 /* images in Resources */,
+				089279C51E23A9190084ADE5 /* images in Resources */,
 				083B0BB71E15D02800F6B9EB /* LaunchScreen.storyboard in Resources */,
 				083B0BB41E15D02800F6B9EB /* Assets.xcassets in Resources */,
 				083B0BB21E15D02800F6B9EB /* Main.storyboard in Resources */,
@@ -449,16 +236,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				089279C41E23A9190084ADE5 /* images in Resources */,
 				08781A4C1DFF3B6000C4F39D /* Assets.xcassets in Resources */,
 				08781A4F1DFF3B6000C4F39D /* MainMenu.xib in Resources */,
-				08781A631DFF40B400C4F39D /* images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08FF6C731E217AFB0062CA95 /* ShellScript */ = {
+		083B0BA51E15CF1200F6B9EB /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -471,19 +258,6 @@
 			shellPath = /bin/sh;
 			shellScript = "cd ../../../\nmake macos";
 		};
-		08FF6CBB1E21900C0062CA95 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"${PROJECT_TEMP_DIR}/SymlinkLibs\"\nln -sf ${BUILT_PRODUCTS_DIR}/Cpng.framework/Cpng ${PROJECT_TEMP_DIR}/SymlinkLibs/libCpng.dylib\nln -sf ${BUILT_PRODUCTS_DIR}/Cbgfx.framework/Cbgfx ${PROJECT_TEMP_DIR}/SymlinkLibs/libCbgfx.dylib\nln -sf ${BUILT_PRODUCTS_DIR}/CChipmunk2D.framework/CChipmunk2D ${PROJECT_TEMP_DIR}/SymlinkLibs/libCChipmunk2D.dylib";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -492,9 +266,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				083B0BBE1E15D0C900F6B9EB /* MetalView.swift in Sources */,
-				08FF6CB61E2186720062CA95 /* UserComponents.swift in Sources */,
-				08FF6CBE1E2197C70062CA95 /* MainScene.swift in Sources */,
-				08FF6CB51E21866E0062CA95 /* PhysicsScene.swift in Sources */,
 				083B0BAF1E15D02800F6B9EB /* ViewController.swift in Sources */,
 				083B0BAD1E15D02800F6B9EB /* AppDelegate.swift in Sources */,
 			);
@@ -514,39 +285,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		08FF6C9C1E2182040062CA95 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Fiber2D;
-			targetProxy = 08FF6C9B1E2182040062CA95 /* PBXContainerItemProxy */;
-		};
-		08FF6CA11E2182240062CA95 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftBGFX;
-			targetProxy = 08FF6CA01E2182240062CA95 /* PBXContainerItemProxy */;
-		};
-		08FF6CA51E2182280062CA95 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CChipmunk2D;
-			targetProxy = 08FF6CA41E2182280062CA95 /* PBXContainerItemProxy */;
-		};
-		08FF6CA91E21822B0062CA95 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Cpng;
-			targetProxy = 08FF6CA81E21822B0062CA95 /* PBXContainerItemProxy */;
-		};
-		08FF6CB11E2182320062CA95 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftMath;
-			targetProxy = 08FF6CB01E2182320062CA95 /* PBXContainerItemProxy */;
-		};
-		08FF6CBA1E2186EB0062CA95 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Cbgfx;
-			targetProxy = 08FF6CB91E2186EB0062CA95 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		083B0BB01E15D02800F6B9EB /* Main.storyboard */ = {
@@ -579,19 +317,13 @@
 		083B0BBA1E15D02800F6B9EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
-				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_TEMP_DIR)/SymlinkLibs/**",
-					"$(inherited)",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -603,19 +335,13 @@
 		083B0BBB1E15D02800F6B9EB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
-				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Fiber2D-demo-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_TEMP_DIR)/SymlinkLibs/**",
-					"$(inherited)",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -666,16 +392,16 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../../../external/Cpng/**",
-					"../../../external/CChipmunk2D/**",
+					../../../external/CChipmunk2D/CChipmunk2D/include,
+					../../../external/Cpng/Cpng/include,
 				);
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "../../../.build/debug/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = "../../../.build/debug/**";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -715,14 +441,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../../../external/Cpng/**",
-					"../../../external/CChipmunk2D/**",
+					../../../external/CChipmunk2D/CChipmunk2D/include,
+					../../../external/Cpng/Cpng/include,
 				);
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "../../../.build/debug/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = "../../../.build/debug/**";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
@@ -733,22 +459,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
-				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Fiber2D-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../.build/debug,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				OTHER_LDFLAGS = (
-					"-lFiber2D",
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-lFiber2D";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(inherited) ../../../.build/debug";
+				SWIFT_INCLUDE_PATHS = "$(inherited)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -759,22 +477,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = PR6HV9J6AD;
-				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Fiber2D-demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					../../../.build/debug,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				OTHER_LDFLAGS = (
-					"-lFiber2D",
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-lFiber2D";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.s1ddok.Fiber2D-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_INCLUDE_PATHS = "$(inherited) ../../../.build/debug";
+				SWIFT_INCLUDE_PATHS = "$(inherited)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
