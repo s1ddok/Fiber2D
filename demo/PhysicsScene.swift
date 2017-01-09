@@ -74,7 +74,7 @@ public class PhysicsScene: Scene {
             
             physicsSquare.position = self.contentSize * vec2(Float.random(0, 1), 1.0)
             self.add(child: physicsSquare)
-        }.instantly.then(ActionCallBlock{}.continously(duration: 0.5)).repeat(times: 100)
+            }.instantly.then(ActionWait(for: 1.0)).repeat(times: 100)
         
         self.run(action: spawnSquares)
         
