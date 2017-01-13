@@ -25,7 +25,7 @@ Thanks to them we currently have:
   * WebGL 1.0, 2.0
 
 ### What it looks like?
-Currently this repo only contains demos for `Linux`, `Android` and `macOS`. `macOS demo` can use both `MetalKit` and `SDL`, it also can seamlessly be ported to `iOS` and `tvOS`, but developing is easier with desktop executables. `Linux` and `Android` demos can only be compiled with `SDL`, hence only `GL` rendering backend is available.
+Currently this repo only contains demos for `Linux`, `Android`, `iOS` and `macOS`. `macOS` demo can use both `MetalKit` and `SDL`. `iOS` demo only supports `MetalKit` for now and can be easily ported to `tvOS`. `Linux` and `Android` demos can only be compiled with `SDL`, hence only `GL` rendering backend is available.
 
 You can get the idea from this GIF: 
 ![Fiber2D Demo Gif](http://imgur.com/CP6d9kT.gif)
