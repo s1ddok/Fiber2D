@@ -21,10 +21,13 @@ swift build \
 -Xlinker -L$ANDROID_LIBICONV/armeabi-v7a \
 -Xlinker -L../android-project/libs/armeabi-v7a/ \
 -Xlinker -L../../../../external/SwiftBGFX/3rdparty/bgfx/.build/android-arm/bin \
--Xlinker -lgcc    -Xlinker -ldispatch  -Xlinker -lFoundation \
--Xlinker -latomic -Xlinker -licui18n   -Xlinker -licuuc \
--Xlinker -lc++    -Xlinker -lbgfxDebug -Xlinker -lz \
+-Xlinker -lgcc        -Xlinker -ldispatch  -Xlinker -lFoundation \
+-Xlinker -latomic     -Xlinker -licui18n   -Xlinker -licuuc \
+-Xlinker -lc++_shared -Xlinker -lbgfxDebug -Xlinker -lz \
 -Xlinker --sysroot=$ANDROID_NDK_HOME/platforms/android-21/arch-arm/
 
 cp -f .build/debug/libFiber2D.so ../android-project/libs/armeabi-v7a/libFiber2D.so
 cp -f .build/debug/libf2dc.so ../android-project/libs/armeabi-v7a/libf2dc.so
+cp -f .build/debug/libCbgfx.so ../android-project/libs/armeabi-v7a/libCbgfx.so
+cp -f .build/debug/libCpng.so ../android-project/libs/armeabi-v7a/libCpng.so
+cp -f .build/debug/libCChipmunk2D.so ../android-project/libs/armeabi-v7a/libCChipmunk2D.so
