@@ -3,11 +3,13 @@ import PackageDescription
 var f2d_Dependencies: [Package.Dependency] = [
     .Package(url: "https://github.com/s1ddok/CChipmunk2D", Version(1, 0, 0)),
     .Package(url: "https://github.com/s1ddok/Cpng", Version(1, 0, 0)),
-    .Package(url: "https://github.com/SwiftGFX/SwiftBGFX", Version(1, 0, 0))
+    .Package(url: "https://github.com/SwiftGFX/SwiftBGFX", Version(1, 0, 0)),
+    .Package(url: "https://github.com/s1ddok/CFreeType", Version(1, 0, 0))
 ]
 
 // os(macOS) is excluded from this because the supported platform is Metal
 // but you can add this here if you really want to use Fiber2D with SDL on macOS.
+// os(Android) actually does not work at all as os() reflects the host OS, not the target one, but as we compile Android binaries on Linux, that's just ok for now
 #if os(Linux) || os(Android)
 f2d_Dependencies += [.Package(url: "https://github.com/s1ddok/CSDL2", Version(1, 0, 0))]
 #endif
