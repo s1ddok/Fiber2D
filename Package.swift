@@ -4,7 +4,8 @@ var f2d_Dependencies: [Package.Dependency] = [
     .Package(url: "https://github.com/s1ddok/CChipmunk2D", Version(1, 0, 0)),
     .Package(url: "https://github.com/s1ddok/Cpng", Version(1, 0, 0)),
     .Package(url: "https://github.com/SwiftGFX/SwiftBGFX", Version(1, 0, 0)),
-    .Package(url: "https://github.com/s1ddok/CFreeType", Version(1, 0, 0))
+    .Package(url: "https://github.com/s1ddok/CFreeType", Version(1, 0, 0)),
+    .Package(url: "https://github.com/s1ddok/Cedtaa3", Version(1, 0, 0))
 ]
 
 // os(macOS) is excluded from this because the supported platform is Metal
