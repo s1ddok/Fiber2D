@@ -1,9 +1,9 @@
 
-SWIFT_FLAGS_COMMON = -Xcc -Iexternal/SwiftBGFX/3rdparty/bgfx/3rdparty/khronos \
--Xcc -Iexternal/SwiftBGFX/3rdparty/bx/include \
--Xcc -Iexternal/SwiftBGFX/3rdparty/bgfx/3rdparty \
+SWIFT_FLAGS_COMMON = -Xswiftc -Iexternal/SwiftBGFX/3rdparty/bgfx/3rdparty/khronos \
+-Xswiftc -Iexternal/SwiftBGFX/3rdparty/bx/include \
+-Xswiftc -Iexternal/SwiftBGFX/3rdparty/bgfx/3rdparty \
 -Xlinker -lc++ \
--Xlinker -lbgfxDebug -Xlinker -lz \
+-Xlinker -lbgfxDebug -Xlinker -lbxDebug -Xlinker -lbimgDebug -Xlinker -lz \
 -Xcc -DCP_USE_CGTYPES=0
 
 APPLE_FLAGS = -Xlinker -framework -Xlinker Foundation

@@ -34,7 +34,7 @@ internal extension BGFXRenderer {
             currentFrameHasNestedRTS = true
         }
         
-        bgfx.setViewSequential(viewId: currentViewID, enabled: true)
+        bgfx.set(viewMode: .sequental, for: currentViewID)
         
         let rtPixelSize = rt.pixelSize
         bgfx.setViewRect(viewId: currentViewID, x: 0, y: 0,
