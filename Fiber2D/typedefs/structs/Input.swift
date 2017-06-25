@@ -10,12 +10,12 @@ import SwiftMath
 
 public struct Input {
     public var screenPosition: Point
-    
-    #if os(OSX)
+
+    #if os(OSX) || os(Linux) || os(Windows)
     public var mouseButton: MouseButton
     #endif
-    
-    #if os(iOS)
+
+    #if os(iOS) || os(Android)
     public var force: Float = 1.0
     #endif
 }
@@ -35,5 +35,5 @@ public enum MouseButton {
 }
 
 public enum Key {
-    
+
 }

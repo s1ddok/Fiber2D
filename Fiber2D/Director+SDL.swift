@@ -15,7 +15,7 @@ internal extension Director {
         let normalizedPosition = p2d(event.x, event.y)
         let positionInPoints = normalizedPosition * viewSize
         
-        return Input(screenPosition: positionInPoints, force: event.pressure)
+        return Input(screenPosition: convertToGL(positionInPoints), force: event.pressure)
     }
 }
 
