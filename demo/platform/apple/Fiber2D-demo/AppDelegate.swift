@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Setup.shared.assetScale = Setup.shared.contentScale
         Setup.shared.UIScale = 0.5
         let rect: CGRect = CGRect(x: 0, y: 0, width: 1280, height: 720)
-        window = NSWindow(contentRect: rect, styleMask: [NSClosableWindowMask, NSResizableWindowMask, NSTitledWindowMask], backing: .buffered, defer: false, screen: NSScreen.main())
+        window = NSWindow(contentRect: rect, styleMask: [.closable, .resizable, .titled], backing: .buffered, defer: false, screen: NSScreen.main())
         
         let view: MetalView = MetalView(frame: rect)
         view.wantsBestResolutionOpenGLSurface = true
@@ -47,8 +47,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.window.acceptsMouseMovedEvents = true
         let director: Director = view.director
         Director.pushCurrentDirector(director)
-        director.present(scene: PhysicsScene(size: director.designSize))
-        //director.present(scene: MainScene(size: director.designSize))
+        //director.present(scene: PhysicsScene(size: director.designSize))
+        director.present(scene: MainScene(size: director.designSize))
         //director.present(scene: ViewportScene(size: director.designSize))
         Director.popCurrentDirector()
     }
