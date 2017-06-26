@@ -4,9 +4,3 @@
 [submodule "demo/platform/android/android-project"]
 	path = demo/platform/android/android-project
 	url = https://github.com/s1ddok/Fiber2D-Android-Project.git
-[submodule "external/Cpng"]
-	path = external/Cpng
-	url = https://github.com/s1ddok/Cpng.git
-[submodule "external/CChipmunk2D"]
-	path = external/CChipmunk2D
-	url = https://github.com/s1ddok/CChipmunk2D.git
