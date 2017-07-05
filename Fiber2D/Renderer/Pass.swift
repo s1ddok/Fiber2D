@@ -60,7 +60,7 @@ public final class Pass {
     
     internal var renderStateDirty = true
     private var _renderState: RenderStateOptions = .default
-    internal static let defaultRenderState: RenderStateOptions = .colorWrite | .alphaWrite
+    internal static let defaultRenderState: RenderStateOptions = [.colorWrite, .alphaWrite]
     
     public init(vertexShader: Shader,
                 fragmentShader: Shader,
