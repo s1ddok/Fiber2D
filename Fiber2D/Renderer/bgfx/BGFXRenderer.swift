@@ -36,7 +36,7 @@ internal class BGFXRenderer: Renderer {
     }
     
     func enqueueClear(color: vec4) {
-        bgfx.setViewClear(viewId: currentViewID, options: [.color, .depth], rgba: 0x30_30_30_ff, depth: 1.0, stencil: 0)
+        bgfx.setViewClear(viewId: currentViewID, options: [.color, .depth], rgba: color.uint32Representation, depth: 1.0, stencil: 0)
     }
     
     func prepare(withProjection proj: Matrix4x4f) {
