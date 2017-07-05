@@ -193,10 +193,10 @@ extension Scheduler {
             }
             
             for i in 0..<st.actions.count {
-                st.actions[i].step(dt: dt)
+                st.actions[i].step(with: st.target!, dt: dt)
                 
                 if st.actions[i].isDone {
-                    st.actions[i].stop()
+                    st.actions[i].stop(with: st.target!)
                 }
             }
             
