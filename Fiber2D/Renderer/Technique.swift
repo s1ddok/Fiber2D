@@ -21,12 +21,14 @@ public final class Technique {
 public extension Technique {
     public static let positionColor: Technique = {
         let retVal = Technique()
+        retVal.name = "DefaultTechnique: positionColor"
         retVal.add(pass: .positionColor)
         return retVal
     }()
     
     public static let positionTexture: Technique = {
         let retVal = Technique()
+        retVal.name = "DefaultTechnique: positionTexture"
         retVal.add(pass: .positionTexture)
         return retVal
     }()
