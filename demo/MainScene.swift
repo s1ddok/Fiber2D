@@ -155,7 +155,7 @@ class MainScene: Scene {
         messageBubble.position = p2d(256.0, 256.0)
         add(child: messageBubble)
 
-        onEnter.subscribeOnce(on: self) { [unowned self] in
+        onEnter.subscribeOnce(on: self) { [unowned self] _ in
             let rt = createRT(size: Size(128.0), clearColor: .red)
             rt.position = p2d(512, 512)
             rt.run(action: ActionMoveBy(vec2(150.0, 0)).continously(duration: 1.0)
