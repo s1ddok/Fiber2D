@@ -16,8 +16,6 @@ public protocol DirectorView: class {
     // Prepare the view to render a new frame.
     func beginFrame()
     
-    // Present the current frame to the display.
-    func presentFrame()
     // Schedule a block to be invoked when the frame completes.
     // The block may not be invoked from the main thread.
     // @param handler The completion block. The block takes no arguments and has no return value.
