@@ -29,17 +29,17 @@ internal extension Node {
         components.forEach {
             scene!.system(for: $0)?.add(component: $0)
         }
-        onEnter.fire()
+        onEnter.fire(())
     }
     
     internal func _onEnterTransitionDidFinish() {
         children.forEach { $0._onEnterTransitionDidFinish() }
-        onEnterTransitionDidFinish.fire()
+        onEnterTransitionDidFinish.fire(())
     }
     
     internal func _onExitTransitionDidStart() {
         children.forEach { $0._onExitTransitionDidStart() }
-        onExitTransitionDidStart.fire()
+        onExitTransitionDidStart.fire(())
     }
 
     internal func _onExit() {
@@ -53,7 +53,7 @@ internal extension Node {
         if updatableComponents.count > 0 || fixedUpdatableComponents.count > 0 {
             scheduler!.unscheduleUpdates(from: self)
         }
-        onExit.fire()
+        onExit.fire(())
         children.forEach { $0._onExit() }
     }
 }
