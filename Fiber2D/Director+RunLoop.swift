@@ -65,7 +65,6 @@ public extension Director {
             // TODO: Completion handlers here
         }
         renderer.flush()
-        view!.presentFrame()
         totalFrames += 1
         Director.popCurrentDirector()
     }

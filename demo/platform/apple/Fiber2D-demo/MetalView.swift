@@ -45,8 +45,7 @@ public class MetalView: MTKView, DirectorView {
     
     #if os(OSX)
     var contentScaleFactor: CGFloat {
-        let screen = NSScreen.main()!
-        return screen.backingScaleFactor
+        return NSScreen.main!.backingScaleFactor
     }
     
     override public var acceptsFirstResponder : Bool {
@@ -69,15 +68,6 @@ public class MetalView: MTKView, DirectorView {
     
     required public init(coder: NSCoder) {
         super.init(coder: coder)
-        //self.context = CCMetalContext()
-        //TODO Move into CCRenderDispatch to support threaded rendering with Metal?
-        //CCMetalContext.setCurrent(context)
-        /*self.device = context.device
-        self.framebufferOnly = true
-        self.director = Director(view: self)
-        self.preferredFramesPerSecond = 60
-        self.delegate = director
-        self.sampleCount = 4*/
     }
     
     #if os(iOS) || os(tvOS)
@@ -97,19 +87,13 @@ public class MetalView: MTKView, DirectorView {
     }
     
     public func beginFrame() {
-        //dispatch_semaphore_wait(_queuedFramesSemaphore, DISPATCH_TIME_FOREVER);
         if layerSizeDidUpdate {
             self.drawableSize = surfaceSize
             self.layerSizeDidUpdate = false
         }
         
     }
-    
-    public func presentFrame() {
-        //context.currentCommandBuffer.present(self.currentDrawable!)
-        //context.flushCommandBuffer()
-    }
-    
+
     public func add(frameCompletionHandler handler: @escaping ()->()) {
         /*context.currentCommandBuffer.addCompletedHandler {(buffer: MTLCommandBuffer) -> Void in
             handler()
