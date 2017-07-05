@@ -8,20 +8,20 @@
 
 public struct ActionInstantContainer: ActionContainer {
     
-    mutating public func update(state: Float) {
-        action.update(state: 1.0)
+    mutating public func update(with target: Node, state: Float) {
+        action.update(with: target, state: 1.0)
     }
     
     mutating public func start(with target: Node) {
         action.start(with: target)
     }
     
-    mutating public func stop() {
-        action.stop()
+    mutating public func stop(with target: Node) {
+        action.stop(with: target)
     }
     
-    mutating public func step(dt: Time) {
-        self.update(state: 1.0)
+    mutating public func step(with target: Node, dt: Time) {
+        self.update(with: target, state: 1.0)
     }
     
     public var tag: Int = 0

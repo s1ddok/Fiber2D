@@ -8,24 +8,23 @@
 
 public struct ActionSpeedContainer: ActionContainer, Continous {
 
-    mutating public func update(state: Float) {
-        action.update(state: state)
+    mutating public func update(with target: Node, state: Float) {
+        action.update(with: target, state: state)
     }
     
     public mutating func start(with target: Node) {
         elapsed = 0
-        self.target = target
         action.start(with: target)
     }
     
-    public mutating func stop() {
-        action.stop()
+    public mutating func stop(with target: Node) {
+        action.stop(with: target)
     }
     
-    public mutating func step(dt: Time) {
+    public mutating func step(with target: Node, dt: Time) {
         elapsed += dt * speed
         
-        self.update(state: max(0, // needed for rewind. elapsed could be negative
+        self.update(with: target, state: max(0, // needed for rewind. elapsed could be negative
             min(1, elapsed / max(actionDuration, Float.ulpOfOne)) // division by 0
             )
         )

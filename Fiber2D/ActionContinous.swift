@@ -8,8 +8,8 @@
 
 public struct ActionContinousContainer: ActionContainer, Continous {
     
-    mutating public func update(state: Float) {
-        action.update(state: state)
+    mutating public func update(with target: Node, state: Float) {
+        action.update(with: target, state: state)
     }
     
     public mutating func start(with target: Node) {
@@ -17,14 +17,14 @@ public struct ActionContinousContainer: ActionContainer, Continous {
         action.start(with: target)
     }
     
-    public mutating func stop() {
-        action.stop()
+    public mutating func stop(with target: Node) {
+        action.stop(with: target)
     }
     
-    public mutating func step(dt: Time) {
+    public mutating func step(with target: Node, dt: Time) {
         elapsed += dt
         
-        self.update(state: max(0, // needed for rewind. elapsed could be negative
+        self.update(with: target, state: max(0, // needed for rewind. elapsed could be negative
             min(1, elapsed / max(duration, Float.ulpOfOne)) // division by 0
             )
         )

@@ -11,10 +11,9 @@
  */
 public struct ActionConcurrent: ActionModel {
     
-    mutating public func update(state: Float) {
-        first.update(state: state)
-        second.update(state: state)
-
+    mutating public func update(with target: Node, state: Float) {
+        first.update(with: target, state: state)
+        second.update(with: target, state: state)
     }
     
     public mutating func start(with target: Node) {
@@ -22,9 +21,9 @@ public struct ActionConcurrent: ActionModel {
         second.start(with: target)
     }
     
-    public mutating func stop() {
-        first.stop()
-        second.stop()
+    public mutating func stop(with target: Node) {
+        first.stop(with: target)
+        second.stop(with: target)
     }
     
     public var tag: Int = 0
@@ -60,9 +59,9 @@ public struct ActionConcurrent: ActionModel {
  */
 public struct ActionConcurrentContainer: ActionContainer, Continous {
     
-    mutating public func update(state: Float) {
-        first.update(state: state)
-        second.update(state: state)
+    mutating public func update(with target: Node, state: Float) {
+        first.update(with: target, state: state)
+        second.update(with: target, state: state)
     }
     
     public mutating func start(with target: Node) {
@@ -71,15 +70,15 @@ public struct ActionConcurrentContainer: ActionContainer, Continous {
         second.start(with: target)
     }
     
-    public mutating func stop() {
-        first.stop()
-        second.stop()
+    public mutating func stop(with target: Node) {
+        first.stop(with: target)
+        second.stop(with: target)
     }
     
-    public mutating func step(dt: Time) {
+    public mutating func step(with target: Node, dt: Time) {
         elapsed += dt
         
-        self.update(state: max(0, // needed for rewind. elapsed could be negative
+        self.update(with: target, state: max(0, // needed for rewind. elapsed could be negative
             min(1, elapsed / max(duration, Float.ulpOfOne)) // division by 0
             )
         )

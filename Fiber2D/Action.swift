@@ -6,17 +6,6 @@
 //  Copyright © 2016 s1ddok. All rights reserved.
 //
 
-public protocol Targeted {
-
-    /// @name Action Targets
-
-    /**
-     The "target" is typically the node instance that received the Node.runAction() message.
-     The action will modify the target properties. The target will be set with the 'start(with:)' method.
-     */
-    var target: AnyObject? { get set }
-}
-
 // Not all actions support reversing. See individual class references to find out if a certain action does not support reversing.
 public protocol Reversable {
     /** @name Reversing an Action */
@@ -60,8 +49,10 @@ public protocol ActionModel {
      *  Note:
      *  You should never call this method directly.
      *  In stead use: target.stopAction(:)
+     *
+     *  @param target Current action's target
      */
-    mutating func stop()
+    mutating func stop(with target: Node)
     
     /**
      *  Updates the action with normalized value.
@@ -69,9 +60,10 @@ public protocol ActionModel {
      *  For example:
      *  A value of 0.5 indicates that the action is 50% complete.
      *
+     *  @param target Current action's target to perform updates on
      *  @param state Normalized action progress.
      */
-    mutating func update(state: Float)
+    mutating func update(with target: Node, state: Float)
 }
 
 public protocol ActionContainer: Tagged {
@@ -98,9 +90,10 @@ public protocol ActionContainer: Tagged {
      *  Note:
      *  Do not call this method directly. Actions are automatically stepped when used with [Node runAction:].
      *
+     *  @param target Current action's target to perform updates on
      *  @param dt Ellapsed interval since last step.
      */
-    mutating func step(dt: Time)
+    mutating func step(with target: Node, dt: Time)
     
     /**
      *  Updates the action with normalized value.
@@ -108,9 +101,10 @@ public protocol ActionContainer: Tagged {
      *  For example:
      *  A value of 0.5 indicates that the action is 50% complete.
      *
+     *  @param target Current action's target to perform updates on
      *  @param state Normalized action progress.
      */
-    mutating func update(state: Float)
+    mutating func update(with target: Node, state: Float)
     
     /**
      *  Overridden by subclasses to set up an action before it runs.
@@ -124,19 +118,22 @@ public protocol ActionContainer: Tagged {
      *  Note:
      *  You should never call this method directly.
      *  In stead use: target.stopAction(:)
+     *
+     *  @param target Current action's target
      */
-    mutating func stop()
+    mutating func stop(with target: Node)
 }
 
 public typealias ActionContainerFiniteTime = ActionContainer & FiniteTime
 
-// Default implementation
+// Default implementation for optional methods
 extension ActionModel {
     mutating public func start(with target: Node) {}
-    mutating public func stop() {}
-    mutating func update(state: Float) {}
+    mutating public func stop(with target: Node) {}
+    mutating public func update(with target: Node, state: Float) {}
 }
+
 extension ActionContainer {
     mutating func start(with target: Node) {}
-    mutating public func stop() {}
+    mutating public func stop(with target: Node) {}
 }

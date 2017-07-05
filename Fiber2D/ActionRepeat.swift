@@ -16,15 +16,14 @@ import SwiftMath
  *  However you can use ActionRepeatForever to repeat a ActionSequence.
  */
 public struct ActionRepeatForeverContainer: ActionContainer {
-    public mutating func update(state: Float) { }
+    public mutating func update(with target: Node, state: Float) { }
     
     public mutating func start(with target: Node) {
-        self.target = target
         innerContainer.start(with: target)
     }
     
-    mutating public func step(dt: Time) {
-        innerContainer.step(dt: dt)
+    mutating public func step(with target: Node, dt: Time) {
+        innerContainer.step(with: target, dt: dt)
         
         if innerContainer.isDone {
             if let c = innerContainer as? Continous {
@@ -32,8 +31,8 @@ public struct ActionRepeatForeverContainer: ActionContainer {
                 
                 defer {
                     // to prevent jerk. issue #390, 1247
-                    innerContainer.step(dt: 0.0)
-                    innerContainer.step(dt: diff)
+                    innerContainer.step(with: target, dt: 0.0)
+                    innerContainer.step(with: target, dt: diff)
                 }
             }
             
@@ -42,7 +41,6 @@ public struct ActionRepeatForeverContainer: ActionContainer {
     }
     
     public var tag: Int = 0
-    weak var target: Node!
     public var isDone: Bool {
         return false
     }
@@ -58,22 +56,23 @@ public struct ActionRepeatForeverContainer: ActionContainer {
 }
 
 public struct ActionRepeatContainer: ActionContainer, FiniteTime {
-    public mutating func update(state: Float) {
+    
+    public mutating func update(with target: Node, state: Float) {
         // issue #80. Instead of hooking step:, hook update: since it can be called by any
         // container action like Repeat, Sequence, Ease, etc..
         let dt = state
         if dt >= nextDt {
             while dt >= nextDt && remainingRepeats > 0 {
-                innerContainer.update(state: 1.0)
+                innerContainer.update(with: target, state: 1.0)
                 remainingRepeats -= 1
                 
-                innerContainer.stop()
+                innerContainer.stop(with: target)
                 innerContainer.start(with: target)
                 self.nextDt = Float(Int(repeatCount - remainingRepeats) + 1) / Float(repeatCount)
             }
             // fix for issue #1288, incorrect end value of repeat
             if dt ~= 1.0 && remainingRepeats > 0 {
-                innerContainer.update(state: 1.0)
+                innerContainer.update(with: target, state: 1.0)
                 remainingRepeats -= 1
             }
             
@@ -81,47 +80,47 @@ public struct ActionRepeatContainer: ActionContainer, FiniteTime {
                 return
             }
             if remainingRepeats == 0 {
-                innerContainer.stop()
+                innerContainer.stop(with: target)
             } else {
                 // issue #390 prevent jerk, use right update
-                innerContainer.update(state: dt - (nextDt - 1.0 / Float(repeatCount)))
+                var innerContainerStep = innerContainer
+                innerContainerStep.update(with: target, state: dt - (nextDt - 1.0 / Float(repeatCount)))
+                self.innerContainer = innerContainerStep
             }
         } else {
             guard icDuration > 0 else {
                 return
             }
             let clampedState = (dt * Float(repeatCount)).truncatingRemainder(dividingBy: 1.0)
-            innerContainer.update(state: clampedState)
+            innerContainer.update(with: target, state: clampedState)
         }
         
     }
     
     public mutating func start(with target: Node) {
         self.elapsed = 0
-        self.target = target
         self.remainingRepeats = repeatCount
         self.nextDt = 1.0 / Float(repeatCount)
         innerContainer.start(with: target)
     }
 
-    mutating public func step(dt: Time) {
+    mutating public func step(with target: Node, dt: Time) {
         guard icDuration > 0 else {
             innerContainer.start(with: target)
-            innerContainer.update(state: 1.0)
-            innerContainer.stop()
+            innerContainer.update(with: target, state: 1.0)
+            innerContainer.stop(with: target)
             remainingRepeats -= 1
             return
         }
         
         elapsed += dt
-        self.update(state: max(0, // needed for rewind. elapsed could be negative
+        self.update(with: target, state: max(0, // needed for rewind. elapsed could be negative
             min(1, elapsed / max(duration, Float.ulpOfOne)) // division by 0
             )
         )
     }
     
     public var tag: Int = 0
-    weak var target: Node!
     public var isDone: Bool {
         return remainingRepeats == 0
     }

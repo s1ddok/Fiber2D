@@ -8,7 +8,7 @@
 
 public struct ActionSequenceContainer: ActionContainer, Continous {
 
-    mutating public func update(state: Float) {
+    mutating public func update(with target: Node, state: Float) {
         let t = state
         var found = 0
         var new_t: Float = 0.0
@@ -35,21 +35,21 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
             if last == -1 {
                 // action[0] was skipped, execute it.
                 actions[0].start(with: target)
-                actions[0].update(state: 1.0)
-                actions[0].stop()
+                actions[0].update(with: target, state: 1.0)
+                actions[0].stop(with: target)
             }
             else if last == 0 {
                 // switching to action 1. stop action 0.
-                actions[0].update(state: 1.0)
-                actions[0].stop()
+                actions[0].update(with: target, state: 1.0)
+                actions[0].stop(with: target)
             }
         } else if found == 0 && last == 1 {
             // Reverse mode ?
             // XXX: Bug. this case doesn't contemplate when _last==-1, found=0 and in "reverse mode"
             // since it will require a hack to know if an action is on reverse mode or not.
             // "step" should be overriden, and the "reverseMode" value propagated to inner Sequences.
-            actions[1].update(state: 0)
-            actions[1].stop()
+            actions[1].update(with: target, state: 0)
+            actions[1].stop(with: target)
         }
         
         // Last action found and it is done.
@@ -60,36 +60,32 @@ public struct ActionSequenceContainer: ActionContainer, Continous {
         if found != last {
             actions[found].start(with: target)
         }
-        actions[found].update(state: new_t)
+        actions[found].update(with: target, state: new_t)
         self.last = found
     }
     
     public mutating func start(with target: Node) {
         elapsed = 0
-        self.target = target
         self.split = actions[0].duration / max(duration, Float.ulpOfOne)
         self.last = -1
     }
     
-    public mutating func stop() {
+    public mutating func stop(with target: Node) {
         // Issue #1305
         if last != -1 {
-            actions[last].stop()
+            actions[last].stop(with: target)
         }
-        
-        target = nil
     }
     
-    public mutating func step(dt: Time) {
+    public mutating func step(with target: Node, dt: Time) {
         elapsed += dt
         
-        self.update(state: max(0, // needed for rewind. elapsed could be negative
+        self.update(with: target, state: max(0, // needed for rewind. elapsed could be negative
             min(1, elapsed / max(duration, Float.ulpOfOne)) // division by 0
             )
         )
     }
     
-    weak var target: Node!
     public var tag: Int = 0
     private(set) public var duration: Time = 0.0
     private(set) public var elapsed: Time = 0.0

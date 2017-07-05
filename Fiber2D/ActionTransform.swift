@@ -20,7 +20,6 @@ public struct ActionRotateTo: ActionModel {
     private let rotateX: Bool
     private let rotateY: Bool
     private let simple: Bool
-    private var target: Node!
     
     private var diffAngleY  = Angle.zero
     private var diffAngleX  = Angle.zero
@@ -38,7 +37,6 @@ public struct ActionRotateTo: ActionModel {
     }
 
     mutating public func start(with target: Node) {
-        self.target = target
         // Simple Rotation
         if simple {
             self.startAngleX = target.rotation
@@ -77,7 +75,7 @@ public struct ActionRotateTo: ActionModel {
         }
     }
 
-    mutating public func update(state: Float) {
+    mutating public func update(with target: Node, state: Float) {
         // added to support overriding setRotation only
         if startAngleX == startAngleY && diffAngleX == diffAngleY {
             target.rotation = startAngleX + diffAngleX * state
@@ -100,7 +98,6 @@ public struct ActionRotateBy: ActionModel {
     private var startAngleY : Angle!
     private let rotateX: Bool
     private let rotateY: Bool
-    private var target: Node!
     
     private let diffAngleY: Angle
     private let diffAngleX: Angle
@@ -117,12 +114,11 @@ public struct ActionRotateBy: ActionModel {
     }
     
     mutating public func start(with target: Node) {
-        self.target = target
         self.startAngleX = target.rotationalSkewX
         self.startAngleY = target.rotationalSkewY
-    
     }
-    mutating public func update(state: Float) {
+    
+    mutating public func update(with target: Node, state: Float) {
         // added to support overriding setRotation only
         if startAngleX == startAngleY && diffAngleX == diffAngleY {
             target.rotation = startAngleX + diffAngleX * state
@@ -150,8 +146,6 @@ public struct ActionSkewTo: ActionModel {
     private var deltaX:        Angle = 0°
     private var deltaY:        Angle = 0°
     
-    private(set) var target: Node!
-    
     /** @name Creating a Skew Action */
     /**
      *  Initializes the action.
@@ -167,8 +161,6 @@ public struct ActionSkewTo: ActionModel {
     }
     
     mutating public func start(with target: Node) {
-        self.target = target
-        
         // X
         self.startSkewX = target.skewX
         self.startSkewX = startSkewX % (self.startSkewX > Angle.zero ? Angle.pi : -Angle.pi)
@@ -192,7 +184,7 @@ public struct ActionSkewTo: ActionModel {
         }
     }
     
-    mutating public func update(state: Float) {
+    mutating public func update(with target: Node, state: Float) {
         target.skewX = startSkewX + deltaX * state
         target.skewY = startSkewY + deltaY * state
     }
@@ -206,8 +198,6 @@ public struct ActionSkewBy: ActionModel {
     private var startSkewY:    Angle = 0°
     private let deltaX:        Angle
     private let deltaY:        Angle
-    
-    private(set) var target: Node!
     
     /** @name Creating a Skew Action */
     /**
@@ -224,12 +214,11 @@ public struct ActionSkewBy: ActionModel {
     }
     
     mutating public func start(with target: Node) {
-        self.target = target
         self.startSkewX = target.skewX
         self.startSkewY = target.skewY
     }
     
-    mutating public func update(state: Float) {
+    mutating public func update(with target: Node, state: Float) {
         target.skewX = startSkewX + deltaX * state
         target.skewY = startSkewY + deltaY * state
     }
@@ -242,8 +231,6 @@ public struct ActionSkewBy: ActionModel {
 public struct ActionMoveTo: ActionModel {
     private var startPosition: Point!
     private let endPosition: Point
-    
-    private(set) var target: Node!
     
     /** @name Creating a Move Action */
     
@@ -259,11 +246,10 @@ public struct ActionMoveTo: ActionModel {
     }
     
     mutating public func start(with target: Node) {
-        self.target = target
         self.startPosition = target.position
     }
     
-    mutating public func update(state: Float) {
+    mutating public func update(with target: Node, state: Float) {
         target.position = startPosition.interpolated(to: endPosition, factor: state)
     }
 }
@@ -279,7 +265,6 @@ public struct ActionMoveBy: ActionModel {
     #if ENABLE_STACKABLE_ACTIONS
     private var previousPosition: Point!
     #endif
-    private(set) var target: Node!
     
     /** @name Creating a Move Action */
     
@@ -295,23 +280,22 @@ public struct ActionMoveBy: ActionModel {
     }
     
     mutating public func start(with target: Node) {
-        self.target = target
         self.startPosition = target.position
         #if ENABLE_STACKABLE_ACTIONS
         self.previousPosition = startPosition
         #endif
     }
     
-    mutating public func update(state: Float) {
+    public func update(with target: Node, state: Float) {
         #if ENABLE_STACKABLE_ACTIONS
-        let currentPosition = target.position
-        let diff = currentPosition - previousPosition
-        startPosition = startPosition + diff
-        let newPos = startPosition + deltaPosition * state
-        target.position = newPos
-        previousPosition = newPos
+            let currentPosition = target.position
+            let diff = currentPosition - previousPosition
+            startPosition = startPosition + diff
+            let newPos = startPosition + deltaPosition * state
+            target.position = newPos
+            previousPosition = newPos
         #else
-        target.position = startPosition + deltaPosition * state
+            target.position = startPosition + deltaPosition * state
         #endif
     }
     
