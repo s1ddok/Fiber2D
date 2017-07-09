@@ -5,6 +5,7 @@ let package = Package(
     name: "Fiber2D",
     products: [
         .library(name: "Fiber2D", type: .static, targets: ["Fiber2D"]),
+        .executable(name: "Fiber2D-macOS", targets: ["Fiber2D-macOSDemo"])
     ],
     dependencies: [
         .package(url: "https://github.com/s1ddok/CChipmunk2D", .upToNextMinor(from: "2.0.0")),
@@ -23,7 +24,17 @@ let package = Package(
             ],
             path: ".",
             sources: ["Fiber2D"]
-        )
-    ]
+            ),
+        .target(
+            name: "Fiber2D-macOSDemo",
+            dependencies: ["Fiber2D"],
+            path: "./demo",
+            sources: ["MainScene.swift",
+                      "UserComponents.swift",
+                      "platform/apple/Fiber2D-demo/main.swift",
+                      "platform/apple/Fiber2D-demo/AppDelegate.swift",
+                      "platform/apple/Fiber2D-demo/MetalView.swift"])
+    ],
+    swiftLanguageVersions: [4]
 )
 
