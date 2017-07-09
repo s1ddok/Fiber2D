@@ -16,3 +16,5 @@ CONFIGURATION_BUILD_DIR = $(SRCROOT)/build/$CONFIGURATION
 
 // The final product executables and other build products go here
 BUILT_PRODUCTS_DIR = $(SRCROOT)/build/$CONFIGURATION
+
+MACOSX_DEPLOYMENT_TARGET = 10.11
