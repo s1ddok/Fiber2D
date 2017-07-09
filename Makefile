@@ -45,13 +45,13 @@ android:
 xcodeproj-ios:
 	swift package \
 	$(SWIFT_FLAGS_COMMON) $(SWIFT_FLAGS_METAL) $(CC_FLAGS_METAL) $(IOS_FLAGS) $(APPLE_FLAGS) \
-	generate-xcodeproj --xcconfig-overrides misc/ios-overrides.xcconfig \
+	generate-xcodeproj --xcconfig-overrides xcode/ios-overrides.xcconfig \
 	--output Fiber2D-iOS.xcodeproj
 
 xcodeproj-macos:
 	swift package $(SWIFT_FLAGS_COMMON) $(SWIFT_FLAGS_METAL) $(CC_FLAGS_METAL) $(MACOS_FLAGS) \
-	generate-xcodeproj --xcconfig-overrides misc/macos-overrides.xcconfig \
-	--output Fiber2D-macOS.xcodeproj
+	generate-xcodeproj --xcconfig-overrides xcode/macos-overrides.xcconfig \
+	--output xcode/Fiber2D-macOS.xcodeproj
 
 clean:
 	swift build --clean
