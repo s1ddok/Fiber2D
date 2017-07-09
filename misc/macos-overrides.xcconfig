@@ -1,9 +1,0 @@
-//
-//  macos-overrides.xcconfig
-//  Fiber2D
-//
-//  Created by Andrey Volodin on 07.01.17.
-//
-//
-
-GCC_PREPROCESSOR_DEFINITIONS = CP_USE_CGTYPES=0
