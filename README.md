@@ -48,14 +48,21 @@ We have a [trello](https://trello.com/b/eUe8CkrW/fiber2d) which I will try to ma
 
    ```$ git clone --recursive https://github.com/s1ddok/Fiber2D.git```
 
-2. Call helper script, that will do all the preparation stuff for you. (You have to have `ninja build` installed)
+2. Call helper script, that will do all the preparation stuff for you.
 
    ```
-   cd external/SwiftBGFX
-   sh prepare_bgfx_macos.sh
+   cd external/SwiftBGFX/3rdparty/bgfx
+   make osx-debug64 
    ```
 
-3. Open demo XCode project, compile and run. You should see the demo yourself.
+3. Generate XCode project
+
+   ```
+   cd ../../../../
+   make xcodeproj-macos
+   ```
+
+4. Open XCode project, compile and run. You should see the demo yourself.
 
 ## iOS
 
